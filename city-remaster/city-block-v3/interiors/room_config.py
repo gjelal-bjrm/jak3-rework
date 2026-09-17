@@ -61,6 +61,12 @@ def variants(inhabited):
     return out
 
 
+def family(v):
+    """Famille de scene : ce que le joueur retient (assis, couple, dormeur, cuisine)."""
+    who = v['key'][1]
+    return 'couple' if who == 'couple' else who.split('-')[0] if who != 'vide' else 'vide'
+
+
 def similarity(a, b):
     """0 = rien en commun ; plus c'est haut, plus les deux scenes se ressemblent vues de la rue."""
     score = 0
@@ -76,6 +82,7 @@ def rooms_for(windows):
     assert len(by_id) == len(windows)
     rooms = []; assigned = set(); placed = []      # (centre, variante) des pieces deja attribuees
     fit = json.loads(FIT_FILE.read_text(encoding='utf-8')) if FIT_FILE.exists() else {}
+    family_count = {}                              # scenes deja attribuees dans toute la ville, par famille
     if all(name in by_id for name in SHARED):
         corner = {'id': 'wca-house1-corner-apartment', 'anchor': SHARED[0], 'windows': list(SHARED),
                   'mesh': 'corner-conversation', 'scale': [1, 1, 1], 'lamp': [.55, 2.8, -1.7], 'actors': [
@@ -83,13 +90,17 @@ def rooms_for(windows):
                       {'mesh': 'conversing-female', 'position': [1.45, .058, -3.05], 'yaw': -0.9272952180016122, 'phase': 0}]}
         rooms.append(corner); assigned.update(SHARED)
         placed.append((by_id[SHARED[0]]['center'], {'key': ('corner', 'couple', 1, 0), 'mesh': 'corner-conversation', 'mirror': 1, 'actors': corner['actors']}))
+        family_count['couple'] = 1
     for w in sorted(windows, key=lambda w: w['id']):
         if w['id'] in assigned: continue
         choices = variants(w['inhabited'])
         neighbours = [v for centre, v in placed if math.dist(centre, w['center']) < NEIGHBOUR_RADIUS]
-        # La scene la moins ressemblante a ses voisines gagne ; a egalite, tirage stable par identifiant.
-        choices.sort(key=lambda v: (sum(similarity(v, n) for n in neighbours), h(w['id'], v['key'])))
+        # 1) la famille de scene la moins utilisee dans toute la ville (assis, couple, dormeur, cuisine),
+        # 2) la scene la moins ressemblante a ses voisines, 3) a egalite, tirage stable par identifiant.
+        choices.sort(key=lambda v: (family_count.get(family(v), 0) if w['inhabited'] else 0,
+                                    sum(similarity(v, n) for n in neighbours), h(w['id'], v['key'])))
         chosen = choices[0]
+        if w['inhabited']: family_count[family(chosen)] = family_count.get(family(chosen), 0) + 1
         phase = (h(w['id'], 'phase') % 800) / 100.0          # 0 a 7,99 s, commune aux deux interlocuteurs
         # echelle mesuree : la piece ne doit pas ressortir du batiment (fit_rooms.py) ; les acteurs suivent
         sx, _, sz = fit.get(w['id'], {}).get('scale', [1, 1, 1])

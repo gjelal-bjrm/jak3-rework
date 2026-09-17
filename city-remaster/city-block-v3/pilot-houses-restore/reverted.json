@@ -1,5 +1,5 @@
 {
-  "status": "installed",
+  "status": "reverted",
   "path": "out/jak3/fr3/wascitya.fr3",
   "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascitya.fr3",
   "base_sha256": "46b986d81aa7b3edf5d85e1f387a3b8efc789f9657d1e861495e51c2a251ea72",
@@ -16,5 +16,6 @@
   "scope": "Maisons pilotes 1 et 2 (WCA, TIE arbre 1) rendues a leur geometrie native ; leurs cinq ouvertures disparaissent.",
   "window_anchors_final": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\window-anchors-final.json",
   "window_anchors_final_sha256": "676654e37cb957bae50b3e82e65b97c50ff4337c4b01e9900768e9597b355d56",
-  "windows_total": 7
+  "windows_total": 7,
+  "reverted_reason": "malentendu : l'utilisateur voulait garder l'appartement de l'entree (double fenetre, couple) ; seule la fenetre du marche au pied de la rampe devait partir"
 }

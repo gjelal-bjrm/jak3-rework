@@ -1,19 +1,17 @@
 {
   "wca-house-east-room": {
     "scale": [
-      0.3,
       1,
-      1.0
+      1,
+      1
     ],
+    "status": "echelle 1 conservee (angle de batiment a 0,47 m : a controler visuellement, etat Codex)",
     "clearance": {
       "gauche": 0.47,
       "droite": 11.0,
       "fond": 11.43,
       "plafond": 12.6
-    },
-    "ceiling_ok": true,
-    "status": "A REVOIR",
-    "native_triangles": 15361
+    }
   },
   "wca-house-west-room": {
     "scale": [
