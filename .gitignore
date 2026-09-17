@@ -89,3 +89,6 @@ models-v1/native-objects.json
 models-v1/native-rocks.json
 models-v2/native-objects.json
 reference/tree.json
+
+# ---- Fichiers objets MSVC produits par les tests
+*.obj
