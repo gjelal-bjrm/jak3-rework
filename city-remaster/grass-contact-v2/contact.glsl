@@ -22,12 +22,15 @@ vec3 marketGrassContact(vec3 position, vec2 rawUV) {
     float radial = 1.0 - smoothstep(0.12, reach, distanceToRoot);
     // Compare two ground positions, never a tall tip against Jak's feet.
     float floor = 1.0 - smoothstep(0.35, 0.9, abs(grass_root_in.y - samplePoint.y));
-    float recovery = 1.0 - smoothstep(0.08, 1.0, age);
-    float strength = radial * floor * recovery;
+    // Each sample fades in over 0.3 s and out until 1.0 s (the engine drops it at 1 s).
+    // Successive samples cross-fade, so the blade follows Jak instead of jumping.
+    float attack = smoothstep(0.0, 0.3, age);
+    float recovery = 1.0 - smoothstep(0.25, 1.0, age);
+    float strength = radial * floor * attack * recovery;
     vec2 outward = distanceToRoot > 0.025 ? away / distanceToRoot : p - samplePoint.xz;
     float outwardLength = length(outward);
     outward = outwardLength > 0.005 ? outward / outwardLength : vec2(0.83205, 0.55470);
-    float weight = strength * strength * strength * strength;
+    float weight = strength * strength;
     directions += outward * weight;
     totalWeight += weight;
     strongest = max(strongest, strength); // repeated idle contacts cannot amplify

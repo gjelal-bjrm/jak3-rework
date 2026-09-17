@@ -28,6 +28,8 @@ parser.add_argument('--scene', choices=('arena', 'palace', 'city'), default='are
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
+parser.add_argument('--viewpoint', metavar='X,Y,Z',
+                    help='scene city : autre point de placement de Jak, en metres (test)')
 args = parser.parse_args()
 
 # La scene "city" reutilise la route de demarrage du palais ; le deplacement en ville
@@ -191,7 +193,8 @@ def place_jak_in_city(game, game_log, capture):
 
     # 4. Placer Jak dans la rue devant les maisons pilotes (meme logique que le lot herbe,
     #    ecrite sans macros pour rester lisible par un compilateur neuf : 1 m = 4096 unites).
-    x, y, z = (value * 4096.0 for value in CITY_VIEWPOINT)
+    viewpoint = tuple(float(v) for v in args.viewpoint.split(',')) if args.viewpoint else CITY_VIEWPOINT
+    x, y, z = (value * 4096.0 for value in viewpoint)
     nrepl_send(sock, '(when (and *target* (-> *target* control)) '
                      "(let ((destination (new 'stack-no-clear 'vector))) "
                      f'(set! (-> destination x) {x!r}) '

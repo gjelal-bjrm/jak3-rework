@@ -1,0 +1,45 @@
+From cb15639f7b8bbbb35ca159e330f441e7c5b82e51 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 13:18:23 +0200
+Subject: [PATCH 2/2] =?UTF-8?q?Herbe=20:=20mont=C3=A9e=20progressive=20du?=
+ =?UTF-8?q?=20contact=20(fondu=200,3=20s,=20retour=20jusqu'=C3=A0=201=20s)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Le contact de Jak passait de 0 à 100 % d'un coup ; chaque échantillon
+apparaît maintenant en fondu sur 0,3 s et s'efface jusqu'à 1 s, les
+échantillons successifs se fondent l'un dans l'autre. Validé à la manette
+par l'utilisateur.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/shaders/shrub.vert | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/shaders/shrub.vert b/game/graphics/opengl_renderer/shaders/shrub.vert
+index e3457be5..ea4a9326 100644
+--- a/game/graphics/opengl_renderer/shaders/shrub.vert
++++ b/game/graphics/opengl_renderer/shaders/shrub.vert
+@@ -50,12 +50,15 @@ vec3 marketGrassContact(vec3 position, vec2 rawUV) {
+     float radial = 1.0 - smoothstep(0.12, reach, distanceToRoot);
+     // Compare two ground positions, never a tall tip against Jak's feet.
+     float floor = 1.0 - smoothstep(0.35, 0.9, abs(grass_root_in.y - samplePoint.y));
+-    float recovery = 1.0 - smoothstep(0.08, 1.0, age);
+-    float strength = radial * floor * recovery;
++    // Each sample fades in over 0.3 s and out until 1.0 s (the engine drops it at 1 s).
++    // Successive samples cross-fade, so the blade follows Jak instead of jumping.
++    float attack = smoothstep(0.0, 0.3, age);
++    float recovery = 1.0 - smoothstep(0.25, 1.0, age);
++    float strength = radial * floor * attack * recovery;
+     vec2 outward = distanceToRoot > 0.025 ? away / distanceToRoot : p - samplePoint.xz;
+     float outwardLength = length(outward);
+     outward = outwardLength > 0.005 ? outward / outwardLength : vec2(0.83205, 0.55470);
+-    float weight = strength * strength * strength * strength;
++    float weight = strength * strength;
+     directions += outward * weight;
+     totalWeight += weight;
+     strongest = max(strongest, strength); // repeated idle contacts cannot amplify
+-- 
+2.54.0.windows.1
+
