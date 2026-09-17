@@ -92,3 +92,6 @@ reference/tree.json
 
 # ---- Fichiers objets MSVC produits par les tests
 *.obj
+
+# ---- Sauvegarde locale des habitants a l echelle 1 (scale_actors.py)
+**/scale-backup/
