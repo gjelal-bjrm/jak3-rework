@@ -1,0 +1,534 @@
+{
+  "all_added_vertices_inside_native_spheres": true,
+  "groups": [
+    {
+      "draw": 0,
+      "geom": 0,
+      "group": 1,
+      "maximum_outside_m": -15.15374197709443,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1965,
+      "vis_index": 199
+    },
+    {
+      "draw": 0,
+      "geom": 0,
+      "group": 14,
+      "maximum_outside_m": -13.620219827018346,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1074,
+      "vis_index": 207
+    },
+    {
+      "draw": 1,
+      "geom": 0,
+      "group": 8,
+      "maximum_outside_m": -17.7975555091558,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 987,
+      "vis_index": 207
+    },
+    {
+      "draw": 2,
+      "geom": 0,
+      "group": 1,
+      "maximum_outside_m": -12.324034438592737,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 33,
+      "vis_index": 199
+    },
+    {
+      "draw": 2,
+      "geom": 0,
+      "group": 14,
+      "maximum_outside_m": -15.743768922893494,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 57,
+      "vis_index": 207
+    },
+    {
+      "draw": 33,
+      "geom": 0,
+      "group": 10,
+      "maximum_outside_m": -2.9177362413387797,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1845.2449951171875,
+        42.126495361328125,
+        -384.2582092285156,
+        34.6346435546875
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1968,
+      "vis_index": 206
+    },
+    {
+      "draw": 14,
+      "geom": 0,
+      "group": 4,
+      "maximum_outside_m": -5.312288844672082,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1705.547119140625,
+        60.89113235473633,
+        -312.9985046386719,
+        45.40452575683594
+      ],
+      "tree": 1,
+      "unculled": false,
+      "vertices": 1980,
+      "vis_index": 116
+    },
+    {
+      "draw": 0,
+      "geom": 1,
+      "group": 1,
+      "maximum_outside_m": -15.15374197709443,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1965,
+      "vis_index": 199
+    },
+    {
+      "draw": 0,
+      "geom": 1,
+      "group": 14,
+      "maximum_outside_m": -13.620219827018346,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1074,
+      "vis_index": 207
+    },
+    {
+      "draw": 1,
+      "geom": 1,
+      "group": 8,
+      "maximum_outside_m": -17.7975555091558,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 987,
+      "vis_index": 207
+    },
+    {
+      "draw": 2,
+      "geom": 1,
+      "group": 1,
+      "maximum_outside_m": -12.324034438592737,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 33,
+      "vis_index": 199
+    },
+    {
+      "draw": 2,
+      "geom": 1,
+      "group": 14,
+      "maximum_outside_m": -15.743768922893494,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 57,
+      "vis_index": 207
+    },
+    {
+      "draw": 33,
+      "geom": 1,
+      "group": 10,
+      "maximum_outside_m": -2.9177362413387797,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1845.2449951171875,
+        42.126495361328125,
+        -384.2582092285156,
+        34.6346435546875
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1968,
+      "vis_index": 206
+    },
+    {
+      "draw": 14,
+      "geom": 1,
+      "group": 4,
+      "maximum_outside_m": -5.312288844672082,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1705.547119140625,
+        60.89113235473633,
+        -312.9985046386719,
+        45.40452575683594
+      ],
+      "tree": 1,
+      "unculled": false,
+      "vertices": 1980,
+      "vis_index": 116
+    },
+    {
+      "draw": 0,
+      "geom": 2,
+      "group": 1,
+      "maximum_outside_m": -15.15374197709443,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1965,
+      "vis_index": 199
+    },
+    {
+      "draw": 0,
+      "geom": 2,
+      "group": 14,
+      "maximum_outside_m": -13.620219827018346,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1074,
+      "vis_index": 207
+    },
+    {
+      "draw": 1,
+      "geom": 2,
+      "group": 8,
+      "maximum_outside_m": -17.7975555091558,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 987,
+      "vis_index": 207
+    },
+    {
+      "draw": 2,
+      "geom": 2,
+      "group": 1,
+      "maximum_outside_m": -12.324034438592737,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 33,
+      "vis_index": 199
+    },
+    {
+      "draw": 2,
+      "geom": 2,
+      "group": 14,
+      "maximum_outside_m": -15.743768922893494,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 57,
+      "vis_index": 207
+    },
+    {
+      "draw": 33,
+      "geom": 2,
+      "group": 10,
+      "maximum_outside_m": -2.9177362413387797,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1845.2449951171875,
+        42.126495361328125,
+        -384.2582092285156,
+        34.6346435546875
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1968,
+      "vis_index": 206
+    },
+    {
+      "draw": 14,
+      "geom": 2,
+      "group": 4,
+      "maximum_outside_m": -5.312288844672082,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1705.547119140625,
+        60.89113235473633,
+        -312.9985046386719,
+        45.40452575683594
+      ],
+      "tree": 1,
+      "unculled": false,
+      "vertices": 1980,
+      "vis_index": 116
+    },
+    {
+      "draw": 0,
+      "geom": 3,
+      "group": 1,
+      "maximum_outside_m": -15.15374197709443,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1962,
+      "vis_index": 199
+    },
+    {
+      "draw": 0,
+      "geom": 3,
+      "group": 14,
+      "maximum_outside_m": -13.620219827018346,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 2061,
+      "vis_index": 207
+    },
+    {
+      "draw": 2,
+      "geom": 3,
+      "group": 1,
+      "maximum_outside_m": -12.324034438592737,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1831.4957275390625,
+        51.91449737548828,
+        -272.86395263671875,
+        32.03407669067383
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 30,
+      "vis_index": 199
+    },
+    {
+      "draw": 2,
+      "geom": 3,
+      "group": 14,
+      "maximum_outside_m": -15.743768922893494,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1763.8758544921875,
+        58.256568908691406,
+        -357.03948974609375,
+        94.45914459228516
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 39,
+      "vis_index": 207
+    },
+    {
+      "draw": 33,
+      "geom": 3,
+      "group": 10,
+      "maximum_outside_m": -2.9177362413387797,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1845.2449951171875,
+        42.126495361328125,
+        -384.2582092285156,
+        34.6346435546875
+      ],
+      "tree": 0,
+      "unculled": false,
+      "vertices": 1962,
+      "vis_index": 206
+    },
+    {
+      "draw": 14,
+      "geom": 3,
+      "group": 4,
+      "maximum_outside_m": -4.325613824029901,
+      "outside_vertices": 0,
+      "sphere_m": [
+        1705.547119140625,
+        60.89113235473633,
+        -312.9985046386719,
+        45.40452575683594
+      ],
+      "tree": 1,
+      "unculled": false,
+      "vertices": 1980,
+      "vis_index": 116
+    }
+  ],
+  "level": "wascityb",
+  "maximum_outside_m": -2.9177362413387797,
+  "native_bvh_sha256": [
+    {
+      "geom": 0,
+      "sha256": "9b890f69990aa0c2348121468dec48cbba65c4c6492e01e76f66f43d7b473fec",
+      "tree": 0
+    },
+    {
+      "geom": 0,
+      "sha256": "49bdcccf96c91eb9cf8e6a3b2bfac765aced23bb419cd373fd751b64e94852fb",
+      "tree": 1
+    },
+    {
+      "geom": 0,
+      "sha256": "677cdba6e8f225d7e729291f6369f02538f00b25643082155aa398bc135e9028",
+      "tree": 2
+    },
+    {
+      "geom": 1,
+      "sha256": "9b890f69990aa0c2348121468dec48cbba65c4c6492e01e76f66f43d7b473fec",
+      "tree": 0
+    },
+    {
+      "geom": 1,
+      "sha256": "49bdcccf96c91eb9cf8e6a3b2bfac765aced23bb419cd373fd751b64e94852fb",
+      "tree": 1
+    },
+    {
+      "geom": 1,
+      "sha256": "677cdba6e8f225d7e729291f6369f02538f00b25643082155aa398bc135e9028",
+      "tree": 2
+    },
+    {
+      "geom": 2,
+      "sha256": "9b890f69990aa0c2348121468dec48cbba65c4c6492e01e76f66f43d7b473fec",
+      "tree": 0
+    },
+    {
+      "geom": 2,
+      "sha256": "49bdcccf96c91eb9cf8e6a3b2bfac765aced23bb419cd373fd751b64e94852fb",
+      "tree": 1
+    },
+    {
+      "geom": 2,
+      "sha256": "677cdba6e8f225d7e729291f6369f02538f00b25643082155aa398bc135e9028",
+      "tree": 2
+    },
+    {
+      "geom": 3,
+      "sha256": "9b890f69990aa0c2348121468dec48cbba65c4c6492e01e76f66f43d7b473fec",
+      "tree": 0
+    },
+    {
+      "geom": 3,
+      "sha256": "49bdcccf96c91eb9cf8e6a3b2bfac765aced23bb419cd373fd751b64e94852fb",
+      "tree": 1
+    },
+    {
+      "geom": 3,
+      "sha256": "677cdba6e8f225d7e729291f6369f02538f00b25643082155aa398bc135e9028",
+      "tree": 2
+    }
+  ],
+  "outside_vertices": 0,
+  "patch_sha256": "9bed8808028e4a57a818c67c07f0c500e573251776cf0ee30bc323d778e7fe46",
+  "source_modified": false,
+  "source_sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d",
+  "status": "passed",
+  "vertices_checked": 32226
+}

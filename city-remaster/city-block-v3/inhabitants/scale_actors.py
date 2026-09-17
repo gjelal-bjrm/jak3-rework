@@ -28,6 +28,7 @@ HASHES = ROOT / 'variant-hashes.json'
 # facteur d'echelle par acteur, et abaissement (m) pour l'acteur assis
 SCALES = {'conversing-male': 1.2, 'conversing-female': 1.2, 'sitting-male': 1.15}
 SEAT_HEIGHT = 0.6624                 # hauteur de l'assise dans le modele d'origine (m)
+SEAT_BASE_Y = 0.09                   # hauteur d'auteur de l'acteur assis dans room_config.py (m)
 FLOATS_PER_VERTEX = 12               # position3 normale3 uv2 couleur4
 
 
@@ -74,12 +75,14 @@ def main():
                 print(f'{name:18s} x{factor}  {frames} poses, {meta["vertex_count"]} sommets')
         changed.append(f'{name}.bin')
 
-    runtime = json.loads((BACKUP / 'runtime.json').read_text(encoding='utf-8'))
-    if not args.restore:
-        for room in runtime['rooms']:
-            for actor in room['actors']:
-                if actor['mesh'] == 'sitting-male':
-                    actor['position'][1] = round(actor['position'][1] - SEAT_HEIGHT * (SCALES['sitting-male'] - 1), 4)
+    # runtime.json courant (il peut contenir plus de fenetres que la sauvegarde) :
+    # seule la hauteur de l'acteur assis change, a partir de sa valeur d'auteur (0.09 m).
+    runtime = json.loads((source_dir / 'runtime.json').read_text(encoding='utf-8'))
+    seat_y = SEAT_BASE_Y if args.restore else round(SEAT_BASE_Y - SEAT_HEIGHT * (SCALES['sitting-male'] - 1), 4)
+    for room in runtime['rooms']:
+        for actor in room['actors']:
+            if actor['mesh'] == 'sitting-male':
+                actor['position'][1] = seat_y
     for target in TARGETS:
         (target / 'runtime.json').write_text(json.dumps(runtime, indent=2) + '\n', encoding='utf-8')
     changed.append('runtime.json')

@@ -1,0 +1,357 @@
+{
+  "status": "authored",
+  "source_fr3": {
+    "bytes": 271111860,
+    "sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d"
+  },
+  "author_sha256": "e4757d051a35546fb2670ddff7f179f84ca91598a1bc129b2c21111f01850004",
+  "historical_author": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\author_buildings.py",
+  "historical_author_sha256": "dede462e69a64c191bb59fb79dca52e4ef3cff6aa25a05d9e8867d6fbde17a7b",
+  "windows": [
+    {
+      "id": "wcb-market-south-room",
+      "lod": 0,
+      "native_instances": [
+        271
+      ],
+      "cut_polygons": 10,
+      "removed": 16,
+      "added": 706,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          14
+        ],
+        [
+          0,
+          1,
+          8
+        ],
+        [
+          0,
+          2,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-south-room",
+      "lod": 1,
+      "native_instances": [
+        271
+      ],
+      "cut_polygons": 10,
+      "removed": 16,
+      "added": 706,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          14
+        ],
+        [
+          0,
+          1,
+          8
+        ],
+        [
+          0,
+          2,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-south-room",
+      "lod": 2,
+      "native_instances": [
+        271
+      ],
+      "cut_polygons": 10,
+      "removed": 16,
+      "added": 706,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          14
+        ],
+        [
+          0,
+          1,
+          8
+        ],
+        [
+          0,
+          2,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-south-room",
+      "lod": 3,
+      "native_instances": [
+        271
+      ],
+      "cut_polygons": 9,
+      "removed": 14,
+      "added": 700,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          14
+        ],
+        [
+          0,
+          2,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-southeast-room",
+      "lod": 0,
+      "native_instances": [
+        2218
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 656,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          33,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-southeast-room",
+      "lod": 1,
+      "native_instances": [
+        2218
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 656,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          33,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-southeast-room",
+      "lod": 2,
+      "native_instances": [
+        2218
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 656,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          33,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-southeast-room",
+      "lod": 3,
+      "native_instances": [
+        2218
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 654,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          33,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-northeast-room",
+      "lod": 0,
+      "native_instances": [
+        1
+      ],
+      "cut_polygons": 7,
+      "removed": 8,
+      "added": 666,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-northeast-room",
+      "lod": 1,
+      "native_instances": [
+        1
+      ],
+      "cut_polygons": 7,
+      "removed": 8,
+      "added": 666,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-northeast-room",
+      "lod": 2,
+      "native_instances": [
+        1
+      ],
+      "cut_polygons": 7,
+      "removed": 8,
+      "added": 666,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-northeast-room",
+      "lod": 3,
+      "native_instances": [
+        1
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 664,
+      "remapped": 0,
+      "groups": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-west-room",
+      "lod": 0,
+      "native_instances": [
+        700
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 660,
+      "remapped": 0,
+      "groups": [
+        [
+          1,
+          14,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-west-room",
+      "lod": 1,
+      "native_instances": [
+        700
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 660,
+      "remapped": 0,
+      "groups": [
+        [
+          1,
+          14,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-west-room",
+      "lod": 2,
+      "native_instances": [
+        700
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 660,
+      "remapped": 0,
+      "groups": [
+        [
+          1,
+          14,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wcb-market-west-room",
+      "lod": 3,
+      "native_instances": [
+        700
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 660,
+      "remapped": 0,
+      "groups": [
+        [
+          1,
+          14,
+          4
+        ]
+      ]
+    }
+  ],
+  "faces_removed": 114,
+  "faces_added": 10742
+}

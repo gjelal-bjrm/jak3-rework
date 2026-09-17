@@ -95,3 +95,7 @@ reference/tree.json
 
 # ---- Sauvegarde locale des habitants a l echelle 1 (scale_actors.py)
 **/scale-backup/
+
+# ---- Lot R5 marche : export natif volumineux, regenerable par le bridge
+city-remaster/city-block-v3/market-windows-r5/native-market.json
+city-remaster/city-block-v3/market-windows-r5/survey.json

@@ -12,6 +12,7 @@ Deux scènes jouables : l’arène du début et les bassins/fontaines du palais.
 - **Comparer-PREMIER-REMASTER.cmd** : décor V1 avec les liquides d’origine.
 - **Tester-VILLE.cmd** : ville de Spargus. Jak est placé automatiquement dans la rue devant les deux maisons pilotes (fenêtres habitées, plaques de bronze, herbe réactive à quelques mètres).
 - **Comparer-VILLE-ORIGINALE.cmd** : même endroit avec le moteur et les graphismes originaux.
+- **Tester-MARCHE.cmd** : quartier du marché. Jak est placé devant la maison sud ; quatre fenêtres habitées autour de la place (voir `city-remaster/city-block-v3/market-windows-r5/README.md`).
 
 Les fichiers de lancement se trouvent dans le dossier principal du prototype. Fermer la fenêtre du jeu avant de changer de variante. Les scènes démarrent à leur point de test, à 09:00. Aucune compilation n’est nécessaire pour jouer. Le lanceur habituel OpenGOAL ouvre toujours l’installation habituelle.
 

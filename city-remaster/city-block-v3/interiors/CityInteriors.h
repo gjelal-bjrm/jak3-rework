@@ -20,7 +20,7 @@ class CityInteriors {
   ~CityInteriors(){for(auto& m:m_meshes)if(m.second.buffer)glDeleteBuffers(1,&m.second.buffer);for(auto& t:m_textures)glDeleteTextures(1,&t.second);if(m_vao)glDeleteVertexArrays(1,&m_vao);}
   void render(SharedRenderState* state){
     if(!state->has_pc_data||state->version!=GameVersion::Jak3)return;
-    bool loaded=false;for(auto* level:state->loader->get_in_use_levels())if(level->level->level_name=="wascitya")loaded=true;
+    bool loaded=false;for(auto* level:state->loader->get_in_use_levels())if(level->level->level_name=="wascitya"||level->level->level_name=="wascityb")loaded=true;
     if(!loaded)return;
     Guard guard;
     if(!m_attempted){m_attempted=true;try{initialize(state);}catch(const std::exception& e){lg::error("City interiors unavailable: {}",e.what());return;}}

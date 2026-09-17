@@ -1,0 +1,31 @@
+From 01a38fceefb187ad2571793a2c4eb0b3f4140455 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 13:42:38 +0200
+Subject: [PATCH 3/3] =?UTF-8?q?Int=C3=A9rieurs=20de=20ville=20:=20rendu=20?=
+ =?UTF-8?q?aussi=20quand=20seul=20wascityb=20(march=C3=A9)=20est=20charg?=
+ =?UTF-8?q?=C3=A9?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/CityInteriors.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/game/graphics/opengl_renderer/CityInteriors.h b/game/graphics/opengl_renderer/CityInteriors.h
+index 192e2d07..3bb3282c 100644
+--- a/game/graphics/opengl_renderer/CityInteriors.h
++++ b/game/graphics/opengl_renderer/CityInteriors.h
+@@ -20,7 +20,7 @@ class CityInteriors {
+   ~CityInteriors(){for(auto& m:m_meshes)if(m.second.buffer)glDeleteBuffers(1,&m.second.buffer);for(auto& t:m_textures)glDeleteTextures(1,&t.second);if(m_vao)glDeleteVertexArrays(1,&m_vao);}
+   void render(SharedRenderState* state){
+     if(!state->has_pc_data||state->version!=GameVersion::Jak3)return;
+-    bool loaded=false;for(auto* level:state->loader->get_in_use_levels())if(level->level->level_name=="wascitya")loaded=true;
++    bool loaded=false;for(auto* level:state->loader->get_in_use_levels())if(level->level->level_name=="wascitya"||level->level->level_name=="wascityb")loaded=true;
+     if(!loaded)return;
+     Guard guard;
+     if(!m_attempted){m_attempted=true;try{initialize(state);}catch(const std::exception& e){lg::error("City interiors unavailable: {}",e.what());return;}}
+-- 
+2.54.0.windows.1
+

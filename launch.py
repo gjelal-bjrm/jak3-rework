@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market'), default='arena')
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
@@ -32,9 +32,16 @@ parser.add_argument('--viewpoint', metavar='X,Y,Z',
                     help='scene city : autre point de placement de Jak, en metres (test)')
 args = parser.parse_args()
 
-# La scene "city" reutilise la route de demarrage du palais ; le deplacement en ville
+# Les scenes de ville reutilisent la route de demarrage du palais ; le deplacement
 # se fait ensuite en direct via goalc, sans toucher aux routes verifiees.
-route_scene = 'palace' if args.scene == 'city' else args.scene
+CITY_SCENES = {
+    # point de reprise natif, position (x, z) attendue a l'arrivee, point de placement final (m)
+    'city': {'continue': 'wascitya-seem', 'arrival': (2240.3, -40.8), 'viewpoint': (2270.0, 20.5, 3.0),
+             'label': 'devant les maisons pilotes de la ville basse'},
+    'market': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1821.1, 29.6, -359.6),
+               'label': 'devant la maison sud du marche (fenetre habitee)'},
+}
+route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 
 lock = (ROOT / 'prototype.lock').open('a+b')
 lock.seek(0)
@@ -76,8 +83,6 @@ if args.prepare_only:
 # ---------------------------------------------------------------------------
 GOALC = ROOT.parents[1] / 'versions/official/v0.3.6/goalc.exe'
 NREPL_PORT = 8189                      # port dedie : evite un goalc oublie sur le 8181 par defaut
-CITY_CONTINUE = 'wascitya-seem'        # point de reprise natif de la ville basse
-CITY_VIEWPOINT = (2270.0, 20.5, 3.0)   # metres : rue devant la maison pilote 1 (fenetres habitees)
 GOALC_LOG = ROOT / 'city-goalc.log'
 POS_PATTERN = re.compile(r'VILLE-POS (\d+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+)')
 
@@ -134,6 +139,7 @@ def probe_position(sock, game, game_log, tag, timeout):
 
 
 def place_jak_in_city(game, game_log, capture):
+    scene = CITY_SCENES[args.scene]
     started = time.monotonic()
 
     def say(message):
@@ -176,14 +182,14 @@ def place_jak_in_city(game, game_log, capture):
         return goalc
     say(f'liaison etablie, Jak est a {position}')
 
-    # 3. Aller en ville par le point de reprise natif.
-    nrepl_send(sock, f'(start \'play (get-continue-by-name *game-info* "{CITY_CONTINUE}"))')
+    # 3. Aller en ville par le point de reprise natif de la scene.
+    nrepl_send(sock, f'(start \'play (get-continue-by-name *game-info* "{scene["continue"]}"))')
     deadline = time.monotonic() + 120
     while time.monotonic() < deadline:
         time.sleep(3)
         tag += 1
         position = probe_position(sock, game, game_log, tag, 8)
-        if position and abs(position[0] - 2240) < 60 and abs(position[2] + 41) < 60:
+        if position and abs(position[0] - scene['arrival'][0]) < 60 and abs(position[2] - scene['arrival'][1]) < 60:
             break
     else:
         say("le point de reprise de la ville n'a pas repondu. Verifier le journal runtime.")
@@ -193,7 +199,7 @@ def place_jak_in_city(game, game_log, capture):
 
     # 4. Placer Jak dans la rue devant les maisons pilotes (meme logique que le lot herbe,
     #    ecrite sans macros pour rester lisible par un compilateur neuf : 1 m = 4096 unites).
-    viewpoint = tuple(float(v) for v in args.viewpoint.split(',')) if args.viewpoint else CITY_VIEWPOINT
+    viewpoint = tuple(float(v) for v in args.viewpoint.split(',')) if args.viewpoint else scene['viewpoint']
     x, y, z = (value * 4096.0 for value in viewpoint)
     nrepl_send(sock, '(when (and *target* (-> *target* control)) '
                      "(let ((destination (new 'stack-no-clear 'vector))) "
@@ -207,7 +213,7 @@ def place_jak_in_city(game, game_log, capture):
     time.sleep(3)
     tag += 1
     position = probe_position(sock, game, game_log, tag, 10)
-    say(f'Jak est place devant les maisons pilotes, position {position}')
+    say(f'Jak est place {scene["label"]}, position {position}')
     if capture:
         time.sleep(4)
         nrepl_send(sock, '(pc-screen-shot)')
@@ -241,7 +247,7 @@ with game_log.open('w', encoding='utf-8') as log:
                                 creationflags=subprocess.CREATE_NO_WINDOW)
     (ROOT / f'{args.variant}.pid').write_text(str(process.pid), encoding='utf-8')
     try:
-        if args.scene == 'city':
+        if args.scene in CITY_SCENES:
             goalc = place_jak_in_city(process, game_log, args.capture)
         result = process.wait()
     finally:

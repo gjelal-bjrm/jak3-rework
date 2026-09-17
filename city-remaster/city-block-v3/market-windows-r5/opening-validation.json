@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "source_sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d",
+  "patch_sha256": "9bed8808028e4a57a818c67c07f0c500e573251776cf0ee30bc323d778e7fe46",
+  "checks": [
+    {
+      "name": "Every removal exists in exact source",
+      "passed": true
+    },
+    {
+      "name": "All removed original positions match",
+      "passed": true
+    },
+    {
+      "name": "No duplicate native removals",
+      "passed": true
+    },
+    {
+      "name": "No nonfinite vertices or normals",
+      "passed": true
+    },
+    {
+      "name": "wcb-market-south-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-southeast-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-northeast-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-west-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-south-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-southeast-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-northeast-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-west-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-south-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-southeast-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-northeast-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-west-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-south-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-southeast-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-northeast-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wcb-market-west-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    }
+  ]
+}
