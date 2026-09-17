@@ -10,8 +10,12 @@ Deux scènes jouables : l’arène du début et les bassins/fontaines du palais.
 - **Comparer-EAU-ORIGINALE.cmd** : palais avec le moteur et les graphismes originaux.
 - **Comparer-ORIGINAL.cmd** : arène originale.
 - **Comparer-PREMIER-REMASTER.cmd** : décor V1 avec les liquides d’origine.
+- **Tester-VILLE.cmd** : ville de Spargus. Jak est placé automatiquement dans la rue devant les deux maisons pilotes (fenêtres habitées, plaques de bronze, herbe réactive à quelques mètres).
+- **Comparer-VILLE-ORIGINALE.cmd** : même endroit avec le moteur et les graphismes originaux.
 
 Les fichiers de lancement se trouvent dans le dossier principal du prototype. Fermer la fenêtre du jeu avant de changer de variante. Les scènes démarrent à leur point de test, à 09:00. Aucune compilation n’est nécessaire pour jouer. Le lanceur habituel OpenGOAL ouvre toujours l’installation habituelle.
+
+La scène ville n’a pas de route de démarrage propre : `launch.py` démarre par la route du palais, lance le compilateur officiel `goalc` (v0.3.6) sur un port dédié, le connecte au jeu, envoie Jak au point de reprise `wascitya-seem` puis le déplace devant la maison pilote 1. Le journal `city-goalc.log` garde la trace du compilateur ; les lignes `VILLE :` du lanceur indiquent chaque étape. Compter une trentaine de secondes avant d’arriver en ville.
 
 La mention **Prototype liquides V3** en bas de l’écran confirme le moteur modifié. `launch.py` vérifie les empreintes des 28 fichiers de chaque variante, du moteur V3 et de son code de démarrage. Les comparaisons originale/V1 emploient le moteur officiel et leurs routes préservées. La passe V2 refusée est archivée dans `variants/remaster-liquids-v2`.
 
