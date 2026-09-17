@@ -60,21 +60,18 @@ float oceanVisibleDepth(float surfaceDepth) {
   return surfaceDepth;
 }
 float oceanNoise(vec2 p){return swellNoise(p).x;}
-// Vaguelettes de surface (v15b) : ondulations de bruit de valeur lisse a trois echelles (~2 m, ~0,8 m,
-// ~0,35 m), gradient analytique, tournees et advectees dans des directions differentes. Aucune sinusoide :
-// des trains periodiques faisaient des moires (anneaux, rayures). Un grain fin est reserve a l'eclat.
-vec2 oceanRipples(vec2 xz,float footprint,out vec2 glitterSlope) {
+// Rides fines : trois couches de bruit advecte (1,1 m, 0,35 m, 0,12 m), comme une normal map animee.
+// Elles portent l'eclat solaire et la refraction ; elles s'effacent quand elles deviennent sous-pixel.
+vec2 oceanRipples(vec2 xz,float footprint) {
   mat2 rot=mat2(.819,.574,-.574,.819),rot2=mat2(.6,.8,-.8,.6);
   vec2 q=rot*(xz-vec2(1700,-350)),q2=rot2*(xz-vec2(1700,-350));
   vec2 slope=vec2(0);
-  vec3 r1=swellNoise(q*vec2(.5,.36)-ocean_time*vec2(.42,.17));
-  slope+=transpose(rot)*(r1.yz*vec2(.5,.36))*.067*(1.-smoothstep(.5,1.8,footprint*.5));
-  vec3 r2=swellNoise(q2*vec2(1.3,.95)+ocean_time*vec2(.28,-.41));
-  slope+=transpose(rot2)*(r2.yz*vec2(1.3,.95))*.018*(1.-smoothstep(.5,1.8,footprint*1.3));
-  vec3 r3=swellNoise(q*2.9-ocean_time*vec2(.6,.35));
-  slope+=transpose(rot)*(r3.yz*2.9)*.0035*(1.-smoothstep(.4,1.5,footprint*2.9));
-  vec3 g=swellNoise(q*7.-ocean_time*vec2(.9,.6));
-  glitterSlope=transpose(rot)*(g.yz*7.)*.0019*(1.-smoothstep(.3,1.2,footprint*7.));
+  vec3 r1=swellNoise(q*vec2(.9,.62)-ocean_time*vec2(.55,.22));
+  slope+=transpose(rot)*(r1.yz*vec2(.9,.62))*.055*(1.-smoothstep(.5,1.8,footprint*.9));
+  vec3 r2=swellNoise(q2*vec2(2.9,2.1)+ocean_time*vec2(.31,-.47));
+  slope+=transpose(rot2)*(r2.yz*vec2(2.9,2.1))*.030*(1.-smoothstep(.5,1.8,footprint*2.9));
+  vec3 r3=swellNoise(q*8.3-ocean_time*vec2(.9,.6));
+  slope+=transpose(rot)*(r3.yz*8.3)*.012*(1.-smoothstep(.3,1.2,footprint*8.3));
   return slope;
 }
 vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
@@ -98,19 +95,12 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
 vec3 oceanSkyFallback(vec3 ray) {
   return mix(vec3(.66,.70,.72),vec3(.44,.56,.70),smoothstep(0.,.6,ray.y));
 }
-const vec3 oceanSunDirection=normalize(vec3(-.32,.66,-.68));
-const vec3 oceanSunColor=vec3(1.,.93,.78);
-// Soleil dans le reflet : disque net et lueur large (le ciel natif n'a pas de soleil marque).
-vec3 oceanSunReflection(vec3 ray) {
-  float c=max(dot(ray,oceanSunDirection),0.);
-  return oceanSunColor*(pow(c,1400.)*6.+pow(c,90.)*.45+pow(c,8.)*.06);
-}
 vec3 oceanSky(vec3 ray) {
   vec3 sky=oceanSkyFallback(ray);
   float confidence;
   vec3 sampled=oceanSkySample(ray,.012,confidence);
   sky=mix(sky,sampled,.88*smoothstep(-.025,.015,ray.y)*confidence);
-  return sky*ocean_reflection_tint+oceanSunReflection(ray);
+  return sky*ocean_reflection_tint;
 }
 vec3 oceanHorizonSky(vec3 away) {
   float confidence;
@@ -130,7 +120,7 @@ vec3 blurredScene(vec2 uv) {
 // Reflet : ciel par defaut, scene proche par lancer de rayon ecran (rochers, batiments, Jak).
 vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
   vec3 r=reflect(-v,n),sky=oceanSky(r);
-  if(length(p-ocean_eye)>220.)return sky;
+  if(length(p-ocean_eye)>140.)return sky;
   float lo=.12;
   for(int i=0;i<32;i++) {
     float hi=lo+.15+float(i)*.075;
@@ -160,61 +150,66 @@ vec3 shadeModernOcean() {
   float range=length(p-ocean_eye);
   vec3 v=normalize(ocean_eye-p);
   float footprint=max(length(dFdx(p.xz)),length(dFdy(p.xz)));
-  // ---- Surface : houle (relief), contacts de Jak, vagues de bord, vaguelettes lisses, grain d'eclat
+  // ---- Surface : houle (grandes vagues + houle bruitee), contacts de Jak, vagues de bord, rides fines
   vec3 swell=oceanSwellFiltered(p.xz,footprint);
-  vec2 slopeBase=swell.yz+oceanContacts(p.xz).yz;
+  vec2 slopeBase=swell.yz;
+  vec3 contact=oceanContacts(p.xz);
+  slopeBase+=contact.yz;
   vec2 shoreDir;vec4 shore=shoreWave(p.xz,ocean_time,shoreDir);
   if(any(notEqual(shore,vec4(0)))) {
     vec2 unused;float ahead=shoreWave(p.xz+shoreDir*.2,ocean_time,unused).x;
     slopeBase+=shoreDir*((ahead-shore.x)/.2);
   }
-  vec2 glitterSlope;vec2 slopeRipple=oceanRipples(p.xz,footprint,glitterSlope);
-  vec2 slope=slopeBase+slopeRipple;
-  vec3 n=normalize(vec3(-slope.x,1.,-slope.y));                       // reflets, refraction, Fresnel
-  vec3 nGlitter=normalize(vec3(-(slope.x+glitterSlope.x),1.,-(slope.y+glitterSlope.y)));   // eclat solaire
+  vec2 slopeDetail=oceanRipples(p.xz,footprint);
+  vec3 n=normalize(vec3(-(slopeBase.x+slopeDetail.x),1.,-(slopeBase.y+slopeDetail.y)));
+  vec3 nReflect=normalize(vec3(-(slopeBase.x+slopeDetail.x*.35),1.,-(slopeBase.y+slopeDetail.y*.35)));
   // ---- Sous l'eau : fenetre de Snell
   if(ocean_eye.y < p.y) {
     n=-n;
     float facing=max(dot(n,v),0.);
     float window=smoothstep(.61,.72,facing);
     vec2 uv=clamp(screen+n.xz*.006,vec2(.001),vec2(.999));
-    return mix(ocean_deep*1.5,texture(tex_T25,uv).rgb,window*.90);
+    return mix(vec3(.08,.20,.17),texture(tex_T25,uv).rgb,window*.90);
   }
   // ---- Fond et epaisseur d'eau traversee
   float depth=texture(tex_T26,screen).r,thickness=60.;
-  bool hasBed=false;vec3 bedScene=vec3(0);vec3 bed=p;
+  bool hasBed=false;vec3 bedScene=vec3(0);
   if(!oceanSkyDepth(depth) && depth<gl_FragCoord.z) {
-    bed=oceanUnproject(screen,depth);thickness=clamp(length(bed-p),0.,60.);
-    vec2 uv=clamp(screen+n.xz*.035*min(thickness,2.)/max(range*.03,1.),vec2(.001),vec2(.999));
+    vec3 bed=oceanUnproject(screen,depth);thickness=clamp(length(bed-p),0.,60.);
+    // Refraction : les rides deforment le fond, plus fort de pres ; jamais un objet du premier plan.
+    vec2 uv=clamp(screen+n.xz*.03*min(thickness,1.5)/max(range*.03,1.),vec2(.001),vec2(.999));
     if(texture(tex_T26,uv).r>gl_FragCoord.z)uv=screen;
     bedScene=texture(tex_T25,uv).rgb;hasBed=true;
   }
-  // ---- Corps de l'eau : fond vu a travers une eau claire, caustiques, diffusion selon la profondeur
-  vec3 transmission=exp(-ocean_absorb*thickness);
-  float caustic=0.;
-  if(hasBed) {
-    vec2 q=bed.xz*1.7;
-    float c1=swellNoise(q+ocean_time*vec2(.31,.17)).x,c2=swellNoise(q*1.9-ocean_time*vec2(.23,.29)).x;
-    caustic=pow(max(1.-abs(c1-c2)*2.6,0.),3.)*exp(-thickness*.55)*max(dot(n,oceanSunDirection),0.);
-  }
-  vec3 scatter=mix(ocean_deep,ocean_shallow,exp(-thickness*.20));
-  vec3 body=hasBed ? bedScene*(1.+caustic*1.1)*transmission+scatter*(1.-transmission) : ocean_deep;
+  // ---- Couleur de l'eau : Spargus est verte. Le fond se voit a travers une eau claire
+  //      (le rouge disparait vite, le vert reste), la diffusion verdit avec la profondeur.
+  vec3 absorb=ocean_absorb,shallow=ocean_shallow,deep=ocean_deep;   // palette de la region
+  vec3 transmission=exp(-absorb*thickness);
+  vec3 scatter=mix(deep,shallow,exp(-thickness*.22));
+  vec3 body=hasBed ? bedScene*transmission*mix(vec3(1.),shallow*1.6,.35)+scatter*(1.-transmission) : deep;
+  // Cretes : la lumiere traverse le haut des vagues, vert plus clair.
   float crest=smoothstep(0.,.55,swell.x);
-  body+=ocean_shallow*.18*crest;
+  body+=shallow*.25*crest;
+  // Lointain : diffusion atmospherique, l'eau s'eclaircit vers un vert-gris (jamais bleu).
   float far=smoothstep(80.,700.,range);
-  body=mix(body,ocean_far,far*.7);
-  // ---- Reflet : le ciel (avec soleil) et le decor proche ; Fresnel releve pour une surface bien miroir
+  body=mix(body,ocean_far,far*.75);
+  // ---- Reflet (Fresnel de Schlick sur la normale detaillee)
   float facing=max(dot(n,v),0.);
-  float fresnel=.06+.94*pow(1.-facing,4.);
-  vec3 reflection=oceanReflection(p,n,v);
+  float fresnel=.02+.98*pow(1.-facing,5.);
+  vec3 reflection=oceanReflection(p,nReflect,v);
   vec3 result=mix(body,reflection,fresnel);
-  // ---- Trainee de soleil : scintillement serre sur le grain, lobe doux sur les vaguelettes
-  vec3 h=normalize(oceanSunDirection+v);
-  float sunVis=max(dot(n,oceanSunDirection),0.);
-  float glitter=pow(max(dot(nGlitter,h),0.),900.);
-  float sheen=pow(max(dot(n,h),0.),70.);
-  result+=oceanSunColor*(glitter*2.2+sheen*.14)*sunVis*mix(1.,.6,far);
-  // ---- Ecume : sillage de Jak, lisere des cotes, moutons en eau peu profonde, plage
+  // ---- Soleil : eclat net sur les rides fines, nappe douce, scintillement (Genshin-like)
+  vec3 light=normalize(vec3(-.32,.66,-.68));
+  vec3 h=normalize(light+v);
+  float nh=max(dot(n,h),0.);
+  float a2s=.006,a2w=.09;
+  float specSharp=a2s/(3.14159*pow(nh*nh*(a2s-1.)+1.,2.));
+  float specWide=a2w/(3.14159*pow(nh*nh*(a2w-1.)+1.,2.));
+  float sunVis=max(dot(n,light),0.);
+  float sparkle=smoothstep(.55,.95,swellNoise(p.xz*17.+ocean_time*vec2(1.7,-1.1)).x)*(1.-smoothstep(40.,220.,range));
+  vec3 sunColor=vec3(1.,.93,.78);
+  result+=sunColor*(specSharp*.012*(.5+.9*sparkle)+specWide*.03)*sunVis*mix(1.,.5,far);
+  // ---- Ecume : sillage de Jak, lisere des cotes, moutons des grandes vagues sur le haut-fond, plage
   float foamNoise=.45*smoothstep(.35,.85,oceanNoise(p.xz*2.3+ocean_time*vec2(.3,-.15)))
                  +.55*smoothstep(.45,.9,oceanNoise(p.xz*8.5-ocean_time*vec2(.7,.3)));
   float wake=0.;
@@ -224,15 +219,15 @@ vec3 shadeModernOcean() {
     float d=length(p.xz-fluid_contacts[i].xz);
     wake+=exp(-d*d/1.3-age*2.4)*smoothstep(.03,.10,fluid_strength[i])*.16;
   }
-  float shoreFoam=(1.-smoothstep(.10,.8,thickness))*(.35+.65*foamNoise)*.65;
-  float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.7;
+  float shoreFoam=(1.-smoothstep(.10,.9,thickness))*(.35+.65*foamNoise)*.7;
+  float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.8;
   float beachFoam=shore.y*(.25+.95*foamNoise)+shore.z*(.12+.6*foamNoise)+shore.w*.95;
   float foam=clamp(max(max(wake*foamNoise*1.2,shoreFoam),max(crestFoam,beachFoam)),0.,.92);
-  result=mix(result,vec3(.88,.91,.90),foam);
-  // ---- Brume vers le vrai ciel de l'horizon, puis extinction au tres loin
+  result=mix(result,vec3(.86,.90,.88),foam);
+  // ---- Brume : vers le vrai ciel de l'horizon, puis extinction au tres loin
   vec3 horizonSky=oceanHorizonSky(-v);
   float haze=1.-exp(-range*.0007);
-  result=mix(result,horizonSky,haze*.5);
+  result=mix(result,horizonSky,haze*.55);
   if(range<=750.)return result;
   float extinction=1.-exp(-max(range-750.,0.)*.0006);
   return mix(result,horizonSky,extinction);
