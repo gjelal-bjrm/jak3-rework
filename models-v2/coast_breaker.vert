@@ -49,7 +49,7 @@ void main() {
     // the actual silhouette, rather than enlarging a flat smoke-like billboard.
     float curl=pow(v,3.)*height*(.13+.12*collapse)*smoothstep(.08,.38,localAge);
     p.y-=pow(v,3.)*height*.10*collapse;
-    p+=basis[2]*(sin(v*3.141593)*1.15-curl);
+    p+=basis[2]*(sin(v*3.141593)*1.15+curl);   // basis[2] = vers le large : la levre retombe cote mer
     envelope*=1.-smoothstep(.88,1.,collapse);
   } else if(kind==3) {
     p.y=9.05+.10*sin(v*5.+age)*sin(u*7.+seed);

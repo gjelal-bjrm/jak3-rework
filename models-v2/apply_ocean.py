@@ -1,7 +1,9 @@
 from pathlib import Path
 import re,shutil,json
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parent
-rel=Path('game/graphics/opengl_renderer/shaders');swell=(HERE/'ocean_swell.glsl').read_text()
+rel=Path('game/graphics/opengl_renderer/shaders')
+shore=(HERE/'shore/shore_waves.glsl').read_text().replace('// SHORE_TABLES_INSERT',(HERE/'shore/shore_tables.glsl').read_text())
+swell=(HERE/'ocean_swell.glsl').read_text().replace('// SHORE_WAVES_INSERT',shore)
 helper=(HERE/'ocean.glsl').read_text().replace('// OCEAN_SWELL_INSERT',swell)
 for name in ('ocean_common.frag','direct_basic_textured.frag'):
     path=ROOT/'data'/rel/name;old=HERE/'before'/name
@@ -44,6 +46,9 @@ void main() {
   float meshFootprint=max(radius(row)*6.28318530718/384.,(radius(min(row+1,192))-radius(max(row-1,0)))*.5);
   vec3 wave=oceanSwellFiltered(xz,meshFootprint);
   wave+=oceanContacts(xz)*(1.-smoothstep(2.,5.,meshFootprint));
+  // Vagues de bord de la plage : cambrure, deferlement et nappe sur le sable (maillage fin jusqu'a ~100 m).
+  vec2 shoreDir;vec4 shore=shoreWave(xz,ocean_time,shoreDir);
+  wave.x+=shore.x*(1.-smoothstep(120.,200.,length(xz-ocean_eye.xz)));
   ocean_world=vec3(xz.x,9.+wave.x,xz.y);
   gl_Position=-ocean_camera*vec4((ocean_world-ocean_eye)*4096.,1.);
   gl_Position.y*=(512./416.)*.5;

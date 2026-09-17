@@ -66,3 +66,4 @@ vec3 oceanContacts(vec2 p) {
   }
   return result;
 }
+// SHORE_WAVES_INSERT

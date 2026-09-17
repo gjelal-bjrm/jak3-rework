@@ -51,7 +51,7 @@ float oceanVisibleDepth(float surfaceDepth) {
   return surfaceDepth;
 }
 float oceanNoise(vec2 p){return swellNoise(p).x;}
-vec3 oceanSurface(vec3 p,out float wake) {
+vec3 oceanSurface(vec3 p,out float wake,out vec4 shore) {
   float footprint=max(length(dFdx(p.xz)),length(dFdy(p.xz)));
   vec3 swell=oceanSwellFiltered(p.xz,footprint);
   vec2 slope=swell.yz;
@@ -66,6 +66,12 @@ vec3 oceanSurface(vec3 p,out float wake) {
   }
   vec3 contact=oceanContacts(p.xz);
   slope+=contact.yz;
+  // Vagues de bord : pente numerique le long de la direction vers le large.
+  vec2 shoreDir;shore=shoreWave(p.xz,ocean_time,shoreDir);
+  if(any(notEqual(shore,vec4(0)))){
+    vec2 unused;float ahead=shoreWave(p.xz+shoreDir*.2,ocean_time,unused).x;
+    slope+=shoreDir*((ahead-shore.x)/.2);
+  }
   wake=0.;
   for(int i=0;i<32;i++) {
     float age=ocean_time-fluid_contacts[i].w;
@@ -110,13 +116,19 @@ vec3 oceanHorizonSky(vec3 away) {
   vec3 sampled=oceanSkySample(away,.018,confidence);
   return mix(oceanSkyFallback(away)*ocean_reflection_tint,sampled,confidence);
 }
+// Reflet adouci (3x3, pas de 3 px) : les bords des rochers refletes ne font plus d'escaliers.
 vec3 blurredScene(vec2 uv) {
-  vec2 px=vec2(2.)/vec2(textureSize(tex_T25,0));
-  return texture(tex_T25,uv).rgb*.4+
-    (texture(tex_T25,uv+vec2(px.x,0)).rgb+texture(tex_T25,uv-vec2(px.x,0)).rgb+
-     texture(tex_T25,uv+vec2(0,px.y)).rgb+texture(tex_T25,uv-vec2(0,px.y)).rgb)*.15;
+  vec2 px=vec2(3.)/vec2(textureSize(tex_T25,0));
+  vec3 sum=texture(tex_T25,uv).rgb*.25;
+  sum+=(texture(tex_T25,uv+vec2(px.x,0)).rgb+texture(tex_T25,uv-vec2(px.x,0)).rgb+
+        texture(tex_T25,uv+vec2(0,px.y)).rgb+texture(tex_T25,uv-vec2(0,px.y)).rgb)*.125;
+  sum+=(texture(tex_T25,uv+px).rgb+texture(tex_T25,uv-px).rgb+
+        texture(tex_T25,uv+vec2(px.x,-px.y)).rgb+texture(tex_T25,uv+vec2(-px.x,px.y)).rgb)*.0625;
+  return sum;
 }
 vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
+  // Le rayon reflechi suit une normale lissee : les rides fines perturbent l'eclat, pas la geometrie du reflet.
+  n=normalize(mix(vec3(0.,1.,0.),n,.5));
   vec3 r=reflect(-v,n),sky=oceanSky(r);
   if(length(p-ocean_eye)>140.)return sky;
   float lo=.12;
@@ -147,8 +159,8 @@ vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
 vec3 shadeModernOcean() {
   vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
   vec3 p=ocean_world;
-  float range=length(p-ocean_eye),wake;
-  vec3 n=oceanSurface(p,wake),v=normalize(ocean_eye-p);
+  float range=length(p-ocean_eye),wake;vec4 shore;
+  vec3 n=oceanSurface(p,wake,shore),v=normalize(ocean_eye-p);
   if(ocean_eye.y < p.y) {
     n=-n;
     float facing=max(dot(n,v),0.);
@@ -191,7 +203,12 @@ vec3 shadeModernOcean() {
   float coast=(1.-smoothstep(.15,1.1,thickness))*smoothstep(.03,.25,height);
   // (moutons de crete retires : le bruit grossier faisait des taches rectangulaires de pres)
   float foam=clamp(wake*bubbles+coast*bubbles*.16,0.,.22);
-  result=mix(result,vec3(.72,.78,.75),foam);
+  // Plage : ecume du deferlement, nappe bouillonnante sur le sable et front blanc de la lame.
+  float beachBubbles=.4*smoothstep(.35,.8,oceanNoise(p.xz*2.7+ocean_time*vec2(.35,-.2)))
+                    +.6*smoothstep(.45,.9,oceanNoise(p.xz*9.5-ocean_time*vec2(.8,.35)));
+  float beachFoam=shore.y*(.25+.95*beachBubbles)+shore.z*(.12+.6*beachBubbles)+shore.w*.95;
+  foam=max(foam,clamp(beachFoam,0.,.9));
+  result=mix(result,vec3(.80,.85,.82),foam);
   // Brume : vers le vrai ciel de l'horizon, pas vers un gris fixe.
   vec3 horizonSky=oceanHorizonSky(-v);
   float haze=1.-exp(-range*.0007);

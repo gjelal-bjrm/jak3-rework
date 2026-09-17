@@ -1,0 +1,18 @@
+{
+  "level": "wascityb",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+    "bytes": 271372409,
+    "sha256": "4d911c554e267a9842429af48152ffaf49e64bdc736d3486d85b7b94852a8526"
+  },
+  "tree_types": [
+    "tfrag",
+    "tie"
+  ],
+  "bounds_xz_m": [
+    1440,
+    1720,
+    -560,
+    -380
+  ]
+}

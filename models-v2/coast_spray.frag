@@ -14,5 +14,5 @@ void main(){
   alpha*=clamp((gl_FragCoord.z-depth)/max(fwidth(gl_FragCoord.z)*2.,.00000004),0.,1.);
   if(alpha<.009)discard;
   float glint=pow(max(0.,1.-length(droplet_uv-vec2(-.24,.28))),4.);
-  color=vec4(mix(vec3(.42,.56,.49),vec3(.83,.89,.85),glint*.8+mist*.12),alpha);
+  color=vec4(mix(vec3(.62,.72,.68),vec3(.92,.95,.93),glint*.85+mist*.12),alpha);   // gouttes claires, eclat solaire
 }

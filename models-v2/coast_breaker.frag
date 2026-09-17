@@ -1,4 +1,5 @@
 #version 410 core
+// Lame d'eau projetee contre un rocher : corps blanc charge d'air, base translucide, sommet dechire en doigts.
 in vec3 breaker_world;
 in vec2 breaker_uv;
 flat in vec4 breaker_episode;
@@ -17,52 +18,38 @@ void main(){
   if(breaker_world.y<8.75)discard;
   float u=breaker_uv.x,v=breaker_uv.y,age=breaker_episode.x,seed=breaker_episode.z;
   int kind=int(breaker_episode.y+.1);
-  bool impact=kind==2;
-  float edge=smoothstep(0.,.09,u)*(1.-smoothstep(.91,1.,u));
-  float n=noise(vec2(u*16.+seed,v*8.-age*1.8));
-  float detail=noise(vec2(u*43.-seed,v*26.-age*3.5));
-  float top=.79+.15*noise(vec2(u*9.+seed,age*.55));
-  float film=impact ? smoothstep(.06,.19,v)*(1.-smoothstep(top-.035,top+.035,v))
-                    : exp(-pow((v-.57)/.29,2.));
-  // Disconnected filaments and a narrow broken lip, without a filled white quad.
-  float strands=smoothstep(.62,.88,n*.7+detail*.3);
-  float lip=exp(-pow((v-(impact?top:.63))/(impact?.074:.048),2.))*smoothstep(.18,.55,n);
-  float foam=clamp(strands*(impact?.78:.42)+lip*.95,0.,1.);
-  if(kind==3) {
-    film=smoothstep(.40,.75,n)*smoothstep(.25,.7,detail)*(1.-smoothstep(.20,.58,length(breaker_uv-.5)));
-    foam=.7;
-  }
+  if(kind!=2)discard;                       // seules les lames sur rochers sont dessinees
+  float edge=smoothstep(0.,.10,u)*(1.-smoothstep(.90,1.,u));
+  // Colonnes d'eau qui montent (bruit fin en largeur, etire en hauteur) et grain plus fin.
+  float columns=noise(vec2(u*22.+seed,v*3.-age*2.2));
+  float detail=noise(vec2(u*55.-seed,v*9.-age*4.));
+  // Sommet dechire : hauteur du bord variable par colonne, doigts qui se separent.
+  float top=.55+.40*noise(vec2(u*7.+seed,age*.7))+.08*noise(vec2(u*31.+seed,age*1.5));
+  float body=smoothstep(top+.02,top-.14,v);
+  // Base continue, puis colonnes distinctes separees par des trous : une nappe d'eau, pas un brouillard.
+  float fingers=smoothstep(.38,.62,columns*.7+detail*.3);
+  float coverage=body*mix(1.,fingers,smoothstep(.15,.45,v))*smoothstep(0.,.06,v);
+  float streak=smoothstep(.62,.9,noise(vec2(u*40.+seed,v*2.-age*3.)));   // filets brillants qui montent
+  // Air entraine : blanc dense vers le haut, eau verte translucide a la base.
+  float aeration=clamp(smoothstep(.05,.55,v)*(.55+.45*detail)+streak*.35,0.,1.);
   vec3 normal=normalize(cross(dFdx(breaker_world),dFdy(breaker_world)));
   vec3 view=normalize(ocean_eye-breaker_world);
   if(dot(normal,view)<0.)normal=-normal;
-  float fresnel=pow(1.-abs(dot(normal,view)),4.);
   vec2 screen=(gl_FragCoord.xy-fluid_viewport.xy)/fluid_viewport.zw;
-  vec2 bend=normal.xz*(.0018+.001*noise(vec2(u*11.,v*13.-age)));
+  vec2 bend=normal.xz*(.004+.003*detail);
   vec3 refracted=texture(tex_T25,clamp(screen+bend,vec2(.001),vec2(.999))).rgb;
-  vec3 water=mix(refracted,vec3(.25,.34,.30),.22+.20*fresnel);
-  float aeration=0.;
-  float openings=1.;
-  if(impact) {
-    // Entrained air gives a breaking wave a visible body even when the water
-    // behind it has the same colour. Density follows moving folds and pockets;
-    // clear holes keep this from becoming a filled white sprite wall.
-    float fold=noise(vec2(u*9.+sin(v*6.-age)*.65+seed,v*6.-age*1.3));
-    aeration=smoothstep(.17,.82,n*.45+detail*.20+fold*.35);
-    aeration*=.40+.60*smoothstep(.10,.60,v);
-    float pore=noise(vec2(u*24.+seed+11.,v*12.+age*2.3));
-    openings=1.-smoothstep(.72,.91,pore)*smoothstep(.22,.78,v)*.82;
-    vec3 aeratedWater=mix(vec3(.38,.52,.44),vec3(.59,.71,.63),aeration);
-    water=mix(water,aeratedWater,.55+.34*aeration);
-  }
-  vec3 light=mix(vec3(.82,.88,.84),breaker_tint.rgb,.20);
-  vec3 rgb=mix(water,light,foam*.90);
-  float bodyAlpha=impact ? .28+.18*aeration : .13;
-  float alpha=(bodyAlpha+.10*fresnel+foam*(impact?.46:.44))*film*edge*breaker_episode.w*openings;
-  if(kind==1)alpha*=.6;
-  if(kind==3)alpha*=.45;
+  vec3 water=mix(refracted,vec3(.30,.44,.40),.35);
+  vec3 white=vec3(.86,.90,.88)*mix(vec3(1.),breaker_tint.rgb,.15);
+  vec3 light=normalize(vec3(-.32,.66,-.68));
+  float rim=smoothstep(top-.18,top-.02,v)*(.5+.5*max(dot(normal,light),0.));
+  vec3 rgb=mix(water,white,aeration)+vec3(.25,.22,.16)*rim;
+  rgb*=mix(.72,1.,smoothstep(0.,.5,v));  // base plus sombre (eau chargee, moins eclairee)
+  float alpha=coverage*mix(.5,.97,aeration)*edge*breaker_episode.w;
+  float collapse=smoothstep(.55,1.5,age);   // la lame retombe et se disperse
+  alpha*=1.-collapse*.55;
   float sceneDepth=texture(tex_T26,screen).r;
   float depthFade=clamp((gl_FragCoord.z-sceneDepth)/max(fwidth(gl_FragCoord.z)*1.7,0.000000025),0.,1.);
-  alpha*=depthFade*(1.-smoothstep(130.,260.,length(ocean_eye-breaker_world)));
+  alpha*=depthFade*(1.-smoothstep(150.,280.,length(ocean_eye-breaker_world)));
   if(alpha<.007)discard;
   color=vec4(rgb,alpha);
 }

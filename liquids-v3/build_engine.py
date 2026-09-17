@@ -13,5 +13,6 @@ with (ROOT / 'liquids-v3/build-engine.log').open('w', encoding='utf-8') as log:
     result = subprocess.run([str(CMAKE), '--build', str(ROOT / 'engine-build'),
                              '--config', 'Release', '--target', 'gk', '--parallel', '6'],
                             env=env, stdout=log, stderr=subprocess.STDOUT)
-print('\n'.join((ROOT / 'liquids-v3/build-engine.log').read_text(encoding='utf-8', errors='replace').splitlines()[-35:]))
+log_tail = (ROOT / 'liquids-v3/build-engine.log').read_text(encoding='utf-8', errors='replace').splitlines()[-35:]
+print(chr(10).join(log_tail).encode('ascii', errors='replace').decode())   # console Windows : pas de plantage sur les accents
 sys.exit(result.returncode)
