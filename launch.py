@@ -38,8 +38,8 @@ args = parser.parse_args()
 # se fait ensuite en direct via goalc, sans toucher aux routes verifiees.
 CITY_SCENES = {
     # point de reprise natif, position (x, z) attendue a l'arrivee, point de placement final (m)
-    'city': {'continue': 'wascitya-seem', 'arrival': (2240.3, -40.8), 'viewpoint': (2115.2, 29.3, -207.5),
-             'label': 'devant la maison habitee du quartier ouest'},
+    'city': {'continue': 'wascitya-seem', 'arrival': (2240.3, -40.8), 'viewpoint': (2253.2, 18.3, -176.9),
+             'label': 'devant la maison habitee du quartier bas (9 m de recul, rue degagee)'},
     'market': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1821.1, 29.6, -359.6),
                'label': 'devant la maison sud du marche (fenetre habitee)'},
 }
