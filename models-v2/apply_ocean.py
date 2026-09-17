@@ -49,7 +49,7 @@ void main() {
   // Vagues de bord de la plage : cambrure, deferlement et nappe sur le sable (maillage fin jusqu'a ~100 m).
   vec2 shoreDir;vec4 shore=shoreWave(xz,ocean_time,shoreDir);
   wave.x+=shore.x*(1.-smoothstep(120.,200.,length(xz-ocean_eye.xz)));
-  ocean_world=vec3(xz.x,9.+wave.x,xz.y);
+  ocean_world=vec3(xz.x,ocean_level+wave.x,xz.y);
   gl_Position=-ocean_camera*vec4((ocean_world-ocean_eye)*4096.,1.);
   gl_Position.y*=(512./416.)*.5;
   // OpenGOAL's finite world projection clips at the original far depth. The

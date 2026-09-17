@@ -10,6 +10,13 @@ uniform mat4 ocean_camera;
 uniform vec3 ocean_eye;
 uniform vec3 ocean_body_color;
 uniform vec3 ocean_reflection_tint;
+// Region (Spargus, Haven...) : niveau de la mer et palette fournis par le moteur (ModernOcean.h)
+#define OCEAN_LEVEL_DECLARED
+uniform float ocean_level;
+uniform vec3 ocean_shallow;
+uniform vec3 ocean_deep;
+uniform vec3 ocean_far;
+uniform vec3 ocean_absorb;
 uniform vec4 fluid_viewport;
 uniform sampler2D tex_T25;
 uniform sampler2D tex_T26;
@@ -176,18 +183,16 @@ vec3 shadeModernOcean() {
   }
   // ---- Couleur de l'eau : Spargus est verte. Le fond se voit a travers une eau claire
   //      (le rouge disparait vite, le vert reste), la diffusion verdit avec la profondeur.
-  const vec3 absorb=vec3(.62,.16,.24);
-  const vec3 shallow=vec3(.21,.54,.45);   // vert d'eau clair, pas turquoise tropical
-  const vec3 deep=vec3(.03,.21,.17);
+  vec3 absorb=ocean_absorb,shallow=ocean_shallow,deep=ocean_deep;   // palette de la region
   vec3 transmission=exp(-absorb*thickness);
   vec3 scatter=mix(deep,shallow,exp(-thickness*.22));
   vec3 body=hasBed ? bedScene*transmission*mix(vec3(1.),shallow*1.6,.35)+scatter*(1.-transmission) : deep;
   // Cretes : la lumiere traverse le haut des vagues, vert plus clair.
   float crest=smoothstep(0.,.55,swell.x);
-  body+=vec3(.04,.13,.09)*crest;
+  body+=shallow*.25*crest;
   // Lointain : diffusion atmospherique, l'eau s'eclaircit vers un vert-gris (jamais bleu).
   float far=smoothstep(80.,700.,range);
-  body=mix(body,vec3(.22,.35,.29),far*.75);
+  body=mix(body,ocean_far,far*.75);
   // ---- Reflet (Fresnel de Schlick sur la normale detaillee)
   float facing=max(dot(n,v),0.);
   float fresnel=.02+.98*pow(1.-facing,5.);
@@ -210,7 +215,7 @@ vec3 shadeModernOcean() {
   float wake=0.;
   for(int i=0;i<32;i++) {
     float age=ocean_time-fluid_contacts[i].w;
-    if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-9.)>1.)continue;
+    if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-ocean_level)>1.)continue;
     float d=length(p.xz-fluid_contacts[i].xz);
     wake+=exp(-d*d/1.3-age*2.4)*smoothstep(.03,.10,fluid_strength[i])*.16;
   }

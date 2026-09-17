@@ -1,0 +1,29 @@
+{
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\goal_src\\jak3\\engine\\gfx\\ocean\\ocean-tables.gc",
+  "header": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\ocean\\OceanCoastMaskCity.h",
+  "header_sha256": "f7a416337ff347fe925d385224291ca749abb4af1c17fd92aed3674d5e684175",
+  "origin_xz": [
+    -864.0,
+    -1728.0
+  ],
+  "level": 0.0,
+  "observations": [
+    {
+      "name": "quai du port, point de reprise ctyport-start",
+      "xz": [
+        193.0,
+        1754.0
+      ],
+      "wet": true
+    },
+    {
+      "name": "bassin du port devant le quai",
+      "xz": [
+        150.0,
+        1700.0
+      ],
+      "wet": true
+    }
+  ],
+  "water_cells": 1878249
+}

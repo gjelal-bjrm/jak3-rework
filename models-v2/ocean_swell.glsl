@@ -11,6 +11,11 @@ vec3 swellNoise(vec2 p) {
   return vec3(a+(b-a)*u.x+(c-a)*u.y+k*u.x*u.y,
               du.x*(b-a+k*u.y),du.y*(c-a+k*u.x));
 }
+#ifndef OCEAN_LEVEL_DECLARED
+#define OCEAN_LEVEL_DECLARED
+uniform float ocean_level;
+#endif
+uniform float ocean_swell_scale;
 // SHORE_WAVES_INSERT
 // Direction dominante des grandes vagues : du large (sud-ouest) vers la baie et la plage.
 const vec2 swellDirection=vec2(.55,.835);
@@ -33,7 +38,7 @@ vec3 oceanSwellFiltered(vec2 p,float footprint) {
   p-=vec2(1700.,-350.);vec3 result=vec3(0);
   // 1. Grandes vagues vers la cote (44, 27, 15 et 8,5 m). Elles s'effacent sur la plage, ou les
   //    vagues de bord prennent le relais ; elles frappent les cotes rocheuses de plein fouet.
-  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused));
+  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused))*ocean_swell_scale;   // amplitude des grandes vagues par region (bassin portuaire calme)
   vec2 d=normalize(swellDirection);
   result+=swellTrain(p,d,44.,.42,0.,footprint)*coast;
   result+=swellTrain(p,swellRotate(d,.21),27.,.26,2.1,footprint)*coast;
@@ -88,7 +93,7 @@ vec3 oceanContacts(vec2 p) {
   vec3 result=vec3(0);
   for(int i=0;i<32;i++) {
     float age=ocean_time-fluid_contacts[i].w;
-    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-9.)>1.)continue;
+    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-ocean_level)>1.)continue;
     vec2 delta=p-fluid_contacts[i].xz;float d=max(length(delta),.001);
     if(d>7.)continue;
     float q=d-(.10+age*1.4),width=.24+age*.13;
