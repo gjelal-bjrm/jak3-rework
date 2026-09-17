@@ -1,0 +1,291 @@
+From 1507dd216bad85d9146b7b0c9f888e7d65af0640 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 17:12:14 +0200
+Subject: [PATCH 7/7] =?UTF-8?q?Poussi=C3=A8re=20de=20Spargus=20:=20bouff?=
+ =?UTF-8?q?=C3=A9es=20natives=20dirtpuff01=20remaill=C3=A9es=20en=20nappes?=
+ =?UTF-8?q?=20de=20sable=20port=C3=A9es=20par=20le=20vent=20(SandDrift)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ .../opengl_renderer/shaders/sand_drift.frag   |  40 ++++++
+ .../opengl_renderer/shaders/sand_drift.vert   |  40 ++++++
+ .../opengl_renderer/sprite/SandDrift.h        | 117 ++++++++++++++++++
+ .../opengl_renderer/sprite/Sprite3.cpp        |  20 +++
+ .../graphics/opengl_renderer/sprite/Sprite3.h |   2 +
+ 5 files changed, 219 insertions(+)
+ create mode 100644 game/graphics/opengl_renderer/shaders/sand_drift.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/sand_drift.vert
+ create mode 100644 game/graphics/opengl_renderer/sprite/SandDrift.h
+
+diff --git a/game/graphics/opengl_renderer/shaders/sand_drift.frag b/game/graphics/opengl_renderer/shaders/sand_drift.frag
+new file mode 100644
+index 00000000..ed2c83df
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/sand_drift.frag
+@@ -0,0 +1,40 @@
++#version 410 core
++in vec2 drift_uv;
++in float drift_alpha;
++in float drift_seed;
++in float drift_layer;
++in vec3 drift_world;
++uniform float drift_time;
++uniform vec3 drift_eye;
++uniform vec3 drift_fog;
++uniform vec4 fluid_viewport;
++uniform sampler2D tex_T26;
++out vec4 color;
++float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
++float noise(vec2 p){
++  vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
++  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);
++}
++void main(){
++  vec2 uv=drift_uv;float t=drift_time,s=drift_seed;
++  // Stries qui filent dans le sens du vent (u), fines en travers (v), plus un grain de sable.
++  float streak=noise(vec2(uv.x*4.-t*3.1+s,uv.y*14.+s*3.));
++  float ripple=noise(vec2(uv.x*9.-t*4.6+s*2.,uv.y*6.));
++  float grain=noise(vec2(uv.x*27.-t*6.5,uv.y*45.+s));
++  float density=smoothstep(.40,.88,streak*.55+ripple*.25+grain*.20);
++  float mask;
++  if(drift_layer<.5){
++    vec2 d=(uv-.5)*vec2(2.,2.6);mask=1.-smoothstep(.30,1.,length(d));           // nappe elliptique
++  } else {
++    mask=(1.-smoothstep(.2,1.,abs(uv.x-.5)*2.))*(1.-smoothstep(.15,1.,uv.y))*smoothstep(0.,.12,uv.y);  // voile qui s efface en hauteur
++  }
++  float alpha=density*mask*drift_alpha*(drift_layer<.5?.62:.40);
++  // Particule douce : fondu au contact du sol et des murs, pas d intersection dure.
++  vec2 screen=(gl_FragCoord.xy-fluid_viewport.xy)/fluid_viewport.zw;
++  float sceneDepth=texture(tex_T26,screen).r;
++  alpha*=clamp((gl_FragCoord.z-sceneDepth)/max(fwidth(gl_FragCoord.z)*3.,0.00000004),0.,1.);
++  alpha*=1.-smoothstep(90.,150.,length(drift_world-drift_eye));
++  if(alpha<.006)discard;
++  vec3 sand=vec3(.76,.66,.51);
++  color=vec4(mix(sand,drift_fog,.22),alpha);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/sand_drift.vert b/game/graphics/opengl_renderer/shaders/sand_drift.vert
+new file mode 100644
+index 00000000..6e7cecbd
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/sand_drift.vert
+@@ -0,0 +1,40 @@
++#version 410 core
++// Sable porte par le vent : chaque bouffee native dirtpuff01 devient une nappe au ras du sol
++// (couche 0) et un voile souleve face camera (couche 1), allonges dans le sens du vent.
++layout(location=0) in vec4 source_position_scale;   // xyz (m), w = echelle native (m)
++layout(location=1) in vec4 source_color;             // rgba natif (a = enveloppe de la bouffee)
++layout(location=2) in vec4 source_extra;             // x = graine, y = echelle y
++uniform mat4 drift_camera;
++uniform vec3 drift_eye;
++uniform float drift_time;
++out vec2 drift_uv;
++out float drift_alpha;
++out float drift_seed;
++out float drift_layer;
++out vec3 drift_world;
++void main(){
++  const vec2 corners[6]=vec2[6](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));
++  int layer=gl_VertexID/6;
++  vec2 c=corners[gl_VertexID%6];drift_uv=c;
++  float sx=abs(source_position_scale.w),seed=source_extra.x;
++  vec2 wind=normalize(vec2(.12,1.));                 // vent de Spargus : vers +z (derive native)
++  vec2 side=vec2(-wind.y,wind.x);
++  vec3 centre=source_position_scale.xyz;
++  vec3 p;
++  if(layer==0){
++    float L=3.6*sx+1.2,W=1.4*sx+.5;
++    p=centre+vec3(wind.x,0.,wind.y)*(c.x-.5)*L+vec3(side.x,0.,side.y)*(c.y-.5)*W;
++    p.y=centre.y-.35+.04*sin(seed*7.+drift_time*2.);
++  } else {
++    vec3 toEye=normalize(drift_eye-centre);
++    vec3 right=normalize(cross(vec3(0.,1.,0.),toEye)+vec3(.0001,0.,0.));
++    float W=2.4*sx+.8,H=.8+.45*sx;
++    p=centre+right*(c.x-.5)*W+vec3(0.,c.y*H-.3,0.);
++  }
++  drift_world=p;
++  drift_alpha=clamp(source_color.a*16.,0.,1.)*(layer==0?1.:.5);
++  drift_seed=seed+float(layer)*13.7;
++  drift_layer=float(layer);
++  gl_Position=-drift_camera*vec4((p-drift_eye)*4096.,1.);
++  gl_Position.y*=(512./416.)*.5;
++}
+diff --git a/game/graphics/opengl_renderer/sprite/SandDrift.h b/game/graphics/opengl_renderer/sprite/SandDrift.h
+new file mode 100644
+index 00000000..c5331bfd
+--- /dev/null
++++ b/game/graphics/opengl_renderer/sprite/SandDrift.h
+@@ -0,0 +1,117 @@
++#pragma once
++#include <array>
++#include <cmath>
++#include <memory>
++#include <string>
++#include <vector>
++
++#include "common/log/log.h"
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++
++// Poussiere de sable de Spargus. Les bouffees natives dirtpuff01 (group-waswide-topdust, 38
++// emetteurs dans la ville) sont remaillees en nappes de sable au ras du sol et voiles souleves,
++// allonges dans le sens du vent (+z, comme la derive native). Cadence, positions et enveloppe
++// d'opacite restent celles du jeu ; seuls les sprites ronds sont remplaces.
++class SandDrift {
++ public:
++  static bool matches(const std::string& name) { return name.find("dirtpuff01") != std::string::npos; }
++  static bool in_city(const SharedRenderState* s) {
++    const auto e = s->camera_pos / 4096.f;
++    return s->version == GameVersion::Jak3 && s->has_pc_data && e.x() > 1400.f && e.x() < 2650.f &&
++           e.y() > -60.f && e.y() < 200.f && e.z() > -900.f && e.z() < 400.f;
++  }
++  template <class Vertex>
++  static bool accepts(const Vertex& v) {
++    const float x = v.xyz_sx.x() / 4096.f, z = v.xyz_sx.z() / 4096.f, sx = std::abs(v.xyz_sx.w() / 4096.f);
++    return std::isfinite(x) && std::isfinite(z) && std::isfinite(sx) && x > 1400.f && x < 2650.f &&
++           z > -900.f && z < 400.f && sx > .3f && sx < 6.f;
++  }
++  ~SandDrift() {
++    if (m_buffer) glDeleteBuffers(1, &m_buffer);
++    if (m_vao) glDeleteVertexArrays(1, &m_vao);
++  }
++  template <class Vertex>
++  bool render(SharedRenderState* s, const std::vector<Vertex>& vertices, const std::vector<u32>& indices) {
++    m_instances.clear();
++    for (size_t i = 0; i + 4 < indices.size(); i += 5) {
++      if (indices[i] >= vertices.size()) continue;
++      const auto& v = vertices[indices[i]];
++      if (!accepts(v)) continue;
++      Instance a{};
++      for (int j = 0; j < 4; ++j) { a.position_scale[j] = v.xyz_sx[j] / 4096.f; a.color[j] = v.rgba[j]; }
++      // Graine stable pendant la vie de la bouffee : sa rotation native (rot-z aleatoire a la naissance).
++      a.extra = {std::fmod(std::abs(v.quat_sy.z()) * .37f, 100.f), std::abs(v.quat_sy.w() / 4096.f), 0.f, 0.f};
++      m_instances.push_back(a);
++    }
++    if (m_instances.empty()) return false;
++    Guard guard;
++    if (!m_shader) {
++      m_shader = std::make_unique<Shader>("sand_drift", s->version);
++      glGenVertexArrays(1, &m_vao); glGenBuffers(1, &m_buffer);
++      glBindVertexArray(m_vao); glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
++      for (GLuint i = 0; i < 3; ++i) {
++        glEnableVertexAttribArray(i);
++        glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, sizeof(Instance), reinterpret_cast<void*>(size_t(i) * 16));
++        glVertexAttribDivisor(i, 1);
++      }
++    }
++    if (!m_shader->okay()) return false;
++    m_shader->activate();
++    const GLuint id = GLuint(m_shader->id());
++    m_snapshot.bind(s, id);   // profondeur de la scene (tex_T26) pour le fondu de contact
++    glBindVertexArray(m_vao); glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
++    glBufferData(GL_ARRAY_BUFFER, m_instances.size() * sizeof(Instance), m_instances.data(), GL_STREAM_DRAW);
++    const auto eye = s->camera_pos / 4096.f;
++    glUniformMatrix4fv(glGetUniformLocation(id, "drift_camera"), 1, GL_FALSE, s->prototype_camera);
++    glUniform3fv(glGetUniformLocation(id, "drift_eye"), 1, eye.data());
++    glUniform1f(glGetUniformLocation(id, "drift_time"), LiquidSnapshot::seconds());
++    glUniform3f(glGetUniformLocation(id, "drift_fog"), s->fog_color[0] / 255.f, s->fog_color[1] / 255.f, s->fog_color[2] / 255.f);
++    glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_GEQUAL); glDepthMask(GL_FALSE); glDisable(GL_CULL_FACE);
++    glEnable(GL_BLEND); glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
++    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
++    glDrawArraysInstanced(GL_TRIANGLES, 0, 12, GLsizei(m_instances.size()));
++    if (!m_logged) {
++      const auto& a = m_instances.front();
++      lg::info("SandDrift: {} bouffees natives ; position ({:.2f}, {:.2f}, {:.2f}), echelle {:.2f}, rgba ({:.3f}, {:.3f}, {:.3f}, {:.4f})",
++               m_instances.size(), a.position_scale[0], a.position_scale[1], a.position_scale[2], a.position_scale[3],
++               a.color[0], a.color[1], a.color[2], a.color[3]);
++      m_logged = true;
++    }
++    return true;
++  }
++  size_t count() const { return m_instances.size(); }
++
++ private:
++  struct Instance { std::array<float, 4> position_scale, color, extra; };
++  static_assert(sizeof(Instance) == 48);
++  struct Guard {
++    GLint program, vao, buffer, depth, src, dst, src_a, dst_a, eq, eq_a, active, tex25, tex26;
++    GLboolean write, test, blend, cull;
++    Guard() {
++      glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
++      glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &buffer); glGetIntegerv(GL_DEPTH_FUNC, &depth);
++      glGetBooleanv(GL_DEPTH_WRITEMASK, &write); test = glIsEnabled(GL_DEPTH_TEST); blend = glIsEnabled(GL_BLEND); cull = glIsEnabled(GL_CULL_FACE);
++      glGetIntegerv(GL_BLEND_SRC_RGB, &src); glGetIntegerv(GL_BLEND_DST_RGB, &dst); glGetIntegerv(GL_BLEND_SRC_ALPHA, &src_a); glGetIntegerv(GL_BLEND_DST_ALPHA, &dst_a);
++      glGetIntegerv(GL_BLEND_EQUATION_RGB, &eq); glGetIntegerv(GL_BLEND_EQUATION_ALPHA, &eq_a);
++      glGetIntegerv(GL_ACTIVE_TEXTURE, &active);
++      glActiveTexture(GL_TEXTURE25); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex25);
++      glActiveTexture(GL_TEXTURE26); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex26);
++    }
++    ~Guard() {
++      glUseProgram(program); glBindVertexArray(vao); glBindBuffer(GL_ARRAY_BUFFER, buffer);
++      glActiveTexture(GL_TEXTURE25); glBindTexture(GL_TEXTURE_2D, tex25);
++      glActiveTexture(GL_TEXTURE26); glBindTexture(GL_TEXTURE_2D, tex26); glActiveTexture(active);
++      glDepthFunc(depth); glDepthMask(write); glBlendEquationSeparate(eq, eq_a); glBlendFuncSeparate(src, dst, src_a, dst_a);
++      if (test) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
++      if (blend) glEnable(GL_BLEND); else glDisable(GL_BLEND);
++      if (cull) glEnable(GL_CULL_FACE); else glDisable(GL_CULL_FACE);
++    }
++  };
++  GLuint m_vao = 0, m_buffer = 0;
++  bool m_logged = false;
++  std::unique_ptr<Shader> m_shader;
++  LiquidSnapshot m_snapshot;
++  std::vector<Instance> m_instances;
++};
+diff --git a/game/graphics/opengl_renderer/sprite/Sprite3.cpp b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+index 1ba4cac2..bc0024e4 100644
+--- a/game/graphics/opengl_renderer/sprite/Sprite3.cpp
++++ b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+@@ -662,6 +662,26 @@ void Sprite3::flush_sprites(SharedRenderState* render_state,
+       if(m_coastal_native_runs.empty())continue;
+     }
+ 
++    if (SandDrift::in_city(render_state) &&
++        SandDrift::matches(render_state->texture_pool->get_debug_texture_name_from_tbp(tbp))) {
++      // Poussiere de sable de Spargus : bouffees natives remaillees en nappes portees par le vent.
++      m_coastal_indices.clear();m_coastal_native_runs.clear();
++      for(u32 i=0;i<bucket->ids.size();i+=5){
++        const u32 count=std::min<u32>(5,u32(bucket->ids.size())-i),source_id=bucket->ids[i];
++        if(count==5 && source_id<m_vertices_3d.size() && SandDrift::accepts(m_vertices_3d[source_id]))
++          m_coastal_indices.insert(m_coastal_indices.end(),bucket->ids.begin()+i,bucket->ids.begin()+i+5);
++        else if(!m_coastal_native_runs.empty() && m_coastal_native_runs.back().start+m_coastal_native_runs.back().count==i)
++          m_coastal_native_runs.back().count+=count;
++        else m_coastal_native_runs.push_back({i,count});
++      }
++      if(!m_coastal_indices.empty()){
++        if(m_sand_drift.render(render_state,m_vertices_3d,m_coastal_indices)){
++          prof.add_draw_call();prof.add_tri(m_sand_drift.count()*4);
++        }else {m_coastal_native_runs.clear();m_coastal_native_runs.push_back({0,u32(bucket->ids.size())});}
++      }
++      if(m_coastal_native_runs.empty())continue;
++    }
++
+     std::optional<u64> tex;
+     tex = render_state->texture_pool->lookup(tbp);
+ 
+diff --git a/game/graphics/opengl_renderer/sprite/Sprite3.h b/game/graphics/opengl_renderer/sprite/Sprite3.h
+index 268071b6..5dca7395 100644
+--- a/game/graphics/opengl_renderer/sprite/Sprite3.h
++++ b/game/graphics/opengl_renderer/sprite/Sprite3.h
+@@ -13,6 +13,7 @@
+ #include "game/graphics/opengl_renderer/ocean/CoastalBreakers.h"
+ #include "game/graphics/opengl_renderer/sprite/GlowRenderer.h"
+ #include "game/graphics/opengl_renderer/sprite/MarketFruit.h"
++#include "game/graphics/opengl_renderer/sprite/SandDrift.h"
+ #include "game/graphics/opengl_renderer/sprite/sprite_common.h"
+ 
+ class Sprite3 : public BucketRenderer {
+@@ -72,6 +73,7 @@ class Sprite3 : public BucketRenderer {
+   GlowRenderer m_glow_renderer;
+   CoastalBreakers m_coastal_breakers;
+   MarketFruit m_market_fruit;
++  SandDrift m_sand_drift;
+   // Reused CPU scratch storage. Native runs retain offsets into the original
+   // uploaded index buffer, including each sprite's primitive-restart index.
+   struct CoastalNativeRun { u32 start, count; };
+-- 
+2.54.0.windows.1
+

@@ -109,5 +109,7 @@
   "custom_assets/jak3/city-interiors/cooking-female.bin",
   "custom_assets/jak3/city-interiors/cooking-female.json",
   "custom_assets/jak3/city-interiors/cooking-male.bin",
-  "custom_assets/jak3/city-interiors/cooking-male.json"
+  "custom_assets/jak3/city-interiors/cooking-male.json",
+  "game/graphics/opengl_renderer/shaders/sand_drift.vert",
+  "game/graphics/opengl_renderer/shaders/sand_drift.frag"
 ]
