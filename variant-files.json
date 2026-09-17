@@ -93,5 +93,21 @@
   "game/graphics/opengl_renderer/shaders/city_fire_lighting.frag",
   "game/graphics/opengl_renderer/shaders/city_fire_lighting.vert",
   "custom_assets/jak3/city-interiors/corner-conversation.bin",
-  "custom_assets/jak3/city-interiors/corner-conversation.json"
+  "custom_assets/jak3/city-interiors/corner-conversation.json",
+  "custom_assets/jak3/city-interiors/home-lounge.bin",
+  "custom_assets/jak3/city-interiors/home-lounge.json",
+  "custom_assets/jak3/city-interiors/home-bedroom.bin",
+  "custom_assets/jak3/city-interiors/home-bedroom.json",
+  "custom_assets/jak3/city-interiors/home-kitchen.bin",
+  "custom_assets/jak3/city-interiors/home-kitchen.json",
+  "custom_assets/jak3/city-interiors/sitting-female.bin",
+  "custom_assets/jak3/city-interiors/sitting-female.json",
+  "custom_assets/jak3/city-interiors/sleeping-male.bin",
+  "custom_assets/jak3/city-interiors/sleeping-male.json",
+  "custom_assets/jak3/city-interiors/sleeping-female.bin",
+  "custom_assets/jak3/city-interiors/sleeping-female.json",
+  "custom_assets/jak3/city-interiors/cooking-female.bin",
+  "custom_assets/jak3/city-interiors/cooking-female.json",
+  "custom_assets/jak3/city-interiors/cooking-male.bin",
+  "custom_assets/jak3/city-interiors/cooking-male.json"
 ]

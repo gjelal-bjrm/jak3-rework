@@ -1,0 +1,425 @@
+{
+  "name": "cooking-male",
+  "version": 1,
+  "binary": "cooking-male.bin",
+  "binary_sha256": "e68ef2ff45ef512ed92127b28c2463627d7362b52c18f1593c7bd22b3b770921",
+  "source_manifest": "source-manifest.json",
+  "source_sex": "male",
+  "kind": "cooking",
+  "coordinate_system": "right-handed X right, Y up, Z forward; metres; lowest point at Y=0",
+  "stride_bytes": 48,
+  "attributes": {
+    "position": [
+      0,
+      3
+    ],
+    "normal": [
+      12,
+      3
+    ],
+    "uv": [
+      24,
+      2
+    ],
+    "color": [
+      32,
+      4
+    ]
+  },
+  "vertex_color_contract": "linear vertex COLOR_0 multiplied by native GLB baseColorFactor=2; RGB normally 0..1, alpha=2 compensates native texture alpha 128/255; multiply albedo * vertex RGBA directly, then lighting",
+  "primitive": "triangles",
+  "vertex_count": 5310,
+  "frame_count": 4,
+  "frame_stride_bytes": 254880,
+  "duration_seconds": 3.2,
+  "sample_times": [
+    0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "loop": true,
+  "interpolation": "cyclic linear positions; normalize blended normals; UV/color constant",
+  "standing_height_m": 2.0,
+  "source_height_m": 2.9813147558971167,
+  "source_to_metres_scale": 0.8050139607878499,
+  "bounds_by_frame": [
+    [
+      [
+        -0.49085042718523264,
+        0.0,
+        -0.1625668584379063
+      ],
+      [
+        0.5394139713289731,
+        2.477455577618958,
+        0.9353617822262582
+      ]
+    ],
+    [
+      [
+        -0.4983466003317191,
+        0.0,
+        -0.1625668584379063
+      ],
+      [
+        0.5397536399502996,
+        2.475615158119085,
+        0.9335504401645156
+      ]
+    ],
+    [
+      [
+        -0.48976381387847173,
+        0.0,
+        -0.1625668584379063
+      ],
+      [
+        0.5403569728002162,
+        2.473507187802357,
+        0.9938278734433317
+      ]
+    ],
+    [
+      [
+        -0.480735941095033,
+        0.0,
+        -0.1625668584379063
+      ],
+      [
+        0.5397946650486517,
+        2.4756153500493694,
+        0.9915154014082688
+      ]
+    ]
+  ],
+  "draws": [
+    {
+      "first": 0,
+      "count": 168,
+      "material": "wstlander-01-mustache",
+      "texture": "textures/wstlander-01-mustache.png",
+      "texture_sha256": "d8fb1a0bff3fb2da8a548ff5dfe16b7519f9451b2440c93628130f26a2072651",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 168,
+      "count": 1440,
+      "material": "wstlander-01-head",
+      "texture": "textures/wstlander-01-head.png",
+      "texture_sha256": "1ff6feaa130931e19e03981e5a7bddbb13c20f3e216dd1c0a39fb96d1268bd69",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1608,
+      "count": 72,
+      "material": "wstlander-01-eye",
+      "texture": "textures/wstlander-01-eye.png",
+      "texture_sha256": "e085adb28919a0a02bcfb09f3d8dad0dbff8fed8820d6b369f28d86883eebcd7",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1680,
+      "count": 300,
+      "material": "wstlander-01-pants",
+      "texture": "textures/wstlander-01-pants.png",
+      "texture_sha256": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1980,
+      "count": 132,
+      "material": "wstlander-01-wrap",
+      "texture": "textures/wstlander-01-wrap.png",
+      "texture_sha256": "eedd4e64073600a79a4ace89d7a27f9f495307577f60fad7cb262fe3258e1a5a",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 2112,
+      "count": 948,
+      "material": "wstlander-01-shoetop",
+      "texture": "textures/wstlander-01-shoetop.png",
+      "texture_sha256": "4a561233e99f56f38257eb4c47a3b810d36a68a20f2cbc733012c9e23921e9aa",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 3060,
+      "count": 54,
+      "material": "wstlander-01-skirt",
+      "texture": "textures/wstlander-01-skirt.png",
+      "texture_sha256": "d2833fc119f2d95e79f8dc406de9e0371d5c448783cedc99a50b8658ec32acf3",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 3114,
+      "count": 834,
+      "material": "wstlander-01-pants.001",
+      "texture": "textures/wstlander-01-pants_001.png",
+      "texture_sha256": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 3948,
+      "count": 324,
+      "material": "wstlander-01-shoetop.001",
+      "texture": "textures/wstlander-01-shoetop_001.png",
+      "texture_sha256": "4a561233e99f56f38257eb4c47a3b810d36a68a20f2cbc733012c9e23921e9aa",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 4272,
+      "count": 192,
+      "material": "wstlander-01-shoebottom",
+      "texture": "textures/wstlander-01-shoebottom.png",
+      "texture_sha256": "54a62b1431a0af71df44f37b6df5ec16ac16ffd0cd3e660d9a01dda0c638d37c",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 4464,
+      "count": 270,
+      "material": "wstlander-01-pants.002",
+      "texture": "textures/wstlander-01-pants_002.png",
+      "texture_sha256": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 4734,
+      "count": 576,
+      "material": "wstlander-01-leatherstrap",
+      "texture": "textures/wstlander-01-leatherstrap.png",
+      "texture_sha256": "424886464a24600cd098b671f699e86d97f90991fca244daa32b0aa0108671b3",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    }
+  ],
+  "joint_positions_by_frame": [
+    {
+      "hips": [
+        9.111194378803208e-11,
+        1.2345281052390866,
+        0.17221533779688358
+      ],
+      "Lknee": [
+        0.17536559752025221,
+        0.7082664925463543,
+        0.2527510486114422
+      ],
+      "Rknee": [
+        -0.17536586142439367,
+        0.7082668764069237,
+        0.25275097663758544
+      ],
+      "Lhand": [
+        0.06427260610230948,
+        1.3997114652786444,
+        0.23643795805567464
+      ],
+      "Rhand": [
+        -0.27792925506923316,
+        1.742742417297468,
+        0.6775838635372681
+      ],
+      "Lankle": [
+        0.17536558552460943,
+        0.22633866438340908,
+        0.0793320320297809
+      ],
+      "Rankle": [
+        -0.17536584942875086,
+        0.22633895227883613,
+        0.0793320320297809
+      ],
+      "neck": [
+        1.0724940412936367e-15,
+        2.028983405275398,
+        0.18213304736270688
+      ]
+    },
+    {
+      "hips": [
+        9.111194378803208e-11,
+        1.2345281052390866,
+        0.17221533779688358
+      ],
+      "Lknee": [
+        0.17536559752025221,
+        0.7082664925463543,
+        0.2527510486114422
+      ],
+      "Rknee": [
+        -0.17536586142439367,
+        0.7082668764069237,
+        0.25275097663758544
+      ],
+      "Lhand": [
+        0.06579125447990296,
+        1.3990941215179455,
+        0.23039006684615793
+      ],
+      "Rhand": [
+        -0.20279924872726815,
+        1.6855627388135155,
+        0.685862440489285
+      ],
+      "Lankle": [
+        0.17536558552460943,
+        0.22633866438340908,
+        0.0793320320297809
+      ],
+      "Rankle": [
+        -0.17536584942875086,
+        0.22633895227883613,
+        0.0793320320297809
+      ],
+      "neck": [
+        0.0003360256711268292,
+        2.0293292636484055,
+        0.17458338564500644
+      ]
+    },
+    {
+      "hips": [
+        9.111194378803208e-11,
+        1.2345281052390866,
+        0.17221533779688358
+      ],
+      "Lknee": [
+        0.17536559752025221,
+        0.7082664925463543,
+        0.2527510486114422
+      ],
+      "Rknee": [
+        -0.17536586142439367,
+        0.7082668764069237,
+        0.25275097663758544
+      ],
+      "Lhand": [
+        0.06427243816331038,
+        1.3983947275605426,
+        0.22707794991458338
+      ],
+      "Rhand": [
+        -0.2667040924128299,
+        1.632683066427712,
+        0.7131249378649304
+      ],
+      "Lankle": [
+        0.17536558552460943,
+        0.22633866438340908,
+        0.0793320320297809
+      ],
+      "Rankle": [
+        -0.17536584942875086,
+        0.22633895227883613,
+        0.0793320320297809
+      ],
+      "neck": [
+        2.5787774958689663e-15,
+        2.0295434578461173,
+        0.16703593112557988
+      ]
+    },
+    {
+      "hips": [
+        9.111194378803208e-11,
+        1.2345281052390866,
+        0.17221533779688358
+      ],
+      "Lknee": [
+        0.17536559752025221,
+        0.7082664925463543,
+        0.2527510486114422
+      ],
+      "Rknee": [
+        -0.17536586142439367,
+        0.7082668764069237,
+        0.25275097663758544
+      ],
+      "Lhand": [
+        0.06272488028658577,
+        1.3990941215179455,
+        0.23308208101919126
+      ],
+      "Rhand": [
+        -0.347423012679766,
+        1.696711969051039,
+        0.6991183455141148
+      ],
+      "Lankle": [
+        0.17536558552460943,
+        0.22633866438340908,
+        0.0793320320297809
+      ],
+      "Rankle": [
+        -0.17536584942875086,
+        0.22633895227883613,
+        0.0793320320297809
+      ],
+      "neck": [
+        -0.0003360257648427885,
+        2.0293292636484055,
+        0.17458338564500644
+      ]
+    }
+  ],
+  "native_game_validation": false
+}

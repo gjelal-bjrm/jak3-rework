@@ -1,0 +1,31 @@
+From 442ffd9224dd90875119c4e9a9695aa8e69bf823 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 14:26:05 +0200
+Subject: [PATCH 4/4] =?UTF-8?q?Int=C3=A9rieurs=20de=20ville=20:=20chargeme?=
+ =?UTF-8?q?nt=20paresseux=20des=20meshes=20d'habitants=20(plus=20de=20list?=
+ =?UTF-8?q?e=20en=20dur)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/CityInteriors.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/game/graphics/opengl_renderer/CityInteriors.h b/game/graphics/opengl_renderer/CityInteriors.h
+index 3bb3282c..346ec46f 100644
+--- a/game/graphics/opengl_renderer/CityInteriors.h
++++ b/game/graphics/opengl_renderer/CityInteriors.h
+@@ -109,7 +109,7 @@ class CityInteriors {
+       for(const auto& id:a.at("windows")){size_t index=indices.at(id.get<std::string>());if(assigned[index])throw std::runtime_error("window belongs to two rooms");assigned[index]=true;room.windows.push_back(index);}
+       if(room.windows.empty()||std::find(room.windows.begin(),room.windows.end(),room.anchor)==room.windows.end())throw std::runtime_error("invalid room anchor");
+       if(!m_meshes.count(room.mesh))m_meshes.emplace(room.mesh,load_mesh(room.mesh));
+-      for(const auto& actor:a.at("actors")){Actor out;out.mesh=actor.at("mesh").get<std::string>();out.position=actor.at("position").get<Vec3>();out.yaw=actor.value("yaw",0.f);out.phase=actor.value("phase",0.f);if(!m_meshes.count(out.mesh))throw std::runtime_error("unknown occupant mesh");room.actors.push_back(out);}
++      for(const auto& actor:a.at("actors")){Actor out;out.mesh=actor.at("mesh").get<std::string>();out.position=actor.at("position").get<Vec3>();out.yaw=actor.value("yaw",0.f);out.phase=actor.value("phase",0.f);if(!m_meshes.count(out.mesh))m_meshes.emplace(out.mesh,load_mesh(out.mesh));room.actors.push_back(out);}
+       m_rooms.push_back(room);
+     }
+     if(std::find(assigned.begin(),assigned.end(),false)!=assigned.end())throw std::runtime_error("window has no room");
+-- 
+2.54.0.windows.1
+

@@ -109,7 +109,7 @@ class CityInteriors {
       for(const auto& id:a.at("windows")){size_t index=indices.at(id.get<std::string>());if(assigned[index])throw std::runtime_error("window belongs to two rooms");assigned[index]=true;room.windows.push_back(index);}
       if(room.windows.empty()||std::find(room.windows.begin(),room.windows.end(),room.anchor)==room.windows.end())throw std::runtime_error("invalid room anchor");
       if(!m_meshes.count(room.mesh))m_meshes.emplace(room.mesh,load_mesh(room.mesh));
-      for(const auto& actor:a.at("actors")){Actor out;out.mesh=actor.at("mesh").get<std::string>();out.position=actor.at("position").get<Vec3>();out.yaw=actor.value("yaw",0.f);out.phase=actor.value("phase",0.f);if(!m_meshes.count(out.mesh))throw std::runtime_error("unknown occupant mesh");room.actors.push_back(out);}
+      for(const auto& actor:a.at("actors")){Actor out;out.mesh=actor.at("mesh").get<std::string>();out.position=actor.at("position").get<Vec3>();out.yaw=actor.value("yaw",0.f);out.phase=actor.value("phase",0.f);if(!m_meshes.count(out.mesh))m_meshes.emplace(out.mesh,load_mesh(out.mesh));room.actors.push_back(out);}
       m_rooms.push_back(room);
     }
     if(std::find(assigned.begin(),assigned.end(),false)!=assigned.end())throw std::runtime_error("window has no room");

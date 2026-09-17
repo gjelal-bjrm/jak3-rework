@@ -99,3 +99,13 @@ reference/tree.json
 # ---- Lot R5 marche : export natif volumineux, regenerable par le bridge
 city-remaster/city-block-v3/market-windows-r5/native-market.json
 city-remaster/city-block-v3/market-windows-r5/survey.json
+
+# ---- Remise en etat des maisons pilotes : export natif volumineux, regenerable
+city-remaster/city-block-v3/pilot-houses-restore/native-pilot-current.json
+# ---- Captures du tour de controle du lanceur (--tour)
+/qa/
+
+# ---- Exports natifs autour de chaque fenetre (fit_rooms.py), regenerables
+city-remaster/city-block-v3/interiors/fit/
+
+city-remaster/city-block-v3/east-house-restore/native-east-current.json

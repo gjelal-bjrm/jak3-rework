@@ -1,11 +1,11 @@
 {
   "passed": true,
-  "faces_removed": 114,
-  "faces_added": 10742,
+  "faces_removed": 52,
+  "faces_added": 7924,
   "degenerate_float32": 0,
   "bad_normals": 0,
   "bad_palettes": 0,
-  "patch_sha256": "9bed8808028e4a57a818c67c07f0c500e573251776cf0ee30bc323d778e7fe46",
+  "patch_sha256": "45e00c2f037205508d601e19b8e800311d77a618021c5ff17731c613f87938f8",
   "source_fr3": {
     "bytes": 271111860,
     "sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d"

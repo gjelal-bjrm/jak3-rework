@@ -1,0 +1,114 @@
+{
+  "wca-house-east-room": {
+    "scale": [
+      0.3,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 0.47,
+      "droite": 11.0,
+      "fond": 11.43,
+      "plafond": 12.6
+    },
+    "ceiling_ok": true,
+    "status": "A REVOIR",
+    "native_triangles": 15361
+  },
+  "wca-house-west-room": {
+    "scale": [
+      1.0,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 6.55,
+      "droite": 11.0,
+      "fond": 10.69,
+      "plafond": 12.6
+    },
+    "ceiling_ok": true,
+    "status": "entiere",
+    "native_triangles": 13579
+  },
+  "wca-house-low-room": {
+    "scale": [
+      1.0,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 11.0,
+      "droite": 8.25,
+      "fond": 12.6,
+      "plafond": 11.42
+    },
+    "ceiling_ok": true,
+    "status": "entiere",
+    "native_triangles": 16631
+  },
+  "wca-house-north-room": {
+    "scale": [
+      1.0,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 11.0,
+      "droite": 7.51,
+      "fond": 11.32,
+      "plafond": 12.6
+    },
+    "ceiling_ok": true,
+    "status": "entiere",
+    "native_triangles": 14816
+  },
+  "wcb-market-southeast-room": {
+    "scale": [
+      0.718,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 11.0,
+      "droite": 1.87,
+      "fond": 12.6,
+      "plafond": 9.91
+    },
+    "ceiling_ok": true,
+    "status": "reduite",
+    "native_triangles": 17817
+  },
+  "wcb-market-northeast-room": {
+    "scale": [
+      1.0,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 3.24,
+      "droite": 6.75,
+      "fond": 12.6,
+      "plafond": 12.6
+    },
+    "ceiling_ok": true,
+    "status": "entiere",
+    "native_triangles": 21530
+  },
+  "wcb-market-west-room": {
+    "scale": [
+      0.722,
+      1,
+      1.0
+    ],
+    "clearance": {
+      "gauche": 1.88,
+      "droite": 2.99,
+      "fond": 12.6,
+      "plafond": 12.6
+    },
+    "ceiling_ok": true,
+    "status": "reduite",
+    "native_triangles": 11463
+  }
+}

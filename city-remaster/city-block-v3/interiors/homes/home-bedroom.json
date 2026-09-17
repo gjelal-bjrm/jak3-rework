@@ -1,0 +1,275 @@
+{
+  "schema": "city-room-mesh-v1",
+  "units": "metres",
+  "floor_y": -0.45,
+  "dimensions": [
+    4.8,
+    3.1500000000000004,
+    3.4
+  ],
+  "binary": "home-bedroom.bin",
+  "stride_floats": 12,
+  "vertex_count": 23796,
+  "draws": [
+    {
+      "first": 0,
+      "count": 3240,
+      "material": 0
+    },
+    {
+      "first": 3240,
+      "count": 1296,
+      "material": 1
+    },
+    {
+      "first": 4536,
+      "count": 6048,
+      "material": 2
+    },
+    {
+      "first": 10584,
+      "count": 324,
+      "material": 3
+    },
+    {
+      "first": 10908,
+      "count": 648,
+      "material": 4
+    },
+    {
+      "first": 11556,
+      "count": 360,
+      "material": 5
+    },
+    {
+      "first": 11916,
+      "count": 6480,
+      "material": 6
+    },
+    {
+      "first": 18396,
+      "count": 324,
+      "material": 7
+    },
+    {
+      "first": 18720,
+      "count": 1296,
+      "material": 8
+    },
+    {
+      "first": 20016,
+      "count": 432,
+      "material": 10
+    },
+    {
+      "first": 20448,
+      "count": 2160,
+      "material": 11
+    },
+    {
+      "first": 22608,
+      "count": 504,
+      "material": 12
+    },
+    {
+      "first": 23112,
+      "count": 360,
+      "material": 13
+    },
+    {
+      "first": 23472,
+      "count": 324,
+      "material": 16
+    }
+  ],
+  "materials": [
+    {
+      "name": "sunbaked plaster",
+      "color": [
+        0.64,
+        0.47,
+        0.29
+      ],
+      "roughness": 0.93,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "warm stone",
+      "color": [
+        0.36,
+        0.3,
+        0.23
+      ],
+      "roughness": 0.88,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "carved wood",
+      "color": [
+        0.22,
+        0.12,
+        0.055
+      ],
+      "roughness": 0.7,
+      "texture_kind": 1,
+      "emissive": false
+    },
+    {
+      "name": "copper bindings",
+      "color": [
+        0.34,
+        0.18,
+        0.073
+      ],
+      "roughness": 0.43,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "ochre canvas",
+      "color": [
+        0.59,
+        0.31,
+        0.105
+      ],
+      "roughness": 0.92,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "deep teal canvas",
+      "color": [
+        0.12,
+        0.26,
+        0.22
+      ],
+      "roughness": 0.94,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "clay vessels",
+      "color": [
+        0.56,
+        0.23,
+        0.1
+      ],
+      "roughness": 0.82,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "dark rug",
+      "color": [
+        0.28,
+        0.13,
+        0.068
+      ],
+      "roughness": 0.98,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "rug border",
+      "color": [
+        0.63,
+        0.4,
+        0.15
+      ],
+      "roughness": 0.95,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "plant green",
+      "color": [
+        0.22,
+        0.29,
+        0.06
+      ],
+      "roughness": 0.62,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "dark bronze",
+      "color": [
+        0.12,
+        0.095,
+        0.065
+      ],
+      "roughness": 0.52,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "lamplight glass",
+      "color": [
+        0.94,
+        0.48,
+        0.12
+      ],
+      "roughness": 0.3,
+      "texture_kind": 0,
+      "emissive": true
+    },
+    {
+      "name": "shadow plaster",
+      "color": [
+        0.16,
+        0.12,
+        0.08
+      ],
+      "roughness": 0.97,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "linen",
+      "color": [
+        0.78,
+        0.7,
+        0.56
+      ],
+      "roughness": 0.9,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "hearth stone",
+      "color": [
+        0.2,
+        0.18,
+        0.16
+      ],
+      "roughness": 0.92,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "fire glow",
+      "color": [
+        1.0,
+        0.52,
+        0.14
+      ],
+      "roughness": 0.2,
+      "texture_kind": 0,
+      "emissive": true
+    },
+    {
+      "name": "sand floor",
+      "color": [
+        0.55,
+        0.44,
+        0.3
+      ],
+      "roughness": 0.96,
+      "texture_kind": 0,
+      "emissive": false
+    }
+  ],
+  "sha256": "db28aab4aa3d77d3606b3e5b37b885b6c546fd0158a6cac6e3d54ecdceb71c80"
+}

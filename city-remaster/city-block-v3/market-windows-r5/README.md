@@ -1,13 +1,12 @@
 # Fenêtres habitées autour du marché (WCB) — lot R5
 
-Quatre vraies fenêtres découpées dans quatre bâtiments distincts du quartier du
+Trois vraies fenêtres découpées dans trois bâtiments distincts du quartier du
 marché de Spargus (niveau `wascityb`), chacune donnant sur une pièce meublée et
 habitée. C'est le premier lot d'intérieurs hors de la ville basse (WCA), pour
 répartir les habitants dans toute la ville.
 
 | Fenêtre | Bâtiment natif | Position (m) | Côté de la place |
 |---|---|---|---|
-| `wcb-market-south-room` | TIE arbre 0, instance 271 | 1833 / 30,8 / −367 | sud-est, petite maison |
 | `wcb-market-southeast-room` | TIE arbre 0, instance 2218 | 1842 / 30,5 / −361 | sud-est, grand bâtiment |
 | `wcb-market-northeast-room` | TIE arbre 0, instance 1 | 1823 / 40,9 / −277 | nord-est, grand édifice |
 | `wcb-market-west-room` | TIE arbre 1, instance 700 | 1698 / 42,4 / −284 | ouest |
@@ -44,3 +43,7 @@ seul `wascityb` l'est : la condition accepte maintenant les deux niveaux. Moteur
 `Tester-MARCHE.cmd` place Jak devant la maison sud du marché. Les trois autres fenêtres sont à
 quelques dizaines de mètres : grand bâtiment juste à droite, édifice nord-est de l'autre côté de
 la place, maison de l'ouest en face.
+
+## Révision
+
+La fenêtre `wcb-market-south-room` (petite maison sud, instance 271) a été retirée le jour même : elle était au pied d'une rampe et sa maison a une ouverture latérale par laquelle la pièce ressortait. Le lot a été reconstruit à trois fenêtres depuis la base geometry-002 (`staging.py` prend l'archive comme base, `install.py` remplace la sortie précédente).

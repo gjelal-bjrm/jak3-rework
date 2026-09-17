@@ -38,9 +38,9 @@ def main():
     stage = H / 'staging'; stage.mkdir(exist_ok=True)
     patch = H / 'wascityb-patch.json'; p = read(patch)
     parent = C / 'environment/geometry-002/wascityb-installed.json'; prec = read(parent)
-    before = R / 'data' / prec['path']; after = stage / 'wascityb.fr3'
+    before = Path(prec['output_path']); after = stage / 'wascityb.fr3'     # archive geometry-002, base immuable du lot
     assert p['preserve_bvh'] is True
-    assert sha(before) == p['source_fr3']['sha256'] == prec['output_sha256'], 'Le WCB actif ne correspond plus a la base du patch'
+    assert sha(before) == p['source_fr3']['sha256'] == prec['output_sha256'], 'La base geometry-002 ne correspond plus au patch'
     verify_geometry(p)
     with (stage / 'opening-validation.log').open('w') as f:
         subprocess.run([str(BLENDER), '--background', '--python', str(H / 'validate_openings.py')], stdout=f, stderr=subprocess.STDOUT, check=True)

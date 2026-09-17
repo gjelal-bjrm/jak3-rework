@@ -30,14 +30,16 @@ parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
 parser.add_argument('--viewpoint', metavar='X,Y,Z',
                     help='scene city : autre point de placement de Jak, en metres (test)')
+parser.add_argument('--tour', action='store_true',
+                    help='scenes de ville : passer devant chaque fenetre habitee et capturer (controle qualite)')
 args = parser.parse_args()
 
 # Les scenes de ville reutilisent la route de demarrage du palais ; le deplacement
 # se fait ensuite en direct via goalc, sans toucher aux routes verifiees.
 CITY_SCENES = {
     # point de reprise natif, position (x, z) attendue a l'arrivee, point de placement final (m)
-    'city': {'continue': 'wascitya-seem', 'arrival': (2240.3, -40.8), 'viewpoint': (2270.0, 20.5, 3.0),
-             'label': 'devant les maisons pilotes de la ville basse'},
+    'city': {'continue': 'wascitya-seem', 'arrival': (2240.3, -40.8), 'viewpoint': (2115.2, 29.3, -207.5),
+             'label': 'devant la maison habitee du quartier ouest'},
     'market': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1821.1, 29.6, -359.6),
                'label': 'devant la maison sud du marche (fenetre habitee)'},
 }
@@ -218,7 +220,67 @@ def place_jak_in_city(game, game_log, capture):
         time.sleep(4)
         nrepl_send(sock, '(pc-screen-shot)')
         say('capture demandee (dossier screenshots du profil).')
+    if args.tour:
+        tour(sock, game, game_log, tag, say)
     return goalc
+
+
+def move_jak(sock, x, y, z):
+    x, y, z = (v * 4096.0 for v in (x, y, z))
+    nrepl_send(sock, '(when (and *target* (-> *target* control)) '
+                     "(let ((destination (new 'stack-no-clear 'vector))) "
+                     f'(set! (-> destination x) {x!r}) (set! (-> destination y) {y!r}) (set! (-> destination z) {z!r}) (set! (-> destination w) 1.0) '
+                     '(move-to-point! (-> *target* control) destination) '
+                     '(vector-copy! (-> *target* root trans) destination) '
+                     '(vector-copy! (-> *target* control transv) *zero-vector*)))')
+
+
+def aim_camera(sock, eye, target):
+    """Pose la camera du jeu en un point, tournee vers une cible (metres). Meme methode que les captures de Codex."""
+    import math
+    f = [target[i] - eye[i] for i in range(3)]; L = math.sqrt(sum(c * c for c in f)); f = [c / L for c in f]
+    up = (0.0, 1.0, 0.0)
+    r = [up[1] * f[2] - up[2] * f[1], up[2] * f[0] - up[0] * f[2], up[0] * f[1] - up[1] * f[0]]; L = math.sqrt(sum(c * c for c in r)); r = [c / L for c in r]
+    u = [f[1] * r[2] - f[2] * r[1], f[2] * r[0] - f[0] * r[2], f[0] * r[1] - f[1] * r[0]]
+    p = [v * 4096.0 for v in eye]
+    sets = ' '.join(f'(set! (-> m {vec} {axis}) {val!r})' for vec, vals in (('rvec', r), ('uvec', u), ('fvec', f)) for axis, val in zip('xyz', vals))
+    nrepl_send(sock, "(let ((p (new 'stack-no-clear 'vector)) (m (new 'stack-no-clear 'matrix))) "
+                     f'(set! (-> p x) {p[0]!r}) (set! (-> p y) {p[1]!r}) (set! (-> p z) {p[2]!r}) (set! (-> p w) 1.0) '
+                     f'{sets} (set! (-> m rvec w) 0.0) (set! (-> m uvec w) 0.0) (set! (-> m fvec w) 0.0) '
+                     '(set! (-> m trans x) 0.0) (set! (-> m trans y) 0.0) (set! (-> m trans z) 0.0) (set! (-> m trans w) 1.0) '
+                     '(vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) '
+                     '(matrix-copy! (-> *camera* slave 0 tracking inv-mat) m) (none))')
+
+
+def tour(sock, game, game_log, tag, say):
+    """Controle qualite : pour chaque fenetre habitee, place Jak dans la rue, vise la fenetre, capture."""
+    anchors = json.loads((ROOT / 'city-remaster/city-block-v3/interiors/window-anchors-final.json').read_text(encoding='utf-8'))
+    out = ROOT / 'qa'; out.mkdir(exist_ok=True)
+    shot = profile / 'OpenGOAL/jak3/screenshots/screenshot.png'
+    current_level = None
+    for w in anchors:
+        continue_point = {'wascitya': ('wascitya-seem', (2240.3, -40.8)), 'wascityb': ('wascityb-start', (1776.4, -375.5))}[w['level']]
+        if w['level'] != current_level:
+            nrepl_send(sock, f'(start \'play (get-continue-by-name *game-info* "{continue_point[0]}"))')
+            deadline = time.monotonic() + 90
+            while time.monotonic() < deadline:
+                time.sleep(3); tag += 1
+                position = probe_position(sock, game, game_log, tag, 8)
+                if position and abs(position[0] - continue_point[1][0]) < 60 and abs(position[2] - continue_point[1][1]) < 60: break
+            current_level = w['level']; time.sleep(2)
+        cam = w['street_camera']; centre = w['center']
+        move_jak(sock, cam[0], cam[1] + .3, cam[2]); time.sleep(4)
+        eye = (cam[0], cam[1] + 1.4, cam[2])
+        aim_camera(sock, eye, (centre[0], centre[1], centre[2])); time.sleep(.4)
+        before = shot.stat().st_mtime if shot.exists() else 0
+        nrepl_send(sock, '(pc-screen-shot)')
+        for _ in range(30):
+            time.sleep(.3)
+            if shot.exists() and shot.stat().st_mtime > before: break
+        time.sleep(.5)
+        if shot.exists(): shutil.copy2(shot, out / f'tour-{w["id"]}.png')
+        say(f'capture {w["id"]}')
+    say(f'tour termine : {len(anchors)} captures dans {out}')
 
 
 profile = ROOT / 'profiles' / (args.variant if args.scene == 'arena' else f'{args.variant}-{args.scene}')

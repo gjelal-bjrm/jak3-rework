@@ -1,0 +1,17 @@
+{
+  "status": "staged",
+  "path": "out/jak3/fr3/wascitya.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascitya.fr3",
+  "base_sha256": "7c5c50e8cb2c16ba2f1ce4927701dd2d5743a0d66417dc28b2bc9c19eaf937f7",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\east-house-restore\\staging\\wascitya.fr3",
+  "output_sha256": "9dbc23226620b9b17a86095342c6f7e53e0163818592cb573370da9231807501",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\east-house-restore\\wascitya-patch.json",
+  "patch_sha256": "a5edea7e1ab229530034795b3aa92f44610368bd09d0cd830e7140c6423274f5",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\east-house-restore\\staging\\preservation.json",
+  "preservation_report_sha256": "e143c9a75bf8af92c9b7c350294cdedc82a5662bbd8b0fdfb0a28844fd014533",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\pilot-houses-restore\\installed.json",
+  "parent_record_sha256": "bb7178854fde8d793ea7d56c209a8fb9d4a8ce81d48d46e214a89d60cbd2530b",
+  "bvh_coverage": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\east-house-restore\\bvh-coverage.json",
+  "bvh_coverage_sha256": "f4e054c1ce35b11077fc88348b7d1991fd5d57471cbdc1ecfe31270fd61dd654",
+  "scope": "Maison du quartier est (WCA, TIE arbre 1, instance 0) rendue a sa geometrie native : sa fenetre etait a 47 cm d un angle, aucune piece n y tient."
+}

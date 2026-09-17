@@ -9,113 +9,6 @@
   "historical_author_sha256": "dede462e69a64c191bb59fb79dca52e4ef3cff6aa25a05d9e8867d6fbde17a7b",
   "windows": [
     {
-      "id": "wcb-market-south-room",
-      "lod": 0,
-      "native_instances": [
-        271
-      ],
-      "cut_polygons": 10,
-      "removed": 16,
-      "added": 706,
-      "remapped": 0,
-      "groups": [
-        [
-          0,
-          0,
-          14
-        ],
-        [
-          0,
-          1,
-          8
-        ],
-        [
-          0,
-          2,
-          14
-        ]
-      ]
-    },
-    {
-      "id": "wcb-market-south-room",
-      "lod": 1,
-      "native_instances": [
-        271
-      ],
-      "cut_polygons": 10,
-      "removed": 16,
-      "added": 706,
-      "remapped": 0,
-      "groups": [
-        [
-          0,
-          0,
-          14
-        ],
-        [
-          0,
-          1,
-          8
-        ],
-        [
-          0,
-          2,
-          14
-        ]
-      ]
-    },
-    {
-      "id": "wcb-market-south-room",
-      "lod": 2,
-      "native_instances": [
-        271
-      ],
-      "cut_polygons": 10,
-      "removed": 16,
-      "added": 706,
-      "remapped": 0,
-      "groups": [
-        [
-          0,
-          0,
-          14
-        ],
-        [
-          0,
-          1,
-          8
-        ],
-        [
-          0,
-          2,
-          14
-        ]
-      ]
-    },
-    {
-      "id": "wcb-market-south-room",
-      "lod": 3,
-      "native_instances": [
-        271
-      ],
-      "cut_polygons": 9,
-      "removed": 14,
-      "added": 700,
-      "remapped": 0,
-      "groups": [
-        [
-          0,
-          0,
-          14
-        ],
-        [
-          0,
-          2,
-          14
-        ]
-      ]
-    },
-    {
       "id": "wcb-market-southeast-room",
       "lod": 0,
       "native_instances": [
@@ -352,6 +245,6 @@
       ]
     }
   ],
-  "faces_removed": 114,
-  "faces_added": 10742
+  "faces_removed": 52,
+  "faces_added": 7924
 }

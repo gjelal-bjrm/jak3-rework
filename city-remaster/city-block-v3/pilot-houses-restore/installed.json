@@ -1,0 +1,20 @@
+{
+  "status": "installed",
+  "path": "out/jak3/fr3/wascitya.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascitya.fr3",
+  "base_sha256": "46b986d81aa7b3edf5d85e1f387a3b8efc789f9657d1e861495e51c2a251ea72",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\pilot-houses-restore\\staging\\wascitya.fr3",
+  "output_sha256": "7c5c50e8cb2c16ba2f1ce4927701dd2d5743a0d66417dc28b2bc9c19eaf937f7",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\pilot-houses-restore\\wascitya-patch.json",
+  "patch_sha256": "42acd88abbd3f3dbd9ade37961be978e09b44ec88325df652dd03f04841a0ce6",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\pilot-houses-restore\\staging\\preservation.json",
+  "preservation_report_sha256": "e542145e575be97b72cecfa35f961991d56302f8fc26a86b698be318fb176a97",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\revision-004\\installed.json",
+  "parent_record_sha256": "471c31fc6333cf6a2183323887500059b3df39df181ab361c0be7f10f6ae2226",
+  "bvh_coverage": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\pilot-houses-restore\\bvh-coverage.json",
+  "bvh_coverage_sha256": "bb9e5df5889656211a45276ae066a6d6d8eedc42345063d57369a78df68e586b",
+  "scope": "Maisons pilotes 1 et 2 (WCA, TIE arbre 1) rendues a leur geometrie native ; leurs cinq ouvertures disparaissent.",
+  "window_anchors_final": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\window-anchors-final.json",
+  "window_anchors_final_sha256": "676654e37cb957bae50b3e82e65b97c50ff4337c4b01e9900768e9597b355d56",
+  "windows_total": 7
+}

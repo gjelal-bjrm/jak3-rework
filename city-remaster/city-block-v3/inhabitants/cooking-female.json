@@ -1,0 +1,451 @@
+{
+  "name": "cooking-female",
+  "version": 1,
+  "binary": "cooking-female.bin",
+  "binary_sha256": "6d732743cd5b2fbe809848f9ae909150bdfaa96e737df6eed172b05719a0f812",
+  "source_manifest": "source-manifest.json",
+  "source_sex": "female",
+  "kind": "cooking",
+  "coordinate_system": "right-handed X right, Y up, Z forward; metres; lowest point at Y=0",
+  "stride_bytes": 48,
+  "attributes": {
+    "position": [
+      0,
+      3
+    ],
+    "normal": [
+      12,
+      3
+    ],
+    "uv": [
+      24,
+      2
+    ],
+    "color": [
+      32,
+      4
+    ]
+  },
+  "vertex_color_contract": "linear vertex COLOR_0 multiplied by native GLB baseColorFactor=2; RGB normally 0..1, alpha=2 compensates native texture alpha 128/255; multiply albedo * vertex RGBA directly, then lighting",
+  "primitive": "triangles",
+  "vertex_count": 6288,
+  "frame_count": 4,
+  "frame_stride_bytes": 301824,
+  "duration_seconds": 3.2,
+  "sample_times": [
+    0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "loop": true,
+  "interpolation": "cyclic linear positions; normalize blended normals; UV/color constant",
+  "standing_height_m": 1.9,
+  "source_height_m": 3.1339044646201097,
+  "source_to_metres_scale": 0.7275269638049991,
+  "bounds_by_frame": [
+    [
+      [
+        -0.4357858593723043,
+        0.0,
+        -0.24943747606416475
+      ],
+      [
+        0.4354833522042793,
+        2.2471233336466225,
+        0.6230344139888507
+      ]
+    ],
+    [
+      [
+        -0.43608203539833795,
+        0.0,
+        -0.25385726363391986
+      ],
+      [
+        0.43722970665822175,
+        2.247576920942715,
+        0.6329444291287476
+      ]
+    ],
+    [
+      [
+        -0.4348782511402568,
+        0.0,
+        -0.2568572492481288
+      ],
+      [
+        0.43639096043632675,
+        2.2478270444153594,
+        0.6907551273874238
+      ]
+    ],
+    [
+      [
+        -0.43322447879694126,
+        0.0,
+        -0.2516427082205213
+      ],
+      [
+        0.4332852751056527,
+        2.247576920942715,
+        0.6705701024354302
+      ]
+    ]
+  ],
+  "draws": [
+    {
+      "first": 0,
+      "count": 498,
+      "material": "wstlanderchic-hair",
+      "texture": "textures/wstlanderchic-hair.png",
+      "texture_sha256": "84d068bab96bd693db1491f23ecbfd1d5509c6e6531904e2e02e9a2154ec07db",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 498,
+      "count": 444,
+      "material": "wstlander-01-leatherstrap",
+      "texture": "textures/wstlander-01-leatherstrap.png",
+      "texture_sha256": "424886464a24600cd098b671f699e86d97f90991fca244daa32b0aa0108671b3",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 942,
+      "count": 96,
+      "material": "citn-allleatherstrap",
+      "texture": "textures/citn-allleatherstrap.png",
+      "texture_sha256": "675fde74266812cad134d123ca609af9a33ef3af370b5d9487ef399b07f2f0b6",
+      "size": [
+        64,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1038,
+      "count": 654,
+      "material": "wstlanderchic-shirtb",
+      "texture": "textures/wstlanderchic-shirtb.png",
+      "texture_sha256": "e3c5bdcf92c0918fa05900cdcab7f16832846e3c6c99a53b6c659635159d504b",
+      "size": [
+        64,
+        64
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1692,
+      "count": 174,
+      "material": "wstlanderchic-flesh",
+      "texture": "textures/wstlanderchic-flesh.png",
+      "texture_sha256": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+      "size": [
+        4,
+        4
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 1866,
+      "count": 582,
+      "material": "wstlanderchic-flesh.001",
+      "texture": "textures/wstlanderchic-flesh_001.png",
+      "texture_sha256": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+      "size": [
+        4,
+        4
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 2448,
+      "count": 1140,
+      "material": "wstlander-02-glove",
+      "texture": "textures/wstlander-02-glove.png",
+      "texture_sha256": "0bc4680b7db9230fae25b0f56783e20e28c21dee47e2127b10fcb56dec38e436",
+      "size": [
+        64,
+        64
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 3588,
+      "count": 288,
+      "material": "wstlanderchic-shirtb.001",
+      "texture": "textures/wstlanderchic-shirtb_001.png",
+      "texture_sha256": "e3c5bdcf92c0918fa05900cdcab7f16832846e3c6c99a53b6c659635159d504b",
+      "size": [
+        64,
+        64
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 3876,
+      "count": 498,
+      "material": "wstlanderchic-skirt",
+      "texture": "textures/wstlanderchic-skirt.png",
+      "texture_sha256": "fb1d39b701e33867f85be52e29a09f0a93f3e1fa0ce68bae3e2aa5b5b36ec08d",
+      "size": [
+        128,
+        128
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 4374,
+      "count": 384,
+      "material": "wstlanderchic-bootleg",
+      "texture": "textures/wstlanderchic-bootleg.png",
+      "texture_sha256": "b293a6b2047f77ce4b97919f8cada9895d760631b50ca9b6b8502000106a9daf",
+      "size": [
+        64,
+        64
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 4758,
+      "count": 276,
+      "material": "wstlanderchic-shoetopb",
+      "texture": "textures/wstlanderchic-shoetopb.png",
+      "texture_sha256": "4029a940b7255b20310412afa6923a862554159d2c1e781c391ecfd17a80515e",
+      "size": [
+        64,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 5034,
+      "count": 168,
+      "material": "wstlander-01-shoebottom",
+      "texture": "textures/wstlander-01-shoebottom.png",
+      "texture_sha256": "54a62b1431a0af71df44f37b6df5ec16ac16ffd0cd3e660d9a01dda0c638d37c",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 5202,
+      "count": 864,
+      "material": "wstlanderchic-flesh.002",
+      "texture": "textures/wstlanderchic-flesh_002.png",
+      "texture_sha256": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+      "size": [
+        4,
+        4
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    },
+    {
+      "first": 6066,
+      "count": 222,
+      "material": "wstlanderchic-eye",
+      "texture": "textures/wstlanderchic-eye.png",
+      "texture_sha256": "094c9beabeb22e4a6c1ed7f8caceb0cb9cf60fe667f4ba0275e26e7959a25f60",
+      "size": [
+        32,
+        32
+      ],
+      "texture_filter": "linear_mipmap_linear",
+      "alpha_mode": "opaque"
+    }
+  ],
+  "joint_positions_by_frame": [
+    {
+      "hips": [
+        -7.32023200648993e-13,
+        1.2440029731498226,
+        0.005958298437639147
+      ],
+      "Lknee": [
+        0.11375762322966286,
+        0.7024151016688167,
+        0.014777172694217083
+      ],
+      "Rknee": [
+        -0.11375756902468005,
+        0.7024151016688167,
+        0.014777142881476541
+      ],
+      "Lhand": [
+        -0.05081829884112134,
+        1.4911060574246087,
+        0.13573503350699498
+      ],
+      "Rhand": [
+        -0.20153870096078008,
+        1.8298599673577756,
+        0.48698792949166836
+      ],
+      "Lankle": [
+        0.11375762322966286,
+        0.14877867670239778,
+        -0.05724483618170456
+      ],
+      "Rankle": [
+        -0.11375757986567661,
+        0.14877876343037028,
+        -0.057244874125192524
+      ],
+      "neck": [
+        9.70388351296457e-13,
+        1.8743363265749737,
+        0.0356530374417813
+      ]
+    },
+    {
+      "hips": [
+        -7.32023200648993e-13,
+        1.2440029731498226,
+        0.005958298437639147
+      ],
+      "Lknee": [
+        0.11375762322966286,
+        0.7024151016688167,
+        0.014777172694217083
+      ],
+      "Rknee": [
+        -0.11375756902468005,
+        0.7024151016688167,
+        0.014777142881476541
+      ],
+      "Lhand": [
+        -0.048176456389286054,
+        1.49101638070106,
+        0.13261582945360995
+      ],
+      "Rhand": [
+        -0.12439571969856486,
+        1.770732998660706,
+        0.49452216191731846
+      ],
+      "Lankle": [
+        0.11375762322966286,
+        0.14877867670239778,
+        -0.05724483618170456
+      ],
+      "Rankle": [
+        -0.11375757986567661,
+        0.14877876343037028,
+        -0.057244874125192524
+      ],
+      "neck": [
+        0.0005132757057726587,
+        1.8748089940250128,
+        0.03046188857450228
+      ]
+    },
+    {
+      "hips": [
+        -7.32023200648993e-13,
+        1.2440029731498226,
+        0.005958298437639147
+      ],
+      "Lknee": [
+        0.11375762322966286,
+        0.7024151016688167,
+        0.014777172694217083
+      ],
+      "Rknee": [
+        -0.11375756902468005,
+        0.7024151016688167,
+        0.014777142881476541
+      ],
+      "Lhand": [
+        -0.05081842893308006,
+        1.490855066672239,
+        0.12742524702840122
+      ],
+      "Rhand": [
+        -0.18982225056400226,
+        1.7161068648236784,
+        0.5255448010389141
+      ],
+      "Lankle": [
+        0.11375762322966286,
+        0.14877867670239778,
+        -0.05724483618170456
+      ],
+      "Rankle": [
+        -0.11375757986567661,
+        0.14877876343037028,
+        -0.057244874125192524
+      ],
+      "neck": [
+        9.641339068499443e-13,
+        1.8751914643836682,
+        0.025274040790675936
+      ]
+    },
+    {
+      "hips": [
+        -7.32023200648993e-13,
+        1.2440029731498226,
+        0.005958298437639147
+      ],
+      "Lknee": [
+        0.11375762322966286,
+        0.7024151016688167,
+        0.014777172694217083
+      ],
+      "Rknee": [
+        -0.11375756902468005,
+        0.7024151016688167,
+        0.014777142881476541
+      ],
+      "Lhand": [
+        -0.0534380907059525,
+        1.49101638070106,
+        0.13048732987090883
+      ],
+      "Rhand": [
+        -0.27283724677223137,
+        1.7823703314645851,
+        0.5120675776627683
+      ],
+      "Lankle": [
+        0.11375762322966286,
+        0.14877867670239778,
+        -0.05724483618170456
+      ],
+      "Rankle": [
+        -0.11375757986567661,
+        0.14877876343037028,
+        -0.057244874125192524
+      ],
+      "neck": [
+        -0.0005132757057726587,
+        1.8748089940250128,
+        0.030461893995000558
+      ]
+    }
+  ],
+  "native_game_validation": false
+}

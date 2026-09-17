@@ -32,14 +32,15 @@ def main():
     proof = read(c['preservation_report'])
     assert proof['status'] == 'passed' and all(proof['checks'].values())
     assert proof['before_sha256'] == c['base_sha256'] and proof['after_sha256'] == c['output_sha256']
-    record = H / 'installed.json'; assert not record.exists(), 'deja installe'
+    record = H / 'installed.json'
+    previous = read(record)['output_sha256'] if record.exists() else None      # reinstallation : on remplace l'ancienne sortie du lot
 
     hashes = read(R / 'variant-hashes.json'); files = read(R / 'variant-files.json')
     assert c['path'] in files and INTERIORS in files
 
     # 2. FR3 : data + variante remaster (les variantes original / remaster-v1 restent intactes)
     live = R / 'data' / c['path']; variant = R / 'variants/remaster' / c['path']
-    assert sha(live) == c['base_sha256'] and sha(variant) == c['base_sha256'], 'WCB actif different de la base du lot'
+    assert sha(live) == sha(variant) and sha(live) in (c['base_sha256'], previous), 'WCB actif different de la base du lot et de sa sortie precedente'
     protected = {str(R / 'variants' / v / c['path']): sha(R / 'variants' / v / c['path']) for v in ('original', 'remaster-v1')}
     shutil.copy2(c['output_path'], live); shutil.copy2(c['output_path'], variant)
     assert sha(live) == sha(variant) == c['output_sha256']

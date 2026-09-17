@@ -1,46 +1,5 @@
 [
   {
-    "id": "wcb-market-south-room",
-    "center": [
-      1832.987,
-      30.801,
-      -366.879
-    ],
-    "normal": [
-      -0.8522,
-      0.0,
-      0.5233
-    ],
-    "right": [
-      0.5233,
-      0,
-      0.8522
-    ],
-    "up": [
-      0,
-      1,
-      0
-    ],
-    "width": 3.2,
-    "height": 2.8,
-    "wall_depth": 0.5,
-    "room_depth": 3.5,
-    "building_native_instance": 271,
-    "building_native_instances": [
-      271
-    ],
-    "tree": 0,
-    "level": "wascityb",
-    "inhabited": true,
-    "street_ground_y": 27.701,
-    "street_camera": [
-      1821.06,
-      29.4,
-      -359.55
-    ],
-    "region": "market"
-  },
-  {
     "id": "wcb-market-southeast-room",
     "center": [
       1842.353,
