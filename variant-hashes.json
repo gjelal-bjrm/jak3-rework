@@ -111,11 +111,12 @@
     "custom_assets/jak3/city-interiors/cooking-female.json": "6ce580c878ed69ed90e3aeab8d617631b60ed112934f61efa3d17fc9646b5360",
     "custom_assets/jak3/city-interiors/cooking-male.bin": "e68ef2ff45ef512ed92127b28c2463627d7362b52c18f1593c7bd22b3b770921",
     "custom_assets/jak3/city-interiors/cooking-male.json": "1338e1fd6731b2a5c06ec5a4dc0b197e7d598a30d2d2c324ce4568d8fa77e048",
-    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "f3e62c6f490b1006ea42756a3bc9f373b822758e2889bcab8309129d1107b32e",
-    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "15b23544878a41dddbee03aec4c4cc006bbfa5747c0dff89204e8276ae00a02c"
+    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "b52edd9ee1fc47ef79e3dd8c06070afbd71954472addc67e552f4427eafbc290",
+    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
+    "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3"
   },
   "remaster": {
-    "game/graphics/opengl_renderer/shaders/tfrag3.vert": "df060e37e291c812ef13e3976fd5e9ca60cd099b310ae388656fa26d43d4ff50",
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert": "7e1b3747f803f508cbf4bd204efc4910a3a3a1268627ac6e2fddb02c23107a42",
     "game/graphics/opengl_renderer/shaders/tfrag3.frag": "5835ea5bc55649581e147600073353345a5dd9f82da059b44e8a30eb5b0b8ae8",
     "game/graphics/opengl_renderer/shaders/tie_wind.vert": "d0014420a8c797d402b68c6c6a7d679b6ac5fc1b30efac638fa5fd5446b12772",
     "game/graphics/opengl_renderer/shaders/tie_wind.frag": "e090d25fd90f2e5ec1b957336a3c7b6e5c30e7987be3e9e3e7c2fd82fd7c0e46",
@@ -123,14 +124,14 @@
     "game/graphics/opengl_renderer/shaders/etie_base.frag": "fd12cd835dcb4e78c9e2c26eae24bf304d2734f3b6cbdfcffb68f73c78d15bf6",
     "out/jak3/fr3/wasstada.fr3": "01e28268eee85401f3597e5109c9164c6efe2fea20a984fed2523aaa07f89f26",
     "out/jak3/fr3/wasstadb.fr3": "7ccf7f9e1ca80e86488bc2e0d018f3feebc9342ceba35f0e00b88a522691e6f3",
-    "out/jak3/iso/WASSTADA.DGO": "46f7f69d94fa5402db705313db46e32dc105358b2d9da2bd3243a160df5004f5",
+    "out/jak3/iso/WASSTADA.DGO": "5459ce898571173b494de1042f2934b11257217d2b492847aa456a31f8e3f4cc",
     "out/jak3/fr3/game.fr3": "bcfa3b786f624fec2c2276369195132b81600952aa319195d94ad14698f9e3e1",
     "out/jak3/fr3/waspala.fr3": "18af49de0bb31b2e45fbd4a89ff35444cc4e76476cbd3932850f0f28f605ef24",
     "out/jak3/iso/WASPALA.DGO": "e3be994261b2379d4b25b83689587383521b08b08a50e238cb2a54741e70eace",
     "game/graphics/opengl_renderer/shaders/generic.frag": "62b19185c2a524d372888bffc476750cc0b56201a6f497faf3ffe9b7ebac9e0a",
     "game/graphics/opengl_renderer/shaders/merc2.frag": "09cfebe00c179b578f76a14a12c2e71db837dd7eada8699b8d69f146b91e5631",
     "game/graphics/opengl_renderer/shaders/liquid_bloom.vert": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576",
-    "game/graphics/opengl_renderer/shaders/liquid_bloom.frag": "f8013fbf011f8c87b31440db1fb7b2a95ea7e8fc20f78ed0fecd64254296526b",
+    "game/graphics/opengl_renderer/shaders/liquid_bloom.frag": "a0dc3ae39033599e3cecf42f62e36a9e30b7b36a772194092366d27c63e8288a",
     "game/graphics/opengl_renderer/shaders/water_spray.vert": "a1888cdfb9fbd75513df95da349a3380e3bf516e8962e6b274008a9f55388926",
     "game/graphics/opengl_renderer/shaders/water_spray.frag": "f14d5b8c09adb0deda4de2d39a9b3a9453eb0491f0eebb7390a70cf0576e4af1",
     "game/graphics/opengl_renderer/shaders/fountain.vert": "c08189a38d7ecd758cc7a54a16042f7cee7fc13a53016457d8cf1c18b9cb3b73",
@@ -147,8 +148,8 @@
     "game/graphics/opengl_renderer/shaders/shrub.frag": "e0e1e47a14e146176ee83b22061d34ab99aac12ad326f060aff41e0c28e50244",
     "game/graphics/opengl_renderer/shaders/ocean_common.frag": "ca7daf116835a7d6d672e4b855061e6b9dd43a304ab501a4835278d692afc6a6",
     "game/graphics/opengl_renderer/shaders/direct_basic_textured.frag": "65b9bd704200df99ea4b652754555f54e26a710dd6da3f273c8d7aa47811f4ae",
-    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert": "da11291b0271e3e2b667836d08d36c8d375b0a1d9e8f5c3b09f8499a2ed47784",
-    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "0d7398a09d42ee096a756e98505d33a9774af473b2d1a0c3024e8c16561fb0ad",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert": "f59fde642bf270c7473abcce03c38a4f3910de2d8a9feeda97c7c1c807c05748",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "c75ae233a25287a12ab6cff85ae6f991275290dc8aa5a3738b582109c6d9c02f",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.vert": "88459cbc1824b6cf6a65dbc9fd8654122a92524a7c3bb099045971ad5bc15d2a",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.frag": "6defbd695e915b679d1eb2e044e69ba202b7bcdddcacad61fca11bb616acb631",
     "game/graphics/opengl_renderer/shaders/coast_spray.vert": "703350e8da29ff342278ff14879033014920d7b19c8b5432d832b278efe1f971",
@@ -226,8 +227,9 @@
     "custom_assets/jak3/city-interiors/cooking-female.json": "6ce580c878ed69ed90e3aeab8d617631b60ed112934f61efa3d17fc9646b5360",
     "custom_assets/jak3/city-interiors/cooking-male.bin": "e68ef2ff45ef512ed92127b28c2463627d7362b52c18f1593c7bd22b3b770921",
     "custom_assets/jak3/city-interiors/cooking-male.json": "1338e1fd6731b2a5c06ec5a4dc0b197e7d598a30d2d2c324ce4568d8fa77e048",
-    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "f3e62c6f490b1006ea42756a3bc9f373b822758e2889bcab8309129d1107b32e",
-    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "15b23544878a41dddbee03aec4c4cc006bbfa5747c0dff89204e8276ae00a02c"
+    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "b52edd9ee1fc47ef79e3dd8c06070afbd71954472addc67e552f4427eafbc290",
+    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
+    "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
@@ -341,7 +343,8 @@
     "custom_assets/jak3/city-interiors/cooking-female.json": "6ce580c878ed69ed90e3aeab8d617631b60ed112934f61efa3d17fc9646b5360",
     "custom_assets/jak3/city-interiors/cooking-male.bin": "e68ef2ff45ef512ed92127b28c2463627d7362b52c18f1593c7bd22b3b770921",
     "custom_assets/jak3/city-interiors/cooking-male.json": "1338e1fd6731b2a5c06ec5a4dc0b197e7d598a30d2d2c324ce4568d8fa77e048",
-    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "f3e62c6f490b1006ea42756a3bc9f373b822758e2889bcab8309129d1107b32e",
-    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "15b23544878a41dddbee03aec4c4cc006bbfa5747c0dff89204e8276ae00a02c"
+    "game/graphics/opengl_renderer/shaders/sand_drift.vert": "b52edd9ee1fc47ef79e3dd8c06070afbd71954472addc67e552f4427eafbc290",
+    "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
+    "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3"
   }
 }

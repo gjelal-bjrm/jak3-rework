@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -49,6 +49,10 @@ CITY_SCENES = {
                'label': 'devant la maison sud du marche (fenetre habitee)'},
     'coast': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1685.0, 20.0, -440.0),
               'face': (1450.0, -600.0), 'label': 'sur la cote de Spargus, face au large'},
+    # Port de Haven (ctyport-start, level-info.gc) : eau native pour l'instant, le nouveau rendu de mer
+    # n'est actif que dans la region de Spargus.
+    'port': {'continue': 'ctyport-start', 'arrival': (193.0, 1754.0), 'viewpoint': (193.0, 17.3, 1754.0),
+             'label': 'au port de Haven, point de reprise ctyport-start (eau native)'},
 }
 route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 
@@ -174,7 +178,9 @@ def attach_repl(game, game_log, say):
 
     # 1. Attendre que le jeu soit en place au palais.
     deadline = time.monotonic() + 180
-    while 'SPARGUS-PROTOTYPE:' not in log_text(game_log):
+    if args.variant != 'remaster':
+        time.sleep(22)          # le moteur officiel n'ecrit pas le marqueur du prototype : delai fixe
+    while args.variant == 'remaster' and 'SPARGUS-PROTOTYPE:' not in log_text(game_log):
         if game.poll() is not None or time.monotonic() > deadline:
             say("le jeu n'a pas signale son demarrage. Jak reste au palais.")
             return goalc, None, None, 0

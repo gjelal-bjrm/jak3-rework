@@ -1,0 +1,1016 @@
+From 873e431b37dc801cc5b030af54e3f049a4016548 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 18:14:56 +0200
+Subject: [PATCH 8/8] =?UTF-8?q?Mer=20v14=20(r=C3=A9=C3=A9criture=20optique?=
+ =?UTF-8?q?),=20lave=20:=20surface=20relev=C3=A9e=20sans=20ondulation,=20p?=
+ =?UTF-8?q?oussi=C3=A8re=20:=20sprite=20natif=20;=20journal=20des=20textur?=
+ =?UTF-8?q?es=20de=20sprites?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- modern_ocean_surface : trains de Gerstner vers la côte déformés par bruit, absorption/diffusion
+  verte, rides à trois couches, éclat et scintillement, écume de rivage et de crête.
+- tfrag3.vert : la lave n'ondule plus et est relevée de 22 cm (les plateformes d'arène qui circulent
+  dessous affleuraient) ; liquid_bloom.frag : masque aligné.
+- SandDrift : substitution de texture HD disponible mais désactivée (poussière d'origine conservée) ;
+  Sprite3 journalise une fois chaque texture de sprite (diagnostic).
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ .../opengl_renderer/shaders/liquid_bloom.frag |   2 +-
+ .../shaders/modern_ocean_surface.frag         | 327 ++++++++++--------
+ .../shaders/modern_ocean_surface.vert         | 147 ++++----
+ .../opengl_renderer/shaders/sand_drift.frag   |  35 +-
+ .../opengl_renderer/shaders/sand_drift.vert   |  35 +-
+ .../opengl_renderer/shaders/tfrag3.vert       |   5 +-
+ .../opengl_renderer/sprite/SandDrift.h        | 139 +++-----
+ .../opengl_renderer/sprite/Sprite3.cpp        |  33 +-
+ 8 files changed, 371 insertions(+), 352 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/shaders/liquid_bloom.frag b/game/graphics/opengl_renderer/shaders/liquid_bloom.frag
+index 8b1eaa2e..a1d44a1c 100644
+--- a/game/graphics/opengl_renderer/shaders/liquid_bloom.frag
++++ b/game/graphics/opengl_renderer/shaders/liquid_bloom.frag
+@@ -16,7 +16,7 @@ void main() {
+     h.y/=(512.0/416.0)*0.5;
+     vec4 world=inverse(-lava_camera)*h;
+     vec3 p=(world.xyz/world.w+lava_position)/4096.0;
+-    float mask=(1.0-smoothstep(0.16,0.25,abs(p.y-9.999542)))
++    float mask=(1.0-smoothstep(0.16,0.25,abs(p.y-10.219542)))
+                *step(2186.13,p.x)*step(p.x,2466.15)*step(-644.11,p.z)*step(p.z,-364.08);
+     vec3 source=texture(tex_T25,uv).rgb;
+     mask*=smoothstep(0.35,0.88,source.r)*smoothstep(0.06,0.28,source.g);
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+index 4b55f26e..50678282 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+@@ -2,7 +2,10 @@
+ #define OCEAN_SURFACE_GEOMETRY
+ out vec4 color;
+ uniform vec4 fog_color;
+-// Spargus sea optics. Palette is supplied per region by the renderer.
++// Mer de Spargus v14 : eau verte, limpide et brillante. Reecriture complete de l'optique.
++// Modele : fond vu a travers une eau claire (absorption par canal), diffusion verte croissant avec
++// la profondeur, reflet du ciel/de la scene selon Fresnel, eclat solaire net + scintillement,
++// ecume douce le long des cotes, sur les cretes en eau peu profonde et sur la plage.
+ uniform int modern_ocean;
+ uniform int ocean_far_plane;
+ uniform int ocean_horizon_pass;
+@@ -20,7 +23,9 @@ uniform vec4 ocean_coast_map;
+ #ifdef OCEAN_SURFACE_GEOMETRY
+ in vec3 ocean_world;
+ #endif
+-// Height and analytic derivatives; warped wave packets share a wind direction.
++// Houle de Spargus v14 : trains de vagues directionnels qui roulent vers la cote (profil de Gerstner
++// simplifie, cretes pointues, creux plats) + houle irreguliere bruitee. Hauteur et derivees analytiques,
++// partagees par le vertex shader (relief) et le fragment (normale).
+ float swellHash(vec2 p) {return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+ vec3 swellNoise(vec2 p) {
+   vec2 i=floor(p),f=fract(p);
+@@ -31,63 +36,6 @@ vec3 swellNoise(vec2 p) {
+   return vec3(a+(b-a)*u.x+(c-a)*u.y+k*u.x*u.y,
+               du.x*(b-a+k*u.y),du.y*(c-a+k*u.x));
+ }
+-vec3 oceanSwellFiltered(vec2 p,float footprint) {
+-  vec2 cameraDelta=p-ocean_eye.xz;
+-  p-=vec2(1700.,-350.);vec3 result=vec3(0);
+-  const float ks[8]=float[8](.155,.241,.363,.526,.737,1.05,1.48,2.14);
+-  const float amps[8]=float[8](.30,.135,.071,.043,.025,.014,.008,.004);
+-  for(int i=0;i<8;i++) {
+-    float fi=float(i),angle=.48+.23*sin(fi*2.39);
+-    vec2 d=vec2(cos(angle),sin(angle));float k=ks[i];
+-    vec3 warp=swellNoise(p*k*.17+vec2(fi*17.1,ocean_time*.047));
+-    float phase=dot(p,d)*k-ocean_time*sqrt(9.81*k)+3.8*warp.x+fi*2.14;
+-    vec2 gradient=k*d+3.8*warp.yz*k*.17;
+-    float resolved=1.-smoothstep(.65,2.8,footprint*k);
+-    result.x+=amps[i]*resolved*(sin(phase)+.08*sin(phase*2.));
+-    result.yz+=amps[i]*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
+-  }
+-  // The original eight components stop at a 40 m wavelength. Once those
+-  // become subpixel, replacing their slopes with zero made a flat colour band.
+-  // Carry a low-frequency swell into the distance instead. It fades in outside
+-  // the swimming area, preserving the accepted nearby surface and hand contacts.
+-  float distance=max(length(cameraDelta),.001);
+-  if(distance<=120.)return result;
+-  vec3 distant=vec3(0);
+-  const float longKs[3]=float[3](.05236,.02327,.01102);
+-  const float longAmps[3]=float[3](.22,.18,.12);
+-  for(int i=0;i<3;i++) {
+-    float fi=float(i),angle=.31+fi*.19,k=longKs[i];
+-    vec2 d=vec2(cos(angle),sin(angle));
+-    vec3 warp=swellNoise(p*k*.27+vec2(fi*31.7,ocean_time*.012));
+-    float phase=dot(p,d)*k-ocean_time*sqrt(9.81*k)+3.1*warp.x+fi*4.37;
+-    vec2 gradient=k*d+3.1*warp.yz*k*.27;
+-    float resolved=1.-smoothstep(.65,2.8,footprint*k);
+-    distant+=longAmps[i]*resolved*vec3(sin(phase),cos(phase)*gradient);
+-  }
+-  float blend=smoothstep(120.,640.,distance);
+-  float u=clamp((distance-120.)/520.,0.,1.);
+-  vec2 blendGradient=cameraDelta/distance*(6.*u*(1.-u)/520.);
+-  result+=distant*blend;
+-  result.yz+=distant.x*blendGradient;
+-  return result;
+-}
+-vec3 oceanSwell(vec2 p){return oceanSwellFiltered(p,0.);}
+-uniform vec4 fluid_contacts[32];
+-uniform float fluid_strength[32];
+-vec3 oceanContacts(vec2 p) {
+-  vec3 result=vec3(0);
+-  for(int i=0;i<32;i++) {
+-    float age=ocean_time-fluid_contacts[i].w;
+-    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-9.)>1.)continue;
+-    vec2 delta=p-fluid_contacts[i].xz;float d=max(length(delta),.001);
+-    if(d>7.)continue;
+-    float q=d-(.10+age*1.4),width=.24+age*.13;
+-    float e=exp(-q*q/(width*width)-age*1.10)*fluid_strength[i]*.65;
+-    result.x+=e*cos(q*10.);
+-    result.yz+=delta/d*e*(-10.*sin(q*10.)-2.*q/(width*width)*cos(q*10.));
+-  }
+-  return result;
+-}
+ // ---- Vagues de bord de la plage de Spargus (procedurales, remplacent les sprites natifs wave-foam) ----
+ // Genere par models-v2/shore/build_shore_tables.py : ligne d eau du sable de la plage de Spargus (y = 9 m).
+ const int shorePointCount=10;
+@@ -146,11 +94,97 @@ vec4 shoreWave(vec2 xz,float time,out vec2 seaward){
+   return vec4(height,foam,swash,front);
+ }
+ 
++// Direction dominante des grandes vagues : du large (sud-ouest) vers la baie et la plage.
++const vec2 swellDirection=vec2(.55,.835);
++vec2 swellRotate(vec2 d,float a){float c=cos(a),s=sin(a);return vec2(c*d.x-s*d.y,s*d.x+c*d.y);}
++// Un train de vagues : x hauteur, yz gradient. Profil asymetrique : cretes plus pointues, creux plus plats.
++vec3 swellTrain(vec2 p,vec2 d,float wavelength,float amplitude,float offset,float footprint) {
++  float k=6.2831853/wavelength,w=sqrt(9.81*k);
++  // Les cretes ne sont pas des droites : un bruit lent deforme la phase le long du front (� ~1,3 rad).
++  vec3 warp=swellNoise(p*k*.11+vec2(offset*3.1,ocean_time*.02));
++  float phase=dot(p,d)*k-ocean_time*w+offset+2.6*(warp.x-.5);
++  vec2 gradient=k*d+2.6*warp.yz*k*.11;
++  float resolved=1.-smoothstep(.65,2.8,footprint*k);
++  float h=sin(phase)-.18*cos(2.*phase);
++  float dh=cos(phase)+.36*sin(2.*phase);
++  return amplitude*resolved*vec3(h,dh*gradient);
++}
++vec3 oceanSwellFiltered(vec2 p,float footprint) {
++  vec2 cameraDelta=p-ocean_eye.xz;
++  vec2 world=p;
++  p-=vec2(1700.,-350.);vec3 result=vec3(0);
++  // 1. Grandes vagues vers la cote (44, 27, 15 et 8,5 m). Elles s'effacent sur la plage, ou les
++  //    vagues de bord prennent le relais ; elles frappent les cotes rocheuses de plein fouet.
++  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused));
++  vec2 d=normalize(swellDirection);
++  result+=swellTrain(p,d,44.,.42,0.,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,.21),27.,.26,2.1,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,-.26),15.,.12,4.3,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,.44),8.5,.05,1.2,footprint)*coast;
++  // 2. Houle irreguliere : paquets de vagues deformes par du bruit, sans trains rectilignes visibles.
++  const float ks[8]=float[8](.155,.241,.363,.526,.737,1.05,1.48,2.14);
++  const float amps[8]=float[8](.18,.09,.05,.03,.018,.010,.006,.003);
++  for(int i=0;i<8;i++) {
++    float fi=float(i),angle=.48+.23*sin(fi*2.39);
++    vec2 dd=vec2(cos(angle),sin(angle));float k=ks[i];
++    vec3 warp=swellNoise(p*k*.17+vec2(fi*17.1,ocean_time*.047));
++    float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.8*warp.x+fi*2.14;
++    vec2 gradient=k*dd+3.8*warp.yz*k*.17;
++    float resolved=1.-smoothstep(.65,2.8,footprint*k);
++    result.x+=amps[i]*resolved*(sin(phase)+.08*sin(phase*2.));
++    result.yz+=amps[i]*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
++  }
++  // 3. Au loin, les composantes fines deviennent sous-pixel : une houle longue prend le relais pour
++  //    que la mer ne devienne pas une bande plate.
++  float distance=max(length(cameraDelta),.001);
++  if(distance<=120.)return result;
++  vec3 distant=vec3(0);
++  const float longKs[3]=float[3](.05236,.02327,.01102);
++  const float longAmps[3]=float[3](.22,.18,.12);
++  for(int i=0;i<3;i++) {
++    float fi=float(i),angle=.31+fi*.19,k=longKs[i];
++    vec2 dd=vec2(cos(angle),sin(angle));
++    vec3 warp=swellNoise(p*k*.27+vec2(fi*31.7,ocean_time*.012));
++    float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.1*warp.x+fi*4.37;
++    vec2 gradient=k*dd+3.1*warp.yz*k*.27;
++    float resolved=1.-smoothstep(.65,2.8,footprint*k);
++    distant+=longAmps[i]*resolved*vec3(sin(phase),cos(phase)*gradient);
++  }
++  float blend=smoothstep(120.,640.,distance);
++  float u=clamp((distance-120.)/520.,0.,1.);
++  vec2 blendGradient=cameraDelta/distance*(6.*u*(1.-u)/520.);
++  result+=distant*blend;
++  result.yz+=distant.x*blendGradient;
++  return result;
++}
++vec3 oceanSwell(vec2 p){return oceanSwellFiltered(p,0.);}
++// Phase de la grande vague dominante (0..1, 1 = crete) : sert aux moutons de crete du fragment.
++float oceanCrestPhase(vec2 p) {
++  p-=vec2(1700.,-350.);
++  float k=6.2831853/44.,w=sqrt(9.81*k);
++  return .5+.5*sin(dot(p,normalize(swellDirection))*k-ocean_time*w);
++}
++uniform vec4 fluid_contacts[32];
++uniform float fluid_strength[32];
++vec3 oceanContacts(vec2 p) {
++  vec3 result=vec3(0);
++  for(int i=0;i<32;i++) {
++    float age=ocean_time-fluid_contacts[i].w;
++    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-9.)>1.)continue;
++    vec2 delta=p-fluid_contacts[i].xz;float d=max(length(delta),.001);
++    if(d>7.)continue;
++    float q=d-(.10+age*1.4),width=.24+age*.13;
++    float e=exp(-q*q/(width*width)-age*1.10)*fluid_strength[i]*.65;
++    result.x+=e*cos(q*10.);
++    result.yz+=delta/d*e*(-10.*sin(q*10.)-2.*q/(width*width)*cos(q*10.));
++  }
++  return result;
++}
+ 
+ bool oceanContainsPoint(vec2 xz) {
+   vec2 cell=floor((xz-ocean_coast_map.xy)/ocean_coast_map.z);
+-  // Retain the native far ocean beyond its finite 4608m map. Inside it,
+-  // use the exact authored 3m exclusion cells rather than the camera region.
++  // Au-dela de la carte native finie (4608 m), la mer lointaine native continue. A l'interieur,
++  // on respecte les cellules d'exclusion de 3 m (sous les routes et les batiments).
+   if(any(lessThan(cell,vec2(0.))) || any(greaterThanEqual(cell,vec2(ocean_coast_map.w))))return true;
+   return texelFetch(ocean_coast_mask,ivec2(cell),0).r>.5;
+ }
+@@ -167,9 +201,8 @@ vec3 oceanProject(vec3 p) {
+   return vec3((fluid_viewport.xy+(n.xy*.5+.5)*fluid_viewport.zw)/vec2(textureSize(tex_T25,0)),n.z*.5+.5);
+ }
+ bool oceanSkyDepth(float depth) {
+-  // Jak 3's sky-work::draw-fog writes packed XYZF2 Z=6400. DirectRenderer
+-  // shifts that by four bits, then divides by 0xffffff: a flat Z24 value 400.
+-  // This is atmospheric background, not scenery occluding the distant sea.
++  // Le ciel de Jak 3 (sky-work::draw-fog) ecrit un Z24 constant de 400 : c'est un fond
++  // atmospherique, pas un decor qui masquerait la mer lointaine.
+   const float step24=1./16777215.;
+   return depth<=1.5*step24 || abs(depth-400.*step24)<=1.5*step24;
+ }
+@@ -181,35 +214,19 @@ float oceanVisibleDepth(float surfaceDepth) {
+   return surfaceDepth;
+ }
+ float oceanNoise(vec2 p){return swellNoise(p).x;}
+-vec3 oceanSurface(vec3 p,out float wake,out vec4 shore) {
+-  float footprint=max(length(dFdx(p.xz)),length(dFdy(p.xz)));
+-  vec3 swell=oceanSwellFiltered(p.xz,footprint);
+-  vec2 slope=swell.yz;
+-  // Advected, rotated noise has no straight, intersecting wave trains.
+-  mat2 rotation=mat2(.819,.574,-.574,.819);
+-  vec2 q=rotation*(p.xz-vec2(1700,-350));
+-  for(int i=0;i<3;i++) {
+-    float fi=float(i),k=1.7*pow(2.13,fi);
+-    vec2 scale=vec2(k,k*.72);
+-    vec3 rip=swellNoise(q*scale-ocean_time*vec2(.67,.19)+fi*vec2(19.7,32.1));
+-    slope+=transpose(rotation)*(rip.yz*scale)*(.029*pow(.35,fi))*(1.-smoothstep(.55,1.8,k*footprint));
+-  }
+-  vec3 contact=oceanContacts(p.xz);
+-  slope+=contact.yz;
+-  // Vagues de bord : pente numerique le long de la direction vers le large.
+-  vec2 shoreDir;shore=shoreWave(p.xz,ocean_time,shoreDir);
+-  if(any(notEqual(shore,vec4(0)))){
+-    vec2 unused;float ahead=shoreWave(p.xz+shoreDir*.2,ocean_time,unused).x;
+-    slope+=shoreDir*((ahead-shore.x)/.2);
+-  }
+-  wake=0.;
+-  for(int i=0;i<32;i++) {
+-    float age=ocean_time-fluid_contacts[i].w;
+-    if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-9.)>1.)continue;
+-    float d=length(p.xz-fluid_contacts[i].xz);
+-    wake+=exp(-d*d/1.3-age*2.4)*smoothstep(.03,.10,fluid_strength[i])*.16;
+-  }
+-  return normalize(vec3(-slope.x,1.,-slope.y));
++// Rides fines : trois couches de bruit advecte (1,1 m, 0,35 m, 0,12 m), comme une normal map animee.
++// Elles portent l'eclat solaire et la refraction ; elles s'effacent quand elles deviennent sous-pixel.
++vec2 oceanRipples(vec2 xz,float footprint) {
++  mat2 rot=mat2(.819,.574,-.574,.819),rot2=mat2(.6,.8,-.8,.6);
++  vec2 q=rot*(xz-vec2(1700,-350)),q2=rot2*(xz-vec2(1700,-350));
++  vec2 slope=vec2(0);
++  vec3 r1=swellNoise(q*vec2(.9,.62)-ocean_time*vec2(.55,.22));
++  slope+=transpose(rot)*(r1.yz*vec2(.9,.62))*.055*(1.-smoothstep(.5,1.8,footprint*.9));
++  vec3 r2=swellNoise(q2*vec2(2.9,2.1)+ocean_time*vec2(.31,-.47));
++  slope+=transpose(rot2)*(r2.yz*vec2(2.9,2.1))*.030*(1.-smoothstep(.5,1.8,footprint*2.9));
++  vec3 r3=swellNoise(q*8.3-ocean_time*vec2(.9,.6));
++  slope+=transpose(rot)*(r3.yz*8.3)*.012*(1.-smoothstep(.3,1.2,footprint*8.3));
++  return slope;
+ }
+ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
+   vec3 lookup=normalize(vec3(ray.x,max(ray.y,minimumElevation),ray.z));
+@@ -218,8 +235,6 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
+   vec2 low=(fluid_viewport.xy+vec2(1.5))/dimensions;
+   vec2 high=(fluid_viewport.xy+fluid_viewport.zw-vec2(1.5))/dimensions;
+   vec3 total=vec3(0);float weight=0.;
+-  // Clamp at the viewport edge instead of switching the entire last 1% of
+-  // the image to a solid fallback. Higher taps look past distant palm leaves.
+   const float offsets[5]=float[5](0.,4.,12.,32.,80.);
+   for(int i=0;i<5;i++) {
+     vec2 tap=clamp(uv+vec2(0,offsets[i])/dimensions,low,high);
+@@ -232,7 +247,7 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
+ }
+ // Ciel : le vrai ciel de la scene (capture avant la mer) domine ; un degrade clair sert de secours.
+ vec3 oceanSkyFallback(vec3 ray) {
+-  return mix(vec3(.62,.66,.70),vec3(.42,.53,.68),smoothstep(0.,.6,ray.y));
++  return mix(vec3(.66,.70,.72),vec3(.44,.56,.70),smoothstep(0.,.6,ray.y));
+ }
+ vec3 oceanSky(vec3 ray) {
+   vec3 sky=oceanSkyFallback(ray);
+@@ -246,7 +261,7 @@ vec3 oceanHorizonSky(vec3 away) {
+   vec3 sampled=oceanSkySample(away,.018,confidence);
+   return mix(oceanSkyFallback(away)*ocean_reflection_tint,sampled,confidence);
+ }
+-// Reflet adouci (3x3, pas de 3 px) : les bords des rochers refletes ne font plus d'escaliers.
++// Reflet adouci (3x3, pas de 3 px) : les bords des rochers refletes ne font pas d'escaliers.
+ vec3 blurredScene(vec2 uv) {
+   vec2 px=vec2(3.)/vec2(textureSize(tex_T25,0));
+   vec3 sum=texture(tex_T25,uv).rgb*.25;
+@@ -256,9 +271,8 @@ vec3 blurredScene(vec2 uv) {
+         texture(tex_T25,uv+vec2(px.x,-px.y)).rgb+texture(tex_T25,uv+vec2(-px.x,px.y)).rgb)*.0625;
+   return sum;
+ }
++// Reflet : ciel par defaut, scene proche par lancer de rayon ecran (rochers, batiments, Jak).
+ vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
+-  // Le rayon reflechi suit une normale lissee : les rides fines perturbent l'eclat, pas la geometrie du reflet.
+-  n=normalize(mix(vec3(0.,1.,0.),n,.5));
+   vec3 r=reflect(-v,n),sky=oceanSky(r);
+   if(length(p-ocean_eye)>140.)return sky;
+   float lo=.12;
+@@ -268,8 +282,6 @@ vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
+     if(any(lessThan(uv.xy,vec2(.006))) || any(greaterThan(uv.xy,vec2(.994))))break;
+     float z=texture(tex_T26,uv.xy).r;
+     if(z>uv.z && !oceanSkyDepth(z)) {
+-      // Refine the crossing rather than selecting a discrete march step.
+-      // This removes the horizontal bands made by coarse hit/miss thresholds.
+       float a=lo,b=hi;
+       for(int j=0;j<8;j++) {
+         float m=(a+b)*.5;vec3 probe=oceanProject(p+n*.065+r*m);
+@@ -289,57 +301,86 @@ vec3 oceanReflection(vec3 p,vec3 n,vec3 v) {
+ vec3 shadeModernOcean() {
+   vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
+   vec3 p=ocean_world;
+-  float range=length(p-ocean_eye),wake;vec4 shore;
+-  vec3 n=oceanSurface(p,wake,shore),v=normalize(ocean_eye-p);
++  float range=length(p-ocean_eye);
++  vec3 v=normalize(ocean_eye-p);
++  float footprint=max(length(dFdx(p.xz)),length(dFdy(p.xz)));
++  // ---- Surface : houle (grandes vagues + houle bruitee), contacts de Jak, vagues de bord, rides fines
++  vec3 swell=oceanSwellFiltered(p.xz,footprint);
++  vec2 slopeBase=swell.yz;
++  vec3 contact=oceanContacts(p.xz);
++  slopeBase+=contact.yz;
++  vec2 shoreDir;vec4 shore=shoreWave(p.xz,ocean_time,shoreDir);
++  if(any(notEqual(shore,vec4(0)))) {
++    vec2 unused;float ahead=shoreWave(p.xz+shoreDir*.2,ocean_time,unused).x;
++    slopeBase+=shoreDir*((ahead-shore.x)/.2);
++  }
++  vec2 slopeDetail=oceanRipples(p.xz,footprint);
++  vec3 n=normalize(vec3(-(slopeBase.x+slopeDetail.x),1.,-(slopeBase.y+slopeDetail.y)));
++  vec3 nReflect=normalize(vec3(-(slopeBase.x+slopeDetail.x*.35),1.,-(slopeBase.y+slopeDetail.y*.35)));
++  // ---- Sous l'eau : fenetre de Snell
+   if(ocean_eye.y < p.y) {
+     n=-n;
+     float facing=max(dot(n,v),0.);
+-    // Snell's window: surface is reflective outside the escape cone.
+     float window=smoothstep(.61,.72,facing);
+     vec2 uv=clamp(screen+n.xz*.006,vec2(.001),vec2(.999));
+-    return mix(vec3(.10,.16,.14),texture(tex_T25,uv).rgb,window*.90);
++    return mix(vec3(.08,.20,.17),texture(tex_T25,uv).rgb,window*.90);
+   }
+-  vec3 deep=ocean_body_color,body=deep;
+-  float depth=texture(tex_T26,screen).r,thickness=40.;
++  // ---- Fond et epaisseur d'eau traversee
++  float depth=texture(tex_T26,screen).r,thickness=60.;
++  bool hasBed=false;vec3 bedScene=vec3(0);
+   if(!oceanSkyDepth(depth) && depth<gl_FragCoord.z) {
+-    vec3 bed=oceanUnproject(screen,depth);thickness=clamp(length(bed-p),0.,40.);
+-    vec2 uv=clamp(screen+n.xz*.012*min(thickness,1.),vec2(.001),vec2(.999));
++    vec3 bed=oceanUnproject(screen,depth);thickness=clamp(length(bed-p),0.,60.);
++    // Refraction : les rides deforment le fond, plus fort de pres ; jamais un objet du premier plan.
++    vec2 uv=clamp(screen+n.xz*.03*min(thickness,1.5)/max(range*.03,1.),vec2(.001),vec2(.999));
+     if(texture(tex_T26,uv).r>gl_FragCoord.z)uv=screen;
+-    vec3 transmission=exp(-vec3(.65,.38,.45)*thickness);
+-    body=texture(tex_T25,uv).rgb*transmission+deep*(1.-transmission);
++    bedScene=texture(tex_T25,uv).rgb;hasBed=true;
+   }
++  // ---- Couleur de l'eau : Spargus est verte. Le fond se voit a travers une eau claire
++  //      (le rouge disparait vite, le vert reste), la diffusion verdit avec la profondeur.
++  const vec3 absorb=vec3(.62,.16,.24);
++  const vec3 shallow=vec3(.21,.54,.45);   // vert d'eau clair, pas turquoise tropical
++  const vec3 deep=vec3(.03,.21,.17);
++  vec3 transmission=exp(-absorb*thickness);
++  vec3 scatter=mix(deep,shallow,exp(-thickness*.22));
++  vec3 body=hasBed ? bedScene*transmission*mix(vec3(1.),shallow*1.6,.35)+scatter*(1.-transmission) : deep;
++  // Cretes : la lumiere traverse le haut des vagues, vert plus clair.
++  float crest=smoothstep(0.,.55,swell.x);
++  body+=vec3(.04,.13,.09)*crest;
++  // Lointain : diffusion atmospherique, l'eau s'eclaircit vers un vert-gris (jamais bleu).
++  float far=smoothstep(80.,700.,range);
++  body=mix(body,vec3(.22,.35,.29),far*.75);
++  // ---- Reflet (Fresnel de Schlick sur la normale detaillee)
+   float facing=max(dot(n,v),0.);
+-  float fresnel=.035+.90*pow(1.-facing,5.);
+-  // Corps : avec la distance, l'eau s'eclaircit vers un vert grise (diffusion), jamais bleu.
+-  float far=smoothstep(60.,600.,range);
+-  body=mix(body,vec3(.16,.23,.20),far*.85);
+-  // Diffusion sous la surface sur les cretes : vert d'eau plus clair.
+-  float height=oceanSwell(p.xz).x;
+-  float crest=smoothstep(.05,.32,height);
+-  body+=vec3(.06,.13,.10)*crest*(1.-far*.6);
+-  vec3 result=mix(body,oceanReflection(p,n,v),fresnel);
+-  // A soft sky lobe makes small wave curvature readable from above.
+-  float skyLobe=pow(max(dot(n,normalize(v+vec3(-.3,.78,-.43))),0.),36.);
+-  result+=vec3(.16,.18,.17)*skyLobe*.20;
+-  // Soleil : reflet etroit de pres, scintillement large au loin (rugosite croissante).
++  float fresnel=.02+.98*pow(1.-facing,5.);
++  vec3 reflection=oceanReflection(p,nReflect,v);
++  vec3 result=mix(body,reflection,fresnel);
++  // ---- Soleil : eclat net sur les rides fines, nappe douce, scintillement (Genshin-like)
+   vec3 light=normalize(vec3(-.32,.66,-.68));
+-  float a2=mix(.0225,.075,far);
+-  float nh=max(dot(n,normalize(light+v)),0.);
+-  float spec=a2/(3.14159*pow(max(.006,nh*nh*(a2-1.)+1.),2.));
+-  result+=vec3(1.,.88,.62)*min(spec*mix(.007,.014,far),.6)*max(dot(n,light),0.);
+-  // Ecume : contacts de Jak, berges, et moutons epars sur les cretes a moyenne distance.
+-  float noise=oceanNoise(p.xz*7.-ocean_time*vec2(.65,.31));
+-  float bubbles=smoothstep(.68,.88,noise);
+-  float coast=(1.-smoothstep(.15,1.1,thickness))*smoothstep(.03,.25,height);
+-  // (moutons de crete retires : le bruit grossier faisait des taches rectangulaires de pres)
+-  float foam=clamp(wake*bubbles+coast*bubbles*.16,0.,.22);
+-  // Plage : ecume du deferlement, nappe bouillonnante sur le sable et front blanc de la lame.
+-  float beachBubbles=.4*smoothstep(.35,.8,oceanNoise(p.xz*2.7+ocean_time*vec2(.35,-.2)))
+-                    +.6*smoothstep(.45,.9,oceanNoise(p.xz*9.5-ocean_time*vec2(.8,.35)));
+-  float beachFoam=shore.y*(.25+.95*beachBubbles)+shore.z*(.12+.6*beachBubbles)+shore.w*.95;
+-  foam=max(foam,clamp(beachFoam,0.,.9));
+-  result=mix(result,vec3(.80,.85,.82),foam);
+-  // Brume : vers le vrai ciel de l'horizon, pas vers un gris fixe.
++  vec3 h=normalize(light+v);
++  float nh=max(dot(n,h),0.);
++  float a2s=.006,a2w=.09;
++  float specSharp=a2s/(3.14159*pow(nh*nh*(a2s-1.)+1.,2.));
++  float specWide=a2w/(3.14159*pow(nh*nh*(a2w-1.)+1.,2.));
++  float sunVis=max(dot(n,light),0.);
++  float sparkle=smoothstep(.55,.95,swellNoise(p.xz*17.+ocean_time*vec2(1.7,-1.1)).x)*(1.-smoothstep(40.,220.,range));
++  vec3 sunColor=vec3(1.,.93,.78);
++  result+=sunColor*(specSharp*.012*(.5+.9*sparkle)+specWide*.03)*sunVis*mix(1.,.5,far);
++  // ---- Ecume : sillage de Jak, lisere des cotes, moutons des grandes vagues sur le haut-fond, plage
++  float foamNoise=.45*smoothstep(.35,.85,oceanNoise(p.xz*2.3+ocean_time*vec2(.3,-.15)))
++                 +.55*smoothstep(.45,.9,oceanNoise(p.xz*8.5-ocean_time*vec2(.7,.3)));
++  float wake=0.;
++  for(int i=0;i<32;i++) {
++    float age=ocean_time-fluid_contacts[i].w;
++    if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-9.)>1.)continue;
++    float d=length(p.xz-fluid_contacts[i].xz);
++    wake+=exp(-d*d/1.3-age*2.4)*smoothstep(.03,.10,fluid_strength[i])*.16;
++  }
++  float shoreFoam=(1.-smoothstep(.10,.9,thickness))*(.35+.65*foamNoise)*.7;
++  float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.8;
++  float beachFoam=shore.y*(.25+.95*foamNoise)+shore.z*(.12+.6*foamNoise)+shore.w*.95;
++  float foam=clamp(max(max(wake*foamNoise*1.2,shoreFoam),max(crestFoam,beachFoam)),0.,.92);
++  result=mix(result,vec3(.86,.90,.88),foam);
++  // ---- Brume : vers le vrai ciel de l'horizon, puis extinction au tres loin
+   vec3 horizonSky=oceanHorizonSky(-v);
+   float haze=1.-exp(-range*.0007);
+   result=mix(result,horizonSky,haze*.55);
+@@ -353,13 +394,9 @@ vec4 shadeOceanHorizon() {
+   float pixelAngle=max(fwidth(ray.y),.00001);
+   float band=abs(ray.y)/pixelAngle;
+   if(band>8.)discard;
+-  // The second snapshot contains the new sea. The first snapshot's depth
+-  // masks every island, building and character before any sea was drawn.
+   if(!oceanSkyDepth(texture(ocean_geometry_depth,screen).r))discard;
+   float confidence;
+   vec3 sky=oceanSkySample(ray,max(.008,pixelAngle*10.),confidence);
+-  // The legacy sky uses a +/-1 GS-pixel offset (about 2.6 pixels at 1080p).
+-  // Fully cover that seam, then feather the outer three pixels of the band.
+   float coverage=(1.-smoothstep(5.,8.,band))*confidence;
+   vec3 current=texture(tex_T25,screen).rgb;
+   return vec4(mix(current,sky,coverage),1.);
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert
+index 58134309..c072f3f6 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert
++++ b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert
+@@ -4,7 +4,9 @@ uniform vec3 ocean_eye;
+ uniform float ocean_time;
+ uniform int ocean_horizon_pass;
+ out vec3 ocean_world;
+-// Height and analytic derivatives; warped wave packets share a wind direction.
++// Houle de Spargus v14 : trains de vagues directionnels qui roulent vers la cote (profil de Gerstner
++// simplifie, cretes pointues, creux plats) + houle irreguliere bruitee. Hauteur et derivees analytiques,
++// partagees par le vertex shader (relief) et le fragment (normale).
+ float swellHash(vec2 p) {return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+ vec3 swellNoise(vec2 p) {
+   vec2 i=floor(p),f=fract(p);
+@@ -15,63 +17,6 @@ vec3 swellNoise(vec2 p) {
+   return vec3(a+(b-a)*u.x+(c-a)*u.y+k*u.x*u.y,
+               du.x*(b-a+k*u.y),du.y*(c-a+k*u.x));
+ }
+-vec3 oceanSwellFiltered(vec2 p,float footprint) {
+-  vec2 cameraDelta=p-ocean_eye.xz;
+-  p-=vec2(1700.,-350.);vec3 result=vec3(0);
+-  const float ks[8]=float[8](.155,.241,.363,.526,.737,1.05,1.48,2.14);
+-  const float amps[8]=float[8](.30,.135,.071,.043,.025,.014,.008,.004);
+-  for(int i=0;i<8;i++) {
+-    float fi=float(i),angle=.48+.23*sin(fi*2.39);
+-    vec2 d=vec2(cos(angle),sin(angle));float k=ks[i];
+-    vec3 warp=swellNoise(p*k*.17+vec2(fi*17.1,ocean_time*.047));
+-    float phase=dot(p,d)*k-ocean_time*sqrt(9.81*k)+3.8*warp.x+fi*2.14;
+-    vec2 gradient=k*d+3.8*warp.yz*k*.17;
+-    float resolved=1.-smoothstep(.65,2.8,footprint*k);
+-    result.x+=amps[i]*resolved*(sin(phase)+.08*sin(phase*2.));
+-    result.yz+=amps[i]*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
+-  }
+-  // The original eight components stop at a 40 m wavelength. Once those
+-  // become subpixel, replacing their slopes with zero made a flat colour band.
+-  // Carry a low-frequency swell into the distance instead. It fades in outside
+-  // the swimming area, preserving the accepted nearby surface and hand contacts.
+-  float distance=max(length(cameraDelta),.001);
+-  if(distance<=120.)return result;
+-  vec3 distant=vec3(0);
+-  const float longKs[3]=float[3](.05236,.02327,.01102);
+-  const float longAmps[3]=float[3](.22,.18,.12);
+-  for(int i=0;i<3;i++) {
+-    float fi=float(i),angle=.31+fi*.19,k=longKs[i];
+-    vec2 d=vec2(cos(angle),sin(angle));
+-    vec3 warp=swellNoise(p*k*.27+vec2(fi*31.7,ocean_time*.012));
+-    float phase=dot(p,d)*k-ocean_time*sqrt(9.81*k)+3.1*warp.x+fi*4.37;
+-    vec2 gradient=k*d+3.1*warp.yz*k*.27;
+-    float resolved=1.-smoothstep(.65,2.8,footprint*k);
+-    distant+=longAmps[i]*resolved*vec3(sin(phase),cos(phase)*gradient);
+-  }
+-  float blend=smoothstep(120.,640.,distance);
+-  float u=clamp((distance-120.)/520.,0.,1.);
+-  vec2 blendGradient=cameraDelta/distance*(6.*u*(1.-u)/520.);
+-  result+=distant*blend;
+-  result.yz+=distant.x*blendGradient;
+-  return result;
+-}
+-vec3 oceanSwell(vec2 p){return oceanSwellFiltered(p,0.);}
+-uniform vec4 fluid_contacts[32];
+-uniform float fluid_strength[32];
+-vec3 oceanContacts(vec2 p) {
+-  vec3 result=vec3(0);
+-  for(int i=0;i<32;i++) {
+-    float age=ocean_time-fluid_contacts[i].w;
+-    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-9.)>1.)continue;
+-    vec2 delta=p-fluid_contacts[i].xz;float d=max(length(delta),.001);
+-    if(d>7.)continue;
+-    float q=d-(.10+age*1.4),width=.24+age*.13;
+-    float e=exp(-q*q/(width*width)-age*1.10)*fluid_strength[i]*.65;
+-    result.x+=e*cos(q*10.);
+-    result.yz+=delta/d*e*(-10.*sin(q*10.)-2.*q/(width*width)*cos(q*10.));
+-  }
+-  return result;
+-}
+ // ---- Vagues de bord de la plage de Spargus (procedurales, remplacent les sprites natifs wave-foam) ----
+ // Genere par models-v2/shore/build_shore_tables.py : ligne d eau du sable de la plage de Spargus (y = 9 m).
+ const int shorePointCount=10;
+@@ -130,6 +75,92 @@ vec4 shoreWave(vec2 xz,float time,out vec2 seaward){
+   return vec4(height,foam,swash,front);
+ }
+ 
++// Direction dominante des grandes vagues : du large (sud-ouest) vers la baie et la plage.
++const vec2 swellDirection=vec2(.55,.835);
++vec2 swellRotate(vec2 d,float a){float c=cos(a),s=sin(a);return vec2(c*d.x-s*d.y,s*d.x+c*d.y);}
++// Un train de vagues : x hauteur, yz gradient. Profil asymetrique : cretes plus pointues, creux plus plats.
++vec3 swellTrain(vec2 p,vec2 d,float wavelength,float amplitude,float offset,float footprint) {
++  float k=6.2831853/wavelength,w=sqrt(9.81*k);
++  // Les cretes ne sont pas des droites : un bruit lent deforme la phase le long du front (� ~1,3 rad).
++  vec3 warp=swellNoise(p*k*.11+vec2(offset*3.1,ocean_time*.02));
++  float phase=dot(p,d)*k-ocean_time*w+offset+2.6*(warp.x-.5);
++  vec2 gradient=k*d+2.6*warp.yz*k*.11;
++  float resolved=1.-smoothstep(.65,2.8,footprint*k);
++  float h=sin(phase)-.18*cos(2.*phase);
++  float dh=cos(phase)+.36*sin(2.*phase);
++  return amplitude*resolved*vec3(h,dh*gradient);
++}
++vec3 oceanSwellFiltered(vec2 p,float footprint) {
++  vec2 cameraDelta=p-ocean_eye.xz;
++  vec2 world=p;
++  p-=vec2(1700.,-350.);vec3 result=vec3(0);
++  // 1. Grandes vagues vers la cote (44, 27, 15 et 8,5 m). Elles s'effacent sur la plage, ou les
++  //    vagues de bord prennent le relais ; elles frappent les cotes rocheuses de plein fouet.
++  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused));
++  vec2 d=normalize(swellDirection);
++  result+=swellTrain(p,d,44.,.42,0.,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,.21),27.,.26,2.1,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,-.26),15.,.12,4.3,footprint)*coast;
++  result+=swellTrain(p,swellRotate(d,.44),8.5,.05,1.2,footprint)*coast;
++  // 2. Houle irreguliere : paquets de vagues deformes par du bruit, sans trains rectilignes visibles.
++  const float ks[8]=float[8](.155,.241,.363,.526,.737,1.05,1.48,2.14);
++  const float amps[8]=float[8](.18,.09,.05,.03,.018,.010,.006,.003);
++  for(int i=0;i<8;i++) {
++    float fi=float(i),angle=.48+.23*sin(fi*2.39);
++    vec2 dd=vec2(cos(angle),sin(angle));float k=ks[i];
++    vec3 warp=swellNoise(p*k*.17+vec2(fi*17.1,ocean_time*.047));
++    float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.8*warp.x+fi*2.14;
++    vec2 gradient=k*dd+3.8*warp.yz*k*.17;
++    float resolved=1.-smoothstep(.65,2.8,footprint*k);
++    result.x+=amps[i]*resolved*(sin(phase)+.08*sin(phase*2.));
++    result.yz+=amps[i]*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
++  }
++  // 3. Au loin, les composantes fines deviennent sous-pixel : une houle longue prend le relais pour
++  //    que la mer ne devienne pas une bande plate.
++  float distance=max(length(cameraDelta),.001);
++  if(distance<=120.)return result;
++  vec3 distant=vec3(0);
++  const float longKs[3]=float[3](.05236,.02327,.01102);
++  const float longAmps[3]=float[3](.22,.18,.12);
++  for(int i=0;i<3;i++) {
++    float fi=float(i),angle=.31+fi*.19,k=longKs[i];
++    vec2 dd=vec2(cos(angle),sin(angle));
++    vec3 warp=swellNoise(p*k*.27+vec2(fi*31.7,ocean_time*.012));
++    float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.1*warp.x+fi*4.37;
++    vec2 gradient=k*dd+3.1*warp.yz*k*.27;
++    float resolved=1.-smoothstep(.65,2.8,footprint*k);
++    distant+=longAmps[i]*resolved*vec3(sin(phase),cos(phase)*gradient);
++  }
++  float blend=smoothstep(120.,640.,distance);
++  float u=clamp((distance-120.)/520.,0.,1.);
++  vec2 blendGradient=cameraDelta/distance*(6.*u*(1.-u)/520.);
++  result+=distant*blend;
++  result.yz+=distant.x*blendGradient;
++  return result;
++}
++vec3 oceanSwell(vec2 p){return oceanSwellFiltered(p,0.);}
++// Phase de la grande vague dominante (0..1, 1 = crete) : sert aux moutons de crete du fragment.
++float oceanCrestPhase(vec2 p) {
++  p-=vec2(1700.,-350.);
++  float k=6.2831853/44.,w=sqrt(9.81*k);
++  return .5+.5*sin(dot(p,normalize(swellDirection))*k-ocean_time*w);
++}
++uniform vec4 fluid_contacts[32];
++uniform float fluid_strength[32];
++vec3 oceanContacts(vec2 p) {
++  vec3 result=vec3(0);
++  for(int i=0;i<32;i++) {
++    float age=ocean_time-fluid_contacts[i].w;
++    if(fluid_strength[i]<=0. || age<0. || age>4. || abs(fluid_contacts[i].y-9.)>1.)continue;
++    vec2 delta=p-fluid_contacts[i].xz;float d=max(length(delta),.001);
++    if(d>7.)continue;
++    float q=d-(.10+age*1.4),width=.24+age*.13;
++    float e=exp(-q*q/(width*width)-age*1.10)*fluid_strength[i]*.65;
++    result.x+=e*cos(q*10.);
++    result.yz+=delta/d*e*(-10.*sin(q*10.)-2.*q/(width*width)*cos(q*10.));
++  }
++  return result;
++}
+ 
+ float radius(int row) {
+   if(row<=64)return float(row)*1.5;
+diff --git a/game/graphics/opengl_renderer/shaders/sand_drift.frag b/game/graphics/opengl_renderer/shaders/sand_drift.frag
+index ed2c83df..fb321cd6 100644
+--- a/game/graphics/opengl_renderer/shaders/sand_drift.frag
++++ b/game/graphics/opengl_renderer/shaders/sand_drift.frag
+@@ -1,9 +1,12 @@
+ #version 410 core
++// Nuage de sable : forme ronde erodee par du bruit (comme le sprite d'origine, en plus fin), grain,
++// eclairage par le soleil (cote clair / cote ombre), fondu doux au contact du decor.
+ in vec2 drift_uv;
+ in float drift_alpha;
+ in float drift_seed;
+ in float drift_layer;
+ in vec3 drift_world;
++in vec2 drift_light;
+ uniform float drift_time;
+ uniform vec3 drift_eye;
+ uniform vec3 drift_fog;
+@@ -15,26 +18,28 @@ float noise(vec2 p){
+   vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+   return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);
+ }
++float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.07+vec2(3.1,1.7);a*=.5;}return v;}
+ void main(){
+   vec2 uv=drift_uv;float t=drift_time,s=drift_seed;
+-  // Stries qui filent dans le sens du vent (u), fines en travers (v), plus un grain de sable.
+-  float streak=noise(vec2(uv.x*4.-t*3.1+s,uv.y*14.+s*3.));
+-  float ripple=noise(vec2(uv.x*9.-t*4.6+s*2.,uv.y*6.));
+-  float grain=noise(vec2(uv.x*27.-t*6.5,uv.y*45.+s));
+-  float density=smoothstep(.40,.88,streak*.55+ripple*.25+grain*.20);
+-  float mask;
+-  if(drift_layer<.5){
+-    vec2 d=(uv-.5)*vec2(2.,2.6);mask=1.-smoothstep(.30,1.,length(d));           // nappe elliptique
+-  } else {
+-    mask=(1.-smoothstep(.2,1.,abs(uv.x-.5)*2.))*(1.-smoothstep(.15,1.,uv.y))*smoothstep(0.,.12,uv.y);  // voile qui s efface en hauteur
+-  }
+-  float alpha=density*mask*drift_alpha*(drift_layer<.5?.62:.40);
+-  // Particule douce : fondu au contact du sol et des murs, pas d intersection dure.
++  float r=length(uv);
++  // Contour erode : le rayon varie avec un bruit lent (volutes) ; le sable tourbillonne doucement.
++  float ang=atan(uv.y,uv.x);
++  float edge=.72+.20*fbm(vec2(ang*1.6+s,t*.35+s*.7))-.08;
++  float body=1.-smoothstep(edge-.35,edge,r);
++  // Texture interne : volutes qui montent et derivent, grain fin.
++  float volutes=fbm(uv*2.6+vec2(s,-t*.45+s*.3));
++  float grain=noise(uv*22.+vec2(t*1.3,s*9.));
++  float density=body*(.55+.45*smoothstep(.30,.75,volutes))*(.8+.2*grain);
++  // Eclairage : plus clair vers le soleil, ombre douce a l oppose ; legere transparence au centre.
++  float lit=.5+.5*dot(normalize(uv+vec2(.0001)),normalize(drift_light+vec2(.0001)))*min(r*1.4,1.);
++  vec3 sandLit=vec3(.86,.78,.62),sandShade=vec3(.55,.47,.36);
++  vec3 sand=mix(sandShade,sandLit,lit);
++  float alpha=density*drift_alpha*(drift_layer<.5?.55:.42);
++  // Particule douce : fondu au contact du sol et des murs.
+   vec2 screen=(gl_FragCoord.xy-fluid_viewport.xy)/fluid_viewport.zw;
+   float sceneDepth=texture(tex_T26,screen).r;
+   alpha*=clamp((gl_FragCoord.z-sceneDepth)/max(fwidth(gl_FragCoord.z)*3.,0.00000004),0.,1.);
+   alpha*=1.-smoothstep(90.,150.,length(drift_world-drift_eye));
+   if(alpha<.006)discard;
+-  vec3 sand=vec3(.76,.66,.51);
+-  color=vec4(mix(sand,drift_fog,.22),alpha);
++  color=vec4(mix(sand,drift_fog,.18),alpha);
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/sand_drift.vert b/game/graphics/opengl_renderer/shaders/sand_drift.vert
+index 6e7cecbd..62cef65a 100644
+--- a/game/graphics/opengl_renderer/shaders/sand_drift.vert
++++ b/game/graphics/opengl_renderer/shaders/sand_drift.vert
+@@ -1,6 +1,7 @@
+ #version 410 core
+-// Sable porte par le vent : chaque bouffee native dirtpuff01 devient une nappe au ras du sol
+-// (couche 0) et un voile souleve face camera (couche 1), allonges dans le sens du vent.
++// Poussiere de Spargus : la bouffee native (sprite rond) est redessinee en un petit nuage de sable,
++// deux lobes face camera (couche 0 : lobe principal, couche 1 : lobe secondaire decale), qui garde la
++// taille, la position et l'enveloppe d'opacite de la particule d'origine.
+ layout(location=0) in vec4 source_position_scale;   // xyz (m), w = echelle native (m)
+ layout(location=1) in vec4 source_color;             // rgba natif (a = enveloppe de la bouffee)
+ layout(location=2) in vec4 source_extra;             // x = graine, y = echelle y
+@@ -12,29 +13,31 @@ out float drift_alpha;
+ out float drift_seed;
+ out float drift_layer;
+ out vec3 drift_world;
++out vec2 drift_light;    // direction du soleil projetee dans le plan du lobe
++float hash1(float n){return fract(sin(n*127.1)*43758.5453);}
+ void main(){
+-  const vec2 corners[6]=vec2[6](vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,0),vec2(1,1),vec2(0,1));
++  const vec2 corners[6]=vec2[6](vec2(-1,-1),vec2(1,-1),vec2(1,1),vec2(-1,-1),vec2(1,1),vec2(-1,1));
+   int layer=gl_VertexID/6;
+   vec2 c=corners[gl_VertexID%6];drift_uv=c;
+   float sx=abs(source_position_scale.w),seed=source_extra.x;
+-  vec2 wind=normalize(vec2(.12,1.));                 // vent de Spargus : vers +z (derive native)
+-  vec2 side=vec2(-wind.y,wind.x);
+   vec3 centre=source_position_scale.xyz;
+-  vec3 p;
+-  if(layer==0){
+-    float L=3.6*sx+1.2,W=1.4*sx+.5;
+-    p=centre+vec3(wind.x,0.,wind.y)*(c.x-.5)*L+vec3(side.x,0.,side.y)*(c.y-.5)*W;
+-    p.y=centre.y-.35+.04*sin(seed*7.+drift_time*2.);
+-  } else {
+-    vec3 toEye=normalize(drift_eye-centre);
+-    vec3 right=normalize(cross(vec3(0.,1.,0.),toEye)+vec3(.0001,0.,0.));
+-    float W=2.4*sx+.8,H=.8+.45*sx;
+-    p=centre+right*(c.x-.5)*W+vec3(0.,c.y*H-.3,0.);
++  vec3 toEye=normalize(drift_eye-centre);
++  vec3 right=normalize(cross(vec3(0.,1.,0.),toEye)+vec3(.0001,0.,0.));
++  vec3 up=normalize(cross(toEye,right));
++  float radius=sx*1.15;
++  if(layer==1){
++    // lobe secondaire : plus petit, decale selon la graine, un peu plus haut (le sable se souleve)
++    float a=hash1(seed+3.)*6.2832;
++    centre+=right*cos(a)*sx*.55+up*(.25+hash1(seed+5.)*.35)*sx;
++    radius=sx*.75;
+   }
++  vec3 p=centre+right*c.x*radius+up*c.y*radius;
+   drift_world=p;
+-  drift_alpha=clamp(source_color.a*16.,0.,1.)*(layer==0?1.:.5);
++  drift_alpha=clamp(source_color.a*16.,0.,1.)*(layer==0?1.:.7);
+   drift_seed=seed+float(layer)*13.7;
+   drift_layer=float(layer);
++  vec3 sun=normalize(vec3(-.32,.66,-.68));
++  drift_light=vec2(dot(sun,right),dot(sun,up));
+   gl_Position=-drift_camera*vec4((p-drift_eye)*4096.,1.);
+   gl_Position.y*=(512./416.)*.5;
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.vert b/game/graphics/opengl_renderer/shaders/tfrag3.vert
+index c8b68bef..c7430961 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.vert
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.vert
+@@ -48,8 +48,9 @@ void main() {
+   vec3 fluid_position = palace_position;
+   if (fluid_kind == 1) {
+     vec2 p = arena_world.xz-vec2(2320.0,-505.0);
+-    float rise = 0.105*sin(p.x*0.18+p.y*0.11+fluid_time*0.42)
+-               + 0.065*sin(p.y*0.23-p.x*0.07-fluid_time*0.31);
++    // Lac de lave : surface releve de 22 cm, sans ondulation. Les plateformes d'arene qui circulent sous la
++    // lave affleuraient (tache grise mobile) ; l'originale, transparente, les recouvrait.
++    float rise = 0.22;
+     fluid_position.y += rise*4096.0;
+     arena_world.y += rise;
+   }
+diff --git a/game/graphics/opengl_renderer/sprite/SandDrift.h b/game/graphics/opengl_renderer/sprite/SandDrift.h
+index c5331bfd..f08fbc7b 100644
+--- a/game/graphics/opengl_renderer/sprite/SandDrift.h
++++ b/game/graphics/opengl_renderer/sprite/SandDrift.h
+@@ -1,117 +1,62 @@
+ #pragma once
+-#include <array>
+-#include <cmath>
+-#include <memory>
++#include <cstring>
++#include <stdexcept>
+ #include <string>
+ #include <vector>
+ 
+ #include "common/log/log.h"
++#include "common/util/FileUtil.h"
+ #include "game/graphics/opengl_renderer/Shader.h"
+-#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ 
+-// Poussiere de sable de Spargus. Les bouffees natives dirtpuff01 (group-waswide-topdust, 38
+-// emetteurs dans la ville) sont remaillees en nappes de sable au ras du sol et voiles souleves,
+-// allonges dans le sens du vent (+z, comme la derive native). Cadence, positions et enveloppe
+-// d'opacite restent celles du jeu ; seuls les sprites ronds sont remplaces.
++// Poussiere de sable de Spargus (sprites natifs dirtpuff01, group-waswide-topdust). Le comportement
++// d'origine est conserve a l'identique (apparition, taille, derive, fondu) : seule la texture du sprite
++// est remplacee, en ville, par une version haute resolution (custom_assets/jak3/city-dust). Les deux
++// remaillages precedents (nappes au sol, puis nuages a deux lobes) ont ete rejetes par l'utilisateur.
+ class SandDrift {
+  public:
++  // 2026-09-17 : substitution desactivee a la demande de l'utilisateur (poussiere d'origine conservee).
++  static constexpr bool ENABLED = false;
+   static bool matches(const std::string& name) { return name.find("dirtpuff01") != std::string::npos; }
+   static bool in_city(const SharedRenderState* s) {
+     const auto e = s->camera_pos / 4096.f;
+-    return s->version == GameVersion::Jak3 && s->has_pc_data && e.x() > 1400.f && e.x() < 2650.f &&
+-           e.y() > -60.f && e.y() < 200.f && e.z() > -900.f && e.z() < 400.f;
+-  }
+-  template <class Vertex>
+-  static bool accepts(const Vertex& v) {
+-    const float x = v.xyz_sx.x() / 4096.f, z = v.xyz_sx.z() / 4096.f, sx = std::abs(v.xyz_sx.w() / 4096.f);
+-    return std::isfinite(x) && std::isfinite(z) && std::isfinite(sx) && x > 1400.f && x < 2650.f &&
+-           z > -900.f && z < 400.f && sx > .3f && sx < 6.f;
++    const bool spargus = s->version == GameVersion::Jak3 && s->has_pc_data && e.x() > 1400.f && e.x() < 2650.f &&
++                         e.y() > -60.f && e.y() < 200.f && e.z() > -900.f && e.z() < 400.f;
++    const bool arena = e.x() > 2200.f && e.z() < -380.f;   // l'arene partage le sprite (vapeur de lave) : inchange
++    return spargus && !arena;
+   }
+   ~SandDrift() {
+-    if (m_buffer) glDeleteBuffers(1, &m_buffer);
+-    if (m_vao) glDeleteVertexArrays(1, &m_vao);
++    if (m_texture) glDeleteTextures(1, &m_texture);
+   }
+-  template <class Vertex>
+-  bool render(SharedRenderState* s, const std::vector<Vertex>& vertices, const std::vector<u32>& indices) {
+-    m_instances.clear();
+-    for (size_t i = 0; i + 4 < indices.size(); i += 5) {
+-      if (indices[i] >= vertices.size()) continue;
+-      const auto& v = vertices[indices[i]];
+-      if (!accepts(v)) continue;
+-      Instance a{};
+-      for (int j = 0; j < 4; ++j) { a.position_scale[j] = v.xyz_sx[j] / 4096.f; a.color[j] = v.rgba[j]; }
+-      // Graine stable pendant la vie de la bouffee : sa rotation native (rot-z aleatoire a la naissance).
+-      a.extra = {std::fmod(std::abs(v.quat_sy.z()) * .37f, 100.f), std::abs(v.quat_sy.w() / 4096.f), 0.f, 0.f};
+-      m_instances.push_back(a);
+-    }
+-    if (m_instances.empty()) return false;
+-    Guard guard;
+-    if (!m_shader) {
+-      m_shader = std::make_unique<Shader>("sand_drift", s->version);
+-      glGenVertexArrays(1, &m_vao); glGenBuffers(1, &m_buffer);
+-      glBindVertexArray(m_vao); glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+-      for (GLuint i = 0; i < 3; ++i) {
+-        glEnableVertexAttribArray(i);
+-        glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, sizeof(Instance), reinterpret_cast<void*>(size_t(i) * 16));
+-        glVertexAttribDivisor(i, 1);
+-      }
+-    }
+-    if (!m_shader->okay()) return false;
+-    m_shader->activate();
+-    const GLuint id = GLuint(m_shader->id());
+-    m_snapshot.bind(s, id);   // profondeur de la scene (tex_T26) pour le fondu de contact
+-    glBindVertexArray(m_vao); glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+-    glBufferData(GL_ARRAY_BUFFER, m_instances.size() * sizeof(Instance), m_instances.data(), GL_STREAM_DRAW);
+-    const auto eye = s->camera_pos / 4096.f;
+-    glUniformMatrix4fv(glGetUniformLocation(id, "drift_camera"), 1, GL_FALSE, s->prototype_camera);
+-    glUniform3fv(glGetUniformLocation(id, "drift_eye"), 1, eye.data());
+-    glUniform1f(glGetUniformLocation(id, "drift_time"), LiquidSnapshot::seconds());
+-    glUniform3f(glGetUniformLocation(id, "drift_fog"), s->fog_color[0] / 255.f, s->fog_color[1] / 255.f, s->fog_color[2] / 255.f);
+-    glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
+-    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_GEQUAL); glDepthMask(GL_FALSE); glDisable(GL_CULL_FACE);
+-    glEnable(GL_BLEND); glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+-    glDrawArraysInstanced(GL_TRIANGLES, 0, 12, GLsizei(m_instances.size()));
+-    if (!m_logged) {
+-      const auto& a = m_instances.front();
+-      lg::info("SandDrift: {} bouffees natives ; position ({:.2f}, {:.2f}, {:.2f}), echelle {:.2f}, rgba ({:.3f}, {:.3f}, {:.3f}, {:.4f})",
+-               m_instances.size(), a.position_scale[0], a.position_scale[1], a.position_scale[2], a.position_scale[3],
+-               a.color[0], a.color[1], a.color[2], a.color[3]);
+-      m_logged = true;
++  // Texture HD, chargee une fois depuis un fichier RGBA brut (u32 largeur, u32 hauteur, pixels RGBA8).
++  // Retourne 0 si le fichier manque : le sprite natif reste alors utilise.
++  GLuint texture() {
++    if (m_loaded) return m_texture;
++    m_loaded = true;
++    try {
++      const auto bytes = file_util::read_binary_file(file_util::get_file_path({"custom_assets", "jak3", "city-dust", "dirtpuff01-hd.rgba"}));
++      if (bytes.size() < 8) throw std::runtime_error("fichier trop court");
++      u32 w = 0, h = 0;
++      std::memcpy(&w, bytes.data(), 4); std::memcpy(&h, bytes.data() + 4, 4);
++      if (w == 0 || h == 0 || w > 2048 || h > 2048 || bytes.size() < 8 + size_t(w) * h * 4) throw std::runtime_error("dimensions invalides");
++      GLint previous; glGetIntegerv(GL_TEXTURE_BINDING_2D, &previous);
++      glGenTextures(1, &m_texture);
++      glBindTexture(GL_TEXTURE_2D, m_texture);
++      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GLsizei(w), GLsizei(h), 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes.data() + 8);
++      glGenerateMipmap(GL_TEXTURE_2D);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++      glBindTexture(GL_TEXTURE_2D, GLuint(previous));
++      lg::info("SandDrift: texture HD de la poussiere {}x{} chargee", w, h);
++    } catch (const std::exception& e) {
++      lg::warn("SandDrift: texture HD de la poussiere indisponible ({}), sprite natif conserve", e.what());
++      m_texture = 0;
+     }
+-    return true;
++    return m_texture;
+   }
+-  size_t count() const { return m_instances.size(); }
+ 
+  private:
+-  struct Instance { std::array<float, 4> position_scale, color, extra; };
+-  static_assert(sizeof(Instance) == 48);
+-  struct Guard {
+-    GLint program, vao, buffer, depth, src, dst, src_a, dst_a, eq, eq_a, active, tex25, tex26;
+-    GLboolean write, test, blend, cull;
+-    Guard() {
+-      glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
+-      glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &buffer); glGetIntegerv(GL_DEPTH_FUNC, &depth);
+-      glGetBooleanv(GL_DEPTH_WRITEMASK, &write); test = glIsEnabled(GL_DEPTH_TEST); blend = glIsEnabled(GL_BLEND); cull = glIsEnabled(GL_CULL_FACE);
+-      glGetIntegerv(GL_BLEND_SRC_RGB, &src); glGetIntegerv(GL_BLEND_DST_RGB, &dst); glGetIntegerv(GL_BLEND_SRC_ALPHA, &src_a); glGetIntegerv(GL_BLEND_DST_ALPHA, &dst_a);
+-      glGetIntegerv(GL_BLEND_EQUATION_RGB, &eq); glGetIntegerv(GL_BLEND_EQUATION_ALPHA, &eq_a);
+-      glGetIntegerv(GL_ACTIVE_TEXTURE, &active);
+-      glActiveTexture(GL_TEXTURE25); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex25);
+-      glActiveTexture(GL_TEXTURE26); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex26);
+-    }
+-    ~Guard() {
+-      glUseProgram(program); glBindVertexArray(vao); glBindBuffer(GL_ARRAY_BUFFER, buffer);
+-      glActiveTexture(GL_TEXTURE25); glBindTexture(GL_TEXTURE_2D, tex25);
+-      glActiveTexture(GL_TEXTURE26); glBindTexture(GL_TEXTURE_2D, tex26); glActiveTexture(active);
+-      glDepthFunc(depth); glDepthMask(write); glBlendEquationSeparate(eq, eq_a); glBlendFuncSeparate(src, dst, src_a, dst_a);
+-      if (test) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+-      if (blend) glEnable(GL_BLEND); else glDisable(GL_BLEND);
+-      if (cull) glEnable(GL_CULL_FACE); else glDisable(GL_CULL_FACE);
+-    }
+-  };
+-  GLuint m_vao = 0, m_buffer = 0;
+-  bool m_logged = false;
+-  std::unique_ptr<Shader> m_shader;
+-  LiquidSnapshot m_snapshot;
+-  std::vector<Instance> m_instances;
++  GLuint m_texture = 0;
++  bool m_loaded = false;
+ };
+diff --git a/game/graphics/opengl_renderer/sprite/Sprite3.cpp b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+index bc0024e4..647c8adf 100644
+--- a/game/graphics/opengl_renderer/sprite/Sprite3.cpp
++++ b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+@@ -1,3 +1,4 @@
++#include <set>
+ #include "Sprite3.h"
+ 
+ #include "common/log/log.h"
+@@ -662,26 +663,17 @@ void Sprite3::flush_sprites(SharedRenderState* render_state,
+       if(m_coastal_native_runs.empty())continue;
+     }
+ 
+-    if (SandDrift::in_city(render_state) &&
+-        SandDrift::matches(render_state->texture_pool->get_debug_texture_name_from_tbp(tbp))) {
+-      // Poussiere de sable de Spargus : bouffees natives remaillees en nappes portees par le vent.
+-      m_coastal_indices.clear();m_coastal_native_runs.clear();
+-      for(u32 i=0;i<bucket->ids.size();i+=5){
+-        const u32 count=std::min<u32>(5,u32(bucket->ids.size())-i),source_id=bucket->ids[i];
+-        if(count==5 && source_id<m_vertices_3d.size() && SandDrift::accepts(m_vertices_3d[source_id]))
+-          m_coastal_indices.insert(m_coastal_indices.end(),bucket->ids.begin()+i,bucket->ids.begin()+i+5);
+-        else if(!m_coastal_native_runs.empty() && m_coastal_native_runs.back().start+m_coastal_native_runs.back().count==i)
+-          m_coastal_native_runs.back().count+=count;
+-        else m_coastal_native_runs.push_back({i,count});
++    {
++      // Diagnostic (gouttes de lave de l'arene) : journaliser une fois chaque texture de sprite vue en jeu.
++      static std::set<std::string> logged_sprite_textures;
++      const auto sprite_name = render_state->texture_pool->get_debug_texture_name_from_tbp(tbp);
++      if (logged_sprite_textures.insert(sprite_name).second && !bucket->ids.empty() && bucket->ids[0] < m_vertices_3d.size()) {
++        const auto& v0 = m_vertices_3d[bucket->ids[0]];
++        lg::info("Sprite3 texture '{}' : {} sprites, premier a ({:.1f}, {:.1f}, {:.1f}) m, taille {:.2f}, alpha {:.3f}, mode {}",
++                 sprite_name, bucket->ids.size() / 5, v0.xyz_sx.x() / 4096.f, v0.xyz_sx.y() / 4096.f, v0.xyz_sx.z() / 4096.f,
++                 v0.xyz_sx.w() / 4096.f, v0.rgba.w(), v0.info[3]);
+       }
+-      if(!m_coastal_indices.empty()){
+-        if(m_sand_drift.render(render_state,m_vertices_3d,m_coastal_indices)){
+-          prof.add_draw_call();prof.add_tri(m_sand_drift.count()*4);
+-        }else {m_coastal_native_runs.clear();m_coastal_native_runs.push_back({0,u32(bucket->ids.size())});}
+-      }
+-      if(m_coastal_native_runs.empty())continue;
+     }
+-
+     std::optional<u64> tex;
+     tex = render_state->texture_pool->lookup(tbp);
+ 
+@@ -691,6 +683,11 @@ void Sprite3::flush_sprites(SharedRenderState* render_state,
+     }
+     ASSERT(tex);
+ 
++    if (SandDrift::ENABLED && SandDrift::in_city(render_state) &&
++        SandDrift::matches(render_state->texture_pool->get_debug_texture_name_from_tbp(tbp))) {
++      // Poussiere de Spargus : sprite natif inchange, texture haute resolution.
++      if (const GLuint hd = m_sand_drift.texture()) tex = u64(hd);
++    }
+     glActiveTexture(GL_TEXTURE0);
+     glBindTexture(GL_TEXTURE_2D, *tex);
+ 
+-- 
+2.54.0.windows.1
+
