@@ -30,6 +30,7 @@ parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N 
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--replace', action='store_true', help='ferme la partie deja ouverte au lieu de refuser de demarrer (tests)')
+parser.add_argument('--quit', action='store_true', help='ferme le jeu une fois les captures faites (tests enchaines)')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
 parser.add_argument('--viewpoint', metavar='X,Y,Z',
@@ -155,13 +156,9 @@ def probe_position(sock, game, game_log, tag, timeout):
     return None
 
 
-def place_jak_in_city(game, game_log, capture):
-    scene = CITY_SCENES[args.scene]
-    started = time.monotonic()
-
-    def say(message):
-        print(f'VILLE [+{time.monotonic() - started:3.0f}s] : {message}', flush=True)
-
+def attach_repl(game, game_log, say):
+    """Demarre goalc, le relie au jeu et verifie la liaison. Retourne (goalc, sock, position, tag) ;
+    sock vaut None si la liaison a echoue (le jeu continue sans pilotage)."""
     goalc_out = GOALC_LOG.open('w', encoding='utf-8')
     goalc = subprocess.Popen([str(GOALC), '--game', 'jak3', '--proj-path', str(ROOT / 'data'),
                               '--port', str(NREPL_PORT)],
@@ -180,9 +177,9 @@ def place_jak_in_city(game, game_log, capture):
     while 'SPARGUS-PROTOTYPE:' not in log_text(game_log):
         if game.poll() is not None or time.monotonic() > deadline:
             say("le jeu n'a pas signale son demarrage. Jak reste au palais.")
-            return goalc
+            return goalc, None, None, 0
         time.sleep(1)
-    say('jeu demarre au palais')
+    say('jeu demarre')
 
     # 2. Connecter goalc au jeu, puis verifier la liaison par une vraie reponse du jeu.
     #    Les messages s'empilent tant que goalc lit encore les types ; c'est attendu.
@@ -196,8 +193,64 @@ def place_jak_in_city(game, game_log, capture):
         tag += 1
     if position is None:
         say("goalc n'a pas pu se connecter au jeu. Jak reste au palais. Voir city-goalc.log.")
-        return goalc
+        return goalc, None, None, tag
     say(f'liaison etablie, Jak est a {position}')
+    return goalc, sock, position, tag
+
+
+def run_stops(sock, game, game_log, tag, say):
+    """Arrets supplementaires --stops : "X,Y,Z/FX,FZ" (position en m, puis point vise facultatif), rafale a chacun."""
+    for index, stop in enumerate(s for s in (args.stops or '').split(';') if s.strip()):
+        where, _, toward = stop.partition('/')
+        sx, sy, sz = (float(v) for v in where.split(','))
+        move_jak(sock, sx, sy, sz)
+        time.sleep(3)
+        tag += 1
+        position = probe_position(sock, game, game_log, tag, 10) or (sx, sy, sz)
+        if toward.strip():
+            fx, fz = (float(v) for v in toward.split(','))
+            face_jak(sock, position, (fx, fz))
+        say(f'arret {index + 1} : Jak en {tuple(round(v, 1) for v in position)}' + (f', tourne vers ({toward})' if toward.strip() else ''))
+        time.sleep(4)
+        burst(sock, profile, args.burst or 1, f'burst-{args.scene}-{index + 1}', say)
+    return tag
+
+
+def capture_in_scene(game, game_log):
+    """Scenes arene / palais : pas de teleportation par defaut ; --viewpoint, --face, --burst et --stops comme en ville."""
+    started = time.monotonic()
+
+    def say(message):
+        print(f'{args.scene.upper()} [+{time.monotonic() - started:3.0f}s] : {message}', flush=True)
+
+    goalc, sock, position, tag = attach_repl(game, game_log, say)
+    if sock is None: return goalc
+    time.sleep(3)
+    if args.viewpoint:
+        move_jak(sock, *(float(v) for v in args.viewpoint.split(',')))
+        time.sleep(3)
+        tag += 1
+        position = probe_position(sock, game, game_log, tag, 10) or position
+        say(f'Jak est place en {position}')
+    if args.face and position:
+        face_jak(sock, position, tuple(float(v) for v in args.face.split(',')))
+        time.sleep(4)
+    if args.burst:
+        burst(sock, profile, args.burst, f'burst-{args.scene}', say)
+    run_stops(sock, game, game_log, tag, say)
+    if args.quit: game.kill()
+    return goalc
+
+
+def place_jak_in_city(game, game_log, capture):
+    scene = CITY_SCENES[args.scene]
+    started = time.monotonic()
+
+    def say(message):
+        print(f'VILLE [+{time.monotonic() - started:3.0f}s] : {message}', flush=True)
+
+    goalc, sock, position, tag = attach_repl(game, game_log, say)
+    if sock is None: return goalc
 
     # 3. Aller en ville par le point de reprise natif de la scene.
     nrepl_send(sock, f'(start \'play (get-continue-by-name *game-info* "{scene["continue"]}"))')
@@ -242,22 +295,10 @@ def place_jak_in_city(game, game_log, capture):
         say('capture demandee (dossier screenshots du profil).')
     if args.burst:
         burst(sock, profile, args.burst, f'burst-{args.scene}', say)
-    for index, stop in enumerate(s for s in (args.stops or '').split(';') if s.strip()):
-        # Arret supplementaire : "X,Y,Z/FX,FZ" (position en m, puis point vise ; le point vise est facultatif)
-        where, _, toward = stop.partition('/')
-        sx, sy, sz = (float(v) for v in where.split(','))
-        move_jak(sock, sx, sy, sz)
-        time.sleep(3)
-        tag += 1
-        position = probe_position(sock, game, game_log, tag, 10) or (sx, sy, sz)
-        if toward.strip():
-            fx, fz = (float(v) for v in toward.split(','))
-            face_jak(sock, position, (fx, fz))
-        say(f'arret {index + 1} : Jak en {tuple(round(v, 1) for v in position)}' + (f', tourne vers ({toward})' if toward.strip() else ''))
-        time.sleep(4)
-        burst(sock, profile, args.burst or 1, f'burst-{args.scene}-{index + 1}', say)
+    run_stops(sock, game, game_log, tag, say)
     if args.tour:
         tour(sock, game, game_log, tag, say)
+    if args.quit: game.kill()
     return goalc
 
 
@@ -371,11 +412,13 @@ with game_log.open('w', encoding='utf-8') as log:
     try:
         if args.scene in CITY_SCENES:
             goalc = place_jak_in_city(process, game_log, args.capture)
+        elif args.burst or args.stops or args.viewpoint:
+            goalc = capture_in_scene(process, game_log)
         result = process.wait()
     finally:
         # goalc reste ouvert pendant la partie ; on le coupe net a la fin, sans passer par (e)
         # qui redemarrerait le jeu.
         if goalc is not None and goalc.poll() is None:
             goalc.kill()
-if result:
+if result and not args.quit:
     sys.exit(f'Le jeu a quitte avec le code {result}. Voir {args.variant}-runtime.log.')
