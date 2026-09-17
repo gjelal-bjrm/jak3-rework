@@ -1,0 +1,169 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+  },
+  "source_export_sha256": "a233587b28d7743f40852374f43e1bb5400983af86381981a1357a35d260c556",
+  "instances": [
+    {
+      "instance": 2302,
+      "kind": "grass",
+      "origin_m": [
+        2536.05810546875,
+        42.70851516723633,
+        -105.57355499267578
+      ],
+      "matrix_columns": [
+        [
+          -0.98046875,
+          0.013916015625,
+          -0.195068359375,
+          0.0
+        ],
+        [
+          0.01953125,
+          0.999267578125,
+          -0.027099609375,
+          0.0
+        ],
+        [
+          0.194580078125,
+          -0.030517578125,
+          -0.980224609375,
+          0.0
+        ],
+        [
+          2536.05810546875,
+          42.70851516723633,
+          -105.57355499267578,
+          2880.0
+        ]
+      ],
+      "original_triangles": 38,
+      "triangles": 1302,
+      "original_bounds": [
+        [
+          2534.57568359375,
+          42.6260986328125,
+          -106.774658203125
+        ],
+        [
+          2537.359130859375,
+          44.85425567626953,
+          -104.49070739746094
+        ]
+      ],
+      "authored_bounds": [
+        [
+          2534.975830078125,
+          42.6260986328125,
+          -106.49767303466797
+        ],
+        [
+          2537.203125,
+          44.85906982421875,
+          -104.763671875
+        ]
+      ],
+      "radius_ratio": 0.7714650465651901,
+      "base_y_change_m": 0.0,
+      "vertices": 693,
+      "closed_components": 21
+    },
+    {
+      "instance": 3266,
+      "kind": "cactus",
+      "origin_m": [
+        2288.454833984375,
+        22.944976806640625,
+        69.54338836669922
+      ],
+      "matrix_columns": [
+        [
+          0.14501953125,
+          -0.05859375,
+          -1.168701171875,
+          0.0
+        ],
+        [
+          -0.06298828125,
+          1.175537109375,
+          -0.06689453125,
+          0.0
+        ],
+        [
+          1.16845703125,
+          0.070556640625,
+          0.141357421875,
+          0.0
+        ],
+        [
+          2288.454833984375,
+          22.944976806640625,
+          69.54338836669922,
+          0.0
+        ]
+      ],
+      "original_triangles": 228,
+      "triangles": 8358,
+      "original_bounds": [
+        [
+          2287.055908203125,
+          22.822307586669922,
+          67.79388427734375
+        ],
+        [
+          2289.23681640625,
+          24.13393211364746,
+          70.71440887451172
+        ]
+      ],
+      "authored_bounds": [
+        [
+          2286.90771484375,
+          22.822307586669922,
+          67.90144348144531
+        ],
+        [
+          2289.320068359375,
+          24.139636993408203,
+          70.54617309570312
+        ]
+      ],
+      "radius_ratio": 0.857397083043431,
+      "base_y_change_m": 0.0,
+      "vertices": 4767,
+      "closed_components": 294
+    }
+  ],
+  "grass_material": "market-shrub-orange-v1",
+  "grass_uv": "native V4096 root -> V0 tip, monotone; bases anchored for passage bending/recovery",
+  "preserved_palms": true,
+  "preserved_market_69_shrubs": true,
+  "live_modified": false,
+  "native_visual_validation": false,
+  "removed_triangles": 266,
+  "added_triangles": 9660,
+  "grass_count": 1,
+  "cactus_count": 1,
+  "patch_sha256": "84f3acd77ba7ac9bfb1a3579048b2369f89ac957d36ab819722d23e2105a6af7",
+  "textures": [
+    {
+      "name": "market-shrub-orange-v1",
+      "page": "remaster-market-plants",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-shrub-orange-hd.rgba",
+      "sha256": "62d642ae859d396dacb05e5d1649eb13c0481228adf4789c708940880427a722"
+    },
+    {
+      "name": "city-cactus-green-v2",
+      "page": "remaster-city-vegetation",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\vegetation-v2\\cactus-skin-hd.rgba",
+      "sha256": "2cbccac0aaee341aeb9fc674e896ed0fa6989cee99acee459c39f1c128c14c71"
+    }
+  ]
+}

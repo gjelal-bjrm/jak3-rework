@@ -1,0 +1,18 @@
+{
+  "units": "world metres, Y up",
+  "level_continue": "wascitya-seem",
+  "views": [
+    {"name": "house1-corner-before-after", "position": [2267, 21.4, 10], "look_at": [2274, 27.3, 13.5]},
+    {"name": "house1-lounge", "position": [2272.3, 27.3, 5.4], "look_at": [2275.3, 27.3, 11.45]},
+    {"name": "house1-conversation", "position": [2267, 27.3, 18.6], "look_at": [2272.98, 27.3, 16.1]},
+    {"name": "house1-roof-and-context", "position": [2245, 50, 34], "look_at": [2280, 35, 14]},
+    {"name": "house2-ornaments", "position": [2321, 31, -16], "look_at": [2342, 27, -21]},
+    {"name": "wcb-fire", "level_continue": "wascityb-seem", "position": [1833, 49.8, -390], "look_at": [1840.85, 49.7, -387.19]}
+  ],
+  "gameplay_return": {
+    "teleport_above_ground": [2272, 30, 5],
+    "mode": "cam-string",
+    "note": "Allow Jak to settle under native gravity. This position reaches the path beside the first house's stairs. Do not leave cam-really-fixed active."
+  },
+  "test_audio": "OPENGOAL_TEST_MUTE=1, verify muted output message in current runtime log"
+}

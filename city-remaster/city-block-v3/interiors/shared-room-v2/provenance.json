@@ -1,0 +1,28 @@
+{
+  "status": "installed",
+  "before": {
+    "CityInteriors-before.h": "96afef56071a608be894b8b45904f6fac4e995e963488fee75b5bc9d57517219",
+    "city_interior-before.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1",
+    "source-manifest-before.json": "004673279bd2301dba13fbfcbc4a07c63f2f5815242a1efe9ccb6d4c890a2dcf",
+    "asset-manifest-before.json": "5f58c9ba2e0f67bf6f546bc0ae99a3b6706d48de164fd55ab7823a2887b5f1c6"
+  },
+  "after": {
+    "CityInteriors.h": "1bca2259e1ef20861f26e203a9206faee83af16db9e1eae182eed7490091ed35",
+    "city_interior.frag": "a7abf34af1a14878566b4790d2de3ba33cff4d832d71af890a18b99238b171c5",
+    "room_config.py": "fb95daf59f6081e2817e8cd424f3a111da5ec03f66f26f0f97844aaf5c9a4ca5",
+    "prepare.py": "e148ab888219c024eb5b174551c31a3231984eaa93366639a78b0f9e46d4c5ee"
+  },
+  "proofs": {
+    "author.py": "6fa75018d29f3b46181d1f882460c2990744705c9c5a3c947a2e52ff63ab9f47",
+    "author-report.json": "ad4523d52071133a58b6ed73ea694c6c29133c02723736ab2673ea4c695c14b3",
+    "corner-conversation.bin": "dc8e74339c6ca3b93478c6e6c23458ef281b09ef5c351e819d80ffc22a671d11",
+    "corner-conversation.json": "c6b32b8e79e5ad76ae8f07582a1b262afca24aa84d4383d12b615e15a510040d",
+    "no-ao/corner-conversation.bin": "6e0a7d5cbc036d8725830fe3514d74c53a3bb54b3893cd3a349622d36492ac22",
+    "no-ao/corner-conversation.json": "0727edc4597cfcd2cb9280ca0209c74e2f516be106eeffeccd7dca966b82b1bc",
+    "ao/corner-conversation.bin": "dc8e74339c6ca3b93478c6e6c23458ef281b09ef5c351e819d80ffc22a671d11",
+    "ao/corner-conversation.json": "c6b32b8e79e5ad76ae8f07582a1b262afca24aa84d4383d12b615e15a510040d",
+    "ao/bake-report.json": "2a7d33405abbee4523f9a06181826d0fbd707c3637a2793fa3ff87f3620a83eb",
+    "qa_gpu_shared.py": "1ce94f0a523fbdf83ca659e61b53b9e1e60ced24e56dd20352ef90dab7c117bd",
+    "qa/validation.json": "ac7d9d4f81d0d2a55601eb10ab5a671bac74701106a18d4e817ecc84aefe33ae"
+  }
+}

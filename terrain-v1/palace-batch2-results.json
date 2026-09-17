@@ -1,0 +1,68 @@
+[
+  {
+    "key": "waspala-glass-03",
+    "page": "waspala-alpha",
+    "file": "waspala-glass-03.png",
+    "label": "Vitres du palais",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-alpha/waspala-glass-03.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Original old ochre smoked glass panels with slim dark bronze polygonal borders. Preserve every polygon boundary and its exact position, border widths, and warm subdued beige/brown palette. Fine uneven hand-made glass, tiny bubbles, subtle age and faint dusty perimeter; glass centres clean enough to transmit light. Do not paint a room, scenery, reflections, cracks, light rays or change the panel design.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-6dc26921-3508-42cf-8827-ae5319d175e2.png"
+  },
+  {
+    "key": "waspala-window-frame",
+    "page": "waspala-tfrag",
+    "file": "waspala-window-frame.png",
+    "label": "Encadrement des vitres",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-window-frame.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x512 wide horizontal texture. The original is a horizontally banded weathered stone/bronze-brown moulding, with a wide central mottled strip and thin ridged trims near the top and bottom. Preserve all band positions and existing fine crack shapes. Add convincing fine mineral grain, shallow patina and gently rubbed ridges. No wood planks or wood knots.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-659858f2-9338-4ecc-8430-61065c38027c.png"
+  },
+  {
+    "key": "waspala-stage-tile",
+    "page": "waspala-tfrag",
+    "file": "waspala-stage-tile.png",
+    "label": "Sol autour du trône",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-stage-tile.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Original cool muted grey-blue stone tile material with broad mottled cloudy mineral patches and faint hairline fissures. Keep it as a single continuous surface, without new tile boundaries or borders. Add restrained realistic mineral grain and tiny pits, wear from footsteps, a finely honed but matte finish. Keep the very low contrast broad pattern.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9f42b616-f03f-4e42-9a5c-b5c9fc05716b.png"
+  },
+  {
+    "key": "waspala-palmplant-leaf-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmplant-leaf-02.png",
+    "label": "Feuilles des palmiers",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmplant-leaf-02.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Preserve the exact fan of thin tapered olive-green palm leaflets and the central convergence point near the upper right corner. Reconstruct the existing leaf surfaces with fine longitudinal veins, soft fibre detail and gentle natural green variation. Keep every leaflet exactly where it is and preserve the same long thin shapes, spacing, muted olive green background and silhouette. Do not add branches or move leaf edges. Texture atlas patch, not a new plant.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ac39dc55-1923-4805-9413-a07da347e87a.png"
+  },
+  {
+    "key": "waspala-palmtree-trunk-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmtree-trunk-01.png",
+    "label": "Écorce des palmiers",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmtree-trunk-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 512x1024 tall texture. Preserve the original diagonal overlapping brown fibrous bark scales, their exact pattern and warm grey/brown/tan palette. Render weathered palm-trunk bark with realistic layered fibres, small dry splits and frayed scale edges. Keep scale size and repeat unchanged. No green moss, deep new holes, smooth tree bark or straight wooden boards.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-6426853c-3192-43a2-acdf-d6ea2a0a25b2.png"
+  },
+  {
+    "key": "waspala-shrub-plant",
+    "page": "waspala-shrub",
+    "file": "waspala-shrub-plant.png",
+    "label": "Végétation de la salle",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-shrub/waspala-shrub-plant.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Preserve this existing green leaf texture atlas exactly: same broad irregular dark green foliage patches, horizontal leaflet bands and dark internal divisions, same shapes and green palette. Add recognizable fine leaf veins, leathery foliage grain and gentle variation. Keep the original composition and painted silhouette; do not turn it into a new plant, change its outlines, add stems or add a background scene.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-28cd5ab1-c542-4d6f-b17a-e25acfaa5eb5.png"
+  }
+]

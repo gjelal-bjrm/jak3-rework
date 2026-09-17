@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "shader_sha256": "1d38a31ff34455541f5e6f19629d29e1e476266401251fa4a1e3381ae989dcbd",
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "method": "Actual full packaged vertex shader; arena_world transform feedback; hidden WGL context",
+  "checks": {
+    "actual_packaged_vertex_shader_compile_link": true,
+    "root_output_bit_identical": true,
+    "near_tip_moves_outward_and_down": true,
+    "centerline_is_finite_and_bounded": true,
+    "far_tip_output_bit_identical": true,
+    "other_floor_output_bit_identical": true,
+    "duplicate_contacts_bit_identical": true,
+    "zero_count_is_exact_wind_only": true,
+    "half_blade_bends_less_than_tip": true,
+    "recovery_monotonic": true,
+    "one_second_restores_wind_bit_identical": true,
+    "mode_zero_ignores_contacts": true,
+    "palace_mode_one_ignores_contacts": true,
+    "native_shader_files_unchanged": true
+  },
+  "fixtures": [
+    {
+      "name": "root",
+      "position_m": [
+        1767.1,
+        7.03,
+        -330.0
+      ],
+      "native_v": 4096.0,
+      "contact_delta_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "near_tip",
+      "position_m": [
+        1767.2,
+        7.6,
+        -330.0
+      ],
+      "native_v": 0.0,
+      "contact_delta_m": [
+        0.2686767578125,
+        -0.07676267623901367,
+        0.0
+      ]
+    },
+    {
+      "name": "far_tip",
+      "position_m": [
+        1769.0,
+        7.6,
+        -330.0
+      ],
+      "native_v": 0.0,
+      "contact_delta_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "other_floor",
+      "position_m": [
+        1767.1,
+        10.6,
+        -330.0
+      ],
+      "native_v": 0.0,
+      "contact_delta_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "center_tip",
+      "position_m": [
+        1767.0,
+        7.6,
+        -330.0
+      ],
+      "native_v": 0.0,
+      "contact_delta_m": [
+        0.2330322265625,
+        -0.07999992370605469,
+        0.155303955078125
+      ]
+    },
+    {
+      "name": "half_blade",
+      "position_m": [
+        1767.2,
+        7.35,
+        -330.0
+      ],
+      "native_v": 2048.0,
+      "contact_delta_m": [
+        0.13427734375,
+        -0.038381099700927734,
+        0.0
+      ]
+    }
+  ],
+  "recovery_age_s": [
+    0,
+    0.1,
+    0.3,
+    0.6,
+    0.9,
+    1.0,
+    1.2
+  ],
+  "near_tip_contact_displacement_m": [
+    0.27942746581539263,
+    0.2790458708799546,
+    0.23917908766956567,
+    0.11248576037701939,
+    0.009144139075732843,
+    0.0,
+    0.0
+  ],
+  "centerline_contact_displacement_m": 0.29124444178826686,
+  "native_visual_validation": false
+}

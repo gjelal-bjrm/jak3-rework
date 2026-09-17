@@ -1,0 +1,32 @@
+{
+  "status": "installed",
+  "path": "out/jak3/fr3/wascitya.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r2\\staging\\wascitya.fr3",
+  "base_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\staging\\wascitya.fr3",
+  "output_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\wascitya-patch.json",
+  "patch_sha256": "a9c23236ccdec9660ada8446c98599841009533e314fc49e4643e948aad0a250",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\staging\\preservation.json",
+  "preservation_report_sha256": "e749cfa403003d28ba33122eada93bab2e11d01c8ff431520021ff5e1d81eb34",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\revision-002\\installed.json",
+  "parent_record_sha256": "cbfcc1c860a063cbe1712ee5136d45d68e95e5f03f4fa74b625560f477f80aa9",
+  "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\author-report.json",
+  "author_report_sha256": "54254012a4cd248919e5049043a45a6148a46500934b3491eccc0b05aaca1700",
+  "native_visual_validation": false,
+  "scope": "Close house1 east-room window and remove its frame and balcony by replaying native facade author without this opening. Keep west and upper windows, all house2 and other geometry unchanged.",
+  "closed_window_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\closed-window-validation.json",
+  "closed_window_validation_sha256": "642946c3706a961c2e146e7fbb12bc9e0934fe7035a56fbf688d93d4535d5d0a",
+  "bvh_coverage": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\bvh-coverage.json",
+  "bvh_coverage_sha256": "9a432c678e8da69589def5449dd885e56baf026e6f058cd4b3583618d91b9b03",
+  "opening_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\opening-validation.json",
+  "opening_validation_sha256": "d16772208f7080f763c65666630e5b33632536b8c981c86d8af5926eededf0be",
+  "geometry_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\geometry-validation.json",
+  "geometry_validation_sha256": "482168d69dc244fe7c88374a21beabcfd67edf5ff4834ce678df8f45303b4940",
+  "window_anchors": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\window-anchors.json",
+  "window_anchors_sha256": "747177d3b3e01e7c7d1dc495244dc2787e36cf9d2bf745de70f4ec9ecd6c9140",
+  "protected_variant_hashes": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf"
+  }
+}

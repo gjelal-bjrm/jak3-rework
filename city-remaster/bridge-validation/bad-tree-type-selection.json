@@ -1,0 +1,37 @@
+{
+  "level": "wascityb",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+    "bytes": 36575263,
+    "sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f"
+  },
+  "bounds_xz_m": [
+    1735.0,
+    1820.0,
+    -355.0,
+    -290.0
+  ],
+  "tree_types": [
+    "merc"
+  ],
+  "materials": [
+    "city-port-bigpipe-ring-side",
+    "wascity-cement-road",
+    "wascity-ditch-wall-top-to-ground",
+    "wascity-ditch-wall-top-to-ground-edging",
+    "wascity-ground-01",
+    "wascity-ground-2-ditch-03",
+    "wascity-ground-2-ditch-04",
+    "wascity-ground-2-ditch-05",
+    "wascity-ground2ocean-shore-rocks",
+    "wascity-metal-dirty",
+    "wascity-palm-beard",
+    "wascity-palm-leaf-worn",
+    "wascity-palm-trunk",
+    "wascity-rock-small",
+    "wascity-shrub-orange-01",
+    "wascity-wood-plain"
+  ],
+  "label": "WCB march\u00c3\u00a9 : g\u00c3\u00a9om\u00c3\u00a9trie statique, murs, sol, rochers et v\u00c3\u00a9g\u00c3\u00a9tation",
+  "bounds_semantics": "Conservative world XZ AABB overlap, whole triangles retained"
+}

@@ -1,0 +1,26 @@
+  ;; REMASTER-SAND-STEP-HOOK-BEGIN
+  (let ((step? (or (string= (the-as string arg0) "effect-walk-step-left")
+                   (string= (the-as string arg0) "effect-walk-step-right")
+                   (string= (the-as string arg0) "effect-run-step-left")
+                   (string= (the-as string arg0) "effect-run-step-right")))
+        (poof? (or (string= (the-as string arg0) "effect-run-poof")
+                   (string= (the-as string arg0) "effect-just-poof")))
+        )
+    (when step?
+      (+! *remaster-sand-step-events* 1)
+      (set! *remaster-sand-step-last-material* (the int (-> arg4 material)))
+      (let ((level (level-get-target-inside *level*)))
+        (set! *remaster-sand-step-last-level* (if level (-> level name) 'none))))
+    (when (and (or step? poof?) (remaster-sand-step-contact? this arg4 arg2))
+      (cond
+        (step?
+         (+! *remaster-sand-step-eligible* 1)
+         (remaster-sand-step-emit this arg2))
+        (poof?
+         ;; The new foot emission replaces the old running clouds in this
+         ;; scope. Footprints, landings and every other material stay native.
+         (+! *remaster-sand-step-suppressed-poofs* 1)
+         (return #f))
+        ))
+    )
+  ;; REMASTER-SAND-STEP-HOOK-END

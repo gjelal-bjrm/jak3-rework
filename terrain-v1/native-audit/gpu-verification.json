@@ -1,0 +1,242 @@
+[
+  {
+    "key": "waspala-cliff-rock-01",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "37a39a326101b1bf26c4333b537798d7500aadd68c454106492678c7a9728735",
+    "expected_pixel_sha256": "37a39a326101b1bf26c4333b537798d7500aadd68c454106492678c7a9728735"
+  },
+  {
+    "key": "waspala-cliff-rock-02",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "3bb96faec52ee3f4b1b7f5bb1f143aa40afc5bdb1d93b091ba319d60ebdb71ac",
+    "expected_pixel_sha256": "3bb96faec52ee3f4b1b7f5bb1f143aa40afc5bdb1d93b091ba319d60ebdb71ac"
+  },
+  {
+    "key": "waspala-cliff-rock-top",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "58d0473aaa5998ca58eb7e8c7bca31e6060f758f538a9be16a9154290f917e2a",
+    "expected_pixel_sha256": "58d0473aaa5998ca58eb7e8c7bca31e6060f758f538a9be16a9154290f917e2a"
+  },
+  {
+    "key": "waspala-pool-floor",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "849503eeb320e6c99f7352b46b106caf9c310f1f0f75ef9fc79fad801fe43546",
+    "expected_pixel_sha256": "849503eeb320e6c99f7352b46b106caf9c310f1f0f75ef9fc79fad801fe43546"
+  },
+  {
+    "key": "waspala-step-top",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "4cf6dc5f310667ea1b0938ffa2f3dba38cfe3a3762ac1e97f300168392485eab",
+    "expected_pixel_sha256": "4cf6dc5f310667ea1b0938ffa2f3dba38cfe3a3762ac1e97f300168392485eab"
+  },
+  {
+    "key": "waspala-column-01",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "691b2b8a851b660003d60531a9d3a85e2cdbe4d59d5407fd64873f4442170780",
+    "expected_pixel_sha256": "691b2b8a851b660003d60531a9d3a85e2cdbe4d59d5407fd64873f4442170780"
+  },
+  {
+    "key": "waspala-glass-03",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "6d72b725e6c940d2a0842a4e7dd6a895f3bffe2c468997d3fad56340ec30b697",
+    "expected_pixel_sha256": "6d72b725e6c940d2a0842a4e7dd6a895f3bffe2c468997d3fad56340ec30b697"
+  },
+  {
+    "key": "waspala-window-frame",
+    "gpu_size": [
+      1024,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "b79f1253f81bd051382c0259e0bfad4171e95ce0eb6158ed1d43051b96ec5b1e",
+    "expected_pixel_sha256": "b79f1253f81bd051382c0259e0bfad4171e95ce0eb6158ed1d43051b96ec5b1e"
+  },
+  {
+    "key": "waspala-stage-tile",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "55be713a7bf12b83a73f1226a3ec422e76a34349417d29a117071fdb5563db7a",
+    "expected_pixel_sha256": "55be713a7bf12b83a73f1226a3ec422e76a34349417d29a117071fdb5563db7a"
+  },
+  {
+    "key": "waspala-palmplant-leaf-02",
+    "gpu_size": [
+      512,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "4377548fcbc4c95d90a31f43fb0effa8b1c9de48e6b14273fcd67b80f0b175de",
+    "expected_pixel_sha256": "4377548fcbc4c95d90a31f43fb0effa8b1c9de48e6b14273fcd67b80f0b175de"
+  },
+  {
+    "key": "waspala-palmtree-trunk-01",
+    "gpu_size": [
+      256,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "2584ed3ae7ddb5af51d58440ace1377830dadb6eb720a082f02a291900ac3728",
+    "expected_pixel_sha256": "2584ed3ae7ddb5af51d58440ace1377830dadb6eb720a082f02a291900ac3728"
+  },
+  {
+    "key": "waspala-shrub-plant",
+    "gpu_size": [
+      512,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "2b26e10a394ec98871232687267c83ae197be6201fe8d46699e96cabda65e148",
+    "expected_pixel_sha256": "2b26e10a394ec98871232687267c83ae197be6201fe8d46699e96cabda65e148"
+  },
+  {
+    "key": "waspala-ceiling-frame",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "11a2f6dc5798455f9dcb8e02e403b7e8e28385b525b578fd6ccfec4b2f0b845a",
+    "expected_pixel_sha256": "11a2f6dc5798455f9dcb8e02e403b7e8e28385b525b578fd6ccfec4b2f0b845a"
+  },
+  {
+    "key": "waspala-window-side",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "d5336d5ae195a053192e5159b63eaf3c2ebf6ed61572b56d8457f63304a5d248",
+    "expected_pixel_sha256": "d5336d5ae195a053192e5159b63eaf3c2ebf6ed61572b56d8457f63304a5d248"
+  },
+  {
+    "key": "waspala-step-01",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "ffb59a31cda762713e767d4e065fc5082c36e6bc17cf4ebb3958caa46d949e50",
+    "expected_pixel_sha256": "ffb59a31cda762713e767d4e065fc5082c36e6bc17cf4ebb3958caa46d949e50"
+  },
+  {
+    "key": "waspala-step-02",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "1c51c9ac9e5ab1d7f2c022094349f38510523bab95df21ae911f0477b8601cf5",
+    "expected_pixel_sha256": "1c51c9ac9e5ab1d7f2c022094349f38510523bab95df21ae911f0477b8601cf5"
+  },
+  {
+    "key": "waspala-stage-step",
+    "gpu_size": [
+      1024,
+      256
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "f600ae6edebd2f082b6f5914d68f2016b955c69b9f2a23fccbaad02553401261",
+    "expected_pixel_sha256": "f600ae6edebd2f082b6f5914d68f2016b955c69b9f2a23fccbaad02553401261"
+  },
+  {
+    "key": "waspala-stage-end",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "21b4bde775306d87eaec4cfb01a3949ff4dc439050c47c62dcaa7ec9b977ff9e",
+    "expected_pixel_sha256": "21b4bde775306d87eaec4cfb01a3949ff4dc439050c47c62dcaa7ec9b977ff9e"
+  },
+  {
+    "key": "waspala-column-02",
+    "gpu_size": [
+      1024,
+      256
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "e22978c78be7a8bb307a2cea81b02ce98abd031fdda8aa1ddba15b6aa20121ea",
+    "expected_pixel_sha256": "e22978c78be7a8bb307a2cea81b02ce98abd031fdda8aa1ddba15b6aa20121ea"
+  },
+  {
+    "key": "waspala-column-03",
+    "gpu_size": [
+      1024,
+      1024
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "1980701a4aec5067520537b2d86c0a543d32da6b791b3773a78294bec6955adb",
+    "expected_pixel_sha256": "1980701a4aec5067520537b2d86c0a543d32da6b791b3773a78294bec6955adb"
+  },
+  {
+    "key": "waspala-column-base",
+    "gpu_size": [
+      1024,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "95dfed75bd518e4af9d12e744c39860ffdd8e63c81bf1cb064aa148f373116f2",
+    "expected_pixel_sha256": "95dfed75bd518e4af9d12e744c39860ffdd8e63c81bf1cb064aa148f373116f2"
+  },
+  {
+    "key": "waspala-column-piece",
+    "gpu_size": [
+      1024,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "8a3a8a75327343febd9eed4916964e5e99c6433c06f220e27fdd168b04a7fdd4",
+    "expected_pixel_sha256": "8a3a8a75327343febd9eed4916964e5e99c6433c06f220e27fdd168b04a7fdd4"
+  },
+  {
+    "key": "waspala-column-plate",
+    "gpu_size": [
+      1024,
+      512
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "25a848c5abe1f039f2f600769cdee409f5e587afd2e028b15156db786ce8fd94",
+    "expected_pixel_sha256": "25a848c5abe1f039f2f600769cdee409f5e587afd2e028b15156db786ce8fd94"
+  },
+  {
+    "key": "waspala-metal-bar",
+    "gpu_size": [
+      512,
+      256
+    ],
+    "matches_replacement_pixels": true,
+    "gpu_pixel_sha256": "7bf83b148dd6dfc5b2019f47dc1931544f761322b982d156bd2378868a497903",
+    "expected_pixel_sha256": "7bf83b148dd6dfc5b2019f47dc1931544f761322b982d156bd2378868a497903"
+  }
+]

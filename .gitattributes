@@ -1,0 +1,5 @@
+* text=auto
+*.patch -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.glb filter=lfs diff=lfs merge=lfs -text
+**/masters/** filter=lfs diff=lfs merge=lfs -text

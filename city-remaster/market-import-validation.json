@@ -1,0 +1,458 @@
+{
+  "mode": "validation-only",
+  "created_utc": "2026-09-16T17:51:49.962391+00:00",
+  "deployed": false,
+  "compiled_or_launched": false,
+  "errors": [],
+  "models": [
+    {
+      "control": "cty-fruit-stand-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\cty-fruit-stand-lod0.glb",
+        "sha256": "3d9f529cbfbffee7f75d29e2f05ab076cfc6acc036bb60b3ba46309f4c9d2a74",
+        "node": "cty-fruit-stand-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main",
+            "fruit"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 78,
+        "drawn_vertex_samples": 156,
+        "weighted_joint_counts": {
+          "main": 156
+        },
+        "bounds_metres_y_up": [
+          [
+            -4.688803672790527,
+            -0.25641894340515137,
+            -1.5751450061798096
+          ],
+          [
+            4.652172565460205,
+            2.051351547241211,
+            1.5751450061798096
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-slum-wood-plain",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "8349814038e2f04dbc1deb6c1c1d32ebc202f81dc52091f5a9f6bc603b497550",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 1,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\cty-fruit-stand-lod0.glb",
+        "sha256": "73ef5c3eda36619212d9dc2c3224d0fd9ff508a2185566fac2d2ae2cd79def29",
+        "node": "cty-fruit-stand-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main",
+            "fruit"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316067e-16,
+              -3.4228545331416204e-08,
+              0.0,
+              2.9289832837920026e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141622e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 13332,
+        "drawn_vertex_samples": 22164,
+        "weighted_joint_counts": {
+          "main": 22164
+        },
+        "bounds_metres_y_up": [
+          [
+            -4.557499408721924,
+            -0.2560001611709595,
+            -1.469225287437439
+          ],
+          [
+            4.557500839233398,
+            1.8710659742355347,
+            1.469225287437439
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-slum-wood-plain",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1774,
+              887
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "6670d6a9aaa413cccf0c50c130f4ec1b9b18572109a680a7779d8c74c7896b75",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 1,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false
+    }
+  ],
+  "extraction_plan": {
+    "extractor": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\versions\\official\\v0.3.6\\extractor.exe",
+    "extractor_sha256": "fe21c4148444773559989d9b32223f6b3b1ad606f31e595c7550cc4c1b029682",
+    "input_dgos": [
+      "CGO/GAME.CGO",
+      "DGO/WASALL.DGO",
+      "DGO/WWD.DGO",
+      "DGO/WCA.DGO",
+      "DGO/WCB.DGO"
+    ],
+    "levels_to_extract": [
+      "WCB.DGO"
+    ],
+    "candidate_allowlist": [
+      "wascityb.fr3"
+    ],
+    "never_deploy_generated": [
+      "GAME.fr3"
+    ],
+    "palace_preservation": "WASPALA excluded; live and DATA palace remain hash-protected",
+    "later_palace_reapplication": "Only if palace is deliberately re-extracted: models-v1/apply_models.py with explicit clean source and destination; not run here",
+    "city_terrain_preservation": "Keep complete current level; append selected GLB draw payloads with explicit texture/vertex/index remapping, then prove all existing textures/static/unrelated Merc data unchanged and selected payloads match extraction",
+    "safety": "No copying to ROOT/out, DATA/out, variants, profiles or live shader directories"
+  },
+  "status": "passed"
+}

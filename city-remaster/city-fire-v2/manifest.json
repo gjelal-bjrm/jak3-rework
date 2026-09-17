@@ -1,0 +1,45 @@
+{
+  "status": "applied",
+  "files": {
+    "engine-src/goal_src/jak3/engine/common-obs/generic-obs.gc": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-fire-v2\\before\\engine-src\\goal_src\\jak3\\engine\\common-obs\\generic-obs.gc",
+      "before_sha256": "462ab5061514b203cc6e1d8164a35592e1bbd579b1f66a42dceea2ad4e9c0481",
+      "after_sha256": "512e5489f3b077963beb12e79d9f34a5ab2538dd28365b119bdbdd35ff4ef1f1"
+    },
+    "data/goal_src/jak3/engine/common-obs/generic-obs.gc": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-fire-v2\\before\\data\\goal_src\\jak3\\engine\\common-obs\\generic-obs.gc",
+      "before_sha256": "b25f4b86277b09d61c0e106200dce33abd9a25964e277585cd7cd9c0cdad84d3",
+      "after_sha256": "9f4cdc4f0a195a68b0d83410145b8d83278d221cc4b579c31645bb388894008c"
+    },
+    "engine-src/game/kernel/jak3/kmachine.cpp": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-fire-v2\\before\\engine-src\\game\\kernel\\jak3\\kmachine.cpp",
+      "before_sha256": "47f728ac9080bbecfc18893ed1bd165e9ea49f76e7c47cadb9a856349c4cb91c",
+      "after_sha256": "a9015ead3632cee04eda3c04d56daad2e5fe4b1ebe0d192d70b93d464cb4fc58"
+    },
+    "engine-src/game/graphics/opengl_renderer/PalaceFire.h": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-fire-v2\\before\\engine-src\\game\\graphics\\opengl_renderer\\PalaceFire.h",
+      "before_sha256": "fcf20f13f8bc433592abd4a2093bc7cff93dd2963f51c50ed64a1c9461d44fc6",
+      "after_sha256": "06e2621f687cd854fb5289fb68233a7095556622e5d4d52e10ae26b888aa458f"
+    }
+  },
+  "new_files": {
+    "engine-src/game/graphics/opengl_renderer/CityFire.h": "aafce63182203a2004dc0e1601f415b87079b44225fb3c2c77c7917538ef85e4",
+    "engine-src/game/graphics/opengl_renderer/CityFireSources.h": "54384ddf8b4147bc987ff30e72e67895fe84b6b094f2868b879758c2a5640f33",
+    "engine-src/game/graphics/opengl_renderer/CityFireAttachments.inc": "68e2fc1dd419d65e694578a7304d152d1250586b8e6083e233cce87b36032152",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire.frag": "14cb0c1bb616b0c753116090b0dc32442d7721a25f1b8db1433bf29e9bfffa47",
+    "data/game/graphics/opengl_renderer/shaders/city_fire.frag": "14cb0c1bb616b0c753116090b0dc32442d7721a25f1b8db1433bf29e9bfffa47",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire.vert": "a58c0a9de1b095868ecc776c78918d951bcc3f3ee4f5c50126212669250289c1",
+    "data/game/graphics/opengl_renderer/shaders/city_fire.vert": "a58c0a9de1b095868ecc776c78918d951bcc3f3ee4f5c50126212669250289c1",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire_embers.frag": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047",
+    "data/game/graphics/opengl_renderer/shaders/city_fire_embers.frag": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire_embers.vert": "1e7449b19b32932bfcd23ac57bcfa49d9c4b2565c907b3740d18b837d28a946e",
+    "data/game/graphics/opengl_renderer/shaders/city_fire_embers.vert": "1e7449b19b32932bfcd23ac57bcfa49d9c4b2565c907b3740d18b837d28a946e",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire_lighting.frag": "b7bd34804e0928c50f2bab3bf53491b22f1f43c88a1d318ee0ecff826b5ff120",
+    "data/game/graphics/opengl_renderer/shaders/city_fire_lighting.frag": "b7bd34804e0928c50f2bab3bf53491b22f1f43c88a1d318ee0ecff826b5ff120",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_fire_lighting.vert": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f",
+    "data/game/graphics/opengl_renderer/shaders/city_fire_lighting.vert": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f"
+  },
+  "required_object": "generic-obs",
+  "archive_installation": false,
+  "native_validation": false
+}

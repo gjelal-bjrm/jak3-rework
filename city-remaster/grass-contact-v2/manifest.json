@@ -1,0 +1,36 @@
+{
+  "status": "data_applied",
+  "scope": "Actual closed grass blade roots; only market-shrub-orange-v1 in WCA/WCB",
+  "files": {
+    "engine-src/game/graphics/opengl_renderer/shaders/shrub.vert": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\before\\engine-src\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "before_sha256": "1d38a31ff34455541f5e6f19629d29e1e476266401251fa4a1e3381ae989dcbd",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\staging\\engine-src\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "after_sha256": "2ae1da31e2cc1ae29c736476005eebbf5f535b5304d2a6c91e9adad1e80e7088"
+    },
+    "data/game/graphics/opengl_renderer/shaders/shrub.vert": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\before\\data\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "before_sha256": "1d38a31ff34455541f5e6f19629d29e1e476266401251fa4a1e3381ae989dcbd",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\staging\\data\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "after_sha256": "2ae1da31e2cc1ae29c736476005eebbf5f535b5304d2a6c91e9adad1e80e7088"
+    },
+    "engine-src/game/graphics/opengl_renderer/background/Shrub.cpp": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\before\\engine-src\\game\\graphics\\opengl_renderer\\background\\Shrub.cpp",
+      "before_sha256": "025c831001918a2503281f76a08e6ce3ad15f6c9ab70f2ba0341ed3e40acceac",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\staging\\engine-src\\game\\graphics\\opengl_renderer\\background\\Shrub.cpp",
+      "after_sha256": "5c93026ad98056ae9593274372a47f1e96b73d08818f114d63ac5fd49125f0d7"
+    },
+    "engine-src/game/graphics/opengl_renderer/background/Shrub.h": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\before\\engine-src\\game\\graphics\\opengl_renderer\\background\\Shrub.h",
+      "before_sha256": "492392642edfe7835f95f6eb8b6e4144774e4d05eb30ad91efcaac5cdfc60a14",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\staging\\engine-src\\game\\graphics\\opengl_renderer\\background\\Shrub.h",
+      "after_sha256": "38183d8dd9c44b3f55d101b64dc1fb02228390f7e6f1cd560fdf773b2f2e31b2"
+    }
+  },
+  "new_header": "engine-src/game/graphics/opengl_renderer/GrassAnchors.h",
+  "new_header_sha256": "bf9cc3898af2e18e7d1aeb21b238ad1777caf28af2662ea419f1d76812349fb8",
+  "goal_changed": false,
+  "geometry_changed": false,
+  "runtime_built": false,
+  "native_visual_validation": false
+}

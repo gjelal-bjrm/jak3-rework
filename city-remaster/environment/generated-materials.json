@@ -1,0 +1,112 @@
+[
+  {
+    "name": "wascity-ground-01",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-1359359f-7945-4fb4-81d7-1da46d998925.png",
+    "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: compact sandy limestone ground, fine pale mineral gravel and embedded irregular worn chips, shallow compacted dusty patches; no paving or bricks. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+  },
+  {
+    "name": "wascity-stucco-wall-bleached-01",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-8519b291-0b6e-41b9-bc59-69ac827439f7.png",
+    "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: sun bleached lime plaster for buildings, layers of age worn plaster and tiny porous chips, warm grey-beige plaster underneath pale chalk surface; coherent broad peeling shapes matching original, avoid random spots. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+  },
+  {
+    "name": "wascity-ocean-shore-rocks",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-11ab37a4-2a72-41a1-9b6e-bb63b128d614.png",
+    "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: naturally fractured sandstone coastal cliff, preserve the vertical layered masses and fissures in the source, worn rounded strata with detailed grain and occasional small horizontal weathering cracks; not man-made masonry. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+  },
+  {
+    "name": "wascitya-stone-top",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-56a3796f-2112-4d31-9928-1eef2db0210a.png",
+    "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: flat exposed limestone bedrock top, preserve the broad irregular cracks and muted dusty grey-beige pale greenish original hue, intricate shallow chips along the existing fissures, compact mineral grain; no separate invented bricks. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+  },
+  {
+    "name": "wascity-rock-small",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-3b2a961d-264e-417d-8b6e-3adee2e79782.png",
+    "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: weathered warm sandstone rock albedo, preserve source muted brown-pink sandy coloration and its big shapes, clearer naturally eroded shallow ridges and fine mineral inclusions; not masonry or polished stone. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+  },
+  {
+    "name": "wascitya-stone-bottom",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-03925fdc-c7af-4177-87e3-ccb56420594f.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Preserve upper olive grey worn plaster and bottom part chunky stone foundation, EXACT original horizontal transition height and masonry layout. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "wascity-cement-road",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ed67ca49-be8c-4110-8333-c85386834d14.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Muted dark warm grey worn compact cement road with sandy aggregate, scuffed irregular ground wear. Not tile pavement. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "wascity-stonewall-bricks",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-c6b65958-4dd9-47a1-9e18-ecb1d17fba14.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Chunky uneven grey olive limestone masonry preserving exact original brick course layout, more convincing softened edges, shallow mortar and mineral grain. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "wascity-stucco-wall-bleached-2-bricks-01",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-85e6f4a9-dfda-4708-95c0-514f8ee8e0a8.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Wide landscape 2:1 texture. Preserve upper quarter pale peeling plaster and darker grey limestone courses below EXACT original transition and UV placement. Match original aspect 2:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "wascity-roof-1",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-b92b7a4d-b4f8-4344-b154-8f7c468b9635.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Preserve original long corrugated metallic ribs and faded ochre/rust/green weathered metal exactly, stronger material structure and moderate authentic wear. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "wascity-ground2ocean-shore-rocks",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-59c8831c-8c69-4a43-8bb5-10a93faa89a9.png",
+    "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Wide landscape 2:1 texture. Coastal sandstone with narrow pale grey ground strip along upper edge at EXACT original position. Lower golden eroded vertical coastal sandstone should match high-detail original material. Match original aspect 2:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+  },
+  {
+    "name": "city-slum-burning-can",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ce14cc77-7bb4-47ad-9702-d71b0a3b4709.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Olive grey aged corrugated structural metal bands, keep exact broad ribs placement and palette. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-ditch-wall-top-to-ground",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-92723d8d-7447-435e-8815-3d700b16d4cb.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Wide 2:1 transition texture. Keep EXACT upper and lower grey ground borders enclosing ochre layered sandstone strip, keep original border positions. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-stone-plain-wall-3",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-5c358e4a-285e-49c4-956b-888ec51dff6a.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Pale olive beige worn lime stucco stone wall with restrained original broad patches and shallow cracks. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-outerwall-metal",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-2638f76b-11bb-4959-a350-2764303698bc.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Metal city wall panel with diagonal X structural braces. Preserve EXACT geometry layout of X braces and rusty olive dark metal palette. Refine rivets and plate texture. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-outerwall-metal-b",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-0221dfe6-7cd5-4eed-81f7-1fc80168d798.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Portrait 1:2 structural metal beam, preserve exact original geometry layout and edges, muted olive brown rusty iron. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-metal-dirty",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-4ac34d85-970b-4a03-918d-1dba5f425225.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Landscape 2:1 aged grey olive structure metal, restrained realistic abrasion. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-ground-2-ditch-03",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-d4b06eb9-cff9-46a5-8c3f-094d67baa896.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-ground-2-ditch-04",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-79fed2fb-2bca-486d-85b7-cbddfb32989d.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-ground-2-ditch-05",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-edf8ca58-5acd-4e52-aeba-b1a4ae376d9d.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-stone-bricks-2-plain",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-685037c7-aaa5-4a38-945b-252785949c65.png",
+    "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Olive beige worn plaster transitioning to chunky stone. Exact source masonry and transition layout. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+  },
+  {
+    "name": "wascity-outerwall-rock",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-20c354d6-aa05-4eab-824a-40e2bb290ced.png",
+    "prompt": "Faithful modern remaster of the attached exact Jak 3 red sandstone cliff albedo texture. Landscape2:1. Preserve EXACT muted terracotta ochre hue, broad original blocky natural erosion masses and big fissure layout. Build tactile rounded eroded ridges, realistic desert wind abrasion and fine granular sandstone inclusions while retaining animated stylized Jak3 art. Important this is NATURAL CLIFF not masonry, no invented brick courses or regular grids. Material-only orthographic albedo under even diffuse light, no strong shadows, no white highlights, no perspective, no borders or text. Preserve average brightness and contrast and seamlessly repeating edges. High resolution detailed surface."
+  }
+]

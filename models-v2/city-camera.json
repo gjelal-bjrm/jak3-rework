@@ -1,0 +1,10 @@
+{
+  "target": [
+    1721.0364,
+    29.6132,
+    -364.4435
+  ],
+  "camera": "(let ((p (new-stack-vector0)) (m (new-stack-matrix0))) (set-vector! p 7070205.5 142389.4218 -1445994.375 1.0) (set-vector! (-> m rvec) -0.9132 0.0 0.4073 0.0) (set-vector! (-> m uvec) -0.0492 0.9926 -0.1104 0.0) (set-vector! (-> m fvec) -0.4043 -0.1209 -0.9065 0.0) (set-vector! (-> m trans) 0.0 0.0 0.0 1.0) (vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) (matrix-copy! (-> *camera* slave 0 tracking inv-mat) m) (none))",
+  "continue": "wascityb-seem"
+}
+

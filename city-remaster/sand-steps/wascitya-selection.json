@@ -1,0 +1,16 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3",
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+  },
+  "tree_types": [
+    "tfrag",
+    "tie"
+  ],
+  "geoms": [
+    0
+  ],
+  "label": "Read-only visible surface classification for subtle sand footsteps"
+}

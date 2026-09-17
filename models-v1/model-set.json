@@ -1,0 +1,10 @@
+{
+  "parts": [
+    "brazier-patch.json",
+    "planter-patch.json",
+    "../models-v2/preserved-patch.json",
+    "../models-v2/throne-patch.json",
+    "../models-v2/foliage-patch.json"
+  ],
+  "texture_manifest": "../models-v2/native-textures.json"
+}

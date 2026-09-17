@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "scope": "Source/mesh/GPU preflight only; final install manifests represented in memory. No deployment/package validation.",
+  "checks": 99,
+  "failures": [
+    "Hash C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\shared-room-v2\\corner-conversation.json",
+    "Hash C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\shared-room-v2\\corner-conversation.bin"
+  ]
+}

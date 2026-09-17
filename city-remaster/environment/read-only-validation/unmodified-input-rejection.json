@@ -1,0 +1,32 @@
+{
+  "status": "failed",
+  "checks": {
+    "pinned_source": true,
+    "pinned_size": true,
+    "level_identity": true,
+    "no_geometry_requested": true,
+    "no_texture_append_requested": true,
+    "entire_static_region_identical": true,
+    "entire_merc_tail_identical": true,
+    "texture_count_identical": true,
+    "unique_allowlist": true,
+    "all_named_targets_present": true,
+    "only_exact_allowed_pixels_changed": false,
+    "visible_pixel_change": false
+  },
+  "errors": [
+    "Wrong pixels/dimensions: 33/wascity-ground-01"
+  ],
+  "level": "wascityb",
+  "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+  "after": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\read-only-validation\\unmodified-input-rejection-patch.json",
+  "before_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+  "after_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+  "patch_sha256": "d77b13e25dc041bb9c3bdb678650c56da3ed166dfe5b27049d29bf46543c5df7",
+  "static_sha256": "d5dbcca4d7ecb7bdfd1b1f776fe30a7b3ae2b925d2b1867cbaa6e5362f2f08eb",
+  "merc_tail_sha256": "6f83793a910775cc8fb3a3c98cd960568101e059ce3f9144428c9577ad244b37",
+  "texture_count": 301,
+  "changed_textures": [],
+  "native_visual_validation": false
+}

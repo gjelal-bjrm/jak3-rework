@@ -1,0 +1,33 @@
+{
+  "status": "candidate",
+  "parameters": {
+    "rays": 128,
+    "radius_m": 0.7,
+    "gain": 0.4,
+    "edge_m": 0.34
+  },
+  "rooms": [
+    {
+      "layout": "lounge",
+      "source_sha256": "7048addf7e787d7ffeec2578902b9ebd359de7b7e0d2b4e3b68638ab559c5ef0",
+      "candidate_sha256": "062064c1a78a7a879e23e569ebb72c54a3c670a18d3d7536e2e400dfc2d5c2f2",
+      "source_vertices": 55140,
+      "candidate_vertices": 244284,
+      "unique_samples": 65130,
+      "minimum_ao": 0.6004136719074633,
+      "mean_ao": 0.8575742326802893,
+      "seconds": 13.679201126098633
+    },
+    {
+      "layout": "conversation",
+      "source_sha256": "7c89d0131835c90f7d8baaf5b70ce50acf4c78f0aebac862914e92eb511dcb21",
+      "candidate_sha256": "4c86f627970e5ebe4d2b11f4f7df65173b1d1a67a3461c5449ba1cfd6bf97027",
+      "source_vertices": 48780,
+      "candidate_vertices": 236292,
+      "unique_samples": 60546,
+      "minimum_ao": 0.6004561137611546,
+      "mean_ao": 0.8620703417744824,
+      "seconds": 12.762595653533936
+    }
+  ]
+}

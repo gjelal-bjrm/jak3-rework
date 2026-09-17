@@ -1,0 +1,46 @@
+{
+  "status": "installed",
+  "rooms": [
+    {
+      "layout": "lounge",
+      "files": {
+        "lounge.bin": {
+          "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\lounge.bin",
+          "before_sha256": "7048addf7e787d7ffeec2578902b9ebd359de7b7e0d2b4e3b68638ab559c5ef0",
+          "after_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\lounge.bin",
+          "after_sha256": "062064c1a78a7a879e23e569ebb72c54a3c670a18d3d7536e2e400dfc2d5c2f2"
+        },
+        "lounge.json": {
+          "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\lounge.json",
+          "before_sha256": "d4e29d503972464ff3bc1c5ffed16c8228b54842b63cb94a984699ea4ff1988a",
+          "after_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\lounge.json",
+          "after_sha256": "1a90b37d123fc69f634a739b4066f6e82e8d853b1efceb16b32ffff6d7fd7621"
+        }
+      }
+    },
+    {
+      "layout": "conversation",
+      "files": {
+        "conversation.bin": {
+          "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\conversation.bin",
+          "before_sha256": "7c89d0131835c90f7d8baaf5b70ce50acf4c78f0aebac862914e92eb511dcb21",
+          "after_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\conversation.bin",
+          "after_sha256": "4c86f627970e5ebe4d2b11f4f7df65173b1d1a67a3461c5449ba1cfd6bf97027"
+        },
+        "conversation.json": {
+          "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\conversation.json",
+          "before_sha256": "1e0dd8c491a3b6ce83b569532f420327950e3af6ff6af4384d8c01b44e836354",
+          "after_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\conversation.json",
+          "after_sha256": "065a1cd096f9112334e5899d3042fb54e93671a142e41c062be288527e694b1c"
+        }
+      }
+    }
+  ],
+  "proofs": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\ao-candidate\\validation.json": "792f755ddd1876854dfdfcdb97154005ad6639c3a8add93e0084dbd83ccc4e2c",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\ao-candidate\\bake-report.json": "2967f438c89ffa0383df0d7433ce5dce7f674ce093e03c6f6814cf9f81b9c3fd",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\ao-candidate\\bake.py": "d2b7bc339a590c5b99a3a8a3a1de3085a47d6e70ce886055d34b0af6a70b6e6c",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\ao-candidate\\verify.py": "1c7a3118c1c7ad427519c01c58a560aca441223cc557a7f8e7b32a2286a4d026",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\ao-candidate\\gpu-comparison.json": "cdc37cbe7f98ff58c4a799bfdfe93ca08043fbef21610f4c594673521a07c07c"
+  }
+}

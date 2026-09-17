@@ -1,0 +1,91 @@
+{
+  "date": "2026-09-17",
+  "status": "native_views_reviewed_with_scope_limits",
+  "levels": {
+    "wascitya": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascitya.fr3",
+      "sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0",
+      "preservation_checks": 163,
+      "installation": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascitya-installed.json",
+        "sha256": "1046d5e52ed46a105062bc7e171419d1de84062a9015cb0136ba5473921276d1"
+      }
+    },
+    "wascityb": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+      "sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d",
+      "preservation_checks": 163,
+      "installation": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascityb-installed.json",
+        "sha256": "1e06c65e03b380c975cd307a317b810c231f247147ca90e95ba321ea87647ab7"
+      }
+    }
+  },
+  "engine": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\runtime\\liquids-v3\\gk.exe",
+    "sha256": "0ec92fd44083db5fc15506f63eb26a15e278239ca5f92c6c7177e680c8f4f696"
+  },
+  "package": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\package-validation.json",
+    "sha256": "a8920ebb57d323db64f1b47352cc72de3a6c1968bf70cb6f86c76b6b43015be4"
+  },
+  "package_checks": 1068,
+  "audio": "Native callback logs that every stereo sample is cleared before playback.",
+  "captures": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-models-before-v1.png",
+      "sha256": "b8e48b84b1d08e6f41f0a61808aca0293ce3962443bf47d9a091b0df063c4e65",
+      "role": "Before new geometry; ENV textures already installed."
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-models-after-v2.png",
+      "sha256": "054948f324c624f05e71c0fd405719d98fddc679cab62d70adc1902de4e6d20a",
+      "role": "Final WCA, matching fixed camera; visibly curved narrow grasses and intact dry streets."
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-facade-seam-diagnostic.png",
+      "sha256": "aeb5be48c0b147128f05176759f771bd4c7d4ebbc0f947490b2af3f7dfbab971",
+      "role": "Rejected 001 facade inset seams; not an accepted result."
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-facade-seam-corrected-v2.png",
+      "sha256": "1579b61178f29de77166d3b1e9c677d735a170276467cb09ef31f7b2a1a4868b",
+      "role": "Final WCB, same diagnostic camera; dark inset bands absent, window openings and adjoining market/coast retained."
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-small-cactus-native-v1.png",
+      "sha256": "afc62755c537b5fb8f7e501346474d076e4c58cee236b6b4b1ba006b30c8ec4f",
+      "role": "Native small cacti and grasses from 001; exact same vegetation patch SHA retained in 002. Large branching cactus remains original."
+    }
+  ],
+  "observations": [
+    "Both WCA and WCB loaded and produced native screenshots on the final packaged runtime.",
+    "Facade dark bands rejected in 001 are absent at the inspected WCB angle after restoring continuous wall panels.",
+    "New roof coping is a restrained improvement; this is not a complete building reconstruction.",
+    "New grasses change silhouettes at gameplay distance; small cactus cushions and flower petals are visible in volume.",
+    "Existing glass and openings were not filled; no new populated interiors are claimed.",
+    "Jak contact callback appears in the final runtime log; separate GPU report validates anchored roots and bounded recovery.",
+    "Final camera restored to cam-string and normal wascitya-seem start, with game left running muted."
+  ],
+  "short_update_rate_sample": {
+    "method": "Two read-only GOAL real-frame-clock integral counters and __read-ee-timer, 300 MHz.",
+    "frames": [
+      304285,
+      305849
+    ],
+    "ticks": [
+      22773072000,
+      30597770400
+    ],
+    "seconds": 26.082328,
+    "updates_per_second": 59.96397254110139,
+    "limit": "One stationary WCB view on RTX 3080 Ti; not GPU frame-time, 1% lows, or a whole-city benchmark."
+  },
+  "limitations": [
+    "Screenshots are observed views, not every building angle, collision or gameplay route.",
+    "Grass native placements use the developer REPL; full manual traversal and NPC contact are not validated.",
+    "Large branching cacti, complete houses, moving doors, interiors and remaining city flames are unfinished.",
+    "Known screenshot OpenGL warning can occur while valid PNGs are written.",
+    "The whole city, arena, desert and vehicles remain ongoing work."
+  ]
+}

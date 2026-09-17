@@ -1,0 +1,435 @@
+{
+  "status": "installed",
+  "object": "effect-control",
+  "object_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\effect-control.o",
+  "object_sha256": "be826db9d70e7c32b8271b53af979ba139c8f9de12c7f55df3556301f425cfcc",
+  "compiled_from": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\obj\\effect-control.o",
+  "source_manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\source-manifest.json",
+  "source_manifest_sha256": "eeb00cecae96d1fdbc15ac746da560e6207b59aa8ddf3ce4262565d94cac34b0",
+  "surface_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\surface-validation.json",
+  "surface_validation_sha256": "f3bb878ecca308fe90e03129188c1a01ce7cd381b35e22ed86acb8ad80e770c7",
+  "routes": {
+    "arena": {
+      "scene": "arena",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\routes\\remaster\\arena\\GAME.CGO",
+      "baseline": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\before\\routes\\arena\\GAME.CGO",
+      "baseline_sha256": "dfe44d6452e6079fd961c19044495a2fec98f9d2489abaec4fea1447e2fc288f",
+      "candidate": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\arena\\GAME.CGO",
+      "output_sha256": "302a04d9ce93f6b6199c70eb6f2896073585bee42ff9020d75316f95bc6948aa",
+      "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\arena\\preservation.json",
+      "preservation_sha256": "b45291def71377d21de7a14610e8047d7cb5bbb637492888e446eb0fcce6bc3f",
+      "preserved_objects": 489
+    },
+    "palace": {
+      "scene": "palace",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\routes\\remaster\\palace\\GAME.CGO",
+      "baseline": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\before\\routes\\palace\\GAME.CGO",
+      "baseline_sha256": "5aa47d7ad847d6f407a261e0fbc93d353f625d8748f2cae3119584a63a94bce5",
+      "candidate": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\palace\\GAME.CGO",
+      "output_sha256": "46a935bc05832c2908a2b59c3bb91cbd3a15a0d8d4893e3f083b92d16897e6cb",
+      "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\palace\\preservation.json",
+      "preservation_sha256": "4e6c15b167ff21e013fb50f048dde8ba1dec649c47804ded4f3c1499415827b1",
+      "preserved_objects": 489
+    }
+  },
+  "protected_files": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\tfrag3.vert",
+      "sha256": "c2aaa5499653847d0fd844047b3d4366e86a4b9b3890721f3168ea564490c1d8"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\tfrag3.frag",
+      "sha256": "d600e108c356b068a413dc88f623f9ad4f5e9e2a450e9f52072235be2de5d2d6"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\tie_wind.vert",
+      "sha256": "6d4ddb26bb3ed25a098b4bf3abfa0f2ffa09228a5f941f2e02848df8ec21333b"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\tie_wind.frag",
+      "sha256": "1a9caa45bbf185cd8c618721a632d90fd173dcca0ea3e7853b456a7e76dbd795"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\etie_base.vert",
+      "sha256": "054459f98c46f97ac35dff4d244eb906d10490dc3637db57026b523416a9db3a"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\etie_base.frag",
+      "sha256": "cad2dd61b0912adeb7e64dafb50604ae344ede00c6544047372df07a81565188"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wasstada.fr3",
+      "sha256": "f5d8eee7ad6a5fea31a506742b732f3c3108e6de0ccfb4aec73d0c162dfb38bc"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wasstadb.fr3",
+      "sha256": "b67dc5f810d63e04ac82cecb323d265cb9c7fc550a3d8338a83a7c37aaa659b3"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\iso\\WASSTADA.DGO",
+      "sha256": "1b379514243f9427942e1de7d04dd5910d7a2837ec4a04ae6bb537948af6b27c"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\game.fr3",
+      "sha256": "55d58e54f61f10915762cbb64883e82eceaa79eb301985e201007363b88d5f9e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\waspala.fr3",
+      "sha256": "51d62e1aaf7d8bb1b6416fff53d65009b67a41117a38f0b02c9bec7e58169798"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\iso\\WASPALA.DGO",
+      "sha256": "3032aba716fb1e2ec7bbf9154a974050b4f980117a9ecae133800ffd6cbc7ef1"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\generic.frag",
+      "sha256": "397e10eb8af935cfed798083b3281c72159bf2db1a0b1e657968eca89e076f2d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\merc2.frag",
+      "sha256": "470f0021712038ebfd219fd86580e02e2c4e66b28db6ccf5d0c1c0cae7a03c78"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\liquid_bloom.vert",
+      "sha256": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\liquid_bloom.frag",
+      "sha256": "f8013fbf011f8c87b31440db1fb7b2a95ea7e8fc20f78ed0fecd64254296526b"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\water_spray.vert",
+      "sha256": "63ff9703df127edfe28a1946c375c0804dc67c49762751290875854fc290ea83"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\water_spray.frag",
+      "sha256": "b07c50469e8eae472ce96c62a038c382e07a9e2a6187cc75a39296ffc9e3c158"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fountain.vert",
+      "sha256": "c08189a38d7ecd758cc7a54a16042f7cee7fc13a53016457d8cf1c18b9cb3b73"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fountain.frag",
+      "sha256": "2977c62989b42957efe4d820d7f719a3d72265d1ae30aacd78f14b96e49e44ce"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\merc2.vert",
+      "sha256": "221e53e08688b47d3e948862a809a95e70d1328fdd35f6ca7f62935c5727b59d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\palace-shore.bin",
+      "sha256": "5363dddebcbbfdb72aff086251a84a0f4faf92b923afaa29c34e4cef545235e3"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\palace_fire.vert",
+      "sha256": "2f9e487ac6518f5c1086935ec4dd2e99c9868aa2c0407a81446ae1e377d04d6e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\palace_fire.frag",
+      "sha256": "10bebabc63e4c76191b4dd61fd213c8fbe0ebfe37d50cbd5e133647c8dcbf84d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fire_lighting.vert",
+      "sha256": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fire_lighting.frag",
+      "sha256": "de8a6e5f3024a98b6e353d749d9454f4fdbccf3c0ac2c6aa63a51c5509a8c11d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fire_embers.vert",
+      "sha256": "8461b8a241e3698a57a3fb2e781e6a8759c291628f9cb99999d92f5b554e5849"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\fire_embers.frag",
+      "sha256": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "sha256": "c668b80c1134563be34e1bb485c5b86bef9395ff310ef0b9fb21b801b19e2fb2"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\shrub.frag",
+      "sha256": "355f3ef104f53cda38d92f360da6d9fc5ae1fc4518037d37f4a7b9dce3e2f133"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\ocean_common.frag",
+      "sha256": "846eafb04b3383f179bfcef1febbc7490e2641da6bbc217b03c077f2db7c47cb"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\direct_basic_textured.frag",
+      "sha256": "9ec92cb43d9f7fa8b7a3c8949b4c6d8fe7481e067a5e35ca10ec7a6d9a3116b7"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\modern_ocean_surface.vert",
+      "sha256": "77f7ca90c3c75e19504cee97f27b84642caf72672aa3074b3a167638d1d174d9"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\modern_ocean_surface.frag",
+      "sha256": "25e4cfb4bdf999149262742f37f8b15dfd0619da2d9d28fa830acaf1488afe36"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\ocean_underwater.vert",
+      "sha256": "88459cbc1824b6cf6a65dbc9fd8654122a92524a7c3bb099045971ad5bc15d2a"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\ocean_underwater.frag",
+      "sha256": "6defbd695e915b679d1eb2e044e69ba202b7bcdddcacad61fca11bb616acb631"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\coast_spray.vert",
+      "sha256": "8e1a147ba5a2473ffb82763ac0ef62140c15dccce352f3ff7a88a1788410c966"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\coast_spray.frag",
+      "sha256": "0aec0a3b972d04455979c341af9ae4d79ef5cf51c833338ef646a6bf750e4310"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\coast_breaker.vert",
+      "sha256": "a367d8337cf2d4ab12f988917766645bf9f17c8d759290bbc182b4fd8a589031"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\coast_breaker.frag",
+      "sha256": "3fd5297a3aff3a803068d1322a713f1d134af994d2ae4d76e922bbe04dc5341c"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\market_fruit.vert",
+      "sha256": "e996f54e8f1e58c44802e02877256a7ef614feaaccb60829955db70044e84909"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\market_fruit.frag",
+      "sha256": "b21052b88e7f4380a41ce8e365ba691d3932a60d861c0980819c15b97ac1c4ec"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascitya.fr3",
+      "sha256": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascityb.fr3",
+      "sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\iso\\WWD.DGO",
+      "sha256": "4c8b0bb2e4c2624aae55f3202c6a12150c7c0c392a32740981da46fc37c4b964"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.vert",
+      "sha256": "2251b30b504235511d135f15da95733d460c82ff38934611e113112f6b801564"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.frag",
+      "sha256": "2ee2a4cbd428052219acc1ee6939db1fc574f7e921e473a46b374644b1061457"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\waswide.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\tfrag3.vert",
+      "sha256": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\tfrag3.frag",
+      "sha256": "1b9a62b9de8b7b99ec5145aa6c82d81039c27faeba82a9ca9263b75600654b3c"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\tie_wind.vert",
+      "sha256": "09a3ad03ec26b002725ebf306a94a992b341ad2d4f3ecb8728333a10ec026f48"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\tie_wind.frag",
+      "sha256": "3f4582f1b67f52c3a9327347324a6933a6b480107a72f9b9c2764d2ec320a5df"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\etie_base.vert",
+      "sha256": "16a419c50231c0cfe95efff4eb5f73e9ce7bd3799d7d61e7a065e1d67f3c9e9a"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\etie_base.frag",
+      "sha256": "9fde7abda1c4e5fa8e2720d90ff6cf06be837f69c3f7b32fff70fa46fe1dda69"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wasstada.fr3",
+      "sha256": "8ae3e3eced3de8643aeafafa86400af3611f353a3ecf4479dd5928128870cd2b"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wasstadb.fr3",
+      "sha256": "40acb458edfa04ad4746268595012410a1345df454e1c8b55adaa003d908333c"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\iso\\WASSTADA.DGO",
+      "sha256": "892d8191e25ee10ca762cbe12e82be7818cce1ad560bafdf3834f80814cb102f"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\game.fr3",
+      "sha256": "55d58e54f61f10915762cbb64883e82eceaa79eb301985e201007363b88d5f9e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\waspala.fr3",
+      "sha256": "51d62e1aaf7d8bb1b6416fff53d65009b67a41117a38f0b02c9bec7e58169798"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\iso\\WASPALA.DGO",
+      "sha256": "3032aba716fb1e2ec7bbf9154a974050b4f980117a9ecae133800ffd6cbc7ef1"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\generic.frag",
+      "sha256": "397e10eb8af935cfed798083b3281c72159bf2db1a0b1e657968eca89e076f2d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\merc2.frag",
+      "sha256": "470f0021712038ebfd219fd86580e02e2c4e66b28db6ccf5d0c1c0cae7a03c78"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\liquid_bloom.vert",
+      "sha256": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\liquid_bloom.frag",
+      "sha256": "f8013fbf011f8c87b31440db1fb7b2a95ea7e8fc20f78ed0fecd64254296526b"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\water_spray.vert",
+      "sha256": "63ff9703df127edfe28a1946c375c0804dc67c49762751290875854fc290ea83"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\water_spray.frag",
+      "sha256": "b07c50469e8eae472ce96c62a038c382e07a9e2a6187cc75a39296ffc9e3c158"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fountain.vert",
+      "sha256": "c08189a38d7ecd758cc7a54a16042f7cee7fc13a53016457d8cf1c18b9cb3b73"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fountain.frag",
+      "sha256": "2977c62989b42957efe4d820d7f719a3d72265d1ae30aacd78f14b96e49e44ce"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\merc2.vert",
+      "sha256": "221e53e08688b47d3e948862a809a95e70d1328fdd35f6ca7f62935c5727b59d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\palace-shore.bin",
+      "sha256": "5363dddebcbbfdb72aff086251a84a0f4faf92b923afaa29c34e4cef545235e3"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\palace_fire.vert",
+      "sha256": "2f9e487ac6518f5c1086935ec4dd2e99c9868aa2c0407a81446ae1e377d04d6e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\palace_fire.frag",
+      "sha256": "10bebabc63e4c76191b4dd61fd213c8fbe0ebfe37d50cbd5e133647c8dcbf84d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fire_lighting.vert",
+      "sha256": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fire_lighting.frag",
+      "sha256": "de8a6e5f3024a98b6e353d749d9454f4fdbccf3c0ac2c6aa63a51c5509a8c11d"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fire_embers.vert",
+      "sha256": "8461b8a241e3698a57a3fb2e781e6a8759c291628f9cb99999d92f5b554e5849"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\fire_embers.frag",
+      "sha256": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "sha256": "c668b80c1134563be34e1bb485c5b86bef9395ff310ef0b9fb21b801b19e2fb2"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\shrub.frag",
+      "sha256": "355f3ef104f53cda38d92f360da6d9fc5ae1fc4518037d37f4a7b9dce3e2f133"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\ocean_common.frag",
+      "sha256": "846eafb04b3383f179bfcef1febbc7490e2641da6bbc217b03c077f2db7c47cb"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\direct_basic_textured.frag",
+      "sha256": "9ec92cb43d9f7fa8b7a3c8949b4c6d8fe7481e067a5e35ca10ec7a6d9a3116b7"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\modern_ocean_surface.vert",
+      "sha256": "77f7ca90c3c75e19504cee97f27b84642caf72672aa3074b3a167638d1d174d9"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\modern_ocean_surface.frag",
+      "sha256": "25e4cfb4bdf999149262742f37f8b15dfd0619da2d9d28fa830acaf1488afe36"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\ocean_underwater.vert",
+      "sha256": "88459cbc1824b6cf6a65dbc9fd8654122a92524a7c3bb099045971ad5bc15d2a"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\ocean_underwater.frag",
+      "sha256": "6defbd695e915b679d1eb2e044e69ba202b7bcdddcacad61fca11bb616acb631"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\coast_spray.vert",
+      "sha256": "8e1a147ba5a2473ffb82763ac0ef62140c15dccce352f3ff7a88a1788410c966"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\coast_spray.frag",
+      "sha256": "0aec0a3b972d04455979c341af9ae4d79ef5cf51c833338ef646a6bf750e4310"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\coast_breaker.vert",
+      "sha256": "a367d8337cf2d4ab12f988917766645bf9f17c8d759290bbc182b4fd8a589031"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\coast_breaker.frag",
+      "sha256": "3fd5297a3aff3a803068d1322a713f1d134af994d2ae4d76e922bbe04dc5341c"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\market_fruit.vert",
+      "sha256": "e996f54e8f1e58c44802e02877256a7ef614feaaccb60829955db70044e84909"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\market_fruit.frag",
+      "sha256": "b21052b88e7f4380a41ce8e365ba691d3932a60d861c0980819c15b97ac1c4ec"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascitya.fr3",
+      "sha256": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascityb.fr3",
+      "sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\iso\\WWD.DGO",
+      "sha256": "4c8b0bb2e4c2624aae55f3202c6a12150c7c0c392a32740981da46fc37c4b964"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.vert",
+      "sha256": "2251b30b504235511d135f15da95733d460c82ff38934611e113112f6b801564"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.frag",
+      "sha256": "2ee2a4cbd428052219acc1ee6939db1fc574f7e921e473a46b374644b1061457"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\waswide.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\routes\\arena\\GAME.CGO",
+      "sha256": "28f288666a458ddb518c1b84551a09b0dc560829e504194e932d9fc99fff4d1f"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\routes\\palace\\GAME.CGO",
+      "sha256": "f722cfe605581016b4174b212824f4c8a7dc97e7f858689bc3c4dace89a60759"
+    }
+  ],
+  "runtime_before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\runtime-before.json",
+  "runtime_before_sha256": "b006f6dceff2e8ea0e1e413d8614c720a1b0a6cfa3b196e90b792acb5dced303",
+  "runtime_after": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\staging\\effect-control-be826db9d70e7c32\\runtime-after.json",
+  "runtime_after_sha256": "49f90beb7e24ef5bb58ea6464996c5bcff25ed8a3d545c8546d58b5ff34a7a91",
+  "applied_scene": "palace",
+  "native_visual_validation": false
+}

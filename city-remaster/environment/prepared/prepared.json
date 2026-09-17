@@ -1,0 +1,1225 @@
+{
+  "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\generated-materials.json",
+  "manifest_sha256": "a49097b07c278f7eaf3f730fc6034f98a343ba608dde844efbedfcf491837b3f",
+  "conversion": "Unchanged RGB pixels; constant native opaque alpha128",
+  "materials": [
+    {
+      "name": "wascity-ground-01",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ground-01.rgba",
+      "rgba_sha256": "a987af69558400ecf4f8414677cba334ceb435a5977e02f82f58365b49bb87a8",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ground-01.png",
+      "master_sha256": "bbaf29017dfd0e5f7bb5fa850c8f0a1606206ad1177c2042800815abf498ec19",
+      "rgb_sha256": "4e54e61dfad486c073010e0d9691a353cb19d2c7915e4badd6d839a34875fd90",
+      "mean_rgb": [
+        143.5994425493922,
+        128.94663074970302,
+        104.60685869015005
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-01.png",
+          "pixels_sha256": "d6e41ce87dfa28a91127abc14e32224702f02a59f2f16defc22b28fd3fc67821"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-01.png",
+          "pixels_sha256": "d6e41ce87dfa28a91127abc14e32224702f02a59f2f16defc22b28fd3fc67821"
+        },
+        {
+          "page": "waswide-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waswide-vis-shrub\\wascity-ground-01.png",
+          "pixels_sha256": "a2f3a1a18372e13c98382014c4cdb0f4f4aa070e3fc37995328c3d2a15ccc89c"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ground-01",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-1359359f-7945-4fb4-81d7-1da46d998925.png",
+        "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: compact sandy limestone ground, fine pale mineral gravel and embedded irregular worn chips, shallow compacted dusty patches; no paving or bricks. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+      },
+      "generated_file_sha256": "bbaf29017dfd0e5f7bb5fa850c8f0a1606206ad1177c2042800815abf498ec19"
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-01",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-stucco-wall-bleached-01.rgba",
+      "rgba_sha256": "753524d7bf770f43e237152880d8349b0d9233cbefc1ab514b2efed734f8d0cd",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-stucco-wall-bleached-01.png",
+      "master_sha256": "a20c57248fc742634203c20d7b82c8eacbaafbdfb76fe0c3ba64f7f36c209c7b",
+      "rgb_sha256": "ca9e264e5ecbf4a36d2a19e8bbd81351175535c6767dc71ca59beef6175ca538",
+      "mean_rgb": [
+        162.9014744524062,
+        159.1682927232537,
+        143.9790844735443
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-01.png",
+          "pixels_sha256": "c416646d92efa427e27031b736a967be9489670bd9badf843d43ccc2cf4f51c0"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-01.png",
+          "pixels_sha256": "c416646d92efa427e27031b736a967be9489670bd9badf843d43ccc2cf4f51c0"
+        }
+      ],
+      "generation": {
+        "name": "wascity-stucco-wall-bleached-01",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-8519b291-0b6e-41b9-bc59-69ac827439f7.png",
+        "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: sun bleached lime plaster for buildings, layers of age worn plaster and tiny porous chips, warm grey-beige plaster underneath pale chalk surface; coherent broad peeling shapes matching original, avoid random spots. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+      },
+      "generated_file_sha256": "a20c57248fc742634203c20d7b82c8eacbaafbdfb76fe0c3ba64f7f36c209c7b"
+    },
+    {
+      "name": "wascity-ocean-shore-rocks",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ocean-shore-rocks.rgba",
+      "rgba_sha256": "07eae140446cf1f560e4e6df27cc2fd1ba39aadd5fcb5887c034b90e5d495f2b",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ocean-shore-rocks.png",
+      "master_sha256": "7301fb536596a71b0ba6ca20133005929dab814f2bfbc757668017c3c115b491",
+      "rgb_sha256": "dba275538b5f19a7190ed0e8eec77ccc930ec58c1b7bbcbdaccbbdba8fc8f290",
+      "mean_rgb": [
+        165.5365287221243,
+        120.6882543643435,
+        70.80703344194907
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ocean-shore-rocks.png",
+          "pixels_sha256": "5848915a2d8d7c82646263f0b7f78e5ec9be586b90e068a40d05186b8a054580"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ocean-shore-rocks",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-11ab37a4-2a72-41a1-9b6e-bb63b128d614.png",
+        "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: naturally fractured sandstone coastal cliff, preserve the vertical layered masses and fissures in the source, worn rounded strata with detailed grain and occasional small horizontal weathering cracks; not man-made masonry. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+      },
+      "generated_file_sha256": "7301fb536596a71b0ba6ca20133005929dab814f2bfbc757668017c3c115b491"
+    },
+    {
+      "name": "wascitya-stone-top",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascitya-stone-top.rgba",
+      "rgba_sha256": "ab3e961e196246a58422f08aeca3e7215221090ee35f05c35cc74a924c50e60e",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascitya-stone-top.png",
+      "master_sha256": "7ce3f665cb28f1ae012a2a6c1f6d9a0a05590abbf03bdf3d69f786e70a6b1160",
+      "rgb_sha256": "0acb84151ceea155f3d50153186f3e21115ea22cd5aff10f711e3cc1d9b10991",
+      "mean_rgb": [
+        137.66988189627324,
+        132.94886029776487,
+        107.63834390238318
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-top.png",
+          "pixels_sha256": "0a5a31c2e269e498c36098d78186634bb7c0b596fa6f15473be75081607439a6"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        }
+      ],
+      "generation": {
+        "name": "wascitya-stone-top",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-56a3796f-2112-4d31-9928-1eef2db0210a.png",
+        "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: flat exposed limestone bedrock top, preserve the broad irregular cracks and muted dusty grey-beige pale greenish original hue, intricate shallow chips along the existing fissures, compact mineral grain; no separate invented bricks. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+      },
+      "generated_file_sha256": "7ce3f665cb28f1ae012a2a6c1f6d9a0a05590abbf03bdf3d69f786e70a6b1160"
+    },
+    {
+      "name": "wascity-rock-small",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-rock-small.rgba",
+      "rgba_sha256": "5222c3602956bd759c8cd3832263cc0e7b8bd5fcd5a20c3ed280b970eb0ae7bc",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-rock-small.png",
+      "master_sha256": "ac28664a1a4e939d5897eb972ee1825868d03bf3e5b385b1c9f4d88b9298aece",
+      "rgb_sha256": "f4938194302b7650c26d156684ee6a1a948f9065322f7d80422457604f0c6b3b",
+      "mean_rgb": [
+        148.7241935853117,
+        102.34661714093848,
+        72.44671341976806
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-rock-small.png",
+          "pixels_sha256": "b6807999d17db9fb2d463e27140535b00b4ce73137834dea358f51ecb47976c2"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-rock-small.png",
+          "pixels_sha256": "bcdeb5600e8e37b3aeb2002a3065a472006c3f140548eda15fa166ae21ed7b91"
+        }
+      ],
+      "generation": {
+        "name": "wascity-rock-small",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-3b2a961d-264e-417d-8b6e-3adee2e79782.png",
+        "prompt": "Edit the exact attached Jak 3 texture into a high-resolution 2048x2048 faithful remaster game albedo: weathered warm sandstone rock albedo, preserve source muted brown-pink sandy coloration and its big shapes, clearer naturally eroded shallow ridges and fine mineral inclusions; not masonry or polished stone. Preserve EXACT original dominant hue, average brightness, contrast balance, broad pattern positions, tiling and UV layout. It must look visibly much more detailed and convincingly material at normal game distance, while retaining the slightly animated hand-crafted Jak 3 art direction. Texture fills frame orthographic, flat diffuse evenly lit, seamless edges where source is seamless. Detailed physical surface but no photoreal scene or composition, no dramatic shadows, no directional illumination, no labels or borders. Do not recolour, do not add unrelated paving patterns. Preserve the identity of this specific material rather than replacing it with a generic material."
+      },
+      "generated_file_sha256": "ac28664a1a4e939d5897eb972ee1825868d03bf3e5b385b1c9f4d88b9298aece"
+    },
+    {
+      "name": "wascitya-stone-bottom",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascitya-stone-bottom.rgba",
+      "rgba_sha256": "1d09e5a5cb577b5de38cdf3a6ce572629318fc2cb1cc57b0e5572c08641b7eb9",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascitya-stone-bottom.png",
+      "master_sha256": "655bf842eea3fc5f27b0ae997264823c15fd0e49bd7ed7b96599fdcc0a19f957",
+      "rgb_sha256": "4c9bb329ca0962bdf2b28b02cf3358afc76eae7f854d0444924b5b78aff2b317",
+      "mean_rgb": [
+        123.46205253237487,
+        111.31641077101918,
+        80.28007409781522
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-bottom.png",
+          "pixels_sha256": "e805bb07a98bd9ddf254923855b8033b4fdb971efb8d6ba6056ed11906352077"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascitya-stone-bottom.png",
+          "pixels_sha256": "e805bb07a98bd9ddf254923855b8033b4fdb971efb8d6ba6056ed11906352077"
+        }
+      ],
+      "generation": {
+        "name": "wascitya-stone-bottom",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-03925fdc-c7af-4177-87e3-ccb56420594f.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Preserve upper olive grey worn plaster and bottom part chunky stone foundation, EXACT original horizontal transition height and masonry layout. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "655bf842eea3fc5f27b0ae997264823c15fd0e49bd7ed7b96599fdcc0a19f957"
+    },
+    {
+      "name": "wascity-cement-road",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-cement-road.rgba",
+      "rgba_sha256": "815fb4165db78f512738a5b65cf040980b968ec8a6317460d6829feb972ede07",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-cement-road.png",
+      "master_sha256": "b1d2c25033259dc2fb7daf7ec3712d0170bcbad5452d90ecdcdc6a5776aff043",
+      "rgb_sha256": "8174efc5127d025bd230f65f3121801b5a95b079f4ffdc787f2ff6e9f4a31cf7",
+      "mean_rgb": [
+        102.23204279002566,
+        94.24025192748437,
+        82.13825805270025
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-cement-road.png",
+          "pixels_sha256": "eda4f2b315dd9d5afddcfa614f6d60639706f1b86cff78a68aa22abd5c092d3a"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-cement-road.png",
+          "pixels_sha256": "eda4f2b315dd9d5afddcfa614f6d60639706f1b86cff78a68aa22abd5c092d3a"
+        },
+        {
+          "page": "waswide-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waswide-vis-tfrag\\wascity-cement-road.png",
+          "pixels_sha256": "8b8eb84e10fc357e46066408deaa909de81889cdbf6d48716dc0948ff1cada1f"
+        }
+      ],
+      "generation": {
+        "name": "wascity-cement-road",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ed67ca49-be8c-4110-8333-c85386834d14.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Muted dark warm grey worn compact cement road with sandy aggregate, scuffed irregular ground wear. Not tile pavement. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "b1d2c25033259dc2fb7daf7ec3712d0170bcbad5452d90ecdcdc6a5776aff043"
+    },
+    {
+      "name": "wascity-stonewall-bricks",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-stonewall-bricks.rgba",
+      "rgba_sha256": "ca15419e5d07253fe745f5197328b682e9d8e089335ec2070a52fe525a52958d",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-stonewall-bricks.png",
+      "master_sha256": "eeba96e478590f4eeff4d51b482174c9d23ea60316138d0896f32a4432ad7f50",
+      "rgb_sha256": "e7cb5cb0c1e004bbf2ddf2b756c9d6839c3da8d6e9d60b8c540da0aba153ce68",
+      "mean_rgb": [
+        114.43310529113853,
+        111.21200865364804,
+        92.98700998908755
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stonewall-bricks.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stonewall-bricks.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        }
+      ],
+      "generation": {
+        "name": "wascity-stonewall-bricks",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-c6b65958-4dd9-47a1-9e18-ecb1d17fba14.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Chunky uneven grey olive limestone masonry preserving exact original brick course layout, more convincing softened edges, shallow mortar and mineral grain. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "eeba96e478590f4eeff4d51b482174c9d23ea60316138d0896f32a4432ad7f50"
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-2-bricks-01",
+      "width": 1774,
+      "height": 887,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-stucco-wall-bleached-2-bricks-01.rgba",
+      "rgba_sha256": "5e976ea17d13d1bc0c301edb7ff017996f4116905a28145cfd89e4c05d2f0305",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-stucco-wall-bleached-2-bricks-01.png",
+      "master_sha256": "22fdfc33767007af38c4e5367bbc1fb8f972d5dba6dda50d80af5f214d109ade",
+      "rgb_sha256": "59b98ea383dc08f063e2dc5e972f1cda00ca389078e5b6ef114b02fff8c19eb3",
+      "mean_rgb": [
+        138.68202483829435,
+        134.62366717549878,
+        121.20543895349206
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-2-bricks-01.png",
+          "pixels_sha256": "6e445b20c7bee2b60ead978e2b7d7fa6076de4c190bc288ac5ded6469e011ab9"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-2-bricks-01.png",
+          "pixels_sha256": "6e445b20c7bee2b60ead978e2b7d7fa6076de4c190bc288ac5ded6469e011ab9"
+        }
+      ],
+      "generation": {
+        "name": "wascity-stucco-wall-bleached-2-bricks-01",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-85e6f4a9-dfda-4708-95c0-514f8ee8e0a8.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Wide landscape 2:1 texture. Preserve upper quarter pale peeling plaster and darker grey limestone courses below EXACT original transition and UV placement. Match original aspect 2:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "22fdfc33767007af38c4e5367bbc1fb8f972d5dba6dda50d80af5f214d109ade"
+    },
+    {
+      "name": "wascity-roof-1",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-roof-1.rgba",
+      "rgba_sha256": "2999dbf73a25ab55e17521f89871607ac3bf943d40318b352f8149289cdc3e9b",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-roof-1.png",
+      "master_sha256": "d4e552a6c57ef911b588d7194ea09e5d7f35e38644c306914fc1da06b1ed0bcd",
+      "rgb_sha256": "74c63bea95183ef681c536269e3a9876223a30dbb4964fb29f425701b9cfd794",
+      "mean_rgb": [
+        95.7470734796975,
+        84.13105558226435,
+        61.69905806999738
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-roof-1.png",
+          "pixels_sha256": "1588d8ae1e6374aa29228f5929b6f6af063fc597a8b2f4d0c099d43fe839c2cd"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-roof-1.png",
+          "pixels_sha256": "676951009afb4f9082783d5c8eb128c59494fc5d05cf2344634e4e2efc7a8b9d"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-roof-1.png",
+          "pixels_sha256": "1588d8ae1e6374aa29228f5929b6f6af063fc597a8b2f4d0c099d43fe839c2cd"
+        }
+      ],
+      "generation": {
+        "name": "wascity-roof-1",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-b92b7a4d-b4f8-4344-b154-8f7c468b9635.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Preserve original long corrugated metallic ribs and faded ochre/rust/green weathered metal exactly, stronger material structure and moderate authentic wear. Match original aspect 1:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "d4e552a6c57ef911b588d7194ea09e5d7f35e38644c306914fc1da06b1ed0bcd"
+    },
+    {
+      "name": "wascity-ground2ocean-shore-rocks",
+      "width": 1774,
+      "height": 887,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ground2ocean-shore-rocks.rgba",
+      "rgba_sha256": "e969a6e256691c1bd49c7843af8dfef4a1c274a5e647a8aa4c852369b5c6e10f",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ground2ocean-shore-rocks.png",
+      "master_sha256": "31123bc96d1b914d28ce80921e4bb7da4d235097de7017bc7cfda846ad40347d",
+      "rgb_sha256": "4847fd678cc58acea955ecd4a7b17ddee027b2b564aa4f826dbf17054f2d9a47",
+      "mean_rgb": [
+        166.6496163422809,
+        125.61367694965104,
+        79.56588147219831
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground2ocean-shore-rocks.png",
+          "pixels_sha256": "31600a5427e89f94accae63f709efd74044f83a59e33a197e41528fe7035bd4f"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ground2ocean-shore-rocks",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-59c8831c-8c69-4a43-8bb5-10a93faa89a9.png",
+        "prompt": "Use case: style-transfer. Edit the attached exact Jak 3 game texture into a faithful high resolution modern game diffuse material. Wide landscape 2:1 texture. Coastal sandstone with narrow pale grey ground strip along upper edge at EXACT original position. Lower golden eroded vertical coastal sandstone should match high-detail original material. Match original aspect 2:1. Preserve EXACT original hue, average brightness, broad shapes, UV composition and edge tiling. Make realistic material structures visible from normal gameplay, with the slightly animated handmade Jak 3 art direction. Orthographic evenly lit albedo filling entire image, no directional light or dramatic shadows, no new objects, no text, no labels, no border. Do not turn natural material into artificial paving. Increase detail and tactile form with restrained contrast."
+      },
+      "generated_file_sha256": "31123bc96d1b914d28ce80921e4bb7da4d235097de7017bc7cfda846ad40347d"
+    },
+    {
+      "name": "city-slum-burning-can",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\city-slum-burning-can.rgba",
+      "rgba_sha256": "8f5f85fb121f3bf2c73d1213866041f099bb511b763a791c8c86934a9fe1bbae",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\city-slum-burning-can.png",
+      "master_sha256": "9fdfacace8548dc4681b0552028a0a0e328f6b24d61874bda0fbad08c0982a79",
+      "rgb_sha256": "3f50e35d45cd7a33865f91a8e3e65c3522270eaff5460674d9fca9b70a54e5aa",
+      "mean_rgb": [
+        90.54825388104159,
+        91.96969951339128,
+        81.28421777584457
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\city-slum-burning-can.png",
+          "pixels_sha256": "21555cd6dcdd5798f17b7f03894b28a0bb946d2b827a94be8af9c54f73217bd6"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\city-slum-burning-can.png",
+          "pixels_sha256": "21555cd6dcdd5798f17b7f03894b28a0bb946d2b827a94be8af9c54f73217bd6"
+        }
+      ],
+      "generation": {
+        "name": "city-slum-burning-can",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ce14cc77-7bb4-47ad-9702-d71b0a3b4709.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Olive grey aged corrugated structural metal bands, keep exact broad ribs placement and palette. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "9fdfacace8548dc4681b0552028a0a0e328f6b24d61874bda0fbad08c0982a79"
+    },
+    {
+      "name": "wascity-ditch-wall-top-to-ground",
+      "width": 1774,
+      "height": 887,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ditch-wall-top-to-ground.rgba",
+      "rgba_sha256": "3e6753e02ecd5caefb30cdb74bf53f42fed3ebd6e25aa04c1cd4ac9455165b53",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ditch-wall-top-to-ground.png",
+      "master_sha256": "fbdbe28f5e19de826301da67c0f0fe44fca73881b7ce6edb4454e7abe0cbaa37",
+      "rgb_sha256": "3223d732a89d782ce7ba40d1efdec81627e75eaa323ddfe24def00879ca3af35",
+      "mean_rgb": [
+        152.30989909363484,
+        113.04851487539544,
+        73.99259566658066
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "2fc8104e24cf9944dfd9944e2ad1d79a66f34fce769749d81c2c37977a52dff9"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "ab2e2a8bdf2dca43718ee1d524a54582268465e960617e14f1fdd0bd6bcd1b02"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "2fc8104e24cf9944dfd9944e2ad1d79a66f34fce769749d81c2c37977a52dff9"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "ab2e2a8bdf2dca43718ee1d524a54582268465e960617e14f1fdd0bd6bcd1b02"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ditch-wall-top-to-ground",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-92723d8d-7447-435e-8815-3d700b16d4cb.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Wide 2:1 transition texture. Keep EXACT upper and lower grey ground borders enclosing ochre layered sandstone strip, keep original border positions. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "fbdbe28f5e19de826301da67c0f0fe44fca73881b7ce6edb4454e7abe0cbaa37"
+    },
+    {
+      "name": "wascity-stone-plain-wall-3",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-stone-plain-wall-3.rgba",
+      "rgba_sha256": "77672557164f9fac7414ba5b8ab2c625fbb7684b1c7239db4515df3e0794d56a",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-stone-plain-wall-3.png",
+      "master_sha256": "4e5f65163467da258c2b60ae3e675954f4ddac79e998bcb484a5551d59b49e64",
+      "rgb_sha256": "b0c2ea59bb4ad8540786ed0651a18f0e9ec43213a86b1ab892efde9835377fa5",
+      "mean_rgb": [
+        148.23340748202244,
+        129.9956706322861,
+        90.55413808190187
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stone-plain-wall-3.png",
+          "pixels_sha256": "026f1401f9ae7d88088a08a15e7fdf75c6120ad472d4a79e95cb95cc6e1611d3"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stone-plain-wall-3.png",
+          "pixels_sha256": "026f1401f9ae7d88088a08a15e7fdf75c6120ad472d4a79e95cb95cc6e1611d3"
+        }
+      ],
+      "generation": {
+        "name": "wascity-stone-plain-wall-3",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-5c358e4a-285e-49c4-956b-888ec51dff6a.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Pale olive beige worn lime stucco stone wall with restrained original broad patches and shallow cracks. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "4e5f65163467da258c2b60ae3e675954f4ddac79e998bcb484a5551d59b49e64"
+    },
+    {
+      "name": "wascity-outerwall-metal",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-outerwall-metal.rgba",
+      "rgba_sha256": "2909a2b3ad6e5539860d9f8bd2146221d02170ccf692afebddf95efbf249d0fd",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-outerwall-metal.png",
+      "master_sha256": "b054f446387361fb640d62d31670e621385897c3d0bf92a76e6cd19dd6cd79dc",
+      "rgb_sha256": "7682be7020db62a9be806a4a8bf68796a452a9c9800264f03133bef4d8997c20",
+      "mean_rgb": [
+        86.81478217073784,
+        75.43149258894663,
+        55.72921674564837
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal.png",
+          "pixels_sha256": "58b55b8721f8c425e848201aa028928c8149ff63af519343e9d739e38d4a5fe2"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-outerwall-metal.png",
+          "pixels_sha256": "db5be10744585e4849e597c94977362db04815ef2cf2abc37ee6f1cd23e1208b"
+        }
+      ],
+      "generation": {
+        "name": "wascity-outerwall-metal",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-2638f76b-11bb-4959-a350-2764303698bc.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Metal city wall panel with diagonal X structural braces. Preserve EXACT geometry layout of X braces and rusty olive dark metal palette. Refine rivets and plate texture. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "b054f446387361fb640d62d31670e621385897c3d0bf92a76e6cd19dd6cd79dc"
+    },
+    {
+      "name": "wascity-outerwall-metal-b",
+      "width": 887,
+      "height": 1774,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-outerwall-metal-b.rgba",
+      "rgba_sha256": "a325c2972e2c1e4825bee851c2f86bc32ed21b40a8d42e1d957de6fac55c6090",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-outerwall-metal-b.png",
+      "master_sha256": "72f64cb8c5865e9aefa8c565656988fa9fe740804b2469f5f209cdbb150e100b",
+      "rgb_sha256": "9711bd9faaa9bd105a1dbfaecae91c4aea6bbb21ab0d56e713f6fc4069c5300b",
+      "mean_rgb": [
+        83.65064777590372,
+        70.03483551080431,
+        49.90792532496832
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "waswide-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waswide-vis-tfrag\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        }
+      ],
+      "generation": {
+        "name": "wascity-outerwall-metal-b",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-0221dfe6-7cd5-4eed-81f7-1fc80168d798.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Portrait 1:2 structural metal beam, preserve exact original geometry layout and edges, muted olive brown rusty iron. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "72f64cb8c5865e9aefa8c565656988fa9fe740804b2469f5f209cdbb150e100b"
+    },
+    {
+      "name": "wascity-metal-dirty",
+      "width": 1774,
+      "height": 887,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-metal-dirty.rgba",
+      "rgba_sha256": "986dc185feda5737a6703e0a4ab112e895c4ab5109f4624704f0607ecd394d25",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-metal-dirty.png",
+      "master_sha256": "279ea27e7d461e2ceb517cce2c3b7739f61cca742ab82abb09d213986ea14083",
+      "rgb_sha256": "5022cf1e7bcc71feff7d3df17a8e5ffb5015b76d677bfcf97bb560d1dcfdae55",
+      "mean_rgb": [
+        89.65971587594326,
+        88.08001077825892,
+        75.82333823523804
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        },
+        {
+          "page": "waswide-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waswide-vis-tfrag\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        }
+      ],
+      "generation": {
+        "name": "wascity-metal-dirty",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-4ac34d85-970b-4a03-918d-1dba5f425225.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Landscape 2:1 aged grey olive structure metal, restrained realistic abrasion. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "279ea27e7d461e2ceb517cce2c3b7739f61cca742ab82abb09d213986ea14083"
+    },
+    {
+      "name": "wascity-ground-2-ditch-03",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ground-2-ditch-03.rgba",
+      "rgba_sha256": "33e473ce5eb60a2dcb9e86711d8aa0fba0ec42ee2ee74210e25ce29b433e8651",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ground-2-ditch-03.png",
+      "master_sha256": "9425367d53ff0321bea81fff8c15036234af4985f1a623c5151b370a78199402",
+      "rgb_sha256": "bbb7fe98eca4b7b4d4222edf7966857bb97398484bfe9f24026b2ca3d3cfaf68",
+      "mean_rgb": [
+        150.63374681084326,
+        133.67272193096923,
+        106.9906983458356
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-03.png",
+          "pixels_sha256": "ef957b97449eb59e1a0c12e618121e840befa2a2671339053988abe7f7ecafd2"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-03.png",
+          "pixels_sha256": "ef957b97449eb59e1a0c12e618121e840befa2a2671339053988abe7f7ecafd2"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ground-2-ditch-03",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-d4b06eb9-cff9-46a5-8c3f-094d67baa896.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "9425367d53ff0321bea81fff8c15036234af4985f1a623c5151b370a78199402"
+    },
+    {
+      "name": "wascity-ground-2-ditch-04",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ground-2-ditch-04.rgba",
+      "rgba_sha256": "11999a3fe645c6ebbfdcf25eb876df163d9503488f7e6acee6180db9b4e8613e",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ground-2-ditch-04.png",
+      "master_sha256": "2a957896f8162d0d3aa205961e830989ba612ebddffb03aab03d83b277e38fff",
+      "rgb_sha256": "2add88cc97f926ef0bccb7d010163d9fdbb86638e30236266d9f845163ce40ff",
+      "mean_rgb": [
+        151.07981095263895,
+        136.4367173370573,
+        112.74467986335274
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-04.png",
+          "pixels_sha256": "26a2115b9a9e5a1f04b5204ca99d444ea9859baa24c38161423a3682daad0116"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-04.png",
+          "pixels_sha256": "26a2115b9a9e5a1f04b5204ca99d444ea9859baa24c38161423a3682daad0116"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ground-2-ditch-04",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-79fed2fb-2bca-486d-85b7-cbddfb32989d.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "2a957896f8162d0d3aa205961e830989ba612ebddffb03aab03d83b277e38fff"
+    },
+    {
+      "name": "wascity-ground-2-ditch-05",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-ground-2-ditch-05.rgba",
+      "rgba_sha256": "a16a45ec2c63e27e818e16666b0c2b789114bebebc015e0c592e0f06f6b7fa0f",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-ground-2-ditch-05.png",
+      "master_sha256": "63378fd5c4fe80d3525d2c9a9d17b0b09b077e11f276198e43285b082976d41a",
+      "rgb_sha256": "915dab37f1ffe291cda7f981c6bd2deeea6fde0d7e82750c09dd46b9b53c5426",
+      "mean_rgb": [
+        149.6239739373081,
+        136.5246751066444,
+        112.52673422718752
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-05.png",
+          "pixels_sha256": "e3cd6e7ce38a4dee02b10288241efe32157cde19af1ad9bb5b4402fc06c30e01"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-05.png",
+          "pixels_sha256": "e3cd6e7ce38a4dee02b10288241efe32157cde19af1ad9bb5b4402fc06c30e01"
+        }
+      ],
+      "generation": {
+        "name": "wascity-ground-2-ditch-05",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-edf8ca58-5acd-4e52-aeba-b1a4ae376d9d.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Compact grey beige sandy limestone ground transition. Preserve exact source border transitions and markings. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "63378fd5c4fe80d3525d2c9a9d17b0b09b077e11f276198e43285b082976d41a"
+    },
+    {
+      "name": "wascity-stone-bricks-2-plain",
+      "width": 1254,
+      "height": 1254,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-stone-bricks-2-plain.rgba",
+      "rgba_sha256": "d11cd7f5fff549c1ea2dc10c82cd9630fe5133dea0457ca9d51aef893cbf1669",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-stone-bricks-2-plain.png",
+      "master_sha256": "7e863d5af5a39292cfdd0b19dac0e55854c7d1b9772186a5fb691a36ab5111b8",
+      "rgb_sha256": "ea9a6ac80b5b634e7ccf6a4f5a51565562cfbba487918f6e579c32ec53b62ecd",
+      "mean_rgb": [
+        135.80355112444008,
+        115.81356946447603,
+        79.67312129097573
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stone-bricks-2-plain.png",
+          "pixels_sha256": "0dd7847351d60b43dfe70c3f9ca04a0c1b64107c0e4638cb3860c6c9e72d82de"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stone-bricks-2-plain.png",
+          "pixels_sha256": "0dd7847351d60b43dfe70c3f9ca04a0c1b64107c0e4638cb3860c6c9e72d82de"
+        }
+      ],
+      "generation": {
+        "name": "wascity-stone-bricks-2-plain",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-685037c7-aaa5-4a38-945b-252785949c65.png",
+        "prompt": "Use case: style-transfer. Faithful high-resolution remaster of the attached exact Jak 3 texture as diffuse game albedo. Olive beige worn plaster transitioning to chunky stone. Exact source masonry and transition layout. Preserve source ASPECT RATIO, exact average hue and brightness, composition of major shapes, UV layout and edge connections. Add convincing material depth and clearer tactile structures visible from gameplay, finely detailed but slightly stylized Jak 3 animation art. Even neutral illumination orthographic texture filling frame, no scene, no shadows, no labels, no borders. Do not recolour or replace design with generic unrelated material."
+      },
+      "generated_file_sha256": "7e863d5af5a39292cfdd0b19dac0e55854c7d1b9772186a5fb691a36ab5111b8"
+    },
+    {
+      "name": "wascity-outerwall-rock",
+      "width": 1774,
+      "height": 887,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\prepared\\wascity-outerwall-rock.rgba",
+      "rgba_sha256": "36170cfad8bc09c2609d55f5a8c5c2075bca05cf339d35b0d4b0352039cadb53",
+      "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\masters\\wascity-outerwall-rock.png",
+      "master_sha256": "3df9c3e5bc7b21eea5b285e13054e8a9af13a37b858fb3562bfb0fddb0b74324",
+      "rgb_sha256": "27999a59f482781740aa33a21f3193d1e5a6c31271358ebbb3c9f3d38bc92b7a",
+      "mean_rgb": [
+        156.33022716960124,
+        94.58616696895785,
+        59.96220491656382
+      ],
+      "native_alpha": 128,
+      "references": [
+        {
+          "page": "waswide-vis-tfrag",
+          "size": [
+            512,
+            256
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waswide-vis-tfrag\\wascity-outerwall-rock.png",
+          "pixels_sha256": "83a5a3c966666250b8487dbdeab098fd81f49004bfadc67d7f2eb219fad10be8"
+        }
+      ],
+      "generation": {
+        "name": "wascity-outerwall-rock",
+        "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-20c354d6-aa05-4eab-824a-40e2bb290ced.png",
+        "prompt": "Faithful modern remaster of the attached exact Jak 3 red sandstone cliff albedo texture. Landscape2:1. Preserve EXACT muted terracotta ochre hue, broad original blocky natural erosion masses and big fissure layout. Build tactile rounded eroded ridges, realistic desert wind abrasion and fine granular sandstone inclusions while retaining animated stylized Jak3 art. Important this is NATURAL CLIFF not masonry, no invented brick courses or regular grids. Material-only orthographic albedo under even diffuse light, no strong shadows, no white highlights, no perspective, no borders or text. Preserve average brightness and contrast and seamlessly repeating edges. High resolution detailed surface."
+      },
+      "generated_file_sha256": "3df9c3e5bc7b21eea5b285e13054e8a9af13a37b858fb3562bfb0fddb0b74324"
+    }
+  ],
+  "approved_not_yet_present": []
+}

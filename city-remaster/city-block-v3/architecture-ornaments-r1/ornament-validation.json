@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "patch_sha256": "1784b8e6ec8e4f84513b941058aad57a7507df74eed56c669af367786d39a0eb",
+  "lods": [
+    {
+      "lod": 0,
+      "components": 7,
+      "vertices": 588,
+      "triangles": 1148,
+      "volumes_m3": [
+        2.427924056426026,
+        2.3958239392873346,
+        2.3957730555323473,
+        2.4344045842890414,
+        2.402014712315164,
+        2.4260615168555164,
+        2.4425383470390645
+      ],
+      "minimum_wall_clearance_m": 0.0030093097975623095,
+      "maximum_wall_clearance_m": 0.46731431246735156
+    },
+    {
+      "lod": 1,
+      "components": 7,
+      "vertices": 588,
+      "triangles": 1148,
+      "volumes_m3": [
+        2.427924056426026,
+        2.3958239392873346,
+        2.3957730555323473,
+        2.4344045842890414,
+        2.402014712315164,
+        2.4260615168555164,
+        2.4425383470390645
+      ],
+      "minimum_wall_clearance_m": 0.0030093097975623095,
+      "maximum_wall_clearance_m": 0.46731431246735156
+    },
+    {
+      "lod": 2,
+      "components": 7,
+      "vertices": 343,
+      "triangles": 658,
+      "volumes_m3": [
+        2.4166439200736995,
+        2.384603773149947,
+        2.3845173284620103,
+        2.423116368495512,
+        2.390656556519738,
+        2.4147993387337015,
+        2.431215378075773
+      ],
+      "minimum_wall_clearance_m": 0.0030093097975623095,
+      "maximum_wall_clearance_m": 0.46731431246735156
+    },
+    {
+      "lod": 3,
+      "components": 7,
+      "vertices": 343,
+      "triangles": 658,
+      "volumes_m3": [
+        2.416663906033682,
+        2.3829148394578095,
+        2.3824379682768035,
+        2.418748073595766,
+        2.392056365025546,
+        2.4139660182347598,
+        2.431287432632455
+      ],
+      "minimum_wall_clearance_m": 0.016709347517462447,
+      "maximum_wall_clearance_m": 0.3688284088857472
+    }
+  ],
+  "checks": {
+    "0/seven_closed_components": true,
+    "0/every_edge_two_faces": true,
+    "0/positive_component_volumes": true,
+    "0/no_vertices_buried_in_wall": true,
+    "1/seven_closed_components": true,
+    "1/every_edge_two_faces": true,
+    "1/positive_component_volumes": true,
+    "1/no_vertices_buried_in_wall": true,
+    "2/seven_closed_components": true,
+    "2/every_edge_two_faces": true,
+    "2/positive_component_volumes": true,
+    "2/no_vertices_buried_in_wall": true,
+    "3/seven_closed_components": true,
+    "3/every_edge_two_faces": true,
+    "3/positive_component_volumes": true,
+    "3/no_vertices_buried_in_wall": true
+  }
+}

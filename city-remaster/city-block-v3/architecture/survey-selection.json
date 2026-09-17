@@ -1,0 +1,21 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascitya.fr3",
+    "bytes": 239110963,
+    "sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0"
+  },
+  "tree_types": [
+    "tie",
+    "tfrag"
+  ],
+  "geoms": [
+    0
+  ],
+  "bounds_xz_m": [
+    2180,
+    2290,
+    -125,
+    30
+  ]
+}

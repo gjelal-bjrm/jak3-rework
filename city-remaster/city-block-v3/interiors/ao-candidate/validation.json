@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "rooms": [
+    {
+      "layout": "lounge",
+      "checks": {
+        "source_hash_unchanged": true,
+        "candidate_hash": true,
+        "palette_and_materials_unchanged": true,
+        "draw_material_order_unchanged": true,
+        "surface_area_unchanged_per_material": true,
+        "bounds_unchanged": true,
+        "finite": true,
+        "unit_normals": true,
+        "same_authored_uv_mapping": true,
+        "neutral_ao_rgb_no_hue_change": true,
+        "alpha_preserved": true,
+        "draws_cover_buffer": true
+      },
+      "passed": true
+    },
+    {
+      "layout": "conversation",
+      "checks": {
+        "source_hash_unchanged": true,
+        "candidate_hash": true,
+        "palette_and_materials_unchanged": true,
+        "draw_material_order_unchanged": true,
+        "surface_area_unchanged_per_material": true,
+        "bounds_unchanged": true,
+        "finite": true,
+        "unit_normals": true,
+        "same_authored_uv_mapping": true,
+        "neutral_ao_rgb_no_hue_change": true,
+        "alpha_preserved": true,
+        "draws_cover_buffer": true
+      },
+      "passed": true
+    }
+  ],
+  "deployed": false
+}

@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "positive_checks": 1443,
+  "source_sha256": "fd442a3c6d80c55d89189c8cc6fa09f21a41491ff83f12df9ac230e4dffa25c9",
+  "output_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+  "patch_sha256": "997c95ea8d62da6df7f7e7115f69207e2b3b16e3d8ab914452be4533cb085b6e",
+  "unknown_group_rejected": true,
+  "open_plaque_rejected": true,
+  "wrong_parent_rejected": true,
+  "native_visual_validation": false,
+  "deployed": false
+}

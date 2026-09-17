@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "patch_sha256": "997c95ea8d62da6df7f7e7115f69207e2b3b16e3d8ab914452be4533cb085b6e",
+  "lods": [
+    {
+      "lod": 0,
+      "components": 4,
+      "vertices": 336,
+      "triangles": 656,
+      "volumes_m3": [
+        2.3948271849559357,
+        2.3946702014889354,
+        2.4343485043570277,
+        2.401562142430743
+      ],
+      "native_winding_signed_distance_min_m": -0.3811189439147711,
+      "native_winding_signed_distance_max_m": -0.003412617242702254,
+      "note": "Native walls are double sided. Visibility, not native winding, establishes correct street side."
+    },
+    {
+      "lod": 1,
+      "components": 4,
+      "vertices": 336,
+      "triangles": 656,
+      "volumes_m3": [
+        2.3948271849559357,
+        2.3946702014889354,
+        2.4343485043570277,
+        2.401562142430743
+      ],
+      "native_winding_signed_distance_min_m": -0.3811189439147711,
+      "native_winding_signed_distance_max_m": -0.003412617242702254,
+      "note": "Native walls are double sided. Visibility, not native winding, establishes correct street side."
+    },
+    {
+      "lod": 2,
+      "components": 4,
+      "vertices": 196,
+      "triangles": 376,
+      "volumes_m3": [
+        2.383700751849926,
+        2.3834980789494837,
+        2.4230652135003465,
+        2.3903616203632163
+      ],
+      "native_winding_signed_distance_min_m": -0.3811189439147711,
+      "native_winding_signed_distance_max_m": -0.003412617242702254,
+      "note": "Native walls are double sided. Visibility, not native winding, establishes correct street side."
+    },
+    {
+      "lod": 3,
+      "components": 4,
+      "vertices": 196,
+      "triangles": 376,
+      "volumes_m3": [
+        2.3827531494305796,
+        2.382623297558707,
+        2.4184861125800885,
+        2.3914523933287084
+      ],
+      "native_winding_signed_distance_min_m": -0.4056562129408121,
+      "native_winding_signed_distance_max_m": -0.021428168431157246,
+      "note": "Native walls are double sided. Visibility, not native winding, establishes correct street side."
+    }
+  ],
+  "checks": {
+    "0/four_closed_components": true,
+    "0/every_edge_two_faces": true,
+    "0/positive_component_volumes": true,
+    "0/finite_vertices": true,
+    "1/four_closed_components": true,
+    "1/every_edge_two_faces": true,
+    "1/positive_component_volumes": true,
+    "1/finite_vertices": true,
+    "2/four_closed_components": true,
+    "2/every_edge_two_faces": true,
+    "2/positive_component_volumes": true,
+    "2/finite_vertices": true,
+    "3/four_closed_components": true,
+    "3/every_edge_two_faces": true,
+    "3/positive_component_volumes": true,
+    "3/finite_vertices": true
+  }
+}

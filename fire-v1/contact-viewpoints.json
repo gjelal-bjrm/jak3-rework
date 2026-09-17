@@ -1,0 +1,121 @@
+[
+  {
+    "key": "user",
+    "eye": [
+      2016.2202,
+      247.662,
+      -436.1993
+    ],
+    "matrix": [
+      [
+        0.9997,
+        0,
+        0.0229
+      ],
+      [
+        -0.0054,
+        0.9714,
+        0.237
+      ],
+      [
+        -0.0222,
+        -0.237,
+        0.9712
+      ]
+    ],
+    "expr": "(let ((p (new-stack-vector0)) (m (new-stack-matrix0))) (set-vector! p (meters 2016.220200) (meters 247.662000) (meters -436.199300) 1.0) (set-vector! (-> m rvec) 0.9997000 0.0000000 0.0229000 0.0) (set-vector! (-> m uvec) -0.0054000 0.9714000 0.2370000 0.0) (set-vector! (-> m fvec) -0.0222000 -0.2370000 0.9712000 0.0) (set-vector! (-> m trans) 0.0 0.0 0.0 1.0) (vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) (matrix-copy! (-> *camera* slave 0 tracking inv-mat) m))"
+  },
+  {
+    "key": "side",
+    "eye": [
+      2012,
+      248.6,
+      -431.5
+    ],
+    "aim": [
+      2017.7566,
+      248.2,
+      -427.5814
+    ],
+    "matrix": [
+      [
+        0.562713733167838,
+        0,
+        -0.8266518339085177
+      ],
+      [
+        0.047404976085927655,
+        0.9983543779790431,
+        0.03226924561204869
+      ],
+      [
+        0.8252914774469732,
+        -0.0573457580826873,
+        0.561787719057042
+      ]
+    ],
+    "expr": "(let ((p (new-stack-vector0)) (m (new-stack-matrix0))) (set-vector! p (meters 2012.000000) (meters 248.600000) (meters -431.500000) 1.0) (set-vector! (-> m rvec) 0.5627137 0.0000000 -0.8266518 0.0) (set-vector! (-> m uvec) 0.0474050 0.9983544 0.0322692 0.0) (set-vector! (-> m fvec) 0.8252915 -0.0573458 0.5617877 0.0) (set-vector! (-> m trans) 0.0 0.0 0.0 1.0) (vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) (matrix-copy! (-> *camera* slave 0 tracking inv-mat) m))"
+  },
+  {
+    "key": "low",
+    "eye": [
+      2017.8,
+      245.65,
+      -433.4
+    ],
+    "aim": [
+      2017.7566,
+      248,
+      -427.5814
+    ],
+    "matrix": [
+      [
+        0.9999721840217981,
+        0,
+        0.007458631421057584
+      ],
+      [
+        0.0027930997986104857,
+        0.9272354516092309,
+        -0.37446844442828625
+      ],
+      [
+        -0.006915907474091129,
+        0.3744788609241188,
+        0.927209659648121
+      ]
+    ],
+    "expr": "(let ((p (new-stack-vector0)) (m (new-stack-matrix0))) (set-vector! p (meters 2017.800000) (meters 245.650000) (meters -433.400000) 1.0) (set-vector! (-> m rvec) 0.9999722 0.0000000 0.0074586 0.0) (set-vector! (-> m uvec) 0.0027931 0.9272355 -0.3744684 0.0) (set-vector! (-> m fvec) -0.0069159 0.3744789 0.9272097 0.0) (set-vector! (-> m trans) 0.0 0.0 0.0 1.0) (vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) (matrix-copy! (-> *camera* slave 0 tracking inv-mat) m))"
+  },
+  {
+    "key": "above",
+    "eye": [
+      2020.8,
+      251.6,
+      -430.8
+    ],
+    "aim": [
+      2017.7566,
+      247.65,
+      -427.5814
+    ],
+    "matrix": [
+      [
+        0.7266060816365966,
+        0,
+        0.6870542934359057
+      ],
+      [
+        -0.4572648014007909,
+        0.7463586957803594,
+        0.48358825319990584
+      ],
+      [
+        -0.5127889463791189,
+        -0.6655439108226,
+        0.5423087674363675
+      ]
+    ],
+    "expr": "(let ((p (new-stack-vector0)) (m (new-stack-matrix0))) (set-vector! p (meters 2020.800000) (meters 251.600000) (meters -430.800000) 1.0) (set-vector! (-> m rvec) 0.7266061 0.0000000 0.6870543 0.0) (set-vector! (-> m uvec) -0.4572648 0.7463587 0.4835883 0.0) (set-vector! (-> m fvec) -0.5127889 -0.6655439 0.5423088 0.0) (set-vector! (-> m trans) 0.0 0.0 0.0 1.0) (vector-copy! (-> *camera* slave 0 saved-pt) p) (vector-copy! (-> *camera* slave 0 trans) p) (matrix-copy! (-> *camera* slave 0 tracking inv-mat) m))"
+  }
+]

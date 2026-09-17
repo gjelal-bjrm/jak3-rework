@@ -1,0 +1,404 @@
+{
+  "status": "authored",
+  "source_fr3": {
+    "bytes": 240057606,
+    "sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604"
+  },
+  "author_sha256": "e428e740aa8f7bf519ea86581f4835cb73154213f68d32c5778983ee1160ca33",
+  "house_count": 6,
+  "historical_author": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\author_buildings.py",
+  "historical_author_sha256": "dede462e69a64c191bb59fb79dca52e4ef3cff6aa25a05d9e8867d6fbde17a7b",
+  "restoration": {
+    "r3_patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\wascitya-patch.json",
+    "r3_patch_sha256": "a9c23236ccdec9660ada8446c98599841009533e314fc49e4643e948aad0a250",
+    "r2_native_export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\native.json",
+    "r2_native_export_sha256": "77ae9fec9b2895f8dd428dfda8d97271aff375095bc2332baa85b3f6331b30db",
+    "removed": 266,
+    "added": 6250,
+    "positions_uv_palette_exact_from_r2": true
+  },
+  "windows": [
+    {
+      "id": "wca-house-east-room",
+      "lod": 0,
+      "region": "east",
+      "native_instances": [
+        0
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 472,
+      "groups": [
+        [
+          1,
+          9,
+          0
+        ],
+        [
+          1,
+          19,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 1,
+      "region": "east",
+      "native_instances": [
+        0
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 472,
+      "groups": [
+        [
+          1,
+          9,
+          0
+        ],
+        [
+          1,
+          19,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 2,
+      "region": "east",
+      "native_instances": [
+        0
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 472,
+      "groups": [
+        [
+          1,
+          9,
+          0
+        ],
+        [
+          1,
+          19,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 3,
+      "region": "east",
+      "native_instances": [
+        0
+      ],
+      "cut_polygons": 2,
+      "removed": 2,
+      "added": 472,
+      "groups": [
+        [
+          1,
+          9,
+          0
+        ],
+        [
+          1,
+          18,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 0,
+      "region": "west",
+      "native_instances": [
+        4
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          4
+        ],
+        [
+          1,
+          19,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 1,
+      "region": "west",
+      "native_instances": [
+        4
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          4
+        ],
+        [
+          1,
+          19,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 2,
+      "region": "west",
+      "native_instances": [
+        4
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          4
+        ],
+        [
+          1,
+          19,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 3,
+      "region": "west",
+      "native_instances": [
+        4
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          4
+        ],
+        [
+          1,
+          18,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 0,
+      "region": "low",
+      "native_instances": [
+        58,
+        59,
+        60,
+        70
+      ],
+      "cut_polygons": 4,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          12
+        ],
+        [
+          1,
+          12,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 1,
+      "region": "low",
+      "native_instances": [
+        58,
+        59,
+        60,
+        70
+      ],
+      "cut_polygons": 4,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          12
+        ],
+        [
+          1,
+          12,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 2,
+      "region": "low",
+      "native_instances": [
+        58,
+        59,
+        60,
+        70
+      ],
+      "cut_polygons": 4,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          12
+        ],
+        [
+          1,
+          12,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 3,
+      "region": "low",
+      "native_instances": [
+        58,
+        59,
+        60,
+        70
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 572,
+      "groups": [
+        [
+          1,
+          9,
+          12
+        ],
+        [
+          1,
+          11,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 0,
+      "region": "north",
+      "native_instances": [
+        3
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 480,
+      "groups": [
+        [
+          1,
+          9,
+          3
+        ],
+        [
+          1,
+          12,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 1,
+      "region": "north",
+      "native_instances": [
+        3
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 480,
+      "groups": [
+        [
+          1,
+          9,
+          3
+        ],
+        [
+          1,
+          12,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 2,
+      "region": "north",
+      "native_instances": [
+        3
+      ],
+      "cut_polygons": 2,
+      "removed": 4,
+      "added": 480,
+      "groups": [
+        [
+          1,
+          9,
+          3
+        ],
+        [
+          1,
+          12,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 3,
+      "region": "north",
+      "native_instances": [
+        3
+      ],
+      "cut_polygons": 3,
+      "removed": 4,
+      "added": 480,
+      "groups": [
+        [
+          1,
+          9,
+          3
+        ],
+        [
+          1,
+          11,
+          3
+        ]
+      ]
+    }
+  ],
+  "faces_removed": 322,
+  "faces_added": 14634
+}

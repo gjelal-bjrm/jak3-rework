@@ -1,0 +1,6849 @@
+{
+  "method": "Area of indexed triangles in original WCA/WCB background GLB, per scene node with affine world matrix. Includes hidden/backfaces; not visible pixel coverage. Native tree inventory used separately for material usage.",
+  "sources": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\wascitya-background.glb",
+      "sha256": "82cceafbce62e7c2031d812436282775f611bdb5fb2a85a97c87da3a78d4d47b"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\wascityb-background.glb",
+      "sha256": "3ef787c687c2f020238b38f433e02ef114a03aac462526567a9d7c4f9bbdea89"
+    }
+  ],
+  "ranked": [
+    {
+      "name": "wascity-ground-01",
+      "area_m2": 272666.81816851645,
+      "by_level": {
+        "wascitya": 133222.72039543343,
+        "wascityb": 139444.09777308302
+      },
+      "triangles": {
+        "wascitya": 6832,
+        "wascityb": 7784
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-01.png",
+          "pixels_sha256": "d6e41ce87dfa28a91127abc14e32224702f02a59f2f16defc22b28fd3fc67821"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-01.png",
+          "pixels_sha256": "d6e41ce87dfa28a91127abc14e32224702f02a59f2f16defc22b28fd3fc67821"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.9695002530402456,
+        "vertical": 0.0002853707354895726,
+        "sloped": 0.030214376224264802
+      },
+      "largest_face_center_m": [
+        1693.1298828125,
+        26.348872502644856,
+        -732.9949951171875
+      ],
+      "mean_source_rgb": [
+        138.87,
+        128.26,
+        108.58
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 6352
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 416
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 64
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 5266
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 448
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 72
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 11,
+          "triangles": 96
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 12,
+          "triangles": 234
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 13,
+          "triangles": 460
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 192
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 15,
+          "triangles": 952
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 32,
+          "triangles": 64
+        }
+      ]
+    },
+    {
+      "name": "wascity-ocean-shore-rocks",
+      "area_m2": 167630.9573594332,
+      "by_level": {
+        "wascityb": 167630.9573594332
+      },
+      "triangles": {
+        "wascityb": 6448
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ocean-shore-rocks.png",
+          "pixels_sha256": "5848915a2d8d7c82646263f0b7f78e5ec9be586b90e068a40d05186b8a054580"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.08566516158068169,
+        "vertical": 0.7334593772999298,
+        "sloped": 0.18087546111938937
+      },
+      "largest_face_center_m": [
+        1652.306884765625,
+        8.286259174346924,
+        -735.3700968424479
+      ],
+      "mean_source_rgb": [
+        160.67,
+        123.13,
+        81.21
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 516
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 11,
+          "triangles": 576
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 12,
+          "triangles": 2132
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 13,
+          "triangles": 920
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 2176
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 32,
+          "triangles": 128
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-01",
+      "area_m2": 158624.30934392853,
+      "by_level": {
+        "wascitya": 74206.10574933524,
+        "wascityb": 84418.20359459329
+      },
+      "triangles": {
+        "wascitya": 5706,
+        "wascityb": 6800
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-01.png",
+          "pixels_sha256": "c416646d92efa427e27031b736a967be9489670bd9badf843d43ccc2cf4f51c0"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-01.png",
+          "pixels_sha256": "c416646d92efa427e27031b736a967be9489670bd9badf843d43ccc2cf4f51c0"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.12838690892682528,
+        "vertical": 0.8158192689918573,
+        "sloped": 0.05579382208131724
+      },
+      "largest_face_center_m": [
+        2314.2024739583335,
+        44.54833857218424,
+        30.859575907389324
+      ],
+      "mean_source_rgb": [
+        161.35,
+        162.99,
+        150.29
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 12,
+          "triangles": 336
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 14,
+          "triangles": 360
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 23,
+          "triangles": 176
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 26,
+          "triangles": 108
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 39,
+          "triangles": 1344
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 40,
+          "triangles": 1152
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 0,
+          "triangles": 450
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 384
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 7,
+          "triangles": 84
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 9,
+          "triangles": 680
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 40
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 11,
+          "triangles": 592
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 174
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 15,
+          "triangles": 810
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 420
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 23,
+          "triangles": 1248
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 25,
+          "triangles": 354
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 26,
+          "triangles": 336
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 864
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 34,
+          "triangles": 408
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 504
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 43,
+          "triangles": 714
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 350
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 4,
+          "triangles": 240
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 27,
+          "triangles": 176
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 28,
+          "triangles": 40
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 37,
+          "triangles": 120
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 3,
+          "triangles": 42
+        }
+      ]
+    },
+    {
+      "name": "city-slum-burning-can",
+      "area_m2": 101959.4560073104,
+      "by_level": {
+        "wascitya": 58072.91172569895,
+        "wascityb": 43886.54428161145
+      },
+      "triangles": {
+        "wascitya": 1312,
+        "wascityb": 1728
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\city-slum-burning-can.png",
+          "pixels_sha256": "21555cd6dcdd5798f17b7f03894b28a0bb946d2b827a94be8af9c54f73217bd6"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\city-slum-burning-can.png",
+          "pixels_sha256": "21555cd6dcdd5798f17b7f03894b28a0bb946d2b827a94be8af9c54f73217bd6"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.8789501695731854,
+        "vertical": 0.0,
+        "sloped": 0.12104983042681325
+      },
+      "largest_face_center_m": [
+        2313.7774251302085,
+        56.21805191040039,
+        63.71267954508463
+      ],
+      "mean_source_rgb": [
+        91.19,
+        96.32,
+        89.79
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 28,
+          "triangles": 1312
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 42,
+          "triangles": 1728
+        }
+      ]
+    },
+    {
+      "name": "wascitya-stone-top",
+      "area_m2": 72307.36651687187,
+      "by_level": {
+        "wascitya": 42035.42790996737,
+        "wascityb": 30271.938606904496
+      },
+      "triangles": {
+        "wascitya": 4792,
+        "wascityb": 2838
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-top.png",
+          "pixels_sha256": "0a5a31c2e269e498c36098d78186634bb7c0b596fa6f15473be75081607439a6"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascitya-stone-top.png",
+          "pixels_sha256": "e418a78fd3e35a38450abeef01f36a5e54d6aaef1d89bfe4fbc6212046928d48"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.2956180711155954,
+        "vertical": 0.6622189027132982,
+        "sloped": 0.0421630261711082
+      },
+      "largest_face_center_m": [
+        2208.2967122395835,
+        52.249942779541016,
+        118.8956527709961
+      ],
+      "mean_source_rgb": [
+        129.54,
+        129.48,
+        109.28
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 70
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 480
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 22,
+          "triangles": 80
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 840
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 638
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 4,
+          "triangles": 440
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 13,
+          "triangles": 192
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 16,
+          "triangles": 36
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 26,
+          "triangles": 288
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 27,
+          "triangles": 406
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 30,
+          "triangles": 156
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 840
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 37,
+          "triangles": 440
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 25,
+          "triangles": 144
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 26,
+          "triangles": 80
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 35,
+          "triangles": 160
+        }
+      ]
+    },
+    {
+      "name": "wascity-ditch-wall-top-to-ground",
+      "area_m2": 70224.95155980263,
+      "by_level": {
+        "wascitya": 33890.416754249214,
+        "wascityb": 36334.53480555341
+      },
+      "triangles": {
+        "wascitya": 44036,
+        "wascityb": 47544
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "2fc8104e24cf9944dfd9944e2ad1d79a66f34fce769749d81c2c37977a52dff9"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "ab2e2a8bdf2dca43718ee1d524a54582268465e960617e14f1fdd0bd6bcd1b02"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "2fc8104e24cf9944dfd9944e2ad1d79a66f34fce769749d81c2c37977a52dff9"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ditch-wall-top-to-ground.png",
+          "pixels_sha256": "ab2e2a8bdf2dca43718ee1d524a54582268465e960617e14f1fdd0bd6bcd1b02"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.027366404460317833,
+        "vertical": 0.6808962869200337,
+        "sloped": 0.29173730861964164
+      },
+      "largest_face_center_m": [
+        1597.6767578125,
+        15.020573933919271,
+        -425.78692626953125
+      ],
+      "mean_source_rgb": [
+        151.08,
+        118.42,
+        84.66
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 1664
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 3200
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 768
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 21,
+          "triangles": 2304
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 56
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 1792
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 6,
+          "triangles": 3840
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 7,
+          "triangles": 1992
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 864
+        }
+      ]
+    },
+    {
+      "name": "wascity-stain-window-01",
+      "area_m2": 50311.40638467313,
+      "by_level": {
+        "wascitya": 25841.2480666233,
+        "wascityb": 24470.15831804983
+      },
+      "triangles": {
+        "wascitya": 1048,
+        "wascityb": 1080
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            101
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-stain-window-01.png",
+          "pixels_sha256": "426ac084de6d6c31698163ecd278d9d39115071981bcd5cf25372b4e4296c0bb"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            101
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-stain-window-01.png",
+          "pixels_sha256": "426ac084de6d6c31698163ecd278d9d39115071981bcd5cf25372b4e4296c0bb"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.13826588424071018,
+        "vertical": 0.8386566601465969,
+        "sloped": 0.023077455612691887
+      },
+      "largest_face_center_m": [
+        2206.9602864583335,
+        52.221885681152344,
+        -260.86353556315106
+      ],
+      "mean_source_rgb": [
+        35.19,
+        24.75,
+        15.53
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-stone-plain-wall-3",
+      "area_m2": 49842.18190594041,
+      "by_level": {
+        "wascitya": 28645.092709031298,
+        "wascityb": 21197.08919690911
+      },
+      "triangles": {
+        "wascitya": 3076,
+        "wascityb": 2408
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stone-plain-wall-3.png",
+          "pixels_sha256": "026f1401f9ae7d88088a08a15e7fdf75c6120ad472d4a79e95cb95cc6e1611d3"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stone-plain-wall-3.png",
+          "pixels_sha256": "026f1401f9ae7d88088a08a15e7fdf75c6120ad472d4a79e95cb95cc6e1611d3"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.111088682214254,
+        "vertical": 0.7528634281049239,
+        "sloped": 0.136047889680819
+      },
+      "largest_face_center_m": [
+        1817.9739176432292,
+        50.703085581461586,
+        -259.44305419921875
+      ],
+      "mean_source_rgb": [
+        138.39,
+        122.46,
+        87.69
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 180
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 35,
+          "triangles": 1344
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 1088
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 8,
+          "triangles": 192
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 12,
+          "triangles": 112
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 38,
+          "triangles": 160
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 24
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 816
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 5,
+          "triangles": 1200
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 14,
+          "triangles": 80
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 38,
+          "triangles": 192
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 42,
+          "triangles": 96
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground2ocean-shore-rocks",
+      "area_m2": 43429.48458288314,
+      "by_level": {
+        "wascityb": 43429.48458288314
+      },
+      "triangles": {
+        "wascityb": 6432
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground2ocean-shore-rocks.png",
+          "pixels_sha256": "31600a5427e89f94accae63f709efd74044f83a59e33a197e41528fe7035bd4f"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.03862072451830579,
+        "vertical": 0.6065201996339035,
+        "sloped": 0.35485907584778353
+      },
+      "largest_face_center_m": [
+        1737.1299641927083,
+        44.29124450683594,
+        -723.0680745442709
+      ],
+      "mean_source_rgb": [
+        154.46,
+        124.58,
+        88.33
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 264
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 11,
+          "triangles": 192
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 12,
+          "triangles": 650
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 13,
+          "triangles": 2254
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 512
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 15,
+          "triangles": 2176
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 32,
+          "triangles": 384
+        }
+      ]
+    },
+    {
+      "name": "wascity-outerwall-metal",
+      "area_m2": 37782.32371728562,
+      "by_level": {
+        "wascitya": 37782.32371728562
+      },
+      "triangles": {
+        "wascitya": 808
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal.png",
+          "pixels_sha256": "58b55b8721f8c425e848201aa028928c8149ff63af519343e9d739e38d4a5fe2"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-outerwall-metal.png",
+          "pixels_sha256": "db5be10744585e4849e597c94977362db04815ef2cf2abc37ee6f1cd23e1208b"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.0017089911547023772,
+        "vertical": 0.9907723040793618,
+        "sloped": 0.007518704765936214
+      },
+      "largest_face_center_m": [
+        2492.1517740885415,
+        78.83105977376302,
+        -311.8666280110677
+      ],
+      "mean_source_rgb": [
+        90.81,
+        85.59,
+        67.81
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 48
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 18,
+          "triangles": 152
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 21,
+          "triangles": 608
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-dirty",
+      "area_m2": 35523.16507690622,
+      "by_level": {
+        "wascitya": 22605.84015555778,
+        "wascityb": 12917.324921348438
+      },
+      "triangles": {
+        "wascitya": 15500,
+        "wascityb": 10952
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-dirty.png",
+          "pixels_sha256": "e243624df24d7c72a6b98bee51d5f1b117f45ab3c4868dbb61d6b9149b0479f4"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.4019563420755774,
+        "vertical": 0.4515852066814438,
+        "sloped": 0.14645845124297804
+      },
+      "largest_face_center_m": [
+        2427.0870768229165,
+        48.49794387817383,
+        -277.1120198567708
+      ],
+      "mean_source_rgb": [
+        91.99,
+        95.28,
+        87.83
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 12
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 7,
+          "triangles": 9084
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 8,
+          "triangles": 5420
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 192
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 792
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 3,
+          "triangles": 2660
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 6,
+          "triangles": 6972
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 19,
+          "triangles": 672
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 648
+        }
+      ]
+    },
+    {
+      "name": "wascity-outerwall-metal-b",
+      "area_m2": 34453.570672950176,
+      "by_level": {
+        "wascitya": 34417.034685015984,
+        "wascityb": 36.5359879341936
+      },
+      "triangles": {
+        "wascitya": 7520,
+        "wascityb": 324
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-outerwall-metal-b.png",
+          "pixels_sha256": "ae4a70ce90b07dc13dbba3ee4e39d1c66262dad95a3651825250358996b910b7"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.011903357013847425,
+        "vertical": 0.7374390697300125,
+        "sloped": 0.2506575732561447
+      },
+      "largest_face_center_m": [
+        2005.7862548828125,
+        55.432159423828125,
+        -432.6095479329427
+      ],
+      "mean_source_rgb": [
+        89.81,
+        83.35,
+        62.9
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 86
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 20,
+          "triangles": 684
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 21,
+          "triangles": 1216
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 22,
+          "triangles": 1512
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 23,
+          "triangles": 1450
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 24,
+          "triangles": 2176
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 396
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 324
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground-2-ditch-04",
+      "area_m2": 31250.09684892952,
+      "by_level": {
+        "wascitya": 14943.232400530414,
+        "wascityb": 16306.864448399103
+      },
+      "triangles": {
+        "wascitya": 1944,
+        "wascityb": 2224
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-04.png",
+          "pixels_sha256": "26a2115b9a9e5a1f04b5204ca99d444ea9859baa24c38161423a3682daad0116"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-04.png",
+          "pixels_sha256": "26a2115b9a9e5a1f04b5204ca99d444ea9859baa24c38161423a3682daad0116"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.9972431481973684,
+        "vertical": 0.0,
+        "sloped": 0.0027568518026322296
+      },
+      "largest_face_center_m": [
+        2267.572021484375,
+        19.139999389648438,
+        10.00738779703776
+      ],
+      "mean_source_rgb": [
+        140.25,
+        130.62,
+        112.04
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 728
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 960
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 256
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 784
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 6,
+          "triangles": 1152
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 288
+        }
+      ]
+    },
+    {
+      "name": "wascitya-stone-bottom",
+      "area_m2": 27870.47137851683,
+      "by_level": {
+        "wascitya": 16508.234157461146,
+        "wascityb": 11362.237221055686
+      },
+      "triangles": {
+        "wascitya": 954,
+        "wascityb": 646
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-bottom.png",
+          "pixels_sha256": "e805bb07a98bd9ddf254923855b8033b4fdb971efb8d6ba6056ed11906352077"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascitya-stone-bottom.png",
+          "pixels_sha256": "e805bb07a98bd9ddf254923855b8033b4fdb971efb8d6ba6056ed11906352077"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.0,
+        "vertical": 0.9904255099436842,
+        "sloped": 0.009574490056315431
+      },
+      "largest_face_center_m": [
+        2306.77587890625,
+        33.6925303141276,
+        120.95785776774089
+      ],
+      "mean_source_rgb": [
+        118.35,
+        113.47,
+        84.89
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 20
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 144
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 22,
+          "triangles": 64
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 200
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 198
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 4,
+          "triangles": 160
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 15,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 16,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 26,
+          "triangles": 96
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 27,
+          "triangles": 126
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 200
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 37,
+          "triangles": 160
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 25,
+          "triangles": 48
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 26,
+          "triangles": 64
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 35,
+          "triangles": 48
+        }
+      ]
+    },
+    {
+      "name": "wascity-roof-1",
+      "area_m2": 26610.885655976363,
+      "by_level": {
+        "wascitya": 17033.773365541965,
+        "wascityb": 9577.112290434397
+      },
+      "triangles": {
+        "wascitya": 1356,
+        "wascityb": 2340
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-roof-1.png",
+          "pixels_sha256": "1588d8ae1e6374aa29228f5929b6f6af063fc597a8b2f4d0c099d43fe839c2cd"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-roof-1.png",
+          "pixels_sha256": "676951009afb4f9082783d5c8eb128c59494fc5d05cf2344634e4e2efc7a8b9d"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-roof-1.png",
+          "pixels_sha256": "1588d8ae1e6374aa29228f5929b6f6af063fc597a8b2f4d0c099d43fe839c2cd"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.9133640008964399,
+        "vertical": 0.005293404325175605,
+        "sloped": 0.08134259477838666
+      },
+      "largest_face_center_m": [
+        2384.79443359375,
+        40.25977071126302,
+        -274.7670491536458
+      ],
+      "mean_source_rgb": [
+        83.05,
+        80.23,
+        60.39
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 27,
+          "triangles": 1356
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 43,
+          "triangles": 2340
+        }
+      ]
+    },
+    {
+      "name": "wascity-outerwall-metal-d",
+      "area_m2": 25482.094023757523,
+      "by_level": {
+        "wascitya": 25482.094023757523
+      },
+      "triangles": {
+        "wascitya": 726
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-outerwall-metal-d.png",
+          "pixels_sha256": "39d3b86ca2bf5849bdbd32d99de2b13296298acdf752172ad457834f92433966"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal-d.png",
+          "pixels_sha256": "39d3b86ca2bf5849bdbd32d99de2b13296298acdf752172ad457834f92433966"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.03040519341835045,
+        "vertical": 0.9660705923339102,
+        "sloped": 0.0035242142477396924
+      },
+      "largest_face_center_m": [
+        2199.5888671875,
+        66.08162943522136,
+        123.09533182779948
+      ],
+      "mean_source_rgb": [
+        89.05,
+        84.35,
+        65.75
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 46
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 25,
+          "triangles": 616
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 31,
+          "triangles": 64
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-2-bricks-01",
+      "area_m2": 19650.238281456397,
+      "by_level": {
+        "wascitya": 8660.518785959597,
+        "wascityb": 10989.719495496802
+      },
+      "triangles": {
+        "wascitya": 746,
+        "wascityb": 1106
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-2-bricks-01.png",
+          "pixels_sha256": "6e445b20c7bee2b60ead978e2b7d7fa6076de4c190bc288ac5ded6469e011ab9"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-2-bricks-01.png",
+          "pixels_sha256": "6e445b20c7bee2b60ead978e2b7d7fa6076de4c190bc288ac5ded6469e011ab9"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.06964534800350626,
+        "vertical": 0.9167316349898724,
+        "sloped": 0.013623017006623274
+      },
+      "largest_face_center_m": [
+        2284.5177408854165,
+        17.052383422851562,
+        -127.28458404541016
+      ],
+      "mean_source_rgb": [
+        140.84,
+        142.41,
+        130.45
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 14,
+          "triangles": 120
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 23,
+          "triangles": 120
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 39,
+          "triangles": 224
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 0,
+          "triangles": 90
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 192
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 76
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 15,
+          "triangles": 162
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 144
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 252
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 43,
+          "triangles": 140
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 112
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 4,
+          "triangles": 60
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 27,
+          "triangles": 120
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 37,
+          "triangles": 40
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-wall-base-plate-envmap",
+      "area_m2": 16433.100508270818,
+      "by_level": {
+        "wascitya": 10534.094091179119,
+        "wascityb": 5899.0064170917
+      },
+      "triangles": {
+        "wascitya": 6006,
+        "wascityb": 3380
+      },
+      "placements": [],
+      "orientation_area_fraction": {
+        "horizontal": 0.04611020864527757,
+        "vertical": 0.9466799651144914,
+        "sloped": 0.007209826240234721
+      },
+      "largest_face_center_m": [
+        2072.5819498697915,
+        27.219369252522785,
+        -362.7543131510417
+      ],
+      "native_usage": []
+    },
+    {
+      "name": "wascity-cement-road",
+      "area_m2": 15953.399986894721,
+      "by_level": {
+        "wascitya": 8014.360116860314,
+        "wascityb": 7939.0398700344085
+      },
+      "triangles": {
+        "wascitya": 9146,
+        "wascityb": 9696
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-cement-road.png",
+          "pixels_sha256": "eda4f2b315dd9d5afddcfa614f6d60639706f1b86cff78a68aa22abd5c092d3a"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-cement-road.png",
+          "pixels_sha256": "eda4f2b315dd9d5afddcfa614f6d60639706f1b86cff78a68aa22abd5c092d3a"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.6959336929698429,
+        "vertical": 0.025460056914535074,
+        "sloped": 0.2786062501156238
+      },
+      "largest_face_center_m": [
+        2259.1402994791665,
+        52.801709493001304,
+        127.12982686360677
+      ],
+      "mean_source_rgb": [
+        102.26,
+        98.77,
+        91.52
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 138
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 35,
+          "triangles": 4680
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 36,
+          "triangles": 1512
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 37,
+          "triangles": 2816
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 22,
+          "triangles": 5520
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 23,
+          "triangles": 3264
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 24,
+          "triangles": 912
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground-2-ditch-05",
+      "area_m2": 15583.576050658521,
+      "by_level": {
+        "wascitya": 8257.617170843105,
+        "wascityb": 7325.958879815416
+      },
+      "triangles": {
+        "wascitya": 1152,
+        "wascityb": 1120
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-05.png",
+          "pixels_sha256": "e3cd6e7ce38a4dee02b10288241efe32157cde19af1ad9bb5b4402fc06c30e01"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-05.png",
+          "pixels_sha256": "e3cd6e7ce38a4dee02b10288241efe32157cde19af1ad9bb5b4402fc06c30e01"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.9946700037539461,
+        "vertical": 0.0,
+        "sloped": 0.005329996246054924
+      },
+      "largest_face_center_m": [
+        2494.1326497395835,
+        28.873286565144856,
+        -267.83338419596356
+      ],
+      "mean_source_rgb": [
+        141.29,
+        131.79,
+        113.4
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 320
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 64
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 21,
+          "triangles": 768
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 6,
+          "triangles": 384
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 7,
+          "triangles": 664
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 72
+        }
+      ]
+    },
+    {
+      "name": "wascity-stone-bricks-2-plain",
+      "area_m2": 15472.357443762041,
+      "by_level": {
+        "wascitya": 8513.7110704854,
+        "wascityb": 6958.646373276641
+      },
+      "triangles": {
+        "wascitya": 818,
+        "wascityb": 670
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stone-bricks-2-plain.png",
+          "pixels_sha256": "0dd7847351d60b43dfe70c3f9ca04a0c1b64107c0e4638cb3860c6c9e72d82de"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stone-bricks-2-plain.png",
+          "pixels_sha256": "0dd7847351d60b43dfe70c3f9ca04a0c1b64107c0e4638cb3860c6c9e72d82de"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.0,
+        "vertical": 0.580190963638483,
+        "sloped": 0.4198090363615166
+      },
+      "largest_face_center_m": [
+        1820.3435465494792,
+        41.36944707234701,
+        -257.3283437093099
+      ],
+      "mean_source_rgb": [
+        126.75,
+        113.22,
+        82.14
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 34
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 35,
+          "triangles": 448
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 288
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 8,
+          "triangles": 48
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 6
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 216
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 5,
+          "triangles": 400
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 38,
+          "triangles": 48
+        }
+      ]
+    },
+    {
+      "name": "wascity-blotch-withstreaks-01",
+      "area_m2": 13682.486841469188,
+      "by_level": {
+        "wascitya": 7836.494586243534,
+        "wascityb": 5845.992255225655
+      },
+      "triangles": {
+        "wascitya": 1184,
+        "wascityb": 926
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            0,
+            114
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-blotch-withstreaks-01.png",
+          "pixels_sha256": "834122753c58d40256d20a93db43106326af0b5ed72b0be436e646b96d4b2aae"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            0,
+            114
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-blotch-withstreaks-01.png",
+          "pixels_sha256": "834122753c58d40256d20a93db43106326af0b5ed72b0be436e646b96d4b2aae"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.0,
+        "vertical": 0.9988604455215624,
+        "sloped": 0.001139554478434395
+      },
+      "largest_face_center_m": [
+        2303.572509765625,
+        61.34426625569662,
+        -339.9162902832031
+      ],
+      "mean_source_rgb": [
+        32.0,
+        27.0,
+        15.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-metal-segments",
+      "area_m2": 11038.743546674876,
+      "by_level": {
+        "wascitya": 6020.527452036211,
+        "wascityb": 5018.216094638665
+      },
+      "triangles": {
+        "wascitya": 6192,
+        "wascityb": 5400
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-segments.png",
+          "pixels_sha256": "dfd51aa59183f0be08ac7061c7957fc707c89701e8f4d2aa5721774ca2308f29"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-segments.png",
+          "pixels_sha256": "dfd51aa59183f0be08ac7061c7957fc707c89701e8f4d2aa5721774ca2308f29"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.15770132081101282,
+        "vertical": 0.7720197218757413,
+        "sloped": 0.07027895731325004
+      },
+      "largest_face_center_m": [
+        2297.0035807291665,
+        56.82917404174805,
+        -206.06437174479166
+      ],
+      "mean_source_rgb": [
+        136.43,
+        123.19,
+        104.83
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 3,
+          "triangles": 5220
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 9,
+          "triangles": 972
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 1,
+          "triangles": 612
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 10,
+          "triangles": 4788
+        }
+      ]
+    },
+    {
+      "name": "wascity-beach-wet-02",
+      "area_m2": 10893.58494944375,
+      "by_level": {
+        "wascityb": 10893.58494944375
+      },
+      "triangles": {
+        "wascityb": 132
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-beach-wet-02.png",
+          "pixels_sha256": "2e6a313639692da2841fe89e3eb87cab71cd3b2bedb2bf7afc53ee6484469fde"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.7389916152425138,
+        "vertical": 0.0,
+        "sloped": 0.2610083847574861
+      },
+      "largest_face_center_m": [
+        1585.9318033854167,
+        -3.1930012702941895,
+        -451.047119140625
+      ],
+      "mean_source_rgb": [
+        100.17,
+        90.08,
+        54.86
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 132
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground-2-ditch-03",
+      "area_m2": 10798.744229018092,
+      "by_level": {
+        "wascitya": 5141.671655929413,
+        "wascityb": 5657.072573088678
+      },
+      "triangles": {
+        "wascitya": 552,
+        "wascityb": 656
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ground-2-ditch-03.png",
+          "pixels_sha256": "ef957b97449eb59e1a0c12e618121e840befa2a2671339053988abe7f7ecafd2"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ground-2-ditch-03.png",
+          "pixels_sha256": "ef957b97449eb59e1a0c12e618121e840befa2a2671339053988abe7f7ecafd2"
+        }
+      ],
+      "orientation_area_fraction": {
+        "horizontal": 0.9983024368899338,
+        "vertical": 0.0006333783117523512,
+        "sloped": 0.0010641847983147905
+      },
+      "largest_face_center_m": [
+        2279.656494140625,
+        8.380361557006836,
+        -251.59413146972656
+      ],
+      "mean_source_rgb": [
+        139.89,
+        130.11,
+        111.29
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 104
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 320
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 20,
+          "triangles": 128
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 16
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 112
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 6,
+          "triangles": 384
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 10,
+          "triangles": 144
+        }
+      ]
+    },
+    {
+      "name": "wascitya-airlock-door",
+      "area_m2": 10674.655307099361,
+      "by_level": {
+        "wascitya": 10674.655307099361
+      },
+      "triangles": {
+        "wascitya": 352
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-airlock-door.png",
+          "pixels_sha256": "5f7e8292af3303cebe2c9dffae539dccbb8f8de6cc2f94c1dd27085a62c7bb3b"
+        }
+      ],
+      "mean_source_rgb": [
+        76.81,
+        71.92,
+        59.11
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 256
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 96
+        }
+      ]
+    },
+    {
+      "name": "wascity-palace-elevator-shaft",
+      "area_m2": 9640.561592476302,
+      "by_level": {
+        "wascitya": 9640.561592476302
+      },
+      "triangles": {
+        "wascitya": 448
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            256
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-palace-elevator-shaft.png",
+          "pixels_sha256": "46ebb48f503556f404029c7ded8f762a4ea6dd4b709c26d354466ad25f6b0496"
+        }
+      ],
+      "mean_source_rgb": [
+        79.21,
+        87.46,
+        118.36
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 448
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-piece-02",
+      "area_m2": 8372.550946272431,
+      "by_level": {
+        "wascitya": 3851.915962573518,
+        "wascityb": 4520.634983698914
+      },
+      "triangles": {
+        "wascitya": 6392,
+        "wascityb": 6444
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-piece-02.png",
+          "pixels_sha256": "ecb0c20b51035799ea4fed75b0d6b2a116289b70fa6fed87915d37bcecc101a7"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-piece-02.png",
+          "pixels_sha256": "ecb0c20b51035799ea4fed75b0d6b2a116289b70fa6fed87915d37bcecc101a7"
+        }
+      ],
+      "mean_source_rgb": [
+        109.75,
+        122.34,
+        121.24
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 5,
+          "triangles": 420
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 6,
+          "triangles": 2352
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 24,
+          "triangles": 2664
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 2,
+          "triangles": 884
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 6,
+          "triangles": 72
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 12,
+          "triangles": 2520
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 22,
+          "triangles": 440
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 24,
+          "triangles": 2088
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 29,
+          "triangles": 1360
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 2,
+          "triangles": 36
+        }
+      ]
+    },
+    {
+      "name": "wascity-outerwall-metal-c",
+      "area_m2": 8359.919804763964,
+      "by_level": {
+        "wascitya": 7552.337905299135,
+        "wascityb": 807.5818994648291
+      },
+      "triangles": {
+        "wascitya": 1100,
+        "wascityb": 160
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-outerwall-metal-c.png",
+          "pixels_sha256": "05c5b3d5d429e16beb4bff84462c904aef1a82fda1722b837b5ea0dabcb2dbbd"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-outerwall-metal-c.png",
+          "pixels_sha256": "72a38b1b437127a786aeead5632a1120aebdda63d3634a534d8fc41afc2ecde4"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-outerwall-metal-c.png",
+          "pixels_sha256": "8b0a6093b266e142ddf76ca8ed48ff3f761be5117e3092449d553287c08ad26c"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-outerwall-metal-c.png",
+          "pixels_sha256": "05c5b3d5d429e16beb4bff84462c904aef1a82fda1722b837b5ea0dabcb2dbbd"
+        }
+      ],
+      "mean_source_rgb": [
+        88.43,
+        82.09,
+        61.85
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 236
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 160
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 19,
+          "triangles": 624
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 31,
+          "triangles": 80
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 160
+        }
+      ]
+    },
+    {
+      "name": "wascity-greenmetal-tube",
+      "area_m2": 8299.621994651623,
+      "by_level": {
+        "wascitya": 4078.6334456262034,
+        "wascityb": 4220.988549025419
+      },
+      "triangles": {
+        "wascitya": 1952,
+        "wascityb": 2208
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-greenmetal-tube.png",
+          "pixels_sha256": "0e4cd377a8eca249d075d25c4a1fa8355eb09ec60c33d9b12a5fab26b8a472de"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-greenmetal-tube.png",
+          "pixels_sha256": "0e4cd377a8eca249d075d25c4a1fa8355eb09ec60c33d9b12a5fab26b8a472de"
+        }
+      ],
+      "mean_source_rgb": [
+        103.02,
+        76.12,
+        48.37
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 12
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 5,
+          "triangles": 420
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 28,
+          "triangles": 792
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 37,
+          "triangles": 648
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 38,
+          "triangles": 80
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 8,
+          "triangles": 1044
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 14,
+          "triangles": 40
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 684
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 22,
+          "triangles": 440
+        }
+      ]
+    },
+    {
+      "name": "wascity-rock-small",
+      "area_m2": 8002.645800016976,
+      "by_level": {
+        "wascitya": 3706.738877638325,
+        "wascityb": 4295.906922378651
+      },
+      "triangles": {
+        "wascitya": 8928,
+        "wascityb": 8064
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-rock-small.png",
+          "pixels_sha256": "b6807999d17db9fb2d463e27140535b00b4ce73137834dea358f51ecb47976c2"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-rock-small.png",
+          "pixels_sha256": "bcdeb5600e8e37b3aeb2002a3065a472006c3f140548eda15fa166ae21ed7b91"
+        }
+      ],
+      "mean_source_rgb": [
+        141.61,
+        106.02,
+        83.0
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 17,
+          "triangles": 4896
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 19,
+          "triangles": 4032
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 8,
+          "triangles": 4320
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 9,
+          "triangles": 3744
+        }
+      ]
+    },
+    {
+      "name": "wascity-stonewall-bricks",
+      "area_m2": 7627.289537630408,
+      "by_level": {
+        "wascitya": 3522.333516246963,
+        "wascityb": 4104.956021383445
+      },
+      "triangles": {
+        "wascitya": 970,
+        "wascityb": 780
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stonewall-bricks.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stonewall-bricks.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        }
+      ],
+      "mean_source_rgb": [
+        114.21,
+        115.63,
+        100.44
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 32
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 32,
+          "triangles": 560
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 0,
+          "triangles": 60
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 36
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 15,
+          "triangles": 120
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 16,
+          "triangles": 162
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 8
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 15,
+          "triangles": 108
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 580
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 43,
+          "triangles": 56
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 28
+        }
+      ]
+    },
+    {
+      "name": "wascity-beach-01",
+      "area_m2": 7457.305319945677,
+      "by_level": {
+        "wascityb": 7457.305319945677
+      },
+      "triangles": {
+        "wascityb": 256
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-beach-01.png",
+          "pixels_sha256": "f80bf7d5cbded0fb75f2946fb0ac703d32fd9b097a1f8b5f0004c789779229e9"
+        }
+      ],
+      "mean_source_rgb": [
+        136.89,
+        127.12,
+        89.05
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 256
+        }
+      ]
+    },
+    {
+      "name": "wascitya-redish-metal",
+      "area_m2": 6675.726401787468,
+      "by_level": {
+        "wascitya": 4045.1094188300845,
+        "wascityb": 2630.6169829573832
+      },
+      "triangles": {
+        "wascitya": 846,
+        "wascityb": 612
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascitya-redish-metal.png",
+          "pixels_sha256": "55736cf84abfcf54caaacbd917f4eb28688c966f7dd287282aec79e23c4693a9"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-redish-metal.png",
+          "pixels_sha256": "55736cf84abfcf54caaacbd917f4eb28688c966f7dd287282aec79e23c4693a9"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascitya-redish-metal.png",
+          "pixels_sha256": "55736cf84abfcf54caaacbd917f4eb28688c966f7dd287282aec79e23c4693a9"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascitya-redish-metal.png",
+          "pixels_sha256": "55736cf84abfcf54caaacbd917f4eb28688c966f7dd287282aec79e23c4693a9"
+        }
+      ],
+      "mean_source_rgb": [
+        103.83,
+        69.34,
+        51.26
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 82
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 33,
+          "triangles": 160
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 220
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 13,
+          "triangles": 384
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 27,
+          "triangles": 140
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 30,
+          "triangles": 312
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 160
+        }
+      ]
+    },
+    {
+      "name": "wascity-wall-weathered",
+      "area_m2": 6367.776360329339,
+      "by_level": {
+        "wascitya": 3214.2088384258745,
+        "wascityb": 3153.5675219034647
+      },
+      "triangles": {
+        "wascitya": 504,
+        "wascityb": 504
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-wall-weathered.png",
+          "pixels_sha256": "3f74a2153a54d09dab5e039504c3b45b4ba4d422313c41f1bee74c51d25f5441"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-wall-weathered.png",
+          "pixels_sha256": "3f74a2153a54d09dab5e039504c3b45b4ba4d422313c41f1bee74c51d25f5441"
+        }
+      ],
+      "mean_source_rgb": [
+        121.38,
+        124.08,
+        113.56
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 8,
+          "triangles": 504
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 38,
+          "triangles": 504
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-supports-end",
+      "area_m2": 5901.230963201787,
+      "by_level": {
+        "wascitya": 2742.8228777221093,
+        "wascityb": 3158.4080854796775
+      },
+      "triangles": {
+        "wascitya": 960,
+        "wascityb": 1092
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-supports-end.png",
+          "pixels_sha256": "e370561f5ad0eebb49ac055c2f1cd67487c3c9397c3673a97e308d38aa7e32c2"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-supports-end.png",
+          "pixels_sha256": "e370561f5ad0eebb49ac055c2f1cd67487c3c9397c3673a97e308d38aa7e32c2"
+        }
+      ],
+      "mean_source_rgb": [
+        141.3,
+        143.34,
+        122.72
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 624
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 32,
+          "triangles": 336
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 348
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 21,
+          "triangles": 744
+        }
+      ]
+    },
+    {
+      "name": "wascity-palm-leaf-worn",
+      "area_m2": 5249.886633123421,
+      "by_level": {
+        "wascityb": 5249.886633123421
+      },
+      "triangles": {
+        "wascityb": 4320
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            0,
+            126
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-palm-leaf-worn.png",
+          "pixels_sha256": "734ab4730dc970492c34aeaed1d678d0fe1dd1847f5188307d6d4645f988fa8b"
+        }
+      ],
+      "mean_source_rgb": [
+        91.61,
+        90.55,
+        44.2
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-wall-canister",
+      "area_m2": 5214.033154444394,
+      "by_level": {
+        "wascitya": 3152.620460957877,
+        "wascityb": 2061.4126934865167
+      },
+      "triangles": {
+        "wascitya": 2032,
+        "wascityb": 1424
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-wall-canister.png",
+          "pixels_sha256": "9f2b33289123563c6f2c18702813f88e1ce797c3187c54b3782f64a154bcf514"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-wall-canister.png",
+          "pixels_sha256": "9f2b33289123563c6f2c18702813f88e1ce797c3187c54b3782f64a154bcf514"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-wall-canister.png",
+          "pixels_sha256": "9f2b33289123563c6f2c18702813f88e1ce797c3187c54b3782f64a154bcf514"
+        }
+      ],
+      "mean_source_rgb": [
+        98.78,
+        93.43,
+        61.26
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 25,
+          "triangles": 1872
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 3,
+          "triangles": 64
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 31,
+          "triangles": 96
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 35,
+          "triangles": 1392
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 1,
+          "triangles": 32
+        }
+      ]
+    },
+    {
+      "name": "wascity-wallspike-2-ground-01",
+      "area_m2": 4901.283178365282,
+      "by_level": {
+        "wascitya": 2654.7229989512457,
+        "wascityb": 2246.5601794140357
+      },
+      "triangles": {
+        "wascitya": 1368,
+        "wascityb": 1176
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-wallspike-2-ground-01.png",
+          "pixels_sha256": "9320b8a27cfc11a31d519606ceb3cb60d9b198c8975438a1ab1f5e248ece8351"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-wallspike-2-ground-01.png",
+          "pixels_sha256": "9320b8a27cfc11a31d519606ceb3cb60d9b198c8975438a1ab1f5e248ece8351"
+        }
+      ],
+      "mean_source_rgb": [
+        114.51,
+        102.35,
+        90.99
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 11,
+          "triangles": 1368
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 13,
+          "triangles": 1176
+        }
+      ]
+    },
+    {
+      "name": "wascity-shrub-orange-01",
+      "area_m2": 4712.3716550623285,
+      "by_level": {
+        "wascitya": 2836.1576515019487,
+        "wascityb": 1876.21400356038
+      },
+      "triangles": {
+        "wascitya": 29982,
+        "wascityb": 28956
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-shrub-orange-01.png",
+          "pixels_sha256": "193e1665990441b2ce0a93b3a4fb9c6637938d32d9292170dd47bb084a27fd18"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-shrub-orange-01.png",
+          "pixels_sha256": "193e1665990441b2ce0a93b3a4fb9c6637938d32d9292170dd47bb084a27fd18"
+        }
+      ],
+      "mean_source_rgb": [
+        190.25,
+        134.46,
+        74.5
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "common-gray-dark",
+      "area_m2": 4698.097121385585,
+      "by_level": {
+        "wascitya": 2411.2626308239287,
+        "wascityb": 2286.834490561656
+      },
+      "triangles": {
+        "wascitya": 242,
+        "wascityb": 244
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            4,
+            4
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\common-gray-dark.png",
+          "pixels_sha256": "879027a7f3ead5be8890c381864d9d34ce91598fb724a1b797de3fc11930fedd"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            4,
+            4
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\common-gray-dark.png",
+          "pixels_sha256": "879027a7f3ead5be8890c381864d9d34ce91598fb724a1b797de3fc11930fedd"
+        }
+      ],
+      "mean_source_rgb": [
+        74.0,
+        74.0,
+        74.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 9,
+          "triangles": 54
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 28,
+          "triangles": 44
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 37,
+          "triangles": 144
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 1,
+          "triangles": 34
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 8,
+          "triangles": 58
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 16,
+          "triangles": 152
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-spike-01-envmap",
+      "area_m2": 4675.508829218148,
+      "by_level": {
+        "wascitya": 2889.4934196224935,
+        "wascityb": 1786.015409595655
+      },
+      "triangles": {
+        "wascitya": 8328,
+        "wascityb": 5880
+      },
+      "placements": [],
+      "native_usage": []
+    },
+    {
+      "name": "wascity-stucco-wall-supports",
+      "area_m2": 4662.751758887764,
+      "by_level": {
+        "wascitya": 2133.5837006122606,
+        "wascityb": 2529.1680582755025
+      },
+      "triangles": {
+        "wascitya": 952,
+        "wascityb": 1100
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-supports.png",
+          "pixels_sha256": "025c51bf3042dc08f1057a782bcaff49333bba0dc90d06c1652d1621f3f1b602"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-supports.png",
+          "pixels_sha256": "025c51bf3042dc08f1057a782bcaff49333bba0dc90d06c1652d1621f3f1b602"
+        }
+      ],
+      "mean_source_rgb": [
+        150.8,
+        155.52,
+        135.19
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 31,
+          "triangles": 728
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 32,
+          "triangles": 224
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 18,
+          "triangles": 232
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 21,
+          "triangles": 868
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground-stain-01",
+      "area_m2": 4368.162506221176,
+      "by_level": {
+        "wascitya": 2690.915553494322,
+        "wascityb": 1677.246952726854
+      },
+      "triangles": {
+        "wascitya": 206,
+        "wascityb": 130
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            103
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-ground-stain-01.png",
+          "pixels_sha256": "2a6778a620a55c834b84ddcd22cc13c0b2b4beb7b5a1441ffac5cf51606d5c5c"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            103
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-ground-stain-01.png",
+          "pixels_sha256": "2a6778a620a55c834b84ddcd22cc13c0b2b4beb7b5a1441ffac5cf51606d5c5c"
+        }
+      ],
+      "mean_source_rgb": [
+        66.94,
+        59.0,
+        37.41
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-metal-piece-01",
+      "area_m2": 4106.852813076673,
+      "by_level": {
+        "wascitya": 2016.492895431202,
+        "wascityb": 2090.359917645471
+      },
+      "triangles": {
+        "wascitya": 1338,
+        "wascityb": 1684
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-piece-01.png",
+          "pixels_sha256": "05d48e488f49a78cd294a8a14dbdd2a3b47ab2d026ccdcaa7c3a840f38cc39f4"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-piece-01.png",
+          "pixels_sha256": "05d48e488f49a78cd294a8a14dbdd2a3b47ab2d026ccdcaa7c3a840f38cc39f4"
+        }
+      ],
+      "mean_source_rgb": [
+        143.95,
+        122.72,
+        100.15
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 16
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 41,
+          "triangles": 666
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 43,
+          "triangles": 396
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 2,
+          "triangles": 260
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 29,
+          "triangles": 400
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 39,
+          "triangles": 864
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 41,
+          "triangles": 420
+        }
+      ]
+    },
+    {
+      "name": "wascity-wallspike-01",
+      "area_m2": 4092.9376114973743,
+      "by_level": {
+        "wascitya": 2216.909419215371,
+        "wascityb": 1876.0281922820031
+      },
+      "triangles": {
+        "wascitya": 2394,
+        "wascityb": 2058
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-wallspike-01.png",
+          "pixels_sha256": "c06de4f7347cc813907db21d9e44b1095ab5a067cd0b40e3849863081f524bbc"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-wallspike-01.png",
+          "pixels_sha256": "c06de4f7347cc813907db21d9e44b1095ab5a067cd0b40e3849863081f524bbc"
+        }
+      ],
+      "mean_source_rgb": [
+        157.61,
+        156.89,
+        145.72
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 11,
+          "triangles": 2394
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 13,
+          "triangles": 2058
+        }
+      ]
+    },
+    {
+      "name": "wascity-stain-wall-01",
+      "area_m2": 4060.1162700729756,
+      "by_level": {
+        "wascitya": 2374.886755345767,
+        "wascityb": 1685.2295147272084
+      },
+      "triangles": {
+        "wascitya": 516,
+        "wascityb": 354
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            0,
+            113
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-stain-wall-01.png",
+          "pixels_sha256": "2793be05bcfe25321e33b3ec7a501ac81a52f6301b1935a7af5a6fa36f634ac8"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            0,
+            113
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-stain-wall-01.png",
+          "pixels_sha256": "2793be05bcfe25321e33b3ec7a501ac81a52f6301b1935a7af5a6fa36f634ac8"
+        }
+      ],
+      "mean_source_rgb": [
+        25.02,
+        25.02,
+        25.02
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-steel-bar",
+      "area_m2": 3656.360399061416,
+      "by_level": {
+        "wascitya": 1670.5222172360682,
+        "wascityb": 1985.8381818253479
+      },
+      "triangles": {
+        "wascitya": 2904,
+        "wascityb": 2928
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-steel-bar.png",
+          "pixels_sha256": "ac961f95a276d5dee49ec7490962b64ae852f873c024d03bf6326609218cdc7c"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-steel-bar.png",
+          "pixels_sha256": "ac961f95a276d5dee49ec7490962b64ae852f873c024d03bf6326609218cdc7c"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-steel-bar.png",
+          "pixels_sha256": "ac961f95a276d5dee49ec7490962b64ae852f873c024d03bf6326609218cdc7c"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-steel-bar.png",
+          "pixels_sha256": "ac961f95a276d5dee49ec7490962b64ae852f873c024d03bf6326609218cdc7c"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-steel-bar.png",
+          "pixels_sha256": "ac961f95a276d5dee49ec7490962b64ae852f873c024d03bf6326609218cdc7c"
+        }
+      ],
+      "mean_source_rgb": [
+        106.56,
+        91.21,
+        85.24
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 29,
+          "triangles": 1056
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 1320
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 9,
+          "triangles": 1392
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 1080
+        }
+      ]
+    },
+    {
+      "name": "wascity-palm-beard",
+      "area_m2": 3391.383273911014,
+      "by_level": {
+        "wascityb": 3391.383273911014
+      },
+      "triangles": {
+        "wascityb": 1920
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-palm-beard.png",
+          "pixels_sha256": "e44c880ef88289a32d9bd77e243aa87978bb3d32fc1ab118c608e2f482dff750"
+        }
+      ],
+      "mean_source_rgb": [
+        97.7,
+        81.34,
+        32.02
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-ditch-wall-top-to-ground-edging",
+      "area_m2": 3390.6864634664785,
+      "by_level": {
+        "wascitya": 1218.1797110400862,
+        "wascityb": 2172.5067524263923
+      },
+      "triangles": {
+        "wascitya": 328,
+        "wascityb": 464
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-ditch-wall-top-to-ground-edging.png",
+          "pixels_sha256": "7da6123c1f12937cba33acf5ba24ffeecbf33e15c98a4debb5632a6036f1cb85"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ditch-wall-top-to-ground-edging.png",
+          "pixels_sha256": "7da6123c1f12937cba33acf5ba24ffeecbf33e15c98a4debb5632a6036f1cb85"
+        }
+      ],
+      "mean_source_rgb": [
+        134.97,
+        120.83,
+        97.91
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 328
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 464
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-door-01-envmap",
+      "area_m2": 2758.7601414137107,
+      "by_level": {
+        "wascitya": 1686.2061140163291,
+        "wascityb": 1072.5540273973816
+      },
+      "triangles": {
+        "wascitya": 2268,
+        "wascityb": 1428
+      },
+      "placements": [],
+      "native_usage": []
+    },
+    {
+      "name": "wascity-palm-trunk",
+      "area_m2": 2223.6187951055667,
+      "by_level": {
+        "wascityb": 2223.6187951055667
+      },
+      "triangles": {
+        "wascityb": 1920
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-palm-trunk.png",
+          "pixels_sha256": "b8d4a0ff1586efd21865cb00a5a1796e5c4843152cc045cf99ad0a328df35e0c"
+        }
+      ],
+      "mean_source_rgb": [
+        105.92,
+        76.32,
+        52.01
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 16,
+          "triangles": 1920
+        }
+      ]
+    },
+    {
+      "name": "wascity-window-glass-01-envmap",
+      "area_m2": 2169.72499375377,
+      "by_level": {
+        "wascitya": 1013.4549782838309,
+        "wascityb": 1156.2700154699392
+      },
+      "triangles": {
+        "wascitya": 590,
+        "wascityb": 656
+      },
+      "placements": [],
+      "native_usage": []
+    },
+    {
+      "name": "wascity-beach-wet-01",
+      "area_m2": 2085.6494400885103,
+      "by_level": {
+        "wascityb": 2085.6494400885103
+      },
+      "triangles": {
+        "wascityb": 44
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-beach-wet-01.png",
+          "pixels_sha256": "0d2b9edf6494cae4fbc7f7a1e5ac36edc53be1311fb59ead49ab5f71e4dff587"
+        }
+      ],
+      "mean_source_rgb": [
+        115.87,
+        106.21,
+        69.81
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 44
+        }
+      ]
+    },
+    {
+      "name": "wascity-steps-red",
+      "area_m2": 1995.2431011199951,
+      "by_level": {
+        "wascitya": 1995.2431011199951
+      },
+      "triangles": {
+        "wascitya": 960
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-steps-red.png",
+          "pixels_sha256": "e547f838e991b4cad28a4a2cba9cae731deadf03f6002f13df639e47100a096b"
+        }
+      ],
+      "mean_source_rgb": [
+        108.98,
+        86.98,
+        81.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 30,
+          "triangles": 960
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-cut-01",
+      "area_m2": 1993.5324374495283,
+      "by_level": {
+        "wascitya": 566.2001461608384,
+        "wascityb": 1427.33229128869
+      },
+      "triangles": {
+        "wascitya": 310,
+        "wascityb": 1032
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-cut-01.png",
+          "pixels_sha256": "851410905ab5a4ddc9f9576ac2d7955937e8af997c358e51df09d5269eba840a"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-cut-01.png",
+          "pixels_sha256": "851410905ab5a4ddc9f9576ac2d7955937e8af997c358e51df09d5269eba840a"
+        }
+      ],
+      "mean_source_rgb": [
+        131.76,
+        135.4,
+        124.43
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 23,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 26,
+          "triangles": 216
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 0,
+          "triangles": 70
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 20
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 15,
+          "triangles": 126
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 25,
+          "triangles": 708
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 43,
+          "triangles": 112
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 42
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 27,
+          "triangles": 24
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-indent",
+      "area_m2": 1886.214909271107,
+      "by_level": {
+        "wascitya": 948.0615690930401,
+        "wascityb": 938.1533401780667
+      },
+      "triangles": {
+        "wascitya": 712,
+        "wascityb": 716
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-indent.png",
+          "pixels_sha256": "d3482efd1156795610bbc6eb73c2ccaaacfd2d55758dcbdbdfeab91c4d4a1517"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-metal-indent.png",
+          "pixels_sha256": "d3482efd1156795610bbc6eb73c2ccaaacfd2d55758dcbdbdfeab91c4d4a1517"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-indent.png",
+          "pixels_sha256": "d3482efd1156795610bbc6eb73c2ccaaacfd2d55758dcbdbdfeab91c4d4a1517"
+        }
+      ],
+      "mean_source_rgb": [
+        86.29,
+        82.64,
+        70.86
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 38,
+          "triangles": 648
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 3,
+          "triangles": 64
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 17,
+          "triangles": 684
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 1,
+          "triangles": 32
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-piece-03",
+      "area_m2": 1818.8560771017173,
+      "by_level": {
+        "wascityb": 1818.8560771017173
+      },
+      "triangles": {
+        "wascityb": 2304
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-piece-03.png",
+          "pixels_sha256": "19a3fd495a83eed35d8b205fa26d646828c99c0c175a208187e17ba04ba647c0"
+        }
+      ],
+      "mean_source_rgb": [
+        88.6,
+        118.19,
+        137.43
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 0,
+          "triangles": 1260
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 2,
+          "triangles": 576
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 3,
+          "triangles": 468
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-edge-01",
+      "area_m2": 1692.1194448771096,
+      "by_level": {
+        "wascitya": 961.4238085979864,
+        "wascityb": 730.6956362791232
+      },
+      "triangles": {
+        "wascitya": 360,
+        "wascityb": 308
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            256,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stucco-wall-bleached-edge-01.png",
+          "pixels_sha256": "65f69a30ae31c38538da240bf75e4a6cd49ffd7e833ce0151123090e43b5e339"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            256,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-edge-01.png",
+          "pixels_sha256": "65f69a30ae31c38538da240bf75e4a6cd49ffd7e833ce0151123090e43b5e339"
+        }
+      ],
+      "mean_source_rgb": [
+        142.81,
+        145.44,
+        135.04
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 14,
+          "triangles": 168
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 5,
+          "triangles": 192
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 36,
+          "triangles": 252
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 37,
+          "triangles": 56
+        }
+      ]
+    },
+    {
+      "name": "wascitya-slum-lightwall",
+      "area_m2": 1661.5030540645669,
+      "by_level": {
+        "wascitya": 1661.5030540645669
+      },
+      "triangles": {
+        "wascitya": 48
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-slum-lightwall.png",
+          "pixels_sha256": "536f7756aa715abb9cd78bc4d66ee39d3a88ad9b48d5bb3b5aa985bbf062a37a"
+        }
+      ],
+      "mean_source_rgb": [
+        121.7,
+        124.74,
+        122.93
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 48
+        }
+      ]
+    },
+    {
+      "name": "wascity-torch-tank",
+      "area_m2": 1442.886480789919,
+      "by_level": {
+        "wascitya": 793.6019767397208,
+        "wascityb": 649.2845040501983
+      },
+      "triangles": {
+        "wascitya": 2640,
+        "wascityb": 2160
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-torch-tank.png",
+          "pixels_sha256": "649f88df2cc36343335058c297a9a6fdc7778e291112b5354e2489174ab9bb28"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-torch-tank.png",
+          "pixels_sha256": "649f88df2cc36343335058c297a9a6fdc7778e291112b5354e2489174ab9bb28"
+        }
+      ],
+      "mean_source_rgb": [
+        93.91,
+        97.16,
+        94.06
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 2640
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 2160
+        }
+      ]
+    },
+    {
+      "name": "wascity-overlay-tribal-1",
+      "area_m2": 1421.6346538620874,
+      "by_level": {
+        "wascitya": 798.1316193274348,
+        "wascityb": 623.5030345346527
+      },
+      "triangles": {
+        "wascitya": 20,
+        "wascityb": 16
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            0,
+            123
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-tribal-1.png",
+          "pixels_sha256": "2832fb53e63b9e49664968081dadae19094c9b75e37f07d3532adc2e32f3d7d9"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            0,
+            123
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-tribal-1.png",
+          "pixels_sha256": "165498d75b5e0541ebc202ae88919bf54205334c461a5b06f100f68ca5b0704a"
+        }
+      ],
+      "mean_source_rgb": [
+        149.75,
+        126.3,
+        115.69
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-metal-pole",
+      "area_m2": 1408.010401075749,
+      "by_level": {
+        "wascitya": 698.2348512781397,
+        "wascityb": 709.7755497976093
+      },
+      "triangles": {
+        "wascitya": 4860,
+        "wascityb": 4950
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-pole.png",
+          "pixels_sha256": "20950c63e572f3cbef645a8019d6943a5e216f188d9f7bd08f98b38c82e65d64"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-pole.png",
+          "pixels_sha256": "20950c63e572f3cbef645a8019d6943a5e216f188d9f7bd08f98b38c82e65d64"
+        }
+      ],
+      "mean_source_rgb": [
+        94.54,
+        72.78,
+        53.49
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 27,
+          "triangles": 4860
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 19,
+          "triangles": 4950
+        }
+      ]
+    },
+    {
+      "name": "city-slum-medpipe-01",
+      "area_m2": 1329.6957918678327,
+      "by_level": {
+        "wascitya": 1141.9948440954681,
+        "wascityb": 187.70094777236457
+      },
+      "triangles": {
+        "wascitya": 2184,
+        "wascityb": 528
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\city-slum-medpipe-01.png",
+          "pixels_sha256": "5d49526c7ac8adc25badfa8837e986582d12520e33df0a49a2c9aaf7ca45d8aa"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\city-slum-medpipe-01.png",
+          "pixels_sha256": "5d49526c7ac8adc25badfa8837e986582d12520e33df0a49a2c9aaf7ca45d8aa"
+        }
+      ],
+      "mean_source_rgb": [
+        78.83,
+        80.83,
+        72.65
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 39,
+          "triangles": 1368
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 41,
+          "triangles": 240
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 42,
+          "triangles": 576
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 39,
+          "triangles": 336
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 40,
+          "triangles": 96
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 41,
+          "triangles": 96
+        }
+      ]
+    },
+    {
+      "name": "wascitya-stone-top-breakaway",
+      "area_m2": 1297.49125235262,
+      "by_level": {
+        "wascitya": 1297.49125235262
+      },
+      "triangles": {
+        "wascitya": 498
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-top-breakaway.png",
+          "pixels_sha256": "873eec269ae1bec054eed350ea2e998aab4f2bcfbf76f5bfb7aac07735bca909"
+        }
+      ],
+      "mean_source_rgb": [
+        125.17,
+        124.35,
+        103.04
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 14,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 15,
+          "triangles": 24
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 16,
+          "triangles": 30
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 17,
+          "triangles": 420
+        }
+      ]
+    },
+    {
+      "name": "wascity-base",
+      "area_m2": 1193.7069894825213,
+      "by_level": {
+        "wascitya": 1193.7069894825213
+      },
+      "triangles": {
+        "wascitya": 328
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-base.png",
+          "pixels_sha256": "4a0db1a8914e7cdc070bf98bf3be595cc70dcdcdbcc22d9ae84b4bbcdfdcbb63"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-base.png",
+          "pixels_sha256": "4a0db1a8914e7cdc070bf98bf3be595cc70dcdcdbcc22d9ae84b4bbcdfdcbb63"
+        }
+      ],
+      "mean_source_rgb": [
+        70.72,
+        70.41,
+        58.37
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 328
+        }
+      ]
+    },
+    {
+      "name": "wascity-stonewall-bricks-HI",
+      "area_m2": 1039.0053007814881,
+      "by_level": {
+        "wascitya": 485.80223045207657,
+        "wascityb": 553.2030703294116
+      },
+      "triangles": {
+        "wascitya": 32,
+        "wascityb": 40
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-stonewall-bricks-HI.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stonewall-bricks-HI.png",
+          "pixels_sha256": "eea1adec5da1375731e502d6f7b958ed8f582ba08e1b49ae407c4d2f76445fd8"
+        }
+      ],
+      "mean_source_rgb": [
+        114.21,
+        115.63,
+        100.44
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 23,
+          "triangles": 32
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 8
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 27,
+          "triangles": 32
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-door-01",
+      "area_m2": 895.4860388715508,
+      "by_level": {
+        "wascitya": 784.976212227311,
+        "wascityb": 110.50982664423992
+      },
+      "triangles": {
+        "wascitya": 1500,
+        "wascityb": 648
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            32
+          ],
+          "alpha": [
+            0,
+            98
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-door-01.png",
+          "pixels_sha256": "a0abba516c0d91e9b5cd0ad09f1e1efdec61620be764783b6b779e8db9e96f8f"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            128,
+            32
+          ],
+          "alpha": [
+            0,
+            98
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\wascity-metal-door-01.png",
+          "pixels_sha256": "a0abba516c0d91e9b5cd0ad09f1e1efdec61620be764783b6b779e8db9e96f8f"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            32
+          ],
+          "alpha": [
+            0,
+            98
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-door-01.png",
+          "pixels_sha256": "a0abba516c0d91e9b5cd0ad09f1e1efdec61620be764783b6b779e8db9e96f8f"
+        }
+      ],
+      "mean_source_rgb": [
+        104.83,
+        81.02,
+        69.04
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 10,
+          "triangles": 2268
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 32,
+          "triangles": 96
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 33,
+          "triangles": 612
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 792
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 2,
+          "triangles": 1428
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 29,
+          "triangles": 648
+        }
+      ]
+    },
+    {
+      "name": "wascity-ditch-wall-top-to-beach",
+      "area_m2": 889.7370280037039,
+      "by_level": {
+        "wascityb": 889.7370280037039
+      },
+      "triangles": {
+        "wascityb": 160
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-ditch-wall-top-to-beach.png",
+          "pixels_sha256": "54b1a3d45952df839c72c7c5ed92a5cbe83bebc5b3aa1eef230c3e98e5b7fac9"
+        }
+      ],
+      "mean_source_rgb": [
+        137.28,
+        125.65,
+        93.81
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 160
+        }
+      ]
+    },
+    {
+      "name": "wascitya-airlock-metal",
+      "area_m2": 798.2453450434691,
+      "by_level": {
+        "wascitya": 798.2453450434691
+      },
+      "triangles": {
+        "wascitya": 48
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-airlock-metal.png",
+          "pixels_sha256": "3e3810df11ba34fffacf8ac78b6a2b92faafc6bc98ac42e18b54fe9c17f4c7f5"
+        }
+      ],
+      "mean_source_rgb": [
+        78.1,
+        81.97,
+        68.63
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 48
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-spike-01",
+      "area_m2": 745.2157660767244,
+      "by_level": {
+        "wascitya": 523.9492042161288,
+        "wascityb": 221.26656186059563
+      },
+      "triangles": {
+        "wascitya": 264,
+        "wascityb": 108
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            0,
+            85
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-spike-01.png",
+          "pixels_sha256": "18dc2fe4669c4a00f6cf7cdd9352af457f40df5911d0c2520678bc25fdc3b874"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            0,
+            85
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-spike-01.png",
+          "pixels_sha256": "18dc2fe4669c4a00f6cf7cdd9352af457f40df5911d0c2520678bc25fdc3b874"
+        }
+      ],
+      "mean_source_rgb": [
+        141.02,
+        114.77,
+        82.08
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 1,
+          "triangles": 4800
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 13,
+          "triangles": 264
+        },
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 30,
+          "triangles": 3528
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 4,
+          "triangles": 3240
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 7,
+          "triangles": 2640
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 36,
+          "triangles": 108
+        }
+      ]
+    },
+    {
+      "name": "wascity-overlay-bullethole-c",
+      "area_m2": 604.7638749034269,
+      "by_level": {
+        "wascitya": 264.04878644379664,
+        "wascityb": 340.71508845963024
+      },
+      "triangles": {
+        "wascitya": 80,
+        "wascityb": 94
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-bullethole-c.png",
+          "pixels_sha256": "9a4b37392e3ca51fb533aeeb32d0b9777d15cd41fd435fd7c765b8cda52ce286"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-bullethole-c.png",
+          "pixels_sha256": "9a4b37392e3ca51fb533aeeb32d0b9777d15cd41fd435fd7c765b8cda52ce286"
+        }
+      ],
+      "mean_source_rgb": [
+        161.45,
+        154.1,
+        145.12
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-steps",
+      "area_m2": 577.8282712939179,
+      "by_level": {
+        "wascitya": 93.17512399681918,
+        "wascityb": 484.6531472970987
+      },
+      "triangles": {
+        "wascitya": 10,
+        "wascityb": 42
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-steps.png",
+          "pixels_sha256": "1d7974b3f178faa31e06d97a0758ee0b66f460feca3230b5fde8fa3a0a3d3a05"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            128,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-steps.png",
+          "pixels_sha256": "4ac5a57be66adef6cae44d735e79f2da7a44e799232b6525b16af1f4a135761a"
+        }
+      ],
+      "mean_source_rgb": [
+        113.0,
+        110.04,
+        102.48
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 10
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 42
+        }
+      ]
+    },
+    {
+      "name": "wascity-overlay-bullethole-b",
+      "area_m2": 463.1670261819494,
+      "by_level": {
+        "wascitya": 223.54683924049036,
+        "wascityb": 239.620186941459
+      },
+      "triangles": {
+        "wascitya": 134,
+        "wascityb": 140
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-bullethole-b.png",
+          "pixels_sha256": "225addd60b185b9cf50e5d76866347e4bf9a816e5c9b7f7854b246aa0a112653"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-bullethole-b.png",
+          "pixels_sha256": "225addd60b185b9cf50e5d76866347e4bf9a816e5c9b7f7854b246aa0a112653"
+        }
+      ],
+      "mean_source_rgb": [
+        157.27,
+        147.38,
+        138.28
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "common-black",
+      "area_m2": 447.28354009226666,
+      "by_level": {
+        "wascitya": 447.28354009226666
+      },
+      "triangles": {
+        "wascitya": 74
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            8,
+            8
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\common-black.png",
+          "pixels_sha256": "a9b083b7e9b26bab56580c1f888aac39e2c0397bc6817da98fbce8d49a8d090e"
+        },
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            8,
+            8
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\common-black.png",
+          "pixels_sha256": "a9b083b7e9b26bab56580c1f888aac39e2c0397bc6817da98fbce8d49a8d090e"
+        },
+        {
+          "page": "wascityb-vis-pris",
+          "size": [
+            8,
+            8
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-pris\\common-black.png",
+          "pixels_sha256": "a9b083b7e9b26bab56580c1f888aac39e2c0397bc6817da98fbce8d49a8d090e"
+        }
+      ],
+      "mean_source_rgb": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 74
+        }
+      ]
+    },
+    {
+      "name": "city-slum-medpipe-02",
+      "area_m2": 328.66882447522937,
+      "by_level": {
+        "wascitya": 248.26501512237874,
+        "wascityb": 80.4038093528506
+      },
+      "triangles": {
+        "wascitya": 3528,
+        "wascityb": 1476
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\city-slum-medpipe-02.png",
+          "pixels_sha256": "0dd803d4675e53d1bc1245261a13a3e649f25b01ba992546ad3b292f19af6499"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\city-slum-medpipe-02.png",
+          "pixels_sha256": "0dd803d4675e53d1bc1245261a13a3e649f25b01ba992546ad3b292f19af6499"
+        }
+      ],
+      "mean_source_rgb": [
+        79.92,
+        84.11,
+        76.36
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 40,
+          "triangles": 3528
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 38,
+          "triangles": 1476
+        }
+      ]
+    },
+    {
+      "name": "wascity-chimney-hires",
+      "area_m2": 322.7902117874654,
+      "by_level": {
+        "wascitya": 154.28014259437214,
+        "wascityb": 168.51006919309327
+      },
+      "triangles": {
+        "wascitya": 320,
+        "wascityb": 360
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-chimney-hires.png",
+          "pixels_sha256": "f7229a504b1de7de1ff1ed12fd041dc591a9ee2588507c7db35db9d1d62b0449"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-chimney-hires.png",
+          "pixels_sha256": "f7229a504b1de7de1ff1ed12fd041dc591a9ee2588507c7db35db9d1d62b0449"
+        }
+      ],
+      "mean_source_rgb": [
+        102.2,
+        90.69,
+        77.29
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 0,
+          "proto": 15,
+          "triangles": 320
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 0,
+          "triangles": 360
+        }
+      ]
+    },
+    {
+      "name": "wascity-overlay-crack",
+      "area_m2": 226.39363888512673,
+      "by_level": {
+        "wascitya": 150.93110957577613,
+        "wascityb": 75.46252930935059
+      },
+      "triangles": {
+        "wascitya": 8,
+        "wascityb": 4
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            0,
+            123
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-crack.png",
+          "pixels_sha256": "e8b5ff3b7d813ebee42aefaa6e72e0e2f6c1bff961f31ca6084852cd8f781263"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            128,
+            128
+          ],
+          "alpha": [
+            0,
+            123
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-crack.png",
+          "pixels_sha256": "39b420ad17ecb0e439d45fc0889200d403db1c1a2a485c96c261d8dabf449758"
+        }
+      ],
+      "mean_source_rgb": [
+        112.88,
+        104.71,
+        86.96
+      ],
+      "same_pixels_all_placements": false,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-wood-plain",
+      "area_m2": 202.7307208238633,
+      "by_level": {
+        "wascitya": 15.215621818959248,
+        "wascityb": 187.51509900490404
+      },
+      "triangles": {
+        "wascitya": 216,
+        "wascityb": 1784
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-wood-plain.png",
+          "pixels_sha256": "ae8286a41335ae67205caf7da874a7a17bb98dd9182974307a5ebbae19d90309"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-wood-plain.png",
+          "pixels_sha256": "ae8286a41335ae67205caf7da874a7a17bb98dd9182974307a5ebbae19d90309"
+        }
+      ],
+      "mean_source_rgb": [
+        115.62,
+        90.55,
+        69.66
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 2,
+          "proto": 0,
+          "triangles": 216
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 19,
+          "triangles": 560
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 20,
+          "triangles": 576
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 31,
+          "triangles": 648
+        }
+      ]
+    },
+    {
+      "name": "wascity-cactus-green",
+      "area_m2": 178.92277597364668,
+      "by_level": {
+        "wascitya": 133.6228415643833,
+        "wascityb": 45.299934409263386
+      },
+      "triangles": {
+        "wascitya": 3384,
+        "wascityb": 1316
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-cactus-green.png",
+          "pixels_sha256": "8b83a2929baaa597a62dff92c6003c437b51b954d0e08d37ada6323ee70738e7"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            32,
+            32
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-cactus-green.png",
+          "pixels_sha256": "8b83a2929baaa597a62dff92c6003c437b51b954d0e08d37ada6323ee70738e7"
+        }
+      ],
+      "mean_source_rgb": [
+        117.09,
+        148.95,
+        121.38
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascitya-stone-top-door",
+      "area_m2": 128.36870319576448,
+      "by_level": {
+        "wascitya": 128.36870319576448
+      },
+      "triangles": {
+        "wascitya": 10
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-top-door.png",
+          "pixels_sha256": "028914fa4bb0c89a21a7007e26f2241d8a933c7813759694e6fd3a8ae858225b"
+        }
+      ],
+      "mean_source_rgb": [
+        84.21,
+        84.08,
+        70.22
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 10
+        }
+      ]
+    },
+    {
+      "name": "wascity-overlay-bullethole-a",
+      "area_m2": 107.61916542040571,
+      "by_level": {
+        "wascitya": 50.30111728106721,
+        "wascityb": 57.3180481393385
+      },
+      "triangles": {
+        "wascitya": 170,
+        "wascityb": 198
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-bullethole-a.png",
+          "pixels_sha256": "ad3e41c620164e120a0f6a574ca478767a0c66ad59f2d0ca3a9ac9f6f0ddb7d1"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            80
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-bullethole-a.png",
+          "pixels_sha256": "ad3e41c620164e120a0f6a574ca478767a0c66ad59f2d0ca3a9ac9f6f0ddb7d1"
+        }
+      ],
+      "mean_source_rgb": [
+        136.24,
+        125.12,
+        112.17
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascitya-airlock-groove",
+      "area_m2": 102.91009515779609,
+      "by_level": {
+        "wascitya": 102.91009515779609
+      },
+      "triangles": {
+        "wascitya": 20
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            64
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-airlock-groove.png",
+          "pixels_sha256": "32b889637d310d785a523d9c5b88be487f82767fbb3e4f5f58b5815b10d3d6a9"
+        }
+      ],
+      "mean_source_rgb": [
+        40.83,
+        35.66,
+        31.97
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 20
+        }
+      ]
+    },
+    {
+      "name": "wascity-ground-stain-satellite-01",
+      "area_m2": 98.7249804056258,
+      "by_level": {
+        "wascityb": 98.7249804056258
+      },
+      "triangles": {
+        "wascityb": 54
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-ground-stain-satellite-01.png",
+          "pixels_sha256": "41665133c1efbaac0dc05158ea3936a403a9fedf8beff4da81be2b0509b77253"
+        }
+      ],
+      "mean_source_rgb": [
+        121.7,
+        101.59,
+        97.41
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-overlay-tribal-3",
+      "area_m2": 81.75965745936813,
+      "by_level": {
+        "wascityb": 81.75965745936813
+      },
+      "triangles": {
+        "wascityb": 4
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            83
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-overlay-tribal-3.png",
+          "pixels_sha256": "072760aa2e46acf12c3c1c8301412f5eb94bb82681f41999411a409b9c5e8ccb"
+        }
+      ],
+      "mean_source_rgb": [
+        125.95,
+        143.61,
+        146.76
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascitya-stone-bottom-door",
+      "area_m2": 54.734820208426804,
+      "by_level": {
+        "wascitya": 54.734820208426804
+      },
+      "triangles": {
+        "wascitya": 4
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascitya-stone-bottom-door.png",
+          "pixels_sha256": "30ec6cbfc370ab2eab9ece63e89e39973a5cb33b948224aafc9a8123c86bbd7c"
+        }
+      ],
+      "mean_source_rgb": [
+        77.96,
+        74.52,
+        55.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 4
+        }
+      ]
+    },
+    {
+      "name": "wascity-metal-ladder-rung",
+      "area_m2": 53.651499191726934,
+      "by_level": {
+        "wascitya": 13.262747294098432,
+        "wascityb": 40.3887518976285
+      },
+      "triangles": {
+        "wascitya": 440,
+        "wascityb": 1340
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-tfrag",
+          "size": [
+            32,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-tfrag\\wascity-metal-ladder-rung.png",
+          "pixels_sha256": "810d1e7d165b604a25d400940a3b6ea67a7e355ad97a0ca749353939831d84a1"
+        },
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-metal-ladder-rung.png",
+          "pixels_sha256": "810d1e7d165b604a25d400940a3b6ea67a7e355ad97a0ca749353939831d84a1"
+        }
+      ],
+      "mean_source_rgb": [
+        131.49,
+        122.2,
+        103.42
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascitya",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 43,
+          "triangles": 440
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 30,
+          "triangles": 1340
+        }
+      ]
+    },
+    {
+      "name": "wascity-stucco-wall-bleached-2-broken",
+      "area_m2": 40.20423984557995,
+      "by_level": {
+        "wascityb": 40.20423984557995
+      },
+      "triangles": {
+        "wascityb": 32
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            32,
+            128
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-stucco-wall-bleached-2-broken.png",
+          "pixels_sha256": "96f6a9f2933bcc86fb8a1754d1a09466171d4ab6ed66f9966d751d17e021b0d6"
+        }
+      ],
+      "mean_source_rgb": [
+        113.01,
+        114.45,
+        99.79
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tfrag",
+          "tree": 0,
+          "proto": 0,
+          "triangles": 4
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 1,
+          "triangles": 28
+        }
+      ]
+    },
+    {
+      "name": "wascity-cactus-flower",
+      "area_m2": 35.45766031812944,
+      "by_level": {
+        "wascitya": 26.48065357913062,
+        "wascityb": 8.977006738998819
+      },
+      "triangles": {
+        "wascitya": 720,
+        "wascityb": 280
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-cactus-flower.png",
+          "pixels_sha256": "df129d602c076de8b0d56ef9ea4eb48de69218f73c58311102f60c7322e45b7b"
+        },
+        {
+          "page": "wascityb-vis-shrub",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-shrub\\wascity-cactus-flower.png",
+          "pixels_sha256": "df129d602c076de8b0d56ef9ea4eb48de69218f73c58311102f60c7322e45b7b"
+        }
+      ],
+      "mean_source_rgb": [
+        202.25,
+        122.8,
+        162.0
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "wascity-overlay-damaged",
+      "area_m2": 27.87222350447155,
+      "by_level": {
+        "wascitya": 27.87222350447155
+      },
+      "triangles": {
+        "wascitya": 4
+      },
+      "placements": [
+        {
+          "page": "wascitya-vis-shrub",
+          "size": [
+            64,
+            64
+          ],
+          "alpha": [
+            0,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascitya-vis-shrub\\wascity-overlay-damaged.png",
+          "pixels_sha256": "061310f362f348bf82e8de6afe992990d7b98ea116a8f9fdd848bf9476e1afa0"
+        }
+      ],
+      "mean_source_rgb": [
+        128.26,
+        130.28,
+        126.12
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": []
+    },
+    {
+      "name": "city-port-bigpipe-ring-side",
+      "area_m2": 27.543043524541304,
+      "by_level": {
+        "wascityb": 27.543043524541304
+      },
+      "triangles": {
+        "wascityb": 1792
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            64,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\city-port-bigpipe-ring-side.png",
+          "pixels_sha256": "0814805a806adedff06325b775663f9c055f6e99d59ceb28fb53d719f5db9847"
+        }
+      ],
+      "mean_source_rgb": [
+        99.1,
+        106.52,
+        111.6
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 21,
+          "triangles": 1792
+        }
+      ]
+    },
+    {
+      "name": "wascity-satellite-piece-01",
+      "area_m2": 11.025279221293278,
+      "by_level": {
+        "wascityb": 11.025279221293278
+      },
+      "triangles": {
+        "wascityb": 330
+      },
+      "placements": [
+        {
+          "page": "wascityb-vis-tfrag",
+          "size": [
+            16,
+            16
+          ],
+          "alpha": [
+            128,
+            128
+          ],
+          "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wascityb-vis-tfrag\\wascity-satellite-piece-01.png",
+          "pixels_sha256": "99c69e144c6c44d323414a15b9c59903f93d6a672a94a023b2311107e93c05e1"
+        }
+      ],
+      "mean_source_rgb": [
+        137.59,
+        101.38,
+        155.19
+      ],
+      "same_pixels_all_placements": true,
+      "native_usage": [
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 33,
+          "triangles": 228
+        },
+        {
+          "level": "wascityb",
+          "tree_type": "tie",
+          "tree": 1,
+          "proto": 34,
+          "triangles": 102
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "checks": {
+    "lounge_animation_changes_pixels": true,
+    "lounge_nonempty_render": true,
+    "conversation_animation_changes_pixels": true,
+    "conversation_nonempty_render": true,
+    "native_128_alpha_same_as_255": true,
+    "transparent_alpha_is_discarded": true,
+    "alpha_threshold_uses_vertex_factor": true,
+    "native_128_alpha_is_visible": true,
+    "actual_shaders_compile_link": true,
+    "source_and_asset_bytes_unchanged": true
+  },
+  "shader_sha256": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.vert": "f24335e241085941788f017f6bab844ef3b9695229daeaa502e448295ba53316",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1"
+  },
+  "asset_sha256": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\lounge.json": "1a90b37d123fc69f634a739b4066f6e82e8d853b1efceb16b32ffff6d7fd7621",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\lounge.bin": "062064c1a78a7a879e23e569ebb72c54a3c670a18d3d7536e2e400dfc2d5c2f2",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\conversation.json": "065a1cd096f9112334e5899d3042fb54e93671a142e41c062be288527e694b1c",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\conversation.bin": "4c86f627970e5ebe4d2b11f4f7df65173b1d1a67a3461c5449ba1cfd6bf97027",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\sitting-male.json": "09949c88235841e3547eafd6fbaf59df9dc200fb3df7de999dfb66281d2eef72",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\sitting-male.bin": "ce63197218b7dac9ec4a395671d9872c6b5b3ffa02cb914917def1835ebab3b8",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\conversing-male.json": "89dd4466ae7463b45b90bf9574c598f9305ea779987022a62ceab9c5f7573d7b",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\conversing-male.bin": "ca16eaa9b395b4ed53686556fccf8e9645028e9bb920cc69df10bf499cf68074",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\conversing-female.json": "0798dfe904d6762fa90a1ced3b8b8a391250353960f61f43091fd72af2a9c595",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\inhabitants\\conversing-female.bin": "82577de40b9235f75eb99b0d1360de864b2dc175bbe18fd3ffc4f0809c74ba51"
+  },
+  "renders": [
+    "lounge-pose-0.png",
+    "lounge-pose-1.png",
+    "conversation-pose-0.png",
+    "conversation-pose-1.png"
+  ],
+  "camera": "synthetic street view; native shader PS2 clip/unit conventions inverted through uniforms only",
+  "method": "Actual shaders compile/link/draw in hidden WGL; actual 12f room and actor binaries; exact native PNG textures; GPU frame readback",
+  "native_game_validation": false
+}

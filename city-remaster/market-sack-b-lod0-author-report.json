@@ -1,0 +1,31 @@
+{
+  "control": "market-sack-b-lod0",
+  "source_triangles": 192,
+  "authored_triangles": 11014,
+  "vertices": 5784,
+  "materials": [
+    "market-sack-cotton-hd",
+    "market-sack-cord-hd"
+  ],
+  "bounds_blender": [
+    [
+      -1.0233912467956543,
+      -0.7675434350967407,
+      0.0
+    ],
+    [
+      1.0233912467956543,
+      0.8830876350402832,
+      2.1045546531677246
+    ]
+  ],
+  "joints": [
+    "align",
+    "prejoint",
+    "main"
+  ],
+  "weights": "All main, matching original source. Native armature retained.",
+  "features": "Soft filled sack with three deep folds converging into a leaning tied neck, asymmetric compressed belly, a slouched open cloth tail, double rope ligature, knot and stitched seam.",
+  "deployed": false,
+  "native_visual_validation": false
+}

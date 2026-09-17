@@ -1,0 +1,15 @@
+{
+  "description": "Before the two-house building pass, with the previously remastered textures retained. Not the original PS2 renderer.",
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascitya.fr3",
+  "source_sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0",
+  "restore": {
+    "out/jak3/fr3/wascitya.fr3": {
+      "backup": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\baseline\\live-before\\out\\jak3\\fr3\\wascitya.fr3",
+      "sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74"
+    },
+    "custom_assets/jak3/city-interiors/runtime.json": {
+      "backup": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\baseline\\live-before\\custom_assets\\jak3\\city-interiors\\runtime.json",
+      "sha256": "2df038f1db3159f033fb08c73936d3a8712233f45c2f773c80298962f99f9827"
+    }
+  }
+}

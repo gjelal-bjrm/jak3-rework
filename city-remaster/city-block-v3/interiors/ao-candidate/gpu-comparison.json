@@ -1,0 +1,24 @@
+{
+  "status": "rendered",
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "shader_sha256": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.vert": "f24335e241085941788f017f6bab844ef3b9695229daeaa502e448295ba53316",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1"
+  },
+  "rooms": [
+    {
+      "layout": "lounge",
+      "changed_pixels": 202493,
+      "mean_absolute_channel_change": 1.6362336666666666
+    },
+    {
+      "layout": "conversation",
+      "changed_pixels": 192325,
+      "mean_absolute_channel_change": 1.5277313333333333
+    }
+  ],
+  "native_game_validation": false
+}

@@ -1,0 +1,42 @@
+{
+  "status": "candidate_audited_not_installed",
+  "path": "out/jak3/fr3/wascitya.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3",
+  "base_sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-001\\wascitya.fr3",
+  "output_sha256": "5455159e5ac47d07731596bc6be700d0165e8a8b55614237ab62fc1d92a661c2",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-001\\wascitya-patch.json",
+  "patch_sha256": "45a2323ae07a9a6f6fdc72e32ddb25384cfdc207e3562af46b346768eab9db17",
+  "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-001\\wascitya-author-validation.json",
+  "author_report_sha256": "384f09617b1ee68a296396d3062e79327b47ffbb5353b524e1afcb2491e45086",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-001\\wascitya-preservation.json",
+  "preservation_report_sha256": "b93afd155848e8dd55027b0d2b9503075b06871faee4fdc31753b6d1405fde07",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\installed.json",
+  "parent_record_sha256": "71ce91e6ec1b88a9f7db34905f67e62cd8a1dc7d2fc4c76b98551585a57a7823",
+  "parts": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-patch.json",
+      "sha256": "89192b54d47500cfb1ff72a1306e92a80d81e9a9a1ca2c1c578913eff171934b",
+      "removed": 27498,
+      "added": 300351
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\windows\\wascitya-patch.json",
+      "sha256": "66456fa688f79d9981b4dc3ed7e822d12211685656bab54a22c751110426ce8d",
+      "removed": 19720,
+      "added": 132385
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\vegetation-v2\\wascitya-patch.json",
+      "sha256": "3916f22c1fb576b74d87641d6a7c0aa2df5e2510fa395f0b670b0e19015f83ce",
+      "removed": 34086,
+      "added": 1177722
+    }
+  ],
+  "protected_variant_hashes": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf"
+  },
+  "native_visual_validation": false,
+  "scope": "City plaster/coping, window frames, complete cactus and grass models authored in Blender"
+}

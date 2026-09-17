@@ -1,0 +1,1508 @@
+{
+  "scope": "King room first: all environment surfaces, glass, vegetation, throne and mechanical props. Water and fire effects are tracked separately.",
+  "assets": [
+    {
+      "key": "common-black",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common-black.png",
+          "size": [
+            8,
+            8
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 40,
+      "status": "preserved utility constant (not a surface texture)"
+    },
+    {
+      "key": "common_sandstone_base01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common_sandstone_base01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "common_sandstone_ground01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common_sandstone_ground01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "common_sandstone_pill01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common_sandstone_pill01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "common_sandstone_taper01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common_sandstone_taper01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "common_sandstone_trim01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\common_sandstone_trim01.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "wascity-outerwall-rock",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\wascity-outerwall-rock.png",
+          "size": [
+            512,
+            256
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 76,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-blue-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-blue-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 2014,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-branch-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-branch-01.png",
+          "size": [
+            32,
+            8
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1440,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-ceiling-frame",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-ceiling-frame.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 80,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-chain-anchor",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-chain-anchor.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        },
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-chain-anchor.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 22116,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-cliff-rock-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-cliff-rock-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 7038,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-cliff-rock-02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-cliff-rock-02.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 17514,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-cliff-rock-top",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-cliff-rock-top.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 5316,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 712,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-02.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 500,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-03",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-03.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 64,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-base",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-base.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 608,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-piece",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-piece.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 250,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-column-plate",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-column-plate.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 4772,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-corgmetal",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-corgmetal.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 296,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-bolt02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-bolt02.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 24,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-cable",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-cable.png",
+          "size": [
+            16,
+            8
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 108,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-metal-plate",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-metal-plate.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 2,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-metal",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-metal.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 8,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-shaft",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-shaft.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 132,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-elevator-tube",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-elevator-tube.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        },
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-elevator-tube.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 16,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fire-coal",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fire-coal.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 72,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fire-holder01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fire-holder01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 576,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fire-holder02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fire-holder02.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 28,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fire-holder03",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fire-holder03.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1384,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fire-holder04",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fire-holder04.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 24,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fountain-bar",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fountain-bar.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 2808,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fountain-base01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fountain-base01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 168,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fountain-base02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fountain-base02.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 64,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-fountain-base03",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-fountain-base03.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 138,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-lowres-desert-mount-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-lowres-desert-mount-01.png",
+          "size": [
+            32,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 2860,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-metal-bar",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-metal-bar.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 4236,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-metal-plate01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-metal-plate01.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 10510,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-metal-plate02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-metal-plate02.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 282,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-metal-plate03",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-metal-plate03.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 6276,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-metal-plate04",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-metal-plate04.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 276,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-palm-dirt",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-palm-dirt.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 336,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-palmplant-leaf-02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-palmplant-leaf-02.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            0,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 3072,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-palmtree-beard",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-palmtree-beard.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            0,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 2944,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-palmtree-trunk-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-palmtree-trunk-01.png",
+          "size": [
+            32,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 3936,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-pool-floor",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-pool-floor.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1354,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-red-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-red-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1088,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-stage-end",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-stage-end.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 100,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-stage-step",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-stage-step.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 332,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-stage-tile",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-stage-tile.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 256,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-step-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-step-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1724,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-step-02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-step-02.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1420,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-step-top",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-step-top.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 620,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-throne-back-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-back-01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 48,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-back-02",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-back-02.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 96,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-back-03",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-back-03.png",
+          "size": [
+            64,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 72,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-base",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-base.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 64,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-bolt",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-bolt.png",
+          "size": [
+            32,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 210,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-cap",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-cap.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 4,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-cushion",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-cushion.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 10,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-throne-floor",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-throne-floor.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 24,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-window-frame",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-window-frame.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 846,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-window-side",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-window-side.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 144,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-yellow-01",
+      "originals": [
+        {
+          "page": "waspala-tfrag",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-tfrag\\waspala-yellow-01.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 1784,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-glass-03",
+      "originals": [
+        {
+          "page": "waspala-alpha",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-alpha\\waspala-glass-03.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            36,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 356,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "for-shrub-moss",
+      "originals": [
+        {
+          "page": "waspala-shrub",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-shrub\\for-shrub-moss.png",
+          "size": [
+            128,
+            32
+          ],
+          "alpha_range": [
+            0,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 3864,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-shrub-plant",
+      "originals": [
+        {
+          "page": "waspala-shrub",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-shrub\\waspala-shrub-plant.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            0,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 5280,
+      "status": "replacement packaged for extraction"
+    },
+    {
+      "key": "waspala-small-rocks",
+      "originals": [
+        {
+          "page": "waspala-shrub",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-shrub\\waspala-small-rocks.png",
+          "size": [
+            32,
+            32
+          ],
+          "alpha_range": [
+            0,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 903,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-edge",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-edge.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-face-01",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-face-01.png",
+          "size": [
+            128,
+            128
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-face-02",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-face-02.png",
+          "size": [
+            128,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-interior",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-interior.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-paddle",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-paddle.png",
+          "size": [
+            64,
+            32
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    },
+    {
+      "key": "waspala-wheel-pipe",
+      "originals": [
+        {
+          "page": "waspala-pris",
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-pris\\waspala-wheel-pipe.png",
+          "size": [
+            64,
+            64
+          ],
+          "alpha_range": [
+            128,
+            128
+          ]
+        }
+      ],
+      "background_triangles": 0,
+      "status": "remaining"
+    }
+  ],
+  "total_surface_textures": 74,
+  "integrated_surface_textures": 24,
+  "remaining": [
+    "common_sandstone_base01",
+    "common_sandstone_ground01",
+    "common_sandstone_pill01",
+    "common_sandstone_taper01",
+    "common_sandstone_trim01",
+    "wascity-outerwall-rock",
+    "waspala-blue-01",
+    "waspala-branch-01",
+    "waspala-chain-anchor",
+    "waspala-corgmetal",
+    "waspala-elevator-bolt02",
+    "waspala-elevator-cable",
+    "waspala-elevator-metal-plate",
+    "waspala-elevator-metal",
+    "waspala-elevator-shaft",
+    "waspala-elevator-tube",
+    "waspala-fire-coal",
+    "waspala-fire-holder01",
+    "waspala-fire-holder02",
+    "waspala-fire-holder03",
+    "waspala-fire-holder04",
+    "waspala-fountain-bar",
+    "waspala-fountain-base01",
+    "waspala-fountain-base02",
+    "waspala-fountain-base03",
+    "waspala-lowres-desert-mount-01",
+    "waspala-metal-plate01",
+    "waspala-metal-plate02",
+    "waspala-metal-plate03",
+    "waspala-metal-plate04",
+    "waspala-palm-dirt",
+    "waspala-palmtree-beard",
+    "waspala-red-01",
+    "waspala-throne-back-01",
+    "waspala-throne-back-02",
+    "waspala-throne-back-03",
+    "waspala-throne-base",
+    "waspala-throne-bolt",
+    "waspala-throne-cap",
+    "waspala-throne-cushion",
+    "waspala-throne-floor",
+    "waspala-yellow-01",
+    "for-shrub-moss",
+    "waspala-small-rocks",
+    "waspala-wheel-edge",
+    "waspala-wheel-face-01",
+    "waspala-wheel-face-02",
+    "waspala-wheel-interior",
+    "waspala-wheel-paddle",
+    "waspala-wheel-pipe"
+  ]
+}

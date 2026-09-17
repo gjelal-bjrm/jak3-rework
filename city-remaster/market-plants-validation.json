@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "original_glb": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\wascityb-background.glb",
+  "original_glb_sha256": "3ef787c687c2f020238b38f433e02ef114a03aac462526567a9d7c4f9bbdea89",
+  "all_WCB_wind_triangles_compared_to_original_glb": 6240,
+  "max_world_vertex_distance_m": 6.823937919616058e-05,
+  "complete_palms": 2,
+  "complete_shrubs": 69,
+  "shrubs_extended": 12,
+  "native_face_namespace_unique": true,
+  "indexed_geometry_bounds_verified": true,
+  "export_only": true
+}

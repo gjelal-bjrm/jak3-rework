@@ -1,0 +1,20 @@
+{
+  "label": "March\u00c3\u0192\u00c2\u00a9 WCB : deux palmiers complets et tous les buissons touchant le bloc",
+  "level": "wascityb",
+  "materials": [
+    "bridge-test-isolated"
+  ],
+  "source_fr3": {
+    "sha256": "f5d22d2059ee9ad1fc8eb5ec5a1c52d5312813f1dc5de9a74f269318659449d1",
+    "bytes": 36940662
+  },
+  "tree_types": [
+    "tfrag",
+    "tie",
+    "shrub",
+    "tie_wind"
+  ],
+  "geoms": [
+    0
+  ]
+}

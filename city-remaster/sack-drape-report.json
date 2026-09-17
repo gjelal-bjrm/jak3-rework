@@ -1,0 +1,86 @@
+{
+  "protected_files_unchanged": true,
+  "protected_count": 9,
+  "protected_sha256": {
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0.glb": "51a44755ec56a809cf4883bcea2011dd8290e04d57da5db209be3877b858d245",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0.blend": "82ee4a08b34d5501245e37c53280e5f941062ee3c1acc03510c8983174580304",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0-authored.png": "8262798b5043c66f77235b4ae8dc41acae408a8ce59ef16e127fba91f40b427e",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0.glb": "d2dc7282ca248e4b03bcb5c16b61afc6e5ea958b3340fcaa42ffbc12be8f1b71",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0.blend": "4fab0bae46b4a76fc7da504f2c2e7f4d0eef971cf5e9de4941aeb3997f177d59",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0-authored.png": "67304d0eb6a1e582879262357bcfc8b9ffcf2c7546b488e806f926d8da468e31",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0.glb": "df2fad1a0584d947ed6d88586348fb90e3ebd7305895fa64bd0b4478d5f2040d",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0.blend": "c37d2c24b6c431e0b87d9b57c956c52cfd0f6eb6132a72893fc560dfe4931bee",
+    "prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0-authored.png": "98af2a69dd37009247595786e36fd48afb0698eb56dba9b27a5cf8e37c0ab269"
+  },
+  "sacks": [
+    {
+      "control": "market-sack-a-lod0",
+      "source_triangles": 144,
+      "authored_triangles": 12728,
+      "vertices": 6698,
+      "materials": [
+        "market-sack-cotton-hd",
+        "market-sack-cord-hd",
+        "market-ochre-contents-hd"
+      ],
+      "bounds_blender": [
+        [
+          -1.1589372158050537,
+          -0.7395123243331909,
+          0.0
+        ],
+        [
+          1.114787220954895,
+          0.7726248502731323,
+          2.8145618438720703
+        ]
+      ],
+      "joints": [
+        "align",
+        "prejoint",
+        "main"
+      ],
+      "weights": "All main, matching original source. Native armature retained.",
+      "features": "Open sack with asymmetrically slumped shoulders, three deep curved folds converging on the seams, an inclined rolled mouth, stitched seams and recessed level ochre contents.",
+      "deployed": false,
+      "native_visual_validation": false,
+      "sha256": "ee9fdc814253818a13df36e001a02e0e6151abffe576b7a2835b463733dce6ca"
+    },
+    {
+      "control": "market-sack-b-lod0",
+      "source_triangles": 192,
+      "authored_triangles": 11014,
+      "vertices": 5784,
+      "materials": [
+        "market-sack-cotton-hd",
+        "market-sack-cord-hd"
+      ],
+      "bounds_blender": [
+        [
+          -1.0233912467956543,
+          -0.7675434350967407,
+          0.0
+        ],
+        [
+          1.0233912467956543,
+          0.8830876350402832,
+          2.1045546531677246
+        ]
+      ],
+      "joints": [
+        "align",
+        "prejoint",
+        "main"
+      ],
+      "weights": "All main, matching original source. Native armature retained.",
+      "features": "Soft filled sack with three deep folds converging into a leaning tied neck, asymmetric compressed belly, a slouched open cloth tail, double rope ligature, knot and stitched seam.",
+      "deployed": false,
+      "native_visual_validation": false,
+      "sha256": "fe84d38446609b81f56a45eea4da87c974fcd77028efd694f2d45f15f1b91758"
+    }
+  ],
+  "validation": "accessories-import-validation.json",
+  "palette": "Original selected HD PNGs unchanged. Local cavity contrast scales RGB uniformly by at most20%; hue unchanged.",
+  "native_game_validation": false,
+  "deployment": false
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": {
+    "arena_noop_exact": true,
+    "arena_replacement_and_inverse_exact": true,
+    "arena_unrelated_mutation_rejected": true,
+    "palace_noop_exact": true,
+    "palace_replacement_and_inverse_exact": true,
+    "palace_unrelated_mutation_rejected": true,
+    "truncated_archive_rejected": true
+  },
+  "scope": "In-memory test only; no route or object file changed"
+}

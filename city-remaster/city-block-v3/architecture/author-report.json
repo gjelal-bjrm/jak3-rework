@@ -1,0 +1,148 @@
+{
+  "source_fr3": {
+    "bytes": 239110963,
+    "sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0"
+  },
+  "author_sha256": "dede462e69a64c191bb59fb79dca52e4ef3cff6aa25a05d9e8867d6fbde17a7b",
+  "buildings": [
+    {
+      "instance": 1,
+      "lod": 0,
+      "source_triangles": 134,
+      "removed_triangles": 949,
+      "added_triangles": 4748,
+      "cut_polygons": 8,
+      "max_distance_m": 5.369017601013184
+    },
+    {
+      "instance": 1,
+      "lod": 1,
+      "source_triangles": 134,
+      "removed_triangles": 711,
+      "added_triangles": 4748,
+      "cut_polygons": 8,
+      "max_distance_m": 5.369017601013184
+    },
+    {
+      "instance": 1,
+      "lod": 2,
+      "source_triangles": 134,
+      "removed_triangles": 381,
+      "added_triangles": 4360,
+      "cut_polygons": 8,
+      "max_distance_m": 5.369017601013184
+    },
+    {
+      "instance": 1,
+      "lod": 3,
+      "source_triangles": 72,
+      "removed_triangles": 182,
+      "added_triangles": 3878,
+      "cut_polygons": 8,
+      "max_distance_m": 5.357475280761719
+    },
+    {
+      "instance": 2,
+      "lod": 0,
+      "source_triangles": 134,
+      "removed_triangles": 949,
+      "added_triangles": 2698,
+      "cut_polygons": 7,
+      "max_distance_m": 2.067488431930542
+    },
+    {
+      "instance": 2,
+      "lod": 1,
+      "source_triangles": 134,
+      "removed_triangles": 711,
+      "added_triangles": 2698,
+      "cut_polygons": 7,
+      "max_distance_m": 2.067488431930542
+    },
+    {
+      "instance": 2,
+      "lod": 2,
+      "source_triangles": 134,
+      "removed_triangles": 381,
+      "added_triangles": 2698,
+      "cut_polygons": 7,
+      "max_distance_m": 2.067488431930542
+    },
+    {
+      "instance": 2,
+      "lod": 3,
+      "source_triangles": 72,
+      "removed_triangles": 182,
+      "added_triangles": 2256,
+      "cut_polygons": 4,
+      "max_distance_m": 1.8760297298431396
+    }
+  ],
+  "native_validation": false,
+  "occluders": [
+    {
+      "lod": 0,
+      "draw": 9,
+      "group": 81,
+      "removed": 24,
+      "added": 26,
+      "cuts": 10
+    },
+    {
+      "lod": 0,
+      "draw": 40,
+      "group": 10,
+      "removed": 18,
+      "added": 59,
+      "cuts": 12
+    },
+    {
+      "lod": 1,
+      "draw": 9,
+      "group": 81,
+      "removed": 24,
+      "added": 26,
+      "cuts": 10
+    },
+    {
+      "lod": 1,
+      "draw": 40,
+      "group": 10,
+      "removed": 18,
+      "added": 59,
+      "cuts": 12
+    },
+    {
+      "lod": 2,
+      "draw": 9,
+      "group": 81,
+      "removed": 24,
+      "added": 26,
+      "cuts": 10
+    },
+    {
+      "lod": 2,
+      "draw": 40,
+      "group": 10,
+      "removed": 18,
+      "added": 59,
+      "cuts": 12
+    },
+    {
+      "lod": 3,
+      "draw": 9,
+      "group": 81,
+      "removed": 24,
+      "added": 26,
+      "cuts": 10
+    },
+    {
+      "lod": 3,
+      "draw": 38,
+      "group": 10,
+      "removed": 12,
+      "added": 39,
+      "cuts": 8
+    }
+  ]
+}

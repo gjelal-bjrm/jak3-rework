@@ -1,0 +1,36 @@
+{
+  "wood-original.png": {
+    "size": [
+      64,
+      32
+    ],
+    "mode": "RGBA",
+    "sha256": "8349814038e2f04dbc1deb6c1c1d32ebc202f81dc52091f5a9f6bc603b497550",
+    "mean_rgb": [
+      127.29,
+      119.364,
+      89.479
+    ],
+    "wrap_edge_mean_difference_rgb": {
+      "left_right": 2.917,
+      "top_bottom": 28.443
+    }
+  },
+  "wood-hd.png": {
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGB",
+    "sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a",
+    "mean_rgb": [
+      124.226,
+      113.531,
+      80.124
+    ],
+    "wrap_edge_mean_difference_rgb": {
+      "left_right": 19.179,
+      "top_bottom": 30.502
+    }
+  }
+}

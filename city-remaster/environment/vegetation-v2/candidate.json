@@ -1,0 +1,42 @@
+{
+  "schema": "city-vegetation-author-candidates-v1",
+  "validated": true,
+  "deployed": false,
+  "native_visual_validation": false,
+  "parts": [
+    {
+      "level": "wascitya",
+      "base": "city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3",
+      "baseSHA256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+      "patch": "city-remaster\\environment\\vegetation-v2\\wascitya-patch.json",
+      "patchSHA256": "3916f22c1fb576b74d87641d6a7c0aa2df5e2510fa395f0b670b0e19015f83ce",
+      "author": "city-remaster\\environment\\vegetation-v2\\wascitya-plants.blend",
+      "authorSHA256": "2df39a898b9e90184899d5e03cfb2735211f8b28781e373af19d8018494a5c60",
+      "report": "city-remaster\\environment\\vegetation-v2\\wascitya-report.json",
+      "validation": "city-remaster\\environment\\vegetation-v2\\wascitya-validation.json",
+      "validationSHA256": "3e8e8fec83b5326632380a6cd408151ea6ffd20e1a7b71c755d24e262832166a",
+      "grass_count": 789,
+      "cactus_count": 18,
+      "triangles": 1177722
+    },
+    {
+      "level": "wascityb",
+      "base": "city-remaster\\environment\\staging\\city-environment-001\\wascityb.fr3",
+      "baseSHA256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee",
+      "patch": "city-remaster\\environment\\vegetation-v2\\wascityb-patch.json",
+      "patchSHA256": "4ffd455df4a2879f91b996a1f9c825130bc00fc57fbfbeaf168525b82147c8b3",
+      "author": "city-remaster\\environment\\vegetation-v2\\wascityb-plants.blend",
+      "authorSHA256": "632465ac73e38eef3b57e6d50f42c923aaab11fd890d70bca76a8054589d8d3f",
+      "report": "city-remaster\\environment\\vegetation-v2\\wascityb-report.json",
+      "validation": "city-remaster\\environment\\vegetation-v2\\wascityb-validation.json",
+      "validationSHA256": "c5e70177a73db17d36e5253bbc369888d7b0d4e9916ed178fcdba7f4062e0363",
+      "grass_count": 693,
+      "cactus_count": 7,
+      "triangles": 960792
+    }
+  ],
+  "triangles_total": 2138514,
+  "author_scriptSHA256": "c7223d048710f1566399635e383e833172f526f4f597cab5ea77a54e0455103f",
+  "validatorSHA256": "28066919b4bd5d3c98335a4db46d27eff98f26ef2e85fce6bf1f09555d0fcc5b",
+  "integration": "Combine with architecture/window patch additions on same immutable ENV base, verify exact removal identity overlap and same-name texture-byte equality. Stage once; audit FR3 and native rendering separately."
+}

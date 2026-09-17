@@ -1,0 +1,78 @@
+{
+  "status": "native_views_reviewed",
+  "user_approval": false,
+  "scope": "Two WCA pilot houses, five openings and furnished rooms; city fire in WCA/WCB",
+  "runtime_sha256": "a03eb7fe2d8f5aa79dda538406380ddcf70679f444d9c608796975ab5b7a823b",
+  "data_wca_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+  "data_wcb_sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d",
+  "package_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\package-validation.json",
+  "package_report_sha256": "2d63a132e6cfc432846eecb8be98f72792c034f08c236b08b221c4d530255b20",
+  "runtime_log": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\runtime-reviewed.log",
+  "runtime_log_sha256": "dd05fbc667537037e9b98a5b11bdb6dd4054501173055f4b46cad2957d96c105",
+  "screenshots": {
+    "city-window-corner-before-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-window-corner-before-v3.png",
+      "sha256": "dbd3b9f7af9cc6b503786eb90f67aa3b6bade0ab081fc8293d1ec75c911e277b"
+    },
+    "city-window-corner-after-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-window-corner-after-v3.png",
+      "sha256": "5402cde5d98af1f881233a03ba8559943fa6be9a93f70fc9a505c5e8832f0ded"
+    },
+    "city-lounge-native-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-lounge-native-v3.png",
+      "sha256": "eaf8ec01f26ed4eca1faf52caba06d766c8ae15175d2fcde37f44698d33d5ae4"
+    },
+    "city-conversation-native-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-conversation-native-v3.png",
+      "sha256": "69fafa121f875873565efa845910f5b6818935abd95e9897412a93531b65e4af"
+    },
+    "city-conversation-final-pose-a": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-conversation-final-pose-a.png",
+      "sha256": "7d26deaff48b7c8bafa9145af922803f2424b9e319892c8d2ae5bfbd3121f1b7"
+    },
+    "city-conversation-final-pose-b": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-conversation-final-pose-b.png",
+      "sha256": "9cecdb389b461eed6a0b7222c96a3444feea10686d285d6b7655d40b54b26837"
+    },
+    "city-house-silhouette-native-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-house-silhouette-native-v3.png",
+      "sha256": "cd953a7a8209ba037e6c881bf228bb93c2694063b4158655b579b978b8039c9d"
+    },
+    "city-buildings-gameplay-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-buildings-gameplay-v3.png",
+      "sha256": "ccb770d5384b0b3817f37cdd2bf98a06b569bc2b15f1e69fe674c7132cc8b4f2"
+    },
+    "city-house2-corrected-native-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-house2-corrected-native-v3.png",
+      "sha256": "dbd2f383382ac1d065ec0fa42d325832253f7171c0ec60035ecc24cbbfb33b35"
+    },
+    "city-house2-corrected-open-angle-v3": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-house2-corrected-open-angle-v3.png",
+      "sha256": "d3170892668888f5eef943efac57e7ec01817681e04a4e50115ac9696240a3cf"
+    },
+    "city-fire-wcb-native-v3-a": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-fire-wcb-native-v3-a.png",
+      "sha256": "de5ceebfa5c214e4b98be6a3388ca5568f85005f86a7aeffaede3d3fb6095a0f"
+    },
+    "city-fire-wcb-native-v3-b": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-fire-wcb-native-v3-b.png",
+      "sha256": "c5b2308ce7f7c534bafe48dedd75d63e6e88ac64a9672a0010f78a83589ef888"
+    }
+  },
+  "observations": [
+    "Actual facade openings and furniture visible from multiple native camera angles.",
+    "House2 ornaments checked from two native angles after R2 street-facing correction.",
+    "Neutral room contact shading inspected in native lounge and conversation views.",
+    "Native male/female inhabitants have posed meshes and looping interpolation.",
+    "Native conversation capture changes 5175 pixels in the actor rectangle between two frames.",
+    "Normal third-person camera restored at the first house; movement remains native.",
+    "New city fire visible and anchored in a WCB vessel, and in WCA wider views.",
+    "Corrected generic-obs survived boot WCA-to-palace and subsequent WCA/WCB transitions."
+  ],
+  "limitations": [
+    "Two pilot buildings only; surrounding city and complete AAA finish remain unfinished.",
+    "Decorative inhabitants use original NPC models; no interior gameplay AI or access.",
+    "Open apertures currently have no reflective glass pane.",
+    "No exhaustive gameplay/cutscene/performance audit; NPC sand and grass deferred."
+  ]
+}

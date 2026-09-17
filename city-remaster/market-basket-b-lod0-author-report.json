@@ -1,0 +1,31 @@
+{
+  "control": "market-basket-b-lod0",
+  "source_triangles": 128,
+  "authored_triangles": 14664,
+  "vertices": 7663,
+  "materials": [
+    "market-reed-fibres-hd",
+    "market-rice-hd"
+  ],
+  "bounds_blender": [
+    [
+      -1.4321144819259644,
+      -1.4209260940551758,
+      -0.022376790642738342
+    ],
+    [
+      1.4209260940551758,
+      1.4097377061843872,
+      1.219534993171692
+    ]
+  ],
+  "joints": [
+    "align",
+    "prejoint",
+    "main"
+  ],
+  "weights": "All main, matching original source. Native armature retained.",
+  "features": "Round shallow basket with interleaved three-dimensional reeds, bound rim, concave woven body and individually oriented rice grains.",
+  "deployed": false,
+  "native_visual_validation": false
+}

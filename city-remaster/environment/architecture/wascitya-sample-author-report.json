@@ -1,0 +1,48 @@
+{
+  "level": "wascitya",
+  "source_export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-native.json",
+  "source_export_sha256": "a815256effdb37cdef1a42a334a359d2e5de87aee669ea8ad0caec6c51bceb0d",
+  "source_fr3": {
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+  },
+  "author_sha256": "1bf4616da63f688c392f9f09912d30c8353de76578c21f0af03d6fe7cee45f84",
+  "instances": [
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2894,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489035725593567
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 1,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2790336608886719
+        }
+      ]
+    }
+  ],
+  "scope": "Rounded plaster construction edges and continuous thick weathered roof coping; native shapes, UV palette and doors retained",
+  "native_game_validation": false,
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-sample-patch.json",
+  "patch_sha256": "3904ae442656dbae24aa947bcab3c4a8cb7247a09e3b933fc73689a9e89a3dde",
+  "removed": 246,
+  "added": 3520
+}

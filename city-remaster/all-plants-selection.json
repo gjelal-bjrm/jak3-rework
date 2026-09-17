@@ -1,0 +1,21 @@
+{
+  "level": "wascityb",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+    "bytes": 36575263,
+    "sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f"
+  },
+  "tree_types": [
+    "tfrag",
+    "tie",
+    "shrub",
+    "tie_wind"
+  ],
+  "materials": [
+    "wascity-palm-trunk",
+    "wascity-palm-leaf-worn",
+    "wascity-palm-beard",
+    "wascity-shrub-orange-01"
+  ],
+  "label": "WCB végétation complète : diagnostic de correspondance des instances"
+}

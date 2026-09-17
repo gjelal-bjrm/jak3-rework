@@ -1,0 +1,32 @@
+{
+  "control": "market-sack-a-lod0",
+  "source_triangles": 144,
+  "authored_triangles": 12728,
+  "vertices": 6698,
+  "materials": [
+    "market-sack-cotton-hd",
+    "market-sack-cord-hd",
+    "market-ochre-contents-hd"
+  ],
+  "bounds_blender": [
+    [
+      -1.1589372158050537,
+      -0.7395123243331909,
+      0.0
+    ],
+    [
+      1.114787220954895,
+      0.7726248502731323,
+      2.8145618438720703
+    ]
+  ],
+  "joints": [
+    "align",
+    "prejoint",
+    "main"
+  ],
+  "weights": "All main, matching original source. Native armature retained.",
+  "features": "Open sack with asymmetrically slumped shoulders, three deep curved folds converging on the seams, an inclined rolled mouth, stitched seams and recessed level ochre contents.",
+  "deployed": false,
+  "native_visual_validation": false
+}

@@ -1,0 +1,30 @@
+{
+  "control": "market-crate-lod0",
+  "source_triangles": 132,
+  "authored_triangles": 6304,
+  "vertices": 3232,
+  "materials": [
+    "market-crate-wood-hd"
+  ],
+  "bounds_blender": [
+    [
+      -1.3279304504394531,
+      -0.9025777578353882,
+      -0.7054630517959595
+    ],
+    [
+      1.3279304504394531,
+      0.9959478378295898,
+      0.7780842781066895
+    ]
+  ],
+  "joints": [
+    "align",
+    "prejoint",
+    "main"
+  ],
+  "weights": "All main, matching original source. Native armature retained.",
+  "features": "Individually fitted thick boards, worn chamfers, inset lid, corner battens, diagonal bracing, recessed wooden joinery pegs.",
+  "deployed": false,
+  "native_visual_validation": false
+}

@@ -1,0 +1,27 @@
+{
+  "mode": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "clay-v2",
+      "prompt": "Use case: style-transfer. Edit target is the original low resolution Jak 3 clay texture attached. Make a faithful square high-resolution diffuse material tile, 1024x1024 or larger, for the same golden ochre earthenware. CRITICAL color calibration: original mean sRGB about (127,82,20), so keep the overall image this medium-dark earthy brown-ochre, not bright golden orange. Original has irregular muted pale worn patches among dark ochre. Reconstruct convincing fine clay pores, restrained mineral flecks, soft abrasions and hand-thrown clay texture; improve definition without changing the original lightness or saturation. No large stones, no carved decorations, no writing, no cracks, no bricks, no object or jar, no lighting gradient, no shadows, no vignette. Uniform neutral flat albedo texture, edge to edge, seamless tile as closely as possible. Keep overall source brightness strictly, use the source as the color reference. Opaque RGB.",
+      "file": "data/decompiler_out/jak3/textures/wascityb-vis-pris/city-mark-clay-pot-01.png"
+    },
+    {
+      "key": "rice",
+      "prompt": "Use case: style-transfer. Reference image: original 32x32 Jak 3 rice-grain texture. Create a square 1024x1024 or larger game albedo texture for the surface of dry uncooked rice in a desert market basket, faithful to the original muted gray-beige palette, with softly varied ivory gray and light warm beige short rice kernels. Closely packed random whole kernels lying in different orientations, small overlapping clusters, hundreds of fine grains covering the surface edge to edge. No large empty gaps, no liquid or porridge, no basket, no vessel, no shadows from external objects, no vignette, no text, no colored decorations. Each kernel clearly defined with natural fine texture, stylized realistic Jak remaster, not food photography with dramatic lighting. Original understated gray-beige overall brightness, no pure white or bright yellow. Flat top-down material texture under even illumination, seamless tile both axes as closely as possible. Opaque RGB.",
+      "file": "data/decompiler_out/jak3/textures/wascityb-vis-pris/city-mark-rice-01.png"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "market-clay-hd.png",
+      "generated": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-ada96da8-91f2-477a-93ee-59103a0b1e6f.png"
+    },
+    {
+      "name": "market-rice-hd.png",
+      "generated": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-fb61f394-ffe8-4dc3-a3be-142528a052a6.png"
+    }
+  ],
+  "reason": "The initial clay image was brighter than the original. This refinement restores darker ochre, and rice HD replaces the last original small bitmap in these five assets. Original images are unchanged; generated files copied without pixel edits.",
+  "tiling": "Asked for seamless generation; exact periodic pixel equality not guaranteed."
+}

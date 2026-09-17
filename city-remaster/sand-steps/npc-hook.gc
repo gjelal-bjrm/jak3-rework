@@ -1,0 +1,18 @@
+    ;; REMASTER-SAND-NPC-HOOK-BEGIN
+    ;; Spargus residents annotate their walking animations with direct footstep
+    ;; sounds, unlike Jak's effect-walk-step events. Keep the sound path below.
+    (when (or (string= s3-0 "was-fs-hard") (string= s3-0 "wasf-fs"))
+      (let ((moving (as-type (-> this process root) collide-shape-moving)))
+        (when moving
+          (+! *remaster-sand-step-events* 1)
+          (set! *remaster-sand-step-last-material* (the int (-> moving ground-pat material)))
+          (let ((level (level-get-target-inside *level*)))
+            (set! *remaster-sand-step-last-level* (if level (-> level name) 'none)))
+          (let ((foot (remaster-sand-npc-foot-joint (-> this process))))
+            (when (remaster-sand-step-contact? this (-> moving ground-pat) foot)
+              (+! *remaster-sand-step-eligible* 1)
+              (remaster-sand-step-emit this foot)))
+          )
+        )
+      )
+    ;; REMASTER-SAND-NPC-HOOK-END

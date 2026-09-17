@@ -1,0 +1,74 @@
+{
+  "status": "staged",
+  "native_capture_status": "pending",
+  "description": "Legacy city fire emitter versus palace-derived city fire, under the same current renderer and assets. Not the original PS2 renderer.",
+  "scope": "generic-obs only; fresh process required per version; all other objects and assets identical",
+  "installed_record": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\installed.json",
+    "sha256": "ac5329be951d1f22a5a04f665f3bb49035740c6344d68012ca28cb9ef2d99952"
+  },
+  "parent_record": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\parent-installed.json",
+    "sha256": "d051c524a02685c5ddb505ce43dc5c64e47c5fb374fff08d28289f4c2099de33"
+  },
+  "source_manifest": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\source-manifest.json",
+    "sha256": "e94c94fa122d6f0efbafca4a8b6cd8f6b4c48af3178f156df103f6d9f060fc74"
+  },
+  "after_object": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\after-generic-obs.o",
+    "sha256": "0f8e38bda699d2043140c8318de2f9d010eed352fd2df39e8cffb0f1271e6a41"
+  },
+  "source_before": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\source-before\\engine-src\\goal_src\\jak3\\engine\\common-obs\\generic-obs.gc",
+      "sha256": "462ab5061514b203cc6e1d8164a35592e1bbd579b1f66a42dceea2ad4e9c0481"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\source-before\\data\\goal_src\\jak3\\engine\\common-obs\\generic-obs.gc",
+      "sha256": "b25f4b86277b09d61c0e106200dce33abd9a25964e277585cd7cd9c0cdad84d3"
+    }
+  ],
+  "routes": {
+    "arena": {
+      "before": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\arena\\before-GAME.CGO",
+        "sha256": "d967473802e768889265d382045cebe2ef80af1bd8d18a0aec32513b307aae3c"
+      },
+      "after": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\arena\\after-GAME.CGO",
+        "sha256": "1f8fbd173123ffdf2846a2cbdc96d3ae6f130a2ca326d6857fa9fa791bda6e74"
+      },
+      "preservation": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\arena\\preservation.json",
+        "sha256": "a75f27b085e8b17655fc7059c3f4bfabe64386b695b25ab25361a4793393d655"
+      },
+      "preserved_objects": 489,
+      "unrelated_object_mutation_rejected": true
+    },
+    "palace": {
+      "before": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\palace\\before-GAME.CGO",
+        "sha256": "e92b9dc4a9b3d22bf196b79413e6bfa43fd9c3757f4d7688635fef4cc1a8d435"
+      },
+      "after": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\palace\\after-GAME.CGO",
+        "sha256": "bbaf7bc667ec2625b242ae72a2d1099b25285edeb39856e590da16b4b8c34186"
+      },
+      "preservation": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\palace\\preservation.json",
+        "sha256": "4fa86bf18c18bcea657eee30f08e869754b6ebeb2c4d42e4b79a48090448084f"
+      },
+      "preserved_objects": 489,
+      "unrelated_object_mutation_rejected": true
+    }
+  },
+  "before_object": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\staging\\before-generic-obs.o",
+    "sha256": "1b1dd47c9c7d86c41790b639da72a648d032833548340392fe2dd8c8f0acaa05"
+  },
+  "camera_views": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\review-window-fix\\fire-comparison\\camera-views.json",
+    "sha256": "c7b53f74271a6e2b52d927ec817c5ac36d62b205e5f39c2e123441287ba62ec3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "candidate",
+  "parameters": {
+    "rays": 128,
+    "radius_m": 0.7,
+    "gain": 0.4,
+    "edge_m": 0.34
+  },
+  "rooms": [
+    {
+      "layout": "corner-conversation",
+      "source_sha256": "6e0a7d5cbc036d8725830fe3514d74c53a3bb54b3893cd3a349622d36492ac22",
+      "candidate_sha256": "dc8e74339c6ca3b93478c6e6c23458ef281b09ef5c351e819d80ffc22a671d11",
+      "source_vertices": 39168,
+      "candidate_vertices": 177696,
+      "unique_samples": 44954,
+      "minimum_ao": 0.6006306751643786,
+      "mean_ao": 0.8799314422926481,
+      "seconds": 8.041672945022583
+    }
+  ]
+}

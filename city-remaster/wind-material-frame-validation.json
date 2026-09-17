@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": {
+    "engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h current hash": true,
+    "engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h bounded inverse": true,
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.h current hash": true,
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.h bounded inverse": true,
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.cpp current hash": true,
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.cpp bounded inverse": true,
+    "engine-src/game/graphics/opengl_renderer/shaders/tie_wind.vert current hash": true,
+    "engine-src/game/graphics/opengl_renderer/shaders/tie_wind.vert bounded inverse": true,
+    "engine-src/game/graphics/opengl_renderer/shaders/tie_wind.vert native projection unchanged": true,
+    "data/game/graphics/opengl_renderer/shaders/tie_wind.vert current hash": true,
+    "data/game/graphics/opengl_renderer/shaders/tie_wind.vert bounded inverse": true,
+    "data/game/graphics/opengl_renderer/shaders/tie_wind.vert native projection unchanged": true,
+    "source and active shader identical": true,
+    "native local to world positions under 0.2mm": true,
+    "anisotropic and sheared normals stay perpendicular": true
+  },
+  "native_points": 7392,
+  "native_instances": 56,
+  "max_position_error_m": 6.291359902370698e-05,
+  "max_normal_tangent_dot": 1.9255430583342559e-16,
+  "native_visual_validation": false
+}

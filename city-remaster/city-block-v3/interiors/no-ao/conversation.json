@@ -1,0 +1,200 @@
+{
+  "schema": "city-room-mesh-v1",
+  "units": "metres",
+  "floor_y": 0,
+  "dimensions": [
+    4.3,
+    3.65,
+    3.65
+  ],
+  "binary": "conversation.bin",
+  "stride_floats": 12,
+  "vertex_count": 48780,
+  "draws": [
+    {
+      "first": 0,
+      "count": 2256,
+      "material": 0
+    },
+    {
+      "first": 2256,
+      "count": 1692,
+      "material": 1
+    },
+    {
+      "first": 3948,
+      "count": 8424,
+      "material": 2
+    },
+    {
+      "first": 12372,
+      "count": 9816,
+      "material": 3
+    },
+    {
+      "first": 22188,
+      "count": 2820,
+      "material": 5
+    },
+    {
+      "first": 25008,
+      "count": 17280,
+      "material": 6
+    },
+    {
+      "first": 42288,
+      "count": 564,
+      "material": 7
+    },
+    {
+      "first": 42852,
+      "count": 4212,
+      "material": 8
+    },
+    {
+      "first": 47064,
+      "count": 132,
+      "material": 10
+    },
+    {
+      "first": 47196,
+      "count": 1584,
+      "material": 11
+    }
+  ],
+  "materials": [
+    {
+      "name": "sunbaked plaster",
+      "color": [
+        0.61,
+        0.43,
+        0.25
+      ],
+      "roughness": 0.93,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "warm stone",
+      "color": [
+        0.38,
+        0.32,
+        0.24
+      ],
+      "roughness": 0.88,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "carved wood",
+      "color": [
+        0.24,
+        0.13,
+        0.06
+      ],
+      "roughness": 0.7,
+      "texture_kind": 1,
+      "emissive": false
+    },
+    {
+      "name": "copper bindings",
+      "color": [
+        0.34,
+        0.18,
+        0.073
+      ],
+      "roughness": 0.43,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "ochre canvas",
+      "color": [
+        0.59,
+        0.31,
+        0.105
+      ],
+      "roughness": 0.92,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "deep teal canvas",
+      "color": [
+        0.12,
+        0.26,
+        0.22
+      ],
+      "roughness": 0.94,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "clay vessels",
+      "color": [
+        0.56,
+        0.23,
+        0.1
+      ],
+      "roughness": 0.82,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "dark rug",
+      "color": [
+        0.28,
+        0.13,
+        0.068
+      ],
+      "roughness": 0.98,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "rug border",
+      "color": [
+        0.63,
+        0.4,
+        0.15
+      ],
+      "roughness": 0.95,
+      "texture_kind": 2,
+      "emissive": false
+    },
+    {
+      "name": "plant green",
+      "color": [
+        0.22,
+        0.29,
+        0.06
+      ],
+      "roughness": 0.62,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "dark bronze",
+      "color": [
+        0.12,
+        0.095,
+        0.065
+      ],
+      "roughness": 0.52,
+      "texture_kind": 0,
+      "emissive": false
+    },
+    {
+      "name": "lamplight glass",
+      "color": [
+        0.94,
+        0.48,
+        0.12
+      ],
+      "roughness": 0.3,
+      "texture_kind": 0,
+      "emissive": true
+    }
+  ],
+  "sha256": "7c89d0131835c90f7d8baaf5b70ce50acf4c78f0aebac862914e92eb511dcb21"
+}

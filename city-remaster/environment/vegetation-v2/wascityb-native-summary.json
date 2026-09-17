@@ -1,0 +1,17 @@
+{
+  "status": "Native export only; no models generated or installed",
+  "level": "wascityb",
+  "source_sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee",
+  "selection_sha256": "817244829ceb41f983c91ed0255a2f87d3112e4823b2c3db836028fabe50463d",
+  "export_sha256": "9ab64197d86abe6859d7fccf64259a38dc88a8f6c1df013d58c019127bce04f3",
+  "faces": 27930,
+  "by_tree_type_and_geom": {
+    "shrub/0": 27930
+  },
+  "by_material": {
+    "wascity-shrub-orange-01": 26334,
+    "wascity-cactus-green": 1316,
+    "wascity-cactus-flower": 280
+  },
+  "unique_native_keys": true
+}

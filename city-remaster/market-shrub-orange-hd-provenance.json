@@ -1,0 +1,23 @@
+{
+  "tool": "ImageGen built-in",
+  "operation": "reference-guided new material",
+  "reference": "data/decompiler_out/jak3/textures/wascityb-vis-shrub/wascity-shrub-orange-01.png",
+  "reference_mean_rgb": [
+    190.25390625,
+    134.4609375,
+    74.49609375
+  ],
+  "source_generated_image": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-f8c442eb-69c1-4493-a6ea-c37fa9600bf7.png",
+  "authored_png_sha256": "f7e3b22e16f85f0d125210628c3054208cb5b343ff1fda21fc7845c5326192f3",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "mean_rgb": [
+    205.4910468319559,
+    142.35508382744595,
+    71.01888247877923
+  ],
+  "technical_export": "RGB pixels unchanged, raw RGBA8 export adds constant alpha128 matching native source",
+  "rgba_sha256": "62d642ae859d396dacb05e5d1649eb13c0481228adf4789c708940880427a722"
+}

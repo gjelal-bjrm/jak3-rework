@@ -1,0 +1,11 @@
+[
+  "game/graphics/opengl_renderer/shaders/tfrag3.vert",
+  "game/graphics/opengl_renderer/shaders/tfrag3.frag",
+  "game/graphics/opengl_renderer/shaders/tie_wind.vert",
+  "game/graphics/opengl_renderer/shaders/tie_wind.frag",
+  "game/graphics/opengl_renderer/shaders/etie_base.vert",
+  "game/graphics/opengl_renderer/shaders/etie_base.frag",
+  "out/jak3/fr3/wasstada.fr3",
+  "out/jak3/fr3/wasstadb.fr3",
+  "out/jak3/iso/WASSTADA.DGO"
+]

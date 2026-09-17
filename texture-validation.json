@@ -1,0 +1,167 @@
+[
+  {
+    "file": "wstd-interior-rock01.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "5f0c35d1713969db051871893523b66a3cf867e21cdae832c075533ab65250cc",
+    "placements": [
+      "wasstada-tfrag\\wstd-interior-rock01.png"
+    ],
+    "replacement_sha256": "830663d5e88e461a2168cbedacd04e423296a8f722ed7f8eb9d33f2d9f198d1d"
+  },
+  {
+    "file": "wstd-platform-floor.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "8d67a3d4cff691b6929f7084642bec30d2b245b9d51fc30772651956460af8ad",
+    "placements": [
+      "wasstada-tfrag\\wstd-platform-floor.png",
+      "wasstadb-tfrag\\wstd-platform-floor.png"
+    ],
+    "replacement_sha256": "531fdf51d86b52977432d1bbdd8987a63d2bb0320c0170c019fc97124964cf44"
+  },
+  {
+    "file": "wstd-platform-wall.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "9b3637c7eda7198521d6a48cbc473a15bf956e51541f980f284108406c6bbdbd",
+    "placements": [
+      "wasstada-tfrag\\wstd-platform-wall.png",
+      "wasstadb-tfrag\\wstd-platform-wall.png"
+    ],
+    "replacement_sha256": "525c45a40726867135812c17d58782bac5a76ba897dc7234ef16f592e1dab9f4"
+  },
+  {
+    "file": "common_sandstone_ground01.png",
+    "original_size": [
+      64,
+      64
+    ],
+    "replacement_size": [
+      256,
+      256
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "2508f1f58eab9f3e4faeee1e52cf15af45c675826f3d2db9b9b90229841e1d6e",
+    "placements": [
+      "wasstada-tfrag\\common_sandstone_ground01.png"
+    ],
+    "replacement_sha256": "cbc4259a8e8a1fade2cd1490f188164120dde1aada3566849891b99c3aa516bd"
+  },
+  {
+    "file": "wstd-floor-panel01.png",
+    "original_size": [
+      128,
+      64
+    ],
+    "replacement_size": [
+      512,
+      256
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "d1f46b47e9fefefa9e844f1b879194600a6eb3041ada1bb05466c2487042b8d4",
+    "placements": [
+      "wasstada-tfrag\\wstd-floor-panel01.png",
+      "wasstadb-tfrag\\wstd-floor-panel01.png"
+    ],
+    "replacement_sha256": "fbb1e3edeaae38bfefa599c5f148d132ab99e15821c402954c783caf8a832323"
+  },
+  {
+    "file": "wstd-scaffold-wall-01.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "c4f8b0f0a10a7f600574952660b11047af6a742c7860a85a8ee8e7623c8ca3f3",
+    "placements": [
+      "wasstada-tfrag\\wstd-scaffold-wall-01.png",
+      "wasstadb-tfrag\\wstd-scaffold-wall-01.png"
+    ],
+    "replacement_sha256": "148c724055d9c50bc1ccd0fcbbaed5630af747a3cf863eada8eb9d4e2f6eec78"
+  },
+  {
+    "file": "wstd-scaffold-wall-02.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "33193a9b3a6182bcf717e0248f42b1a9db9337192d79a137d03981311fe674f7",
+    "placements": [
+      "wasstada-tfrag\\wstd-scaffold-wall-02.png",
+      "wasstadb-tfrag\\wstd-scaffold-wall-02.png"
+    ],
+    "replacement_sha256": "5318dca90122881f1aa18e870d51c17528783c485f2e658ab9ebb07a0fe58bf5"
+  },
+  {
+    "file": "wstd-scaffold-floor-01.png",
+    "original_size": [
+      128,
+      128
+    ],
+    "replacement_size": [
+      512,
+      512
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "source_sha256": "b09d9afb7288989fff8565bf660c65669a2e3d767099136d5a6482ad45e6d872",
+    "placements": [
+      "wasstadb-tfrag\\wstd-scaffold-floor-01.png"
+    ],
+    "replacement_sha256": "ea132429b9b45d2f9d28f8bbc83b63da5cf8af8aef259a89a8d1ee1e164ab73d"
+  }
+]

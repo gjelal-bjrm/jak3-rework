@@ -1,0 +1,39 @@
+;; REPL-only, read-only camera/light diagnostics. Never add to GAME.CGO.
+;; Load this file, then call (fire-capture-readback "wca-before").
+;; GOAL uses 4096 units/metre and 65536 angle units/full turn.
+;; PNG dimensions provide the actual render_size; x-pix/y-pix are PS2 camera units.
+
+(defun fire-capture-readback ((tag string))
+  (format #t "FIRE-CAPTURE begin ~a~%" tag)
+  (when *math-camera*
+    (format #t "FIRE-CAPTURE render-eye-m=[~f,~f,~f] fov-degrees=~f fov-raw=~f~%"
+      (/ (-> *math-camera* trans x) 4096.0)
+      (/ (-> *math-camera* trans y) 4096.0)
+      (/ (-> *math-camera* trans z) 4096.0)
+      (* (-> *math-camera* fov) 0.0054931640625)
+      (-> *math-camera* fov))
+    (format #t "FIRE-CAPTURE render-fvec=[~f,~f,~f] render-uvec=[~f,~f,~f]~%"
+      (-> *math-camera* inv-camera-rot fvec x)
+      (-> *math-camera* inv-camera-rot fvec y)
+      (-> *math-camera* inv-camera-rot fvec z)
+      (-> *math-camera* inv-camera-rot uvec x)
+      (-> *math-camera* inv-camera-rot uvec y)
+      (-> *math-camera* inv-camera-rot uvec z)))
+  (when (and *camera* (-> *camera* slave 0))
+    (format #t "FIRE-CAPTURE slave-eye-m=[~f,~f,~f] slave-fov-degrees=~f~%"
+      (/ (-> *camera* slave 0 trans x) 4096.0)
+      (/ (-> *camera* slave 0 trans y) 4096.0)
+      (/ (-> *camera* slave 0 trans z) 4096.0)
+      (* (-> *camera* slave 0 fov) 0.0054931640625)))
+  (when *time-of-day-context*
+    (format #t "FIRE-CAPTURE time-of-day=~f palette-mode=~d override=~a~%"
+      (-> *time-of-day-context* time)
+      (the-as int (-> *time-of-day-context* mode))
+      (-> *time-of-day-context* overide-enable)))
+  (when (and *time-of-day* (-> *time-of-day* 0))
+    (format #t "FIRE-CAPTURE process-time=~f ratio=~f destination-ratio=~f~%"
+      (-> *time-of-day* 0 time-of-day)
+      (-> *time-of-day* 0 time-ratio)
+      (-> *time-of-day* 0 dest-time-ratio)))
+  (format #t "FIRE-CAPTURE end ~a~%" tag)
+  (none))

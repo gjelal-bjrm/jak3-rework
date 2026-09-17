@@ -1,0 +1,34 @@
+{
+  "path": "out/jak3/fr3/wascityb.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\before-wascityb.fr3",
+  "base_sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\wascityb.fr3",
+  "output_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\combined-patch.json",
+  "patch_sha256": "5b292f3c8ce7fa97ada13ff061cf3f6c2bdd140ac5dbe81a76f05f3088af5145",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\preservation.json",
+  "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\author-validation.json",
+  "parts": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\supports\\patch.json",
+      "sha256": "5c72fef16ddd0f8ac189a62248cc1cca0e06a927415c04bc8667565407eddab1",
+      "removed": 11256,
+      "added": 168448
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\palms\\palms-patch.json",
+      "sha256": "89d1b35f853b14339ff04d7654145b94d58f815ee1c80784f01adc0c7de5300a",
+      "removed": 3136,
+      "added": 50260
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-shrubs-patch.json",
+      "sha256": "916fe21ab667eef53424477575811bdf9bbca4a597dcd0bcd379466e20f474ad",
+      "removed": 2622,
+      "added": 214320
+    }
+  ],
+  "scope": "14 posts, 14 arms, 28 links, 2 complete palms, 69 grass tufts around WCB market",
+  "native_visual_validation": false,
+  "remaining": "Native visual inspection pending. This batch does not complete the city, buildings, terrain or regional fire."
+}

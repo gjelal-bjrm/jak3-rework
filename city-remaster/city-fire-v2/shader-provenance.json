@@ -1,0 +1,19 @@
+{
+  "accepted_recipe_sources": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\palace_fire.vert": "8928d569426543fd431143c6bc4d9025d399bd918dee78bb3f24bf9da78c2b78",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\palace_fire.frag": "229ef377f5b585829842f96944b678403347c53b6d3eb0fe661f8c2ae1e8f8ff",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\fire_lighting.vert": "c72bcb77da35ec5cf36ac60d9ce485e91117b36630a35becb5fd19aa1ed0be33",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\fire_lighting.frag": "225ca3853a9c18a884c63eac335e2abd739990c98713de30b4a0249e49ae7cf4",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\fire_embers.vert": "c315a6f37ead75c823450e0df2425b825e1ec4d9696ef03006324c9214e3e79b",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\fire-v1\\fire_embers.frag": "9a90697fc4e31cbfc3e36d663f823cee9ed0de87c1428b457492877c10b3f157"
+  },
+  "outputs": {
+    "city_fire.vert": "a58c0a9de1b095868ecc776c78918d951bcc3f3ee4f5c50126212669250289c1",
+    "city_fire.frag": "14cb0c1bb616b0c753116090b0dc32442d7721a25f1b8db1433bf29e9bfffa47",
+    "city_fire_lighting.vert": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f",
+    "city_fire_lighting.frag": "b7bd34804e0928c50f2bab3bf53491b22f1f43c88a1d318ee0ecff826b5ff120",
+    "city_fire_embers.vert": "1e7449b19b32932bfcd23ac57bcfa49d9c4b2565c907b3740d18b837d28a946e",
+    "city_fire_embers.frag": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047"
+  },
+  "changes": "Uniform active attachments, actor-stable phase, 8 nearby lights, 24 far samples, original 200\u2013300 m fade; same near flame recipe, opaque clipping and premultiplied blend."
+}

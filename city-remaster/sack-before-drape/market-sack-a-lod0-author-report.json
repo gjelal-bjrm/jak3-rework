@@ -1,0 +1,32 @@
+{
+  "control": "market-sack-a-lod0",
+  "source_triangles": 144,
+  "authored_triangles": 10424,
+  "vertices": 5530,
+  "materials": [
+    "market-sack-cotton-hd",
+    "market-sack-cord-hd",
+    "market-ochre-contents-hd"
+  ],
+  "bounds_blender": [
+    [
+      -1.1589372158050537,
+      -0.7395123243331909,
+      0.0
+    ],
+    [
+      1.114787220954895,
+      0.7726248502731323,
+      2.8145618438720703
+    ]
+  ],
+  "joints": [
+    "align",
+    "prejoint",
+    "main"
+  ],
+  "weights": "All main, matching original source. Native armature retained.",
+  "features": "Open asymmetric slumped sack, gravity folds, thick rolled cloth mouth, twin stitched seams and irregular ochre contents.",
+  "deployed": false,
+  "native_visual_validation": false
+}

@@ -1,0 +1,329 @@
+[
+  {
+    "id": "wca-house1-west-room",
+    "center": [
+      2275.300048828125,
+      27.299999237060547,
+      11.449999809265137
+    ],
+    "normal": [
+      -0.4367884397506714,
+      0.0,
+      -0.899564266204834
+    ],
+    "width": 3.6,
+    "height": 3.0,
+    "right": [
+      -0.899564266204834,
+      0.0,
+      0.4367884397506714
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 1,
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 19.1
+  },
+  {
+    "id": "wca-house1-east-room",
+    "center": [
+      2272.97998046875,
+      27.299999237060547,
+      16.100000381469727
+    ],
+    "normal": [
+      -0.9224243760108948,
+      0.0,
+      0.386177659034729
+    ],
+    "width": 3.6,
+    "height": 3.0,
+    "right": [
+      0.3861777186393738,
+      0.0,
+      0.9224244952201843
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "wall_depth": 0.5,
+    "room_depth": 2.0,
+    "building_native_instance": 1,
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 19.1
+  },
+  {
+    "id": "wca-house1-upper-room",
+    "center": [
+      2276.0,
+      44.20000076293945,
+      10.800000190734863
+    ],
+    "normal": [
+      -0.4399991035461426,
+      0.0,
+      -0.8979981541633606
+    ],
+    "width": 3.6,
+    "height": 3.7,
+    "right": [
+      -0.8979982733726501,
+      0.0,
+      0.43999916315078735
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 1,
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": false,
+    "street_ground_y": 19.1
+  },
+  {
+    "id": "wca-house2-street-room",
+    "center": [
+      2339.35009765625,
+      20.5,
+      -26.549999237060547
+    ],
+    "normal": [
+      -0.8739685416221619,
+      0.0,
+      0.4859825074672699
+    ],
+    "width": 3.4,
+    "height": 3.0,
+    "right": [
+      0.4859825074672699,
+      0.0,
+      0.8739685416221619
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 2,
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": false,
+    "street_ground_y": 9.56
+  },
+  {
+    "id": "wca-house2-upper-room",
+    "center": [
+      2339.39990234375,
+      34.25,
+      -26.5
+    ],
+    "normal": [
+      -0.8739685416221619,
+      0.0,
+      0.4859825074672699
+    ],
+    "width": 3.4,
+    "height": 3.8,
+    "right": [
+      0.4859825074672699,
+      0.0,
+      0.8739685416221619
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 2,
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": false,
+    "street_ground_y": 9.56
+  },
+  {
+    "id": "wca-house-east-room",
+    "center": [
+      2438.58935546875,
+      23.447597122192384,
+      14.604915618896484
+    ],
+    "normal": [
+      -0.876228392124176,
+      -0.0,
+      0.4818960130214691
+    ],
+    "right": [
+      0.4818960130214691,
+      0,
+      0.876228392124176
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "width": 3.2,
+    "height": 2.8,
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 0,
+    "building_native_instances": [
+      0
+    ],
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 19.747596740722656,
+    "street_camera": [
+      2434.208251953125,
+      21.44759750366211,
+      17.01439666748047
+    ],
+    "region": "east"
+  },
+  {
+    "id": "wca-house-west-room",
+    "center": [
+      2118.21630859375,
+      30.994342422485353,
+      -203.5103759765625
+    ],
+    "normal": [
+      -0.5934156179428101,
+      0.0,
+      -0.8048962354660034
+    ],
+    "right": [
+      -0.8048962354660034,
+      0,
+      0.5934156179428101
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "width": 3.2,
+    "height": 2.8,
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 4,
+    "building_native_instances": [
+      4
+    ],
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 27.294342041015625,
+    "street_camera": [
+      2115.249267578125,
+      28.994342803955078,
+      -207.53485107421875
+    ],
+    "region": "west"
+  },
+  {
+    "id": "wca-house-low-room",
+    "center": [
+      2244.698486328125,
+      20.212167739868164,
+      -179.6924285888672
+    ],
+    "normal": [
+      0.948959469795227,
+      0.0,
+      0.31539782881736755
+    ],
+    "right": [
+      0.31539782881736755,
+      0,
+      -0.948959469795227
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "width": 3.2,
+    "height": 2.8,
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 58,
+    "building_native_instances": [
+      58,
+      59,
+      60,
+      70
+    ],
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 17.112167358398438,
+    "street_camera": [
+      2253.239013671875,
+      18.81216812133789,
+      -176.85385131835938
+    ],
+    "region": "low"
+  },
+  {
+    "id": "wca-house-north-room",
+    "center": [
+      2517.345947265625,
+      36.168426513671875,
+      -224.62991333007812
+    ],
+    "normal": [
+      0.009603570215404034,
+      0.0,
+      -0.9999538064002991
+    ],
+    "right": [
+      -0.9999538064002991,
+      0,
+      -0.009603570215404034
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "width": 3.2,
+    "height": 2.8,
+    "wall_depth": 0.5,
+    "room_depth": 3.5,
+    "building_native_instance": 3,
+    "building_native_instances": [
+      3
+    ],
+    "tree": 1,
+    "level": "wascitya",
+    "inhabited": true,
+    "street_ground_y": 33.06842803955078,
+    "street_camera": [
+      2517.39404296875,
+      34.76842498779297,
+      -229.6296844482422
+    ],
+    "region": "north"
+  }
+]

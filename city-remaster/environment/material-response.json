@@ -1,0 +1,7 @@
+{
+  "before_path": "C:/Users/Gjelal/Documents/OpenGoal/prototypes/spargus-arena-v0.1/city-remaster/environment/PalaceMaterials-before.h",
+  "after_path": "C:/Users/Gjelal/Documents/OpenGoal/prototypes/spargus-arena-v0.1/engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h",
+  "before_sha256": "3524e30edb7cb92f08b41663ca27472ed13dbcfcfc8f67b54c2d2bbe758c6b2c",
+  "after_sha256": "4d19b9020ffcae63dae60f97e3202f14657161b40ff3d051646385af5be47e36",
+  "scope": "Explicit high-resolution city opaque materials only; unchanged palace classification and bind function"
+}

@@ -1,0 +1,7 @@
+{
+  "relative": "engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h",
+  "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-001\\PalaceMaterials-before-cactus.h",
+  "before_sha256": "c9116779f4af19d3302b5417a737c92e1d992adbb0452fb9d290342185f1c655",
+  "after_sha256": "95f4f76847da5f1d3b1a31e38250aae705c14a019f0b81a8798815a4fb51cdf1",
+  "scope": "Only city-cactus-green-v2 uses foliage light/filter response; no foliage motion or grass contact added to cactus"
+}

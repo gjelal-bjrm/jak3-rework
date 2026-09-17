@@ -1,0 +1,26 @@
+{
+  "status": "compiled_object_matches_current_sources",
+  "object": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\obj\\effect-control.o",
+  "bytes": 3825736,
+  "sha256": "be826db9d70e7c32b8271b53af979ba139c8f9de12c7f55df3556301f425cfcc",
+  "sources": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\goal_src\\jak3\\engine\\game\\effect-control.gc",
+      "sha256": "653473a1a433123478c4fa41a162372150b006725815e22cc3cf81b8a5256f98"
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\goal_src\\jak3\\engine\\game\\effect-control.gc",
+      "sha256": "653473a1a433123478c4fa41a162372150b006725815e22cc3cf81b8a5256f98"
+    }
+  ],
+  "symbols": {
+    "remaster-sand-step-contact?": true,
+    "remaster-sand-step-launcher": true,
+    "remaster-sand-npc-foot-joint": true,
+    "remaster-sand-visible-at?": true
+  },
+  "source_manifest_sha256": "eeb00cecae96d1fdbc15ac746da560e6207b59aa8ddf3ce4262565d94cac34b0",
+  "runtime_loaded": false,
+  "live_validation": false,
+  "note": "Root confirmed successful compilation. Listener cannot transfer large table; persistent GAME loading required."
+}

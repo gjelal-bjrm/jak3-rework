@@ -1,0 +1,38 @@
+{
+  "scope": "Jak3 SKY procedural clouds; recent WCA/WCB/lwasbbv and Spargus camera bounds",
+  "private_resolution": [
+    1024,
+    1024
+  ],
+  "native_visual_validation": false,
+  "files": {
+    "engine-src/game/graphics/opengl_renderer/DirectRenderer.h": {
+      "before_sha256": "31cd1604db2b2bc369b2631cf59284e98cbe9981858a3cbec2c84b9ceb1425f3",
+      "after_sha256": "a74711c6c7d31e8d96307a48aaf372bc04b86745543f18595e5ec908678587d3"
+    },
+    "engine-src/game/graphics/opengl_renderer/DirectRenderer.cpp": {
+      "before_sha256": "dfe9f16a053b97527611dd581570f7f1d9f3ddc5b0c230a041a56554fe50c2a6",
+      "after_sha256": "5aeb52e647c843bd4ac4fb22fc5b4bfc49a0d44567f41f03c4687176c1271231"
+    },
+    "engine-src/game/graphics/opengl_renderer/SpargusClouds.h": {
+      "before_sha256": null,
+      "after_sha256": "094fb7d1d2d5d51a984f321862a8b4fc4569297d97579fbc092ac70e45bd1d67"
+    },
+    "engine-src/game/graphics/opengl_renderer/shaders/spargus_clouds.vert": {
+      "before_sha256": null,
+      "after_sha256": "2251b30b504235511d135f15da95733d460c82ff38934611e113112f6b801564"
+    },
+    "data/game/graphics/opengl_renderer/shaders/spargus_clouds.vert": {
+      "before_sha256": null,
+      "after_sha256": "2251b30b504235511d135f15da95733d460c82ff38934611e113112f6b801564"
+    },
+    "engine-src/game/graphics/opengl_renderer/shaders/spargus_clouds.frag": {
+      "before_sha256": null,
+      "after_sha256": "880226e6f3d933fa0d7b3983a3b99fff5bac3b3702634033b778c2e0c88e2fdd"
+    },
+    "data/game/graphics/opengl_renderer/shaders/spargus_clouds.frag": {
+      "before_sha256": null,
+      "after_sha256": "880226e6f3d933fa0d7b3983a3b99fff5bac3b3702634033b778c2e0c88e2fdd"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "positive_checks": 274,
+  "source_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+  "output_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+  "patch_sha256": "a9c23236ccdec9660ada8446c98599841009533e314fc49e4643e948aad0a250",
+  "unknown_group_rejected": true,
+  "changed_retained_anchor_rejected": true,
+  "restored_duplicate_room_rejected": true,
+  "wrong_parent_rejected": true,
+  "native_visual_validation": false,
+  "deployed": false
+}

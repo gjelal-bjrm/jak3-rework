@@ -1,0 +1,1804 @@
+{
+  "source_export_sha256": "2f7357cff0aac509f1d628308a6cd68ec19c4dd32d72a48bc270b2b8e52369fc",
+  "instances": 56,
+  "posts": 14,
+  "arms": 14,
+  "rings": 28,
+  "geometry": [
+    {
+      "instance": 501,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.24437333643436432
+    },
+    {
+      "instance": 501,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.24229705333709717
+    },
+    {
+      "instance": 501,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.2432696372270584
+    },
+    {
+      "instance": 501,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.23665951192378998
+    },
+    {
+      "instance": 502,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.22568216919898987
+    },
+    {
+      "instance": 502,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.22343935072422028
+    },
+    {
+      "instance": 502,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.22566616535186768
+    },
+    {
+      "instance": 502,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.21747803688049316
+    },
+    {
+      "instance": 503,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2664283215999603
+    },
+    {
+      "instance": 503,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2664283215999603
+    },
+    {
+      "instance": 503,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.26587796211242676
+    },
+    {
+      "instance": 503,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.26235538721084595
+    },
+    {
+      "instance": 504,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2522323727607727
+    },
+    {
+      "instance": 504,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2503648102283478
+    },
+    {
+      "instance": 504,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.25103816390037537
+    },
+    {
+      "instance": 504,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.2436014711856842
+    },
+    {
+      "instance": 505,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2356792539358139
+    },
+    {
+      "instance": 505,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2356792539358139
+    },
+    {
+      "instance": 505,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.23560215532779694
+    },
+    {
+      "instance": 505,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.23262600600719452
+    },
+    {
+      "instance": 506,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2291170060634613
+    },
+    {
+      "instance": 506,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.22936835885047913
+    },
+    {
+      "instance": 506,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.22767555713653564
+    },
+    {
+      "instance": 506,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.2183198481798172
+    },
+    {
+      "instance": 507,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.24604347348213196
+    },
+    {
+      "instance": 507,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.24489839375019073
+    },
+    {
+      "instance": 507,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.24525479972362518
+    },
+    {
+      "instance": 507,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.22884348034858704
+    },
+    {
+      "instance": 508,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2500324547290802
+    },
+    {
+      "instance": 508,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2500324547290802
+    },
+    {
+      "instance": 508,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.24967820942401886
+    },
+    {
+      "instance": 508,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.2465260773897171
+    },
+    {
+      "instance": 509,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2429780513048172
+    },
+    {
+      "instance": 509,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.24062345921993256
+    },
+    {
+      "instance": 509,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.24414832890033722
+    },
+    {
+      "instance": 509,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.23355616629123688
+    },
+    {
+      "instance": 510,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2362290769815445
+    },
+    {
+      "instance": 510,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2362290769815445
+    },
+    {
+      "instance": 510,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.2361789494752884
+    },
+    {
+      "instance": 510,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.2334250956773758
+    },
+    {
+      "instance": 511,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.2406046837568283
+    },
+    {
+      "instance": 511,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.23979265987873077
+    },
+    {
+      "instance": 511,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.23991495370864868
+    },
+    {
+      "instance": 511,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.21992017328739166
+    },
+    {
+      "instance": 512,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.23783540725708008
+    },
+    {
+      "instance": 512,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2379843294620514
+    },
+    {
+      "instance": 512,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.23752199113368988
+    },
+    {
+      "instance": 512,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.22675958275794983
+    },
+    {
+      "instance": 513,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.24963846802711487
+    },
+    {
+      "instance": 513,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.25147494673728943
+    },
+    {
+      "instance": 513,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.24812015891075134
+    },
+    {
+      "instance": 513,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.23017728328704834
+    },
+    {
+      "instance": 514,
+      "proto": 19,
+      "lod": 0,
+      "old_triangles": 88,
+      "new_triangles": 2784,
+      "max_surface_offset_m": 0.25067946314811707
+    },
+    {
+      "instance": 514,
+      "proto": 19,
+      "lod": 1,
+      "old_triangles": 88,
+      "new_triangles": 2008,
+      "max_surface_offset_m": 0.2504384517669678
+    },
+    {
+      "instance": 514,
+      "proto": 19,
+      "lod": 2,
+      "old_triangles": 72,
+      "new_triangles": 1588,
+      "max_surface_offset_m": 0.2506421208381653
+    },
+    {
+      "instance": 514,
+      "proto": 19,
+      "lod": 3,
+      "old_triangles": 52,
+      "new_triangles": 912,
+      "max_surface_offset_m": 0.23865781724452972
+    },
+    {
+      "instance": 515,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.1357419788837433
+    },
+    {
+      "instance": 515,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.1357419788837433
+    },
+    {
+      "instance": 515,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13585348427295685
+    },
+    {
+      "instance": 515,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13606762886047363
+    },
+    {
+      "instance": 516,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.1357397437095642
+    },
+    {
+      "instance": 516,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.1357397437095642
+    },
+    {
+      "instance": 516,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13585124909877777
+    },
+    {
+      "instance": 516,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13606804609298706
+    },
+    {
+      "instance": 517,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13571874797344208
+    },
+    {
+      "instance": 517,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13571874797344208
+    },
+    {
+      "instance": 517,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13589565455913544
+    },
+    {
+      "instance": 517,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13607639074325562
+    },
+    {
+      "instance": 518,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.1357697993516922
+    },
+    {
+      "instance": 518,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.1357697993516922
+    },
+    {
+      "instance": 518,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13582874834537506
+    },
+    {
+      "instance": 518,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.136044442653656
+    },
+    {
+      "instance": 519,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13571926951408386
+    },
+    {
+      "instance": 519,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13571926951408386
+    },
+    {
+      "instance": 519,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13580076396465302
+    },
+    {
+      "instance": 519,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13601736724376678
+    },
+    {
+      "instance": 520,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.135736346244812
+    },
+    {
+      "instance": 520,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.135736346244812
+    },
+    {
+      "instance": 520,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13584820926189423
+    },
+    {
+      "instance": 520,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13606306910514832
+    },
+    {
+      "instance": 521,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13573655486106873
+    },
+    {
+      "instance": 521,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13573655486106873
+    },
+    {
+      "instance": 521,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.1357840597629547
+    },
+    {
+      "instance": 521,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13599929213523865
+    },
+    {
+      "instance": 522,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13572952151298523
+    },
+    {
+      "instance": 522,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13572952151298523
+    },
+    {
+      "instance": 522,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13580481708049774
+    },
+    {
+      "instance": 522,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13602085411548615
+    },
+    {
+      "instance": 523,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13575336337089539
+    },
+    {
+      "instance": 523,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13575336337089539
+    },
+    {
+      "instance": 523,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.135773167014122
+    },
+    {
+      "instance": 523,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13598725199699402
+    },
+    {
+      "instance": 524,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13574232161045074
+    },
+    {
+      "instance": 524,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13574232161045074
+    },
+    {
+      "instance": 524,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13584701716899872
+    },
+    {
+      "instance": 524,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13606365025043488
+    },
+    {
+      "instance": 525,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.1357075572013855
+    },
+    {
+      "instance": 525,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.1357075572013855
+    },
+    {
+      "instance": 525,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13590393960475922
+    },
+    {
+      "instance": 525,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13606581091880798
+    },
+    {
+      "instance": 526,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13575302064418793
+    },
+    {
+      "instance": 526,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13575302064418793
+    },
+    {
+      "instance": 526,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13575145602226257
+    },
+    {
+      "instance": 526,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.1359662562608719
+    },
+    {
+      "instance": 527,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.13567954301834106
+    },
+    {
+      "instance": 527,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.13567954301834106
+    },
+    {
+      "instance": 527,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13585205376148224
+    },
+    {
+      "instance": 527,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.136037677526474
+    },
+    {
+      "instance": 528,
+      "proto": 20,
+      "lod": 0,
+      "old_triangles": 32,
+      "new_triangles": 992,
+      "max_surface_offset_m": 0.1357216089963913
+    },
+    {
+      "instance": 528,
+      "proto": 20,
+      "lod": 1,
+      "old_triangles": 32,
+      "new_triangles": 552,
+      "max_surface_offset_m": 0.1357216089963913
+    },
+    {
+      "instance": 528,
+      "proto": 20,
+      "lod": 2,
+      "old_triangles": 16,
+      "new_triangles": 300,
+      "max_surface_offset_m": 0.13575127720832825
+    },
+    {
+      "instance": 528,
+      "proto": 20,
+      "lod": 3,
+      "old_triangles": 8,
+      "new_triangles": 176,
+      "max_surface_offset_m": 0.13596658408641815
+    },
+    {
+      "instance": 533,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07645393162965775
+    },
+    {
+      "instance": 533,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08210085332393646
+    },
+    {
+      "instance": 533,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08168914169073105
+    },
+    {
+      "instance": 533,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.14922024309635162
+    },
+    {
+      "instance": 534,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.047809433192014694
+    },
+    {
+      "instance": 534,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050914425402879715
+    },
+    {
+      "instance": 534,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.05156965181231499
+    },
+    {
+      "instance": 534,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09293541312217712
+    },
+    {
+      "instance": 535,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04782292619347572
+    },
+    {
+      "instance": 535,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05097167566418648
+    },
+    {
+      "instance": 535,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.05158422142267227
+    },
+    {
+      "instance": 535,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09222111105918884
+    },
+    {
+      "instance": 536,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07716646045446396
+    },
+    {
+      "instance": 536,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08199481666088104
+    },
+    {
+      "instance": 536,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.07900336384773254
+    },
+    {
+      "instance": 536,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1445387750864029
+    },
+    {
+      "instance": 537,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04763288050889969
+    },
+    {
+      "instance": 537,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05084804445505142
+    },
+    {
+      "instance": 537,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.05142273008823395
+    },
+    {
+      "instance": 537,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08929131180047989
+    },
+    {
+      "instance": 538,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07642300426959991
+    },
+    {
+      "instance": 538,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08182255923748016
+    },
+    {
+      "instance": 538,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08247200399637222
+    },
+    {
+      "instance": 538,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.15095563232898712
+    },
+    {
+      "instance": 539,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04753781855106354
+    },
+    {
+      "instance": 539,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05095668509602547
+    },
+    {
+      "instance": 539,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.05042305216193199
+    },
+    {
+      "instance": 539,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09220793843269348
+    },
+    {
+      "instance": 540,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07708831131458282
+    },
+    {
+      "instance": 540,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.0821981430053711
+    },
+    {
+      "instance": 540,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.0830940380692482
+    },
+    {
+      "instance": 540,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.14815182983875275
+    },
+    {
+      "instance": 541,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.047912124544382095
+    },
+    {
+      "instance": 541,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05089676380157471
+    },
+    {
+      "instance": 541,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.049027010798454285
+    },
+    {
+      "instance": 541,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08971650898456573
+    },
+    {
+      "instance": 542,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07615862786769867
+    },
+    {
+      "instance": 542,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08116167038679123
+    },
+    {
+      "instance": 542,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08181595802307129
+    },
+    {
+      "instance": 542,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.13978013396263123
+    },
+    {
+      "instance": 543,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07688862085342407
+    },
+    {
+      "instance": 543,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08131557703018188
+    },
+    {
+      "instance": 543,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08302041888237
+    },
+    {
+      "instance": 543,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.15180538594722748
+    },
+    {
+      "instance": 544,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.0477348230779171
+    },
+    {
+      "instance": 544,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050956226885318756
+    },
+    {
+      "instance": 544,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.05146980285644531
+    },
+    {
+      "instance": 544,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09253641963005066
+    },
+    {
+      "instance": 545,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07665977627038956
+    },
+    {
+      "instance": 545,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08042192459106445
+    },
+    {
+      "instance": 545,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.0808725506067276
+    },
+    {
+      "instance": 545,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1383097618818283
+    },
+    {
+      "instance": 546,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04778805747628212
+    },
+    {
+      "instance": 546,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050470538437366486
+    },
+    {
+      "instance": 546,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.051531799137592316
+    },
+    {
+      "instance": 546,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08691969513893127
+    },
+    {
+      "instance": 547,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04745892807841301
+    },
+    {
+      "instance": 547,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05060272663831711
+    },
+    {
+      "instance": 547,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.051055602729320526
+    },
+    {
+      "instance": 547,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.0939415767788887
+    },
+    {
+      "instance": 548,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07702823728322983
+    },
+    {
+      "instance": 548,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.0821249857544899
+    },
+    {
+      "instance": 548,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08310458809137344
+    },
+    {
+      "instance": 548,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1464487612247467
+    },
+    {
+      "instance": 549,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.047887738794088364
+    },
+    {
+      "instance": 549,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050579071044921875
+    },
+    {
+      "instance": 549,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.04873840510845184
+    },
+    {
+      "instance": 549,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08717411011457443
+    },
+    {
+      "instance": 550,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07704560458660126
+    },
+    {
+      "instance": 550,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08195649087429047
+    },
+    {
+      "instance": 550,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.07847917824983597
+    },
+    {
+      "instance": 550,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1437624990940094
+    },
+    {
+      "instance": 551,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.0760616660118103
+    },
+    {
+      "instance": 551,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08087876439094543
+    },
+    {
+      "instance": 551,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08143817633390427
+    },
+    {
+      "instance": 551,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.13909746706485748
+    },
+    {
+      "instance": 552,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07601877301931381
+    },
+    {
+      "instance": 552,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08093181252479553
+    },
+    {
+      "instance": 552,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08142074942588806
+    },
+    {
+      "instance": 552,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.13913500308990479
+    },
+    {
+      "instance": 553,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04779773950576782
+    },
+    {
+      "instance": 553,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05103900656104088
+    },
+    {
+      "instance": 553,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.051657285541296005
+    },
+    {
+      "instance": 553,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09202975779771805
+    },
+    {
+      "instance": 554,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07715054601430893
+    },
+    {
+      "instance": 554,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08126436173915863
+    },
+    {
+      "instance": 554,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.0832681655883789
+    },
+    {
+      "instance": 554,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1517980545759201
+    },
+    {
+      "instance": 555,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04785415902733803
+    },
+    {
+      "instance": 555,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05026384815573692
+    },
+    {
+      "instance": 555,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.049323804676532745
+    },
+    {
+      "instance": 555,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09435119479894638
+    },
+    {
+      "instance": 556,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07605289667844772
+    },
+    {
+      "instance": 556,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08217202126979828
+    },
+    {
+      "instance": 556,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08192826062440872
+    },
+    {
+      "instance": 556,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.1500162035226822
+    },
+    {
+      "instance": 557,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04786951467394829
+    },
+    {
+      "instance": 557,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.05057855322957039
+    },
+    {
+      "instance": 557,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.04839462786912918
+    },
+    {
+      "instance": 557,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08781575411558151
+    },
+    {
+      "instance": 558,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04778948426246643
+    },
+    {
+      "instance": 558,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050145942717790604
+    },
+    {
+      "instance": 558,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.049616485834121704
+    },
+    {
+      "instance": 558,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.08622745424509048
+    },
+    {
+      "instance": 559,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.04707437753677368
+    },
+    {
+      "instance": 559,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.050897836685180664
+    },
+    {
+      "instance": 559,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.0506780669093132
+    },
+    {
+      "instance": 559,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.09034809470176697
+    },
+    {
+      "instance": 560,
+      "proto": 21,
+      "lod": 0,
+      "old_triangles": 64,
+      "new_triangles": 640,
+      "max_surface_offset_m": 0.07648096233606339
+    },
+    {
+      "instance": 560,
+      "proto": 21,
+      "lod": 1,
+      "old_triangles": 64,
+      "new_triangles": 384,
+      "max_surface_offset_m": 0.08215008676052094
+    },
+    {
+      "instance": 560,
+      "proto": 21,
+      "lod": 2,
+      "old_triangles": 64,
+      "new_triangles": 192,
+      "max_surface_offset_m": 0.08158084005117416
+    },
+    {
+      "instance": 560,
+      "proto": 21,
+      "lod": 3,
+      "old_triangles": 16,
+      "new_triangles": 144,
+      "max_surface_offset_m": 0.14906199276447296
+    }
+  ],
+  "total_old_triangles": 11256,
+  "total_new_triangles": 168448,
+  "status": "Authored only; native integration pending"
+}

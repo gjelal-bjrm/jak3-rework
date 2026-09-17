@@ -1,0 +1,31 @@
+{
+  "level": "wascityb",
+  "status": "passed",
+  "checks": {
+    "patch_source_matches_export": true,
+    "all_triangle_areas_nonzero": true,
+    "all_components_finite": true,
+    "normals_unit": true,
+    "normals_match_export_winding": true,
+    "color_weights_barycentric": true,
+    "color_index_triples_from_original_material_palette": true,
+    "no_main_planar_wall_flips": true,
+    "source_files_unchanged": true
+  },
+  "source_export_sha256": "35cc3f931d11b9e9c53ab8df7a248faaafd61482ec1c3c9a9c98f3c24a652c68",
+  "patch_sha256": "dea5dd3c4393cf7d4d16f1f9edbf7e2230254c319b1432c4d5ad3c0bd3aaa150",
+  "counts": {
+    "added_triangles": 138587,
+    "centres_within_2cm": 48789,
+    "opposite_close_centres": 119,
+    "close_nonplanar_or_tiny_opposite": 119
+  },
+  "minimum_triangle_area_m2": 0.0032965049146902008,
+  "maximum_normal_unit_error": 1.3085081307373514e-07,
+  "maximum_color_weight_sum_error": 2.220446049250313e-16,
+  "issues": {},
+  "opposite_groups": {},
+  "method": "Actual exported triangles; native BVH by geom/tree/draw/group; compare geometric winding, normals, and native palette triples.",
+  "main_wall_definition": "All vertices within 2cm of original shell, centre normal dot<-0.95, original |normal.y|<0.35, area>0.01m2, centre at least0.5m below nearest native face top. Excludes an equally close (within1mm) alternative native face with matching orientation.",
+  "native_visual_validation": false
+}

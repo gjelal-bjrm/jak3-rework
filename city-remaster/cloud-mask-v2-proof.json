@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "passed": true,
+      "message": "Cloud manifest has unexpected source files"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\DirectRenderer.h"
+    },
+    {
+      "passed": true,
+      "message": "Missing/duplicate scoped cloud insertion"
+    },
+    {
+      "passed": true,
+      "message": "Missing/duplicate scoped cloud insertion"
+    },
+    {
+      "passed": true,
+      "message": "Cloud insertion changed unrelated Direct renderer source"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sky-source-baseline\\engine-src\\game\\graphics\\opengl_renderer\\DirectRenderer.h"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\DirectRenderer.cpp"
+    },
+    {
+      "passed": true,
+      "message": "Missing/duplicate scoped cloud insertion"
+    },
+    {
+      "passed": true,
+      "message": "Cloud insertion changed unrelated Direct renderer source"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sky-source-baseline\\engine-src\\game\\graphics\\opengl_renderer\\DirectRenderer.cpp"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\SpargusClouds.h"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\SpargusClouds.h"
+    },
+    {
+      "passed": true,
+      "message": "Unexpected cloud source file baseline"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.vert"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\spargus_clouds.vert"
+    },
+    {
+      "passed": true,
+      "message": "Unexpected cloud source file baseline"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.vert"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\spargus_clouds.vert"
+    },
+    {
+      "passed": true,
+      "message": "Unexpected cloud source file baseline"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.frag"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\spargus_clouds.frag"
+    },
+    {
+      "passed": true,
+      "message": "Unexpected cloud source file baseline"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\game\\graphics\\opengl_renderer\\shaders\\spargus_clouds.frag"
+    },
+    {
+      "passed": true,
+      "message": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\spargus_clouds.frag"
+    },
+    {
+      "passed": true,
+      "message": "Unexpected cloud source file baseline"
+    }
+  ],
+  "previous_shader_sha256": "2ee2a4cbd428052219acc1ee6939db1fc574f7e921e473a46b374644b1061457",
+  "shader_sha256": "880226e6f3d933fa0d7b3983a3b99fff5bac3b3702634033b778c2e0c88e2fdd",
+  "shader_only": true,
+  "native_visual_validation": false,
+  "cause": "Native dense bank dominated density, while depth-only lighting saturated to a flat bright front. Native coverage contribution reduced; three-dimensional optical self-shadow added."
+}

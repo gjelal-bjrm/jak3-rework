@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "checks": {
+    "disjoint_removal_keys": true,
+    "pinned_common_parent": true,
+    "finite_vertices": true,
+    "normalized_normals": true,
+    "nondegenerate_triangles": true
+  },
+  "parts": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture-coping\\wascityb-patch.json",
+      "sha256": "dea5dd3c4393cf7d4d16f1f9edbf7e2230254c319b1432c4d5ad3c0bd3aaa150",
+      "removed": 35668,
+      "added": 138587
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\windows\\wascityb-patch.json",
+      "sha256": "925bd22f2188e927af207d99a8098eb39a19ba02008fb67aea23468e30bd0ef3",
+      "removed": 18088,
+      "added": 121429
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\vegetation-v2\\wascityb-patch.json",
+      "sha256": "4ffd455df4a2879f91b996a1f9c825130bc00fc57fbfbeaf168525b82147c8b3",
+      "removed": 27930,
+      "added": 960792
+    }
+  ],
+  "minimum_area_m2": 3.895296359852223e-07,
+  "maximum_normal_error": 8.926918984020205e-07,
+  "removed": 81686,
+  "added": 1220808
+}

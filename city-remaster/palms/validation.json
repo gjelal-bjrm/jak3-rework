@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_snapshot_hash_matches": true,
+    "all_and_only_complete_two_palms_removed": true,
+    "remove_positions_match_source": true,
+    "only_selected_native_groups_added": true,
+    "finite_vertex_data": true,
+    "unit_world_normals": true,
+    "native_color_weights_valid": true,
+    "triangles_nondegenerate": true,
+    "all_64_component_lod_groups_reconstructed": true,
+    "decreasing_lod_budget": true,
+    "lod0_below_30000_triangles": true,
+    "native_anchor_matrix_wind_metadata_preserved": true,
+    "dedicated_textures_present": true,
+    "texture_bytes_and_sizes_valid": true,
+    "only_authored_green_blades_use_tissue": true,
+    "only_authored_trunks_use_bark": true,
+    "native_beard_atlas_unreplaced": true
+  },
+  "max_normal_length_error": 1.4885726651314712e-07,
+  "max_color_weight_sum_error": 2.220446049250313e-16,
+  "minimum_triangle_area_m2": 4.227695149156482e-05,
+  "triangles_by_lod": {
+    "0": 24520,
+    "1": 15568,
+    "2": 7176,
+    "3": 2996
+  },
+  "patch_sha256": "89d1b35f853b14339ff04d7654145b94d58f815ee1c80784f01adc0c7de5300a",
+  "textures": [
+    {
+      "name": "market-palm-leaf-v1",
+      "page": "remaster-market-plants",
+      "width": 1024,
+      "height": 1024,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\leaf-tissue.rgba",
+      "sha256": "39a85b468e05071abf5fcd6d0c0dcc815422bfe5500efb60a747f2493acc48e8"
+    },
+    {
+      "name": "market-palm-trunk-v1",
+      "page": "remaster-market-plants",
+      "width": 887,
+      "height": 1774,
+      "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\palms\\trunk-tissue.rgba",
+      "sha256": "de7106bcd4390cdbe5fd2d166b570318b017c02766bb43fd777e62b256b2a677"
+    }
+  ],
+  "native_visual_validation": false,
+  "limitation": "Blender preview and structural checks only. Bridge round trip, in-game wind, culling, colour and GPU normal use need native validation."
+}

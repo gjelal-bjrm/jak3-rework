@@ -1,0 +1,49 @@
+{
+  "reviewed_utc": "2026-09-16T19:50:08.115874+00:00",
+  "runtime_sha256": "150d45cb757f2ec449acac5177521018b9d316acb2ce77a74d9ea8549d362b2e",
+  "captures": [
+    {
+      "name": "city-panorama-before-v1",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-panorama-before-v1.png",
+      "sha256": "80b09de803abea1d5c6852515cfaa077777c114d6ae6d62969c380af2160e627",
+      "observation": "Baseline before citywide textures, thirteen further palms and cloud changes."
+    },
+    {
+      "name": "city-panorama-after-v1",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-panorama-after-v1.png",
+      "sha256": "160338d5633ac39188ec494ad9ad23e6e3a62558a89b5736a20141001906a8f1",
+      "observation": "First cloud pass rejected: broad uniform cream shapes."
+    },
+    {
+      "name": "city-panorama-after-v2",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-panorama-after-v2.png",
+      "sha256": "51e0d7c598c8a926c9fe6f2fc07a96601d7f3710395bd71943d5baeb237bee61",
+      "observation": "Same fixed camera: citywide surfaces and full palms visible, cloud interiors improved."
+    },
+    {
+      "name": "city-center-after-v1",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-center-after-v1.png",
+      "sha256": "8d4a1d5ca0a7b8fe853142458baae00b6a05edc04e2bb3b1599f6a93c56e9432",
+      "observation": "Rejected display regression: procedural ocean covered a dry WCA street."
+    },
+    {
+      "name": "city-center-dry-v2",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-center-dry-v2.png",
+      "sha256": "5f2ec68db7164d47190caf064e63e4d64981525c3fcef345ec25007f136cf0d5",
+      "observation": "Same WCA start: native coast mask removes water from street."
+    },
+    {
+      "name": "city-coast-mask-swim-v2",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\city-coast-mask-swim-v2.png",
+      "sha256": "5a1a818012a974328d1a468d70b55b75a9ec8af0bc92ed0f5b7db83d535f5d07",
+      "observation": "Coastal water retained; live target-swim-stance and touch-water=true confirmed at (1647,-430)."
+    }
+  ],
+  "scope": "First broad Spargus environment pass, WCA/WCB/WASWIDE.",
+  "limits": [
+    "No complete traversal, collision, cutscene or performance benchmark.",
+    "Building geometry, cactus geometry, all grass and regional fire are not complete.",
+    "Cloud rendering still uses the native dome with an animated volume-derived mask.",
+    "This records agent inspection, not user approval."
+  ]
+}

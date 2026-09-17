@@ -1,0 +1,11 @@
+[
+  {
+    "key": "waspala-glass-03",
+    "page": "waspala-alpha",
+    "file": "waspala-glass-03.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-alpha/waspala-glass-03.png",
+    "tool": "built-in ImageGen",
+    "alpha": "generated_glass",
+    "prompt": "Use case: precise-object-edit. Asset: 2048x2048 RGBA game window texture. The provided image is the ORIGINAL EDIT TARGET. Preserve EXACTLY all polygonal lead/bronze came framing positions, thicknesses, UV layout and tiling edges. Rebuild the frames in finely weathered dark bronze, sharp dimensional fine details. Replace cloudy opaque-looking beige pane interiors with CLEAR TRANSPARENT lightly amber-tinted GLASS: actual translucent alpha channel, 15 to 25 percent opacity on glass, fully opaque frames, antialiased frame edges. Glass has only extremely subtle fine unevenness, a few tiny imperfections, not frosting, dust, large bubbles or scratches. The game must see actual outdoor scenery THROUGH the pane pixels. Do not paint an exterior, sky, clouds, scenery, checkerboard, reflection or background into the image. GENUINE TRANSPARENT BACKGROUND with barely translucent warm glass tint inside panes. Flat orthographic tile, faithful stylized Jak 3 desert palette with modern high-resolution materials. No perspective, no text, no border, no added ornament. Clear glass, NOT stone, parchment, fabric or frosted glass."
+  }
+]

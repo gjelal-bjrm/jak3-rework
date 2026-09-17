@@ -1,0 +1,42 @@
+{
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v1\\waspala-before-models.fr3",
+  "source_sha256": "8f7ff9ee8cc419e130e9df879b0b1ec613d84c596d5a45b221741e1e56d5236c",
+  "parts": [
+    {
+      "file": "brazier-patch.json",
+      "sha256": "d28a6bbc48f3ce52d07c73ea0cb2169555ba4f7c47762843cc225122e67c40bf",
+      "removed": 22968,
+      "added": 145080
+    },
+    {
+      "file": "planter-patch.json",
+      "sha256": "767801691b5fd3d8099a4dab5adc634fd32f6795c7e892e53cd756564654ecbd",
+      "removed": 11844,
+      "added": 225792
+    },
+    {
+      "file": "../models-v2/preserved-patch.json",
+      "sha256": "6d4addd90683a52ff8b6d01daef30bd41f0a094c9e24d249977cfe36230add4c",
+      "removed": 13632,
+      "added": 153960
+    },
+    {
+      "file": "../models-v2/throne-patch.json",
+      "sha256": "96e38544f1b25054282ee0d2f5f594ed4a2298ddd67acb61eada0d4348ed2139",
+      "removed": 882,
+      "added": 35568
+    },
+    {
+      "file": "../models-v2/foliage-patch.json",
+      "sha256": "45c1e6f3039322b211b835307edaa39b8cd9fd8569d93d017abae639e4e9d823",
+      "removed": 34880,
+      "added": 1306656
+    }
+  ],
+  "removed_triangles": 84206,
+  "added_triangles": 1867056,
+  "fuel_faces_exactly_preserved": 288,
+  "overlapping_replacements": 0,
+  "output": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v1\\waspala-objects.fr3",
+  "output_sha256": "18af49de0bb31b2e45fbd4a89ff35444cc4e76476cbd3932850f0f28f605ef24"
+}

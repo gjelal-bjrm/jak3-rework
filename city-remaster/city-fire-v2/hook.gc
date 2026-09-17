@@ -1,0 +1,23 @@
+;; Only indexed city actors reach the bridge. Region filtering must precede
+;; entity/root reads: other maps may use a different or unfinished launch mode.
+;; The C++ registry checks all 61 exact (region, actor-id) pairs before any
+;; transform read, so inspecting mode[0] or a launch-group is unnecessary.
+(define-extern pc-remaster-city-fire (function int int vector quaternion int int))
+
+(defun pc-remaster-spawner-fire ((source part-spawner) (active int))
+  (let ((region 0))
+    (when (and (-> source level) (nonzero? (-> source level)))
+      (case (-> source level name)
+        (('wascitya) (set! region 1))
+        (('wascityb) (set! region 2))))
+    (when (and (nonzero? region)
+               (-> source entity) (nonzero? (-> source entity)))
+      (let ((aid (the-as int (-> (the-as entity-actor (-> source entity)) aid))))
+        ;; Deactivation never needs the root, which may already be released.
+        (when (zero? active)
+          (return (pc-remaster-city-fire region aid
+                    (the-as vector 0) (the-as quaternion 0) 0)))
+        (when (and (-> source root) (nonzero? (-> source root)))
+          (return (pc-remaster-city-fire region aid
+                    (-> source root trans) (-> source root quat) active)))))
+    0))

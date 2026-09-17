@@ -1,0 +1,128 @@
+{
+  "levels": [
+    {
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "0b662fbcd50f466ce33cacbfc0afa7ceaeefa6a6a7c81bd19319fce617ac0f9f",
+      "output_sha256": "7507178aa5ee8a20c0ee2cbdce0137d3fb428fd0e3eb8ad823d94a3777a17f55",
+      "original_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\wascitya.fr3",
+      "original_sha256": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\candidates\\wascitya.fr3",
+      "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\wascitya-preservation.json"
+    },
+    {
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "base_sha256": "d5744b0406e85e278cab38c61aa2578ac1bdb97e114a1bc389b7837529e8f5ef",
+      "output_sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+      "original_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\wascityb.fr3",
+      "original_sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+      "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\candidates\\wascityb.fr3",
+      "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\wascityb-preservation.json"
+    }
+  ],
+  "controls": [
+    "cty-fruit-stand-lod0",
+    "market-crate-lod0",
+    "market-basket-a-lod0",
+    "market-basket-b-lod0",
+    "market-sack-a-lod0",
+    "market-sack-b-lod0",
+    "wascity-awning-b-lod0",
+    "wascity-awning-b-lod1"
+  ],
+  "models": [
+    {
+      "control": "cty-fruit-stand-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\cty-fruit-stand-lod0.glb",
+      "sha256": "73ef5c3eda36619212d9dc2c3224d0fd9ff508a2185566fac2d2ae2cd79def29",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\cty-fruit-stand-lod0.glb"
+    },
+    {
+      "control": "market-crate-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0.glb",
+      "sha256": "51a44755ec56a809cf4883bcea2011dd8290e04d57da5db209be3877b858d245",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-crate-lod0.glb"
+    },
+    {
+      "control": "market-basket-a-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0.glb",
+      "sha256": "d2dc7282ca248e4b03bcb5c16b61afc6e5ea958b3340fcaa42ffbc12be8f1b71",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-basket-a-lod0.glb"
+    },
+    {
+      "control": "market-basket-b-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0.glb",
+      "sha256": "df2fad1a0584d947ed6d88586348fb90e3ebd7305895fa64bd0b4478d5f2040d",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-basket-b-lod0.glb"
+    },
+    {
+      "control": "market-sack-a-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-a-lod0.glb",
+      "sha256": "ee9fdc814253818a13df36e001a02e0e6151abffe576b7a2835b463733dce6ca",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-sack-a-lod0.glb"
+    },
+    {
+      "control": "market-sack-b-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-b-lod0.glb",
+      "sha256": "fe84d38446609b81f56a45eea4da87c974fcd77028efd694f2d45f15f1b91758",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-sack-b-lod0.glb"
+    },
+    {
+      "control": "wascity-awning-b-lod0",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\wascity-awning-b-lod0.glb",
+      "sha256": "9dcb7f3d523153f39abed24e888c628030d352b8494603457fd261db01243e17",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\wascity-awning-b-lod0.glb"
+    },
+    {
+      "control": "wascity-awning-b-lod1",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\wascity-awning-b-lod1.glb",
+      "sha256": "a7cf3a8b4c845788bb4624d706a5daef701fcb905dced6099b25b664f9e9f7fd",
+      "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\wascity-awning-b-lod1.glb"
+    }
+  ],
+  "stage_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\import-report.json",
+  "native_visual_validation": true,
+  "scope": "Rebuilt market controls and embedded materials; native animation, collision and fruit responses retained",
+  "remaining": "City vegetation, terrain, buildings, static market supports and shared fire modernization pending",
+  "native_validation": {
+    "captures": [
+      "market-remaster-front-v2-stable.png",
+      "market-fruit-contact-side-v2.png",
+      "market-remaster-wide-v2.png",
+      "market-fruit-release-v2-0.png",
+      "market-fruit-release-v2-3.png",
+      "market-fruit-release-v2-6.png",
+      "market-awning-bounce-v2-0.png",
+      "market-awning-bounce-v2-5.png",
+      "market-awning-bounce-v2-8.png"
+    ],
+    "observed": [
+      "All eight replacement controls visible in native WCB market",
+      "Broad wood boards and subdued grain",
+      "Sack folds and angled openings",
+      "Canvas seams on underside and upper surface",
+      "Solid fruit release, bounce and dither fade",
+      "Native bouncer response and stable visible anchors"
+    ],
+    "bouncer_state": "target-jump",
+    "observed_bouncer_y_m": [
+      34.6198,
+      44.6108,
+      41.3383,
+      40.4682,
+      45.7731,
+      37.1386,
+      43.7784,
+      43.6493,
+      37.6978
+    ],
+    "scope_limit": "Not a full traversal or performance audit of WCA/WCB. Fruit control release triggered directly; not every player attack input tested. No complete per-fruit cast-shadow system. Static supports, vegetation, buildings and ground still pending.",
+    "playable_camera_restored": true,
+    "final_player_teleport_m": [
+      1754,
+      31,
+      -316
+    ],
+    "final_playable_capture": "market-player-final-v2.png",
+    "fresh_market_reloaded_after_destructive_controller_test": true
+  }
+}

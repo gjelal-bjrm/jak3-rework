@@ -1,0 +1,51 @@
+{
+  "mesh": "corner-conversation.bin",
+  "sha256": "dc8e74339c6ca3b93478c6e6c23458ef281b09ef5c351e819d80ffc22a671d11",
+  "shared_windows": [
+    "wca-house1-west-room",
+    "wca-house1-east-room"
+  ],
+  "floor_polygon_xz": [
+    [
+      -2.3,
+      -0.12
+    ],
+    [
+      3.2785880333520003,
+      -0.12
+    ],
+    [
+      3.5588039693519997,
+      -5.16
+    ],
+    [
+      -2.3,
+      -5.16
+    ]
+  ],
+  "floor_y": -0.035,
+  "ceiling_y": 3.27,
+  "one_world_instance": true,
+  "front_and_right_walls": "native facade with real openings",
+  "occupants": [
+    {
+      "mesh": "conversing-male",
+      "position": [
+        0.25,
+        0.058,
+        -2.15
+      ],
+      "yaw": 2.214297435588181
+    },
+    {
+      "mesh": "conversing-female",
+      "position": [
+        1.45,
+        0.058,
+        -3.05
+      ],
+      "yaw": -0.9272952180016122
+    }
+  ],
+  "author_sha256": "6fa75018d29f3b46181d1f882460c2990744705c9c5a3c947a2e52ff63ab9f47"
+}

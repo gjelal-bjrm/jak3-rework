@@ -1,0 +1,38 @@
+[
+  {
+    "key": "lava",
+    "prompt": "Edit the reference into a seamless top-down tileable lava surface albedo texture for a faithful modern remaster of Jak 3, a stylized 3D adventure. Image 1 is the edit target and palette reference. Preserve organic slow rolling flow rather than geometric cracks. Replace the uniform yellow with a balanced mixture: roughly 45 percent cooled dark umber/charcoal thin floating crust, 45 percent deep vermilion/red-orange molten folds, 10 percent brighter amber seams. Rich broad shapes readable when reduced to 128 by 128; medium details, not tiny noisy grit. Lava clearly liquid and viscous, cartoon art direction with tasteful detailed hand-painted material. Perfectly flat overhead texture, edge to edge, no perspective, objects, sparks, smoke, text, gradient vignette, lighting cast shadows or border. Seamless in X and Y. Opaque square texture only.",
+    "references": [
+      "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\wasstada-alpha\\wstd-lava-base.png"
+    ],
+    "tool": "image_gen built-in",
+    "output_hint": "Generated images are saved to C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d as C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-91857fba-d8b9-4d92-8048-220018b4c3cd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  {
+    "key": "drops",
+    "prompt": "Create one transparent sprite atlas with exactly FOUR molten lava droplet sprite variations in a precise 2 by 2 grid, equal square cells, for a faithful stylized Jak 3 remaster. The reference image is only a silhouette guide showing the four crude original droplets; do not reproduce its background or labels. Each cell contains ONE isolated small airborne lava blob, centered with 15 percent transparent padding, fully contained in its cell, no extra debris. Top left is an elongated curved teardrop, top right a short tapered blob, bottom left a rounded irregular blob, bottom right a compact small globule. Blobs have a bright golden-orange liquid core, orange-red edges, a few very small dark cooling patches, convincing rounded molten volume. Subtle soft emissive rim but no large glow halo. Clean smooth silhouettes, painterly stylized game-ready rendering, legible when each sprite is reduced to 128 pixels. Truly transparent alpha background, no baked black or white backdrop, no checkerboard, no text, no grid lines, no cast shadow. Square atlas with equal size cells, suitable for mechanical four-way slicing.",
+    "references": [
+      "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\art\\lava-sprites-reference.png"
+    ],
+    "tool": "image_gen built-in",
+    "output_hint": "Generated images are saved to C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d as C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-27e2591e-32cf-48bd-821b-76b93af25308.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  {
+    "key": "water",
+    "prompt": "Edit this top-down water tile into a restrained modern game water ripple material for the shallow basins in the stylized stone palace of Jak 3. Preserve its seamless repeating organic ripple structure and top-down edge-to-edge texture format. Make the surface calmer: overlapping fine smooth ripples, broad dark slate-blue troughs, pale desaturated cyan-gray delicate highlights on small wave crests, a few intertwined soft caustic-like light curves, no white foam. Overall low-to-medium brightness, limited contrast; this texture will be blended three times by the game, so no white highlights and no baked reflections of objects. Painterly faithful stylized material, not photoreal or comic outlines. No stones, pool edge, sky, horizon, text, border, vignette. Perfectly tileable on both axes. Square opaque texture; engine transparency will be restored separately.",
+    "references": [
+      "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-water\\waspala-water.png"
+    ],
+    "tool": "image_gen built-in",
+    "output_hint": "Generated images are saved to C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d as C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-1596b9cb-4677-4076-995c-97f3786516a9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  {
+    "key": "waterfall",
+    "prompt": "Edit the reference into a seamless vertical flowing-water texture for a small palace fountain spillway in a faithful Jak 3 remaster. Texture only: orthographic flat square sheet of flowing water, edge-to-edge. Keep the pale blue-gray and muted cyan-white palette, stylized detailed painterly game material. Replace fuzzy cloud patches with many delicate vertically stretched water strands and wavering translucent ribbons, varied widths, small faint pearly highlights, some quiet soft blue-gray gaps, no large bright white patches. The strands must flow from top to bottom and continue across the vertical seam. Horizontally seamless also. No pool, rocks, scene, camera perspective, horizon, text, border or vignette. Opaque RGB source map; the engine's original alpha map will be restored separately. Fine but clean detail remains readable at 64 by 64 pixels.",
+    "references": [
+      "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\textures\\waspala-water\\waspala-waterfall.png"
+    ],
+    "tool": "image_gen built-in",
+    "output_hint": "Generated images are saved to C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d as C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-a8e49f96-1b7d-42e9-a1c7-9bb185e46dce.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+]

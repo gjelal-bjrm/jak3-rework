@@ -1,0 +1,62 @@
+[
+  {
+    "file": "wstd-interior-rock01.png",
+    "label": "sandstone-wall",
+    "desc": "Weathered warm brown sandstone wall, broad horizontal sediment layers. Preserve the large scale horizontal layer boundaries and low contrast brown palette exactly. Refine with delicate hand-painted chipped stone edges and small pores, moderate detail, clean coherent stylized shapes.",
+    "prompt": "Use case: precise-object-edit\nAsset type: production diffuse/albedo texture for a faithful Jak 3 OpenGOAL remaster prototype.\nInput image: original game texture, edit target. Reconstruct at 1024 by 1024 pixels, full square canvas filled edge-to-edge with the exact same texture composition.\nPrimary request: Weathered warm brown sandstone wall, broad horizontal sediment layers. Preserve the large scale horizontal layer boundaries and low contrast brown palette exactly. Refine with delicate hand-painted chipped stone edges and small pores, moderate detail, clean coherent stylized shapes.\nConstraints: flat orthographic texture only; identical UV layout, repeat scale and edge matching; preserve the original painted art style, overall brightness and colors. Fine new surface detail, not photorealistic. Tile seamlessly on both axes. Neutral diffuse illumination, no cast shadows, specular highlights or directional lighting. No camera view, no new objects, no text, no logo, no border, no comparison or collage. Return an opaque RGB texture; alpha will be restored from the game asset at integration.",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-4df56f72-f413-4e71-98c1-1c62e7285369.png"
+  },
+  {
+    "file": "wstd-platform-floor.png",
+    "label": "platform-floor",
+    "desc": "Square dark warm grey/bronze industrial floor plate with the existing exact staggered grid of circular recessed holes and corner bevel outlines. Preserve the exact hole count, positions, size, spacing, border, and rivet placement from the reference; do not add or remove holes. Refine metal roughness, thin worn rim edges and dark cavity edges, subtle sand dust; no exaggerated scratches.",
+    "prompt": "Use case: precise-object-edit\nAsset type: production diffuse/albedo texture for a faithful Jak 3 OpenGOAL remaster prototype.\nInput image: original game texture, edit target. Reconstruct at 1024 by 1024 pixels, full square canvas filled edge-to-edge with the exact same texture composition.\nPrimary request: Square dark warm grey/bronze industrial floor plate with the existing exact staggered grid of circular recessed holes and corner bevel outlines. Preserve the exact hole count, positions, size, spacing, border, and rivet placement from the reference; do not add or remove holes. Refine metal roughness, thin worn rim edges and dark cavity edges, subtle sand dust; no exaggerated scratches.\nConstraints: flat orthographic texture only; identical UV layout, repeat scale and edge matching; preserve the original painted art style, overall brightness and colors. Fine new surface detail, not photorealistic. Tile seamlessly on both axes. Neutral diffuse illumination, no cast shadows, specular highlights or directional lighting. No camera view, no new objects, no text, no logo, no border, no comparison or collage. Return an opaque RGB texture; alpha will be restored from the game asset at integration.",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-61eb7a4b-c4a2-4e29-afa4-c86f65695694.png"
+  },
+  {
+    "file": "wstd-platform-wall.png",
+    "label": "platform-wall",
+    "desc": "Dark desaturated olive-bronze metal plate wall with stepped interlocking rectangular panel seams. Preserve exact seam coordinates and broad patches of brown/olive patina. Refine with fine matte metal grain and subtle seam wear, restrained dust. Keep the flat stylized Jak 3 industrial design.",
+    "prompt": "Use case: precise-object-edit\nAsset type: production diffuse/albedo texture for a faithful Jak 3 OpenGOAL remaster prototype.\nInput image: original game texture, edit target. Reconstruct at 1024 by 1024 pixels, full square canvas filled edge-to-edge with the exact same texture composition.\nPrimary request: Dark desaturated olive-bronze metal plate wall with stepped interlocking rectangular panel seams. Preserve exact seam coordinates and broad patches of brown/olive patina. Refine with fine matte metal grain and subtle seam wear, restrained dust. Keep the flat stylized Jak 3 industrial design.\nConstraints: flat orthographic texture only; identical UV layout, repeat scale and edge matching; preserve the original painted art style, overall brightness and colors. Fine new surface detail, not photorealistic. Tile seamlessly on both axes. Neutral diffuse illumination, no cast shadows, specular highlights or directional lighting. No camera view, no new objects, no text, no logo, no border, no comparison or collage. Return an opaque RGB texture; alpha will be restored from the game asset at integration.",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-72432c0b-9954-49e4-b423-da1c6a52d46e.png"
+  },
+  {
+    "file": "common_sandstone_ground01.png",
+    "label": "sandstone-ground",
+    "desc": "Warm ochre sandstone ground with fine broad crossed cracks and horizontal natural grain. Preserve original ochre palette and large-scale crack positions. Refine small rock grain and hand-painted crack edges. No cobblestones, no bricks, no individual pebbles or grass.",
+    "prompt": "Use case: precise-object-edit\nAsset type: production diffuse/albedo texture for a faithful Jak 3 OpenGOAL remaster prototype.\nInput image: original game texture, edit target. Reconstruct at 1024 by 1024 pixels, full square canvas filled edge-to-edge with the exact same texture composition.\nPrimary request: Warm ochre sandstone ground with fine broad crossed cracks and horizontal natural grain. Preserve original ochre palette and large-scale crack positions. Refine small rock grain and hand-painted crack edges. No cobblestones, no bricks, no individual pebbles or grass.\nConstraints: flat orthographic texture only; identical UV layout, repeat scale and edge matching; preserve the original painted art style, overall brightness and colors. Fine new surface detail, not photorealistic. Tile seamlessly on both axes. Neutral diffuse illumination, no cast shadows, specular highlights or directional lighting. No camera view, no new objects, no text, no logo, no border, no comparison or collage. Return an opaque RGB texture; alpha will be restored from the game asset at integration.",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-34cb9aa4-b793-49fd-9bee-627fcc43221e.png"
+  },
+  {
+    "file": "wstd-floor-panel01.png",
+    "label": "wstd-floor-panel01",
+    "page": "wasstada-tfrag",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-2557d720-affe-4295-a32a-de3219b5a0cd.png",
+    "prompt_summary": "Faithful 2:1 reconstruction of the flat grey-green metal panel; retain the rusty narrow border, UV layout, subdued palette; fine matte grain and patina; no new seams or objects.",
+    "tool": "built-in ImageGen"
+  },
+  {
+    "file": "wstd-scaffold-wall-01.png",
+    "label": "wstd-scaffold-wall-01",
+    "page": "wasstada-tfrag",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-17974680-10bc-4fc0-acb9-be4744e165ba.png",
+    "prompt_summary": "Faithful reconstruction of the brown-olive softly corrugated metal sheet; retain exact vertical repeat rhythm and color; refine painted weathering; no new objects, seams or rivets.",
+    "tool": "built-in ImageGen"
+  },
+  {
+    "file": "wstd-scaffold-wall-02.png",
+    "label": "wstd-scaffold-wall-02",
+    "page": "wasstada-tfrag",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-2a3817fe-4126-4928-867f-b753c76ba8fa.png",
+    "prompt_summary": "Faithful reconstruction of the square grey metal panel; preserve rusty border geometry and existing edge fasteners; restrained painted grain, scratches and patina; flat diffuse illumination.",
+    "tool": "built-in ImageGen"
+  },
+  {
+    "file": "wstd-scaffold-floor-01.png",
+    "label": "wstd-scaffold-floor-01",
+    "page": "wasstadb-tfrag",
+    "generated": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-55805e8a-6c4a-43fb-99ea-270a0dd1e0a1.png",
+    "prompt_summary": "Faithful reconstruction of the diagonal interlocking grey-green tread pattern; preserve pattern layout, scale, subdued original palette; refine metal edges and sandy deposits; flat texture, neutral light, no new objects.",
+    "tool": "built-in ImageGen"
+  }
+]

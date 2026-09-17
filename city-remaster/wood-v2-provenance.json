@@ -1,0 +1,35 @@
+{
+  "asset": "wood-hd-v2.png",
+  "source_material": "city-slum-wood-plain",
+  "source_reference": "wood-original.png",
+  "previous_asset": "wood-hd.png",
+  "tool": "built-in image_gen.imagegen",
+  "skill": "C:/Users/Gjelal/.codex/skills/.system/imagegen/SKILL.md",
+  "intent": "edit",
+  "use_case": "precise-object-edit",
+  "generated_source": "C:/Users/Gjelal/.codex/generated_images/01a0aaef-01eb-7602-b7b4-be2196ca604f/exec-2c411fb7-45c2-48f1-8f2d-f9f2eebff64b.png",
+  "prompt": "Use case: precise-object-edit. Edit the supplied original Jak 3 64x32 wood material into a high-resolution albedo texture for a carpenter-built market stall. Preserve the original subdued warm OLIVE GREY-BROWN color, average RGB 127,119,89 (#7f7759), and its horizontal left-to-right wood grain. Change only the material resolution and finish: clearly SMOOTH PLANED TIMBER, gently rubbed and patinated by use, a flat sawn wooden surface without bark. Let at least eighty percent of the material read as smooth muted olive-brown wood with softly flowing, low-contrast, broad natural grain figuring. Add very finely resolved horizontal fibre pores and a few soft worn grain streaks for close-up realism. Do not add ridged weathered bark, flaking fibres, splinters, deep cracks, black channels, many narrow dark stripes, gritty roughness, or relief lighting. The surface should feel smooth enough to slide a hand across, like hand-planed old wooden furniture rather than a tree trunk. Broad grain lines may gently waver horizontally, but remain subtle and smoothly integrated with the base wood color. Faithful stylized-realistic game material; contemporary high resolution, restrained natural surface detail, absolutely not blurry. One continuous wood material covering the entire image, not multiple manufactured boards. Opaque 2:1 image, ideally 2048x1024. Flat orthographic albedo scan, uniform diffuse color illumination, no highlights, shadowed grooves, directional lighting, cast shadows, ambient occlusion, vignette or bright gradients. No plank boundaries, joins, edges, nails, objects, decorations, text, logo or border. Seamless tile as far as possible. Strict original muted olive RGB127/119/89 medium value, no orange, red, golden saturated yellow or blue-grey. The key visible change is that it is smooth worked wood with fine restrained pores, rather than raw heavily striated bark.",
+  "postprocessing": "Byte-for-byte copy of generated PNG. No pixel editing, recoloring, resizing or crop.",
+  "created_date": "2026-09-16",
+  "validation": {
+    "visually_inspected": true,
+    "material": "Smoother worked and patinated olive-brown wood with low-contrast horizontal grain and fine pores. The deep bark-like channels and sharp fibre relief of V1 have been reduced.",
+    "palette": "Muted warm olive-brown matching the source material family; actual RGB metrics recorded separately.",
+    "objects_or_plank_boundaries": false,
+    "tiling": "Opposite-edge continuity requested; exact wrap is not guaranteed. See edge measurements.",
+    "native_validation": false,
+    "integration": "Asset only. Parent will integrate into the stand. V1 image, GLBs, FR3s, DGO and runtime were not changed."
+  },
+  "attempts": [
+    {
+      "selected": false,
+      "generated_source": "C:/Users/Gjelal/.codex/generated_images/01a0aaef-01eb-7602-b7b4-be2196ca604f/exec-0fe117a9-8802-4024-a5b2-6c3f90e624f8.png",
+      "prompt": "Use case: precise-object-edit. Asset type: production diffuse/albedo material for the wooden market-stall joinery in a faithful high-resolution Jak 3 remaster. Input image 1 (wood-hd.png) is the EDIT TARGET: replace its excessive bark-like roughness and strongly striped grooves with a genuinely smoother, planed and gently weathered sawn timber surface. Input image 2 (wood-original.png, the tiny original game texture) is the STRICT COLOR AND HORIZONTAL GRAIN reference; preserve its subdued warm olive/sand-brown character and average RGB near 127,119,89. The result must be visibly softer and less busy than image 1: broad, softly varying horizontal flowing grain, fine resolved wood fibres, shallow soft pores, occasional restrained worn grain figuring. It is well-used rubbed market joinery: moderately aged and dry, smoothly worked by carpentry rather than raw tree bark. Grain contrast should be low and broad channels very gentle, not black grooves or hard repetitive horizontal stripes. Keep readable natural wood detail at high resolution; do not merely blur the target. Color stays muted and medium-valued, with an olive warmth; no saturated orange, yellow or reddish timber. Output a wide exact 2:1 rectangular texture, ideally 2048 by 1024 pixels, fully opaque. The entire image is one continuous wood MATERIAL without separate manufactured planks, edges, seams or joints. Front-on orthographic material crop filling every pixel; even flat diffuse albedo, NO directional lighting, highlights, cast shadows, dark ambient-occlusion crevices, vignette or gradients. No object, hardware, nails, leaves, text, watermark, border or background. Grain runs horizontally left to right; opposite edges should connect naturally for tiling. Keep the family of the original Jak stylized-realistic material and improve material fidelity rather than changing its hue or identity.",
+      "reason": "Although contrast was reduced, the high-resolution V1 input kept too much bark-like raised fibre structure. A targeted second edit used the original game texture alone."
+    },
+    {
+      "selected": true,
+      "generated_source": "C:/Users/Gjelal/.codex/generated_images/01a0aaef-01eb-7602-b7b4-be2196ca604f/exec-2c411fb7-45c2-48f1-8f2d-f9f2eebff64b.png"
+    }
+  ]
+}

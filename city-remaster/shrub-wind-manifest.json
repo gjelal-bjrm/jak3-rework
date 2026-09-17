@@ -1,0 +1,47 @@
+{
+  "scope": "Only market-shrub-orange-v1 via palace_foliage=2 in shrub.vert",
+  "time_uniform": "palace_time",
+  "time_source": "LiquidSnapshot::seconds(), set by PalaceMaterials::bind (parent integration)",
+  "selector_uniform": "palace_foliage",
+  "selector_value": 2,
+  "texture": "market-shrub-orange-v1",
+  "strict_inverse": "city-remaster/apply_shrub_wind.py::without_market_shrub_wind",
+  "accepted_complete_shader_sha256": "a88631c931a390c2963781a21643ceb47f83ba39ddac687c5912b3b681b72d73",
+  "palace_mode_1_preserved_byte_for_byte_by_inverse": true,
+  "engine_data_identical": true,
+  "validation": {
+    "authored_patch_sha256": "916fe21ab667eef53424477575811bdf9bbca4a597dcd0bcd379466e20f474ad",
+    "faces": 214320,
+    "uv_ranges": [
+      [
+        125.05032,
+        3912.21411
+      ],
+      [
+        0.0,
+        4096.0
+      ]
+    ],
+    "root_vertex_references": 41040,
+    "tip_vertex_references": 9120,
+    "roots_stationary": true,
+    "tip_time_variation": true,
+    "sampled_peak_displacement_m": 0.033679334711679144,
+    "analytic_max_displacement_m": 0.03459768778401239,
+    "mode_1_palace_branch_changed": false,
+    "source_author": "city-remaster/author_shrubs.py; native UVs multiply by4096 after records inverse-V",
+    "native_visual_validation": false
+  },
+  "files": [
+    {
+      "path": "engine-src/game/graphics/opengl_renderer/shaders/shrub.vert",
+      "before_sha256": "a88631c931a390c2963781a21643ceb47f83ba39ddac687c5912b3b681b72d73",
+      "after_sha256": "0b574c83112ffab8df369db48db480f7c020203014f9945c5267c1dd0c02f3a7"
+    },
+    {
+      "path": "data/game/graphics/opengl_renderer/shaders/shrub.vert",
+      "before_sha256": "a88631c931a390c2963781a21643ceb47f83ba39ddac687c5912b3b681b72d73",
+      "after_sha256": "0b574c83112ffab8df369db48db480f7c020203014f9945c5267c1dd0c02f3a7"
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "status": "active",
+  "stage": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001",
+  "scope": "WCA/WCB/WASWIDE broad surface materials, pixels only",
+  "audit": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\audit.json",
+  "audit_sha256": "8a0c391001000e997c6c1022d2b1b31efb27243dc038399374ab40c8b2c41b39",
+  "stage_sha256": "02827df264c1cd499c0db30d98678bfac235a7040e15aefe6b8e252c44ee75cf",
+  "prepared_sha256": "760efd881e0d2a896f29772147e4ef9587538796070f8bef1c33debe9ea13603",
+  "parent_records": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\baseline.json",
+      "sha256": "df2919c1d36d5e5c2f2f95b867a0ccab4e7a792a7715bbe1d4045a2c2594a80b",
+      "value": {
+        "status": "verified_original_baseline",
+        "level": "waswide",
+        "path": "out/jak3/fr3/waswide.fr3",
+        "output_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+        "bytes": 2185130,
+        "live_equals_active_original": true,
+        "snapshots": [
+          {
+            "role": "active_original",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\active-original.fr3",
+            "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+            "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\waswide.fr3",
+            "source_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+          },
+          {
+            "role": "live_before",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\before.fr3",
+            "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+            "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\waswide.fr3",
+            "source_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+          }
+        ],
+        "variants": [
+          {
+            "variant": "original",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\waswide.fr3",
+            "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+          },
+          {
+            "variant": "remaster-v1",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\waswide.fr3",
+            "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+          },
+          {
+            "variant": "remaster",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster\\out\\jak3\\fr3\\waswide.fr3",
+            "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+          }
+        ],
+        "registry_updated": false,
+        "scope": "Read-only live comparison and copied baseline; no geometry or texture changes"
+      }
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\installed.json",
+      "sha256": "2686116962e38a912d4189a17e250785b9ec754ebc20ac4ea68b666c3df060b8",
+      "value": {
+        "levels": [
+          {
+            "path": "out/jak3/fr3/wascitya.fr3",
+            "base_sha256": "0b662fbcd50f466ce33cacbfc0afa7ceaeefa6a6a7c81bd19319fce617ac0f9f",
+            "output_sha256": "7507178aa5ee8a20c0ee2cbdce0137d3fb428fd0e3eb8ad823d94a3777a17f55",
+            "original_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\wascitya.fr3",
+            "original_sha256": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf",
+            "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\candidates\\wascitya.fr3",
+            "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\wascitya-preservation.json"
+          },
+          {
+            "path": "out/jak3/fr3/wascityb.fr3",
+            "base_sha256": "d5744b0406e85e278cab38c61aa2578ac1bdb97e114a1bc389b7837529e8f5ef",
+            "output_sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+            "original_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\wascityb.fr3",
+            "original_sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+            "candidate_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\candidates\\wascityb.fr3",
+            "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\wascityb-preservation.json"
+          }
+        ],
+        "controls": [
+          "cty-fruit-stand-lod0",
+          "market-crate-lod0",
+          "market-basket-a-lod0",
+          "market-basket-b-lod0",
+          "market-sack-a-lod0",
+          "market-sack-b-lod0",
+          "wascity-awning-b-lod0",
+          "wascity-awning-b-lod1"
+        ],
+        "models": [
+          {
+            "control": "cty-fruit-stand-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\cty-fruit-stand-lod0.glb",
+            "sha256": "73ef5c3eda36619212d9dc2c3224d0fd9ff508a2185566fac2d2ae2cd79def29",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\cty-fruit-stand-lod0.glb"
+          },
+          {
+            "control": "market-crate-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0.glb",
+            "sha256": "51a44755ec56a809cf4883bcea2011dd8290e04d57da5db209be3877b858d245",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-crate-lod0.glb"
+          },
+          {
+            "control": "market-basket-a-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0.glb",
+            "sha256": "d2dc7282ca248e4b03bcb5c16b61afc6e5ea958b3340fcaa42ffbc12be8f1b71",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-basket-a-lod0.glb"
+          },
+          {
+            "control": "market-basket-b-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0.glb",
+            "sha256": "df2fad1a0584d947ed6d88586348fb90e3ebd7305895fa64bd0b4478d5f2040d",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-basket-b-lod0.glb"
+          },
+          {
+            "control": "market-sack-a-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-a-lod0.glb",
+            "sha256": "ee9fdc814253818a13df36e001a02e0e6151abffe576b7a2835b463733dce6ca",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-sack-a-lod0.glb"
+          },
+          {
+            "control": "market-sack-b-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-b-lod0.glb",
+            "sha256": "fe84d38446609b81f56a45eea4da87c974fcd77028efd694f2d45f15f1b91758",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\market-sack-b-lod0.glb"
+          },
+          {
+            "control": "wascity-awning-b-lod0",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\wascity-awning-b-lod0.glb",
+            "sha256": "9dcb7f3d523153f39abed24e888c628030d352b8494603457fd261db01243e17",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\wascity-awning-b-lod0.glb"
+          },
+          {
+            "control": "wascity-awning-b-lod1",
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\wascity-awning-b-lod1.glb",
+            "sha256": "a7cf3a8b4c845788bb4624d706a5daef701fcb905dced6099b25b664f9e9f7fd",
+            "replacement_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\custom_assets\\jak3\\merc_replacements\\wascity-awning-b-lod1.glb"
+          }
+        ],
+        "stage_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-block-004\\import-report.json",
+        "native_visual_validation": true,
+        "scope": "Rebuilt market controls and embedded materials; native animation, collision and fruit responses retained",
+        "remaining": "City vegetation, terrain, buildings, static market supports and shared fire modernization pending",
+        "native_validation": {
+          "captures": [
+            "market-remaster-front-v2-stable.png",
+            "market-fruit-contact-side-v2.png",
+            "market-remaster-wide-v2.png",
+            "market-fruit-release-v2-0.png",
+            "market-fruit-release-v2-3.png",
+            "market-fruit-release-v2-6.png",
+            "market-awning-bounce-v2-0.png",
+            "market-awning-bounce-v2-5.png",
+            "market-awning-bounce-v2-8.png"
+          ],
+          "observed": [
+            "All eight replacement controls visible in native WCB market",
+            "Broad wood boards and subdued grain",
+            "Sack folds and angled openings",
+            "Canvas seams on underside and upper surface",
+            "Solid fruit release, bounce and dither fade",
+            "Native bouncer response and stable visible anchors"
+          ],
+          "bouncer_state": "target-jump",
+          "observed_bouncer_y_m": [
+            34.6198,
+            44.6108,
+            41.3383,
+            40.4682,
+            45.7731,
+            37.1386,
+            43.7784,
+            43.6493,
+            37.6978
+          ],
+          "scope_limit": "Not a full traversal or performance audit of WCA/WCB. Fruit control release triggered directly; not every player attack input tested. No complete per-fruit cast-shadow system. Static supports, vegetation, buildings and ground still pending.",
+          "playable_camera_restored": true,
+          "final_player_teleport_m": [
+            1754,
+            31,
+            -316
+          ],
+          "final_playable_capture": "market-player-final-v2.png",
+          "fresh_market_reloaded_after_destructive_controller_test": true
+        }
+      }
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\static-installed.json",
+      "sha256": "7e91daaf52fab8957de252e4d7b3590e687b44086d1c6ba38622b59fa73ee9b6",
+      "value": {
+        "path": "out/jak3/fr3/wascityb.fr3",
+        "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\before-wascityb.fr3",
+        "base_sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+        "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\wascityb.fr3",
+        "output_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+        "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\combined-patch.json",
+        "patch_sha256": "5b292f3c8ce7fa97ada13ff061cf3f6c2bdd140ac5dbe81a76f05f3088af5145",
+        "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\preservation.json",
+        "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\author-validation.json",
+        "parts": [
+          {
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\supports\\patch.json",
+            "sha256": "5c72fef16ddd0f8ac189a62248cc1cca0e06a927415c04bc8667565407eddab1",
+            "removed": 11256,
+            "added": 168448
+          },
+          {
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\palms\\palms-patch.json",
+            "sha256": "89d1b35f853b14339ff04d7654145b94d58f815ee1c80784f01adc0c7de5300a",
+            "removed": 3136,
+            "added": 50260
+          },
+          {
+            "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-shrubs-patch.json",
+            "sha256": "916fe21ab667eef53424477575811bdf9bbca4a597dcd0bcd379466e20f474ad",
+            "removed": 2622,
+            "added": 214320
+          }
+        ],
+        "scope": "14 posts, 14 arms, 28 links, 2 complete palms, 69 grass tufts around WCB market",
+        "native_visual_validation": false,
+        "remaining": "Native visual inspection pending. This batch does not complete the city, buildings, terrain or regional fire."
+      }
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\installed.json",
+      "sha256": "3997018e77a7dfd8b02020cb6b92461b961f5ce46ad9e728890e9cc19f583b3a",
+      "value": {
+        "status": "installed",
+        "path": "out/jak3/fr3/wascityb.fr3",
+        "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\wascityb.fr3",
+        "base_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+        "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\wascityb.fr3",
+        "output_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf",
+        "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\patch.json",
+        "patch_sha256": "90a6d5ab65f35ca7bae095ad7e18adcd813d494bfbc2728457354822925ced56",
+        "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\preservation.json",
+        "preservation_report_sha256": "4bf64d7f03f955ce0f58eb0aebb6f6b221a280f4e94d3ba7373327fc73260d41",
+        "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\validation.json",
+        "author_report_sha256": "351b16c9bfd2b09f3cb8b29e44f8d8fe224194796333b5954f50e77b1ecc42ec",
+        "bridge_sha256": "aa035b1bfa2a79b72b07b24f21c15c0c807aa1b5ba88cf6af9df3adaef39aa8a",
+        "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\static-installed.json",
+        "parent_record_sha256": "7e91daaf52fab8957de252e4d7b3590e687b44086d1c6ba38622b59fa73ee9b6",
+        "scope": "All 13 remaining native WCB palm instances (11 distinct positions), including complete crowns and four LODs; preserve two accepted market palms",
+        "palms_rebuilt": 13,
+        "accepted_palms_preserved": 2,
+        "triangles_by_lod": {
+          "0": 159380,
+          "1": 101192,
+          "2": 46644,
+          "3": 19474
+        },
+        "native_visual_validation": false,
+        "protected_live_variant_hashes": {
+          "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+          "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster\\out\\jak3\\fr3\\wascityb.fr3": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+          "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascityb.fr3": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+          "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascityb.fr3": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e"
+        },
+        "live_files_written": true,
+        "remaining": "Native culling, wind and performance inspection; WCA palms are outside this candidate."
+      }
+    }
+  ],
+  "native_visual_validation": false,
+  "levels": [
+    {
+      "level": "wascitya",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\before-wascitya.fr3",
+      "base_sha256": "7507178aa5ee8a20c0ee2cbdce0137d3fb428fd0e3eb8ad823d94a3777a17f55",
+      "candidate": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3",
+      "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya-patch.json",
+      "patch_sha256": "a71778e6597750557a00cd1a026e9e85ca74d3c0258853a1ed49621639718307",
+      "parent": {
+        "record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\installed.json",
+        "record_sha256": "2686116962e38a912d4189a17e250785b9ec754ebc20ac4ea68b666c3df060b8",
+        "path": "out/jak3/fr3/wascitya.fr3",
+        "output_sha256": "7507178aa5ee8a20c0ee2cbdce0137d3fb428fd0e3eb8ad823d94a3777a17f55"
+      },
+      "materials": [
+        "wascity-ground-01",
+        "wascity-stucco-wall-bleached-01",
+        "wascitya-stone-top",
+        "wascity-rock-small",
+        "wascitya-stone-bottom",
+        "wascity-cement-road",
+        "wascity-stonewall-bricks",
+        "wascity-stucco-wall-bleached-2-bricks-01",
+        "wascity-roof-1",
+        "city-slum-burning-can",
+        "wascity-ditch-wall-top-to-ground",
+        "wascity-stone-plain-wall-3",
+        "wascity-outerwall-metal",
+        "wascity-outerwall-metal-b",
+        "wascity-metal-dirty",
+        "wascity-ground-2-ditch-03",
+        "wascity-ground-2-ditch-04",
+        "wascity-ground-2-ditch-05",
+        "wascity-stone-bricks-2-plain"
+      ],
+      "output_sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+      "preserved_static_sha256": "1cd31a39545e0155d7ace403a0c3a972c0c5209102507905b76cda692191ba4a",
+      "preserved_merc_tail_sha256": "36052e59cde86fe42fde07b9b67a539f7e43a3d808dfb19519df6fe72c7225b0"
+    },
+    {
+      "level": "wascityb",
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\before-wascityb.fr3",
+      "base_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf",
+      "candidate": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascityb.fr3",
+      "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascityb-patch.json",
+      "patch_sha256": "c52efa635a80beccfa016c7f7ba8a13bc41ed2df0ee3c258c866e78281a4549f",
+      "parent": {
+        "record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\installed.json",
+        "record_sha256": "3997018e77a7dfd8b02020cb6b92461b961f5ce46ad9e728890e9cc19f583b3a",
+        "path": "out/jak3/fr3/wascityb.fr3",
+        "output_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf"
+      },
+      "materials": [
+        "wascity-ground-01",
+        "wascity-stucco-wall-bleached-01",
+        "wascity-ocean-shore-rocks",
+        "wascitya-stone-top",
+        "wascity-rock-small",
+        "wascitya-stone-bottom",
+        "wascity-cement-road",
+        "wascity-stonewall-bricks",
+        "wascity-stucco-wall-bleached-2-bricks-01",
+        "wascity-roof-1",
+        "wascity-ground2ocean-shore-rocks",
+        "city-slum-burning-can",
+        "wascity-ditch-wall-top-to-ground",
+        "wascity-stone-plain-wall-3",
+        "wascity-outerwall-metal",
+        "wascity-outerwall-metal-b",
+        "wascity-metal-dirty",
+        "wascity-ground-2-ditch-03",
+        "wascity-ground-2-ditch-04",
+        "wascity-ground-2-ditch-05",
+        "wascity-stone-bricks-2-plain"
+      ],
+      "output_sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee",
+      "preserved_static_sha256": "f877038735bf0cf76cdc1df68ff32c3d2463f27652626cfcae40df5856b7c397",
+      "preserved_merc_tail_sha256": "6f83793a910775cc8fb3a3c98cd960568101e059ce3f9144428c9577ad244b37"
+    },
+    {
+      "level": "waswide",
+      "path": "out/jak3/fr3/waswide.fr3",
+      "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\before-waswide.fr3",
+      "base_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+      "candidate": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\waswide.fr3",
+      "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\waswide-patch.json",
+      "patch_sha256": "86bc5d0cf3f14c09d5b50c5abd5fa3f5fe2883c4bcd405d50827311c45a4d143",
+      "parent": {
+        "record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\baseline.json",
+        "record_sha256": "df2919c1d36d5e5c2f2f95b867a0ccab4e7a792a7715bbe1d4045a2c2594a80b",
+        "path": "out/jak3/fr3/waswide.fr3",
+        "output_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+      },
+      "materials": [
+        "wascity-ground-01",
+        "wascity-cement-road",
+        "wascity-outerwall-metal-b",
+        "wascity-metal-dirty",
+        "wascity-outerwall-rock"
+      ],
+      "output_sha256": "7b956e755c24cdf42762499d347848fa6874fd171c9e6500bc07d417a483a7d8",
+      "preserved_static_sha256": "15aff32cae6113cc26b0e51430950c2f8946212ce09c2c829bd7fc44f5e5fdaf",
+      "preserved_merc_tail_sha256": "50f59019f9dbc5a1c1a821305e32005f1ffd87284e280a0ce2f871b38a2f8080"
+    }
+  ]
+}

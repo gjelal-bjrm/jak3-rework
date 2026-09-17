@@ -1,0 +1,7 @@
+{
+  "tool": "built-in image_gen",
+  "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\leaf-tissue-master.png",
+  "sha256": "f81d97388d5ee6ca6393a9c89bd810c894a725a802f3f08ce6553946915a7b0a",
+  "prompt": "Square albedo entirely filled with the tissue of a single olive-green leaf; vertical centre vein, fine angled side veins, warm olive/sage palette, flat even lighting, no silhouette, margin, background, transparency, text, or baked highlights. Stylized realistic asset for modeled individual leaves in the Jak 3 desert remaster.",
+  "packaging": "Resized to 1024x1024 RGBA; mesh geometry supplies the leaf silhouette."
+}

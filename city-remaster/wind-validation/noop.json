@@ -1,0 +1,10 @@
+{
+  "level": "wascityb",
+  "source_fr3": {
+    "sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+    "bytes": 36575263
+  },
+  "preserve_bvh": true,
+  "remove": [],
+  "add": []
+}

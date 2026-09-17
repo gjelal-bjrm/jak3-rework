@@ -1,0 +1,20 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascitya.fr3",
+    "sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+    "bytes": 240057606
+  },
+  "tree_types": [
+    "shrub"
+  ],
+  "materials": [
+    "market-shrub-orange-v1"
+  ],
+  "bounds_xz_m": [
+    2258,
+    2270,
+    3,
+    15
+  ]
+}

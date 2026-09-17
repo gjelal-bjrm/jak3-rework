@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "scope": "Only conversing-male and conversing-female; staged, not installed.",
+  "author": "author.py",
+  "author_sha256": "02e31d3d6fd4802e9f4a4cf9e7a9383f1760253718058d950e15be5bedc9506b",
+  "native_topology_preserved": true,
+  "predecessor_files": {
+    "conversing-male.json": "89dd4466ae7463b45b90bf9574c598f9305ea779987022a62ceab9c5f7573d7b",
+    "conversing-male.bin": "ca16eaa9b395b4ed53686556fccf8e9645028e9bb920cc69df10bf499cf68074",
+    "conversing-female.json": "0798dfe904d6762fa90a1ced3b8b8a391250353960f61f43091fd72af2a9c595",
+    "conversing-female.bin": "82577de40b9235f75eb99b0d1360de864b2dc175bbe18fd3ffc4f0809c74ba51"
+  },
+  "candidate_files": {
+    "conversing-male.json": "195ea6bf972a64c576ff9c4ae5ec0d3bb60623731f46cd8c5a67dba1bac08140",
+    "conversing-male.bin": "146603a372c70c89dacfcbfdc67b440e174ce1eef77674e1455ab02130258375",
+    "textures/wstlander-01-mustache.png": "d8fb1a0bff3fb2da8a548ff5dfe16b7519f9451b2440c93628130f26a2072651",
+    "textures/wstlander-01-head.png": "1ff6feaa130931e19e03981e5a7bddbb13c20f3e216dd1c0a39fb96d1268bd69",
+    "textures/wstlander-01-eye.png": "e085adb28919a0a02bcfb09f3d8dad0dbff8fed8820d6b369f28d86883eebcd7",
+    "textures/wstlander-01-pants.png": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+    "textures/wstlander-01-wrap.png": "eedd4e64073600a79a4ace89d7a27f9f495307577f60fad7cb262fe3258e1a5a",
+    "textures/wstlander-01-shoetop.png": "4a561233e99f56f38257eb4c47a3b810d36a68a20f2cbc733012c9e23921e9aa",
+    "textures/wstlander-01-skirt.png": "d2833fc119f2d95e79f8dc406de9e0371d5c448783cedc99a50b8658ec32acf3",
+    "textures/wstlander-01-pants_001.png": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+    "textures/wstlander-01-shoetop_001.png": "4a561233e99f56f38257eb4c47a3b810d36a68a20f2cbc733012c9e23921e9aa",
+    "textures/wstlander-01-shoebottom.png": "54a62b1431a0af71df44f37b6df5ec16ac16ffd0cd3e660d9a01dda0c638d37c",
+    "textures/wstlander-01-pants_002.png": "c726321702b58dd461add916c272cf9eb39ef0811ec8c4970940b6ed33aeb5a3",
+    "textures/wstlander-01-leatherstrap.png": "424886464a24600cd098b671f699e86d97f90991fca244daa32b0aa0108671b3",
+    "conversing-female.json": "854437be2d7c4abddd7800ea74891c694acf2357a4814fac41721d213c0a7631",
+    "conversing-female.bin": "d68872c5a4ec801732a9e766004d38bdb167e07ad13525199a0ff7150e57d0e1",
+    "textures/wstlanderchic-hair.png": "84d068bab96bd693db1491f23ecbfd1d5509c6e6531904e2e02e9a2154ec07db",
+    "textures/citn-allleatherstrap.png": "675fde74266812cad134d123ca609af9a33ef3af370b5d9487ef399b07f2f0b6",
+    "textures/wstlanderchic-shirtb.png": "e3c5bdcf92c0918fa05900cdcab7f16832846e3c6c99a53b6c659635159d504b",
+    "textures/wstlanderchic-flesh.png": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+    "textures/wstlanderchic-flesh_001.png": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+    "textures/wstlander-02-glove.png": "0bc4680b7db9230fae25b0f56783e20e28c21dee47e2127b10fcb56dec38e436",
+    "textures/wstlanderchic-shirtb_001.png": "e3c5bdcf92c0918fa05900cdcab7f16832846e3c6c99a53b6c659635159d504b",
+    "textures/wstlanderchic-skirt.png": "fb1d39b701e33867f85be52e29a09f0a93f3e1fa0ce68bae3e2aa5b5b36ec08d",
+    "textures/wstlanderchic-bootleg.png": "b293a6b2047f77ce4b97919f8cada9895d760631b50ca9b6b8502000106a9daf",
+    "textures/wstlanderchic-shoetopb.png": "4029a940b7255b20310412afa6923a862554159d2c1e781c391ecfd17a80515e",
+    "textures/wstlanderchic-flesh_002.png": "93689a54ee78866870d407b46d279b2c111567edad74758ac06e0c205cb48bef",
+    "textures/wstlanderchic-eye.png": "094c9beabeb22e4a6c1ed7f8caceb0cb9cf60fe667f4ba0275e26e7959a25f60"
+  },
+  "sources": {
+    "male-selected.glb": "451c78b26e180a5513f2962ac286611ab78e979b30d24be12115ac3b9aee29bc",
+    "female-selected.glb": "e06d90e919bd8a2d9a6383c2a0b04f7f7f1ec87cb8cfd762bda2e2a389a0ca8a"
+  },
+  "native_game_validation": false,
+  "room_transform_recommendation": {
+    "male": {
+      "position": [
+        0.25,
+        0.058,
+        -2.15
+      ],
+      "yaw_radians": 2.214297435588181
+    },
+    "female": {
+      "position": [
+        1.45,
+        0.058,
+        -3.05
+      ],
+      "yaw_radians": -0.9272952180016122
+    },
+    "phase_seconds": "same for both",
+    "duration_seconds": 8.0
+  },
+  "status": "staged",
+  "proofs": {
+    "README.md": "0192cdee3d6cd721b823328d84dee00ed791d7331cc461333eb34444473daf93",
+    "author.py": "02e31d3d6fd4802e9f4a4cf9e7a9383f1760253718058d950e15be5bedc9506b",
+    "preview.py": "041a734c813babb60bd2fc62313c04a7ef28a0ff827c0e08f5ecd9ff975210c3",
+    "pair-frame-00.png": "9acd54e94b182c6339a485fe22195e7a1d8338fc784e66dcd3f668a142f8f14c",
+    "pair-frame-06.png": "a284eb30b492ec669295d86d4b90dee01318017dac55a905b5eef59ebc583385",
+    "pair-frame-06-side.png": "ca329374616bd0ee86b732598966aca4fb61e8660cf19783834abbcd903959b9",
+    "pair-frame-12.png": "c4f97acea24c9c5d54094463d34b8b98825df2bcc9b877edb4fe427311b95011",
+    "pair-frame-22.png": "c7526eb7d739cc0127d6d5082a19ba2898cf0d124a031ef7a82721e2cf5f297a"
+  },
+  "previews": {
+    "kind": "Blender renders of exact exported BIN vertices; not native game screenshots",
+    "inspected": [
+      "pair-frame-00.png",
+      "pair-frame-06.png",
+      "pair-frame-06-side.png",
+      "pair-frame-12.png",
+      "pair-frame-22.png"
+    ],
+    "visual_review": "Correct partner orientation, relaxed arms between gestures, feet on floor, no T-pose; native mesh identity retained."
+  },
+  "unchanged_source_files": {
+    "sitting-male.bin": "ce63197218b7dac9ec4a395671d9872c6b5b3ffa02cb914917def1835ebab3b8",
+    "sitting-male.json": "09949c88235841e3547eafd6fbaf59df9dc200fb3df7de999dfb66281d2eef72",
+    "validation.json": "095427f3dd348d89dfbf546bd3c0e957e27e09b16d3149953ce2afa332ba1971",
+    "source-manifest.json": "80b078d3ee3c2cf65e7fabc53df32d6e93a9dd5763c5ef1e7b2f2ea1899e47ea"
+  }
+}

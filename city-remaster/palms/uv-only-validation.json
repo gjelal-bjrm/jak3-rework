@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "checks": {
+    "baseline_patch_hash": true,
+    "all_non_add_sections_identical": true,
+    "same_face_count": true,
+    "all_face_metadata_identical": true,
+    "positions_normals_colors_identical": true,
+    "only_trunk_scar_uvs_changed": true,
+    "changed_triangles_have_continuous_nonzero_uv_area": true,
+    "shared_scar_points_have_shared_uvs": true,
+    "all_and_only_3696_scar_triangles_changed": true
+  },
+  "before_patch_sha256": "bba76792893351fd8b930066484a6d15d8e424c63c6da4ac01becefaf47502d5",
+  "after_patch_sha256": "89d1b35f853b14339ff04d7654145b94d58f815ee1c80784f01adc0c7de5300a",
+  "before_author_sha256": "8948d1a8367e978dbfad6933bce4e11a6ecc9f3d1c67ec98709dc8f983600c60",
+  "after_author_sha256": "6d0a20d7c825dc43963009012e3536319396240dfa6dd8635a9719e783497e92",
+  "changed_triangles": 3696,
+  "changed_vertex_uv_references": 11088,
+  "changed_by_component": [
+    {
+      "tree_type": "tie",
+      "geom": 0,
+      "instance": 486,
+      "triangles": 992
+    },
+    {
+      "tree_type": "tie",
+      "geom": 0,
+      "instance": 487,
+      "triangles": 992
+    },
+    {
+      "tree_type": "tie",
+      "geom": 1,
+      "instance": 486,
+      "triangles": 616
+    },
+    {
+      "tree_type": "tie",
+      "geom": 1,
+      "instance": 487,
+      "triangles": 616
+    },
+    {
+      "tree_type": "tie",
+      "geom": 2,
+      "instance": 486,
+      "triangles": 240
+    },
+    {
+      "tree_type": "tie",
+      "geom": 2,
+      "instance": 487,
+      "triangles": 240
+    }
+  ],
+  "maximum_changed_triangle_u_span": 0.23977410793304443,
+  "correction": "Cylindrical 3x7 UV mapping; atan2 angle unwrapped around scar centre, V from height. Same positions, normals, palette weights, records, textures and native wind anchors.",
+  "runtime_or_fr3_modified": false,
+  "native_visual_validation": false,
+  "companion_fix": "GL_REPEAT for dedicated trunk/support wood is owned and tested separately by the parent/ocean agent."
+}

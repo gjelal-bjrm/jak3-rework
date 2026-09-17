@@ -1,0 +1,20 @@
+[
+  {
+    "name": "waspala-palmplant-leaf-02",
+    "width": 1024,
+    "height": 1024,
+    "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\leaf-tissue.rgba"
+  },
+  {
+    "name": "waspala-shrub-plant",
+    "width": 1024,
+    "height": 1024,
+    "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\leaf-tissue.rgba"
+  },
+  {
+    "name": "for-shrub-moss",
+    "width": 1024,
+    "height": 1024,
+    "rgba_file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\models-v2\\leaf-tissue.rgba"
+  }
+]

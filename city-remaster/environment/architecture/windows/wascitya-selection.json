@@ -1,0 +1,738 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3"
+  },
+  "tree_types": [
+    "tie"
+  ],
+  "instances": [
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 317
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 318
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 319
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 320
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 321
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 322
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 323
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 324
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 325
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 326
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 327
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 328
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 329
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 330
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 331
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 332
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 333
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 334
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 335
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 336
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 337
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 338
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 339
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 340
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 341
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 342
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 343
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 344
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 345
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 346
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 347
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 348
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 349
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 350
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 351
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 352
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 353
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 354
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 355
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 356
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 357
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 358
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 359
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 360
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 361
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 362
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 363
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 364
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 365
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 366
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 367
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 368
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 369
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 370
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 371
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 372
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 373
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 374
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 375
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 376
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 377
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 378
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 379
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 380
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 381
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 382
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 383
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 384
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 385
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 386
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 387
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 388
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 389
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 390
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 391
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 392
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 393
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 394
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 395
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 396
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 397
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 398
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 399
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 400
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 401
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 402
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 403
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 404
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 405
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 406
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 407
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 408
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 409
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 410
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 411
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 412
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 413
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 414
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 415
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 416
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 417
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 418
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 419
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 420
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 421
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 422
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 423
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 424
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 425
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 426
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 427
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 428
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 429
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 430
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 431
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 432
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 433
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 434
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 435
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 436
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 437
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 438
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 439
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 440
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 441
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 442
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 443
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 444
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 445
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 446
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 447
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 448
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 449
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 450
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 451
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 452
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 453
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 454
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 455
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 456
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 457
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 458
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 459
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 460
+    },
+    {
+      "tree_type": "tie",
+      "tree": 0,
+      "instance": 461
+    }
+  ]
+}

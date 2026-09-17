@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "current_gpu_report_checks": 376,
+  "historical_gpu_report_checks": 376,
+  "mixed_source_versions_rejected": true,
+  "modified_qa_reports": false,
+  "modified_room_assets": false
+}

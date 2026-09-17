@@ -1,0 +1,142 @@
+[
+  {
+    "key": "waspala-blue-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-blue-01.png",
+    "label": "waspala-blue-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-blue-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original desaturated grey-green mottled mineral/plaster surface; quiet broad cloudy patches and fine existing scuffs. Add realistic fine lime/mineral grain and light abrasion, keep its low contrast. No new cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-red-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-red-01.png",
+    "label": "waspala-red-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-red-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original warm ochre-brown weathered rock/plaster with broad mineral mottles and fine hairline cracks. Add realistic pores and fine mineral grain, keep original pattern and quiet muted orange-brown. No new large cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-yellow-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-yellow-01.png",
+    "label": "waspala-yellow-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-yellow-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original muted ochre-yellow mottled mineral surface. Add extremely fine stone grain and restrained age, same subtle mottling, no new cracks or seams.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-back-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-01.png",
+    "label": "waspala-throne-back-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original narrow central gold/ochre pointed curling two-lobed ornament on dark desaturated blue-grey panel. Precisely retain its silhouette, negative gap, coordinates and backdrop bands. Fine bronze patina, dark painted panel grain, slight rubbed relief edges.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-back-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-02.png",
+    "label": "waspala-throne-back-02",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-02.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x512 horizontal. Original narrow horizontal layered trim in tan, reddish brown and muted gold; preserve each band width and subtle central splits. Realistic aged wood/bronze-like original trim grain and light wear, no new bands or added decoration.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-back-03",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-03.png",
+    "label": "waspala-throne-back-03",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-03.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 512x1024 tall. Original two stacked asymmetrical ochre-gold flame/leaf ornaments against a dark warm grey-brown panel, thin horizontal bands. Preserve exact curved silhouettes and band coordinates. Fine aged metal patina and dark panel grain, no invented patterns.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-base",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-base.png",
+    "label": "waspala-throne-base",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-base.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original neutral grey subtly mottled solid stone surface. Add fine realistic honed stone micrograin, restrained abrasion; keep same broad quiet grey cloud pattern, no new seams.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-bolt",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-bolt.png",
+    "label": "waspala-throne-bolt",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-bolt.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Exact original square weathered brown bronze rivet head with the same broad irregular angular highlights. Fine aged bronze texture and subtle small scuffs. Preserve the original fastener silhouette and centred composition; no extra fasteners.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-cap",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-cap.png",
+    "label": "waspala-throne-cap",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-cap.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x512 horizontal. Exact original gold angular arrow emblem above horizontal brass-brown band against a dark blue-grey surface. Preserve all emblem outlines, spacing and horizontal trim. Fine bronze patina, lightly rubbed existing raised edges, fine dark surface grain.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-cushion",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-cushion.png",
+    "label": "waspala-throne-cushion",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-cushion.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original deep rust-red leather cushion texture: straight narrow top rim, broad softly curved vertical side seams, lighter rectangular centre and darker outer edge. Preserve every fold and seam coordinate. Realistic fine leather pores and restrained rubbed edges. No new stitching, buttons, cloth weave or wrinkles.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-throne-floor",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-floor.png",
+    "label": "waspala-throne-floor",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-floor.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original blue-grey stone tile with a large ochre semicircle entering from top centre, thin horizontal bands and the original two engraved arch motifs below. Precisely preserve every motif, line and border. Fine stone grain and aged ochre/brass inlay, no new symbols or cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-branch-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-branch-01.png",
+    "label": "waspala-branch-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-branch-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x256 horizontal. Tiny original plant-stem surface, two broad dark green vertical bands over muted olive yellow green. Preserve bands and palette; add subtle realistic stem fibres and fine longitudinal texture, no leaves or extra objects.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-palm-dirt",
+    "page": "waspala-tfrag",
+    "file": "waspala-palm-dirt.png",
+    "label": "waspala-palm-dirt",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palm-dirt.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original dark brown earthy soil, same mottled distribution. Fine realistic packed dry earth, tiny mineral grit and scant organic fibres; keep scale small, no large pebbles, roots or plants.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  },
+  {
+    "key": "waspala-palmtree-beard",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmtree-beard.png",
+    "label": "waspala-palmtree-beard",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmtree-beard.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original curtain of long narrow dried palm fibres hanging down from the top, muted straw/tan/olive coloration, irregular pointed bottom edge. Preserve each main hanging strand and silhouette exactly. Realistic dry fibrous strands and fine weathering. Keep the existing olive background; original cutout alpha will be applied separately. Do not add a plant, trunk or scenery.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "pending"
+  }
+]

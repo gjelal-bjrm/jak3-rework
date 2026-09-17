@@ -1,0 +1,281 @@
+{
+  "expected_pairs": 13,
+  "expected_count": 26,
+  "available_count": 6,
+  "existing_count": 12,
+  "complete_pairs": 0,
+  "native_validation_claim": false,
+  "capture_files": [
+    {
+      "file": "images/house1-overview-before.png",
+      "pair": "house1-overview",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4450992,
+      "sha256": "085778c0629aebf23964168d700c682356e4c0b9d268f813e84152344711e994",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house1-overview-after.png",
+      "pair": "house1-overview",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4455874,
+      "sha256": "a158e10051d155a5ce81a91fe2db4f363a54fff7983420be02433c81af3096f4",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house1-front-before.png",
+      "pair": "house1-front",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4804374,
+      "sha256": "76a025de3fea191c49b45ddf9638701e971082005ed193cc5ab3e8d2b89901be",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house1-front-after.png",
+      "pair": "house1-front",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4412905,
+      "sha256": "832261b63e9562a683feaae3ec3b629b8f6258919b8bb0a4ab74933c1b3ae6c0",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house1-side-before.png",
+      "pair": "house1-side",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4093565,
+      "sha256": "58b05f47fd641869293c7cb790de81eaecbeba0a9980062392b862c762f9b7eb",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house1-side-after.png",
+      "pair": "house1-side",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4102707,
+      "sha256": "37b5fdbce79522ed11eff1826b50cca8c6195117a1d0118ea7522c9a2014ea9f",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house1-roof-before.png",
+      "pair": "house1-roof",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4340620,
+      "sha256": "a383853d3bc636cbe22d6cc6829e141e809671f1ae1f66624328adafaf705e1e",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house1-roof-after.png",
+      "pair": "house1-roof",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4328018,
+      "sha256": "5b0120227b7dcc00b7f0787d91a5e1ee7680e200ca10ccfe9f318d9a9cd9f9a7",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house2-front-before.png",
+      "pair": "house2-front",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4289181,
+      "sha256": "82c805295d828897017c96e967ce2a7fd88d700e767aeaeb9c38d3b99b1c694e",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house2-front-after.png",
+      "pair": "house2-front",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4138106,
+      "sha256": "96ac2a247b846a8175d90720d5013a04c09c8029377c6b47b9ce2642aaf98a78",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house2-roof-before.png",
+      "pair": "house2-roof",
+      "state": "before",
+      "exists": true,
+      "usable": true,
+      "bytes": 4742460,
+      "sha256": "0f3241cdb055501d5fe12370a88896893eae70fd64dbc967fb0b2b01b3079e55",
+      "width": 1920,
+      "height": 1080,
+      "reason": "fichier disponible"
+    },
+    {
+      "file": "images/house2-roof-after.png",
+      "pair": "house2-roof",
+      "state": "after",
+      "exists": true,
+      "usable": false,
+      "bytes": 4723571,
+      "sha256": "87c173ebac1f0c6fc170cd5c0c53b1d70e3e4dfdddd137f907a7ec2e828dabaf",
+      "width": 1920,
+      "height": 1080,
+      "reason": "ancienne capture R3 : capture du lot actuel en attente"
+    },
+    {
+      "file": "images/house-east-before.png",
+      "pair": "house-east",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-east-after.png",
+      "pair": "house-east",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-west-before.png",
+      "pair": "house-west",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-west-after.png",
+      "pair": "house-west",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-low-before.png",
+      "pair": "house-low",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-low-after.png",
+      "pair": "house-low",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-north-before.png",
+      "pair": "house-north",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/house-north-after.png",
+      "pair": "house-north",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/interior-contact-before.png",
+      "pair": "interior-contact",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/interior-contact-after.png",
+      "pair": "interior-contact",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/fire-wca-before.png",
+      "pair": "fire-wca",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/fire-wca-after.png",
+      "pair": "fire-wca",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/fire-wcb-before.png",
+      "pair": "fire-wcb",
+      "state": "before",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    },
+    {
+      "file": "images/fire-wcb-after.png",
+      "pair": "fire-wcb",
+      "state": "after",
+      "exists": false,
+      "usable": false,
+      "reason": "capture en attente"
+    }
+  ],
+  "pair_baselines": {
+    "house1-overview": "geometry",
+    "house1-front": "geometry",
+    "house1-side": "geometry",
+    "house1-roof": "geometry",
+    "house2-front": "geometry",
+    "house2-roof": "geometry",
+    "house-east": "geometry",
+    "house-west": "geometry",
+    "house-low": "geometry",
+    "house-north": "geometry",
+    "interior-contact": "contact",
+    "fire-wca": "fire",
+    "fire-wcb": "fire"
+  }
+}

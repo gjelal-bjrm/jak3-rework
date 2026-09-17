@@ -1,0 +1,35 @@
+{
+  "status": "Native export only; no models generated or installed",
+  "level": "wascityb",
+  "source_sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+  "selection_sha256": "e5b4b3045d9e44a293dded92bcc8440695560cb9756ed70d40a082fd2aca484e",
+  "export_sha256": "2f7357cff0aac509f1d628308a6cd68ec19c4dd32d72a48bc270b2b8e52369fc",
+  "faces": 26750,
+  "by_tree_type_and_geom": {
+    "tfrag/0": 379,
+    "tfrag/1": 379,
+    "tfrag/2": 138,
+    "tie/0": 6341,
+    "tie/1": 6341,
+    "tie/2": 5765,
+    "tie/3": 2426,
+    "shrub/0": 4981
+  },
+  "by_material": {
+    "wascity-ground-01": 922,
+    "wascity-ditch-wall-top-to-ground-edging": 180,
+    "wascity-metal-dirty": 2520,
+    "wascity-ditch-wall-top-to-ground": 3760,
+    "wascity-ground-2-ditch-04": 274,
+    "wascity-ground-2-ditch-03": 118,
+    "wascity-ground-2-ditch-05": 208,
+    "wascity-rock-small": 1642,
+    "wascity-ground2ocean-shore-rocks": 420,
+    "wascity-palm-trunk": 672,
+    "wascity-wood-plain": 2912,
+    "city-port-bigpipe-ring-side": 5824,
+    "wascity-cement-road": 4874,
+    "wascity-shrub-orange-01": 2424
+  },
+  "unique_native_keys": true
+}

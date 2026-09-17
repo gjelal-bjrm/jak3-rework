@@ -1,0 +1,51 @@
+{
+  "status": "V12 installed: horizon and V11 wave appearance accepted by user; faster impact and accelerating fall tested natively, user timing feedback pending",
+  "native_swimming_test_m": [
+    1646.9997,
+    6.9717,
+    -429.9985
+  ],
+  "native_swimming_state": "target-swim-stance",
+  "shallow_test_warning": "1678.838,7.1906,-421.930 can settle in target-wade-stance; do not use it as evidence of idle swimming",
+  "clear_palace_underwater_camera_m": [
+    2056.348,
+    241.1,
+    -439.52
+  ],
+  "clear_palace_underwater_target_m": [
+    2068.348,
+    246.795,
+    -439.52
+  ],
+  "palace_fire_verified": [
+    "palace-fire-clear-under-v8.png",
+    "palace-fire-above-v8.png"
+  ],
+  "known_blocked_camera": "2060,241,-443 is blocked by waspala-step-02; seeing only flame tips from it is correct occlusion",
+  "coast_goal": "Preserve intermittent original breakers, with an approaching crest, strong rock impact, irregular upward water, gravity-driven falling drops and a dissipating surface response",
+  "audio": "OPENGOAL_TEST_MUTE=1 clears callback output. -nosound alone was insufficient",
+  "city_followup": "Rebuild recognizable houses, market stalls and fruit, cacti and whole plants; selected see-through windows with small furnished interiors and stable randomized NPC scenes",
+  "full_remaster_complete": false,
+  "native_wave_captures": [
+    "coastal-v12-cycle-4.png",
+    "coastal-v12-cycle-7.png"
+  ],
+  "native_swimming_capture": "coastal-v12-deep-swim.png",
+  "wave_timing": {
+    "rise_seconds": 0.38,
+    "old_rise_seconds": 0.72,
+    "apex_hold_seconds": 0,
+    "gravity_m_s2": 9.81,
+    "spray_launch_seconds": [
+      0.035,
+      0.375
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "checks": 272,
+    "files_per_variant": 45,
+    "audio_mute_branch_logged": true
+  },
+  "city_phase": "Eight rebuilt market controls and solid fruit renderer installed in WCA/WCB; WWD fruit contact corrected. Native views, release/bounce/fade and awning bouncer checked. Full city and static market surroundings still pending."
+}

@@ -1,0 +1,156 @@
+{
+  "male": {
+    "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\waswide\\wlander-male-lod0.glb",
+    "source_sha256": "0bb1a82a19e229804dad86839f3ea3ba7cbd15f3787e24aba2a6d992532cef38",
+    "selected_sha256": "451c78b26e180a5513f2962ac286611ab78e979b30d24be12115ac3b9aee29bc",
+    "fr3_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+    "effects": [
+      {
+        "effect": 2,
+        "primitives": [
+          11
+        ],
+        "materials": [
+          "wstlander-01-mustache"
+        ]
+      },
+      {
+        "effect": 3,
+        "primitives": [
+          12,
+          13
+        ],
+        "materials": [
+          "wstlander-01-head",
+          "wstlander-01-eye"
+        ]
+      },
+      {
+        "effect": 4,
+        "primitives": [
+          14,
+          15
+        ],
+        "materials": [
+          "wstlander-01-pants",
+          "wstlander-01-wrap"
+        ]
+      },
+      {
+        "effect": 5,
+        "primitives": [
+          16
+        ],
+        "materials": [
+          "wstlander-01-shoetop"
+        ]
+      },
+      {
+        "effect": 8,
+        "primitives": [
+          19,
+          20,
+          21,
+          22
+        ],
+        "materials": [
+          "wstlander-01-skirt",
+          "wstlander-01-pants",
+          "wstlander-01-shoetop",
+          "wstlander-01-shoebottom"
+        ]
+      },
+      {
+        "effect": 9,
+        "primitives": [
+          23,
+          24
+        ],
+        "materials": [
+          "wstlander-01-pants",
+          "wstlander-01-leatherstrap"
+        ]
+      }
+    ],
+    "excluded": "weapons and alternate overlapping bodies; complete single outfit selected from native Merc effect ranges"
+  },
+  "female": {
+    "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\waswide\\wlander-female-lod0.glb",
+    "source_sha256": "3636e47977c663810d3ba27b8bb3c67f810f3190e979c58a9ac982a714fa055e",
+    "selected_sha256": "e06d90e919bd8a2d9a6383c2a0b04f7f7f1ec87cb8cfd762bda2e2a389a0ca8a",
+    "fr3_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+    "effects": [
+      {
+        "effect": 4,
+        "primitives": [
+          11
+        ],
+        "materials": [
+          "wstlanderchic-hair"
+        ]
+      },
+      {
+        "effect": 5,
+        "primitives": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "materials": [
+          "wstlander-01-leatherstrap",
+          "citn-allleatherstrap",
+          "wstlanderchic-shirtb",
+          "wstlanderchic-flesh"
+        ]
+      },
+      {
+        "effect": 8,
+        "primitives": [
+          18
+        ],
+        "materials": [
+          "wstlanderchic-flesh"
+        ]
+      },
+      {
+        "effect": 9,
+        "primitives": [
+          19
+        ],
+        "materials": [
+          "wstlander-02-glove"
+        ]
+      },
+      {
+        "effect": 10,
+        "primitives": [
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "materials": [
+          "wstlanderchic-shirtb",
+          "wstlanderchic-skirt",
+          "wstlanderchic-bootleg",
+          "wstlanderchic-shoetopb",
+          "wstlander-01-shoebottom"
+        ]
+      },
+      {
+        "effect": 17,
+        "primitives": [
+          35,
+          36
+        ],
+        "materials": [
+          "wstlanderchic-flesh",
+          "wstlanderchic-eye"
+        ]
+      }
+    ],
+    "excluded": "weapons and alternate overlapping bodies; complete single outfit selected from native Merc effect ranges"
+  }
+}

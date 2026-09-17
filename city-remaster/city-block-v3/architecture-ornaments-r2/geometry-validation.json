@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "faces_removed": 2064,
+  "faces_added": 2064,
+  "degenerate_float32": 0,
+  "bad_normals": 0,
+  "bad_palettes": 0,
+  "patch_sha256": "997c95ea8d62da6df7f7e7115f69207e2b3b16e3d8ab914452be4533cb085b6e",
+  "source_fr3": {
+    "bytes": 240065111,
+    "sha256": "fd442a3c6d80c55d89189c8cc6fa09f21a41491ff83f12df9ac230e4dffa25c9"
+  }
+}

@@ -1,0 +1,34 @@
+<div id="spargus-comparison">
+  <div class="viz-row" style="justify-content:space-between"><span>Original</span><span>Prototype remaster</span></div>
+  <div class="spargus-frame" role="img" aria-label="Même caméra dans le tutoriel : textures originales à gauche, textures et éclairage retravaillés à droite.">
+    <img class="spargus-after" src="REMASTER_IMAGE" alt="Prototype remaster : plaques au sol plus nettes et ombres moins orangées.">
+    <img class="spargus-before" src="ORIGINAL_IMAGE" alt="Version originale de Jak 3.">
+    <div class="spargus-divider" aria-hidden="true"></div>
+  </div>
+  <label class="form-label" for="spargus-position">Séparation avant/après · <output id="spargus-value">50 %</output></label>
+  <input class="form-range" id="spargus-position" type="range" min="0" max="100" value="50" aria-label="Déplacer la séparation entre original et remaster">
+</div>
+<style>
+#spargus-comparison .spargus-frame {position:relative;aspect-ratio:16/9;overflow:hidden;margin:8px 0}
+#spargus-comparison .spargus-frame img {display:block;width:100%;height:100%;object-fit:contain}
+#spargus-comparison .spargus-before {position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
+#spargus-comparison .spargus-divider {position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--foreground);pointer-events:none}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('spargus-comparison');
+  const slider = root.querySelector('#spargus-position');
+  const value = root.querySelector('#spargus-value');
+  const before = root.querySelector('.spargus-before');
+  const divider = root.querySelector('.spargus-divider');
+  const update = () => {
+    const position = Number(slider.value);
+    before.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
+    divider.style.left = `${position}%`;
+    value.textContent = `${position} %`;
+    slider.setAttribute('aria-valuetext', `${position} % de la version originale`);
+  };
+  slider.addEventListener('input', update);
+  update();
+})();
+</script>

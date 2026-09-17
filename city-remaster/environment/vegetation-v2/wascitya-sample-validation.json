@@ -1,0 +1,57 @@
+{
+  "level": "wascitya",
+  "passed": true,
+  "failures": [],
+  "patch_sha256": "84f3acd77ba7ac9bfb1a3579048b2369f89ac957d36ab819722d23e2105a6af7",
+  "source_fr3": {
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+  },
+  "checked_instances": 2,
+  "checked_triangles": 9660,
+  "removed_triangles": 266,
+  "native_visual_validation": false,
+  "checks": "Exact removal identities/positions; native palette provenance; unchanged roots/matrices; finite native float32 geometry; closed oriented positive-volume components; bounds; texture bytes/alpha; no runtime mutation.",
+  "instances": [
+    {
+      "instance": 2302,
+      "kind": "grass",
+      "zero_area_triangles": 0,
+      "nonmanifold_edges": 0,
+      "inconsistent_edges": 0,
+      "components": 21,
+      "nonpositive_components": 0,
+      "minimum_component_volume_m3": 7.711217170343828e-05,
+      "min": [
+        2534.975830078125,
+        42.6260986328125,
+        -106.49767303466797
+      ],
+      "max": [
+        2537.203125,
+        44.85906982421875,
+        -104.763671875
+      ]
+    },
+    {
+      "instance": 3266,
+      "kind": "cactus",
+      "zero_area_triangles": 0,
+      "nonmanifold_edges": 0,
+      "inconsistent_edges": 0,
+      "components": 294,
+      "nonpositive_components": 0,
+      "minimum_component_volume_m3": 1.833816322497664e-07,
+      "min": [
+        2286.90771484375,
+        22.822307586669922,
+        67.90144348144531
+      ],
+      "max": [
+        2289.320068359375,
+        24.139636993408203,
+        70.54617309570312
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "checks": {
+    "city_fire_compile_link": true,
+    "city_fire_lighting_compile_link": true,
+    "city_fire_embers_compile_link": true,
+    "volume_has_visible_coverage": true,
+    "animation_changes_density": true,
+    "opaque_depth_completely_occludes": true,
+    "all_radiance_finite": true,
+    "opacity_bounded": true
+  },
+  "shader_sha256": {
+    "city_fire.vert": "a58c0a9de1b095868ecc776c78918d951bcc3f3ee4f5c50126212669250289c1",
+    "city_fire.frag": "14cb0c1bb616b0c753116090b0dc32442d7721a25f1b8db1433bf29e9bfffa47",
+    "city_fire_lighting.vert": "7dbc7b6f4a1a7e817cfbbaf0300d062f1e7afe134f8dfe13b9ab67911839201f",
+    "city_fire_lighting.frag": "b7bd34804e0928c50f2bab3bf53491b22f1f43c88a1d318ee0ecff826b5ff120",
+    "city_fire_embers.vert": "1e7449b19b32932bfcd23ac57bcfa49d9c4b2565c907b3740d18b837d28a946e",
+    "city_fire_embers.frag": "26413440dfffc4d7623c7cca911d8cb92947e3bd6a6f63550230f809b526c047"
+  },
+  "visible_pixels": 6122,
+  "mean_animation_change": 0.011466735623845856,
+  "method": "Actual generated city shaders, hidden WGL framebuffer, 48-step volume at two times and opaque wall depth",
+  "native_visual_validation": false
+}

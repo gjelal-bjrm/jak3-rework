@@ -1,0 +1,3048 @@
+{
+  "status": "Native plants fully selected; no remeshing or deployment",
+  "source_sha256": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+  "association": "Nearest indexed trunk triangle to each native wind attachment; <=2m, next trunk >0.5m farther",
+  "bounds": "Geometry bounds/radii use only vertices of indexed exported triangles",
+  "palms_complete": 2,
+  "crown_wind_instances_geom0": 14,
+  "shrubs_complete": 69,
+  "shrubs_extended_past_block": 12,
+  "faces_all_lods": 5758,
+  "palms": [
+    {
+      "id": "wascityb/tie/tree-1/trunk-486",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 486
+      },
+      "trunk_proto": 16,
+      "trunk_origin_m": [
+        1765.775390625,
+        34.619239807128906,
+        -333.6962890625
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 486,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1765.775390625,
+            34.619239807128906,
+            -333.6962890625
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 0,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1766.42822265625,
+            62.6553840637207,
+            -335.1866760253906
+          ],
+          "distance_to_indexed_trunk_m": 0.766644432064091,
+          "next_trunk_distance_m": 6.503322546971229
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 4,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1766.243408203125,
+            62.740604400634766,
+            -335.326904296875
+          ],
+          "distance_to_indexed_trunk_m": 0.637797608728928,
+          "next_trunk_distance_m": 6.689698772454657
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 5,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1766.4345703125,
+            62.63980484008789,
+            -335.1650390625
+          ],
+          "distance_to_indexed_trunk_m": 0.779440740893017,
+          "next_trunk_distance_m": 6.478997641664718
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 49,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1766.2344970703125,
+            61.50719451904297,
+            -335.1704406738281
+          ],
+          "distance_to_indexed_trunk_m": 0.5534175370720672,
+          "next_trunk_distance_m": 5.60223461914145
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 50,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1766.0338134765625,
+            58.42633819580078,
+            -335.68206787109375
+          ],
+          "distance_to_indexed_trunk_m": 0.4479808076972971,
+          "next_trunk_distance_m": 4.106909081491682
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 51,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.8399658203125,
+            55.233585357666016,
+            -335.6826171875
+          ],
+          "distance_to_indexed_trunk_m": 0.4821265279644409,
+          "next_trunk_distance_m": 3.9945365861849917
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 52,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.58447265625,
+            52.373985290527344,
+            -335.8094787597656
+          ],
+          "distance_to_indexed_trunk_m": 0.47744285134959963,
+          "next_trunk_distance_m": 4.667506193716283
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 486
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 486
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 486
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 486
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 0
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 4
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 5
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 49
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 50
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 51
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 52
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 0
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 4
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 5
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 49
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 50
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 51
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 52
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 0
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 4
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 5
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 49
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 50
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 51
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 52
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 0
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 4
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 5
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 49
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 50
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 51
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 52
+        }
+      ],
+      "triangles_all_lods": 1568,
+      "triangles_geom0": 544,
+      "indexed_aabb_min_m": [
+        1757.09326171875,
+        28.272964477539062,
+        -347.0156555175781
+      ],
+      "indexed_aabb_max_m": [
+        1775.32763671875,
+        66.19491577148438,
+        -327.59375
+      ],
+      "indexed_center_m": [
+        1766.21044921875,
+        47.23394012451172,
+        -337.30470275878906
+      ],
+      "indexed_radius_m": 19.746258611078115,
+      "indexed_radius_xz_m": 10.727672904244885
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-487",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 487
+      },
+      "trunk_proto": 16,
+      "trunk_origin_m": [
+        1769.9261474609375,
+        33.622703552246094,
+        -332.0140686035156
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 487,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1769.9261474609375,
+            33.622703552246094,
+            -332.0140686035156
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 1,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1768.0257568359375,
+            57.27587890625,
+            -331.5976867675781
+          ],
+          "distance_to_indexed_trunk_m": 0.7174268495980127,
+          "next_trunk_distance_m": 3.826811441467213
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 2,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1768.176513671875,
+            57.34859085083008,
+            -331.7921142578125
+          ],
+          "distance_to_indexed_trunk_m": 0.5837800625453646,
+          "next_trunk_distance_m": 3.7126507578331407
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 3,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1768.02685546875,
+            57.273155212402344,
+            -331.6239318847656
+          ],
+          "distance_to_indexed_trunk_m": 0.7190023835578728,
+          "next_trunk_distance_m": 3.8040458922142166
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 45,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1768.1722412109375,
+            56.30769729614258,
+            -331.7835388183594
+          ],
+          "distance_to_indexed_trunk_m": 0.5710576794336139,
+          "next_trunk_distance_m": 3.8491174185624586
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 46,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1769.06201171875,
+            53.786155700683594,
+            -331.9227294921875
+          ],
+          "distance_to_indexed_trunk_m": 0.41916467694267034,
+          "next_trunk_distance_m": 4.442463845796252
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 47,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1769.4443359375,
+            51.098365783691406,
+            -332.0673828125
+          ],
+          "distance_to_indexed_trunk_m": 0.5024557009405232,
+          "next_trunk_distance_m": 4.812925276926126
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 48,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1769.9383544921875,
+            48.72929000854492,
+            -332.25860595703125
+          ],
+          "distance_to_indexed_trunk_m": 0.5144122272626421,
+          "next_trunk_distance_m": 5.116670583936694
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 487
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 487
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 487
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 487
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 1
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 2
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 3
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 45
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 46
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 47
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 48
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 1
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 2
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 3
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 45
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 46
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 47
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 48
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 1
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 2
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 3
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 45
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 46
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 47
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 48
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 1
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 2
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 3
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 45
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 46
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 47
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 48
+        }
+      ],
+      "triangles_all_lods": 1568,
+      "triangles_geom0": 544,
+      "indexed_aabb_min_m": [
+        1760.94873046875,
+        28.182743072509766,
+        -340.6077880859375
+      ],
+      "indexed_aabb_max_m": [
+        1779.9384765625,
+        61.022884368896484,
+        -323.0142822265625
+      ],
+      "indexed_center_m": [
+        1770.443603515625,
+        44.602813720703125,
+        -331.81103515625
+      ],
+      "indexed_radius_m": 17.276864226380848,
+      "indexed_radius_xz_m": 10.900294053470644
+    }
+  ],
+  "shrubs": [
+    {
+      "id": "wascityb/shrub/tree-0/instance-2467",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2467
+      },
+      "proto": 9,
+      "origin_m": [
+        1805.071533203125,
+        28.477130889892578,
+        -321.1819152832031
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1804.5052490234375,
+        28.427465438842773,
+        -322.1280822753906
+      ],
+      "indexed_aabb_max_m": [
+        1805.8895263671875,
+        29.764108657836914,
+        -320.4046630859375
+      ],
+      "indexed_center_m": [
+        1805.1973876953125,
+        29.095787048339844,
+        -321.26637268066406
+      ],
+      "indexed_radius_m": 0.8686697116210332,
+      "indexed_radius_xz_m": 0.8686694187214405
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2475",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2475
+      },
+      "proto": 9,
+      "origin_m": [
+        1801.4913330078125,
+        28.64113426208496,
+        -325.1802062988281
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1800.5447998046875,
+        28.55657386779785,
+        -325.9392395019531
+      ],
+      "indexed_aabb_max_m": [
+        1802.6163330078125,
+        30.843944549560547,
+        -324.2670593261719
+      ],
+      "indexed_center_m": [
+        1801.58056640625,
+        29.7002592086792,
+        -325.1031494140625
+      ],
+      "indexed_radius_m": 1.2285394500737006,
+      "indexed_radius_xz_m": 1.0672753551311314
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2476",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2476
+      },
+      "proto": 9,
+      "origin_m": [
+        1801.9403076171875,
+        28.864139556884766,
+        -324.0535888671875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1800.9864501953125,
+        28.802053451538086,
+        -324.8122253417969
+      ],
+      "indexed_aabb_max_m": [
+        1803.0582275390625,
+        30.481489181518555,
+        -323.1399841308594
+      ],
+      "indexed_center_m": [
+        1802.0223388671875,
+        29.64177131652832,
+        -323.9761047363281
+      ],
+      "indexed_radius_m": 1.0674471787920474,
+      "indexed_radius_xz_m": 1.0668017384136448
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2477",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2477
+      },
+      "proto": 9,
+      "origin_m": [
+        1811.51806640625,
+        27.068191528320312,
+        -327.8213806152344
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1810.6324462890625,
+        26.97650718688965,
+        -328.3922119140625
+      ],
+      "indexed_aabb_max_m": [
+        1812.6435546875,
+        28.663890838623047,
+        -326.7539367675781
+      ],
+      "indexed_center_m": [
+        1811.6380004882812,
+        27.820199012756348,
+        -327.5730743408203
+      ],
+      "indexed_radius_m": 1.0956722201605367,
+      "indexed_radius_xz_m": 1.0675100703737728
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2478",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2478
+      },
+      "proto": 9,
+      "origin_m": [
+        1810.6878662109375,
+        27.07738494873047,
+        -327.38824462890625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1810.1009521484375,
+        27.016408920288086,
+        -328.08209228515625
+      ],
+      "indexed_aabb_max_m": [
+        1811.46923828125,
+        28.328216552734375,
+        -326.4549865722656
+      ],
+      "indexed_center_m": [
+        1810.7850952148438,
+        27.67231273651123,
+        -327.26853942871094
+      ],
+      "indexed_radius_m": 0.8860896260523043,
+      "indexed_radius_xz_m": 0.8636461810584408
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2479",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2479
+      },
+      "proto": 9,
+      "origin_m": [
+        1812.4130859375,
+        27.018308639526367,
+        -327.9111022949219
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1811.9410400390625,
+        26.954490661621094,
+        -328.4295959472656
+      ],
+      "indexed_aabb_max_m": [
+        1813.072998046875,
+        28.498098373413086,
+        -327.0841064453125
+      ],
+      "indexed_center_m": [
+        1812.5070190429688,
+        27.72629451751709,
+        -327.75685119628906
+      ],
+      "indexed_radius_m": 0.8911804614158485,
+      "indexed_radius_xz_m": 0.7147423199638565
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2480",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2480
+      },
+      "proto": 9,
+      "origin_m": [
+        1806.4945068359375,
+        28.132190704345703,
+        -322.2442626953125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1806.0675048828125,
+        28.07315444946289,
+        -323.03204345703125
+      ],
+      "indexed_aabb_max_m": [
+        1807.20751953125,
+        29.664499282836914,
+        -321.6080322265625
+      ],
+      "indexed_center_m": [
+        1806.6375122070312,
+        28.868826866149902,
+        -322.3200378417969
+      ],
+      "indexed_radius_m": 0.8789240818612394,
+      "indexed_radius_xz_m": 0.7178909808857603
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2481",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2481
+      },
+      "proto": 9,
+      "origin_m": [
+        1805.6954345703125,
+        28.297103881835938,
+        -321.8719787597656
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1804.9127197265625,
+        28.22511100769043,
+        -322.71258544921875
+      ],
+      "indexed_aabb_max_m": [
+        1806.9764404296875,
+        29.962139129638672,
+        -320.9874267578125
+      ],
+      "indexed_center_m": [
+        1805.944580078125,
+        29.09362506866455,
+        -321.8500061035156
+      ],
+      "indexed_radius_m": 1.0750631616159383,
+      "indexed_radius_xz_m": 1.045971755210365
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2482",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2482
+      },
+      "proto": 9,
+      "origin_m": [
+        1807.35595703125,
+        28.296161651611328,
+        -321.5389709472656
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1806.5516357421875,
+        28.24407386779785,
+        -322.2814025878906
+      ],
+      "indexed_aabb_max_m": [
+        1808.2413330078125,
+        29.573198318481445,
+        -320.86834716796875
+      ],
+      "indexed_center_m": [
+        1807.396484375,
+        28.90863609313965,
+        -321.5748748779297
+      ],
+      "indexed_radius_m": 0.8691382051338606,
+      "indexed_radius_xz_m": 0.8524390050773614
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2486",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2486
+      },
+      "proto": 9,
+      "origin_m": [
+        1794.7845458984375,
+        33.22739791870117,
+        -289.1006774902344
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 1,
+      "indexed_aabb_min_m": [
+        1793.836181640625,
+        33.15887451171875,
+        -290.17401123046875
+      ],
+      "indexed_aabb_max_m": [
+        1795.7762451171875,
+        34.74995040893555,
+        -288.449951171875
+      ],
+      "indexed_center_m": [
+        1794.8062133789062,
+        33.95441246032715,
+        -289.3119812011719
+      ],
+      "indexed_radius_m": 1.0037832268118816,
+      "indexed_radius_xz_m": 1.0033011134061194
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2487",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2487
+      },
+      "proto": 9,
+      "origin_m": [
+        1792.106689453125,
+        32.95611572265625,
+        -290.7079162597656
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1790.995849609375,
+        32.881229400634766,
+        -291.6700134277344
+      ],
+      "indexed_aabb_max_m": [
+        1793.0003662109375,
+        34.762535095214844,
+        -290.0469055175781
+      ],
+      "indexed_center_m": [
+        1791.9981079101562,
+        33.821882247924805,
+        -290.85845947265625
+      ],
+      "indexed_radius_m": 1.1448368530600708,
+      "indexed_radius_xz_m": 1.0427441645391577
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2488",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2488
+      },
+      "proto": 9,
+      "origin_m": [
+        1794.6171875,
+        33.117557525634766,
+        -289.9931335449219
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 29,
+      "indexed_aabb_min_m": [
+        1793.875,
+        33.067543029785156,
+        -290.6360778808594
+      ],
+      "indexed_aabb_max_m": [
+        1795.2142333984375,
+        34.32447052001953,
+        -289.5513610839844
+      ],
+      "indexed_center_m": [
+        1794.5446166992188,
+        33.696006774902344,
+        -290.0937194824219
+      ],
+      "indexed_radius_m": 0.7649002770353913,
+      "indexed_radius_xz_m": 0.6967289913859458
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2491",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2491
+      },
+      "proto": 9,
+      "origin_m": [
+        1781.6351318359375,
+        32.38068389892578,
+        -293.13568115234375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1781.2047119140625,
+        32.307369232177734,
+        -294.1217041015625
+      ],
+      "indexed_aabb_max_m": [
+        1782.58251953125,
+        34.28666305541992,
+        -292.3876037597656
+      ],
+      "indexed_center_m": [
+        1781.8936157226562,
+        33.29701614379883,
+        -293.25465393066406
+      ],
+      "indexed_radius_m": 1.1733442531025906,
+      "indexed_radius_xz_m": 0.8749254868969151
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2492",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2492
+      },
+      "proto": 9,
+      "origin_m": [
+        1782.30224609375,
+        32.282615661621094,
+        -293.8861389160156
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1782.0133056640625,
+        32.223392486572266,
+        -294.5719909667969
+      ],
+      "indexed_aabb_max_m": [
+        1783.0421142578125,
+        33.71803665161133,
+        -293.2550048828125
+      ],
+      "indexed_center_m": [
+        1782.5277099609375,
+        32.9707145690918,
+        -293.9134979248047
+      ],
+      "indexed_radius_m": 0.8872392715284123,
+      "indexed_radius_xz_m": 0.6713696912860421
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2496",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2496
+      },
+      "proto": 9,
+      "origin_m": [
+        1791.428466796875,
+        33.132179260253906,
+        -289.2828369140625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 4,
+      "indexed_aabb_min_m": [
+        1790.5067138671875,
+        33.062740325927734,
+        -290.4303283691406
+      ],
+      "indexed_aabb_max_m": [
+        1792.2216796875,
+        34.35890579223633,
+        -288.5347900390625
+      ],
+      "indexed_center_m": [
+        1791.3641967773438,
+        33.71082305908203,
+        -289.48255920410156
+      ],
+      "indexed_radius_m": 1.017953725516313,
+      "indexed_radius_xz_m": 0.9695609856288676
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2497",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2497
+      },
+      "proto": 9,
+      "origin_m": [
+        1790.8970947265625,
+        32.963436126708984,
+        -290.51123046875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1790.1549072265625,
+        32.913421630859375,
+        -291.1541748046875
+      ],
+      "indexed_aabb_max_m": [
+        1791.494140625,
+        34.17034912109375,
+        -290.0694580078125
+      ],
+      "indexed_center_m": [
+        1790.8245239257812,
+        33.54188537597656,
+        -290.61181640625
+      ],
+      "indexed_radius_m": 0.7649002770353913,
+      "indexed_radius_xz_m": 0.6967289913859458
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2499",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2499
+      },
+      "proto": 9,
+      "origin_m": [
+        1780.206298828125,
+        31.346343994140625,
+        -300.145263671875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1779.621826171875,
+        31.280515670776367,
+        -301.10760498046875
+      ],
+      "indexed_aabb_max_m": [
+        1781.1181640625,
+        33.04248046875,
+        -299.23504638671875
+      ],
+      "indexed_center_m": [
+        1780.3699951171875,
+        32.161498069763184,
+        -300.17132568359375
+      ],
+      "indexed_radius_m": 1.04191266610216,
+      "indexed_radius_xz_m": 0.9808630663317304
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2500",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2500
+      },
+      "proto": 9,
+      "origin_m": [
+        1780.1575927734375,
+        31.64272689819336,
+        -297.4132995605469
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1779.5576171875,
+        31.56279182434082,
+        -298.50177001953125
+      ],
+      "indexed_aabb_max_m": [
+        1781.105224609375,
+        33.77378463745117,
+        -296.6127014160156
+      ],
+      "indexed_center_m": [
+        1780.3314208984375,
+        32.668288230895996,
+        -297.55723571777344
+      ],
+      "indexed_radius_m": 1.2815887007174598,
+      "indexed_radius_xz_m": 0.957172466218432
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2501",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2501
+      },
+      "proto": 9,
+      "origin_m": [
+        1781.0716552734375,
+        31.646209716796875,
+        -296.89300537109375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1780.49658203125,
+        31.580232620239258,
+        -297.4191589355469
+      ],
+      "indexed_aabb_max_m": [
+        1781.92626953125,
+        33.36458969116211,
+        -296.2568664550781
+      ],
+      "indexed_center_m": [
+        1781.21142578125,
+        32.472411155700684,
+        -296.8380126953125
+      ],
+      "indexed_radius_m": 0.9210811200411924,
+      "indexed_radius_xz_m": 0.744510179028352
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2502",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2502
+      },
+      "proto": 9,
+      "origin_m": [
+        1773.140625,
+        32.45752716064453,
+        -297.95355224609375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1772.34375,
+        32.38132095336914,
+        -298.8597106933594
+      ],
+      "indexed_aabb_max_m": [
+        1773.8367919921875,
+        34.441490173339844,
+        -297.1304626464844
+      ],
+      "indexed_center_m": [
+        1773.0902709960938,
+        33.41140556335449,
+        -297.9950866699219
+      ],
+      "indexed_radius_m": 1.1862202509281785,
+      "indexed_radius_xz_m": 0.905215530539285
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2503",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2503
+      },
+      "proto": 9,
+      "origin_m": [
+        1774.0037841796875,
+        32.260536193847656,
+        -299.2339172363281
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1773.2508544921875,
+        32.18386459350586,
+        -300.16070556640625
+      ],
+      "indexed_aabb_max_m": [
+        1774.5537109375,
+        33.984283447265625,
+        -298.6597595214844
+      ],
+      "indexed_center_m": [
+        1773.9022827148438,
+        33.08407402038574,
+        -299.4102325439453
+      ],
+      "indexed_radius_m": 1.0705444701997782,
+      "indexed_radius_xz_m": 0.7883735320176112
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2504",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2504
+      },
+      "proto": 9,
+      "origin_m": [
+        1774.3939208984375,
+        32.157718658447266,
+        -299.8426513671875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1773.9144287109375,
+        32.10574722290039,
+        -300.5513916015625
+      ],
+      "indexed_aabb_max_m": [
+        1774.8388671875,
+        33.34352493286133,
+        -299.5171813964844
+      ],
+      "indexed_center_m": [
+        1774.3766479492188,
+        32.72463607788086,
+        -300.03428649902344
+      ],
+      "indexed_radius_m": 0.7344383610067454,
+      "indexed_radius_xz_m": 0.5297702789415141
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2505",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2505
+      },
+      "proto": 9,
+      "origin_m": [
+        1769.8525390625,
+        32.99196243286133,
+        -294.6488037109375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1769.043701171875,
+        32.9299430847168,
+        -295.5662536621094
+      ],
+      "indexed_aabb_max_m": [
+        1770.4825439453125,
+        34.512474060058594,
+        -293.8199462890625
+      ],
+      "indexed_center_m": [
+        1769.7631225585938,
+        33.721208572387695,
+        -294.69309997558594
+      ],
+      "indexed_radius_m": 0.944557184751486,
+      "indexed_radius_xz_m": 0.8901813892668947
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2506",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2506
+      },
+      "proto": 9,
+      "origin_m": [
+        1769.2718505859375,
+        32.98291015625,
+        -294.5084533691406
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1768.6668701171875,
+        32.94147872924805,
+        -295.0727233886719
+      ],
+      "indexed_aabb_max_m": [
+        1769.9022216796875,
+        34.06695556640625,
+        -294.061767578125
+      ],
+      "indexed_center_m": [
+        1769.2845458984375,
+        33.50421714782715,
+        -294.56724548339844
+      ],
+      "indexed_radius_m": 0.653172415859321,
+      "indexed_radius_xz_m": 0.6268403408250437
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2507",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2507
+      },
+      "proto": 9,
+      "origin_m": [
+        1767.7471923828125,
+        29.778154373168945,
+        -329.7557067871094
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1767.038330078125,
+        29.73463249206543,
+        -330.2381591796875
+      ],
+      "indexed_aabb_max_m": [
+        1768.5172119140625,
+        30.907997131347656,
+        -329.0474853515625
+      ],
+      "indexed_center_m": [
+        1767.7777709960938,
+        30.321314811706543,
+        -329.642822265625
+      ],
+      "indexed_radius_m": 0.757870296472489,
+      "indexed_radius_xz_m": 0.7575164541103571
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2508",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2508
+      },
+      "proto": 9,
+      "origin_m": [
+        1766.0869140625,
+        29.767074584960938,
+        -329.1438903808594
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1765.5955810546875,
+        29.733400344848633,
+        -329.56201171875
+      ],
+      "indexed_aabb_max_m": [
+        1766.6968994140625,
+        30.645063400268555,
+        -328.6672668457031
+      ],
+      "indexed_center_m": [
+        1766.146240234375,
+        30.189231872558594,
+        -329.11463928222656
+      ],
+      "indexed_radius_m": 0.5705745531081193,
+      "indexed_radius_xz_m": 0.568793023437005
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2509",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2509
+      },
+      "proto": 9,
+      "origin_m": [
+        1769.91455078125,
+        29.778154373168945,
+        -328.90777587890625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1769.2056884765625,
+        29.73463249206543,
+        -329.3902282714844
+      ],
+      "indexed_aabb_max_m": [
+        1770.6845703125,
+        30.907997131347656,
+        -328.1995544433594
+      ],
+      "indexed_center_m": [
+        1769.9451293945312,
+        30.321314811706543,
+        -328.7948913574219
+      ],
+      "indexed_radius_m": 0.757870296472489,
+      "indexed_radius_xz_m": 0.7575164541103571
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2510",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2510
+      },
+      "proto": 9,
+      "origin_m": [
+        1770.550537109375,
+        29.775304794311523,
+        -328.9452819824219
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1770.1014404296875,
+        29.725872039794922,
+        -329.59027099609375
+      ],
+      "indexed_aabb_max_m": [
+        1771.1221923828125,
+        31.061357498168945,
+        -328.3414001464844
+      ],
+      "indexed_center_m": [
+        1770.61181640625,
+        30.393614768981934,
+        -328.96583557128906
+      ],
+      "indexed_radius_m": 0.7481449657390493,
+      "indexed_radius_xz_m": 0.62976879170925
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2511",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2511
+      },
+      "proto": 9,
+      "origin_m": [
+        1799.3173828125,
+        28.699060440063477,
+        -326.4202575683594
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1798.509521484375,
+        28.638429641723633,
+        -327.42706298828125
+      ],
+      "indexed_aabb_max_m": [
+        1800.167236328125,
+        30.28175926208496,
+        -325.40887451171875
+      ],
+      "indexed_center_m": [
+        1799.33837890625,
+        29.460094451904297,
+        -326.41796875
+      ],
+      "indexed_radius_m": 1.082884611816838,
+      "indexed_radius_xz_m": 1.0799610029598554
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2512",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2512
+      },
+      "proto": 9,
+      "origin_m": [
+        1800.0120849609375,
+        28.176685333251953,
+        -328.3741760253906
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1799.347900390625,
+        28.116308212280273,
+        -329.2817687988281
+      ],
+      "indexed_aabb_max_m": [
+        1800.6234130859375,
+        29.75516128540039,
+        -327.770263671875
+      ],
+      "indexed_center_m": [
+        1799.9856567382812,
+        28.935734748840332,
+        -328.52601623535156
+      ],
+      "indexed_radius_m": 0.8703530321936542,
+      "indexed_radius_xz_m": 0.8606068280359958
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2513",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2513
+      },
+      "proto": 9,
+      "origin_m": [
+        1800.787109375,
+        28.047988891601562,
+        -328.8009033203125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1799.9119873046875,
+        27.96677589416504,
+        -329.66363525390625
+      ],
+      "indexed_aabb_max_m": [
+        1801.43017578125,
+        30.098478317260742,
+        -328.3648681640625
+      ],
+      "indexed_center_m": [
+        1800.6710815429688,
+        29.03262710571289,
+        -329.0142517089844
+      ],
+      "indexed_radius_m": 1.0930420568674108,
+      "indexed_radius_xz_m": 0.8689677446924879
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2514",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2514
+      },
+      "proto": 9,
+      "origin_m": [
+        1781.0093994140625,
+        31.347190856933594,
+        -300.5119323730469
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1780.4805908203125,
+        31.288108825683594,
+        -301.1507873535156
+      ],
+      "indexed_aabb_max_m": [
+        1782.0113525390625,
+        32.88926696777344,
+        -299.84747314453125
+      ],
+      "indexed_center_m": [
+        1781.2459716796875,
+        32.088687896728516,
+        -300.49913024902344
+      ],
+      "indexed_radius_m": 0.8546979281915709,
+      "indexed_radius_xz_m": 0.818980266095545
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2523",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2523
+      },
+      "proto": 9,
+      "origin_m": [
+        1815.7608642578125,
+        26.7002010345459,
+        -343.3232116699219
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1815.07275390625,
+        26.614545822143555,
+        -344.4808654785156
+      ],
+      "indexed_aabb_max_m": [
+        1816.7113037109375,
+        28.93217658996582,
+        -342.6560363769531
+      ],
+      "indexed_center_m": [
+        1815.8920288085938,
+        27.773361206054688,
+        -343.5684509277344
+      ],
+      "indexed_radius_m": 1.1920012077059887,
+      "indexed_radius_xz_m": 1.048994152862061
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2524",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2524
+      },
+      "proto": 9,
+      "origin_m": [
+        1815.7598876953125,
+        26.81463050842285,
+        -344.2550964355469
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1814.84130859375,
+        26.750932693481445,
+        -345.22601318359375
+      ],
+      "indexed_aabb_max_m": [
+        1816.69775390625,
+        28.196531295776367,
+        -343.6037292480469
+      ],
+      "indexed_center_m": [
+        1815.76953125,
+        27.473731994628906,
+        -344.4148712158203
+      ],
+      "indexed_radius_m": 1.0818280388469652,
+      "indexed_radius_xz_m": 1.077787231599718
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2525",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2525
+      },
+      "proto": 9,
+      "origin_m": [
+        1817.9051513671875,
+        26.846439361572266,
+        -330.73431396484375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1817.2816162109375,
+        26.791488647460938,
+        -331.6051940917969
+      ],
+      "indexed_aabb_max_m": [
+        1818.7818603515625,
+        27.944738388061523,
+        -329.7731018066406
+      ],
+      "indexed_center_m": [
+        1818.03173828125,
+        27.36811351776123,
+        -330.68914794921875
+      ],
+      "indexed_radius_m": 0.9600014184443492,
+      "indexed_radius_xz_m": 0.9481790842771001
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2526",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2526
+      },
+      "proto": 9,
+      "origin_m": [
+        1819.2132568359375,
+        26.69960594177246,
+        -334.7974548339844
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 37,
+      "indexed_aabb_min_m": [
+        1818.53369140625,
+        26.61419105529785,
+        -335.5872497558594
+      ],
+      "indexed_aabb_max_m": [
+        1820.51220703125,
+        28.926233291625977,
+        -333.9166564941406
+      ],
+      "indexed_center_m": [
+        1819.52294921875,
+        27.770212173461914,
+        -334.751953125
+      ],
+      "indexed_radius_m": 1.1989293732689914,
+      "indexed_radius_xz_m": 1.0491461529189492
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2527",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2527
+      },
+      "proto": 9,
+      "origin_m": [
+        1819.770263671875,
+        26.776729583740234,
+        -333.44091796875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 33,
+      "indexed_aabb_min_m": [
+        1819.098388671875,
+        26.7044677734375,
+        -334.3778991699219
+      ],
+      "indexed_aabb_max_m": [
+        1820.736083984375,
+        28.363689422607422,
+        -332.2939147949219
+      ],
+      "indexed_center_m": [
+        1819.917236328125,
+        27.53407859802246,
+        -333.3359069824219
+      ],
+      "indexed_radius_m": 1.0804348612844568,
+      "indexed_radius_xz_m": 1.0756484141508373
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2528",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2528
+      },
+      "proto": 9,
+      "origin_m": [
+        1819.577392578125,
+        26.780611038208008,
+        -332.48992919921875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 34,
+      "indexed_aabb_min_m": [
+        1818.837646484375,
+        26.68922996520996,
+        -333.1544494628906
+      ],
+      "indexed_aabb_max_m": [
+        1820.8270263671875,
+        28.427978515625,
+        -331.4857482910156
+      ],
+      "indexed_center_m": [
+        1819.8323364257812,
+        27.55860424041748,
+        -332.3200988769531
+      ],
+      "indexed_radius_m": 1.083812078736628,
+      "indexed_radius_xz_m": 1.0279678164424388
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2529",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2529
+      },
+      "proto": 9,
+      "origin_m": [
+        1819.836669921875,
+        26.777563095092773,
+        -338.4749450683594
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 29,
+      "indexed_aabb_min_m": [
+        1819.4339599609375,
+        26.70209312438965,
+        -339.4353332519531
+      ],
+      "indexed_aabb_max_m": [
+        1820.6895751953125,
+        28.025211334228516,
+        -337.80938720703125
+      ],
+      "indexed_center_m": [
+        1820.061767578125,
+        27.363652229309082,
+        -338.6223602294922
+      ],
+      "indexed_radius_m": 0.8225120306564349,
+      "indexed_radius_xz_m": 0.8223454512824153
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2530",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2530
+      },
+      "proto": 9,
+      "origin_m": [
+        1820.3037109375,
+        26.77399444580078,
+        -337.86065673828125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 5,
+      "indexed_aabb_min_m": [
+        1819.7677001953125,
+        26.728483200073242,
+        -338.3914489746094
+      ],
+      "indexed_aabb_max_m": [
+        1821.064453125,
+        27.863616943359375,
+        -337.3206481933594
+      ],
+      "indexed_center_m": [
+        1820.4160766601562,
+        27.29605007171631,
+        -337.8560485839844
+      ],
+      "indexed_radius_m": 0.689320769559236,
+      "indexed_radius_xz_m": 0.6601366598845426
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2531",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2531
+      },
+      "proto": 9,
+      "origin_m": [
+        1777.0860595703125,
+        28.333831787109375,
+        -347.1019287109375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1776.386474609375,
+        28.270965576171875,
+        -348.1632080078125
+      ],
+      "indexed_aabb_max_m": [
+        1777.904296875,
+        30.042673110961914,
+        -346.3011474609375
+      ],
+      "indexed_center_m": [
+        1777.1453857421875,
+        29.156819343566895,
+        -347.232177734375
+      ],
+      "indexed_radius_m": 1.0412850375518807,
+      "indexed_radius_xz_m": 0.9580274496292106
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2532",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2532
+      },
+      "proto": 9,
+      "origin_m": [
+        1776.2232666015625,
+        28.471817016601562,
+        -346.80242919921875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1775.33154296875,
+        28.371784210205078,
+        -347.61859130859375
+      ],
+      "indexed_aabb_max_m": [
+        1777.251220703125,
+        31.081022262573242,
+        -346.0568542480469
+      ],
+      "indexed_center_m": [
+        1776.2913818359375,
+        29.72640323638916,
+        -346.8377227783203
+      ],
+      "indexed_radius_m": 1.4350901965673224,
+      "indexed_radius_xz_m": 0.9926241371288979
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2533",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2533
+      },
+      "proto": 9,
+      "origin_m": [
+        1772.5430908203125,
+        29.795827865600586,
+        -332.0938415527344
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1771.7669677734375,
+        29.713956832885742,
+        -332.8831787109375
+      ],
+      "indexed_aabb_max_m": [
+        1773.8099365234375,
+        31.92981719970703,
+        -331.22467041015625
+      ],
+      "indexed_center_m": [
+        1772.7884521484375,
+        30.821887016296387,
+        -332.0539245605469
+      ],
+      "indexed_radius_m": 1.148354516563208,
+      "indexed_radius_xz_m": 1.0755747888561176
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2534",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2534
+      },
+      "proto": 9,
+      "origin_m": [
+        1774.0928955078125,
+        29.787086486816406,
+        -332.69384765625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1773.6275634765625,
+        29.73032569885254,
+        -333.2606201171875
+      ],
+      "indexed_aabb_max_m": [
+        1775.0302734375,
+        31.26588249206543,
+        -332.09698486328125
+      ],
+      "indexed_center_m": [
+        1774.3289184570312,
+        30.498104095458984,
+        -332.6788024902344
+      ],
+      "indexed_radius_m": 0.8045718812901781,
+      "indexed_radius_xz_m": 0.7347315926911756
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2535",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2535
+      },
+      "proto": 9,
+      "origin_m": [
+        1797.3397216796875,
+        28.486852645874023,
+        -329.9903869628906
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1796.6885986328125,
+        28.434537887573242,
+        -330.87109375
+      ],
+      "indexed_aabb_max_m": [
+        1797.966064453125,
+        29.77919578552246,
+        -329.35858154296875
+      ],
+      "indexed_center_m": [
+        1797.3273315429688,
+        29.10686683654785,
+        -330.1148376464844
+      ],
+      "indexed_radius_m": 0.8713648513331004,
+      "indexed_radius_xz_m": 0.8620431644931102
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2536",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2536
+      },
+      "proto": 9,
+      "origin_m": [
+        1772.40673828125,
+        29.782529830932617,
+        -331.1248474121094
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1771.695068359375,
+        29.710634231567383,
+        -331.7779846191406
+      ],
+      "indexed_aabb_max_m": [
+        1773.49267578125,
+        31.654251098632812,
+        -330.3089904785156
+      ],
+      "indexed_center_m": [
+        1772.5938720703125,
+        30.682442665100098,
+        -331.0434875488281
+      ],
+      "indexed_radius_m": 1.010018417028974,
+      "indexed_radius_xz_m": 0.936782809450081
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2537",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2537
+      },
+      "proto": 9,
+      "origin_m": [
+        1814.106689453125,
+        27.291202545166016,
+        -343.5636901855469
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1813.28125,
+        27.230749130249023,
+        -344.5635070800781
+      ],
+      "indexed_aabb_max_m": [
+        1814.90283203125,
+        28.650657653808594,
+        -342.7229919433594
+      ],
+      "indexed_center_m": [
+        1814.092041015625,
+        27.94070339202881,
+        -343.64324951171875
+      ],
+      "indexed_radius_m": 1.0672668319204563,
+      "indexed_radius_xz_m": 1.0457933236843926
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2538",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2538
+      },
+      "proto": 9,
+      "origin_m": [
+        1812.8795166015625,
+        27.397424697875977,
+        -343.75787353515625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1812.1688232421875,
+        27.34210968017578,
+        -344.545166015625
+      ],
+      "indexed_aabb_max_m": [
+        1813.7318115234375,
+        28.515840530395508,
+        -343.2296142578125
+      ],
+      "indexed_center_m": [
+        1812.9503173828125,
+        27.928975105285645,
+        -343.88739013671875
+      ],
+      "indexed_radius_m": 0.9058761993182215,
+      "indexed_radius_xz_m": 0.8940285687247881
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2539",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2539
+      },
+      "proto": 9,
+      "origin_m": [
+        1765.76171875,
+        30.20627784729004,
+        -335.551513671875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1765.0677490234375,
+        30.148828506469727,
+        -336.2724609375
+      ],
+      "indexed_aabb_max_m": [
+        1766.1845703125,
+        31.628190994262695,
+        -334.9370422363281
+      ],
+      "indexed_center_m": [
+        1765.6261596679688,
+        30.88850975036621,
+        -335.60475158691406
+      ],
+      "indexed_radius_m": 0.8406918539248615,
+      "indexed_radius_xz_m": 0.7739794476370926
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2540",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2540
+      },
+      "proto": 9,
+      "origin_m": [
+        1764.3602294921875,
+        29.86267852783203,
+        -334.3129577636719
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1763.9095458984375,
+        29.81477928161621,
+        -334.92730712890625
+      ],
+      "indexed_aabb_max_m": [
+        1764.793701171875,
+        31.112884521484375,
+        -333.8487243652344
+      ],
+      "indexed_center_m": [
+        1764.3516235351562,
+        30.463831901550293,
+        -334.3880157470703
+      ],
+      "indexed_radius_m": 0.6825676482049859,
+      "indexed_radius_xz_m": 0.5747214441509698
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2541",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2541
+      },
+      "proto": 9,
+      "origin_m": [
+        1764.001953125,
+        29.86374855041504,
+        -333.8649597167969
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1763.4461669921875,
+        29.826025009155273,
+        -334.2419128417969
+      ],
+      "indexed_aabb_max_m": [
+        1764.274658203125,
+        30.846664428710938,
+        -333.54071044921875
+      ],
+      "indexed_center_m": [
+        1763.8604125976562,
+        30.336344718933105,
+        -333.8913116455078
+      ],
+      "indexed_radius_m": 0.5310469020893415,
+      "indexed_radius_xz_m": 0.43926406422742026
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2542",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2542
+      },
+      "proto": 9,
+      "origin_m": [
+        1763.4327392578125,
+        29.62664794921875,
+        -347.30804443359375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1762.5814208984375,
+        29.558208465576172,
+        -348.18450927734375
+      ],
+      "indexed_aabb_max_m": [
+        1764.1875,
+        31.406835556030273,
+        -346.2327880859375
+      ],
+      "indexed_center_m": [
+        1763.3844604492188,
+        30.482522010803223,
+        -347.2086486816406
+      ],
+      "indexed_radius_m": 1.0258182605794595,
+      "indexed_radius_xz_m": 0.9778250300763378
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2543",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2543
+      },
+      "proto": 9,
+      "origin_m": [
+        1762.6658935546875,
+        29.62046241760254,
+        -346.54180908203125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1761.968017578125,
+        29.57057762145996,
+        -347.1166687011719
+      ],
+      "indexed_aabb_max_m": [
+        1763.4088134765625,
+        30.91970443725586,
+        -345.92474365234375
+      ],
+      "indexed_center_m": [
+        1762.6884155273438,
+        30.24514102935791,
+        -346.5207061767578
+      ],
+      "indexed_radius_m": 0.7727369164865244,
+      "indexed_radius_xz_m": 0.7219223653606293
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2544",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2544
+      },
+      "proto": 9,
+      "origin_m": [
+        1765.885498046875,
+        29.765602111816406,
+        -330.3757019042969
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1765.1199951171875,
+        29.7200984954834,
+        -330.8915100097656
+      ],
+      "indexed_aabb_max_m": [
+        1766.518310546875,
+        30.868886947631836,
+        -329.7132568359375
+      ],
+      "indexed_center_m": [
+        1765.8191528320312,
+        30.294492721557617,
+        -330.30238342285156
+      ],
+      "indexed_radius_m": 0.7856345956619877,
+      "indexed_radius_xz_m": 0.7805729568363596
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2545",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2545
+      },
+      "proto": 9,
+      "origin_m": [
+        1766.585205078125,
+        30.196866989135742,
+        -335.5831298828125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1765.540283203125,
+        30.118141174316406,
+        -336.36334228515625
+      ],
+      "indexed_aabb_max_m": [
+        1767.4727783203125,
+        32.24825668334961,
+        -334.732421875
+      ],
+      "indexed_center_m": [
+        1766.5065307617188,
+        31.183198928833008,
+        -335.5478820800781
+      ],
+      "indexed_radius_m": 1.18733243973173,
+      "indexed_radius_xz_m": 1.1014427147830705
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2546",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2546
+      },
+      "proto": 9,
+      "origin_m": [
+        1767.0728759765625,
+        29.792261123657227,
+        -330.5021057128906
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1766.020263671875,
+        29.71456527709961,
+        -331.06719970703125
+      ],
+      "indexed_aabb_max_m": [
+        1768.0704345703125,
+        31.796142578125,
+        -329.40771484375
+      ],
+      "indexed_center_m": [
+        1767.0453491210938,
+        30.755353927612305,
+        -330.2374572753906
+      ],
+      "indexed_radius_m": 1.1901814431599638,
+      "indexed_radius_xz_m": 1.0812641430216479
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2553",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2553
+      },
+      "proto": 9,
+      "origin_m": [
+        1771.1065673828125,
+        29.874820709228516,
+        -354.78656005859375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 32,
+      "indexed_aabb_min_m": [
+        1770.28466796875,
+        29.807903289794922,
+        -355.73992919921875
+      ],
+      "indexed_aabb_max_m": [
+        1771.833740234375,
+        31.619651794433594,
+        -353.82403564453125
+      ],
+      "indexed_center_m": [
+        1771.0592041015625,
+        30.713777542114258,
+        -354.781982421875
+      ],
+      "indexed_radius_m": 1.047861364323071,
+      "indexed_radius_xz_m": 0.9847068908317229
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2554",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2554
+      },
+      "proto": 9,
+      "origin_m": [
+        1772.1864013671875,
+        29.871950149536133,
+        -355.17083740234375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 16,
+      "indexed_aabb_min_m": [
+        1771.538818359375,
+        29.819204330444336,
+        -355.9223937988281
+      ],
+      "indexed_aabb_max_m": [
+        1772.759765625,
+        31.24721908569336,
+        -354.41192626953125
+      ],
+      "indexed_center_m": [
+        1772.1492919921875,
+        30.533211708068848,
+        -355.1671600341797
+      ],
+      "indexed_radius_m": 0.8259154260788582,
+      "indexed_radius_xz_m": 0.7762727825479664
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2590",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2590
+      },
+      "proto": 9,
+      "origin_m": [
+        1734.476318359375,
+        32.14940643310547,
+        -290.5274963378906
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 5,
+      "indexed_aabb_min_m": [
+        1733.6063232421875,
+        32.1041374206543,
+        -291.4317626953125
+      ],
+      "indexed_aabb_max_m": [
+        1735.1329345703125,
+        33.32424545288086,
+        -289.6463623046875
+      ],
+      "indexed_center_m": [
+        1734.36962890625,
+        32.71419143676758,
+        -290.5390625
+      ],
+      "indexed_radius_m": 1.0500915683795071,
+      "indexed_radius_xz_m": 1.0483628276265213
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2595",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2595
+      },
+      "proto": 9,
+      "origin_m": [
+        1742.837646484375,
+        31.433338165283203,
+        -306.1528625488281
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1742.343017578125,
+        31.363754272460938,
+        -307.20672607421875
+      ],
+      "indexed_aabb_max_m": [
+        1743.818115234375,
+        33.32497024536133,
+        -305.52410888671875
+      ],
+      "indexed_center_m": [
+        1743.08056640625,
+        32.34436225891113,
+        -306.36541748046875
+      ],
+      "indexed_radius_m": 1.1721290632246486,
+      "indexed_radius_xz_m": 0.8854654609567931
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2596",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2596
+      },
+      "proto": 9,
+      "origin_m": [
+        1743.3692626953125,
+        31.429296493530273,
+        -305.97833251953125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1742.964111328125,
+        31.37630271911621,
+        -306.5554504394531
+      ],
+      "indexed_aabb_max_m": [
+        1744.2547607421875,
+        32.751670837402344,
+        -305.4890441894531
+      ],
+      "indexed_center_m": [
+        1743.6094360351562,
+        32.06398677825928,
+        -306.0222473144531
+      ],
+      "indexed_radius_m": 0.7299094657297731,
+      "indexed_radius_xz_m": 0.6906454168782056
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2613",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2613
+      },
+      "proto": 9,
+      "origin_m": [
+        1754.849609375,
+        29.61861228942871,
+        -341.3736267089844
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1753.912353515625,
+        29.539796829223633,
+        -342.4240417480469
+      ],
+      "indexed_aabb_max_m": [
+        1755.46435546875,
+        31.296302795410156,
+        -340.54278564453125
+      ],
+      "indexed_center_m": [
+        1754.6883544921875,
+        30.418049812316895,
+        -341.48341369628906
+      ],
+      "indexed_radius_m": 1.0613706708729755,
+      "indexed_radius_xz_m": 0.9610904528504789
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2614",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2614
+      },
+      "proto": 9,
+      "origin_m": [
+        1753.9613037109375,
+        29.626970291137695,
+        -341.2673034667969
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1753.0902099609375,
+        29.5706729888916,
+        -342.0914611816406
+      ],
+      "indexed_aabb_max_m": [
+        1754.7586669921875,
+        31.117158889770508,
+        -340.72021484375
+      ],
+      "indexed_center_m": [
+        1753.9244384765625,
+        30.343915939331055,
+        -341.4058380126953
+      ],
+      "indexed_radius_m": 0.9208785614751488,
+      "indexed_radius_xz_m": 0.8513729253281525
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2615",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2615
+      },
+      "proto": 9,
+      "origin_m": [
+        1741.27001953125,
+        30.967647552490234,
+        -310.4317626953125
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1740.551025390625,
+        30.904804229736328,
+        -311.3287353515625
+      ],
+      "indexed_aabb_max_m": [
+        1742.1802978515625,
+        32.27497100830078,
+        -309.9483642578125
+      ],
+      "indexed_center_m": [
+        1741.3656616210938,
+        31.589887619018555,
+        -310.6385498046875
+      ],
+      "indexed_radius_m": 0.8385016436847699,
+      "indexed_radius_xz_m": 0.8263598137005639
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2616",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2616
+      },
+      "proto": 9,
+      "origin_m": [
+        1739.644287109375,
+        30.974233627319336,
+        -310.53631591796875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1738.8460693359375,
+        30.916963577270508,
+        -311.4420471191406
+      ],
+      "indexed_aabb_max_m": [
+        1740.379150390625,
+        32.259864807128906,
+        -309.9853210449219
+      ],
+      "indexed_center_m": [
+        1739.6126098632812,
+        31.588414192199707,
+        -310.71368408203125
+      ],
+      "indexed_radius_m": 0.8321077904088918,
+      "indexed_radius_xz_m": 0.8320734837160317
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2617",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2617
+      },
+      "proto": 9,
+      "origin_m": [
+        1739.227294921875,
+        30.974742889404297,
+        -310.105224609375
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1738.3826904296875,
+        30.891122817993164,
+        -311.07977294921875
+      ],
+      "indexed_aabb_max_m": [
+        1739.826171875,
+        32.91442108154297,
+        -309.37738037109375
+      ],
+      "indexed_center_m": [
+        1739.1044311523438,
+        31.902771949768066,
+        -310.22857666015625
+      ],
+      "indexed_radius_m": 1.197789012807876,
+      "indexed_radius_xz_m": 0.8945345857716295
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2618",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2618
+      },
+      "proto": 9,
+      "origin_m": [
+        1741.6407470703125,
+        30.969491958618164,
+        -309.81854248046875
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1741.1461181640625,
+        30.8999080657959,
+        -310.8724060058594
+      ],
+      "indexed_aabb_max_m": [
+        1742.6212158203125,
+        32.861122131347656,
+        -309.1897888183594
+      ],
+      "indexed_center_m": [
+        1741.8836669921875,
+        31.880515098571777,
+        -310.0310974121094
+      ],
+      "indexed_radius_m": 1.1721283183856535,
+      "indexed_radius_xz_m": 0.8854654609567931
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2623",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2623
+      },
+      "proto": 9,
+      "origin_m": [
+        1736.5626220703125,
+        27.57155418395996,
+        -344.7978820800781
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 38,
+      "indexed_aabb_min_m": [
+        1735.2869873046875,
+        27.48881721496582,
+        -345.97906494140625
+      ],
+      "indexed_aabb_max_m": [
+        1737.5804443359375,
+        29.64512825012207,
+        -344.17724609375
+      ],
+      "indexed_center_m": [
+        1736.4337158203125,
+        28.566972732543945,
+        -345.0781555175781
+      ],
+      "indexed_radius_m": 1.2201529621126865,
+      "indexed_radius_xz_m": 1.1871082485560163
+    },
+    {
+      "id": "wascityb/shrub/tree-0/instance-2624",
+      "source": {
+        "tree_type": "shrub",
+        "geom": 0,
+        "tree": 0,
+        "instance": 2624
+      },
+      "proto": 9,
+      "origin_m": [
+        1735.3817138671875,
+        27.47614288330078,
+        -344.7828369140625
+      ],
+      "triangles": 38,
+      "triangles_in_original_block": 33,
+      "indexed_aabb_min_m": [
+        1734.44677734375,
+        27.39921760559082,
+        -345.81890869140625
+      ],
+      "indexed_aabb_max_m": [
+        1736.0052490234375,
+        29.1600284576416,
+        -343.9225769042969
+      ],
+      "indexed_center_m": [
+        1735.2260131835938,
+        28.27962303161621,
+        -344.87074279785156
+      ],
+      "indexed_radius_m": 1.0609564250564676,
+      "indexed_radius_xz_m": 0.9639572413821709
+    }
+  ],
+  "checks": {
+    "all_selected_instance_faces_preserved": true,
+    "all_palms_have_trunk_three_crown_parts_four_beard_parts": true,
+    "all_lod_matrices_consistent": true,
+    "source_unchanged": true
+  },
+  "limitation": "tie_wind needs a dedicated native import path; static patcher cannot replace crowns"
+}

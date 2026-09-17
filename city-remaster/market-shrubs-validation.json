@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "source_fr3": {
+    "bytes": 36575263,
+    "sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f"
+  },
+  "instances": 69,
+  "removed_triangles": 2622,
+  "added_triangles": 214320,
+  "closed_mesh_edges": 321480,
+  "minimum_native_triangle_area_m2": 2.4254296260274107e-07,
+  "outward_volume_range_m3": [
+    0.00035699973112513297,
+    0.0055723378646716105
+  ],
+  "uv_min": [
+    125.05032,
+    0.0
+  ],
+  "uv_max": [
+    3912.21411,
+    4096.0
+  ],
+  "texture_alpha": 128,
+  "texture_sha256": "62d642ae859d396dacb05e5d1649eb13c0481228adf4789c708940880427a722",
+  "max_radius_ratio": 1.0208310835692513,
+  "native_visual_validation": "Pending root integration; no game/build/deploy performed"
+}

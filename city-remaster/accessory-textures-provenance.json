@@ -1,0 +1,28 @@
+{
+  "mode": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "cloth",
+      "prompt": "Use case: style-transfer. Edit target: attached original Jak 3 market cotton sack texture. Create one square 1024x1024 or larger diffuse albedo game texture that upgrades this cloth to detailed dry coarse woven cotton/hemp, faithful to original muted dusty olive-khaki beige-gray color, subtle irregular yarn crossweave with tiny individual fibers and dusty worn threads. This is for a faithful stylized-realistic Jak desert remaster. Preserve original modest color contrast and palette exactly; don't turn it orange, white, brown or bright green. Original texture contains vague cloudy wrinkles: replace those low resolution squiggles with fine credible thread detail and very gentle broad wear variation. Flat surface texture from straight above, evenly lit, no baked directional shadows, no large folds, no sack object, no seams, no labels, no border, no letters, no graphic pattern. Cloth fibers fill entire image edge to edge, seamless tile in both directions as closely as possible. Sharp high definition microtexture but natural and not an exaggerated dark grid. Opaque RGB image.",
+      "file": "city-mark-cotton-32x32.png"
+    },
+    {
+      "key": "clay",
+      "prompt": "Use case: style-transfer. Edit target: attached original Jak 3 orange market clay-pot texture. Create one square 1024x1024 or larger diffuse albedo game texture for a faithful high-resolution Jak desert remaster. Preserve this exact warm golden ochre-orange terracotta palette and irregular pale sand-colored worn patches, but modernize with convincing fine clay pores, subtle wheel-thrown handcraft mineral flecks, fine abrasions and natural surface wear. The pale patches should be soft irregular weathering, not huge painted shapes. Faithful stylized-realistic material, not photoreal grunge. This is only a flat seamless material texture viewed straight-on under neutral uniform illumination, no lighting gradient or baked shadows. No jar or object, no cracks across whole image, no bricks, no tiles, no border, no text, no carved symbols, no decorations, no black soot. Fill image edge to edge with clay; seamless both axes as closely as possible. Keep dominant original orange ochre, do not desaturate into gray stone or change to red clay. Opaque RGB.",
+      "file": "city-mark-clay-pot-01.png"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "market-cotton-hd.png",
+      "generated": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-407c06f4-2cc0-4dbd-b572-20d6bb069005.png"
+    },
+    {
+      "name": "market-clay-hd-v1.png",
+      "generated": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-214cc083-a62a-44d0-af85-e77d567e7787.png",
+      "selected": false,
+      "reason": "Initial clay too bright; final selection documented in accessory-textures-refinement.json"
+    }
+  ],
+  "inspection": "Both outputs visually inspected. Palette and material type preserved; copied without pixel edits. Tiling requested, exact periodic edge equality not guaranteed."
+}

@@ -1,0 +1,4526 @@
+{
+  "status": "complete targeted export; no live mutation",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\wascityb.fr3",
+    "sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+    "bytes": 69488901
+  },
+  "native_export_sha256": "c18b2cdae4092a8b33e240d004709d2bf606e5052c3941662a37f8f7d4f579b4",
+  "original_export_sha256": "7b6d7be8bcf9026e68da3abf5893c38a0584a18bd15f298c4667c281d69c65a4",
+  "palms": [
+    {
+      "id": "wascityb/tie/tree-1/trunk-488",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 488
+      },
+      "trunk_origin_m": [
+        1764.029296875,
+        38.56266784667969,
+        -397.9584045410156
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 488,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1764.029296875,
+            38.56266784667969,
+            -397.9584045410156
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 7,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1765.9459228515625,
+            73.50675964355469,
+            -401.226806640625
+          ],
+          "distance_to_indexed_trunk_m": 0.6887152932127426,
+          "next_distinct_trunk_distance_m": 19.711317897910533
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 8,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1766.0345458984375,
+            73.41143035888672,
+            -400.9610595703125
+          ],
+          "distance_to_indexed_trunk_m": 0.8420206024101767,
+          "next_distinct_trunk_distance_m": 19.769039425224328
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 9,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1766.0438232421875,
+            73.41512298583984,
+            -400.97418212890625
+          ],
+          "distance_to_indexed_trunk_m": 0.832287536510306,
+          "next_distinct_trunk_distance_m": 19.774766715680396
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 53,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.43505859375,
+            60.58297348022461,
+            -401.25152587890625
+          ],
+          "distance_to_indexed_trunk_m": 0.5353853888251178,
+          "next_distinct_trunk_distance_m": 13.640179633360477
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 55,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.847900390625,
+            71.9847412109375,
+            -400.9970703125
+          ],
+          "distance_to_indexed_trunk_m": 0.5935083046296019,
+          "next_distinct_trunk_distance_m": 18.67618652175759
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 56,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.8792724609375,
+            68.13170623779297,
+            -401.3483581542969
+          ],
+          "distance_to_indexed_trunk_m": 0.46230636197043634,
+          "next_distinct_trunk_distance_m": 16.365003424023666
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 57,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1765.6400146484375,
+            64.15428924560547,
+            -401.19818115234375
+          ],
+          "distance_to_indexed_trunk_m": 0.5287322024205919,
+          "next_distinct_trunk_distance_m": 14.587385836356491
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 488
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 488
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 488
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 488
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 7
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 8
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 9
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 53
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 55
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 56
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 57
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 7
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 8
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 9
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 53
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 55
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 56
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 57
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 7
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 8
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 9
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 53
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 55
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 56
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 57
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 7
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 8
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 9
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 53
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 55
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 56
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 57
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1757.1611328125,
+        30.661663055419922,
+        -411.8041687011719
+      ],
+      "indexed_aabb_max_m": [
+        1773.950927734375,
+        77.62936401367188,
+        -392.6969299316406
+      ],
+      "indexed_center_m": [
+        1765.5560302734375,
+        54.1455135345459,
+        -402.25054931640625
+      ],
+      "indexed_radius_m": 24.48922383649259,
+      "indexed_radius_xz_m": 11.611827753970271
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-489",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 489
+      },
+      "trunk_origin_m": [
+        1755.194091796875,
+        35.968963623046875,
+        -398.05499267578125
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 489,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1755.194091796875,
+            35.968963623046875,
+            -398.05499267578125
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 6,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1751.9654541015625,
+            60.70521545410156,
+            -406.23748779296875
+          ],
+          "distance_to_indexed_trunk_m": 0.709624263541485,
+          "next_distinct_trunk_distance_m": 13.786267647059896
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 10,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1751.7974853515625,
+            60.714744567871094,
+            -406.4139099121094
+          ],
+          "distance_to_indexed_trunk_m": 0.587796249499584,
+          "next_distinct_trunk_distance_m": 14.003659517338653
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 11,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1751.9564208984375,
+            60.70447540283203,
+            -406.2290954589844
+          ],
+          "distance_to_indexed_trunk_m": 0.7144101330625862,
+          "next_distinct_trunk_distance_m": 13.791937092020973
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 54,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1751.9661865234375,
+            59.657798767089844,
+            -405.9726867675781
+          ],
+          "distance_to_indexed_trunk_m": 0.5175445330450853,
+          "next_distinct_trunk_distance_m": 13.646928623030279
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 58,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1752.8658447265625,
+            51.2816276550293,
+            -404.3520202636719
+          ],
+          "distance_to_indexed_trunk_m": 0.4442903089921334,
+          "next_distinct_trunk_distance_m": 12.052319657227557
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 59,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1752.3289794921875,
+            56.7681884765625,
+            -405.6791076660156
+          ],
+          "distance_to_indexed_trunk_m": 0.4110393227655103,
+          "next_distinct_trunk_distance_m": 13.131753977024326
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 60,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1752.6300048828125,
+            53.8934326171875,
+            -404.8931579589844
+          ],
+          "distance_to_indexed_trunk_m": 0.42593352232665715,
+          "next_distinct_trunk_distance_m": 12.521779970800514
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 489
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 489
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 489
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 489
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 6
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 10
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 11
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 54
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 58
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 59
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 60
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 6
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 10
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 11
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 54
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 58
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 59
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 60
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 6
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 10
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 11
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 54
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 58
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 59
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 60
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 6
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 10
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 11
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 54
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 58
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 59
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 60
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1745.1019287109375,
+        30.488853454589844,
+        -416.1762390136719
+      ],
+      "indexed_aabb_max_m": [
+        1759.3203125,
+        63.904998779296875,
+        -394.11669921875
+      ],
+      "indexed_center_m": [
+        1752.2111206054688,
+        47.19692611694336,
+        -405.14646911621094
+      ],
+      "indexed_radius_m": 19.924843957369703,
+      "indexed_radius_xz_m": 12.127323291371326
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-490",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 490
+      },
+      "trunk_origin_m": [
+        1806.8782958984375,
+        32.77925109863281,
+        -449.3117980957031
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 490,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1806.8782958984375,
+            32.77925109863281,
+            -449.3117980957031
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 12,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1800.0582275390625,
+            65.3824691772461,
+            -448.4411926269531
+          ],
+          "distance_to_indexed_trunk_m": 0.7131318301188925,
+          "next_distinct_trunk_distance_m": 57.65193805145852
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 13,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1799.907958984375,
+            65.46375274658203,
+            -448.61187744140625
+          ],
+          "distance_to_indexed_trunk_m": 0.6000401158026666,
+          "next_distinct_trunk_distance_m": 57.70142065269897
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 14,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1800.0631103515625,
+            65.37702941894531,
+            -448.4452209472656
+          ],
+          "distance_to_indexed_trunk_m": 0.7073776887205545,
+          "next_distinct_trunk_distance_m": 57.65814661401272
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 61,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1802.3226318359375,
+            53.48816680908203,
+            -449.9423522949219
+          ],
+          "distance_to_indexed_trunk_m": 0.46179611123446024,
+          "next_distinct_trunk_distance_m": 60.651215455189266
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 62,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1800.2098388671875,
+            64.03361511230469,
+            -448.5605773925781
+          ],
+          "distance_to_indexed_trunk_m": 0.5249081962754933,
+          "next_distinct_trunk_distance_m": 57.86822556031575
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 63,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1800.9903564453125,
+            60.5208625793457,
+            -449.28338623046875
+          ],
+          "distance_to_indexed_trunk_m": 0.3938987344472761,
+          "next_distinct_trunk_distance_m": 58.99914390273943
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 64,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1801.70458984375,
+            56.80719757080078,
+            -449.56256103515625
+          ],
+          "distance_to_indexed_trunk_m": 0.45433991712449673,
+          "next_distinct_trunk_distance_m": 59.75031731971429
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 490
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 490
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 490
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 490
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 12
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 13
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 14
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 61
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 62
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 63
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 64
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 12
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 13
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 14
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 61
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 62
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 63
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 64
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 12
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 13
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 14
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 61
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 62
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 63
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 64
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 12
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 13
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 14
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 61
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 62
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 63
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 64
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1793.4332275390625,
+        25.349525451660156,
+        -458.9734802246094
+      ],
+      "indexed_aabb_max_m": [
+        1810.5382080078125,
+        70.3938217163086,
+        -442.0953369140625
+      ],
+      "indexed_center_m": [
+        1801.9857177734375,
+        47.871673583984375,
+        -450.53440856933594
+      ],
+      "indexed_radius_m": 23.71047179378703,
+      "indexed_radius_xz_m": 9.804922810816462
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-491",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 491
+      },
+      "trunk_origin_m": [
+        1704.257568359375,
+        34.56954574584961,
+        -702.4008178710938
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 491,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1704.257568359375,
+            34.56954574584961,
+            -702.4008178710938
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 15,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.3143310546875,
+            57.21908187866211,
+            -701.026611328125
+          ],
+          "distance_to_indexed_trunk_m": 0.5020269182229863,
+          "next_distinct_trunk_distance_m": 18.070820481704565
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 16,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.476806640625,
+            57.127681732177734,
+            -700.94775390625
+          ],
+          "distance_to_indexed_trunk_m": 0.6089179341234212,
+          "next_distinct_trunk_distance_m": 18.16719482518861
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 19,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.4788818359375,
+            57.1356315612793,
+            -700.940185546875
+          ],
+          "distance_to_indexed_trunk_m": 0.6186630297238488,
+          "next_distinct_trunk_distance_m": 18.17624727779594
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 65,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1706.2620849609375,
+            56.23276901245117,
+            -701.018798828125
+          ],
+          "distance_to_indexed_trunk_m": 0.46730556780484817,
+          "next_distinct_trunk_distance_m": 17.477120596281626
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 67,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.0443115234375,
+            49.016170501708984,
+            -702.35546875
+          ],
+          "distance_to_indexed_trunk_m": 0.40392043103471237,
+          "next_distinct_trunk_distance_m": 12.246237836487985
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 69,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.8255615234375,
+            53.82465362548828,
+            -701.7074584960938
+          ],
+          "distance_to_indexed_trunk_m": 0.3665094625317222,
+          "next_distinct_trunk_distance_m": 15.54081894264201
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 70,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.4544677734375,
+            51.272544860839844,
+            -701.9932250976562
+          ],
+          "distance_to_indexed_trunk_m": 0.39714241233788866,
+          "next_distinct_trunk_distance_m": 13.840199260521047
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 491
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 491
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 491
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 491
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 15
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 16
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 19
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 65
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 67
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 69
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 70
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 15
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 16
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 19
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 65
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 67
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 69
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 70
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 15
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 16
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 19
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 65
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 67
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 69
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 70
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 15
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 16
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 19
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 65
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 67
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 69
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 70
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1698.2020263671875,
+        29.315128326416016,
+        -710.5513305664062
+      ],
+      "indexed_aabb_max_m": [
+        1714.0042724609375,
+        60.67007827758789,
+        -695.188232421875
+      ],
+      "indexed_center_m": [
+        1706.1031494140625,
+        44.99260330200195,
+        -702.8697814941406
+      ],
+      "indexed_radius_m": 16.1769466678492,
+      "indexed_radius_xz_m": 8.667569619782373
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-492",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 492
+      },
+      "trunk_origin_m": [
+        1704.257568359375,
+        34.56954574584961,
+        -702.4008178710938
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 492,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1704.257568359375,
+            34.56954574584961,
+            -702.4008178710938
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 17,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.3143310546875,
+            57.21908187866211,
+            -701.026611328125
+          ],
+          "distance_to_indexed_trunk_m": 0.5020269182229863,
+          "next_distinct_trunk_distance_m": 18.070820481704565
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 18,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.476806640625,
+            57.127681732177734,
+            -700.94775390625
+          ],
+          "distance_to_indexed_trunk_m": 0.6089179341234212,
+          "next_distinct_trunk_distance_m": 18.16719482518861
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 20,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1706.4788818359375,
+            57.1356315612793,
+            -700.940185546875
+          ],
+          "distance_to_indexed_trunk_m": 0.6186630297238488,
+          "next_distinct_trunk_distance_m": 18.17624727779594
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 66,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1706.2620849609375,
+            56.23276901245117,
+            -701.018798828125
+          ],
+          "distance_to_indexed_trunk_m": 0.46730556780484817,
+          "next_distinct_trunk_distance_m": 17.477120596281626
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 68,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.0443115234375,
+            49.016170501708984,
+            -702.35546875
+          ],
+          "distance_to_indexed_trunk_m": 0.40392043103471237,
+          "next_distinct_trunk_distance_m": 12.246237836487985
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 71,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.8255615234375,
+            53.82465362548828,
+            -701.7074584960938
+          ],
+          "distance_to_indexed_trunk_m": 0.3665094625317222,
+          "next_distinct_trunk_distance_m": 15.54081894264201
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 72,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1705.4544677734375,
+            51.272544860839844,
+            -701.9932250976562
+          ],
+          "distance_to_indexed_trunk_m": 0.39714241233788866,
+          "next_distinct_trunk_distance_m": 13.840199260521047
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 492
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 492
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 492
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 492
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 17
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 18
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 20
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 66
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 68
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 71
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 72
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 17
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 18
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 20
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 66
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 68
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 71
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 72
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 17
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 18
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 20
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 66
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 68
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 71
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 72
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 17
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 18
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 20
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 66
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 68
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 71
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 72
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1698.2020263671875,
+        29.315128326416016,
+        -710.5513305664062
+      ],
+      "indexed_aabb_max_m": [
+        1714.0042724609375,
+        60.67007827758789,
+        -695.188232421875
+      ],
+      "indexed_center_m": [
+        1706.1031494140625,
+        44.99260330200195,
+        -702.8697814941406
+      ],
+      "indexed_radius_m": 16.1769466678492,
+      "indexed_radius_xz_m": 8.667569619782373
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-493",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 493
+      },
+      "trunk_origin_m": [
+        1619.58984375,
+        42.22152328491211,
+        -471.1061096191406
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 493,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1619.58984375,
+            42.22152328491211,
+            -471.1061096191406
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 21,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1626.0469970703125,
+            58.220481872558594,
+            -471.2045593261719
+          ],
+          "distance_to_indexed_trunk_m": 0.4081941909376171,
+          "next_distinct_trunk_distance_m": 9.790239197393689
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 22,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1625.9896240234375,
+            58.19805145263672,
+            -471.05035400390625
+          ],
+          "distance_to_indexed_trunk_m": 0.5060790496125126,
+          "next_distinct_trunk_distance_m": 9.92605146563343
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 23,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1625.967041015625,
+            58.19696044921875,
+            -471.0514221191406
+          ],
+          "distance_to_indexed_trunk_m": 0.5169639780292133,
+          "next_distinct_trunk_distance_m": 9.931142780985459
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 73,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1625.7337646484375,
+            57.544212341308594,
+            -471.1666564941406
+          ],
+          "distance_to_indexed_trunk_m": 0.4023811218765608,
+          "next_distinct_trunk_distance_m": 9.624796337713118
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 74,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1625.4073486328125,
+            55.65207290649414,
+            -471.40802001953125
+          ],
+          "distance_to_indexed_trunk_m": 0.3039742477871937,
+          "next_distinct_trunk_distance_m": 8.813715955165954
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 75,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1624.740966796875,
+            53.79445266723633,
+            -471.5318603515625
+          ],
+          "distance_to_indexed_trunk_m": 0.32354566782225813,
+          "next_distinct_trunk_distance_m": 8.185096488416198
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 76,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1624.2420654296875,
+            52.115352630615234,
+            -471.7237548828125
+          ],
+          "distance_to_indexed_trunk_m": 0.33844436909003195,
+          "next_distinct_trunk_distance_m": 7.437976334859807
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 493
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 493
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 493
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 493
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 21
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 22
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 23
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 73
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 74
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 75
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 76
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 21
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 22
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 23
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 73
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 74
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 75
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 76
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 21
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 22
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 23
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 73
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 74
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 75
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 76
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 21
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 22
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 23
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 73
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 74
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 75
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 76
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1617.033203125,
+        38.45651626586914,
+        -477.9209289550781
+      ],
+      "indexed_aabb_max_m": [
+        1633.03369140625,
+        60.4251823425293,
+        -464.438232421875
+      ],
+      "indexed_center_m": [
+        1625.033447265625,
+        49.44084930419922,
+        -471.17958068847656
+      ],
+      "indexed_radius_m": 13.099012413291634,
+      "indexed_radius_xz_m": 8.407592270326687
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-494",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 494
+      },
+      "trunk_origin_m": [
+        1621.012451171875,
+        41.45191955566406,
+        -474.22186279296875
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 494,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1621.012451171875,
+            41.45191955566406,
+            -474.22186279296875
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 24,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1629.2125244140625,
+            53.99556350708008,
+            -480.1161193847656
+          ],
+          "distance_to_indexed_trunk_m": 0.38781546711008674,
+          "next_distinct_trunk_distance_m": 9.240069694536228
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 25,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1629.22900390625,
+            53.99570846557617,
+            -479.95703125
+          ],
+          "distance_to_indexed_trunk_m": 0.47604455819032937,
+          "next_distinct_trunk_distance_m": 9.104100004468863
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 26,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1629.241455078125,
+            53.99809646606445,
+            -479.9659423828125
+          ],
+          "distance_to_indexed_trunk_m": 0.47420092120992946,
+          "next_distinct_trunk_distance_m": 9.117491836887254
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 77,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1628.844482421875,
+            53.47611618041992,
+            -479.82659912109375
+          ],
+          "distance_to_indexed_trunk_m": 0.3649321820515848,
+          "next_distinct_trunk_distance_m": 8.835882702977505
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 78,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1628.1107177734375,
+            51.85593032836914,
+            -479.5235595703125
+          ],
+          "distance_to_indexed_trunk_m": 0.2790394893175417,
+          "next_distinct_trunk_distance_m": 8.294698434180738
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 79,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1627.17236328125,
+            50.3643798828125,
+            -478.9945068359375
+          ],
+          "distance_to_indexed_trunk_m": 0.31118867718357107,
+          "next_distinct_trunk_distance_m": 7.52942585968055
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 80,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1626.3536376953125,
+            48.97726821899414,
+            -478.5914001464844
+          ],
+          "distance_to_indexed_trunk_m": 0.32131656770406763,
+          "next_distinct_trunk_distance_m": 7.015242668799717
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 494
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 494
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 494
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 494
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 24
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 25
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 26
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 77
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 78
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 79
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 80
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 24
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 25
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 26
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 77
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 78
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 79
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 80
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 24
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 25
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 26
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 77
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 78
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 79
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 80
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 24
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 25
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 26
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 77
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 78
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 79
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 80
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1618.67919921875,
+        38.409488677978516,
+        -485.0235290527344
+      ],
+      "indexed_aabb_max_m": [
+        1633.2440185546875,
+        56.62562942504883,
+        -471.2062683105469
+      ],
+      "indexed_center_m": [
+        1625.9616088867188,
+        47.51755905151367,
+        -478.1148986816406
+      ],
+      "indexed_radius_m": 12.522552834710373,
+      "indexed_radius_xz_m": 9.74249522589078
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-495",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 495
+      },
+      "trunk_origin_m": [
+        1699.48828125,
+        33.253822326660156,
+        -708.462646484375
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 495,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1699.48828125,
+            33.253822326660156,
+            -708.462646484375
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 27,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.8836669921875,
+            48.35133361816406,
+            -708.5580444335938
+          ],
+          "distance_to_indexed_trunk_m": 0.4426075136664073,
+          "next_distinct_trunk_distance_m": 13.797288145094996
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 28,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.7659912109375,
+            48.25156784057617,
+            -708.4511108398438
+          ],
+          "distance_to_indexed_trunk_m": 0.5413422976369887,
+          "next_distinct_trunk_distance_m": 13.846058161299068
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 31,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.762451171875,
+            48.250606536865234,
+            -708.4407348632812
+          ],
+          "distance_to_indexed_trunk_m": 0.5401004284020454,
+          "next_distinct_trunk_distance_m": 13.844944578391862
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 81,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1692.1597900390625,
+            47.66080856323242,
+            -708.5396118164062
+          ],
+          "distance_to_indexed_trunk_m": 0.4316255633218666,
+          "next_distinct_trunk_distance_m": 13.446090800677007
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 82,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1693.4652099609375,
+            46.268394470214844,
+            -708.4752807617188
+          ],
+          "distance_to_indexed_trunk_m": 0.33064736144688384,
+          "next_distinct_trunk_distance_m": 12.058149042055181
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 85,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1694.471435546875,
+            44.61553192138672,
+            -708.51611328125
+          ],
+          "distance_to_indexed_trunk_m": 0.38256186855908486,
+          "next_distinct_trunk_distance_m": 10.992742053918438
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 86,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1695.494384765625,
+            43.20289611816406,
+            -708.586669921875
+          ],
+          "distance_to_indexed_trunk_m": 0.3835186133444047,
+          "next_distinct_trunk_distance_m": 10.051398903034274
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 495
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 495
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 495
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 495
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 27
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 28
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 31
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 81
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 82
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 85
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 86
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 27
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 28
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 31
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 81
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 82
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 85
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 86
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 27
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 28
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 31
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 81
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 82
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 85
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 86
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 27
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 28
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 31
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 81
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 82
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 85
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 86
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1687.5322265625,
+        29.08084487915039,
+        -714.4893798828125
+      ],
+      "indexed_aabb_max_m": [
+        1701.8280029296875,
+        52.91773223876953,
+        -702.8806762695312
+      ],
+      "indexed_center_m": [
+        1694.6801147460938,
+        40.99928855895996,
+        -708.6850280761719
+      ],
+      "indexed_radius_m": 12.915058178364857,
+      "indexed_radius_xz_m": 9.03338300190788
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-496",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 496
+      },
+      "trunk_origin_m": [
+        1699.48828125,
+        33.253822326660156,
+        -708.462646484375
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 496,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1699.48828125,
+            33.253822326660156,
+            -708.462646484375
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 29,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.8836669921875,
+            48.35133361816406,
+            -708.5580444335938
+          ],
+          "distance_to_indexed_trunk_m": 0.4426075136664073,
+          "next_distinct_trunk_distance_m": 13.797288145094996
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 30,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.7659912109375,
+            48.25156784057617,
+            -708.4511108398438
+          ],
+          "distance_to_indexed_trunk_m": 0.5413422976369887,
+          "next_distinct_trunk_distance_m": 13.846058161299068
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 32,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1691.762451171875,
+            48.250606536865234,
+            -708.4407348632812
+          ],
+          "distance_to_indexed_trunk_m": 0.5401004284020454,
+          "next_distinct_trunk_distance_m": 13.844944578391862
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 83,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1692.1597900390625,
+            47.66080856323242,
+            -708.5396118164062
+          ],
+          "distance_to_indexed_trunk_m": 0.4316255633218666,
+          "next_distinct_trunk_distance_m": 13.446090800677007
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 84,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1693.4652099609375,
+            46.268394470214844,
+            -708.4752807617188
+          ],
+          "distance_to_indexed_trunk_m": 0.33064736144688384,
+          "next_distinct_trunk_distance_m": 12.058149042055181
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 87,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1694.471435546875,
+            44.61553192138672,
+            -708.51611328125
+          ],
+          "distance_to_indexed_trunk_m": 0.38256186855908486,
+          "next_distinct_trunk_distance_m": 10.992742053918438
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 88,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1695.494384765625,
+            43.20289611816406,
+            -708.586669921875
+          ],
+          "distance_to_indexed_trunk_m": 0.3835186133444047,
+          "next_distinct_trunk_distance_m": 10.051398903034274
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 496
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 496
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 496
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 496
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 29
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 30
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 32
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 83
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 84
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 87
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 88
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 29
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 30
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 32
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 83
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 84
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 87
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 88
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 29
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 30
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 32
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 83
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 84
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 87
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 88
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 29
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 30
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 32
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 83
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 84
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 87
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 88
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1687.5322265625,
+        29.08084487915039,
+        -714.4893798828125
+      ],
+      "indexed_aabb_max_m": [
+        1701.8280029296875,
+        52.91773223876953,
+        -702.8806762695312
+      ],
+      "indexed_center_m": [
+        1694.6801147460938,
+        40.99928855895996,
+        -708.6850280761719
+      ],
+      "indexed_radius_m": 12.915058178364857,
+      "indexed_radius_xz_m": 9.03338300190788
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-497",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 497
+      },
+      "trunk_origin_m": [
+        1588.419189453125,
+        31.75824737548828,
+        -476.560546875
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 497,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1588.419189453125,
+            31.75824737548828,
+            -476.560546875
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 33,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1585.304443359375,
+            50.834442138671875,
+            -481.8434753417969
+          ],
+          "distance_to_indexed_trunk_m": 0.49216044599776787,
+          "next_distinct_trunk_distance_m": 35.34492081785471
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 34,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1585.427978515625,
+            50.833641052246094,
+            -481.67840576171875
+          ],
+          "distance_to_indexed_trunk_m": 0.5919989849553088,
+          "next_distinct_trunk_distance_m": 35.180476447198664
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 35,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1585.431884765625,
+            50.843509674072266,
+            -481.69293212890625
+          ],
+          "distance_to_indexed_trunk_m": 0.5896818319406889,
+          "next_distinct_trunk_distance_m": 35.18459355344413
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 89,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1586.1678466796875,
+            45.59367752075195,
+            -481.0687561035156
+          ],
+          "distance_to_indexed_trunk_m": 0.3719700100835875,
+          "next_distinct_trunk_distance_m": 33.09086528883182
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 90,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1586.4327392578125,
+            43.576576232910156,
+            -480.81158447265625
+          ],
+          "distance_to_indexed_trunk_m": 0.3857904931572521,
+          "next_distinct_trunk_distance_m": 32.495629110194805
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 91,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1585.4437255859375,
+            50.0217170715332,
+            -481.55975341796875
+          ],
+          "distance_to_indexed_trunk_m": 0.46522758654392055,
+          "next_distinct_trunk_distance_m": 34.893298200987346
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 92,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1585.8673095703125,
+            47.81600570678711,
+            -481.53173828125
+          ],
+          "distance_to_indexed_trunk_m": 0.35169147684488145,
+          "next_distinct_trunk_distance_m": 33.94509365149586
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 497
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 497
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 497
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 497
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 33
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 34
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 35
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 89
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 90
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 91
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 92
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 33
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 34
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 35
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 89
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 90
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 91
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 92
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 33
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 34
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 35
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 89
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 90
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 91
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 92
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 33
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 34
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 35
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 89
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 90
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 91
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 92
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1579.181884765625,
+        27.56698226928711,
+        -490.3684997558594
+      ],
+      "indexed_aabb_max_m": [
+        1591.4732666015625,
+        53.681617736816406,
+        -473.363525390625
+      ],
+      "indexed_center_m": [
+        1585.3275756835938,
+        40.62430000305176,
+        -481.8660125732422
+      ],
+      "indexed_radius_m": 15.684316306424213,
+      "indexed_radius_xz_m": 9.695455847882826
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-498",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 498
+      },
+      "trunk_origin_m": [
+        1454.585693359375,
+        24.550060272216797,
+        -517.3099365234375
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 498,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1454.585693359375,
+            24.550060272216797,
+            -517.3099365234375
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 36,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1459.5517578125,
+            51.07403564453125,
+            -519.9069213867188
+          ],
+          "distance_to_indexed_trunk_m": 0.5655005517214982,
+          "next_distinct_trunk_distance_m": 13.484173661032221
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 37,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1459.4140625,
+            51.01590347290039,
+            -519.7322387695312
+          ],
+          "distance_to_indexed_trunk_m": 0.6694286011572049,
+          "next_distinct_trunk_distance_m": 13.58747768396613
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 38,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1459.4276123046875,
+            51.011451721191406,
+            -519.7357788085938
+          ],
+          "distance_to_indexed_trunk_m": 0.6556657819754822,
+          "next_distinct_trunk_distance_m": 13.588653230876636
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 93,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1459.284423828125,
+            49.9178466796875,
+            -519.7660522460938
+          ],
+          "distance_to_indexed_trunk_m": 0.4846267461315883,
+          "next_distinct_trunk_distance_m": 13.383725892583335
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 94,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1459.3282470703125,
+            46.933692932128906,
+            -519.569580078125
+          ],
+          "distance_to_indexed_trunk_m": 0.37663452048047075,
+          "next_distinct_trunk_distance_m": 13.239340963496108
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 95,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1458.8983154296875,
+            43.88633728027344,
+            -519.3705444335938
+          ],
+          "distance_to_indexed_trunk_m": 0.40401918811074483,
+          "next_distinct_trunk_distance_m": 12.832051338558445
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 96,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1458.6724853515625,
+            41.150611877441406,
+            -519.2648315429688
+          ],
+          "distance_to_indexed_trunk_m": 0.412187713290227,
+          "next_distinct_trunk_distance_m": 12.443196223526844
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 498
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 498
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 498
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 498
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 36
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 37
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 38
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 93
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 94
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 95
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 96
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 36
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 37
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 38
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 93
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 94
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 95
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 96
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 36
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 37
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 38
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 93
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 94
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 95
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 96
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 36
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 37
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 38
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 93
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 94
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 95
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 96
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1451.6175537109375,
+        18.620468139648438,
+        -526.8696899414062
+      ],
+      "indexed_aabb_max_m": [
+        1469.2403564453125,
+        53.83671569824219,
+        -512.3403930664062
+      ],
+      "indexed_center_m": [
+        1460.428955078125,
+        36.22859191894531,
+        -519.6050415039062
+      ],
+      "indexed_radius_m": 19.699708049033816,
+      "indexed_radius_xz_m": 9.83509839139612
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-499",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 499
+      },
+      "trunk_origin_m": [
+        1447.002197265625,
+        22.85669708251953,
+        -526.85693359375
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 499,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1447.002197265625,
+            22.85669708251953,
+            -526.85693359375
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 41,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1446.245849609375,
+            44.5411262512207,
+            -541.6695556640625
+          ],
+          "distance_to_indexed_trunk_m": 0.764303438950176,
+          "next_distinct_trunk_distance_m": 11.460485428458883
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 42,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1446.248779296875,
+            44.5404167175293,
+            -541.6932983398438
+          ],
+          "distance_to_indexed_trunk_m": 0.7597240841317213,
+          "next_distinct_trunk_distance_m": 11.476792089371298
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 44,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1446.1708984375,
+            44.47085952758789,
+            -541.9136962890625
+          ],
+          "distance_to_indexed_trunk_m": 0.6396103728068256,
+          "next_distinct_trunk_distance_m": 11.701919768400384
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 97,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1446.6219482421875,
+            40.844085693359375,
+            -540.1135864257812
+          ],
+          "distance_to_indexed_trunk_m": 0.45377795057484904,
+          "next_distinct_trunk_distance_m": 10.398327790188402
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 98,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1446.722900390625,
+            38.25886917114258,
+            -538.5908203125
+          ],
+          "distance_to_indexed_trunk_m": 0.5201363293361371,
+          "next_distinct_trunk_distance_m": 9.422779384790163
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 103,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1446.862060546875,
+            35.85159683227539,
+            -537.374267578125
+          ],
+          "distance_to_indexed_trunk_m": 0.5300035611487128,
+          "next_distinct_trunk_distance_m": 8.669166116715177
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 104,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1446.1859130859375,
+            43.56516647338867,
+            -541.1888427734375
+          ],
+          "distance_to_indexed_trunk_m": 0.5972006536808592,
+          "next_distinct_trunk_distance_m": 11.228234781444725
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 499
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 499
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 499
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 499
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 41
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 42
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 44
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 97
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 98
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 103
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 104
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 41
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 42
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 44
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 97
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 98
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 103
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 104
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 41
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 42
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 44
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 97
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 98
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 103
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 104
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 41
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 42
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 44
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 97
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 98
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 103
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 104
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1437.50537109375,
+        18.2452392578125,
+        -549.8959350585938
+      ],
+      "indexed_aabb_max_m": [
+        1454.6002197265625,
+        49.9001579284668,
+        -521.0625
+      ],
+      "indexed_center_m": [
+        1446.0527954101562,
+        34.07269859313965,
+        -535.4792175292969
+      ],
+      "indexed_radius_m": 20.283768984654053,
+      "indexed_radius_xz_m": 16.38872118608782
+    },
+    {
+      "id": "wascityb/tie/tree-1/trunk-500",
+      "trunk_source": {
+        "tree_type": "tie",
+        "geom": 0,
+        "tree": 1,
+        "instance": 500
+      },
+      "trunk_origin_m": [
+        1450.2520751953125,
+        26.073139190673828,
+        -526.0565185546875
+      ],
+      "parts_geom0": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 500,
+          "material": "wascity-palm-trunk",
+          "origin_m": [
+            1450.2520751953125,
+            26.073139190673828,
+            -526.0565185546875
+          ]
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 39,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1454.941650390625,
+            59.802764892578125,
+            -534.7223510742188
+          ],
+          "distance_to_indexed_trunk_m": 0.6971746492567628,
+          "next_distinct_trunk_distance_m": 17.593493357867647
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 40,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1454.9365234375,
+            59.7646369934082,
+            -534.4547729492188
+          ],
+          "distance_to_indexed_trunk_m": 0.8353596063150018,
+          "next_distinct_trunk_distance_m": 17.35791622927463
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 43,
+          "material": "wascity-palm-leaf-worn",
+          "origin_m": [
+            1454.9241943359375,
+            59.75846862792969,
+            -534.4412231445312
+          ],
+          "distance_to_indexed_trunk_m": 0.8445268805876545,
+          "next_distinct_trunk_distance_m": 17.347021377111588
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 99,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1454.6959228515625,
+            58.362491607666016,
+            -534.2937622070312
+          ],
+          "distance_to_indexed_trunk_m": 0.6032197677450647,
+          "next_distinct_trunk_distance_m": 16.599998210826076
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 100,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1454.6669921875,
+            54.50312042236328,
+            -533.86767578125
+          ],
+          "distance_to_indexed_trunk_m": 0.4752017048257597,
+          "next_distinct_trunk_distance_m": 14.815277084032797
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 101,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1454.2115478515625,
+            50.610755920410156,
+            -533.1044311523438
+          ],
+          "distance_to_indexed_trunk_m": 0.5043044989101639,
+          "next_distinct_trunk_distance_m": 12.713009007395831
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 102,
+          "material": "wascity-palm-beard",
+          "origin_m": [
+            1453.8795166015625,
+            47.104087829589844,
+            -532.5521240234375
+          ],
+          "distance_to_indexed_trunk_m": 0.5148548027525214,
+          "next_distinct_trunk_distance_m": 11.344208056337221
+        }
+      ],
+      "all_lod_source_ids": [
+        {
+          "tree_type": "tie",
+          "geom": 0,
+          "tree": 1,
+          "instance": 500
+        },
+        {
+          "tree_type": "tie",
+          "geom": 1,
+          "tree": 1,
+          "instance": 500
+        },
+        {
+          "tree_type": "tie",
+          "geom": 2,
+          "tree": 1,
+          "instance": 500
+        },
+        {
+          "tree_type": "tie",
+          "geom": 3,
+          "tree": 1,
+          "instance": 500
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 39
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 40
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 43
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 99
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 100
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 101
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 0,
+          "tree": 1,
+          "instance": 102
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 39
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 40
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 43
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 99
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 100
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 101
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 1,
+          "tree": 1,
+          "instance": 102
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 39
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 40
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 43
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 99
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 100
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 101
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 2,
+          "tree": 1,
+          "instance": 102
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 39
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 40
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 43
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 99
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 100
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 101
+        },
+        {
+          "tree_type": "tie_wind",
+          "geom": 3,
+          "tree": 1,
+          "instance": 102
+        }
+      ],
+      "indexed_aabb_min_m": [
+        1446.148193359375,
+        18.517623901367188,
+        -543.6346435546875
+      ],
+      "indexed_aabb_max_m": [
+        1464.7298583984375,
+        63.03720474243164,
+        -521.130126953125
+      ],
+      "indexed_center_m": [
+        1455.4390258789062,
+        40.777414321899414,
+        -532.3823852539062
+      ],
+      "indexed_radius_m": 25.053473355979147,
+      "indexed_radius_xz_m": 13.049568322714592
+    }
+  ],
+  "palms_instances": 13,
+  "distinct_positions": 11,
+  "preserved_market_trunks": [
+    486,
+    487
+  ],
+  "preserved_market_wind": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52
+  ],
+  "coincident_native_trunk_groups": [
+    [
+      491,
+      492
+    ],
+    [
+      495,
+      496
+    ]
+  ],
+  "wind_geometry_seed_aliases": {
+    "98": 98,
+    "101": 101,
+    "57": 57,
+    "65": 65,
+    "66": 65,
+    "54": 54,
+    "62": 62,
+    "55": 55,
+    "64": 64,
+    "91": 91,
+    "60": 60,
+    "89": 89,
+    "96": 96,
+    "104": 104,
+    "86": 86,
+    "88": 86,
+    "75": 75,
+    "102": 102,
+    "95": 95,
+    "79": 79,
+    "70": 70,
+    "72": 70,
+    "76": 76,
+    "77": 77,
+    "99": 99,
+    "103": 103,
+    "69": 69,
+    "71": 69,
+    "85": 85,
+    "87": 85,
+    "53": 53,
+    "80": 80,
+    "90": 90,
+    "59": 59,
+    "63": 63,
+    "73": 73,
+    "61": 61,
+    "58": 58,
+    "92": 92,
+    "78": 78,
+    "67": 67,
+    "68": 67,
+    "56": 56,
+    "93": 93,
+    "81": 81,
+    "83": 81,
+    "97": 97,
+    "74": 74,
+    "82": 82,
+    "84": 82,
+    "100": 100,
+    "94": 94,
+    "43": 43,
+    "41": 41,
+    "9": 9,
+    "6": 6,
+    "8": 8,
+    "16": 16,
+    "18": 16,
+    "12": 12,
+    "37": 37,
+    "15": 15,
+    "17": 15,
+    "42": 42,
+    "35": 35,
+    "23": 23,
+    "40": 40,
+    "34": 34,
+    "10": 10,
+    "25": 25,
+    "14": 14,
+    "11": 11,
+    "28": 28,
+    "30": 28,
+    "13": 13,
+    "26": 26,
+    "33": 33,
+    "7": 7,
+    "22": 22,
+    "19": 19,
+    "20": 19,
+    "24": 24,
+    "44": 44,
+    "38": 38,
+    "39": 39,
+    "31": 31,
+    "32": 31,
+    "21": 21,
+    "27": 27,
+    "29": 27,
+    "36": 36
+  },
+  "duplicate_policy": "Preserve every native identity, matrix and visibility group; spatially coincident wind components share deterministic geometry seeds.",
+  "checks": {
+    "all_13_palms_complete": true,
+    "original_positions_identical": true,
+    "all_lod_matrices_identical": true,
+    "market_excluded": true,
+    "source_unchanged": true
+  }
+}

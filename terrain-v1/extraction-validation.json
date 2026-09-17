@@ -1,0 +1,13 @@
+{
+  "protected_files_unchanged": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\iso\\WASPALA.DGO": "e3be994261b2379d4b25b83689587383521b08b08a50e238cb2a54741e70eace",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\iso\\GAME.CGO": "c1bd13eacaf76034bad52df8e0c87dd80d5251853d101ed28759834765b33334",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\goal_src\\jak3\\levels\\wascity\\palace\\waspala-part.gc": "1a47cbcd45e94c2749bb9dfddc42b662e0d6107daf5608d3adfad0488aa6324f",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\game\\graphics\\opengl_renderer\\shaders\\palace_fire.frag": "9475ad7eb34c3c071611debf9225c6c1332d75576745854e479b9bfda5e55d59"
+  },
+  "levels": {
+    "waspala.fr3": "8f7ff9ee8cc419e130e9df879b0b1ec613d84c596d5a45b221741e1e56d5236c",
+    "wasstada.fr3": "01e28268eee85401f3597e5109c9164c6efe2fea20a984fed2523aaa07f89f26",
+    "wasstadb.fr3": "7ccf7f9e1ca80e86488bc2e0d018f3feebc9342ceba35f0e00b88a522691e6f3"
+  }
+}

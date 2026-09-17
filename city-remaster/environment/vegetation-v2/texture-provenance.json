@@ -1,0 +1,22 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "data/decompiler_out/jak3/textures/wascitya-vis-shrub/wascity-cactus-green.png",
+  "generated_original": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-53432881-6d73-43ec-8ac8-15c9152f96e1.png",
+  "saved_master": "cactus-skin-hd.png",
+  "prompt": "Use case: style-transfer. Asset type: seamless square game material albedo texture for a faithful Jak 3 desert cactus remaster. Input image is a palette and surface reference, not a subject to illustrate. Generate only the cactus green skin material, edge-to-edge flat orthographic surface, 1024x1024 or higher. Preserve the original muted gray-sage green hue and restrained saturation, average approximately RGB(129,160,126), no teal/blue/lime shift. Upgrade the old low resolution skin to finely painted realistic-stylized waxy cactus skin: delicate natural pores, subtle green tonal mottling, sparse tiny ivory areole dots, faint soft vertical tissue striations. Texture will wrap a 3D cactus; no whole cactus, no paddles, no flowers, no silhouettes, no long drawn spines, no dark edge border, no frame, no directional lighting or cast shadow, no large raised beads, no text. Even scale and even brightness with seamless left/right and top/bottom edges. Keep the warm hand-painted animated Jak world feeling.",
+  "conversion": "RGB unchanged; native opaque alpha128 in RGBA export. No image repainting.",
+  "palette_correction": {
+    "generated_original": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0aaec-ea24-7710-b92d-04fc27cc15cb\\exec-67297916-b76e-4a38-8fba-1fd71583ad9a.png",
+    "prompt": "Palette-only reference edit preserving pores and material detail: match native muted gray-sage cactus average RGB(117,149,121), reduce red and raise blue versus initial olive draft. Seamless edges and composition unchanged.",
+    "rgb_mean": [
+      118.4747131348743,
+      140.37637264104148,
+      116.77616571150945
+    ],
+    "size": [
+      1254,
+      1254
+    ],
+    "saved_sha256": "e65c3956535ca0f5390a70d120ddeb463db0a1d68dea52f5914e742fd62a3708"
+  }
+}

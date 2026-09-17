@@ -1,0 +1,35 @@
+{
+  "status": "candidate_audited_not_installed",
+  "path": "out/jak3/fr3/wascityb.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\staging\\market-static-003\\wascityb.fr3",
+  "base_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\wascityb.fr3",
+  "output_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\patch.json",
+  "patch_sha256": "90a6d5ab65f35ca7bae095ad7e18adcd813d494bfbc2728457354822925ced56",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\preservation.json",
+  "preservation_report_sha256": "4bf64d7f03f955ce0f58eb0aebb6f6b221a280f4e94d3ba7373327fc73260d41",
+  "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\validation.json",
+  "author_report_sha256": "351b16c9bfd2b09f3cb8b29e44f8d8fe224194796333b5954f50e77b1ecc42ec",
+  "bridge_sha256": "aa035b1bfa2a79b72b07b24f21c15c0c807aa1b5ba88cf6af9df3adaef39aa8a",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\static-installed.json",
+  "parent_record_sha256": "7e91daaf52fab8957de252e4d7b3590e687b44086d1c6ba38622b59fa73ee9b6",
+  "scope": "All 13 remaining native WCB palm instances (11 distinct positions), including complete crowns and four LODs; preserve two accepted market palms",
+  "palms_rebuilt": 13,
+  "accepted_palms_preserved": 2,
+  "triangles_by_lod": {
+    "0": 159380,
+    "1": 101192,
+    "2": 46644,
+    "3": 19474
+  },
+  "native_visual_validation": false,
+  "protected_live_variant_hashes": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster\\out\\jak3\\fr3\\wascityb.fr3": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascityb.fr3": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascityb.fr3": "ed63aa4dd8e871111914b4d2e5d0f663e237fcc9eeac367ea5acbacf823fb20e"
+  },
+  "live_files_written": false,
+  "remaining": "Native culling, wind and performance inspection; WCA palms are outside this candidate."
+}

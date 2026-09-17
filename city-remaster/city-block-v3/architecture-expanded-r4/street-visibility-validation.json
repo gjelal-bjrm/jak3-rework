@@ -1,0 +1,1596 @@
+{
+  "status": "passed",
+  "source_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+  "patch_sha256": "08e12469c97004bc122981e09b81cf93284d007adafb4b149f0ba53c3d3c5b75",
+  "native_export_sha256": "46df391a702b0e77f326203ca9d210da88cb0ee9656c872487cca9633c118976",
+  "new_window_specs_sha256": "0b9271902a2359db51dd7b6330993c69f63ac6c35ce75e3d0e65df37156a82b8",
+  "checks": {
+    "wca-house-east-room LOD0 street sight lines": true,
+    "wca-house-west-room LOD0 street sight lines": true,
+    "wca-house-low-room LOD0 street sight lines": true,
+    "wca-house-north-room LOD0 street sight lines": true,
+    "wca-house-east-room LOD1 street sight lines": true,
+    "wca-house-west-room LOD1 street sight lines": true,
+    "wca-house-low-room LOD1 street sight lines": true,
+    "wca-house-north-room LOD1 street sight lines": true,
+    "wca-house-east-room LOD2 street sight lines": true,
+    "wca-house-west-room LOD2 street sight lines": true,
+    "wca-house-low-room LOD2 street sight lines": true,
+    "wca-house-north-room LOD2 street sight lines": true,
+    "wca-house-east-room LOD3 street sight lines": true,
+    "wca-house-west-room LOD3 street sight lines": true,
+    "wca-house-low-room LOD3 street sight lines": true,
+    "wca-house-north-room LOD3 street sight lines": true
+  },
+  "windows": [
+    {
+      "id": "wca-house-east-room",
+      "lod": 0,
+      "camera_m": [
+        2434.208251953125,
+        21.44759750366211,
+        17.01439666748047
+      ],
+      "target_m": [
+        2438.58935546875,
+        23.44759750366211,
+        14.604915618896484
+      ],
+      "ground_y": 19.747596740722656,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 0,
+      "camera_m": [
+        2115.249267578125,
+        28.994342803955078,
+        -207.53485107421875
+      ],
+      "target_m": [
+        2118.21630859375,
+        30.994342803955078,
+        -203.5103759765625
+      ],
+      "ground_y": 27.294342041015625,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 0,
+      "camera_m": [
+        2253.239013671875,
+        18.81216812133789,
+        -176.85385131835938
+      ],
+      "target_m": [
+        2244.698486328125,
+        20.212167739868164,
+        -179.6924285888672
+      ],
+      "ground_y": 17.112167358398438,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 0,
+      "camera_m": [
+        2517.39404296875,
+        34.76842498779297,
+        -229.6296844482422
+      ],
+      "target_m": [
+        2517.345947265625,
+        36.168426513671875,
+        -224.62991333007812
+      ],
+      "ground_y": 33.06842803955078,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 1,
+      "camera_m": [
+        2434.208251953125,
+        21.44759750366211,
+        17.01439666748047
+      ],
+      "target_m": [
+        2438.58935546875,
+        23.44759750366211,
+        14.604915618896484
+      ],
+      "ground_y": 19.747596740722656,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 1,
+      "camera_m": [
+        2115.249267578125,
+        28.994342803955078,
+        -207.53485107421875
+      ],
+      "target_m": [
+        2118.21630859375,
+        30.994342803955078,
+        -203.5103759765625
+      ],
+      "ground_y": 27.294342041015625,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 1,
+      "camera_m": [
+        2253.239013671875,
+        18.81216812133789,
+        -176.85385131835938
+      ],
+      "target_m": [
+        2244.698486328125,
+        20.212167739868164,
+        -179.6924285888672
+      ],
+      "ground_y": 17.112167358398438,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 1,
+      "camera_m": [
+        2517.39404296875,
+        34.76842498779297,
+        -229.6296844482422
+      ],
+      "target_m": [
+        2517.345947265625,
+        36.168426513671875,
+        -224.62991333007812
+      ],
+      "ground_y": 33.06842803955078,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 2,
+      "camera_m": [
+        2434.208251953125,
+        21.44759750366211,
+        17.01439666748047
+      ],
+      "target_m": [
+        2438.58935546875,
+        23.44759750366211,
+        14.604915618896484
+      ],
+      "ground_y": 19.747596740722656,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 2,
+      "camera_m": [
+        2115.249267578125,
+        28.994342803955078,
+        -207.53485107421875
+      ],
+      "target_m": [
+        2118.21630859375,
+        30.994342803955078,
+        -203.5103759765625
+      ],
+      "ground_y": 27.294342041015625,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 2,
+      "camera_m": [
+        2253.239013671875,
+        18.81216812133789,
+        -176.85385131835938
+      ],
+      "target_m": [
+        2244.698486328125,
+        20.212167739868164,
+        -179.6924285888672
+      ],
+      "ground_y": 17.112167358398438,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 2,
+      "camera_m": [
+        2517.39404296875,
+        34.76842498779297,
+        -229.6296844482422
+      ],
+      "target_m": [
+        2517.345947265625,
+        36.168426513671875,
+        -224.62991333007812
+      ],
+      "ground_y": 33.06842803955078,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-east-room",
+      "lod": 3,
+      "camera_m": [
+        2434.208251953125,
+        21.44759750366211,
+        17.01439666748047
+      ],
+      "target_m": [
+        2438.58935546875,
+        23.44759750366211,
+        14.604915618896484
+      ],
+      "ground_y": 19.747596740722656,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-west-room",
+      "lod": 3,
+      "camera_m": [
+        2115.249267578125,
+        28.994342803955078,
+        -207.53485107421875
+      ],
+      "target_m": [
+        2118.21630859375,
+        30.994342803955078,
+        -203.5103759765625
+      ],
+      "ground_y": 27.294342041015625,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-low-room",
+      "lod": 3,
+      "camera_m": [
+        2253.239013671875,
+        18.81216812133789,
+        -176.85385131835938
+      ],
+      "target_m": [
+        2244.698486328125,
+        20.212167739868164,
+        -179.6924285888672
+      ],
+      "ground_y": 17.112167358398438,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    },
+    {
+      "id": "wca-house-north-room",
+      "lod": 3,
+      "camera_m": [
+        2517.39404296875,
+        34.76842498779297,
+        -229.6296844482422
+      ],
+      "target_m": [
+        2517.345947265625,
+        36.168426513671875,
+        -224.62991333007812
+      ],
+      "ground_y": 33.06842803955078,
+      "rays": [
+        {
+          "sample": [
+            -0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            -0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            -0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        },
+        {
+          "sample": [
+            0.23,
+            0.23
+          ],
+          "passed": true,
+          "hit_m": null,
+          "face": null
+        }
+      ]
+    }
+  ],
+  "occluders_excluded": []
+}

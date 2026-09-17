@@ -1,0 +1,26 @@
+{
+  "scope": "Dedicated market leaf world shading and trunk/support repeating UVs; native projection and wind preserved",
+  "native_visual_validation": false,
+  "files": {
+    "engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h": {
+      "before_sha256": "214ebd945859adf90743906f1b60137b4a3ba959f67a8d42fc8f6fa005baad70",
+      "after_sha256": "3524e30edb7cb92f08b41663ca27472ed13dbcfcfc8f67b54c2d2bbe758c6b2c"
+    },
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.h": {
+      "before_sha256": "3648e66f4e3fbfe1411b584a66651695ff21d276620ceb7f83ccf48ede97fd8a",
+      "after_sha256": "dae07bbe2c9d7b69fd3500e9a3abcf7b8ac5ad5a3539ddc36656b7bf9a6d1bc5"
+    },
+    "engine-src/game/graphics/opengl_renderer/background/Tie3.cpp": {
+      "before_sha256": "c9435c28e32c4184262d6b44577599be8ca007847a46586ec31eed39464fe6eb",
+      "after_sha256": "3ebcac8f6f20102d260196580a99b1cf48bdd69158dc6e8a8870ab963ff2eadb"
+    },
+    "engine-src/game/graphics/opengl_renderer/shaders/tie_wind.vert": {
+      "before_sha256": "ccd6f98600d6ec9eea9ebfc153d38ada234d61079e44f758dd1849a75e7b9596",
+      "after_sha256": "d0014420a8c797d402b68c6c6a7d679b6ac5fc1b30efac638fa5fd5446b12772"
+    },
+    "data/game/graphics/opengl_renderer/shaders/tie_wind.vert": {
+      "before_sha256": "ccd6f98600d6ec9eea9ebfc153d38ada234d61079e44f758dd1849a75e7b9596",
+      "after_sha256": "d0014420a8c797d402b68c6c6a7d679b6ac5fc1b30efac638fa5fd5446b12772"
+    }
+  }
+}

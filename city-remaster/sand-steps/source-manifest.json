@@ -1,0 +1,44 @@
+{
+  "status": "source_ready_compile_pending",
+  "sources": [
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\goal_src\\jak3\\engine\\game\\effect-control.gc",
+      "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\before\\data-effect-control.gc",
+      "before_sha256": "28be20a3c2a8f4f2f57a58504b9ea9229fa38b91b3209fc48572b6660db34ee3",
+      "source_sha256": "653473a1a433123478c4fa41a162372150b006725815e22cc3cf81b8a5256f98",
+      "inverse_matches_baseline": true
+    },
+    {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\goal_src\\jak3\\engine\\game\\effect-control.gc",
+      "before": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\before\\engine-src-effect-control.gc",
+      "before_sha256": "8c3a19922b84a0bbaf91b3fd8f70a68d23f3def8896314030249857f2e7cb982",
+      "source_sha256": "653473a1a433123478c4fa41a162372150b006725815e22cc3cf81b8a5256f98",
+      "inverse_matches_baseline": true
+    }
+  ],
+  "helper_sha256": "8ed0e589535d246409e9a6c7370b60ee4767162736bd40d27cba7c7683e44bc0",
+  "hook_sha256": "1192ccaf1be0f439c3b3bc53d6a6efd35bcfdbb1eb00cc538d9e46572aefbe23",
+  "npc_hook_sha256": "492c6ad035daceded9b232a9daafe23d41ddf511405d0b5934258efc24112fe2",
+  "surface_table_sha256": "9a2c523ed4a154c1fa6d8324347527d7a69f042d3a090a5654b1ea30040219dd",
+  "dgo": "out/jak3/iso/GAME.CGO",
+  "baseline_dgo": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\before\\GAME.CGO",
+  "baseline_dgo_sha256": "5aa47d7ad847d6f407a261e0fbc93d353f625d8748f2cae3119584a63a94bce5",
+  "only_expected_object_change": "effect-control",
+  "levels": [
+    "wascitya",
+    "wascityb"
+  ],
+  "allowed_collision_materials": {
+    "sand": 5,
+    "dirt": 15
+  },
+  "required_visual_texture": "wascity-ground-01",
+  "particles_per_step": 2,
+  "lifetime_seconds": [
+    0.24,
+    0.3
+  ],
+  "native_visual_validation": false,
+  "runtime_compiled": false,
+  "live_dgo_written": false
+}

@@ -1,0 +1,2105 @@
+{
+  "passed": true,
+  "models": [
+    {
+      "control": "market-crate-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\market-crate-lod0.glb",
+        "sha256": "f614e9fa04d775129c3dabde7d1059320c9af06cf238e934f11648a3351631c5",
+        "node": "market-crate-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 132,
+        "drawn_vertex_samples": 258,
+        "weighted_joint_counts": {
+          "main": 258
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.3279304504394531,
+            -0.7054630517959595,
+            -0.9959478378295898
+          ],
+          [
+            1.3279304504394531,
+            0.7780842781066895,
+            0.9025777578353882
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-mark-wood-plain",
+            "alpha_mode": "MASK",
+            "image_size": [
+              128,
+              64
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "774b7e470b778563f2e7d57b87f38d7a0fa9b603c94a28468c8bfbf97528a322",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 1,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-crate-lod0.glb",
+        "sha256": "51a44755ec56a809cf4883bcea2011dd8290e04d57da5db209be3877b858d245",
+        "node": "market-crate-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 6304,
+        "drawn_vertex_samples": 12768,
+        "weighted_joint_counts": {
+          "main": 12768
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.3279304504394531,
+            -0.7054630517959595,
+            -0.9959478378295898
+          ],
+          [
+            1.3279304504394531,
+            0.7780842781066895,
+            0.9025777578353882
+          ]
+        ],
+        "materials": [
+          {
+            "name": "market-crate-wood-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1774,
+              887
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 1,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascitya",
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [
+        {
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\market-crate-lod0.glb",
+          "sha256": "60936f59e488c5da4f7202834b8896eda531b66b4d4c874759ccb377a3e6b85d"
+        }
+      ],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false,
+      "additional_geometry_checks": {
+        "bounds_max_error_m": 0.0,
+        "unused_helper_vertices": 0,
+        "zero_area_triangles": 0,
+        "maximum_unit_normal_error": 9.831550884520368e-08,
+        "all_embedded_materials_hd": true
+      }
+    },
+    {
+      "control": "market-basket-a-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\market-basket-a-lod0.glb",
+        "sha256": "0873ffe96703ec0d517ff95d6461ea9adcba58970b283f9c761b5598d9fb1a40",
+        "node": "market-basket-a-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 132,
+        "drawn_vertex_samples": 180,
+        "weighted_joint_counts": {
+          "main": 180
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.396550178527832,
+            0.0,
+            -1.396550178527832
+          ],
+          [
+            1.396550178527832,
+            4.034478187561035,
+            1.396550178527832
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-mark-clay-pot-01",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              64
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "75ac6864be31af6ed4d67b2f24604c69c33a21e39433f8e0925695ba638f6b92",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-rope-mesh-01",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              64
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "520c94d312255c3735f0ffc4de6e8048b955597ba30d02b30b52b1e307c9219e",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 2,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-a-lod0.glb",
+        "sha256": "d2dc7282ca248e4b03bcb5c16b61afc6e5ea958b3340fcaa42ffbc12be8f1b71",
+        "node": "market-basket-a-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 14744,
+        "drawn_vertex_samples": 7547,
+        "weighted_joint_counts": {
+          "main": 7547
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.396550178527832,
+            0.0,
+            -1.396550178527832
+          ],
+          [
+            1.396550178527832,
+            4.034478187561035,
+            1.396550178527832
+          ]
+        ],
+        "materials": [
+          {
+            "name": "market-jar-clay-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "302558c3676658577c7d677f701ca6a206fd5699fdc1e44a9c3b6b0fb8c370fe",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "name": "market-jar-fibre-cords-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "dded6bd1b395ef4e9fb1fd7ddd42966bba60a7fdc2b6da728f4574ff428258bc",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 2,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascitya",
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [
+        {
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\market-basket-a-lod0.glb",
+          "sha256": "224d640a3c171359f75c96fa2a6f7bf45d034f28d4ce7975093c809101353a5a"
+        }
+      ],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false,
+      "additional_geometry_checks": {
+        "bounds_max_error_m": 0.0,
+        "unused_helper_vertices": 0,
+        "zero_area_triangles": 0,
+        "maximum_unit_normal_error": 1.0767384983623174e-07,
+        "all_embedded_materials_hd": true
+      }
+    },
+    {
+      "control": "market-basket-b-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\market-basket-b-lod0.glb",
+        "sha256": "02350174088fd3cfc5baea22f4d0a081e2adfc5cc20e612ed1938b4ebbdf22fb",
+        "node": "market-basket-b-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 128,
+        "drawn_vertex_samples": 225,
+        "weighted_joint_counts": {
+          "main": 225
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.4321144819259644,
+            -0.022376788780093193,
+            -1.4097377061843872
+          ],
+          [
+            1.4209260940551758,
+            1.219534993171692,
+            1.4209260940551758
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-mark-basket2",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              64
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "a459792b363a325fc1707d944100deeeb4cd035f70602e14101c81d54df4f179",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-rice-01",
+            "alpha_mode": "MASK",
+            "image_size": [
+              32,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "eddeb2e1503a3fe614db56b45b223258616a5deeeeda7b6f1b5f98a2a5938814",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 2,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-basket-b-lod0.glb",
+        "sha256": "df2fad1a0584d947ed6d88586348fb90e3ebd7305895fa64bd0b4478d5f2040d",
+        "node": "market-basket-b-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 14664,
+        "drawn_vertex_samples": 7692,
+        "weighted_joint_counts": {
+          "main": 7692
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.4321144819259644,
+            -0.022376790642738342,
+            -1.4097377061843872
+          ],
+          [
+            1.4209260940551758,
+            1.219534993171692,
+            1.4209260940551758
+          ]
+        ],
+        "materials": [
+          {
+            "name": "market-reed-fibres-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1774,
+              887
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "name": "market-rice-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "75ed75240cc0436aa585f044bd3ff229c1bac1a716df11662e9ecc2598e339ed",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 2,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascitya",
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [
+        {
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\market-basket-b-lod0.glb",
+          "sha256": "bc6f846a9e000008b3b9e092b3b9840e994233a9be5dd51dd8b6149926eb6d4a"
+        }
+      ],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false,
+      "additional_geometry_checks": {
+        "bounds_max_error_m": 1.862645149230957e-09,
+        "unused_helper_vertices": 0,
+        "zero_area_triangles": 0,
+        "maximum_unit_normal_error": 1.1050426906855648e-07,
+        "all_embedded_materials_hd": true
+      }
+    },
+    {
+      "control": "market-sack-a-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\market-sack-a-lod0.glb",
+        "sha256": "51248409039b61ad3d6ae37b109c9d805e46c7962967f31c0ce307580e336fd3",
+        "node": "market-sack-a-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 144,
+        "drawn_vertex_samples": 282,
+        "weighted_joint_counts": {
+          "main": 282
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.1589372158050537,
+            0.0,
+            -0.7726248502731323
+          ],
+          [
+            1.114787220954895,
+            2.8145618438720703,
+            0.7395123243331909
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-mark-cotton-wrap",
+            "alpha_mode": "MASK",
+            "image_size": [
+              32,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "21af32a6a8b14fa298145f78861769c6d6bd0004137a5110118ca2fff1d812f3",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-cotton-32x32",
+            "alpha_mode": "MASK",
+            "image_size": [
+              32,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "de619693b8574d55c9f2d11857e1f3127100e2381bf32d4ced2521c79eb28739",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-clay-pot-01",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              64
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "75ac6864be31af6ed4d67b2f24604c69c33a21e39433f8e0925695ba638f6b92",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 3,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-a-lod0.glb",
+        "sha256": "ee9fdc814253818a13df36e001a02e0e6151abffe576b7a2835b463733dce6ca",
+        "node": "market-sack-a-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 12728,
+        "drawn_vertex_samples": 16020,
+        "weighted_joint_counts": {
+          "main": 16020
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.1589372158050537,
+            0.0,
+            -0.7726248502731323
+          ],
+          [
+            1.114787220954895,
+            2.8145618438720703,
+            0.7395123243331909
+          ]
+        ],
+        "materials": [
+          {
+            "name": "market-sack-cotton-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "dded6bd1b395ef4e9fb1fd7ddd42966bba60a7fdc2b6da728f4574ff428258bc",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "name": "market-sack-cord-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1774,
+              887
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "name": "market-ochre-contents-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "302558c3676658577c7d677f701ca6a206fd5699fdc1e44a9c3b6b0fb8c370fe",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 3,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascitya",
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [
+        {
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\market-sack-a-lod0.glb",
+          "sha256": "742605a7f7e50db769c34736170e22daab232dbb66d18a858e5532b23951e2c9"
+        }
+      ],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false,
+      "additional_geometry_checks": {
+        "bounds_max_error_m": 0.0,
+        "unused_helper_vertices": 0,
+        "zero_area_triangles": 0,
+        "maximum_unit_normal_error": 1.1510796138480828e-07,
+        "all_embedded_materials_hd": true
+      }
+    },
+    {
+      "control": "market-sack-b-lod0",
+      "source": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascitya\\market-sack-b-lod0.glb",
+        "sha256": "98d0b24ab7e9cc402619acec29627072964af03a402ff0661857bed960462473",
+        "node": "market-sack-b-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              -0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              0.0,
+              0.0,
+              -0.0,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 192,
+        "drawn_vertex_samples": 368,
+        "weighted_joint_counts": {
+          "main": 368
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.0233912467956543,
+            0.0,
+            -0.8830876350402832
+          ],
+          [
+            1.0233912467956543,
+            2.1045546531677246,
+            0.7675434350967407
+          ]
+        ],
+        "materials": [
+          {
+            "name": "city-mark-cotton-32x32",
+            "alpha_mode": "MASK",
+            "image_size": [
+              32,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "de619693b8574d55c9f2d11857e1f3127100e2381bf32d4ced2521c79eb28739",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-cotton-wrap",
+            "alpha_mode": "MASK",
+            "image_size": [
+              32,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "21af32a6a8b14fa298145f78861769c6d6bd0004137a5110118ca2fff1d812f3",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          },
+          {
+            "name": "city-mark-rope-01",
+            "alpha_mode": "MASK",
+            "image_size": [
+              64,
+              32
+            ],
+            "alpha_range": [
+              128,
+              128
+            ],
+            "native_alpha_range_after_shift": [
+              64,
+              64
+            ],
+            "image_sha256": "03795034d70d295db0a73232b49f26c1bccd2e1a48a9b044a7cf07c8e8a15177",
+            "ignored_pbr_extensions": [],
+            "base_color_factor_ignored_by_importer": [
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ]
+          }
+        ],
+        "primitive_count": 3,
+        "custom_weights": false
+      },
+      "authored": {
+        "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\market-sack-b-lod0.glb",
+        "sha256": "fe84d38446609b81f56a45eea4da87c974fcd77028efd694f2d45f15f1b91758",
+        "node": "market-sack-b-lod0",
+        "rig": {
+          "joints": [
+            "align",
+            "prejoint",
+            "main"
+          ],
+          "inverse_bind_matrices": [
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ],
+            [
+              1.0,
+              1.1715933145108092e-15,
+              3.422854533141617e-08,
+              -0.0,
+              -1.1715933145108092e-15,
+              1.0,
+              3.422854533141617e-08,
+              0.0,
+              -3.422854533141617e-08,
+              -4.010193344352739e-23,
+              1.0,
+              -0.0,
+              -0.0,
+              0.0,
+              -0.0,
+              1.0
+            ]
+          ],
+          "joint_world_matrices": [
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316075e-16,
+              -3.4228545331416165e-08,
+              0.0,
+              2.9289832837920164e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.422854533141618e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.9999999999999994,
+              -8.786949861316071e-16,
+              -3.4228545331416185e-08,
+              0.0,
+              2.9289832837920095e-16,
+              0.9999999999999999,
+              -1.7114272665708096e-08,
+              0.0,
+              3.42285453314162e-08,
+              1.7114272665708076e-08,
+              0.9999999999999993,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "triangles": 11014,
+        "drawn_vertex_samples": 12879,
+        "weighted_joint_counts": {
+          "main": 12879
+        },
+        "bounds_metres_y_up": [
+          [
+            -1.0233912467956543,
+            0.0,
+            -0.8830876350402832
+          ],
+          [
+            1.0233912467956543,
+            2.1045546531677246,
+            0.7675434350967407
+          ]
+        ],
+        "materials": [
+          {
+            "name": "market-sack-cotton-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1254,
+              1254
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "dded6bd1b395ef4e9fb1fd7ddd42966bba60a7fdc2b6da728f4574ff428258bc",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "name": "market-sack-cord-hd",
+            "alpha_mode": "MASK",
+            "image_size": [
+              1774,
+              887
+            ],
+            "alpha_range": [
+              255,
+              255
+            ],
+            "native_alpha_range_after_shift": [
+              127,
+              127
+            ],
+            "image_sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a",
+            "ignored_pbr_extensions": [
+              "KHR_materials_specular"
+            ],
+            "base_color_factor_ignored_by_importer": [
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        ],
+        "primitive_count": 2,
+        "custom_weights": false
+      },
+      "source_levels": [
+        "wascitya",
+        "wascityb"
+      ],
+      "shared_source_compatibility_checked": [
+        {
+          "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\wascityb\\market-sack-b-lod0.glb",
+          "sha256": "f0b29ee9d37aecdc15e85bde5aa72f40d332c64015dc51fb4553494c7d168e4e"
+        }
+      ],
+      "shared_lod_rig_reference": null,
+      "weights_policy": "Nearest native vertex weights; authored native rig retained and validated",
+      "native_unit_scale": 4096,
+      "animations": "Original DGO control/idle retained; GLB animations are not imported",
+      "native_visual_validation": false,
+      "additional_geometry_checks": {
+        "bounds_max_error_m": 0.0,
+        "unused_helper_vertices": 0,
+        "zero_area_triangles": 0,
+        "maximum_unit_normal_error": 1.1501873209418534e-07,
+        "all_embedded_materials_hd": true
+      }
+    }
+  ],
+  "native_visual_validation": false
+}

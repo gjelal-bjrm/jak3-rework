@@ -1,0 +1,24 @@
+{
+  "status": "Native export only; no models generated or installed",
+  "level": "wascityb",
+  "source_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+  "selection_sha256": "baa86e3da68c195588bbba49f8c6a0da97342f3fd2b0191e0823aac69e471f44",
+  "export_sha256": "c18b2cdae4092a8b33e240d004709d2bf606e5052c3941662a37f8f7d4f579b4",
+  "faces": 20384,
+  "by_tree_type_and_geom": {
+    "tie/0": 1664,
+    "tie/1": 1664,
+    "tie/2": 832,
+    "tie/3": 208,
+    "tie_wind/0": 5408,
+    "tie_wind/1": 5408,
+    "tie_wind/2": 4160,
+    "tie_wind/3": 1040
+  },
+  "by_material": {
+    "wascity-palm-trunk": 4368,
+    "wascity-palm-leaf-worn": 10608,
+    "wascity-palm-beard": 5408
+  },
+  "unique_native_keys": true
+}

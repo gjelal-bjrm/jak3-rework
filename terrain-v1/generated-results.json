@@ -1,0 +1,68 @@
+[
+  {
+    "key": "waspala-cliff-rock-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-01.png",
+    "label": "Roche des parois",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: Warm muted ochre-brown weathered sandstone. Preserve EXACTLY the broad original horizontal strata and vertical natural fissures, including their locations, width and spacing. These are natural rock strata, NOT masonry or rectangular bricks. Add fine mineral grains, thin layered flaking, small pores and restrained worn crevice edges. Keep the original subdued olive-brown sandstone hue, avoid saturated orange.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-01.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-81b5a49c-e41d-4203-8c92-6f4af0045293.png"
+  },
+  {
+    "key": "waspala-cliff-rock-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-02.png",
+    "label": "Transition des rochers",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: This is a transition texture. The TOP part is a relatively smooth mottled sandstone surface, the LOWER part becomes the EXACT layered fissured rock from the reference. Preserve the precise vertical distribution and soft transition at the same height; match the original ochre-grey top and warm muted brown lower palette. Refine pores, fine mineral grains and natural weathering without moving the main crevices or adding new masonry.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-02.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-78356c4f-8c34-4f30-acb3-94ab4600e99b.png"
+  },
+  {
+    "key": "waspala-cliff-rock-top",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-top.png",
+    "label": "Dessus des rochers",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: The original is a softly mottled, granular ochre-grey sandstone top. Preserve the exact broad cloud-like patches and original subdued warm-grey/brown color distribution. Add realistic fine sandstone grains, tiny pores, delicate mineral flecks and light abrasion. No new large cracks, pebbles, moss, strata, borders or paving patterns.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-top.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-781f4105-2587-4096-9fc5-09ce25d7321a.png"
+  },
+  {
+    "key": "waspala-pool-floor",
+    "page": "waspala-tfrag",
+    "file": "waspala-pool-floor.png",
+    "label": "Fond des bassins",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: The original is a grey stone bed with very subtle wide angular rock boundaries. Preserve the exact shapes, boundary positions, grey low-saturation palette and faint broad stains. Add fine natural stone grain, tiny pits, restrained crevice wear and subtle mineral deposits. This is DRY neutral albedo; do NOT paint water, foam, reflections, caustics or wet gloss.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-pool-floor.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-84da2709-0303-462f-8855-7c8c3928f6f6.png"
+  },
+  {
+    "key": "waspala-step-top",
+    "page": "waspala-tfrag",
+    "file": "waspala-step-top.png",
+    "label": "Pierre des marches",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: Blue-grey slate-like stone slab surface with the original broad diagonal fine fractures. Preserve the exact fracture map, large patches and muted dark blue-grey color. Add finely textured natural stone, shallow abrasion, fine mineral grain and subtle edge weathering. No new border, bricks, markings or additional slab divisions.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-step-top.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ffeffb81-ba4f-45ba-a3bd-448c4467ab99.png"
+  },
+  {
+    "key": "waspala-column-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-01.png",
+    "label": "Panneaux des colonnes",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: Square blue-grey stone panel with the existing narrow recessed border and the exact original diagonal crack across its face. Preserve ALL frame and crack coordinates and the muted dark blue-grey palette. Add realistic slate/stone micrograin, shallow mineral pores and restrained wear in the existing edges. No new border width, holes, rivets, seams or ornament.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-01.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9fd4c698-4bcc-4106-82d8-efeed01bd50f.png"
+  }
+]

@@ -1,0 +1,5149 @@
+{
+  "status": "passed",
+  "source_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+  "patch_sha256": "a9c23236ccdec9660ada8446c98599841009533e314fc49e4643e948aad0a250",
+  "author_report_sha256": "54254012a4cd248919e5049043a45a6148a46500934b3491eccc0b05aaca1700",
+  "native_export_sha256": "77ae9fec9b2895f8dd428dfda8d97271aff375095bc2332baa85b3f6331b30db",
+  "expected_house_sha256": "af5ebdf028a7a5e59d492196c8802459ebe6eea84a0cd90468ace76cdd2f8b9c",
+  "baseline_sha256": "a815256effdb37cdef1a42a334a359d2e5de87aee669ea8ad0caec6c51bceb0d",
+  "removed_window_id": "wca-house1-east-room",
+  "previous_window_anchors_sha256": "1a8a258e2b2731d9a8b7ce5eee493fb41f936cac4fdb4b397d3d06b960e56b04",
+  "window_anchors_sha256": "747177d3b3e01e7c7d1dc495244dc2787e36cf9d2bf745de70f4ec9ecd6c9140",
+  "checks": {
+    "Only east-room anchor removed": true,
+    "LOD0 exact house without lateral frame and balcony": true,
+    "LOD0 49 opaque wall rays at original surface": true,
+    "LOD1 exact house without lateral frame and balcony": true,
+    "LOD1 49 opaque wall rays at original surface": true,
+    "LOD2 exact house without lateral frame and balcony": true,
+    "LOD2 49 opaque wall rays at original surface": true,
+    "LOD3 exact house without lateral frame and balcony": true,
+    "LOD3 49 opaque wall rays at original surface": true
+  },
+  "lods": [
+    {
+      "lod": 0,
+      "after_house_triangles": 3248,
+      "expected_house_triangles": 3248,
+      "wall_samples": [
+        {
+          "sample": [
+            -0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "baseline_hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "baseline_hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "baseline_hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "baseline_hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "baseline_hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "baseline_hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "baseline_hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "baseline_hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "baseline_hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "baseline_hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "baseline_hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "baseline_hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "baseline_hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "baseline_hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "baseline_hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "baseline_hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "baseline_hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "baseline_hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "baseline_hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "baseline_hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "baseline_hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "baseline_hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "baseline_hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "baseline_hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "baseline_hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "baseline_hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "baseline_hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "baseline_hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "baseline_hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "baseline_hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "baseline_hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "baseline_hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "baseline_hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "baseline_hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "baseline_hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "baseline_hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "baseline_hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "baseline_hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "baseline_hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "baseline_hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "baseline_hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "baseline_hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "baseline_hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "baseline_hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "baseline_hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "baseline_hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "baseline_hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "baseline_hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "baseline_hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        }
+      ]
+    },
+    {
+      "lod": 1,
+      "after_house_triangles": 3248,
+      "expected_house_triangles": 3248,
+      "wall_samples": [
+        {
+          "sample": [
+            -0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "baseline_hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "baseline_hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "baseline_hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "baseline_hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "baseline_hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "baseline_hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "baseline_hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "baseline_hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "baseline_hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "baseline_hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "baseline_hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "baseline_hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "baseline_hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "baseline_hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "baseline_hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "baseline_hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "baseline_hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "baseline_hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "baseline_hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "baseline_hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "baseline_hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "baseline_hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "baseline_hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "baseline_hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "baseline_hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "baseline_hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "baseline_hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "baseline_hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "baseline_hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "baseline_hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "baseline_hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "baseline_hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "baseline_hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "baseline_hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "baseline_hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "baseline_hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "baseline_hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "baseline_hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "baseline_hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "baseline_hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "baseline_hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "baseline_hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "baseline_hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "baseline_hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "baseline_hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "baseline_hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "baseline_hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "baseline_hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "baseline_hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        }
+      ]
+    },
+    {
+      "lod": 2,
+      "after_house_triangles": 2860,
+      "expected_house_triangles": 2860,
+      "wall_samples": [
+        {
+          "sample": [
+            -0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "baseline_hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "baseline_hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "baseline_hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "baseline_hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "baseline_hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "baseline_hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "baseline_hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "baseline_hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "baseline_hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "baseline_hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "baseline_hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "baseline_hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "baseline_hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "baseline_hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "baseline_hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "baseline_hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "baseline_hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "baseline_hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "baseline_hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "baseline_hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "baseline_hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "baseline_hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "baseline_hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "baseline_hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "baseline_hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "baseline_hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "baseline_hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "baseline_hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "baseline_hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "baseline_hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "baseline_hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "baseline_hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "baseline_hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "baseline_hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "baseline_hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "baseline_hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "baseline_hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "baseline_hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "baseline_hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "baseline_hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "baseline_hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "baseline_hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "baseline_hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "baseline_hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "baseline_hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "baseline_hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "baseline_hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "baseline_hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "baseline_hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        }
+      ]
+    },
+    {
+      "lod": 3,
+      "after_house_triangles": 2394,
+      "expected_house_triangles": 2394,
+      "wall_samples": [
+        {
+          "sample": [
+            -0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "baseline_hit_m": [
+            2272.337646484375,
+            25.94999885559082,
+            14.612691879272461
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "baseline_hit_m": [
+            2272.340087890625,
+            26.399999618530273,
+            14.611678123474121
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "baseline_hit_m": [
+            2272.342529296875,
+            26.849998474121094,
+            14.610664367675781
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "baseline_hit_m": [
+            2272.344970703125,
+            27.299999237060547,
+            14.609650611877441
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "baseline_hit_m": [
+            2272.347412109375,
+            27.75,
+            14.608636856079102
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "baseline_hit_m": [
+            2272.349853515625,
+            28.19999885559082,
+            14.607623100280762
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "baseline_hit_m": [
+            2272.352294921875,
+            28.649999618530273,
+            14.606609344482422
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "baseline_hit_m": [
+            2272.54638671875,
+            25.94999885559082,
+            15.1107759475708
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "baseline_hit_m": [
+            2272.548828125,
+            26.399999618530273,
+            15.109761238098145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "baseline_hit_m": [
+            2272.55126953125,
+            26.849998474121094,
+            15.108747482299805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "baseline_hit_m": [
+            2272.553466796875,
+            27.299999237060547,
+            15.107733726501465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "baseline_hit_m": [
+            2272.555908203125,
+            27.75,
+            15.106719970703125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "baseline_hit_m": [
+            2272.558349609375,
+            28.19999885559082,
+            15.105706214904785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "baseline_hit_m": [
+            2272.560791015625,
+            28.649999618530273,
+            15.104692459106445
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "baseline_hit_m": [
+            2272.7548828125,
+            25.94999885559082,
+            15.608861923217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "baseline_hit_m": [
+            2272.75732421875,
+            26.399999618530273,
+            15.607847213745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "baseline_hit_m": [
+            2272.759765625,
+            26.849998474121094,
+            15.606831550598145
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "baseline_hit_m": [
+            2272.76220703125,
+            27.299999237060547,
+            15.605817794799805
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "baseline_hit_m": [
+            2272.7646484375,
+            27.75,
+            15.604804039001465
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "baseline_hit_m": [
+            2272.76708984375,
+            28.19999885559082,
+            15.603790283203125
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            -0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "baseline_hit_m": [
+            2272.769287109375,
+            28.649999618530273,
+            15.602776527404785
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "baseline_hit_m": [
+            2272.96337890625,
+            25.94999885559082,
+            16.10694694519043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "baseline_hit_m": [
+            2272.9658203125,
+            26.399999618530273,
+            16.10593032836914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "baseline_hit_m": [
+            2272.96826171875,
+            26.849998474121094,
+            16.104915618896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "baseline_hit_m": [
+            2272.970703125,
+            27.299999237060547,
+            16.103900909423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "baseline_hit_m": [
+            2272.97314453125,
+            27.75,
+            16.102886199951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "baseline_hit_m": [
+            2272.9755859375,
+            28.19999885559082,
+            16.10187339782715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "baseline_hit_m": [
+            2272.97802734375,
+            28.649999618530273,
+            16.100858688354492
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "baseline_hit_m": [
+            2273.171875,
+            25.94999885559082,
+            16.605031967163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "baseline_hit_m": [
+            2273.17431640625,
+            26.399999618530273,
+            16.60401725769043
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "baseline_hit_m": [
+            2273.1767578125,
+            26.849998474121094,
+            16.603002548217773
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "baseline_hit_m": [
+            2273.17919921875,
+            27.299999237060547,
+            16.601987838745117
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "baseline_hit_m": [
+            2273.181640625,
+            27.75,
+            16.600971221923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "baseline_hit_m": [
+            2273.18408203125,
+            28.19999885559082,
+            16.599956512451172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.15,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "baseline_hit_m": [
+            2273.1865234375,
+            28.649999618530273,
+            16.59894371032715
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "baseline_hit_m": [
+            2273.380615234375,
+            25.94999885559082,
+            17.10311508178711
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "baseline_hit_m": [
+            2273.383056640625,
+            26.399999618530273,
+            17.102100372314453
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "baseline_hit_m": [
+            2273.385498046875,
+            26.849998474121094,
+            17.101085662841797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "baseline_hit_m": [
+            2273.3876953125,
+            27.299999237060547,
+            17.10007095336914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "baseline_hit_m": [
+            2273.39013671875,
+            27.75,
+            17.099056243896484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "baseline_hit_m": [
+            2273.392578125,
+            28.19999885559082,
+            17.098041534423828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.3,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "baseline_hit_m": [
+            2273.39501953125,
+            28.649999618530273,
+            17.097026824951172
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "baseline_hit_m": [
+            2273.589111328125,
+            25.94999885559082,
+            17.6012020111084
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "baseline_hit_m": [
+            2273.591552734375,
+            26.399999618530273,
+            17.600187301635742
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            -0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "baseline_hit_m": [
+            2273.593994140625,
+            26.849998474121094,
+            17.599172592163086
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "baseline_hit_m": [
+            2273.596435546875,
+            27.299999237060547,
+            17.598155975341797
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.15
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "baseline_hit_m": [
+            2273.598876953125,
+            27.75,
+            17.59714126586914
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.3
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "baseline_hit_m": [
+            2273.601318359375,
+            28.19999885559082,
+            17.596126556396484
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        },
+        {
+          "sample": [
+            0.45,
+            0.45
+          ],
+          "passed": true,
+          "native_wall_deviation_m": 0.0,
+          "hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "baseline_hit_m": [
+            2273.603515625,
+            28.649999618530273,
+            17.595111846923828
+          ],
+          "face": {
+            "tree_type": "tie",
+            "tree": 1,
+            "draw": 9,
+            "group": 1,
+            "material": null,
+            "stream_index": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-16",
+  "runtime": "OpenGOAL v0.3.6",
+  "checkpoint": "game-start",
+  "time_of_day": "09:00:00 frozen in both variants",
+  "captures": {
+    "original": {
+      "file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\comparison\\arena-original.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "31422860f356b8b87616408c6e6b8f159b4b0ccc4c312ebab27eb02c454f55fc"
+    },
+    "remaster": {
+      "file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\comparison\\arena-remaster.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "555e5ca404395e4e69e154fff8cfc87c6eab7504d78e8e3351157b1bb47876f3"
+    }
+  },
+  "capture_method": "Built-in pc-screen-shot; no artistic editing or color correction",
+  "limitations": [
+    "Particles and lava animation are not deterministic between launches.",
+    "The native screenshot function logs GL_INVALID_OPERATION in both original and remaster, but produces valid PNGs.",
+    "Validated startup and rendered frame; full tutorial playthrough and performance benchmark not performed."
+  ],
+  "checks": {
+    "variant_hashes": "passed",
+    "original_install_matches_snapshot": "passed",
+    "remaster_variant_installed": "passed",
+    "capture_dimensions": "passed"
+  },
+  "inline_comparison": "C:\\Users\\Gjelal\\.codex\\visualizations\\2026\\09\\15\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\spargus-avant-apres.html"
+}

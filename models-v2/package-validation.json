@@ -1,0 +1,251 @@
+{
+  "checked_utc": "2026-09-17T08:25:29.385869+00:00",
+  "passed": true,
+  "checks": 3744,
+  "errors": [],
+  "files_per_variant": 93,
+  "variants_checked": [
+    "original",
+    "remaster",
+    "remaster-v1"
+  ],
+  "deployed_variant": "remaster",
+  "deployed_route": "palace",
+  "changed_since_before_objects": [
+    "game/graphics/opengl_renderer/shaders/etie_base.frag",
+    "game/graphics/opengl_renderer/shaders/etie_base.vert",
+    "game/graphics/opengl_renderer/shaders/generic.frag",
+    "game/graphics/opengl_renderer/shaders/merc2.frag",
+    "game/graphics/opengl_renderer/shaders/shrub.frag",
+    "game/graphics/opengl_renderer/shaders/shrub.vert",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag",
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert",
+    "game/graphics/opengl_renderer/shaders/tie_wind.frag",
+    "game/graphics/opengl_renderer/shaders/tie_wind.vert",
+    "out/jak3/fr3/waspala.fr3"
+  ],
+  "added_ocean_files": [
+    "custom_assets/jak3/city-interiors/conversation.bin",
+    "custom_assets/jak3/city-interiors/conversation.json",
+    "custom_assets/jak3/city-interiors/conversing-female.bin",
+    "custom_assets/jak3/city-interiors/conversing-female.json",
+    "custom_assets/jak3/city-interiors/conversing-male.bin",
+    "custom_assets/jak3/city-interiors/conversing-male.json",
+    "custom_assets/jak3/city-interiors/fabric.rgba",
+    "custom_assets/jak3/city-interiors/lounge.bin",
+    "custom_assets/jak3/city-interiors/lounge.json",
+    "custom_assets/jak3/city-interiors/runtime.json",
+    "custom_assets/jak3/city-interiors/sitting-male.bin",
+    "custom_assets/jak3/city-interiors/sitting-male.json",
+    "custom_assets/jak3/city-interiors/textures/citn-allleatherstrap.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-eye.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-head.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-leatherstrap.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-mustache.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-pants.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-pants_001.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-pants_002.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-shoebottom.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-shoetop.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-shoetop_001.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-skirt.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-01-wrap.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlander-02-glove.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-bootleg.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-eye.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-flesh.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-flesh_001.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-flesh_002.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-hair.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-shirtb.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-shirtb_001.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-shoetopb.rgba",
+    "custom_assets/jak3/city-interiors/textures/wstlanderchic-skirt.rgba",
+    "custom_assets/jak3/city-interiors/wood.rgba",
+    "game/graphics/opengl_renderer/shaders/city_fire.frag",
+    "game/graphics/opengl_renderer/shaders/city_fire.vert",
+    "game/graphics/opengl_renderer/shaders/city_fire_embers.frag",
+    "game/graphics/opengl_renderer/shaders/city_fire_embers.vert",
+    "game/graphics/opengl_renderer/shaders/city_fire_lighting.frag",
+    "game/graphics/opengl_renderer/shaders/city_fire_lighting.vert",
+    "game/graphics/opengl_renderer/shaders/city_interior.frag",
+    "game/graphics/opengl_renderer/shaders/city_interior.vert",
+    "game/graphics/opengl_renderer/shaders/coast_breaker.frag",
+    "game/graphics/opengl_renderer/shaders/coast_breaker.vert",
+    "game/graphics/opengl_renderer/shaders/coast_spray.frag",
+    "game/graphics/opengl_renderer/shaders/coast_spray.vert",
+    "game/graphics/opengl_renderer/shaders/direct_basic_textured.frag",
+    "game/graphics/opengl_renderer/shaders/market_fruit.frag",
+    "game/graphics/opengl_renderer/shaders/market_fruit.vert",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert",
+    "game/graphics/opengl_renderer/shaders/ocean_common.frag",
+    "game/graphics/opengl_renderer/shaders/ocean_underwater.frag",
+    "game/graphics/opengl_renderer/shaders/ocean_underwater.vert",
+    "game/graphics/opengl_renderer/shaders/spargus_clouds.frag",
+    "game/graphics/opengl_renderer/shaders/spargus_clouds.vert",
+    "out/jak3/fr3/wascitya.fr3",
+    "out/jak3/fr3/wascityb.fr3",
+    "out/jak3/fr3/waswide.fr3",
+    "out/jak3/iso/WWD.DGO"
+  ],
+  "city_descendant_chain": [
+    {
+      "kind": "original_baseline",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\baseline.json",
+      "path": "out/jak3/fr3/waswide.fr3",
+      "output_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\static-installed.json",
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "base_sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f",
+      "output_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\foliage\\installed.json",
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "base_sha256": "de7ab0fd18e6f6400da5738c5a3b8446c7fb1b567baebde68e45132bb9faae1f",
+      "output_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf"
+    },
+    {
+      "kind": "environment_textures",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "7507178aa5ee8a20c0ee2cbdce0137d3fb428fd0e3eb8ad823d94a3777a17f55",
+      "output_sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+    },
+    {
+      "kind": "environment_textures",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\installed.json",
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "base_sha256": "8883d7d7c8abdbac1225ce104ab41d023b5f2adc518e6e82874cd7caed45b2bf",
+      "output_sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee"
+    },
+    {
+      "kind": "environment_textures",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\installed.json",
+      "path": "out/jak3/fr3/waswide.fr3",
+      "base_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+      "output_sha256": "7b956e755c24cdf42762499d347848fa6874fd171c9e6500bc07d417a483a7d8"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascitya-installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+      "output_sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\geometry-002\\wascityb-installed.json",
+      "path": "out/jak3/fr3/wascityb.fr3",
+      "base_sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee",
+      "output_sha256": "4893fe0a4c3b78592fa22f79fc477356ccd11ec562098369843b514d5533f66d"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0",
+      "output_sha256": "a1ee034f7733fea032f0a97077d022d6420b679627ccd43250eb8b6d7e71e9ec"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\revision-001\\installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "a1ee034f7733fea032f0a97077d022d6420b679627ccd43250eb8b6d7e71e9ec",
+      "output_sha256": "fd442a3c6d80c55d89189c8cc6fa09f21a41491ff83f12df9ac230e4dffa25c9"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\revision-002\\installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "fd442a3c6d80c55d89189c8cc6fa09f21a41491ff83f12df9ac230e4dffa25c9",
+      "output_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74"
+    },
+    {
+      "kind": "native_mesh",
+      "manifest": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\revision-003\\installed.json",
+      "path": "out/jak3/fr3/wascitya.fr3",
+      "base_sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74",
+      "output_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604"
+    }
+  ],
+  "protected_files_identical": [
+    "game/graphics/opengl_renderer/shaders/fire_embers.frag",
+    "game/graphics/opengl_renderer/shaders/fire_embers.vert",
+    "game/graphics/opengl_renderer/shaders/fire_lighting.frag",
+    "game/graphics/opengl_renderer/shaders/fire_lighting.vert",
+    "game/graphics/opengl_renderer/shaders/fountain.frag",
+    "game/graphics/opengl_renderer/shaders/fountain.vert",
+    "game/graphics/opengl_renderer/shaders/liquid_bloom.frag",
+    "game/graphics/opengl_renderer/shaders/liquid_bloom.vert",
+    "game/graphics/opengl_renderer/shaders/merc2.vert",
+    "game/graphics/opengl_renderer/shaders/palace-shore.bin",
+    "game/graphics/opengl_renderer/shaders/palace_fire.frag",
+    "game/graphics/opengl_renderer/shaders/palace_fire.vert",
+    "game/graphics/opengl_renderer/shaders/water_spray.frag",
+    "game/graphics/opengl_renderer/shaders/water_spray.vert",
+    "out/jak3/fr3/game.fr3",
+    "out/jak3/fr3/wasstada.fr3",
+    "out/jak3/fr3/wasstadb.fr3",
+    "out/jak3/iso/WASPALA.DGO",
+    "out/jak3/iso/WASSTADA.DGO"
+  ],
+  "protected_files_preserved_except_bounded_underwater_fix": [
+    {
+      "path": "game/graphics/opengl_renderer/shaders/generic.frag",
+      "baseline_sha256": "5d3cdb7aba3fdd7b25fb21d86aafda298e018d418dc7d1a3f01d884bc9a8e6a1",
+      "packaged_sha256": "daca222f66182d4ffa36f95c920c2be4650318866c1c585748fa4be9fba286af",
+      "strict_inverse_matches_baseline": true,
+      "comparison": "Full shader text after exact inverse; only CRLF/LF normalized"
+    },
+    {
+      "path": "game/graphics/opengl_renderer/shaders/merc2.frag",
+      "baseline_sha256": "33505a739a0e0c75c9ca626cc9d218bcf3a5df07c3c679097af35c6026e6fdf3",
+      "packaged_sha256": "6f0cf6c6018ec3df0ff607f46dbd1d65d883362d3b96501d3991b523d1272023",
+      "strict_inverse_matches_baseline": true,
+      "comparison": "Full shader text after exact inverse; only CRLF/LF normalized"
+    }
+  ],
+  "underwater_fix_manifest": {
+    "path": "liquids-v3/underwater-fix.json",
+    "sha256": "3ba739d9476868b08e76709ecf73f1ba13e380599dacb975b880c54332884751",
+    "scope": "Underside normal orientation and camera-to-surface absorption path",
+    "visual_validation_inferred": false
+  },
+  "level_sha256": "18af49de0bb31b2e45fbd4a89ff35444cc4e76476cbd3932850f0f28f605ef24",
+  "runtime_sha256": "a03eb7fe2d8f5aa79dda538406380ddcf70679f444d9c608796975ab5b7a823b",
+  "model_triangles_all_lods": {
+    "removed": 84206,
+    "added": 1867056
+  },
+  "fuel_faces_exactly_preserved": 288,
+  "audio_mute_branch_logged": true,
+  "fatal_shader_or_assertion_errors": [],
+  "native_model_captures": {
+    "objects-v2-throne": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-v2-throne.png",
+      "sha256": "6e77162d9bd8d5b1d5580a9d0ccb3e1da6aac0b0919a884756e0749ff76f2dba"
+    },
+    "objects-v2-palms": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-v2-palms.png",
+      "sha256": "daccdf61d3e807a7ff2999a05029bc0cf56c8b1f627f227f8ed43746f0cce4a0"
+    },
+    "objects-v2-hanging": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-v2-hanging.png",
+      "sha256": "cce13697a66fef4fca8828498690329abdbd5c7dd20b1f2200a6dd46e5c5b168"
+    }
+  },
+  "limitations": [
+    "Hash checks establish package consistency, not visual quality or complete gameplay compatibility.",
+    "Palace effects use byte comparisons except the two exact underwater insertions in Generic/Merc; their strict inverse must match the complete protected baseline text. Shared engine behavior is not proven by these checks.",
+    "No automated acoustic capture or complete frame-time/collision/cutscene audit.",
+    "Native screenshots may log GL_INVALID_OPERATION 0x502 while producing valid PNGs.",
+    "Idle swimming ripple visual approval is not inferred by this validator.",
+    "The complete city, arena, desert and vehicle remaster remains unfinished."
+  ]
+}

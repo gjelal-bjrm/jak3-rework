@@ -1,0 +1,60 @@
+{
+  "status": "applied",
+  "scope": "Jak only; WCA/WCB; market-shrub-orange-v1 only",
+  "files": {
+    "engine-src/game/graphics/opengl_renderer/shaders/shrub.vert": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\engine-src\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "before_sha256": "0b574c83112ffab8df369db48db480f7c020203014f9945c5267c1dd0c02f3a7",
+      "after_sha256": "1d38a31ff34455541f5e6f19629d29e1e476266401251fa4a1e3381ae989dcbd"
+    },
+    "data/game/graphics/opengl_renderer/shaders/shrub.vert": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\data\\game\\graphics\\opengl_renderer\\shaders\\shrub.vert",
+      "before_sha256": "0b574c83112ffab8df369db48db480f7c020203014f9945c5267c1dd0c02f3a7",
+      "after_sha256": "1d38a31ff34455541f5e6f19629d29e1e476266401251fa4a1e3381ae989dcbd"
+    },
+    "engine-src/goal_src/jak3/engine/target/logic-target.gc": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\engine-src\\goal_src\\jak3\\engine\\target\\logic-target.gc",
+      "before_sha256": "8df2c6594434f699b8b51b456b6130d8f56c8e2ddc4319530ce9e669fe8bbbf0",
+      "after_sha256": "641054fe026386e67f277828cc56e9760545b8d2a0d5ad6487453c5126298572"
+    },
+    "data/goal_src/jak3/engine/target/logic-target.gc": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\data\\goal_src\\jak3\\engine\\target\\logic-target.gc",
+      "before_sha256": "f99013565e219d556aa5d0607e488e2343044607ef23079b7298be1ea41a8777",
+      "after_sha256": "8ea93d7bbe86cc3c50be456435571b0de88f0d8700f31f3dc724d04d359dcd0e"
+    },
+    "engine-src/game/graphics/opengl_renderer/background/PalaceMaterials.h": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\engine-src\\game\\graphics\\opengl_renderer\\background\\PalaceMaterials.h",
+      "before_sha256": "4d19b9020ffcae63dae60f97e3202f14657161b40ff3d051646385af5be47e36",
+      "after_sha256": "c9116779f4af19d3302b5417a737c92e1d992adbb0452fb9d290342185f1c655"
+    },
+    "engine-src/game/kernel/jak3/kmachine.cpp": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact\\before\\engine-src\\game\\kernel\\jak3\\kmachine.cpp",
+      "before_sha256": "c0571b136c7eae9fe13d3f690fa5c322536100bc9715be10af8c2dccfc3fa3af",
+      "after_sha256": "47f728ac9080bbecfc18893ed1bd165e9ea49f76e7c47cadb9a856349c4cb91c"
+    }
+  },
+  "new_header": "engine-src/game/graphics/opengl_renderer/GrassContacts.h",
+  "new_header_sha256": "927a38d300277ecc400db1b49a4660aadf02ebf6887596d62336cffdd912ec14",
+  "goals": [
+    "logic-target"
+  ],
+  "native_validation": false,
+  "checks": {
+    "roots_fixed": true,
+    "outside_radius_unchanged": true,
+    "other_floor_unchanged": true,
+    "duplicates_do_not_amplify": true,
+    "smooth_monotonic_recovery": true,
+    "zero_after_one_second": true,
+    "sample_displacement_by_age_m": [
+      0.2617614489894796,
+      0.2613957101357917,
+      0.22401504788386264,
+      0.10541884606299422,
+      0.00860562008677502,
+      0.0
+    ],
+    "max_displacement_m": 0.29120439557122074,
+    "native_visual_validation": false
+  }
+}

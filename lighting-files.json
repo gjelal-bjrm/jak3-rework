@@ -1,0 +1,9 @@
+[
+  "game\\graphics\\opengl_renderer\\shaders\\tfrag3.vert",
+  "game\\graphics\\opengl_renderer\\shaders\\tfrag3.frag",
+  "game\\graphics\\opengl_renderer\\shaders\\tie_wind.vert",
+  "game\\graphics\\opengl_renderer\\shaders\\tie_wind.frag",
+  "game\\graphics\\opengl_renderer\\shaders\\etie_base.vert",
+  "game\\graphics\\opengl_renderer\\shaders\\etie_base.frag",
+  "goal_src\\jak3\\levels\\wascity\\wasstadium\\wasstada-mood.gc"
+]

@@ -1,0 +1,238 @@
+{
+  "title": "Spargus Â· six maisons, intÃ©rieurs et feux",
+  "scope": {
+    "houses": 6,
+    "final_openings": 9,
+    "rooms": 8,
+    "inhabited_rooms": 5
+  },
+  "baselines": {
+    "geometry": {
+      "label": "GÃ©omÃ©trie des maisons",
+      "before": "geometry-002, avec les textures et modifications antÃ©rieures dÃ©jÃ  installÃ©es. Ce nâ€™est pas le jeu PS2 original.",
+      "after": "Architecture R4 et piÃ¨ces de shared-room-v2. Les deux fenÃªtres autour de lâ€™angle de la maison 1 montrent la mÃªme piÃ¨ce.",
+      "pair_count": 10
+    },
+    "contact": {
+      "label": "Ombres de contact",
+      "before": "La mÃªme piÃ¨ce partagÃ©e de shared-corner, avec les ombres de contact dÃ©sactivÃ©es.",
+      "after": "La mÃªme piÃ¨ce, avec les ombres de contact activÃ©es. GÃ©omÃ©trie, mobilier et camÃ©ra inchangÃ©s.",
+      "pair_count": 1
+    },
+    "fire": {
+      "label": "Effets de feu",
+      "before": "Ancien effet generic-obs sur la gÃ©omÃ©trie actuelle, au mÃªme emplacement et avec la mÃªme camÃ©ra.",
+      "after": "Nouveau feu sur cette mÃªme gÃ©omÃ©trie. Ce protocole isole lâ€™effet de feu.",
+      "pair_count": 2
+    }
+  },
+  "comparisons": [
+    {
+      "id": "house1-overview",
+      "group": "house1",
+      "baseline_key": "geometry",
+      "title": "Maison 1 Â· vue gÃ©nÃ©rale",
+      "caption": "Silhouette, ouvertures et prÃ©sence de la maison dans la rue. Les fenÃªtres du mÃªme Ã©tage doivent montrer une seule piÃ¨ce cohÃ©rente autour de lâ€™angle.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house1-front",
+      "group": "house1",
+      "baseline_key": "geometry",
+      "title": "Maison 1 Â· fenÃªtre principale",
+      "caption": "Ouverture de faÃ§ade, encadrement et balconnet. Cette fenÃªtre et la fenÃªtre latÃ©rale donnent sur la mÃªme piÃ¨ce, avec les mÃªmes meubles et habitants.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house1-side",
+      "group": "house1",
+      "baseline_key": "geometry",
+      "title": "Maison 1 Â· fenÃªtre latÃ©rale",
+      "caption": "La fenÃªtre latÃ©rale est rÃ©tablie. Elle montre lâ€™autre cÃ´tÃ© de la piÃ¨ce partagÃ©e visible par la fenÃªtre principale ; elle ne dessert plus un intÃ©rieur indÃ©pendant.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house1-roof",
+      "group": "house1",
+      "baseline_key": "geometry",
+      "title": "Maison 1 Â· toiture",
+      "caption": "Sommet rehaussÃ©, coupole basse et rebords en volume. Les couleurs et les matÃ©riaux reprennent ceux de la maison.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house2-front",
+      "group": "house2",
+      "baseline_key": "geometry",
+      "title": "Maison 2 Â· faÃ§ade et ornements",
+      "caption": "Deux ouvertures Ã  des hauteurs diffÃ©rentes, encadrements et balconnet infÃ©rieur. Les plaques de bronze ont Ã©tÃ© Ã©paissies et rÃ©ancrÃ©es devant leur mur.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house2-roof",
+      "group": "house2",
+      "baseline_key": "geometry",
+      "title": "Maison 2 Â· toiture",
+      "caption": "Toit relevÃ© de 0,9 m, avec huit rebords de 0,98 m de haut. Cette modification reste modÃ©rÃ©e : la forme gÃ©nÃ©rale et la cheminÃ©e sont conservÃ©es.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house-east",
+      "group": "more",
+      "baseline_key": "geometry",
+      "title": "Maison est Â· nouvelle ouverture",
+      "caption": "Une ouverture rÃ©elle et un encadrement Ã  linteau Ã©largi, donnant sur une piÃ¨ce habitÃ©e. Cette vue concerne lâ€™ouverture et son intÃ©rieur ; la maison entiÃ¨re nâ€™a pas Ã©tÃ© reconstruite.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house-west",
+      "group": "more",
+      "baseline_key": "geometry",
+      "title": "Maison ouest Â· nouvelle ouverture",
+      "caption": "Une ouverture rÃ©elle avec jambages Ã©pais et appuis, donnant sur une piÃ¨ce habitÃ©e. Les volumes natifs de la maison sont conservÃ©s.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house-low",
+      "group": "more",
+      "baseline_key": "geometry",
+      "title": "Maison basse Â· nouvelle ouverture",
+      "caption": "Ouverture sur une maison polygonale basse, avec un appui large et une piÃ¨ce habitÃ©e. Lâ€™ancienne fenÃªtre haute voisine reste un Ã©lÃ©ment distinct.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "house-north",
+      "group": "more",
+      "baseline_key": "geometry",
+      "title": "Maison nord Â· nouvelle ouverture",
+      "caption": "Ouverture Ã  encadrement Ã©tagÃ©, donnant sur une piÃ¨ce habitÃ©e dans une autre partie de Spargus. Les piÃ¨ces des nouvelles maisons ont des amÃ©nagements variÃ©s.",
+      "before_label": "Avant Â· geometry-002",
+      "after_label": "AprÃ¨s Â· architecture R4 et intÃ©rieurs"
+    },
+    {
+      "id": "interior-contact",
+      "group": "interior",
+      "baseline_key": "contact",
+      "title": "IntÃ©rieur partagÃ© Â· ombres de contact",
+      "caption": "Comparaison isolÃ©e de la mÃªme piÃ¨ce autour de lâ€™angle, sans puis avec les ombres de contact sous les meubles et aux raccords. La gÃ©omÃ©trie, le mobilier et la camÃ©ra doivent rester identiques.",
+      "before_label": "MÃªme piÃ¨ce Â· sans ombres de contact",
+      "after_label": "MÃªme piÃ¨ce Â· avec ombres de contact"
+    },
+    {
+      "id": "fire-wca",
+      "group": "fire",
+      "baseline_key": "fire",
+      "title": "Feu Â· secteur WCA",
+      "caption": "Ancien effet generic-obs et nouveau feu sur le mÃªme emplacement, avec la gÃ©omÃ©trie actuelle. Examiner le volume de la flamme et son ancrage dans le contenant.",
+      "before_label": "MÃªme scÃ¨ne Â· ancien generic-obs",
+      "after_label": "MÃªme scÃ¨ne Â· nouveau feu"
+    },
+    {
+      "id": "fire-wcb",
+      "group": "fire",
+      "baseline_key": "fire",
+      "title": "Feu Â· secteur WCB",
+      "caption": "Ancien effet generic-obs et nouveau feu sur le mÃªme emplacement du second secteur, avec la gÃ©omÃ©trie actuelle. Une image fixe ne permet pas de juger le mouvement des flammes.",
+      "before_label": "MÃªme scÃ¨ne Â· ancien generic-obs",
+      "after_label": "MÃªme scÃ¨ne Â· nouveau feu"
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Maison 1",
+      "native_instance": 1,
+      "position": [
+        2275.3,
+        27.3,
+        11.45
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    },
+    {
+      "name": "Maison 2",
+      "native_instance": 2,
+      "position": [
+        2339.35,
+        20.5,
+        -26.55
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    },
+    {
+      "name": "Maison est",
+      "native_instance": 0,
+      "position": [
+        2438.589,
+        23.448,
+        14.605
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    },
+    {
+      "name": "Maison ouest",
+      "native_instance": 4,
+      "position": [
+        2118.216,
+        30.994,
+        -203.51
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    },
+    {
+      "name": "Maison basse",
+      "native_instance": 58,
+      "position": [
+        2244.698,
+        20.212,
+        -179.692
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    },
+    {
+      "name": "Maison nord",
+      "native_instance": 3,
+      "position": [
+        2517.346,
+        36.168,
+        -224.63
+      ],
+      "description": "Centre de lâ€™ouverture de repÃ©rage ; coordonnÃ©es en mÃ¨tres."
+    }
+  ],
+  "obsolete_capture_sha256": {
+    "images/house1-overview-after.png": [
+      "a158e10051d155a5ce81a91fe2db4f363a54fff7983420be02433c81af3096f4"
+    ],
+    "images/house1-front-after.png": [
+      "832261b63e9562a683feaae3ec3b629b8f6258919b8bb0a4ab74933c1b3ae6c0"
+    ],
+    "images/house1-side-after.png": [
+      "37b5fdbce79522ed11eff1826b50cca8c6195117a1d0118ea7522c9a2014ea9f"
+    ],
+    "images/house1-roof-after.png": [
+      "5b0120227b7dcc00b7f0787d91a5e1ee7680e200ca10ccfe9f318d9a9cd9f9a7"
+    ],
+    "images/house2-front-after.png": [
+      "96ac2a247b846a8175d90720d5013a04c09c8029377c6b47b9ce2642aaf98a78"
+    ],
+    "images/house2-roof-after.png": [
+      "87c173ebac1f0c6fc170cd5c0c53b1d70e3e4dfdddd137f907a7ec2e828dabaf"
+    ]
+  },
+  "sources": [
+    "architecture-expanded-r4/README.md",
+    "architecture-expanded-r4/window-anchors.json",
+    "architecture-expanded-r4/author-report.json",
+    "architecture-ornaments-r2/author-report.json",
+    "review-window-fix/native-review.json"
+  ],
+  "native_validation_claim": false
+}

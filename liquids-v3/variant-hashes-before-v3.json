@@ -1,0 +1,44 @@
+{
+  "original": {
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c2aaa5499653847d0fd844047b3d4366e86a4b9b3890721f3168ea564490c1d8",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "d600e108c356b068a413dc88f623f9ad4f5e9e2a450e9f52072235be2de5d2d6",
+    "game/graphics/opengl_renderer/shaders/tie_wind.vert": "6d4ddb26bb3ed25a098b4bf3abfa0f2ffa09228a5f941f2e02848df8ec21333b",
+    "game/graphics/opengl_renderer/shaders/tie_wind.frag": "1a9caa45bbf185cd8c618721a632d90fd173dcca0ea3e7853b456a7e76dbd795",
+    "game/graphics/opengl_renderer/shaders/etie_base.vert": "054459f98c46f97ac35dff4d244eb906d10490dc3637db57026b523416a9db3a",
+    "game/graphics/opengl_renderer/shaders/etie_base.frag": "cad2dd61b0912adeb7e64dafb50604ae344ede00c6544047372df07a81565188",
+    "out/jak3/fr3/wasstada.fr3": "f5d8eee7ad6a5fea31a506742b732f3c3108e6de0ccfb4aec73d0c162dfb38bc",
+    "out/jak3/fr3/wasstadb.fr3": "b67dc5f810d63e04ac82cecb323d265cb9c7fc550a3d8338a83a7c37aaa659b3",
+    "out/jak3/iso/WASSTADA.DGO": "1b379514243f9427942e1de7d04dd5910d7a2837ec4a04ae6bb537948af6b27c",
+    "out/jak3/fr3/game.fr3": "55d58e54f61f10915762cbb64883e82eceaa79eb301985e201007363b88d5f9e",
+    "out/jak3/fr3/waspala.fr3": "51d62e1aaf7d8bb1b6416fff53d65009b67a41117a38f0b02c9bec7e58169798",
+    "out/jak3/iso/WASPALA.DGO": "3032aba716fb1e2ec7bbf9154a974050b4f980117a9ecae133800ffd6cbc7ef1"
+  },
+  "remaster": {
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert": "5a5c94b6bd5e9b864acfa8200303c2081910babd51f9ef8256238005755aafc8",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "38dd4cd7dfbbc8b98d50e40a765fa988f8411901f48656de986c97ace27dcd15",
+    "game/graphics/opengl_renderer/shaders/tie_wind.vert": "09a3ad03ec26b002725ebf306a94a992b341ad2d4f3ecb8728333a10ec026f48",
+    "game/graphics/opengl_renderer/shaders/tie_wind.frag": "3f4582f1b67f52c3a9327347324a6933a6b480107a72f9b9c2764d2ec320a5df",
+    "game/graphics/opengl_renderer/shaders/etie_base.vert": "16a419c50231c0cfe95efff4eb5f73e9ce7bd3799d7d61e7a065e1d67f3c9e9a",
+    "game/graphics/opengl_renderer/shaders/etie_base.frag": "9fde7abda1c4e5fa8e2720d90ff6cf06be837f69c3f7b32fff70fa46fe1dda69",
+    "out/jak3/fr3/wasstada.fr3": "506ada3c667595164b8ec2fc03ceb5649915b4b54328abaa5074cebb55154dd9",
+    "out/jak3/fr3/wasstadb.fr3": "76b59797ae715630acea2da52b9b4c04433dbc5d45c0c163fe7adac5f9e3d6b8",
+    "out/jak3/iso/WASSTADA.DGO": "daa87d0734a5436527249827cb8de302a49b9f4f8b87784cebacf13b445aea5b",
+    "out/jak3/fr3/game.fr3": "3a066c69d3dc7f20e6f17ce02b7afb0350cb965084647251884057260061da0f",
+    "out/jak3/fr3/waspala.fr3": "205adcdf17dcb12f95440120f92835b11bf878502714293866428202cf1b285c",
+    "out/jak3/iso/WASPALA.DGO": "0cc2413c8d266a2644400a56a5a08933179a93f4eddae2cfaa05bc52c8a5c79e"
+  },
+  "remaster-v1": {
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "1b9a62b9de8b7b99ec5145aa6c82d81039c27faeba82a9ca9263b75600654b3c",
+    "game/graphics/opengl_renderer/shaders/tie_wind.vert": "09a3ad03ec26b002725ebf306a94a992b341ad2d4f3ecb8728333a10ec026f48",
+    "game/graphics/opengl_renderer/shaders/tie_wind.frag": "3f4582f1b67f52c3a9327347324a6933a6b480107a72f9b9c2764d2ec320a5df",
+    "game/graphics/opengl_renderer/shaders/etie_base.vert": "16a419c50231c0cfe95efff4eb5f73e9ce7bd3799d7d61e7a065e1d67f3c9e9a",
+    "game/graphics/opengl_renderer/shaders/etie_base.frag": "9fde7abda1c4e5fa8e2720d90ff6cf06be837f69c3f7b32fff70fa46fe1dda69",
+    "out/jak3/fr3/wasstada.fr3": "8ae3e3eced3de8643aeafafa86400af3611f353a3ecf4479dd5928128870cd2b",
+    "out/jak3/fr3/wasstadb.fr3": "40acb458edfa04ad4746268595012410a1345df454e1c8b55adaa003d908333c",
+    "out/jak3/iso/WASSTADA.DGO": "892d8191e25ee10ca762cbe12e82be7818cce1ad560bafdf3834f80814cb102f",
+    "out/jak3/fr3/game.fr3": "55d58e54f61f10915762cbb64883e82eceaa79eb301985e201007363b88d5f9e",
+    "out/jak3/fr3/waspala.fr3": "51d62e1aaf7d8bb1b6416fff53d65009b67a41117a38f0b02c9bec7e58169798",
+    "out/jak3/iso/WASPALA.DGO": "3032aba716fb1e2ec7bbf9154a974050b4f980117a9ecae133800ffd6cbc7ef1"
+  }
+}

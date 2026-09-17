@@ -1,0 +1,48 @@
+{
+  "checked_utc": "2026-09-16T14:39:20.867114+00:00",
+  "live_pid": 31304,
+  "packaged_and_deployed_files_matching": 30,
+  "changed_files_since_before_objects": [
+    "game/graphics/opengl_renderer/shaders/tfrag3.vert",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag",
+    "game/graphics/opengl_renderer/shaders/tie_wind.vert",
+    "game/graphics/opengl_renderer/shaders/tie_wind.frag",
+    "game/graphics/opengl_renderer/shaders/etie_base.vert",
+    "game/graphics/opengl_renderer/shaders/etie_base.frag",
+    "out/jak3/fr3/waspala.fr3",
+    "game/graphics/opengl_renderer/shaders/shrub.frag"
+  ],
+  "protected_files_identical": 22,
+  "level_sha256": "be4dba2277ab52cdc7db97877f4a98a3348cd81bf62c6d8e1ad7715f8573ed00",
+  "runtime_sha256": "5272fae0329450720fd22d1f53285a69aa31b7230ff5fd01d95e56d9e8e1e00a",
+  "experimental_rock_excluded": true,
+  "captures": {
+    "brazier": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-validated-brazier.png",
+      "sha256": "a05ae7620167ca5345ea8023a6107c33dcf3970684f9c6fa784ed70540ded1c8"
+    },
+    "throne": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-validated-throne.png",
+      "sha256": "c06ef3be3e250efce448f0204f76167e1101cafe7681a8928347be3c0904fa27"
+    },
+    "palms": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-validated-palms.png",
+      "sha256": "f60e6df174eb08b5bdb5c417bdc515714b025e41323159a67147b48fbaabf9af"
+    },
+    "rock-restored": {
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\objects-validated-rock-restored.png",
+      "sha256": "7ce90119ba85c2a264a5d26de70e52a1d8bb250569e62a6aaa4380713ceab3c9"
+    }
+  },
+  "fatal_shader_or_assertion_errors": [],
+  "known_log_limitations": [
+    "The native screenshot path reports GL_INVALID_OPERATION 0x502 while producing valid PNGs.",
+    "No complete frame-time benchmark or full-room collision audit was performed."
+  ],
+  "visual_review": {
+    "brazier": "Continuous bowl and lip; raised ornaments follow the curved body; flame base meets the fuel surface.",
+    "throne": "Frame, cushion and rivets load with their original motifs and proportions.",
+    "palms": "Rounded planter and curved fronds load; hanging plants are outside this lot.",
+    "room_complete": false
+  }
+}

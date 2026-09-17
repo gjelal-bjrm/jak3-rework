@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "native_vertices": 19530,
+  "blades": 105,
+  "affected_vertices": 19530,
+  "unanchored_components": 0,
+  "max_blade_height_m": 2.2775593,
+  "root_vertices": 1890,
+  "max_root_y_error_m": 0.0058317184,
+  "mesh_load_preparation_ms": 1.0439,
+  "palace_and_cactus_excluded": true,
+  "native_visual_validation": false
+}

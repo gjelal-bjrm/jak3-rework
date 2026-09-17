@@ -1,0 +1,67 @@
+;; REPL-only diagnostic. Never add this file to GAME.CGO.
+;; Call (grass-contact-qa-place), wait for ground contact, then capture rest.
+;; Call (grass-contact-qa-pass) for a 3-second crossing and 2-second recovery.
+;; (set! *grass-contact-qa-active* #f) cancels the process on its next frame.
+;; This is controlled translation, not proof of a player-driven walk animation.
+
+(define *grass-contact-qa-active* #f)
+
+(defun grass-contact-qa-shot ((name string))
+  (copyn-charp<-string (-> *screen-shot-settings* name) name 244)
+  (pc-screen-shot)
+  (none))
+
+(defun grass-contact-qa-trace ((phase symbol))
+  (when (and *target* (-> *target* control))
+    (format #t "GRASS-QA ~a control=(~f ~f ~f)m groundY=~fm on-ground=~a~%"
+      phase
+      (/ (-> *target* control trans x) 4096.0)
+      (/ (-> *target* control trans y) 4096.0)
+      (/ (-> *target* control trans z) 4096.0)
+      (/ (-> *target* control ground-touch-point y) 4096.0)
+      (logtest? (-> *target* control status) (collide-status on-ground)))
+    (format #t "GRASS-QA root=(~f ~f ~f)m~%"
+      (/ (-> *target* root trans x) 4096.0)
+      (/ (-> *target* root trans y) 4096.0)
+      (/ (-> *target* root trans z) 4096.0)))
+  (none))
+
+(defun grass-contact-qa-place ()
+  (when (and *target* (-> *target* control))
+    (let ((destination (new-stack-vector0)))
+      (set-vector! destination (meters 2262.4) (meters 18.0) (meters 9.4635) 1.0)
+      (move-to-point! (-> *target* control) destination)
+      (vector-copy! (-> *target* root trans) destination)
+      (vector-copy! (-> *target* control transv) *zero-vector*))
+    (grass-contact-qa-trace 'placed))
+  (none))
+
+(defun grass-contact-qa-pass ()
+  (when (and *target* (not *grass-contact-qa-active*))
+    (set! *grass-contact-qa-active* #t)
+    (process-spawn-function process
+      (lambda :behavior process ()
+        (let ((destination (new-stack-vector0)))
+          (grass-contact-qa-trace 'start)
+          (dotimes (step 180)
+            (when (or (not *target*) (not *grass-contact-qa-active*))
+              (set! *grass-contact-qa-active* #f)
+              (deactivate self))
+            ;; Let normal physics determine Y and ground contact each frame.
+            (vector-copy! destination (-> *target* control trans))
+            (set! (-> destination x) (meters (+ 2262.4 (* 4.4 (/ (the float step) 179.0)))))
+            (set! (-> destination z) (meters 9.4635))
+            (move-to-point! (-> *target* control) destination)
+            (vector-copy! (-> *target* root trans) destination)
+            (when (zero? (logand step 31)) (grass-contact-qa-trace 'crossing))
+            (when (or (= step 0) (= step 45) (= step 90) (= step 135) (= step 179))
+              (grass-contact-qa-shot (the-as string (format #f "grass-r4-pass-~D" step))))
+            (suspend))
+          (grass-contact-qa-trace 'left)
+          (suspend-for (seconds 2.0))
+          (grass-contact-qa-shot "grass-r4-recovered")
+          (grass-contact-qa-trace 'recovered))
+        (set! *grass-contact-qa-active* #f)
+        (deactivate self))
+      :from *pc-dead-pool* :to *pc-pool* :name "grass-contact-native-qa"))
+  (none))

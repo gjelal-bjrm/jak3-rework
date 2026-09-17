@@ -1,0 +1,24 @@
+[
+  {
+    "file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\raw_obj\\wlander-male-ag.go",
+    "sha256": "4efd1f572af60d3a49ac9a82231f0d920ef2f5356e9de1aca0fa7c30038275d5",
+    "relevant_strings": [
+      "@1#effect-name",
+      "Lball",
+      "Rball",
+      "was-fs-hard"
+    ],
+    "effect_joint_present": false
+  },
+  {
+    "file": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\raw_obj\\wlander-female-ag.go",
+    "sha256": "967b11b102b90f357d81eefd6dbcb810292b994862c187f8b249c6aab60c7400",
+    "relevant_strings": [
+      "@1#effect-name",
+      "Lball",
+      "Rball",
+      "wasf-fs"
+    ],
+    "effect_joint_present": false
+  }
+]

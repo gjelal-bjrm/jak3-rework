@@ -1,0 +1,132 @@
+{
+  "date": "2026-09-16",
+  "checks": {
+    "original": true,
+    "original-preserved": true,
+    "remaster-v1": true,
+    "remaster-v1-preserved": true,
+    "remaster": true,
+    "active-data-matches-v3": true,
+    "runtime": true,
+    "basin-material-activated": true,
+    "real-jak-contact-recorded": true,
+    "landing-response-recorded": true,
+    "four-basin-shore-field-loaded": true,
+    "shaders-compiled": true,
+    "official-comparison-booted": true,
+    "original-routes-preserved": true,
+    "remaster-routes": true,
+    "active-core-is-v3-palace": true,
+    "lava-captures": true,
+    "fountains-captures": true,
+    "contact-captures": true,
+    "landing-captures": true,
+    "shore-captures": true
+  },
+  "all_checks_pass": true,
+  "runtime": {
+    "base": "OpenGOAL v0.3.6",
+    "revision": "Prototype liquides V3",
+    "runtime": "runtime/liquids-v3/gk.exe",
+    "sha256": "aeb4fa981f9f5bff7427681932ea112a26c092daef913b02e507a6d2cca9351e",
+    "routes": {
+      "arena": "bfb6b594b9d05602adddfb4b6a7605ea8eb31f1b49f58f10edd9bfefc70d4ae3",
+      "palace": "c1bd13eacaf76034bad52df8e0c87dd80d5251853d101ed28759834765b33334"
+    }
+  },
+  "files_per_variant": 28,
+  "motion": {
+    "lava": {
+      "frames": 12,
+      "region": [
+        250,
+        580,
+        430,
+        700
+      ],
+      "mean_abs_rgb_change": [
+        20.137870370370372,
+        12.201481481481482,
+        3.2819444444444446
+      ],
+      "note": "Native frames, same scene camera."
+    },
+    "fountains": {
+      "frames": 12,
+      "region": [
+        1420,
+        540,
+        1530,
+        770
+      ],
+      "mean_abs_rgb_change": [
+        8.551699604743083,
+        9.639169960474309,
+        9.257351778656126
+      ],
+      "note": "Native frames, same scene camera."
+    },
+    "contact": {
+      "frames": 12,
+      "region": [
+        870,
+        770,
+        1060,
+        990
+      ],
+      "mean_abs_rgb_change": [
+        23.41688995215311,
+        13.627942583732057,
+        8.724234449760765
+      ],
+      "note": "Camera/Jak may move during capture; not a fluid-only motion metric."
+    },
+    "landing": {
+      "frames": 12,
+      "region": [
+        870,
+        770,
+        1100,
+        990
+      ],
+      "mean_abs_rgb_change": [
+        19.000592885375493,
+        11.534268774703557,
+        7.7437549407114625
+      ],
+      "note": "Camera/Jak may move during capture; not a fluid-only motion metric."
+    },
+    "shore": {
+      "frames": 16,
+      "region": [
+        180,
+        830,
+        380,
+        1060
+      ],
+      "mean_abs_rgb_change": [
+        1.9394782608695653,
+        1.9830217391304348,
+        1.9358260869565218
+      ],
+      "note": "Native frames, same scene camera."
+    }
+  },
+  "routes": {
+    "arena": "28f288666a458ddb518c1b84551a09b0dc560829e504194e932d9fc99fff4d1f",
+    "palace": "f722cfe605581016b4174b212824f4c8a7dc97e7f858689bc3c4dace89a60759"
+  },
+  "remaster_routes": {
+    "arena": "bfb6b594b9d05602adddfb4b6a7605ea8eb31f1b49f58f10edd9bfefc70d4ae3",
+    "palace": "c1bd13eacaf76034bad52df8e0c87dd80d5251853d101ed28759834765b33334"
+  },
+  "scope": "Palace basins/fountains and starting arena lava only.",
+  "shore_correction": "Removed permanent bank foam and bank mesh oscillation. Subtle irregular normal disturbance uses real rock contours. Removed vertical bank-film branch that interrupted waterfalls at basin heights. Native shore and wider fountain views inspected.",
+  "interaction_test": "Jak moved through genuine water collision and landed under game gravity; native contact and landing logs plus screenshots recorded. Movement/initial fall position were scripted through GOAL. Original particles, ripple meshes and wake trail are suppressed for Jak in the palace volumes.",
+  "limitations": [
+    "Deep-water swimming not exercised in these shallow palace basins.",
+    "Screen-space reflections lack off-screen scene geometry.",
+    "No full-game playthrough or formal performance benchmark.",
+    "Native screenshot buffer warning also occurs on the official comparison."
+  ]
+}

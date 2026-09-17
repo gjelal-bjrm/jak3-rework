@@ -1,0 +1,87 @@
+{
+  "status": "authored",
+  "source_fr3": {
+    "bytes": 240115429,
+    "sha256": "5dc29623b1613a818d766a98bc0a4dfb247f68eaaf66e399065920f286257b74"
+  },
+  "author_sha256": "63f9bb866978e732097bd8948ae10190d94a00861a1ec8bfd0c8b40282bad46e",
+  "historical_author": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\author_buildings.py",
+  "historical_author_sha256": "dede462e69a64c191bb59fb79dca52e4ef3cff6aa25a05d9e8867d6fbde17a7b",
+  "pre_opening_source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-native.json",
+  "pre_opening_source_sha256": "a815256effdb37cdef1a42a334a359d2e5de87aee669ea8ad0caec6c51bceb0d",
+  "historical_patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\wascitya-patch.json",
+  "historical_patch_sha256": "d3f9b64e2be8fc53d11bb83b64d36d3f5f5a1e028a751e26f4084b72cf19ba85",
+  "removed_window_id": "wca-house1-east-room",
+  "groups": [
+    {
+      "lod": 0,
+      "tree": 1,
+      "group": 1,
+      "removed": 1573,
+      "added": 73,
+      "removed_by_draw": {
+        "9": 1563,
+        "12": 10
+      },
+      "added_by_draw": {
+        "9": 71,
+        "12": 2
+      }
+    },
+    {
+      "lod": 1,
+      "tree": 1,
+      "group": 1,
+      "removed": 1573,
+      "added": 73,
+      "removed_by_draw": {
+        "9": 1563,
+        "12": 10
+      },
+      "added_by_draw": {
+        "9": 71,
+        "12": 2
+      }
+    },
+    {
+      "lod": 2,
+      "tree": 1,
+      "group": 1,
+      "removed": 1571,
+      "added": 71,
+      "removed_by_draw": {
+        "9": 1561,
+        "12": 10
+      },
+      "added_by_draw": {
+        "9": 69,
+        "12": 2
+      }
+    },
+    {
+      "lod": 3,
+      "tree": 1,
+      "group": 1,
+      "removed": 1533,
+      "added": 49,
+      "removed_by_draw": {
+        "9": 1523,
+        "11": 10
+      },
+      "added_by_draw": {
+        "9": 47,
+        "11": 2
+      }
+    }
+  ],
+  "checks": {
+    "LOD0 exact historical replay": true,
+    "LOD1 exact historical replay": true,
+    "LOD2 exact historical replay": true,
+    "LOD3 exact historical replay": true
+  },
+  "faces_removed": 6250,
+  "faces_added": 266,
+  "expected_house": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\expected-house-without-east.json",
+  "expected_house_sha256": "af5ebdf028a7a5e59d492196c8802459ebe6eea84a0cd90468ace76cdd2f8b9c"
+}

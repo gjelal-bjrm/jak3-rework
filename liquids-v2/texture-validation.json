@@ -1,0 +1,86 @@
+[
+  {
+    "file": "wasstada-alpha/wstd-lava-base.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      128,
+      128
+    ],
+    "sha256": "7f0bf9ebe56666f5e66bddc76ccde2ff3375c48f499687f123467615e6d838cf"
+  },
+  {
+    "file": "waspala-water/waspala-water.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      47,
+      67
+    ],
+    "sha256": "425bc4efcbf265d2e3d7a76d6d2b7f21fabf67bdc24840a7ef1b15002964a2f0"
+  },
+  {
+    "file": "waspala-water/waspala-waterfall.png",
+    "size": [
+      64,
+      64
+    ],
+    "alpha_extrema": [
+      0,
+      77
+    ],
+    "sha256": "8c65f1ab218d0aa3f3ce5267402aa39565f74802c6da6b798beb7d621edc5b66"
+  },
+  {
+    "file": "wasstada-sprite/lava-drop-01.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      0,
+      128
+    ],
+    "sha256": "b16a20d8272c0a8dd34dca24505ac15e28557df506efbaf8c4576db8b980e9eb"
+  },
+  {
+    "file": "wasstada-sprite/lava-drop-02.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      0,
+      128
+    ],
+    "sha256": "6842ccbdd5bf6bb3c763802e8764e951c699249a9308995bfe36439f91a928e0"
+  },
+  {
+    "file": "wasstada-sprite/lava-drop-03.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      0,
+      128
+    ],
+    "sha256": "e4cbb0287848863e1f012d238622705b59ab98f588d95950083509227044b114"
+  },
+  {
+    "file": "wasstada-sprite/lava-drop-04.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_extrema": [
+      0,
+      128
+    ],
+    "sha256": "95d3b879fb44a37579d555ec1a2e4d5ffcd87091e40e382ef9204427ab0ea926"
+  }
+]

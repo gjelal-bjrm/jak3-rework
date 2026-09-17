@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "applied": true,
+  "checks": {
+    "roots_fixed": true,
+    "outside_radius_unchanged": true,
+    "other_floor_unchanged": true,
+    "duplicates_do_not_amplify": true,
+    "smooth_monotonic_recovery": true,
+    "zero_after_one_second": true,
+    "sample_displacement_by_age_m": [
+      0.2617614489894796,
+      0.2613957101357917,
+      0.22401504788386264,
+      0.10541884606299422,
+      0.00860562008677502,
+      0.0
+    ],
+    "max_displacement_m": 0.29120439557122074,
+    "native_visual_validation": false
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "key": "waspala-cliff-rock-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-01.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-01.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Natural eroded sandstone boulder surface. Maintain original warm muted ochre sandstone palette. Reinterpret the original big dark orthogonal joints as shallow irregular weathered rock folds with soft chipped edges. NO rectangular block grid, masonry, slabs, bricks, paving, mortar, cut stone or tiled cell pattern. Detail should be immediately legible: sedimentary undulations, wind-abraded ridges, small mineral pores, warm quartz grains. Continuous organic stone. Not photogrammetry-grey, not over-sharpened noise. Broad softly modelled forms remain stylized.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9563f8d5-486e-4f61-b1d4-b5fdc9ec5808.png",
+    "status": "generated"
+  },
+  {
+    "key": "waspala-cliff-rock-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-02.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Natural ochre sandstone boulder transition texture. TOP HALF soft eroded granular sandstone without cracks, LOWER HALF shallow irregular natural rock folds and erosion. Preserve exactly top-smooth/bottom-folded transition and muted original palette. NO rectangular block grid, masonry, slabs, bricks, paving, cut stone or tiled cell pattern. Visibly refined rounded weathered strata, wind-scoured mineral grain, organic shallow fissures. Continuous rock, faithful stylized animated-film realism.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-04456d9c-e9d6-4c07-aa99-8dd79f649163.png",
+    "status": "generated"
+  },
+  {
+    "key": "waspala-cliff-rock-top",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-top.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-top.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Continuous natural gently worn sandstone boulder surface. Keep broad warm grey-ochre cloudy colour patches of reference. Introduce highly resolved wind-worn sandstone grain, sparse tiny irregular pores, soft erosion ripples, fine quartz flecks, shallow micro pits. NO straight cracks, joints, masonry, paving, slabs, borders or cobbles. Broad painted-style shapes with contemporary animated-feature material richness, readable fine relief rather than random noise.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-c8a50d81-0615-4ebd-aec7-1044ecc915f1.png",
+    "status": "generated"
+  },
+  {
+    "key": "waspala-palmplant-leaf-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmplant-leaf-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmplant-leaf-02.png",
+    "tool": "built-in ImageGen",
+    "alpha": "generated_cutout",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: A high-resolution CUTOUT palm leaf fan with the exact same single fan composition and frond origins as reference: all thin pointed blades radiate from TOP RIGHT, fan extends towards bottom and left. Replace coarse flat green strips with dimensional-looking organic olive-green and golden-green blades, visible central ribs, delicate veins, slight width irregularity and gently curling tips, sun-worn tips. Keep silhouette footprint and stylized Jak desert vegetation identity, no pot or stem elsewhere. GENUINELY TRANSPARENT BACKGROUND between and outside each blade. No painted background colour. Crisp antialiased alpha, no white fringe. Every leaf large enough to read in-game. Soft neutral diffuse albedo.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-8e4f0c62-e927-475d-a0ef-7bcfa05380f0.png",
+    "status": "generated"
+  },
+  {
+    "key": "waspala-shrub-plant",
+    "page": "waspala-shrub",
+    "file": "waspala-shrub-plant.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-shrub/waspala-shrub-plant.png",
+    "tool": "built-in ImageGen",
+    "alpha": "generated_cutout",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: High-resolution CUTOUT texture of the SAME small ribbon-leaf desert shrub spray. Preserve reference overall placement, large soft green pointed leaves clustered along the same central flow; recognizable Jak 3 stylized desert plant. Replace muddy blurry leaves with sharply legible olive/teal green leaves with delicate longitudinal veins, clear rib, slightly rolled edges, natural warm tips, varied overlapping orientation. Crisp organic pointed silhouettes. GENUINELY TRANSPARENT BACKGROUND in all gaps and outside leaves. No green painted background, no white halo, no pot, soil, new flowers. NOT dense noise: clear generous elegant leaf shapes.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-1d238e08-ebd1-43ec-838a-7da80780d1ac.png",
+    "status": "generated"
+  }
+]

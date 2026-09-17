@@ -1,0 +1,35 @@
+{
+  "tool": "image_gen.imagegen (built-in mode)",
+  "skill": "C:/Users/Gjelal/.codex/skills/.system/imagegen/SKILL.md",
+  "reference": "wascity-awning-b-original.png",
+  "generated_source": "C:/Users/Gjelal/.codex/generated_images/01a0aaeb-aedf-7033-8fa1-5f0bc1693e12/exec-b3c9b9ee-af5f-4a45-a547-9026fd1a9a69.png",
+  "project_asset": "awning-canvas-hd.png",
+  "requested_dimensions": [
+    2048,
+    2048
+  ],
+  "actual_dimensions": [
+    1254,
+    1254
+  ],
+  "pixel_mode": "RGB",
+  "processing": "Generated image copied unchanged. Original olive palette approximately compensated by vertex colours [1.0755,1.1583,1.2731] in the Blender author; no image resizing or recolouring.",
+  "prompt": "Create a 2048x2048 high-definition diffuse texture for a faithful Jak 3 Spargus market awning remaster. The supplied image is the original awning texture, a strict palette and weathering reference. Rebuild it as tactile coarse handwoven canvas, preserving its muted dusty olive-khaki green, worn lighter ochre yarn, subtle irregular patched colour distribution and stylized desert-world character. Flat evenly lit square texture viewed perfectly perpendicular, fills the image edge to edge, seamless repeat edges. Clearly resolved woven fibers and soft irregular abrasion, a few very subtle darker repaired areas, no large stripes or new symbols. Opaque canvas without holes because tears and frayed edges will be actual model geometry. Do not depict an awning object, folds, hanging cloth, perspective, shadows, highlights, border, text, watermark, canvas frame, metal, or wood. This must be a neutral albedo texture that will receive its own lighting in a 3D game. Keep the original desaturated earthy green-gold palette; do not shift to beige, bright green, blue or grey. Render a convincing high quality remaster texture, realistic fiber detail with the original cartoon-adventure identity.",
+  "sha256": {
+    "wascity-awning-b-original.png": "4dbd3270063a46a83ff1722da74305e5f2f043a92c0bf586dcaa2bdff5b4a9ac",
+    "awning-canvas-hd.png": "30fbce2207c04440d03e736059cd9d71557f8862667d0557bb10505786d99d39",
+    "author_awning.py": "2eab8630f01f73d24fcc5005c3295116df15cdc0463675874d9680dcf23dd901"
+  },
+  "mean_rgb": {
+    "wascity-awning-b-original.png": [
+      116.154541015625,
+      113.326416015625,
+      60.5068359375
+    ],
+    "awning-canvas-hd.png": [
+      108.0011739149236,
+      97.83461535526507,
+      47.52638955660864
+    ]
+  }
+}

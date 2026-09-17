@@ -1,0 +1,77 @@
+{
+  "status": "measured",
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "resolution": [
+    1920,
+    1080
+  ],
+  "msaa_samples": 1,
+  "timer": "GL_TIME_ELAPSED uint64 nanoseconds",
+  "submission": "Native C++ loop, identical material/state/draw count per version; Python outside timed region",
+  "scope": "Rooms only, actual city interior shaders and original/AO room binaries. No actors, exterior geometry, water or game simulation.",
+  "results": [
+    {
+      "rooms_visible": 2,
+      "warmup_frames_per_variant": 40,
+      "timed_frames_per_variant": 60,
+      "before": {
+        "median_ms": 0.031744,
+        "p95_ms": 0.032768,
+        "min_ms": 0.03072,
+        "max_ms": 0.032768,
+        "vertices": 103920,
+        "draws": 21
+      },
+      "ao": {
+        "median_ms": 0.062976,
+        "p95_ms": 0.063488,
+        "min_ms": 0.06144,
+        "max_ms": 0.064512,
+        "vertices": 480576,
+        "draws": 21
+      },
+      "median_added_ms": 0.031232000000000003
+    },
+    {
+      "rooms_visible": 5,
+      "warmup_frames_per_variant": 40,
+      "timed_frames_per_variant": 60,
+      "before": {
+        "median_ms": 0.03072,
+        "p95_ms": 0.032768,
+        "min_ms": 0.027648,
+        "max_ms": 0.032768,
+        "vertices": 262980,
+        "draws": 53
+      },
+      "ao": {
+        "median_ms": 0.135168,
+        "p95_ms": 0.136192,
+        "min_ms": 0.125952,
+        "max_ms": 0.144384,
+        "vertices": 1205436,
+        "draws": 53
+      },
+      "median_added_ms": 0.10444800000000001
+    }
+  ],
+  "asset_sha256": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\lounge.bin": "7048addf7e787d7ffeec2578902b9ebd359de7b7e0d2b4e3b68638ab559c5ef0",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\no-ao\\conversation.bin": "7c89d0131835c90f7d8baaf5b70ce50acf4c78f0aebac862914e92eb511dcb21",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\lounge.bin": "062064c1a78a7a879e23e569ebb72c54a3c670a18d3d7536e2e400dfc2d5c2f2",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\conversation.bin": "4c86f627970e5ebe4d2b11f4f7df65173b1d1a67a3461c5449ba1cfd6bf97027"
+  },
+  "shader_sha256": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.vert": "f24335e241085941788f017f6bab844ef3b9695229daeaa502e448295ba53316",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\city_interior.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1"
+  },
+  "limitations": [
+    "Offscreen synthetic camera; rooms arranged side by side, fully visible.",
+    "Not a whole-game frame-time or FPS benchmark.",
+    "No GPU scheduling/clock lock; median and p95 reported, versions interleaved.",
+    "Texture upload, level loading and CPU submission costs excluded; MSAA disabled."
+  ]
+}

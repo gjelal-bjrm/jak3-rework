@@ -1,0 +1,45 @@
+{
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\decompiler_out\\jak3\\levels\\waspala\\waspala-background.glb",
+  "resolution": [
+    1024,
+    1024
+  ],
+  "bounds": [
+    [
+      1944.0,
+      -524.0
+    ],
+    [
+      2072.0,
+      -396.0
+    ]
+  ],
+  "water_levels": [
+    240.629257,
+    241.491302,
+    242.372253,
+    243.497742
+  ],
+  "segments_per_level": [
+    7586,
+    6874,
+    5487,
+    2677
+  ],
+  "materials": {
+    "waspala-pool-floor": 224,
+    "waspala-step-02": 1098,
+    "waspala-step-top": 34,
+    "waspala-stage-tile": 184,
+    "waspala-step-01": 1460,
+    "wascity-outerwall-rock": 24,
+    "waspala-column-01": 442,
+    "waspala-column-02": 84,
+    "waspala-cliff-rock-top": 1600,
+    "waspala-cliff-rock-02": 16861,
+    "waspala-column-plate": 288,
+    "waspala-cliff-rock-01": 187,
+    "waspala-small-rocks": 138
+  },
+  "seconds": 13.988183736801147
+}

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "actors": [
+    {
+      "actor": "sitting-male",
+      "checks": {
+        "source_native_glb_hash": true,
+        "selected_skin_source_hash": true,
+        "binary_hash": true,
+        "complete_float32_frames": true,
+        "all_values_finite": true,
+        "normals_unit": true,
+        "constant_uv_and_colour": true,
+        "texture_bytes_preserved": true,
+        "draws_cover_whole_frame": true,
+        "feet_at_floor_all_frames": true,
+        "below_2_1_metres": true,
+        "normalised_material_response": true,
+        "not_t_pose": true,
+        "both_feet_remain_planted": true,
+        "visible_small_pose_motion": true,
+        "no_new_zero_area_triangles": true
+      },
+      "all_passed": true,
+      "max_pose_change_m": [
+        0.01815056205811241,
+        0.014591151136349805,
+        0.028835405766682767
+      ],
+      "new_degenerate_triangles": 0,
+      "source_zero_area_triangles": 1,
+      "native_game_validation": false
+    },
+    {
+      "actor": "conversing-male",
+      "checks": {
+        "source_native_glb_hash": true,
+        "selected_skin_source_hash": true,
+        "binary_hash": true,
+        "complete_float32_frames": true,
+        "all_values_finite": true,
+        "normals_unit": true,
+        "constant_uv_and_colour": true,
+        "texture_bytes_preserved": true,
+        "draws_cover_whole_frame": true,
+        "feet_at_floor_all_frames": true,
+        "below_2_1_metres": true,
+        "normalised_material_response": true,
+        "not_t_pose": true,
+        "both_feet_remain_planted": true,
+        "visible_small_pose_motion": true,
+        "no_new_zero_area_triangles": true
+      },
+      "all_passed": true,
+      "max_pose_change_m": [
+        0.049380421300199644,
+        0.035494975370224786,
+        0.049689795090645625
+      ],
+      "new_degenerate_triangles": 0,
+      "source_zero_area_triangles": 1,
+      "native_game_validation": false
+    },
+    {
+      "actor": "conversing-female",
+      "checks": {
+        "source_native_glb_hash": true,
+        "selected_skin_source_hash": true,
+        "binary_hash": true,
+        "complete_float32_frames": true,
+        "all_values_finite": true,
+        "normals_unit": true,
+        "constant_uv_and_colour": true,
+        "texture_bytes_preserved": true,
+        "draws_cover_whole_frame": true,
+        "feet_at_floor_all_frames": true,
+        "below_2_1_metres": true,
+        "normalised_material_response": true,
+        "not_t_pose": true,
+        "both_feet_remain_planted": true,
+        "visible_small_pose_motion": true,
+        "no_new_zero_area_triangles": true
+      },
+      "all_passed": true,
+      "max_pose_change_m": [
+        0.04818414587085319,
+        0.03025531861448176,
+        0.041609802584416856
+      ],
+      "new_degenerate_triangles": 0,
+      "source_zero_area_triangles": 0,
+      "native_game_validation": false
+    }
+  ],
+  "method": "Independent float32 binary parsing; source/material hashes; draw coverage; unit normals; planted feet; bounded nonzero pose motion",
+  "native_game_validation": false
+}

@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "checks": {
+    "source_pinned": true,
+    "patch_pinned": true,
+    "reviewed_author_pinned": true,
+    "all_and_only_remaining_palms_removed": true,
+    "removal_positions_exact": true,
+    "preserve_bvh_requested": true,
+    "all_added_groups_selected": true,
+    "finite_vertex_values": true,
+    "unit_normals": true,
+    "native_palette_weights": true,
+    "triangles_nondegenerate": true,
+    "dedicated_textures_exactly_scoped": true,
+    "all_416_component_lods_rebuilt": true,
+    "market_palms_untouched": true,
+    "decreasing_lods": true,
+    "lod0_budget": true,
+    "anchors_matrices_wind_unchanged": true,
+    "coincident_wind_silhouettes_equal": true,
+    "coincident_trunk_silhouettes_equal": true,
+    "approved_texture_pixels_unchanged": true
+  },
+  "patch_sha256": "90a6d5ab65f35ca7bae095ad7e18adcd813d494bfbc2728457354822925ced56",
+  "triangles_by_lod": {
+    "0": 159380,
+    "1": 101192,
+    "2": 46644,
+    "3": 19474
+  },
+  "max_normal_error": 1.398852367273662e-07,
+  "max_weight_error": 2.220446049250313e-16,
+  "min_area_m2": 1.656817404950834e-05,
+  "native_visual_validation": false,
+  "live_files_written": false
+}

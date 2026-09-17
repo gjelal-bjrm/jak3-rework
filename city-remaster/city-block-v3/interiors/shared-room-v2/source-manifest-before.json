@@ -1,0 +1,21 @@
+{
+  "files": {
+    "engine-src/game/graphics/opengl_renderer/OpenGLRenderer.h": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\before\\engine-src\\game\\graphics\\opengl_renderer\\OpenGLRenderer.h",
+      "before_sha256": "84659ef1db8dd74e945583348c1403945a3e407c62555f08c2fc49cefbf5a4f8",
+      "after_sha256": "833e9572237ba5b009d9bddcb8cb76bd95154a983fe59bc0945cfcdc5d6acaa6"
+    },
+    "engine-src/game/graphics/opengl_renderer/OpenGLRenderer.cpp": {
+      "before_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\interiors\\before\\engine-src\\game\\graphics\\opengl_renderer\\OpenGLRenderer.cpp",
+      "before_sha256": "94e34ea18465f7e5c6cebc3409fd719d77e1d7147ba2a09089022372e482d465",
+      "after_sha256": "bfb9c5a3c81ca3ffbe25e9248cc57f9d257b0a22ec645bb82d56ce9463fdbfa1"
+    }
+  },
+  "new_files": {
+    "engine-src/game/graphics/opengl_renderer/CityInteriors.h": "96afef56071a608be894b8b45904f6fac4e995e963488fee75b5bc9d57517219",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_interior.vert": "f24335e241085941788f017f6bab844ef3b9695229daeaa502e448295ba53316",
+    "data/game/graphics/opengl_renderer/shaders/city_interior.vert": "f24335e241085941788f017f6bab844ef3b9695229daeaa502e448295ba53316",
+    "engine-src/game/graphics/opengl_renderer/shaders/city_interior.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1",
+    "data/game/graphics/opengl_renderer/shaders/city_interior.frag": "0ab48d5d29d201baf3488e7daac4b9275a1a147ff09d7de597fff0c7461d0fb1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+  "patch_sha256": "08e12469c97004bc122981e09b81cf93284d007adafb4b149f0ba53c3d3c5b75",
+  "r2_native_export_sha256": "77ae9fec9b2895f8dd428dfda8d97271aff375095bc2332baa85b3f6331b30db",
+  "r3_patch_sha256": "a9c23236ccdec9660ada8446c98599841009533e314fc49e4643e948aad0a250",
+  "window_anchors_sha256": "0556a31bb15906ed72b42f2709c8f8e967fd6c93f83d9722d6fd2926d11a7f13",
+  "new_window_specs_sha256": "0b9271902a2359db51dd7b6330993c69f63ac6c35ce75e3d0e65df37156a82b8",
+  "restored_house1_triangle_count": 17734,
+  "expected_house1_triangle_count": 17734,
+  "checks": {
+    "house1_exact_R2_positions_uv_and_palette": true,
+    "restoration_face_count_6250": true,
+    "removed_R3_faces_266": true,
+    "house2_geometry_unselected": true,
+    "five_historical_anchors_exact": true,
+    "four_new_anchors_exact": true,
+    "six_distinct_houses": true,
+    "restored_faces_in_original_R3_removal_order": true
+  }
+}

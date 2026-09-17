@@ -1,0 +1,58 @@
+[
+  {
+    "name": "wood-hd.png",
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGB",
+    "mean_rgb": [
+      124.226,
+      113.531,
+      80.124
+    ],
+    "sha256": "0de64a3de10b86312374b9c31ed765cc0da8e6dd381032355c2091c341db825a"
+  },
+  {
+    "name": "market-cotton-hd.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB",
+    "mean_rgb": [
+      133.472,
+      125.799,
+      92.678
+    ],
+    "sha256": "dded6bd1b395ef4e9fb1fd7ddd42966bba60a7fdc2b6da728f4574ff428258bc"
+  },
+  {
+    "name": "market-clay-hd.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB",
+    "mean_rgb": [
+      129.989,
+      78.374,
+      18.018
+    ],
+    "sha256": "302558c3676658577c7d677f701ca6a206fd5699fdc1e44a9c3b6b0fb8c370fe"
+  },
+  {
+    "name": "market-rice-hd.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGB",
+    "mean_rgb": [
+      137.665,
+      127.093,
+      112.671
+    ],
+    "sha256": "75ed75240cc0436aa585f044bd3ff229c1bac1a716df11662e9ecc2598e339ed"
+  }
+]

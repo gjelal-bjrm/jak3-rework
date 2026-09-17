@@ -1,0 +1,43 @@
+{
+  "status": "verified_original_baseline",
+  "level": "waswide",
+  "path": "out/jak3/fr3/waswide.fr3",
+  "output_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+  "bytes": 2185130,
+  "live_equals_active_original": true,
+  "snapshots": [
+    {
+      "role": "active_original",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\active-original.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+      "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\active\\jak3\\data\\out\\jak3\\fr3\\waswide.fr3",
+      "source_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "role": "live_before",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\baselines\\waswide\\before.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff",
+      "source_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\waswide.fr3",
+      "source_sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    }
+  ],
+  "variants": [
+    {
+      "variant": "original",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\waswide.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "variant": "remaster-v1",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\waswide.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    },
+    {
+      "variant": "remaster",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster\\out\\jak3\\fr3\\waswide.fr3",
+      "sha256": "76aa2abc630cd76dd6246354162f20ec5006d350d07e9599dc66d80c3186edff"
+    }
+  ],
+  "registry_updated": false,
+  "scope": "Read-only live comparison and copied baseline; no geometry or texture changes"
+}

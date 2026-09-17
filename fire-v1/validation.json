@@ -1,0 +1,103 @@
+{
+  "checks": {
+    "palace-fire-active": true,
+    "shaders-compiled": true,
+    "active-package": true,
+    "standing-braziers-fit-coal-bowls": true,
+    "all-24-sources-fitted": true,
+    "legacy-particle-2731-retired": true,
+    "legacy-particle-2732-retired": true,
+    "legacy-particle-2733-retired": true,
+    "legacy-particle-2734-retired": true,
+    "legacy-particle-2736-retired": true,
+    "legacy-particle-2737-retired": true,
+    "legacy-particle-2738-retired": true,
+    "legacy-particle-2739-retired": true,
+    "legacy-particle-2740-retired": true,
+    "legacy-particle-2741-retired": true,
+    "front-captures": true,
+    "front-size": true,
+    "front-frames-differ": true,
+    "close-captures": true,
+    "close-size": true,
+    "close-frames-differ": true,
+    "side-captures": true,
+    "side-size": true,
+    "side-frames-differ": true,
+    "coal-contact-user-sequence": true,
+    "coal-contact-side-sequence": true,
+    "coal-contact-low-sequence": true,
+    "coal-contact-above-sequence": true,
+    "gpu-timing-recorded": true
+  },
+  "all_checks_pass": true,
+  "motion": {
+    "front": {
+      "frames": 12,
+      "region": [
+        440,
+        150,
+        610,
+        460
+      ],
+      "mean_abs_rgb_change": 8.816087056523488,
+      "note": "Native game captures. Region measurements are not a simulation-accuracy metric."
+    },
+    "close": {
+      "frames": 12,
+      "region": [
+        850,
+        160,
+        1010,
+        345
+      ],
+      "mean_abs_rgb_change": 23.299531122031123,
+      "note": "Native game captures. Region measurements are not a simulation-accuracy metric."
+    },
+    "side": {
+      "frames": 12,
+      "region": [
+        680,
+        180,
+        820,
+        350
+      ],
+      "mean_abs_rgb_change": 3.7066653934300997,
+      "note": "Native game captures. Region measurements are not a simulation-accuracy metric."
+    }
+  },
+  "coal_contact_views": {
+    "user": {
+      "frames": 12,
+      "example": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\fire-bowl-user-8.png",
+      "assessment": "Inspected native capture: flame meets the coal surface; vessel occludes its underside."
+    },
+    "side": {
+      "frames": 12,
+      "example": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\fire-bowl-side-8.png",
+      "assessment": "Inspected native capture: flame meets the coal surface; vessel occludes its underside."
+    },
+    "low": {
+      "frames": 12,
+      "example": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\fire-bowl-low-8.png",
+      "assessment": "Inspected native capture: flame meets the coal surface; vessel occludes its underside."
+    },
+    "above": {
+      "frames": 12,
+      "example": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\profiles\\remaster-palace\\OpenGOAL\\jak3\\screenshots\\fire-bowl-above-8.png",
+      "assessment": "Inspected native capture: flame meets the coal surface; vessel occludes its underside."
+    }
+  },
+  "gpu_pass_measurement": "Prototype fire GPU: 12 samples, mean 3.10 ms, max 3.55 ms at 1600x900",
+  "scope": "24 fixed palace fire sources only; original placement, new world-space volumetric density and embers.",
+  "corrections": [
+    "Initial version rejected as too small; height, breadth, tongues and hot-core brightness increased.",
+    "Volume follows the eight indexed coal bowl faces, including their recessed centre and tilted rim; upper flame height is preserved."
+  ],
+  "limitations": [
+    "Local fire lighting uses visible scene depth, not full-scene shadow maps.",
+    "Water highlights approximate finite fire sources; not a planar reflection render.",
+    "GPU timings cover this fire pass in one scene, not whole-game frame rate.",
+    "Other desert fire types are not yet remastered."
+  ]
+}

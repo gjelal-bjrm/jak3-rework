@@ -1,0 +1,18 @@
+{
+  "level": "wascitya",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-single-window-r3\\staging\\wascitya.fr3",
+    "bytes": 240057606,
+    "sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604"
+  },
+  "tree_types": [
+    "tie",
+    "tfrag"
+  ],
+  "bounds_xz_m": [
+    2080,
+    2155,
+    -235,
+    -165
+  ]
+}

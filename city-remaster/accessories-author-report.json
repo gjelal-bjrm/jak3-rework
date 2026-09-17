@@ -1,0 +1,157 @@
+[
+  {
+    "control": "market-crate-lod0",
+    "source_triangles": 132,
+    "authored_triangles": 6304,
+    "vertices": 3232,
+    "materials": [
+      "market-crate-wood-hd"
+    ],
+    "bounds_blender": [
+      [
+        -1.3279304504394531,
+        -0.9025777578353882,
+        -0.7054630517959595
+      ],
+      [
+        1.3279304504394531,
+        0.9959478378295898,
+        0.7780842781066895
+      ]
+    ],
+    "joints": [
+      "align",
+      "prejoint",
+      "main"
+    ],
+    "weights": "All main, matching original source. Native armature retained.",
+    "features": "Individually fitted thick boards, worn chamfers, inset lid, corner battens, diagonal bracing, recessed wooden joinery pegs.",
+    "deployed": false,
+    "native_visual_validation": false
+  },
+  {
+    "control": "market-basket-a-lod0",
+    "source_triangles": 132,
+    "authored_triangles": 14744,
+    "vertices": 7460,
+    "materials": [
+      "market-jar-clay-hd",
+      "market-jar-fibre-cords-hd"
+    ],
+    "bounds_blender": [
+      [
+        -1.396550178527832,
+        -1.396550178527832,
+        0.0
+      ],
+      [
+        1.396550178527832,
+        1.396550178527832,
+        4.034478187561035
+      ]
+    ],
+    "joints": [
+      "align",
+      "prejoint",
+      "main"
+    ],
+    "weights": "All main, matching original source. Native armature retained.",
+    "features": "Hand-thrown curved hollow jar, thick rolled mouth, recessed foot, turning rings and a separate crossed rope cradle following the belly.",
+    "deployed": false,
+    "native_visual_validation": false
+  },
+  {
+    "control": "market-basket-b-lod0",
+    "source_triangles": 128,
+    "authored_triangles": 14664,
+    "vertices": 7663,
+    "materials": [
+      "market-reed-fibres-hd",
+      "market-rice-hd"
+    ],
+    "bounds_blender": [
+      [
+        -1.4321144819259644,
+        -1.4209260940551758,
+        -0.022376790642738342
+      ],
+      [
+        1.4209260940551758,
+        1.4097377061843872,
+        1.219534993171692
+      ]
+    ],
+    "joints": [
+      "align",
+      "prejoint",
+      "main"
+    ],
+    "weights": "All main, matching original source. Native armature retained.",
+    "features": "Round shallow basket with interleaved three-dimensional reeds, bound rim, concave woven body and individually oriented rice grains.",
+    "deployed": false,
+    "native_visual_validation": false
+  },
+  {
+    "control": "market-sack-a-lod0",
+    "source_triangles": 144,
+    "authored_triangles": 12728,
+    "vertices": 6698,
+    "materials": [
+      "market-sack-cotton-hd",
+      "market-sack-cord-hd",
+      "market-ochre-contents-hd"
+    ],
+    "bounds_blender": [
+      [
+        -1.1589372158050537,
+        -0.7395123243331909,
+        0.0
+      ],
+      [
+        1.114787220954895,
+        0.7726248502731323,
+        2.8145618438720703
+      ]
+    ],
+    "joints": [
+      "align",
+      "prejoint",
+      "main"
+    ],
+    "weights": "All main, matching original source. Native armature retained.",
+    "features": "Open sack with asymmetrically slumped shoulders, three deep curved folds converging on the seams, an inclined rolled mouth, stitched seams and recessed level ochre contents.",
+    "deployed": false,
+    "native_visual_validation": false
+  },
+  {
+    "control": "market-sack-b-lod0",
+    "source_triangles": 192,
+    "authored_triangles": 11014,
+    "vertices": 5784,
+    "materials": [
+      "market-sack-cotton-hd",
+      "market-sack-cord-hd"
+    ],
+    "bounds_blender": [
+      [
+        -1.0233912467956543,
+        -0.7675434350967407,
+        0.0
+      ],
+      [
+        1.0233912467956543,
+        0.8830876350402832,
+        2.1045546531677246
+      ]
+    ],
+    "joints": [
+      "align",
+      "prejoint",
+      "main"
+    ],
+    "weights": "All main, matching original source. Native armature retained.",
+    "features": "Soft filled sack with three deep folds converging into a leaning tied neck, asymmetric compressed belly, a slouched open cloth tail, double rope ligature, knot and stitched seam.",
+    "deployed": false,
+    "native_visual_validation": false
+  }
+]

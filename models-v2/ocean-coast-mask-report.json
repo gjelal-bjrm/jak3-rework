@@ -1,0 +1,48 @@
+{
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\goal_src\\jak3\\levels\\wascity\\wascity-ocean.gc",
+  "source_sha256": "0b92b085d528257d0e3961ec70b3d7b646cbc06afb3163a83d78d127c431a67b",
+  "header": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\ocean\\OceanCoastMask.h",
+  "header_sha256": "8a43571e2dc78111f04609c7f757f3f4d5da319a4ba7fe39f0e34d0f567f5a10",
+  "origin_xz": [
+    -256.0,
+    -2762.0
+  ],
+  "grid_size": 1536,
+  "cell_metres": 3,
+  "lookup": "Native transition / near / inverted mid-mask bit",
+  "observations": [
+    {
+      "name": "WCA reported flooded street",
+      "xz": [
+        2240.2834,
+        -40.7634
+      ],
+      "wet": false
+    },
+    {
+      "name": "native coastal breaker anchor",
+      "xz": [
+        1484.849,
+        -528.791
+      ],
+      "wet": true
+    },
+    {
+      "name": "swimming test position",
+      "xz": [
+        1647.0,
+        -430.0
+      ],
+      "wet": true
+    },
+    {
+      "name": "market raised terrain above sea level",
+      "xz": [
+        1767.073,
+        -330.502
+      ],
+      "wet": true
+    }
+  ],
+  "water_cells": 1687324
+}

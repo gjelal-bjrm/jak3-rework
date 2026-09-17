@@ -1,0 +1,821 @@
+{
+  "level": "wascityb",
+  "materials": [
+    "wascity-palm-trunk",
+    "wascity-palm-leaf-worn",
+    "wascity-palm-beard",
+    "wascity-shrub-orange-01"
+  ],
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wascityb.fr3",
+    "bytes": 36575263,
+    "sha256": "76f371e111f304863501c3ed4ddcbcbf016383a6856d09591f2a640db608115f"
+  },
+  "tree_types": [
+    "tfrag",
+    "tie",
+    "shrub",
+    "tie_wind"
+  ],
+  "label": "MarchÃ© WCB : deux palmiers complets et tous les buissons touchant le bloc",
+  "instances": [
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2467
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2475
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2476
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2477
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2478
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2479
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2480
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2481
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2482
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2486
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2487
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2488
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2491
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2492
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2496
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2497
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2499
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2500
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2501
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2502
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2503
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2504
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2505
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2506
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2507
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2508
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2509
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2510
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2511
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2512
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2513
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2514
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2523
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2524
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2525
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2526
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2527
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2528
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2529
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2530
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2531
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2532
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2533
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2534
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2535
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2536
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2537
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2538
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2539
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2540
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2541
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2542
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2543
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2544
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2545
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2546
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2553
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2554
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2590
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2595
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2596
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2613
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2614
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2615
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2616
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2617
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2618
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2623
+    },
+    {
+      "tree_type": "shrub",
+      "geom": 0,
+      "tree": 0,
+      "instance": 2624
+    },
+    {
+      "tree_type": "tie",
+      "geom": 0,
+      "tree": 1,
+      "instance": 486
+    },
+    {
+      "tree_type": "tie",
+      "geom": 0,
+      "tree": 1,
+      "instance": 487
+    },
+    {
+      "tree_type": "tie",
+      "geom": 1,
+      "tree": 1,
+      "instance": 486
+    },
+    {
+      "tree_type": "tie",
+      "geom": 1,
+      "tree": 1,
+      "instance": 487
+    },
+    {
+      "tree_type": "tie",
+      "geom": 2,
+      "tree": 1,
+      "instance": 486
+    },
+    {
+      "tree_type": "tie",
+      "geom": 2,
+      "tree": 1,
+      "instance": 487
+    },
+    {
+      "tree_type": "tie",
+      "geom": 3,
+      "tree": 1,
+      "instance": 486
+    },
+    {
+      "tree_type": "tie",
+      "geom": 3,
+      "tree": 1,
+      "instance": 487
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 0
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 1
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 2
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 3
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 4
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 5
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 45
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 46
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 47
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 48
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 49
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 50
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 51
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 0,
+      "tree": 1,
+      "instance": 52
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 0
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 1
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 2
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 3
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 4
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 5
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 45
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 46
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 47
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 48
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 49
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 50
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 51
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 1,
+      "tree": 1,
+      "instance": 52
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 0
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 1
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 2
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 3
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 4
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 5
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 45
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 46
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 47
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 48
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 49
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 50
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 51
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 2,
+      "tree": 1,
+      "instance": 52
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 0
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 1
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 2
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 3
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 4
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 5
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 45
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 46
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 47
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 48
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 49
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 50
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 51
+    },
+    {
+      "tree_type": "tie_wind",
+      "geom": 3,
+      "tree": 1,
+      "instance": 52
+    }
+  ]
+}

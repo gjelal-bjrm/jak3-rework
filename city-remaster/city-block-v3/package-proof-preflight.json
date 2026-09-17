@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "architecture_checks": 41,
+  "architecture_source_sha256": "7895a084e2ec26ccf7ff5ad220f884a089350e090e43e637f91435bb3d28f0f0",
+  "architecture_output_sha256": "a1ee034f7733fea032f0a97077d022d6420b679627ccd43250eb8b6d7e71e9ec",
+  "architecture_patch_sha256": "d3f9b64e2be8fc53d11bb83b64d36d3f5f5a1e028a751e26f4084b72cf19ba85",
+  "interiors_source_and_asset_checks": 305,
+  "exact_runtime_files": 39,
+  "unexpected_geometry_group_rejected": true,
+  "bvh_expansion_rejected": true,
+  "wrong_architecture_parent_rejected": true,
+  "unknown_asset_rejected": true,
+  "writes_to_assets": false,
+  "native_visual_validation": false
+}

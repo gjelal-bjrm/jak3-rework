@@ -1,0 +1,166 @@
+{
+  "status": "passed",
+  "sources": [
+    {
+      "level": "wascitya",
+      "export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\wascitya-surfaces.json",
+      "export_sha256": "ce0ec2b303e0b6643d7384f71c6f3be185571b03351a865c3767cd06e7294ce9",
+      "source_fr3": {
+        "bytes": 191639008,
+        "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+      }
+    },
+    {
+      "level": "wascityb",
+      "export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\sand-steps\\wascityb-surfaces.json",
+      "export_sha256": "8ec31fcdd7495fe64e8c0d61d98accbbfdf8a46ce940f2074ceea765016698f9",
+      "source_fr3": {
+        "bytes": 235009310,
+        "sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee"
+      }
+    }
+  ],
+  "allowed_texture": "wascity-ground-01",
+  "height_tolerance_m": 0.18,
+  "cell_size_m": 8.0,
+  "grid_origin_m": [
+    1376.0,
+    -760.0
+  ],
+  "grid_dimensions": [
+    146,
+    112
+  ],
+  "triangles": 72649,
+  "sand_triangles": 14613,
+  "cell_triangle_references": 131127,
+  "worst_cell_triangles": 644,
+  "mean_nonempty_cell_triangles": 8.019019080234834,
+  "table_sha256": "9a2c523ed4a154c1fa6d8324347527d7a69f042d3a090a5654b1ea30040219dd",
+  "probes": [
+    {
+      "point_m": [
+        2240.2834,
+        7.0479,
+        -40.7634
+      ],
+      "expected": true,
+      "result": true,
+      "hits": [
+        {
+          "height": 7.047568379132347,
+          "sand": true,
+          "index": 2781
+        }
+      ]
+    },
+    {
+      "point_m": [
+        2245.0,
+        7.919,
+        -41.0
+      ],
+      "expected": true,
+      "result": true,
+      "hits": [
+        {
+          "height": 7.901719192110437,
+          "sand": true,
+          "index": 2783
+        }
+      ]
+    },
+    {
+      "point_m": [
+        2239.8809407552085,
+        6.951077302296956,
+        -41.56300608317057
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2240.6678059895835,
+        6.844129721323649,
+        -41.58819071451823
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2241.14794921875,
+        7.2649868329366045,
+        -40.1561164855957
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2241.4453938802085,
+        7.22918717066447,
+        -40.64213943481445
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2241.2608235677085,
+        7.213515122731526,
+        -39.73519515991211
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2239.914306640625,
+        7.138225078582764,
+        -42.19250233968099
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2242.0179850260415,
+        7.428739070892334,
+        -40.48738479614258
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2241.2526041666665,
+        6.963635285695394,
+        -42.308929443359375
+      ],
+      "material": "wascity-cement-road",
+      "expected": false,
+      "result": false
+    },
+    {
+      "point_m": [
+        2240.2834,
+        9.0479,
+        -40.7634
+      ],
+      "expected": false,
+      "result": false
+    }
+  ],
+  "native_visual_validation": false,
+  "collision_modified": false,
+  "classification": "exact texture identity plus indexed native triangle and height; all overlapping other materials reject"
+}

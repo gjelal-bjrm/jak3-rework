@@ -1,0 +1,19 @@
+{
+  "scope": "WWD market fruit only",
+  "heights_m": {
+    "1153": 0.97,
+    "1157": 0.84,
+    "1156": 1.15,
+    "1155": 0.88,
+    "1154": 1.25
+  },
+  "unchanged": [
+    "native release impulses",
+    "omega",
+    "fruit counts",
+    "collision geometry",
+    "launcher durations"
+  ],
+  "baseline_dgo_sha256": "4c8b0bb2e4c2624aae55f3202c6a12150c7c0c392a32740981da46fc37c4b964",
+  "source_sha256": "332763583101e36d9a51a99940266beac333dec7995fc6d715f9aa1158cfefb6"
+}

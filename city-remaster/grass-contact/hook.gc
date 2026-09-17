@@ -1,0 +1,15 @@
+  ;; MARKET_GRASS_CONTACT_BEGIN: actual Jak ground position, once per normal post.
+  (#when PC_PORT
+    (when (and (= self *target*) (-> self control)
+               (logtest? (-> self control status) (collide-status on-ground))
+               (not (focus-test? self touch-water pilot indax)))
+      (let* ((inside (level-get-target-inside *level*))
+             (region (if inside
+                       (case (-> inside name) (('wascitya) 1) (('wascityb) 2) (else 0))
+                       0)))
+        (when (nonzero? region)
+          (let ((packet (new-stack-vector0)))
+            (vector-copy! packet (-> self control trans))
+            (set! (-> packet y) (-> self control ground-touch-point y))
+            (pc-remaster-grass-contact packet region))))))
+  ;; MARKET_GRASS_CONTACT_END

@@ -1,0 +1,35 @@
+{
+  "asset": "wood-hd.png",
+  "source_material": "city-slum-wood-plain",
+  "source_game_glb": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/levels/wascityb/cty-fruit-stand-lod0.glb",
+  "extracted_reference": "wood-original.png",
+  "source_reference_size": [
+    64,
+    32
+  ],
+  "source_reference_mode": "RGBA",
+  "source_reference_alpha": 128,
+  "tool": "built-in image_gen.imagegen",
+  "intent": "edit",
+  "use_case": "precise-object-edit",
+  "skill": "C:/Users/Gjelal/.codex/skills/.system/imagegen/SKILL.md",
+  "generated_source": "C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-9b19e203-84ec-47cd-b475-8423a951905a.png",
+  "final_size": [
+    1774,
+    887
+  ],
+  "final_mode": "RGB",
+  "aspect_ratio": "2:1",
+  "prompt": "Use case: precise-object-edit. Asset type: production albedo texture for the rebuilt market stall in a faithful Jak 3 remaster. Input image 1 is the original 64 x 32 city-slum-wood-plain texture extracted from the user's game, and is the EDIT TARGET / strict palette and grain-direction reference. Reconstruct this same weathered desert wood material in crisp high definition, as a wide 2:1 image, ideally 2048 x 1024 pixels. Preserve its subdued warm olive-brown / sand-grey palette (representative average RGB about 127,119,89), overall middle value, horizontally flowing broad grain and gentle irregular wood fibres. Keep the identity of the original Jak material. Add genuinely resolved fine woody fibres, natural wavering grain, shallow dry grain grooves, small worn pores and a few subtle fine splits, with richer believable surface detail and clean readable stylized-realistic art appropriate to Jak's animated world. This is only a continuous wood surface material used on a modeled object, not a photograph of a board or a scene. Fill every pixel to all four edges with the material, flat front-on orthographic crop, evenly lit diffuse albedo without directional light, cast shadows, specular highlights or baked ambient shading. Make it seamlessly tileable horizontally and vertically as far as possible: grain should continue through opposite boundaries, no framing seam. Do not add individual planks, joins, board boundaries, checker grids, masonry, tiles, hardware, nails, objects, foliage, letters, a border, a background, or perspective. Do not turn it orange, red, dark chocolate, bright yellow, bleached white or grey stone. The visual upgrade must come from more convincing high-resolution wood detail, while the original muted colour and horizontal grain remain recognizably faithful.",
+  "postprocessing": "Byte-for-byte copy of the built-in generated PNG; no pixel editing, cropping, resizing or colour changes.",
+  "validation": {
+    "visually_inspected": true,
+    "grain": "Horizontal irregular dry wood grain matching the reference's coarse flow.",
+    "palette": "Muted olive-brown/sand-grey, close to the original average RGB.",
+    "objects_or_plank_boundaries": false,
+    "tiling": "Opposite-edge continuity requested; exact pixel-perfect wrap is not guaranteed. Edge measurements in wood-image-metrics.json.",
+    "integration": "Asset only. GLB, model files, native data and runtime were not modified."
+  },
+  "created_date": "2026-09-16",
+  "additional_attempt": {"tool":"built-in image_gen.imagegen","intent":"edit","reference":"wood-hd-v1.png","generated_source":"C:/Users/Gjelal/.codex/generated_images/01a0aaec-ea24-7710-b92d-04fc27cc15cb/exec-b16049a7-f271-47b3-a52a-a1ba90abd7a6.png","prompt":"Use case: precise-object-edit. Edit target: the supplied high-resolution weathered desert wood albedo texture. Make ONLY a technical tiling correction: the LEFT and RIGHT edges must match seamlessly when this image is repeated horizontally on long wooden beams. The broad grain bands and all fine wood fibres reaching the right border must reconnect naturally at the same vertical positions on the left border, without a vertical seam, brightness step, dark stripe or join. Also improve top/bottom repetition where possible. Preserve the existing continuous wood surface, exact muted olive-brown/sand-grey palette, exposure, horizontal grain direction, material style, detailed fibres, and all the central-area features. Keep a wide exact2:1 canvas, at least1536×768 pixels; no border, no objects, no manufactured planks, no added board joints, no text, no lighting, no shadows. This is a flat production albedo tile, not a picture of an object. Do not redesign the texture or shift its colours; repair opposite-edge continuity while preserving the middle.","selected":false,"reason":"The attempted edge repair only slightly reduced the horizontal edge difference (19.179 to16.391), worsened the vertical edge difference (30.502 to36.791) and shifted the palette farther from the original. The first output remains wood-hd.png because colour fidelity is the priority.","mean_rgb":[123.331,110.878,77.23]}
+}

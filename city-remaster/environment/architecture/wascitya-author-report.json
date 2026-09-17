@@ -1,0 +1,6683 @@
+{
+  "level": "wascitya",
+  "source_export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-native.json",
+  "source_export_sha256": "a815256effdb37cdef1a42a334a359d2e5de87aee669ea8ad0caec6c51bceb0d",
+  "source_fr3": {
+    "bytes": 191639008,
+    "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c"
+  },
+  "author_sha256": "c21f91e2d149b42429e300f048fe48b19f082773c4681b13bb635d592f602d90",
+  "instances": [
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2038,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1070,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3743269443511963,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 728,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3743269443511963,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 358,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.318341463804245,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 142,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.314383327960968,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2039,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.37845414876937866,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.37845414876937866,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3269622325897217,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.32327747344970703,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2040,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784545958042145,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784545958042145,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3412914574146271,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.33756545186042786,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2041,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1070,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.374326229095459,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 728,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.374326229095459,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 358,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.320293664932251,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 142,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3163444697856903,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2042,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784542679786682,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784542679786682,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.32478347420692444,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.32111066579818726,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2043,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1322,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.36922118067741394,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 896,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.36922118067741394,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 428,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3119134306907654,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.30756330490112305,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2044,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1070,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.37432533502578735,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 728,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.37432533502578735,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 358,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3373214602470398,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 142,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3332505226135254,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2045,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784506618976593,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784506618976593,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3214881420135498,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.31284409761428833,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2046,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1322,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.36921998858451843,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 896,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.36921998858451843,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 428,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3141179382801056,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3014596104621887,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2047,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.37845101952552795,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.37845101952552795,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.340393990278244,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3366233706474304,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2048,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1070,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3743300437927246,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 728,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3743300437927246,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 358,
+          "beveled_edges": 14,
+          "coping_edges": 6,
+          "max_distance_m": 0.3074856698513031,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 142,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.30179327726364136,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 12,
+      "instance": 2049,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 28,
+          "added": 1154,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784509003162384,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 28,
+          "added": 784,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.3784509003162384,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 28,
+          "added": 378,
+          "beveled_edges": 14,
+          "coping_edges": 5,
+          "max_distance_m": 0.310870498418808,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 174,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.2964172065258026,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 14,
+      "instance": 2072,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 216,
+          "added": 2394,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547016859054565,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 216,
+          "added": 1690,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547016859054565,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 216,
+          "added": 994,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.4556477665901184,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 82,
+          "added": 390,
+          "beveled_edges": 48,
+          "coping_edges": 6,
+          "max_distance_m": 0.3101215362548828,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 14,
+      "instance": 2073,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 216,
+          "added": 2394,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547115206718445,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 216,
+          "added": 1690,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547115206718445,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 216,
+          "added": 994,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.45565661787986755,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 82,
+          "added": 390,
+          "beveled_edges": 48,
+          "coping_edges": 6,
+          "max_distance_m": 0.31011977791786194,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 14,
+      "instance": 2074,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 216,
+          "added": 2394,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547571778297424,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 216,
+          "added": 1690,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.5547571778297424,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 216,
+          "added": 994,
+          "beveled_edges": 80,
+          "coping_edges": 9,
+          "max_distance_m": 0.4556930959224701,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 82,
+          "added": 390,
+          "beveled_edges": 48,
+          "coping_edges": 6,
+          "max_distance_m": 0.31015411019325256,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 23,
+      "instance": 2318,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 176,
+          "added": 1900,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 1.109554648399353,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 176,
+          "added": 1283,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 1.109554648399353,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 176,
+          "added": 814,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 0.911422073841095,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 92,
+          "added": 293,
+          "beveled_edges": 65,
+          "coping_edges": 0,
+          "max_distance_m": 0.7249543070793152,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 23,
+      "instance": 2319,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 176,
+          "added": 1900,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 1.1093369722366333,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 176,
+          "added": 1283,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 1.1093369722366333,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 176,
+          "added": 814,
+          "beveled_edges": 94,
+          "coping_edges": 0,
+          "max_distance_m": 0.9112412929534912,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 92,
+          "added": 293,
+          "beveled_edges": 65,
+          "coping_edges": 0,
+          "max_distance_m": 0.7248463034629822,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2887,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749052882194519,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749052882194519,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079579472541809,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24138326942920685,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2888,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37488940358161926,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37488940358161926,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079448342323303,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24134722352027893,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2889,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749105930328369,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749105930328369,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30796173214912415,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24007032811641693,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2890,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.374894917011261,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.374894917011261,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079492449760437,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24101470410823822,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2891,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37491071224212646,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37491071224212646,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30796143412590027,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.23805244266986847,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2892,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3748984932899475,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3748984932899475,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079524040222168,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24068820476531982,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2893,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489578127861023,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489578127861023,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30794990062713623,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24225018918514252,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2894,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489035725593567,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489035725593567,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30794572830200195,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.24110214412212372,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2895,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3748897612094879,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3748897612094879,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079451322555542,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.23403778672218323,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2896,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749030828475952,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749030828475952,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079562485218048,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.2364949882030487,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2897,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37490415573120117,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37490415573120117,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30795690417289734,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.2409713864326477,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2898,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489965558052063,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37489965558052063,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.307952880859375,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.2411527931690216,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2899,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37490296363830566,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.37490296363830566,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.30795586109161377,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.23540718853473663,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 39,
+      "instance": 2900,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 112,
+          "added": 1873,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749030828475952,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 112,
+          "added": 1287,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3749030828475952,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 112,
+          "added": 737,
+          "beveled_edges": 50,
+          "coping_edges": 8,
+          "max_distance_m": 0.3079565167427063,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 56,
+          "added": 318,
+          "beveled_edges": 33,
+          "coping_edges": 7,
+          "max_distance_m": 0.23158754408359528,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2901,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860640227794647,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860640227794647,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860640227794647,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.3239690959453583,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2902,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 1944,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25971487164497375,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1288,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25971487164497375,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 792,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25971487164497375,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 140,
+          "beveled_edges": 20,
+          "coping_edges": 4,
+          "max_distance_m": 0.34318992495536804,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2903,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3858705163002014,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3858705163002014,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3858713209629059,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.34022071957588196,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2904,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 1944,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25725963711738586,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1288,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25725963711738586,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 792,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25725963711738586,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 140,
+          "beveled_edges": 20,
+          "coping_edges": 4,
+          "max_distance_m": 0.343103289604187,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2905,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38593077659606934,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38593077659606934,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38593077659606934,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.3430864214897156,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2906,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 1944,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.24410299956798553,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1288,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.24410299956798553,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 792,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.24410299956798553,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 140,
+          "beveled_edges": 20,
+          "coping_edges": 4,
+          "max_distance_m": 0.3260401487350464,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2907,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860478103160858,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860478103160858,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3860478103160858,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.3374935984611511,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2908,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.4937431216239929,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.4937431216239929,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.4937431216239929,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.3327252268791199,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2909,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3859544098377228,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.3859544098377228,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38595443964004517,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.32821711897850037,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2910,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 1944,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25481414794921875,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1288,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25481414794921875,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 792,
+          "beveled_edges": 72,
+          "coping_edges": 8,
+          "max_distance_m": 0.25481414794921875,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 140,
+          "beveled_edges": 20,
+          "coping_edges": 4,
+          "max_distance_m": 0.3398922085762024,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2911,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38592609763145447,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38592609763145447,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38592609763145447,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.31027862429618835,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 40,
+      "instance": 2912,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 96,
+          "added": 2232,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38597479462623596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 96,
+          "added": 1476,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38597479462623596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 96,
+          "added": 808,
+          "beveled_edges": 84,
+          "coping_edges": 8,
+          "max_distance_m": 0.38597479462623596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 28,
+          "added": 124,
+          "beveled_edges": 16,
+          "coping_edges": 4,
+          "max_distance_m": 0.33426204323768616,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2470,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9500412344932556,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9500412344932556,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7993835806846619,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5560935139656067,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2471,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 342,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.807747483253479,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 240,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.807747483253479,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7035643458366394,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.4894363284111023,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2472,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 231,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565430045127869,
+          "zero_area_slivers_removed": 2
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 157,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565430045127869,
+          "zero_area_slivers_removed": 2
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7297756671905518,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5076701045036316,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2473,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 374,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7097205519676208,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 258,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7097205519676208,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.5829843878746033,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.4055546820163727,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2474,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7380796074867249,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7380796074867249,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.644684910774231,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.4484766721725464,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2475,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9496257901191711,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9496257901191711,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7988362312316895,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5557121634483337,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2476,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.857063889503479,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.857063889503479,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7303045392036438,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5080379247665405,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2477,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 342,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8077369332313538,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 240,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8077369332313538,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7035812735557556,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.48944786190986633,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2478,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565107583999634,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565107583999634,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7298450469970703,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5077178478240967,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2479,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 342,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8076469898223877,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 240,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8076469898223877,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7035278081893921,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.4894111454486847,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2480,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 342,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8076287508010864,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 240,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8076287508010864,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7034138441085815,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.48933175206184387,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2481,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 231,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565743565559387,
+          "zero_area_slivers_removed": 2
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 157,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8565743565559387,
+          "zero_area_slivers_removed": 2
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7299244403839111,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5077733993530273,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2482,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 233,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.6526251435279846,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 159,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.6526251435279846,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5360854268074036,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.3729287087917328,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2483,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 374,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7094432711601257,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 258,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7094432711601257,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.5827566981315613,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.4053961932659149,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2484,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 233,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.6525422930717468,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 159,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.6525422930717468,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5360173583030701,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.37288153171539307,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2485,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8567960858345032,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.8567960858345032,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7300105094909668,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5078331232070923,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2486,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 342,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8074252605438232,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 240,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.8074252605438232,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 150,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.7033129930496216,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 75,
+          "beveled_edges": 12,
+          "coping_edges": 2,
+          "max_distance_m": 0.4892617166042328,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 26,
+      "instance": 2487,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 18,
+          "added": 229,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9497778415679932,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 1,
+          "removed": 18,
+          "added": 155,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.9497778415679932,
+          "zero_area_slivers_removed": 4
+        },
+        {
+          "lod": 2,
+          "removed": 18,
+          "added": 101,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.7991566061973572,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 18,
+          "added": 53,
+          "beveled_edges": 12,
+          "coping_edges": 0,
+          "max_distance_m": 0.5559349060058594,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2736,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42719894647598267,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42719894647598267,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42719894647598267,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3020658493041992,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2737,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983386993408203,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983386993408203,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983386993408203,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35406044125556946,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2738,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.498421311378479,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.498421311378479,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.498421311378479,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3542079031467438,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2739,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49832984805107117,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49832984805107117,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49832984805107117,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3540792465209961,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2740,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5768864750862122,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5768864750862122,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5166276097297668,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35245734453201294,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2741,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4277413487434387,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4277413487434387,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4277413487434387,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.30242031812667847,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2742,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983059763908386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983059763908386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4983059763908386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3539458215236664,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2743,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49860379099845886,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49860379099845886,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49860379099845886,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35436001420021057,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2744,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42716407775878906,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42716407775878906,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42716407775878906,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3019144833087921,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2745,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273608326911926,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273608326911926,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42736074328422546,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.302123099565506,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2746,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49841195344924927,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49841195344924927,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49841195344924927,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.354035884141922,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2747,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876162111759186,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876162111759186,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876162111759186,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.38233432173728943,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2748,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4271998405456543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4271998405456543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42719969153404236,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3019416034221649,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2749,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49847838282585144,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49847838282585144,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49847838282585144,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35427573323249817,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2750,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4272533059120178,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4272533059120178,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4272533059120178,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3020774722099304,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2751,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49848541617393494,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49848541617393494,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4984853267669678,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35428595542907715,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2752,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.487880140542984,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.487880140542984,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.487880140542984,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.38240769505500793,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2753,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.487712562084198,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.487712562084198,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4877128303050995,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.38228917121887207,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2754,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273427128791809,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273427128791809,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273427426815033,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.30209776759147644,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2755,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876023232936859,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876023232936859,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4876023232936859,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3819833993911743,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2756,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49825218319892883,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49825218319892883,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49825218319892883,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35401684045791626,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2757,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273598790168762,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273598790168762,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4273598790168762,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.302137166261673,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2758,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42715176939964294,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42715176939964294,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42715176939964294,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3018225431442261,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2759,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49838948249816895,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49838948249816895,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49838951230049133,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.35419961810112,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2760,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4270901679992676,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4270901679992676,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42709025740623474,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3018418252468109,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2761,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49233800172805786,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.49233800172805786,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.4923378825187683,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3833942413330078,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2762,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5039305686950684,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5039305686950684,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.5039305686950684,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3543057441711426,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 0,
+      "proto": 32,
+      "instance": 2763,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 20,
+          "added": 207,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42729559540748596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 20,
+          "added": 147,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42729559540748596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 20,
+          "added": 99,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.42729559540748596,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 20,
+          "added": 57,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.3020077645778656,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 0,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2982895076274872,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 134,
+          "added": 1189,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2982895076274872,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 134,
+          "added": 675,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2982895076274872,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 72,
+          "added": 290,
+          "beveled_edges": 32,
+          "coping_edges": 5,
+          "max_distance_m": 0.2983339726924896,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 1,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2790336608886719,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 134,
+          "added": 1189,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2790336608886719,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 134,
+          "added": 675,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2790336608886719,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 72,
+          "added": 290,
+          "beveled_edges": 32,
+          "coping_edges": 5,
+          "max_distance_m": 0.27791306376457214,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 2,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30222705006599426,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 134,
+          "added": 1189,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30222705006599426,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 134,
+          "added": 675,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30222705006599426,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 72,
+          "added": 290,
+          "beveled_edges": 32,
+          "coping_edges": 5,
+          "max_distance_m": 0.302634596824646,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 3,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2811437249183655,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 134,
+          "added": 1189,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2811437249183655,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 134,
+          "added": 675,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.2811437249183655,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 72,
+          "added": 290,
+          "beveled_edges": 32,
+          "coping_edges": 5,
+          "max_distance_m": 0.28019845485687256,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 0,
+      "instance": 4,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 134,
+          "added": 1647,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30427032709121704,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 134,
+          "added": 1189,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30427032709121704,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 134,
+          "added": 675,
+          "beveled_edges": 46,
+          "coping_edges": 7,
+          "max_distance_m": 0.30427032709121704,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 72,
+          "added": 290,
+          "beveled_edges": 32,
+          "coping_edges": 5,
+          "max_distance_m": 0.3046025335788727,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 51,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167106509208679,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167106509208679,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.26015567779541016,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19202923774719238,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 52,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167235553264618,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167235553264618,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.26016542315483093,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.1920352280139923,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 53,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.31445086002349854,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.31445086002349854,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.25829872488975525,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 59,
+          "beveled_edges": 9,
+          "coping_edges": 0,
+          "max_distance_m": 0.1906978040933609,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 54,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274820148944855,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274820148944855,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.2690027356147766,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830366969108582,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 55,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274820148944855,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274820148944855,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.2690027356147766,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830316305160522,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 56,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274703919887543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274703919887543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.268993616104126,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830334186553955,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 57,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274703919887543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274703919887543,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.268993616104126,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830331206321716,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 58,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167458474636078,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167458474636078,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.26018384099006653,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19204086065292358,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 59,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3144698143005371,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3144698143005371,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.25831425189971924,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 59,
+          "beveled_edges": 9,
+          "coping_edges": 0,
+          "max_distance_m": 0.1907048523426056,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 60,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167271912097931,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3167271912097931,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.26016873121261597,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19203676283359528,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 61,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3135365843772888,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3135365843772888,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.25754812359809875,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19128850102424622,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 62,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3135300278663635,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3135300278663635,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.25754228234291077,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19128882884979248,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 63,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.32630157470703125,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.32630157470703125,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.2680332660675049,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19814079999923706,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 64,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274754285812378,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274754285812378,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.2689976096153259,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830425083637238,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 65,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.32630258798599243,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.32630258798599243,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.26803451776504517,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19814108312129974,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 5,
+      "instance": 66,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 48,
+          "added": 258,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274754285812378,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 48,
+          "added": 196,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.3274754285812378,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 48,
+          "added": 142,
+          "beveled_edges": 14,
+          "coping_edges": 0,
+          "max_distance_m": 0.2689976096153259,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 24,
+          "added": 64,
+          "beveled_edges": 10,
+          "coping_edges": 0,
+          "max_distance_m": 0.19830425083637238,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 7,
+      "instance": 69,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 42,
+          "added": 615,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2614440321922302,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 42,
+          "added": 419,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2613392174243927,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 42,
+          "added": 245,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.25681397318840027,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 42,
+          "added": 138,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.25896167755126953,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 7,
+      "instance": 70,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 42,
+          "added": 615,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2605835795402527,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 42,
+          "added": 419,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2604677677154541,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 42,
+          "added": 245,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2592313885688782,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 42,
+          "added": 138,
+          "beveled_edges": 20,
+          "coping_edges": 2,
+          "max_distance_m": 0.2566746175289154,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 9,
+      "instance": 77,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 136,
+          "added": 2552,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3819131851196289,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 1,
+          "removed": 136,
+          "added": 1694,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3819131851196289,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 2,
+          "removed": 136,
+          "added": 992,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3071204125881195,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 3,
+          "removed": 68,
+          "added": 322,
+          "beveled_edges": 44,
+          "coping_edges": 8,
+          "max_distance_m": 0.4882951080799103,
+          "zero_area_slivers_removed": 8
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 9,
+      "instance": 78,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 136,
+          "added": 2664,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.37388676404953003,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 1,
+          "removed": 136,
+          "added": 1806,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.37388676404953003,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 2,
+          "removed": 136,
+          "added": 992,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3071211576461792,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 3,
+          "removed": 68,
+          "added": 322,
+          "beveled_edges": 44,
+          "coping_edges": 8,
+          "max_distance_m": 0.43404483795166016,
+          "zero_area_slivers_removed": 8
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 9,
+      "instance": 79,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 136,
+          "added": 2552,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3810920715332031,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 1,
+          "removed": 136,
+          "added": 1694,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3810920715332031,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 2,
+          "removed": 136,
+          "added": 992,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3071211874485016,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 3,
+          "removed": 68,
+          "added": 322,
+          "beveled_edges": 44,
+          "coping_edges": 8,
+          "max_distance_m": 0.4908258616924286,
+          "zero_area_slivers_removed": 8
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 9,
+      "instance": 80,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 136,
+          "added": 2664,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.37387141585350037,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 1,
+          "removed": 136,
+          "added": 1806,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.37387141585350037,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 2,
+          "removed": 136,
+          "added": 992,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3071083128452301,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 3,
+          "removed": 68,
+          "added": 322,
+          "beveled_edges": 44,
+          "coping_edges": 8,
+          "max_distance_m": 0.4375637471675873,
+          "zero_area_slivers_removed": 8
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 9,
+      "instance": 81,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 136,
+          "added": 2552,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.38172340393066406,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 1,
+          "removed": 136,
+          "added": 1694,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.38172340393066406,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 2,
+          "removed": 136,
+          "added": 992,
+          "beveled_edges": 82,
+          "coping_edges": 8,
+          "max_distance_m": 0.3071059584617615,
+          "zero_area_slivers_removed": 8
+        },
+        {
+          "lod": 3,
+          "removed": 68,
+          "added": 322,
+          "beveled_edges": 44,
+          "coping_edges": 8,
+          "max_distance_m": 0.4879137873649597,
+          "zero_area_slivers_removed": 8
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 83,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24420134723186493,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23858532309532166,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23473283648490906,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23919503390789032,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 84,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24450312554836273,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2436288446187973,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2414221614599228,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2405077964067459,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 85,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 679,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24319761991500854,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 461,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.243787944316864,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 231,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23820079863071442,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 102,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23570503294467926,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 86,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 679,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2450168877840042,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 461,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2450168877840042,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 231,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24441419541835785,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 102,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24441419541835785,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 87,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 679,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24006593227386475,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 461,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24393503367900848,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 231,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24186287820339203,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 102,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23650483787059784,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 88,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 679,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24431683123111725,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 461,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24305030703544617,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 231,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2412520945072174,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 102,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23796944320201874,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 89,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24484995007514954,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24205590784549713,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2431851625442505,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23170959949493408,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 90,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 595,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2449004352092743,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 419,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2449004352092743,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 211,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2448691874742508,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 94,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2449769526720047,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 91,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 679,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24390944838523865,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 461,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2427099645137787,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 231,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24130961298942566,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 102,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2385222315788269,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 92,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24375998973846436,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2445727437734604,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24014270305633545,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2336953729391098,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 93,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 595,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24243763089179993,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 419,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2446087747812271,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 211,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24175991117954254,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 94,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23764891922473907,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 94,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 749,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2449687123298645,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 503,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2446562647819519,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 251,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23927417397499084,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 110,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2392747700214386,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 95,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24357475340366364,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24146106839179993,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24410857260227203,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.241462841629982,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 96,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24385952949523926,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23952046036720276,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24347595870494843,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.22304393351078033,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 97,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24375328421592712,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24302878975868225,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23570840060710907,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.22489207983016968,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 98,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24303986132144928,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24303986132144928,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24303986132144928,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24304039776325226,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 99,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2443147450685501,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24388492107391357,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2346644252538681,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24301913380622864,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 100,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24457235634326935,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24117620289325714,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23959137499332428,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2322198450565338,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 101,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24287258088588715,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24195320904254913,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23927797377109528,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2311224639415741,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 102,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2448142021894455,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24420227110385895,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24400009214878082,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24081866443157196,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 103,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24422873556613922,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24187089502811432,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24397428333759308,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24291904270648956,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 104,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24257738888263702,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2429564744234085,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2446194887161255,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23830775916576385,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 105,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24191978573799133,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24027512967586517,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24296040832996368,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23120048642158508,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 106,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24361631274223328,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24334004521369934,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23722106218338013,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24425607919692993,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 107,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24334509670734406,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23910698294639587,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24087542295455933,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23623457551002502,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 108,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 469,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23463810980319977,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 335,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23484663665294647,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 171,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23139767348766327,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.22767770290374756,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 109,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 469,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23705023527145386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 335,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23705023527145386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 171,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23705023527145386,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23709440231323242,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 110,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24246348440647125,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23996037244796753,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.238559290766716,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.238559290766716,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 111,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 581,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24469926953315735,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 391,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.239064559340477,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 211,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23921702802181244,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 94,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.239064559340477,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 112,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2430770993232727,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2430770993232727,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2430770993232727,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2430771291255951,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 113,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2426043599843979,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24293510615825653,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24153849482536316,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23881308734416962,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 114,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24420103430747986,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24420103430747986,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24420103430747986,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24420103430747986,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 115,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24428950250148773,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2444101721048355,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.2420029640197754,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.2420029640197754,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 116,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24169513583183289,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24354086816310883,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.23959355056285858,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24400165677070618,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 117,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 497,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24416153132915497,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 349,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24416153132915497,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 181,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24416153132915497,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.24416153132915497,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 118,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 577,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3062763512134552,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 415,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3062763512134552,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 217,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.3062763512134552,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 106,
+          "beveled_edges": 7,
+          "coping_edges": 3,
+          "max_distance_m": 0.3062763512134552,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 11,
+      "instance": 119,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 16,
+          "added": 455,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24051296710968018,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 16,
+          "added": 307,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24266305565834045,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 16,
+          "added": 171,
+          "beveled_edges": 8,
+          "coping_edges": 2,
+          "max_distance_m": 0.24051296710968018,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 12,
+          "added": 78,
+          "beveled_edges": 7,
+          "coping_edges": 1,
+          "max_distance_m": 0.23939922451972961,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    },
+    {
+      "tree": 1,
+      "proto": 10,
+      "instance": 82,
+      "lods": [
+        {
+          "lod": 0,
+          "removed": 40,
+          "added": 1092,
+          "beveled_edges": 24,
+          "coping_edges": 7,
+          "max_distance_m": 0.2885194420814514,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 1,
+          "removed": 40,
+          "added": 752,
+          "beveled_edges": 24,
+          "coping_edges": 7,
+          "max_distance_m": 0.2885194420814514,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 2,
+          "removed": 40,
+          "added": 402,
+          "beveled_edges": 24,
+          "coping_edges": 7,
+          "max_distance_m": 0.2595054507255554,
+          "zero_area_slivers_removed": 0
+        },
+        {
+          "lod": 3,
+          "removed": 10,
+          "added": 110,
+          "beveled_edges": 8,
+          "coping_edges": 4,
+          "max_distance_m": 0.23322781920433044,
+          "zero_area_slivers_removed": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Rounded plaster construction edges and continuous thick weathered roof coping; native shapes, UV palette and doors retained",
+  "native_game_validation": false,
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\wascitya-patch.json",
+  "patch_sha256": "89192b54d47500cfb1ff72a1306e92a80d81e9a9a1ca2c1c578913eff171934b",
+  "removed": 27498,
+  "added": 300351
+}

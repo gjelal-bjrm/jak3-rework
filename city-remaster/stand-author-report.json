@@ -1,0 +1,17 @@
+{
+  "source_triangles": 78,
+  "authored_triangles": 13332,
+  "vertices": 6856,
+  "joint_names": [
+    "align",
+    "prejoint",
+    "main",
+    "fruit"
+  ],
+  "weights": "all main, matching original",
+  "fruit_plane": "native slope retained",
+  "board_count": 15,
+  "surface": "broad sawn boards, shallow worn edges, subdued joinery crevices",
+  "texture": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\wood-hd-v2.png",
+  "installed": false
+}

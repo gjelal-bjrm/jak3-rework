@@ -1,0 +1,49 @@
+{
+  "purpose": "Underside normal orientation and camera-to-surface absorption path only",
+  "above_water_expressions_preserved": true,
+  "fire_shape_unchanged": true,
+  "full_snell_refraction": false,
+  "protected_shader_exceptions": [
+    "generic.frag",
+    "merc2.frag",
+    "tfrag3.frag"
+  ],
+  "validation": "Remove exactly NORMAL_NEW/PATH_NEW with without_underwater_fix before comparing the protected baseline; no general shader exception is needed.",
+  "files": [
+    {
+      "path": "liquids-v3/fluids.glsl",
+      "before_sha256": "3b029f6a712ef857f3187dc6de63f1f922de9b89ff80bb3518aa4119f71f8758",
+      "after_sha256": "489e0181c26c36cd89e4272fdd45fc92565bbdd8a5e17c61381a77ec40ae2d9b"
+    },
+    {
+      "path": "data/game/graphics/opengl_renderer/shaders/generic.frag",
+      "before_sha256": "5d3cdb7aba3fdd7b25fb21d86aafda298e018d418dc7d1a3f01d884bc9a8e6a1",
+      "after_sha256": "daca222f66182d4ffa36f95c920c2be4650318866c1c585748fa4be9fba286af"
+    },
+    {
+      "path": "data/game/graphics/opengl_renderer/shaders/merc2.frag",
+      "before_sha256": "33505a739a0e0c75c9ca626cc9d218bcf3a5df07c3c679097af35c6026e6fdf3",
+      "after_sha256": "6f0cf6c6018ec3df0ff607f46dbd1d65d883362d3b96501d3991b523d1272023"
+    },
+    {
+      "path": "data/game/graphics/opengl_renderer/shaders/tfrag3.frag",
+      "before_sha256": "01e6dd3d29d4b6b6c5e722c8eb9bd9b3d537ff5d5f0840fa83107b71755b70f2",
+      "after_sha256": "95c5b2991f43be868b97b889e402c439ced7cd43d2e76a90dedd81aec216d6d5"
+    },
+    {
+      "path": "engine-src/game/graphics/opengl_renderer/shaders/generic.frag",
+      "before_sha256": "5d3cdb7aba3fdd7b25fb21d86aafda298e018d418dc7d1a3f01d884bc9a8e6a1",
+      "after_sha256": "daca222f66182d4ffa36f95c920c2be4650318866c1c585748fa4be9fba286af"
+    },
+    {
+      "path": "engine-src/game/graphics/opengl_renderer/shaders/merc2.frag",
+      "before_sha256": "33505a739a0e0c75c9ca626cc9d218bcf3a5df07c3c679097af35c6026e6fdf3",
+      "after_sha256": "6f0cf6c6018ec3df0ff607f46dbd1d65d883362d3b96501d3991b523d1272023"
+    },
+    {
+      "path": "engine-src/game/graphics/opengl_renderer/shaders/tfrag3.frag",
+      "before_sha256": "01e6dd3d29d4b6b6c5e722c8eb9bd9b3d537ff5d5f0840fa83107b71755b70f2",
+      "after_sha256": "95c5b2991f43be868b97b889e402c439ced7cd43d2e76a90dedd81aec216d6d5"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checks": {
+    "all_source_and_fit_hashes": true,
+    "archive_target_only_and_negative_mutation": true,
+    "source_inverse_preserves_unrelated_edits": true,
+    "existing_grass_source_chain_preserved": true
+  },
+  "shared_source_checks": 53,
+  "archives": [
+    {
+      "scene": "arena",
+      "preserved_objects": 489,
+      "unexpected_object_mutation_rejected": true
+    },
+    {
+      "scene": "palace",
+      "preserved_objects": 489,
+      "unexpected_object_mutation_rejected": true
+    }
+  ],
+  "candidate_archive_deployed": false,
+  "native_visual_validation": false
+}

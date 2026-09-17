@@ -1,0 +1,1180 @@
+[
+  {
+    "key": "waspala-cliff-rock-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-01.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-01.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Natural eroded sandstone boulder surface. Maintain original warm muted ochre sandstone palette. Reinterpret the original big dark orthogonal joints as shallow irregular weathered rock folds with soft chipped edges. NO rectangular block grid, masonry, slabs, bricks, paving, mortar, cut stone or tiled cell pattern. Detail should be immediately legible: sedimentary undulations, wind-abraded ridges, small mineral pores, warm quartz grains. Continuous organic stone. Not photogrammetry-grey, not over-sharpened noise. Broad softly modelled forms remain stylized.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9563f8d5-486e-4f61-b1d4-b5fdc9ec5808.png",
+    "status": "generated",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v2\\masters\\waspala-cliff-rock-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-cliff-rock-01.png",
+        "sha256": "c240da19671f7d1a85de3cbc71be3e29d4f1f7f4a893156ac9f75f7ba7555f8b"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-cliff-rock-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-02.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Natural ochre sandstone boulder transition texture. TOP HALF soft eroded granular sandstone without cracks, LOWER HALF shallow irregular natural rock folds and erosion. Preserve exactly top-smooth/bottom-folded transition and muted original palette. NO rectangular block grid, masonry, slabs, bricks, paving, cut stone or tiled cell pattern. Visibly refined rounded weathered strata, wind-scoured mineral grain, organic shallow fissures. Continuous rock, faithful stylized animated-film realism.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-04456d9c-e9d6-4c07-aa99-8dd79f649163.png",
+    "status": "generated",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v2\\masters\\waspala-cliff-rock-02.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-cliff-rock-02.png",
+        "sha256": "729719615d5399072bf3bf86425b7007297e9c214f3d8aa62a21b204dce9fbff"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-cliff-rock-top",
+    "page": "waspala-tfrag",
+    "file": "waspala-cliff-rock-top.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-cliff-rock-top.png",
+    "tool": "built-in ImageGen",
+    "alpha": "source",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: Continuous natural gently worn sandstone boulder surface. Keep broad warm grey-ochre cloudy colour patches of reference. Introduce highly resolved wind-worn sandstone grain, sparse tiny irregular pores, soft erosion ripples, fine quartz flecks, shallow micro pits. NO straight cracks, joints, masonry, paving, slabs, borders or cobbles. Broad painted-style shapes with contemporary animated-feature material richness, readable fine relief rather than random noise.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-c8a50d81-0615-4ebd-aec7-1044ecc915f1.png",
+    "status": "generated",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v2\\masters\\waspala-cliff-rock-top.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-cliff-rock-top.png",
+        "sha256": "dd553e5936d3c87c34ee0ce6777bf595059c2588a03ac196a74fc88d063b86be"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-pool-floor",
+    "page": "waspala-tfrag",
+    "file": "waspala-pool-floor.png",
+    "label": "Fond des bassins",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: The original is a grey stone bed with very subtle wide angular rock boundaries. Preserve the exact shapes, boundary positions, grey low-saturation palette and faint broad stains. Add fine natural stone grain, tiny pits, restrained crevice wear and subtle mineral deposits. This is DRY neutral albedo; do NOT paint water, foam, reflections, caustics or wet gloss.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-pool-floor.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-84da2709-0303-462f-8855-7c8c3928f6f6.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-pool-floor.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-pool-floor.png",
+        "sha256": "1d88b2759f85119f12a9ecea612f15725b33c2782c1d3a0efee075b533590d43"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-step-top",
+    "page": "waspala-tfrag",
+    "file": "waspala-step-top.png",
+    "label": "Pierre des marches",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: Blue-grey slate-like stone slab surface with the original broad diagonal fine fractures. Preserve the exact fracture map, large patches and muted dark blue-grey color. Add finely textured natural stone, shallow abrasion, fine mineral grain and subtle edge weathering. No new border, bricks, markings or additional slab divisions.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-step-top.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ffeffb81-ba4f-45ba-a3bd-448c4467ab99.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-step-top.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-step-top.png",
+        "sha256": "cb765e4b4f1e52a496f36b709d368fef4fe9e88046fd2282e65a0f878dc0ca99"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-01.png",
+    "label": "Panneaux des colonnes",
+    "prompt": "Use case: precise-object-edit.\nAsset type: flat production albedo texture for a faithful modern Jak 3 remaster, 1024x1024 pixels.\nInput image: original PS2 game texture, EDIT TARGET. Reconstruct its same composition at high resolution, keeping its identity and UV mapping.\nPrimary request: Square blue-grey stone panel with the existing narrow recessed border and the exact original diagonal crack across its face. Preserve ALL frame and crack coordinates and the muted dark blue-grey palette. Add realistic slate/stone micrograin, shallow mineral pores and restrained wear in the existing edges. No new border width, holes, rivets, seams or ornament.\nConstraints: preserve the original large-scale pattern, framing, tile scale, color balance and average brightness. Increase material realism at fine scale while retaining the stylized game's recognizable design. Flat orthographic surface filling the entire image edge to edge; seamless repeat matching the original on all edges. No perspective, objects, text, watermark, comparison, margin, cast shadows, directional light or painted specular highlights. Opaque RGB output. Surface detail must be natural and readable, not noisy oversharpening.",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-01.png",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9fd4c698-4bcc-4106-82d8-efeed01bd50f.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-01.png",
+        "sha256": "ad4a683de643d4cf1c0ae068ec3a1b3e0e32319f67960084926d82c68ea1babf"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-glass-03",
+    "page": "waspala-alpha",
+    "file": "waspala-glass-03.png",
+    "label": "Vitres du palais",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-alpha/waspala-glass-03.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Original old ochre smoked glass panels with slim dark bronze polygonal borders. Preserve every polygon boundary and its exact position, border widths, and warm subdued beige/brown palette. Fine uneven hand-made glass, tiny bubbles, subtle age and faint dusty perimeter; glass centres clean enough to transmit light. Do not paint a room, scenery, reflections, cracks, light rays or change the panel design.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-6dc26921-3508-42cf-8827-ae5319d175e2.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-glass-03.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-alpha/waspala-glass-03.png",
+        "sha256": "4c4dbf5e12a9dcfb03f98e6221d342ef97cd804f57a3777ae03af34c78d5c7e3"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      36,
+      128
+    ]
+  },
+  {
+    "key": "waspala-window-frame",
+    "page": "waspala-tfrag",
+    "file": "waspala-window-frame.png",
+    "label": "Encadrement des vitres",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-window-frame.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x512 wide horizontal texture. The original is a horizontally banded weathered stone/bronze-brown moulding, with a wide central mottled strip and thin ridged trims near the top and bottom. Preserve all band positions and existing fine crack shapes. Add convincing fine mineral grain, shallow patina and gently rubbed ridges. No wood planks or wood knots.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-659858f2-9338-4ecc-8430-61065c38027c.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-window-frame.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      128,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-window-frame.png",
+        "sha256": "ece0f552daccc807ee03c9fa30725998980330ec4eb07bf1cba3d0dbd19664af"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-stage-tile",
+    "page": "waspala-tfrag",
+    "file": "waspala-stage-tile.png",
+    "label": "Sol autour du tr\u00c3\u00b4ne",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-stage-tile.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 1024x1024 square. Original cool muted grey-blue stone tile material with broad mottled cloudy mineral patches and faint hairline fissures. Keep it as a single continuous surface, without new tile boundaries or borders. Add restrained realistic mineral grain and tiny pits, wear from footsteps, a finely honed but matte finish. Keep the very low contrast broad pattern.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-9f42b616-f03f-4e42-9a5c-b5c9fc05716b.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-stage-tile.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-stage-tile.png",
+        "sha256": "a6b904821a219d4944f6c1f7b03f2dc88936ca0e4c366510d53a5b665e1ea847"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-palmplant-leaf-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmplant-leaf-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmplant-leaf-02.png",
+    "tool": "built-in ImageGen",
+    "alpha": "generated_cutout",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: A high-resolution CUTOUT palm leaf fan with the exact same single fan composition and frond origins as reference: all thin pointed blades radiate from TOP RIGHT, fan extends towards bottom and left. Replace coarse flat green strips with dimensional-looking organic olive-green and golden-green blades, visible central ribs, delicate veins, slight width irregularity and gently curling tips, sun-worn tips. Keep silhouette footprint and stylized Jak desert vegetation identity, no pot or stem elsewhere. GENUINELY TRANSPARENT BACKGROUND between and outside each blade. No painted background colour. Crisp antialiased alpha, no white fringe. Every leaf large enough to read in-game. Soft neutral diffuse albedo.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-8e4f0c62-e927-475d-a0ef-7bcfa05380f0.png",
+    "status": "generated",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v2\\masters\\waspala-palmplant-leaf-02.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-palmplant-leaf-02.png",
+        "sha256": "dc053b01a5a32c7ebdcac673b20872847273d7667cf2933cccf13e7175d9709b"
+      }
+    ],
+    "alpha_mode": "generated_cutout",
+    "alpha_range": [
+      0,
+      128
+    ]
+  },
+  {
+    "key": "waspala-palmtree-trunk-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmtree-trunk-01.png",
+    "label": "\u00c3\u2030corce des palmiers",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmtree-trunk-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: production albedo texture for a faithful modern Jak 3 remaster.\nInput image: original game texture, EDIT TARGET. Keep the exact composition and UV layout; faithfully reconstruct the same surface with realistic fine detail.\nPrimary request: 512x1024 tall texture. Preserve the original diagonal overlapping brown fibrous bark scales, their exact pattern and warm grey/brown/tan palette. Render weathered palm-trunk bark with realistic layered fibres, small dry splits and frayed scale edges. Keep scale size and repeat unchanged. No green moss, deep new holes, smooth tree bark or straight wooden boards.\nConstraints: preserve the original large-scale pattern, coordinates of all features, tile scale, color balance and average brightness. Realistic materials within Jak's stylized world, no redesign. Flat orthographic surface filling the entire image; no perspective, margins, text or watermark. No cast shadows, directional lighting or painted specular highlights. Original repeat must match across boundaries. Opaque RGB output; game alpha mask is reapplied separately. Do not add any objects, seams or decorations absent from the original.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-6426853c-3192-43a2-acdf-d6ea2a0a25b2.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-palmtree-trunk-01.png",
+    "size": [
+      512,
+      1024
+    ],
+    "original_size": [
+      32,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-palmtree-trunk-01.png",
+        "sha256": "32e992b8d64dbaf3090745c9a83736e7bebab075bcacaf0da32c274e2e21d41a"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-shrub-plant",
+    "page": "waspala-shrub",
+    "file": "waspala-shrub-plant.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-shrub/waspala-shrub-plant.png",
+    "tool": "built-in ImageGen",
+    "alpha": "generated_cutout",
+    "prompt": "Use case: precise-object-edit.\nAsset: 2048x2048 production game texture for a faithful but immediately visible modern Jak 3 remaster.\nInput image: original PS2 albedo, EDIT TARGET/reference layout.\nTask: High-resolution CUTOUT texture of the SAME small ribbon-leaf desert shrub spray. Preserve reference overall placement, large soft green pointed leaves clustered along the same central flow; recognizable Jak 3 stylized desert plant. Replace muddy blurry leaves with sharply legible olive/teal green leaves with delicate longitudinal veins, clear rib, slightly rolled edges, natural warm tips, varied overlapping orientation. Crisp organic pointed silhouettes. GENUINELY TRANSPARENT BACKGROUND in all gaps and outside leaves. No green painted background, no white halo, no pot, soil, new flowers. NOT dense noise: clear generous elegant leaf shapes.\nConstraints: retain the original warm desert world and expressive animated-film art direction. High-resolution, flat orthographic full-frame texture, material albedo with no cast shadow, specular lighting, perspective, labels, border, watermark or composition outside the texture. Preserve original UV placement and useful seamless edge repetition. A visibly richer material, not a redesign.",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-1d238e08-ebd1-43ec-838a-7da80780d1ac.png",
+    "status": "generated",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v2\\masters\\waspala-shrub-plant.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-shrub/waspala-shrub-plant.png",
+        "sha256": "2b598725d1d2954d7f43d37403f874fce9516c0dc1d6f6cc5c385a8828b4b60c"
+      }
+    ],
+    "alpha_mode": "generated_cutout",
+    "alpha_range": [
+      0,
+      128
+    ]
+  },
+  {
+    "key": "waspala-ceiling-frame",
+    "label": "Cadres du plafond",
+    "page": "waspala-tfrag",
+    "file": "waspala-ceiling-frame.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-ceiling-frame.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Dark slate-like flat square panel with the original large ochre/gold curling emblem descending from the top and a thin horizontal top trim. Preserve exact emblem silhouette, all engraved lines and trim locations. Realistic mineral texture in the dark stone, soft aged brass/ochre patina on the emblem, fine original cracks and subtle worn edges.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-572d4add-e0af-4800-aa3a-540ab06ec08f.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-ceiling-frame.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-ceiling-frame.png",
+        "sha256": "31dc179f625573b5c117a0800039d80152261b6f0b08b1e74c44ac9d5c286a83"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-window-side",
+    "label": "Montants lat\u00c3\u00a9raux",
+    "page": "waspala-tfrag",
+    "file": "waspala-window-side.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-window-side.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Weathered warm brown/ochre stone with long broad vertical bands and the original two horizontal fine cracks. Keep every stripe and crack location. Fine sandstone mineral grains, tiny pores and gently rubbed high surfaces; keep large bands softly defined. No new masonry divisions or wooden boards.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-345af396-c139-48ad-a1d0-c4646796f451.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-window-side.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-window-side.png",
+        "sha256": "ca49131779c812c3c982ef4eb3c5eede1c1e3bda54cc851706d5f4d32dc639c6"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-step-01",
+    "label": "Pierre verticale des marches",
+    "page": "waspala-tfrag",
+    "file": "waspala-step-01.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-step-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Original dark muted grey vertically fissured natural stone. Keep all major upright fissures and horizontal strata at identical positions. Realistic small slate grains, shallow erosion and restrained cracks, no added masonry seams or extra blocks.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-387da76e-0d94-4a91-97b7-85cd88c15082.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-step-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-step-01.png",
+        "sha256": "537c764cbb8c1ddb75f06fb7fddcf6d440bc45852997d0d80c505883f820c967"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-step-02",
+    "label": "Pierre des marches secondaires",
+    "page": "waspala-tfrag",
+    "file": "waspala-step-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-step-02.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Dark cool grey-blue naturally fractured stone, original large intersecting diagonal/curving fissures and cloudy patches. Keep the same exact fracture map and broad palette. Natural mineral grain, shallow abrasion, small pores; no new borders, paving or extra major cracks.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-e85e4a45-c88b-454c-a550-9b6c927fddaf.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-step-02.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-step-02.png",
+        "sha256": "e311b19212f8e4d713e931d9cdb84c24591486f3adc16c71ee27f372a29dabeb"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-stage-step",
+    "label": "Bord des marches du tr\u00c3\u00b4ne",
+    "page": "waspala-tfrag",
+    "file": "waspala-stage-step.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-stage-step.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x256 horizontal strip. Original long dark grey-blue stone riser with narrow brighter worn strip along the top and exact existing cracks. Preserve band heights and every crack position. Natural slate grain and tiny abrasion, softly worn existing top lip. No new slab boundaries or geometry.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-5b62dc9a-039a-4af3-be10-68dc777b353f.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-stage-step.png",
+    "size": [
+      1024,
+      256
+    ],
+    "original_size": [
+      128,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-stage-step.png",
+        "sha256": "0e0b2bcf3c5c8c3726f359077b94081281e55bab4014bd3ddb3778c426c47c7d"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-stage-end",
+    "label": "Frise du socle",
+    "page": "waspala-tfrag",
+    "file": "waspala-stage-end.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-stage-end.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Original muted grey-blue stone tile engraved with six curving parallel wave lines. Preserve precisely the count, course, spacing and crossing-free shape of all original lines and the small lower-left crack. Fine natural stone grain and subtle worn edges in the existing engravings. No invented glyphs or patterns.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-b5ac6861-4826-495a-8af3-85e791614621.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-stage-end.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-stage-end.png",
+        "sha256": "03f675ab427c0ed4be7af9e7ff1a351ebe54662e7adc7118190dfbcb68754018"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-02",
+    "label": "Bandeaux des piliers",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-02.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-02.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x256 horizontal strip. Dark blue-grey stone moulding with original narrow recessed top/bottom bands and mottled centre. Preserve all band positions and widths. Fine slate mineral grain, restrained polishing and shallow abrasion, no extra borders or ornaments.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-52a948a8-6123-45a5-acf1-466f5b202d21.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-02.png",
+    "size": [
+      1024,
+      256
+    ],
+    "original_size": [
+      128,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-02.png",
+        "sha256": "3f555ee5bc295e799cacdbf746facf6dd1f8e0d178b48d23af935227f60f583d"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-03",
+    "label": "Panneaux grav\u00c3\u00a9s des piliers",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-03.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-03.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x1024. Dark blue-grey square stone panel with an inset square border and one angular spiral engraved in the centre. Keep the exact angular spiral shape, positions, line width and square frame. Add convincing fine slate grain, tiny pores and worn engraving edges. Do not invent another symbol or turn the spiral into a round curve.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-08e5b92b-de9d-4443-ab75-224bb309db6b.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-03.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-03.png",
+        "sha256": "2e475c29d99e01d747d7e0ff337f9519f1f3bdcf6e11913c1f139a2778e0ea00"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-base",
+    "label": "Bases des piliers",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-base.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-base.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x512 horizontal. Original broad dark blue-grey flat stone/painted mineral surface with thin lighter top and bottom trim bands. Preserve band locations, subtle original horizontal scuffs and muted blue-grey shade. Add fine material grain and gentle wear, no new seams, cracks or motifs.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-73937aa3-1bf1-48f5-8039-18189f3f47e6.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-base.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      128,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-base.png",
+        "sha256": "b4c9dfacc67ec055dba4b7d898f53874744c3e7719a27a23207905951422c198"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-piece",
+    "label": "Ornements dor\u00c3\u00a9s",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-piece.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-piece.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x512 horizontal. Original golden ochre strip with repeated curving embossed wave ornament and thin top/bottom mouldings. Precisely preserve the shapes, spacing and depth cues of the two curling motifs. Fine aged brass texture, restrained patina and lightly rubbed original relief edges. No new waves, rivets or gems.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-56ed1555-4745-4422-b131-bf59dfcfbec7.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-piece.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      128,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-piece.png",
+        "sha256": "def8820a80f1127f2a2679c73f22a27741e9bd3201ea2a1304694e0f495d6b79"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-column-plate",
+    "label": "Plaques des colonnes",
+    "page": "waspala-tfrag",
+    "file": "waspala-column-plate.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-column-plate.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x512 horizontal. Original mottled coppery ochre-brown rectangular plate with a thin dark border and original faint scratches. Preserve its quiet low contrast and colour layout. Realistic worn bronze/copper surface, fine patina, restrained rubbed edges and subtle fine scuffs. No rivets, embossed ornament, new seams or heavy rust.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-14e9b405-7764-451d-92ce-28676fd1eb33.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-column-plate.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      128,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-column-plate.png",
+        "sha256": "6a45bcedb618f732bc6d3176356c2923e8c3f2c1ab023839d6d087248342d781"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-metal-bar",
+    "label": "Barres m\u00c3\u00a9talliques",
+    "page": "waspala-tfrag",
+    "file": "waspala-metal-bar.png",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-metal-bar.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful Jak 3 remaster production albedo.\nInput: original low resolution game texture, EDIT TARGET.\nPrimary request: 1024x512 horizontal. Original dull desaturated olive-brown metal band with horizontal lower lip. Preserve the broad colour gradient and subtle existing wear. Fine weathered bronze metal grain, restrained patina and lightly rubbed existing raised edges. Matte albedo, no painted shiny white reflection, no added bolts or seams.\nConstraints: exact original composition, UV atlas layout, motif coordinates, average brightness and palette must remain recognizable. Increase realism in fine material detail, retain the game's stylized design. Flat orthographic texture edge-to-edge, no perspective, no margins, no text or watermark, no cast shadows or new directional lighting. Retain original edge repetition. Opaque RGB. Do not add decorative elements or change the amount of damage.",
+    "tool": "built-in ImageGen",
+    "status": "generated; awaiting native integration",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-38238d16-19aa-4ca0-86e0-846f8c6344bd.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-metal-bar.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      64,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-metal-bar.png",
+        "sha256": "6321994b545f2b29d596a3b68dba96febc5e94d8771635fc7c7b15cb549c2a36"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-blue-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-blue-01.png",
+    "label": "waspala-blue-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-blue-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original desaturated grey-green mottled mineral/plaster surface; quiet broad cloudy patches and fine existing scuffs. Add realistic fine lime/mineral grain and light abrasion, keep its low contrast. No new cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-6a232ec0-8893-40ca-865f-a73765ce5cc3.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-blue-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-blue-01.png",
+        "sha256": "6d09518e57e07e00c60e0dfaec1c1fcfd8b630cfa7dc58b0a2a1db695ab4b0ec"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-red-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-red-01.png",
+    "label": "waspala-red-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-red-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original warm ochre-brown weathered rock/plaster with broad mineral mottles and fine hairline cracks. Add realistic pores and fine mineral grain, keep original pattern and quiet muted orange-brown. No new large cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-8e0acb1a-12c4-4658-a3f8-6fb92d312612.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-red-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-red-01.png",
+        "sha256": "a935500b99387a9f80a6afbdd242e8afe1ca68ed21244bccc16cddfac520ef69"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-yellow-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-yellow-01.png",
+    "label": "waspala-yellow-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-yellow-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original muted ochre-yellow mottled mineral surface. Add extremely fine stone grain and restrained age, same subtle mottling, no new cracks or seams.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-36b08936-25d8-412e-9581-b84012f95312.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-yellow-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-yellow-01.png",
+        "sha256": "1efdbf1e01d54b2f961c6a61242ef0a0d7bbcd9485b9701135026efbd9b02e1d"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-back-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-01.png",
+    "label": "waspala-throne-back-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original narrow central gold/ochre pointed curling two-lobed ornament on dark desaturated blue-grey panel. Precisely retain its silhouette, negative gap, coordinates and backdrop bands. Fine bronze patina, dark painted panel grain, slight rubbed relief edges.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-be8029c9-2593-4cfe-8d5f-293ac8898cc3.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-back-01.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-back-01.png",
+        "sha256": "92a7df11817618621bfaeb2fd3b84f420f389a150da6c6bbc2a285581c32865d"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-back-02",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-02.png",
+    "label": "waspala-throne-back-02",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-02.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x512 horizontal. Original narrow horizontal layered trim in tan, reddish brown and muted gold; preserve each band width and subtle central splits. Realistic aged wood/bronze-like original trim grain and light wear, no new bands or added decoration.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-63de672e-818e-4cbf-a278-70fe6e5fb74c.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-back-02.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      64,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-back-02.png",
+        "sha256": "4447083f1bf6f12bd70c1e9362aec4467eb846875e534ab9c2cabca51d5b775e"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-back-03",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-back-03.png",
+    "label": "waspala-throne-back-03",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-back-03.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 512x1024 tall. Original two stacked asymmetrical ochre-gold flame/leaf ornaments against a dark warm grey-brown panel, thin horizontal bands. Preserve exact curved silhouettes and band coordinates. Fine aged metal patina and dark panel grain, no invented patterns.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-ffe872b5-abfc-48e4-ae41-50d78d3c5763.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-back-03.png",
+    "size": [
+      512,
+      1024
+    ],
+    "original_size": [
+      64,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-back-03.png",
+        "sha256": "b90b5a0be3376e602f234756ea3dd46dc7f4f38056309759f7dc356af8eeff1c"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-base",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-base.png",
+    "label": "waspala-throne-base",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-base.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original neutral grey subtly mottled solid stone surface. Add fine realistic honed stone micrograin, restrained abrasion; keep same broad quiet grey cloud pattern, no new seams.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-b0fc8b57-3e20-40f4-8915-032bb2c627d7.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-base.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-base.png",
+        "sha256": "510f38f0c27884ad0c55759b6a81fe92ed8ef95b4a57c54bbf639b8893595be8"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-bolt",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-bolt.png",
+    "label": "waspala-throne-bolt",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-bolt.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Exact original square weathered brown bronze rivet head with the same broad irregular angular highlights. Fine aged bronze texture and subtle small scuffs. Preserve the original fastener silhouette and centred composition; no extra fasteners.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-694a3344-0d8c-4e2a-8e4f-f540226ae940.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-bolt.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      32,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-bolt.png",
+        "sha256": "2f13327d858144bc8de379274970cace42a5e988b67f7b70daa175f5192527f2"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-cap",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-cap.png",
+    "label": "waspala-throne-cap",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-cap.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x512 horizontal. Exact original gold angular arrow emblem above horizontal brass-brown band against a dark blue-grey surface. Preserve all emblem outlines, spacing and horizontal trim. Fine bronze patina, lightly rubbed existing raised edges, fine dark surface grain.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-b0afbe10-e424-4d51-bf62-59658373e7c2.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-cap.png",
+    "size": [
+      1024,
+      512
+    ],
+    "original_size": [
+      64,
+      32
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-cap.png",
+        "sha256": "0efb86e2ef2908f51d3a55e94b5e0f8ad0aeba658023628505566fc0fd7c274a"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-cushion",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-cushion.png",
+    "label": "waspala-throne-cushion",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-cushion.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original deep rust-red leather cushion texture: straight narrow top rim, broad softly curved vertical side seams, lighter rectangular centre and darker outer edge. Preserve every fold and seam coordinate. Realistic fine leather pores and restrained rubbed edges. No new stitching, buttons, cloth weave or wrinkles.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-d7384ae4-20ba-4d33-b166-2f65a9d31668.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-cushion.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-cushion.png",
+        "sha256": "3775f2cfa3d03b43bc0caf681d529a1a519585c581d8a3d14b683385ac19eff2"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-throne-floor",
+    "page": "waspala-tfrag",
+    "file": "waspala-throne-floor.png",
+    "label": "waspala-throne-floor",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-throne-floor.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original blue-grey stone tile with a large ochre semicircle entering from top centre, thin horizontal bands and the original two engraved arch motifs below. Precisely preserve every motif, line and border. Fine stone grain and aged ochre/brass inlay, no new symbols or cracks.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-86db3b95-af1e-4626-a28a-45666189aba5.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-throne-floor.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      128,
+      128
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-throne-floor.png",
+        "sha256": "74b19c3441d164db2af2e8c559bffb74c690356e93c6e54d55c1df7b2c145768"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-branch-01",
+    "page": "waspala-tfrag",
+    "file": "waspala-branch-01.png",
+    "label": "waspala-branch-01",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-branch-01.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x256 horizontal. Tiny original plant-stem surface, two broad dark green vertical bands over muted olive yellow green. Preserve bands and palette; add subtle realistic stem fibres and fine longitudinal texture, no leaves or extra objects.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-d174e6a2-1b67-46af-a62c-42ee5a6c10ce.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-branch-01.png",
+    "size": [
+      1024,
+      256
+    ],
+    "original_size": [
+      32,
+      8
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-branch-01.png",
+        "sha256": "b64a91309e6d085d0d3719f050db4231ebcadda5790cf77686fcaab27620455a"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-palm-dirt",
+    "page": "waspala-tfrag",
+    "file": "waspala-palm-dirt.png",
+    "label": "waspala-palm-dirt",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palm-dirt.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original dark brown earthy soil, same mottled distribution. Fine realistic packed dry earth, tiny mineral grit and scant organic fibres; keep scale small, no large pebbles, roots or plants.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-0300a58a-d771-4674-806c-6bc7e3849cea.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-palm-dirt.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-palm-dirt.png",
+        "sha256": "088d5aa343f35b080fa5503d167a889fcbb166b0e8ae239b3df14082564a7cca"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      128,
+      128
+    ]
+  },
+  {
+    "key": "waspala-palmtree-beard",
+    "page": "waspala-tfrag",
+    "file": "waspala-palmtree-beard.png",
+    "label": "waspala-palmtree-beard",
+    "reference": "C:/Users/Gjelal/Documents/OpenGoal/active/jak3/data/decompiler_out/jak3/textures/waspala-tfrag/waspala-palmtree-beard.png",
+    "prompt": "Use case: precise-object-edit.\nAsset type: faithful modern game albedo.\nInput: original texture, EDIT TARGET.\nRequest: 1024x1024. Original curtain of long narrow dried palm fibres hanging down from the top, muted straw/tan/olive coloration, irregular pointed bottom edge. Preserve each main hanging strand and silhouette exactly. Realistic dry fibrous strands and fine weathering. Keep the existing olive background; original cutout alpha will be applied separately. Do not add a plant, trunk or scenery.\nInvariant constraints: original game's exact UV layout, composition, major pattern positions, colours and average brightness. Faithful recognizable Jak 3 style with realistic fine material details. Orthographic flat albedo filling all edges, original repetition, no perspective, borders, watermark, text, directional light or cast shadows. Opaque RGB. No redesign or added ornament.",
+    "tool": "built-in ImageGen",
+    "status": "generated; held pending native visibility diagnosis",
+    "generated_path": "C:\\Users\\Gjelal\\.codex\\generated_images\\01a0a501-7cc7-7072-9c65-4e16af3cef4d\\exec-46fc32cc-fcf8-4731-8591-ed6952ec27d5.png",
+    "master": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\terrain-v1\\masters\\waspala-palmtree-beard.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "original_size": [
+      64,
+      64
+    ],
+    "placements": [
+      {
+        "path": "waspala-tfrag/waspala-palmtree-beard.png",
+        "sha256": "76bb778e52283958a3095d040c48e905029370499781a9378e4972b8f2d79430"
+      }
+    ],
+    "alpha_mode": "source",
+    "alpha_range": [
+      0,
+      128
+    ]
+  }
+]

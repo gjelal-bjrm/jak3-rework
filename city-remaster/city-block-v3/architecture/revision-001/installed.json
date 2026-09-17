@@ -1,0 +1,32 @@
+{
+  "status": "installed",
+  "path": "out/jak3/fr3/wascitya.fr3",
+  "base_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\staging\\wascitya.fr3",
+  "base_sha256": "a1ee034f7733fea032f0a97077d022d6420b679627ccd43250eb8b6d7e71e9ec",
+  "output_path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\staging\\wascitya.fr3",
+  "output_sha256": "fd442a3c6d80c55d89189c8cc6fa09f21a41491ff83f12df9ac230e4dffa25c9",
+  "patch": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\wascitya-patch.json",
+  "patch_sha256": "1784b8e6ec8e4f84513b941058aad57a7507df74eed56c669af367786d39a0eb",
+  "preservation_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\staging\\preservation.json",
+  "preservation_report_sha256": "8bf0361d8d77b8e2919ddb27e10fcee4a0cde358cc9ed456b9360a4b04c8a813",
+  "parent_record": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\installed.json",
+  "parent_record_sha256": "6554bbf28c4c51e84dbed5112cabb314f94f0c11d4eed2b67057489e57e516e6",
+  "author_report": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\author-report.json",
+  "author_report_sha256": "b8bf127808e8efc4a4579ec10e4202052bf46616374066333841e12218d2793a",
+  "native_visual_validation": false,
+  "scope": "House2 seven closed beveled bronze pointed ornaments, remove entire superseded motif intersecting window and loose fragments; no walls or windows moved",
+  "bvh_coverage": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\bvh-coverage.json",
+  "bvh_coverage_sha256": "4074a0187b0ad560d8e7d165c9a1dc0490bb5a2e80dde3a4de87b802f305d138",
+  "opening_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\opening-validation.json",
+  "opening_validation_sha256": "9fe7ce5cde2ea89277f41f5a007d2c8c462f94b48d9d475ae74e96eb42179122",
+  "geometry_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\geometry-validation.json",
+  "geometry_validation_sha256": "9efc38758e69e92fa78eda33fac577dd769d168555ec73c3d81e21a9ceda727d",
+  "window_anchors": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture\\window-anchors.json",
+  "window_anchors_sha256": "1a8a258e2b2731d9a8b7ce5eee493fb41f936cac4fdb4b397d3d06b960e56b04",
+  "ornament_validation": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\city-block-v3\\architecture-ornaments-r1\\ornament-validation.json",
+  "ornament_validation_sha256": "b78791aa93b4d9ea5d3f56ea89f58d10c73554888661c7206dd4e0e486e3205b",
+  "protected_variant_hashes": {
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\original\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf",
+    "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\variants\\remaster-v1\\out\\jak3\\fr3\\wascitya.fr3": "e8833da672ff8c30ea24431eb7d5b90d7704f2e07fa78abfe657def66b657bbf"
+  }
+}

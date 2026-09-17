@@ -1,0 +1,203 @@
+{
+  "passed": true,
+  "source_sha256": "ce3ed2028a71f80b292ff5df34cbe70f3839de4973c930860bd7f871bdd42604",
+  "patch_sha256": "08e12469c97004bc122981e09b81cf93284d007adafb4b149f0ba53c3d3c5b75",
+  "checks": [
+    {
+      "name": "Every removal exists in exact source",
+      "passed": true
+    },
+    {
+      "name": "All removed original positions match",
+      "passed": true
+    },
+    {
+      "name": "No duplicate native removals",
+      "passed": true
+    },
+    {
+      "name": "No nonfinite vertices or normals",
+      "passed": true
+    },
+    {
+      "name": "wca-house1-west-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-east-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-upper-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-street-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-upper-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-east-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-west-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-low-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-north-room LOD0 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-west-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-east-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-upper-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-street-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-upper-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-east-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-west-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-low-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-north-room LOD1 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-west-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-east-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-upper-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-street-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-upper-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-east-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-west-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-low-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-north-room LOD2 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-west-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-east-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house1-upper-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-street-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house2-upper-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-east-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-west-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-low-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    },
+    {
+      "name": "wca-house-north-room LOD3 actual 3x3 rays clear",
+      "passed": true,
+      "hits": []
+    }
+  ]
+}

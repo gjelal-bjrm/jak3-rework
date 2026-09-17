@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "checks": {
+    "full_vertex_shader_compile_and_link": true,
+    "native_19530_vertices_finite": true,
+    "all_native_roots_bit_identical": true,
+    "tall_native_tip_visible_displacement": true,
+    "outer_native_tips_follow_root_contact": true,
+    "distant_blades_bit_identical": true,
+    "other_floor_bit_identical": true,
+    "duplicates_do_not_amplify": true,
+    "bounded_displacement": true,
+    "smooth_monotonic_recovery": true,
+    "one_second_exact_rest": true,
+    "non_grass_mode_unchanged": true,
+    "palace_foliage_unchanged": true
+  },
+  "driver": {
+    "version": "4.6.0 NVIDIA 610.62",
+    "renderer": "NVIDIA GeForce RTX 3080 Ti/PCIe/SSE2"
+  },
+  "shader_sha256": "2ae1da31e2cc1ae29c736476005eebbf5f535b5304d2a6c91e9adad1e80e7088",
+  "native_vertices": 19530,
+  "native_export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\grass-contact-v2\\qa\\native-grass.json",
+  "native_export_sha256": "b1b36b6a55ad17239c668be9a01defcd243d5a96bed712a69f6de42c53f9fb1d",
+  "contact_m": [
+    2264.562255859375,
+    17.115966796875,
+    9.413247108459473
+  ],
+  "tall_tip_position_m": [
+    2264.47216796875,
+    19.23686981201172,
+    9.635663032531738
+  ],
+  "tall_blade_height_m": 2.277559280395508,
+  "tall_tip_displacement_m": 0.6537160277366638,
+  "outer_tip_max_displacement_m": 0.5224929451942444,
+  "max_displacement_m": 0.6537160277366638,
+  "recovery_age_s": [
+    0,
+    0.1,
+    0.3,
+    0.6,
+    0.9,
+    1.0,
+    1.2
+  ],
+  "recovery_displacement_m": [
+    0.6537160277366638,
+    0.65273118019104,
+    0.5595163702964783,
+    0.2633586823940277,
+    0.021454298868775368,
+    0.0,
+    0.0
+  ],
+  "native_visual_validation": false
+}

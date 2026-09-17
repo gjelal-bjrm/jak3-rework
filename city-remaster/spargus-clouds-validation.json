@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checks": {
+    "glsl_compile_and_link": true,
+    "finite_rgba": true,
+    "native_half_alpha_contract": true,
+    "neutral_rgb_preserves_palette": true,
+    "visible_temporal_evolution": true,
+    "smooth_frame_step": true,
+    "saturated_native_banks_keep_internal_relief": true,
+    "clear_native_weather_stays_clear": true
+  },
+  "fixture": "Synthetic native-style coverage; not an in-game screenshot",
+  "render_ms": [
+    6.338600011076778,
+    1.5124999918043613,
+    3.8674000243190676,
+    1.875600020866841
+  ],
+  "max_frame_step": 0.0013420358300209045,
+  "mean_32s_change": 0.022389542311429977,
+  "saturated_bank_shading_stddev": 0.04774196073412895,
+  "native_visual_validation": false
+}

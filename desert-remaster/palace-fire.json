@@ -1,0 +1,368 @@
+{
+  "status": "Reference inventory only; original fire still displayed.",
+  "source": "data/decompiler_out/jak3/entities/waspala-actors.json",
+  "counts": {
+    "group-waspala-crucible-fire": 9,
+    "group-waspala-hanging-fire": 5,
+    "group-waspala-wallfire": 10
+  },
+  "actors": [
+    {
+      "aid": 45104,
+      "name": "part-spawner-1620",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        2068.34765625,
+        244.6076202392578,
+        -439.5204162597656,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45111,
+      "name": "part-spawner-1627",
+      "group": "group-waspala-hanging-fire",
+      "flame_particle": 2736,
+      "trans_m": [
+        2044.33251953125,
+        260.5553894042969,
+        -427.9637756347656,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45088,
+      "name": "part-spawner-1604",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        2012.4354248046875,
+        256.5873718261719,
+        -416.93377685546875,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45101,
+      "name": "part-spawner-1617",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        2017.756591796875,
+        247.03016662597656,
+        -427.5813903808594,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45105,
+      "name": "part-spawner-1621",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        2021.6351318359375,
+        246.88926696777344,
+        -414.157470703125,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45089,
+      "name": "part-spawner-1605",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        2030.8819580078125,
+        251.65386962890625,
+        -423.3805847167969,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45090,
+      "name": "part-spawner-1606",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        2047.1773681640625,
+        251.02096557617188,
+        -440.1131286621094,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45099,
+      "name": "part-spawner-1615",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        1996.695556640625,
+        248.2882537841797,
+        -410.3873596191406,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45100,
+      "name": "part-spawner-1616",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        2006.619873046875,
+        248.2882537841797,
+        -410.3873596191406,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45093,
+      "name": "part-spawner-1609",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        1980.07421875,
+        251.1126251220703,
+        -428.58984375,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45098,
+      "name": "part-spawner-1614",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        1984.552734375,
+        246.904541015625,
+        -427.2791442871094,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45106,
+      "name": "part-spawner-1622",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        1982.3966064453125,
+        246.88926696777344,
+        -414.157470703125,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45110,
+      "name": "part-spawner-1626",
+      "group": "group-waspala-hanging-fire",
+      "flame_particle": 2736,
+      "trans_m": [
+        1969.3896484375,
+        260.5553894042969,
+        -433.6893005371094,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45092,
+      "name": "part-spawner-1608",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        1991.96630859375,
+        254.2679901123047,
+        -416.6759033203125,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45094,
+      "name": "part-spawner-1610",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        1967.8936767578125,
+        250.9300994873047,
+        -446.65179443359375,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45095,
+      "name": "part-spawner-1611",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        2027.325927734375,
+        250.8111114501953,
+        -501.0771179199219,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45103,
+      "name": "part-spawner-1619",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        2035.41943359375,
+        246.88650512695312,
+        -519.3986206054688,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45109,
+      "name": "part-spawner-1625",
+      "group": "group-waspala-hanging-fire",
+      "flame_particle": 2736,
+      "trans_m": [
+        2041.8765869140625,
+        260.5553894042969,
+        -494.7160949707031,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45091,
+      "name": "part-spawner-1607",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        2048.688232421875,
+        251.01776123046875,
+        -479.6444396972656,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45096,
+      "name": "part-spawner-1612",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        1998.5614013671875,
+        251.04702758789062,
+        -503.746337890625,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45108,
+      "name": "part-spawner-1624",
+      "group": "group-waspala-hanging-fire",
+      "flame_particle": 2736,
+      "trans_m": [
+        2013.42431640625,
+        260.5553894042969,
+        -507.685302734375,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45102,
+      "name": "part-spawner-1618",
+      "group": "group-waspala-crucible-fire",
+      "flame_particle": 2739,
+      "trans_m": [
+        1949.805908203125,
+        244.5513916015625,
+        -485.3455505371094,
+        0.000244140625
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "aid": 45097,
+      "name": "part-spawner-1613",
+      "group": "group-waspala-wallfire",
+      "flame_particle": 2731,
+      "trans_m": [
+        1971.1728515625,
+        251.0031280517578,
+        -483.3069763183594,
+        0.000244140625
+      ],
+      "scale": null
+    },
+    {
+      "aid": 45107,
+      "name": "part-spawner-1623",
+      "group": "group-waspala-hanging-fire",
+      "flame_particle": 2736,
+      "trans_m": [
+        1981.2584228515625,
+        260.5553894042969,
+        -497.6298828125,
+        0.000244140625
+      ],
+      "scale": null
+    }
+  ]
+}

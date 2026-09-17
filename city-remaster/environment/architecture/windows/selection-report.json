@@ -1,0 +1,28 @@
+{
+  "wascitya": {
+    "source_fr3": {
+      "bytes": 191639008,
+      "sha256": "12af3f4856dca0ad125594fa3d35c33f854798abc655e7a2d3322dc383464d0c",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascitya.fr3"
+    },
+    "families": {
+      "0/3": 145
+    },
+    "frames": 145,
+    "export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\windows\\wascitya-native.json",
+    "export_sha256": "706d57c0d08989718c9e3966a746867a11d30cea4b94c4bc84f1882c5775c00e"
+  },
+  "wascityb": {
+    "source_fr3": {
+      "bytes": 235009310,
+      "sha256": "e4c756fc7c65988f89b7a0204b7365e96251ccb75ab368bd80bd4bb5a7f7edee",
+      "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\staging\\city-environment-001\\wascityb.fr3"
+    },
+    "families": {
+      "0/10": 133
+    },
+    "frames": 133,
+    "export": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\city-remaster\\environment\\architecture\\windows\\wascityb-native.json",
+    "export_sha256": "3914cbb08011bbec36864814317dddd771e79db77f559e46264e9fded8b8c29e"
+  }
+}

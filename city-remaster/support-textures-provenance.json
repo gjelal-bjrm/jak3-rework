@@ -1,0 +1,6 @@
+{
+  "mode": "imagegen edit from each exact native albedo",
+  "wood": {"source": "wascityb-vis-tfrag/wascity-wood-plain.png", "generated": "exec-7a1defce-fb4f-47ea-899c-f3b95497b06e.png", "asset": "support-wood-hd.png", "palette": "warm muted brown and dusty tan; horizontal worn grain"},
+  "metal": {"source": "wascityb-vis-tfrag/wascity-metal-dirty.png", "generated": "exec-845ccd13-298d-48dd-a617-bfba9abbe546.png", "asset": "support-metal-hd.png", "palette": "muted blue-grey forged iron with small dusty brown oxidation"},
+  "scope": "Dedicated textures on the rebuilt market supports only; no global atlas replacement. Originals preserved."
+}
