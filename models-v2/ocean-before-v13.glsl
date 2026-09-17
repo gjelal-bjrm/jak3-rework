@@ -94,21 +94,17 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
   confidence=smoothstep(.015,.12,weight);
   return total/max(weight,.00001);
 }
-// Ciel : le vrai ciel de la scene (capture avant la mer) domine ; un degrade clair sert de secours.
-vec3 oceanSkyFallback(vec3 ray) {
-  return mix(vec3(.62,.66,.70),vec3(.42,.53,.68),smoothstep(0.,.6,ray.y));
-}
 vec3 oceanSky(vec3 ray) {
-  vec3 sky=oceanSkyFallback(ray);
+  vec3 sky=mix(vec3(.33,.36,.34),vec3(.37,.42,.43),smoothstep(0.,.8,ray.y));
   float confidence;
   vec3 sampled=oceanSkySample(ray,.012,confidence);
-  sky=mix(sky,sampled,.88*smoothstep(-.025,.015,ray.y)*confidence);
+  sky=mix(sky,sampled,.32*smoothstep(-.025,.015,ray.y)*confidence);
   return sky*ocean_reflection_tint;
 }
 vec3 oceanHorizonSky(vec3 away) {
   float confidence;
   vec3 sampled=oceanSkySample(away,.018,confidence);
-  return mix(oceanSkyFallback(away)*ocean_reflection_tint,sampled,confidence);
+  return mix(vec3(.33,.36,.34)*ocean_reflection_tint,sampled,confidence);
 }
 vec3 blurredScene(vec2 uv) {
   vec2 px=vec2(2.)/vec2(textureSize(tex_T25,0));
@@ -166,40 +162,26 @@ vec3 shadeModernOcean() {
     vec3 transmission=exp(-vec3(.65,.38,.45)*thickness);
     body=texture(tex_T25,uv).rgb*transmission+deep*(1.-transmission);
   }
-  float facing=max(dot(n,v),0.);
-  float fresnel=.035+.90*pow(1.-facing,5.);
-  // Corps : avec la distance, l'eau s'eclaircit vers un vert grise (diffusion), jamais bleu.
-  float far=smoothstep(60.,600.,range);
-  body=mix(body,vec3(.16,.23,.20),far*.85);
-  // Diffusion sous la surface sur les cretes : vert d'eau plus clair.
-  float height=oceanSwell(p.xz).x;
-  float crest=smoothstep(.05,.32,height);
-  body+=vec3(.06,.13,.10)*crest*(1.-far*.6);
+  float fresnel=.035+.90*pow(1.-max(dot(n,v),0.),5.);
   vec3 result=mix(body,oceanReflection(p,n,v),fresnel);
   // A soft sky lobe makes small wave curvature readable from above.
   float skyLobe=pow(max(dot(n,normalize(v+vec3(-.3,.78,-.43))),0.),36.);
   result+=vec3(.16,.18,.17)*skyLobe*.20;
-  // Soleil : reflet etroit de pres, scintillement large au loin (rugosite croissante).
   vec3 light=normalize(vec3(-.32,.66,-.68));
-  float a2=mix(.0225,.13,far);
-  float nh=max(dot(n,normalize(light+v)),0.);
+  float nh=max(dot(n,normalize(light+v)),0.),a2=.0225;
   float spec=a2/(3.14159*pow(max(.006,nh*nh*(a2-1.)+1.),2.));
-  result+=vec3(1.,.88,.62)*min(spec*mix(.007,.02,far),.8)*max(dot(n,light),0.);
-  // Ecume : contacts de Jak, berges, et moutons epars sur les cretes a moyenne distance.
+  result+=vec3(1.,.85,.56)*min(spec*.007,.65)*max(dot(n,light),0.);
+  // Only short-lived disturbed water near Jak and shallow breaking contacts.
   float noise=oceanNoise(p.xz*7.-ocean_time*vec2(.65,.31));
   float bubbles=smoothstep(.68,.88,noise);
-  float coast=(1.-smoothstep(.15,1.1,thickness))*smoothstep(.03,.25,height);
-  float caps=smoothstep(.20,.34,height)*smoothstep(.55,.85,oceanNoise(p.xz*.9+ocean_time*vec2(.12,.07)))
-             *(1.-smoothstep(150.,500.,range))*(.35+.65*bubbles);
-  float foam=clamp(wake*bubbles+coast*bubbles*.16+caps*.6,0.,.5);
-  result=mix(result,vec3(.72,.78,.75),foam);
-  // Brume : vers le vrai ciel de l'horizon, pas vers un gris fixe.
-  vec3 horizonSky=oceanHorizonSky(-v);
-  float haze=1.-exp(-range*.0007);
-  result=mix(result,horizonSky,haze*.55);
+  float coast=(1.-smoothstep(.15,1.1,thickness))*smoothstep(.03,.25,oceanSwell(p.xz).x);
+  float foam=clamp(wake*bubbles+coast*bubbles*.16,0.,.22);
+  result=mix(result,vec3(.66,.73,.70),foam);
+  float haze=1.-exp(-range*.00022);
+  result=mix(result,vec3(.18,.205,.19),haze*.38);
   if(range<=750.)return result;
-  float extinction=1.-exp(-max(range-750.,0.)*.0006);
-  return mix(result,horizonSky,extinction);
+  float extinction=1.-exp(-max(range-750.,0.)*.0004);
+  return mix(result,oceanHorizonSky(-v),extinction);
 }
 vec4 shadeOceanHorizon() {
   vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));

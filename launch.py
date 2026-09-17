@@ -24,7 +24,8 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast'), default='arena')
+parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
@@ -42,6 +43,8 @@ CITY_SCENES = {
              'label': "devant l'appartement de l'entree de la ville (double fenetre, couple)"},
     'market': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1821.1, 29.6, -359.6),
                'label': 'devant la maison sud du marche (fenetre habitee)'},
+    'coast': {'continue': 'wascityb-start', 'arrival': (1776.4, -375.5), 'viewpoint': (1685.0, 20.0, -440.0),
+              'face': (1450.0, -600.0), 'label': 'sur la cote de Spargus, face au large'},
 }
 route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 
@@ -216,6 +219,15 @@ def place_jak_in_city(game, game_log, capture):
     tag += 1
     position = probe_position(sock, game, game_log, tag, 10)
     say(f'Jak est place {scene["label"]}, position {position}')
+    face = tuple(float(v) for v in args.face.split(',')) if args.face else scene.get('face')
+    if face and position:
+        import math
+        yaw = math.atan2(face[0] - position[0], face[1] - position[2])
+        nrepl_send(sock, '(when (and *target* (-> *target* control)) '
+                         f'(quaternion-axis-angle! (-> *target* control quat) 0.0 1.0 0.0 {yaw!r}) '
+                         f'(quaternion-axis-angle! (-> *target* root quat) 0.0 1.0 0.0 {yaw!r}))')
+        say(f'Jak se tourne vers {face} (la camera suit en quelques secondes)')
+        time.sleep(4)
     if capture:
         time.sleep(4)
         nrepl_send(sock, '(pc-screen-shot)')
