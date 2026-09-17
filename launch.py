@@ -26,6 +26,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
 parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
+parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
@@ -232,6 +233,18 @@ def place_jak_in_city(game, game_log, capture):
         time.sleep(4)
         nrepl_send(sock, '(pc-screen-shot)')
         say('capture demandee (dossier screenshots du profil).')
+    if args.burst:
+        shot = profile / 'OpenGOAL/jak3/screenshots/screenshot.png'; out = ROOT / 'qa'; out.mkdir(exist_ok=True)
+        for k in range(args.burst):
+            time.sleep(3)
+            before = shot.stat().st_mtime if shot.exists() else 0
+            nrepl_send(sock, '(pc-screen-shot)')
+            for _ in range(30):
+                time.sleep(.3)
+                if shot.exists() and shot.stat().st_mtime > before: break
+            time.sleep(.4)
+            if shot.exists(): shutil.copy2(shot, out / f'burst-{args.scene}-{k:02d}.png')
+        say(f'rafale : {args.burst} captures dans {out}')
     if args.tour:
         tour(sock, game, game_log, tag, say)
     return goalc

@@ -181,17 +181,16 @@ vec3 shadeModernOcean() {
   result+=vec3(.16,.18,.17)*skyLobe*.20;
   // Soleil : reflet etroit de pres, scintillement large au loin (rugosite croissante).
   vec3 light=normalize(vec3(-.32,.66,-.68));
-  float a2=mix(.0225,.13,far);
+  float a2=mix(.0225,.075,far);
   float nh=max(dot(n,normalize(light+v)),0.);
   float spec=a2/(3.14159*pow(max(.006,nh*nh*(a2-1.)+1.),2.));
-  result+=vec3(1.,.88,.62)*min(spec*mix(.007,.02,far),.8)*max(dot(n,light),0.);
+  result+=vec3(1.,.88,.62)*min(spec*mix(.007,.014,far),.6)*max(dot(n,light),0.);
   // Ecume : contacts de Jak, berges, et moutons epars sur les cretes a moyenne distance.
   float noise=oceanNoise(p.xz*7.-ocean_time*vec2(.65,.31));
   float bubbles=smoothstep(.68,.88,noise);
   float coast=(1.-smoothstep(.15,1.1,thickness))*smoothstep(.03,.25,height);
-  float caps=smoothstep(.20,.34,height)*smoothstep(.55,.85,oceanNoise(p.xz*.9+ocean_time*vec2(.12,.07)))
-             *(1.-smoothstep(150.,500.,range))*(.35+.65*bubbles);
-  float foam=clamp(wake*bubbles+coast*bubbles*.16+caps*.6,0.,.5);
+  // (moutons de crete retires : le bruit grossier faisait des taches rectangulaires de pres)
+  float foam=clamp(wake*bubbles+coast*bubbles*.16,0.,.22);
   result=mix(result,vec3(.72,.78,.75),foam);
   // Brume : vers le vrai ciel de l'horizon, pas vers un gris fixe.
   vec3 horizonSky=oceanHorizonSky(-v);
