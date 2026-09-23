@@ -1,0 +1,375 @@
+From 8f7457676e172893f3d2dea0a6badb01a504531b Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 23 Sep 2026 17:34:42 +0200
+Subject: [PATCH 14/14] =?UTF-8?q?Ciel=20moderne=20:=20passe=20plein=20?=
+ =?UTF-8?q?=C3=A9cran=20(nuages=20en=20couches=20=C3=A9clair=C3=A9s=20par?=
+ =?UTF-8?q?=20le=20soleil,=20cirrus,=20soleil=20avec=20lueur,=20=C3=A9toil?=
+ =?UTF-8?q?e=20du=20jour=20redessin=C3=A9e),=20=C3=A9tat=20du=20ciel=20pub?=
+ =?UTF-8?q?li=C3=A9=20par=20GOAL?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernSky.h     |  70 +++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |   1 +
+ .../graphics/opengl_renderer/OpenGLRenderer.h |   2 +
+ game/graphics/opengl_renderer/SkyState.h      |  36 +++++
+ .../opengl_renderer/shaders/modern_sky.frag   | 139 ++++++++++++++++++
+ .../opengl_renderer/shaders/modern_sky.vert   |  13 ++
+ game/kernel/jak3/kmachine.cpp                 |   6 +
+ 7 files changed, 267 insertions(+)
+ create mode 100644 game/graphics/opengl_renderer/ModernSky.h
+ create mode 100644 game/graphics/opengl_renderer/SkyState.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_sky.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_sky.vert
+
+diff --git a/game/graphics/opengl_renderer/ModernSky.h b/game/graphics/opengl_renderer/ModernSky.h
+new file mode 100644
+index 00000000..2ecd2d25
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernSky.h
+@@ -0,0 +1,70 @@
++#pragma once
++#include <memory>
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/SkyState.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++#include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
++
++// Ciel moderne : passe plein ecran, apres le decor opaque et avant la mer (qui le reflete). Sur les pixels
++// de ciel (profondeur du brouillard natif), garde le degrade d'ambiance natif du niveau et ajoute des
++// nuages en couches eclaires par le soleil, un soleil avec lueur, et l'etoile du jour redessinee.
++// Active seulement si GOAL publie l'etat du ciel (sky-tng.gc patche : nuages plats, soleil et etoile
++// natifs non dessines).
++class ModernSky {
++ public:
++  ~ModernSky() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++  void render(SharedRenderState* state) {
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
++    std::array<float, 3> sun, green, moon, star; float hour; bool star_on, valid;
++    {
++      std::lock_guard<std::mutex> guard(SkyState::mutex);
++      valid = SkyState::valid; sun = SkyState::sun; green = SkyState::green_sun; moon = SkyState::moon;
++      star = SkyState::day_star; hour = SkyState::hour; star_on = SkyState::day_star_on;
++    }
++    if (!valid) return;
++    GLint program, old_vao, depth_func, old_active, tex25, tex26;
++    GLboolean depth_write, color_mask[4];
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &old_vao);
++    glGetIntegerv(GL_DEPTH_FUNC, &depth_func); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
++    glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active);
++    glActiveTexture(GL_TEXTURE25); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex25);
++    glActiveTexture(GL_TEXTURE26); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex26);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST};
++    GLboolean was[5];
++    for (int i = 0; i < 5; i++) { was[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
++    if (!m_shader) { m_shader = std::make_unique<Shader>("modern_sky", state->version); glGenVertexArrays(1, &m_vao); }
++    if (m_shader->okay()) {
++      m_shader->activate();
++      const GLuint id = m_shader->id();
++      m_snapshot.bind(state, id);   // couleur (ciel natif deja dessine) + profondeur -> tex_T25 / tex_T26
++      glUniform1i(glGetUniformLocation(id, "tex_T25"), 25);
++      glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++      glUniformMatrix4fv(glGetUniformLocation(id, "sky_camera"), 1, GL_FALSE, state->prototype_camera);
++      glUniform1f(glGetUniformLocation(id, "sky_time"), LiquidSnapshot::seconds());
++      glUniform1f(glGetUniformLocation(id, "sky_hour"), hour);
++      glUniform3fv(glGetUniformLocation(id, "sky_sun"), 1, sun.data());
++      glUniform3fv(glGetUniformLocation(id, "sky_green_sun"), 1, green.data());
++      glUniform3fv(glGetUniformLocation(id, "sky_moon"), 1, moon.data());
++      glUniform3fv(glGetUniformLocation(id, "sky_day_star"), 1, star.data());
++      glUniform1f(glGetUniformLocation(id, "sky_day_star_on"), star_on ? 1.f : 0.f);
++      // Couverture nuageuse par region : desert de Spargus plus degage, Haven plus charge.
++      float coverage = .46f;
++      if (ModernOcean::level_loaded(state, "was")) coverage = .44f;
++      else if (ModernOcean::level_loaded(state, "cty")) coverage = .58f;
++      glUniform1f(glGetUniformLocation(id, "sky_coverage"), coverage);
++      glBindVertexArray(m_vao);
++      glDepthMask(GL_FALSE); glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
++      glDrawArrays(GL_TRIANGLES, 0, 3);
++    }
++    glUseProgram(program); glBindVertexArray(old_vao); glDepthFunc(depth_func); glDepthMask(depth_write);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]);
++    for (int i = 0; i < 5; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
++    glActiveTexture(GL_TEXTURE25); glBindTexture(GL_TEXTURE_2D, tex25);
++    glActiveTexture(GL_TEXTURE26); glBindTexture(GL_TEXTURE_2D, tex26); glActiveTexture(old_active);
++  }
++
++ private:
++  std::unique_ptr<Shader> m_shader;
++  LiquidSnapshot m_snapshot;
++  GLuint m_vao = 0;
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index c790f543..2c2e3737 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1445,6 +1445,7 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+       m_palace_fire.render(&m_render_state);
+     }
+     if (bucket_id == (int)jak3::BucketId::BUCKET567) {
++      m_modern_sky.render(&m_render_state);   // avant la mer : elle reflete le nouveau ciel
+       m_modern_ocean.render(&m_render_state);
+       m_water_fountains.render(&m_render_state);
+       m_water_spray.render(&m_render_state);
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index 21899c40..b1a78d39 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -13,6 +13,7 @@
+ #include "game/graphics/opengl_renderer/LiquidBloom.h"
+ #include "game/graphics/opengl_renderer/WaterSpray.h"
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
++#include "game/graphics/opengl_renderer/ModernSky.h"
+ #include "game/graphics/opengl_renderer/WaterFountains.h"
+ #include "game/graphics/opengl_renderer/PalaceFire.h"
+ #include "game/graphics/opengl_renderer/CityInteriors.h"
+@@ -121,6 +122,7 @@ class OpenGLRenderer {
+   SharedRenderState m_render_state;
+   LiquidBloom m_liquid_bloom;
+   WaterSpray m_water_spray;
++  ModernSky m_modern_sky;
+   ModernOceanSurface m_modern_ocean;
+   WaterFountains m_water_fountains;
+   CityInteriors m_city_interiors;
+diff --git a/game/graphics/opengl_renderer/SkyState.h b/game/graphics/opengl_renderer/SkyState.h
+new file mode 100644
+index 00000000..0a7cb5d7
+--- /dev/null
++++ b/game/graphics/opengl_renderer/SkyState.h
+@@ -0,0 +1,36 @@
++#pragma once
++#include <array>
++#include <cmath>
++#include <cstring>
++#include <mutex>
++
++// Etat du ciel publie par GOAL (sky-tng.gc, methode draw de sky-work) a chaque image :
++// positions du soleil, du soleil vert, de la lune et de l'etoile du jour (axes monde, non normalisees),
++// heure du jour et activation de l'etoile. Sans publication (code GOAL non patche), la passe de ciel
++// moderne reste inactive : le ciel natif est alors dessine tel quel.
++namespace SkyState {
++inline std::mutex mutex;
++inline std::array<float, 3> sun{0.f, 1.f, 0.f}, green_sun{0.f, 1.f, 0.f}, moon{0.f, 1.f, 0.f}, day_star{0.f, .217f, -.976f};
++inline float hour = 9.f;
++inline bool day_star_on = true;
++inline bool valid = false;
++inline unsigned frame = 0;
++
++// upload : sky-upload-data (16 x uint128) ; misc : vecteur (x = heure, y = etoile du jour 1/0)
++inline void publish(const float* upload, const float* misc) {
++  std::lock_guard<std::mutex> guard(mutex);
++  auto direction = [](const float* p, std::array<float, 3>& out) {
++    const float length = std::sqrt(p[0] * p[0] + p[1] * p[1] + p[2] * p[2]);
++    if (!std::isfinite(length) || length < 1.f) return;
++    out = {p[0] / length, p[1] / length, p[2] / length};
++  };
++  direction(upload + 0, sun);          // sun[0].pos : data 0
++  direction(upload + 16, green_sun);   // sun[1].pos : data 4 (64 octets)
++  direction(upload + 32, moon);        // moon.pos : data 8
++  direction(upload + 48, day_star);    // day-star.pos : data 12
++  if (std::isfinite(misc[0])) hour = misc[0];
++  day_star_on = misc[1] > .5f;
++  valid = true;
++  ++frame;
++}
++}  // namespace SkyState
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.frag b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+new file mode 100644
+index 00000000..0c4fb0b8
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+@@ -0,0 +1,139 @@
++#version 410 core
++// Ciel moderne de Jak 3 (remaster). Sur les pixels de ciel :
++//  1. degrade d'ambiance natif du niveau (conserve : c'est lui qui porte l'identite de chaque zone) ;
++//  2. eclaircissement vers le soleil (diffusion), soleil : disque net + lueur ;
++//  3. nuages : couche principale (cumulus, ~1,6 km) eclairee par le soleil avec ombre propre et lisere
++//     lumineux, plus une couche haute de cirrus etires par le vent ; les deux s'ecrasent dans la brume
++//     d'horizon ;
++//  4. etoile du jour (vaisseau des Dark Makers) : coeur blanc-violet, halo, anneau d'eco noir qui ondule,
++//     quatre aigrettes, pulsation lente.
++in vec3 sky_ray;
++out vec4 color;
++uniform sampler2D tex_T25;
++uniform sampler2D tex_T26;
++uniform vec4 fluid_viewport;
++uniform mat4 sky_camera;
++uniform float sky_time;
++uniform float sky_hour;
++uniform vec3 sky_sun;
++uniform vec3 sky_green_sun;
++uniform vec3 sky_moon;
++uniform vec3 sky_day_star;
++uniform float sky_day_star_on;
++uniform float sky_coverage;
++
++bool skyDepth(float depth){
++  const float step24=1./16777215.;
++  return depth<=1.5*step24 || abs(depth-400.*step24)<=1.5*step24;
++}
++vec2 project(vec3 ray){
++  vec4 h=-sky_camera*vec4(ray*4096.,1.);
++  h.y*=(512./416.)*.5;
++  vec2 n=h.xy/h.w;
++  return (fluid_viewport.xy+(n*.5+.5)*fluid_viewport.zw)/vec2(textureSize(tex_T25,0));
++}
++float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
++float noise(vec2 p){
++  vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
++  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);
++}
++float fbm(vec2 p){
++  float v=0.,a=.5;mat2 r=mat2(.8,.6,-.6,.8);
++  for(int i=0;i<5;i++){v+=a*noise(p);p=r*p*2.03+vec2(7.1,3.7);a*=.5;}
++  return v;
++}
++// Densite de la couche principale au point plan p (m). Grandes masses + detail, seuil par couverture.
++float cloudDensity(vec2 p,float coverage){
++  float shape=fbm(p*.00055+vec2(sky_time*.0011,0.));
++  float detail=fbm(p*.0028-vec2(0.,sky_time*.0021));
++  // fbm vaut ~0,3-0,65 : on etire son contraste avant le seuil de couverture.
++  float d=(shape*.7+detail*.3-.47)*3.2+.5;
++  float threshold=.92-coverage*.9;                      // couverture .36 -> .60 ; .54 -> .43
++  return smoothstep(threshold,threshold+.42,d);
++}
++void main(){
++  vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
++  vec3 native=texture(tex_T25,screen).rgb;
++  if(!skyDepth(texture(tex_T26,screen).r)){color=vec4(native,1.);return;}
++  vec3 ray=normalize(sky_ray);
++  vec3 sun=normalize(sky_sun);
++  float sunUp=clamp(sun.y*2.5,0.,1.);                  // 0 sous l'horizon, 1 des 24 deg d'elevation
++  vec3 sunColor=mix(vec3(1.,.62,.32),vec3(1.,.96,.88),sunUp);
++  // Couleur de brume a l'horizon dans la direction du pixel (echantillon natif juste au-dessus de l'horizon)
++  vec3 horizonRay=normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z));
++  vec2 huv=clamp(project(horizonRay),vec2(.003),vec2(.997));
++  vec3 haze=skyDepth(texture(tex_T26,huv).r)?texture(tex_T25,huv).rgb:native;
++  vec3 result=native;
++  // ---- Diffusion vers le soleil : le ciel s'eclaircit et se rechauffe autour de lui, surtout bas.
++  float toSun=max(dot(ray,sun),0.);
++  result+=sunColor*haze*pow(toSun,4.)*.22*(1.-.6*clamp(ray.y*3.,0.,1.));
++  // ---- Nuages (au-dessus de l'horizon seulement)
++  if(ray.y>.005){
++    float y=max(ray.y,.02);
++    // Couche principale : cumulus a 1,6 km, epaisseur simulee 500 m.
++    vec2 p=ray.xz/y*1600.+vec2(sky_time*9.,sky_time*3.5);
++    float far=exp(-length(ray.xz/y*1600.)*.000038);          // les nuages lointains fondent dans la brume
++    float d=cloudDensity(p,sky_coverage);
++    if(d>.001){
++      // ombre propre : densite decalee vers le soleil (les bords tournes vers lui sont eclaires)
++      vec2 toward=sun.xz/max(sun.y,.18)*420.;
++      float dSun=cloudDensity(p+toward,sky_coverage);
++      float lit=exp(-dSun*2.6)*.75+.25*(1.-d);
++      float powder=1.-exp(-d*4.);                              // bords fins plus clairs, coeur plus dense
++      vec3 ambient=mix(native,vec3(.62,.66,.74),.25)*1.15;
++      vec3 shade=ambient*.62;
++      vec3 bright=mix(ambient,sunColor,.55)*1.25;
++      vec3 cloud=mix(shade,bright,lit*powder);
++      // lisere lumineux : diffusion avant a travers les bords minces
++      float rim=pow(toSun,14.)*(1.-d)*d*3.2;
++      cloud+=sunColor*rim;
++      float alpha=smoothstep(.0,.55,d)*(1.-exp(-d*2.2))*far*smoothstep(.0,.06,ray.y);
++      result=mix(result,mix(cloud,haze,1.-far),alpha*.96);
++    }
++    // Cirrus : haute couche etiree dans le sens du vent, tres legere.
++    if(ray.y>.04){
++      vec2 q=ray.xz/y*7000.+vec2(sky_time*22.,sky_time*4.);
++      mat2 stretch=mat2(.96,.28,-.28,.96);
++      q=stretch*q;q.y*=3.6;
++      float c=fbm(q*.00016)*.6+fbm(q*.0007+vec2(3.3,1.1))*.4;
++      float cirrus=smoothstep(.58,.82,c)*smoothstep(.04,.2,ray.y)*exp(-length(ray.xz/y)*.09);
++      vec3 cirrusColor=mix(vec3(.93,.94,.97),sunColor,.3*pow(toSun,3.));
++      result=mix(result,cirrusColor,cirrus*.42);
++    }
++  }
++  // ---- Soleil : disque net, couronne, lueur large (par-dessus les nuages, attenue par eux via la brume)
++  {
++    float c=dot(ray,sun);
++    float disc=smoothstep(.99990,.99997,c);
++    float corona=pow(max(c,0.),600.)*.7+pow(max(c,0.),2500.)*.6;
++    float glow=pow(max(c,0.),40.)*.35+pow(max(c,0.),7.)*.06;
++    result+=sunColor*(disc*1.5+corona)*step(0.,sun.y+.05)+sunColor*glow*(.6+.4*sunUp);
++  }
++  // ---- Etoile du jour : le vaisseau des Dark Makers, fixe dans le ciel.
++  if(sky_day_star_on>.5){
++    vec3 ds=normalize(sky_day_star);
++    float c=dot(ray,ds);
++    if(c>.985){
++      float angle=acos(clamp(c,-1.,1.));                       // rad depuis le centre
++      vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
++      vec2 local=vec2(dot(ray,right),dot(ray,up));
++      float pulse=.88+.12*sin(sky_time*1.7)+.05*sin(sky_time*4.3);
++      vec3 core=vec3(.92,.86,1.);
++      vec3 violet=vec3(.62,.38,1.);
++      vec3 dark=vec3(.30,.06,.48);
++      float coreDisc=smoothstep(.0075,.0025,angle);
++      float halo=exp(-angle*angle/(2.*.006*.006))*.9+exp(-angle*angle/(2.*.02*.02))*.35;
++      // anneau d'eco noir : rayon ~1,6 deg, epaisseur variable, tourne lentement
++      float theta=atan(local.y,local.x);
++      float wobble=.0022*sin(theta*5.+sky_time*.9)+.0012*sin(theta*9.-sky_time*1.7);
++      float ring=exp(-pow((angle-.040-wobble)*420.,2.))*(.45+.55*noise(vec2(theta*3.+sky_time*.4,sky_time*.2)));
++      // quatre aigrettes fines
++      float spikes=(exp(-abs(local.x)*900.)*exp(-abs(local.y)*40.)+exp(-abs(local.y)*900.)*exp(-abs(local.x)*40.))*smoothstep(.06,.0,angle);
++      vec3 star=core*coreDisc*2.4*pulse+violet*halo*pulse+violet*spikes*.9;
++      result=mix(result,dark,ring*.40*smoothstep(.0,.008,angle));
++      result+=star;
++      result+=violet*ring*.12;
++    }
++  }
++  color=vec4(result,1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.vert b/game/graphics/opengl_renderer/shaders/modern_sky.vert
+new file mode 100644
+index 00000000..adcff35d
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.vert
+@@ -0,0 +1,13 @@
++#version 410 core
++// Ciel moderne : triangle plein ecran ; le rayon de vue (axes monde, depuis l'oeil) est reconstruit
++// depuis la matrice camera du prototype, comme la passe d'horizon de la mer.
++uniform mat4 sky_camera;
++out vec3 sky_ray;
++void main(){
++  vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);
++  vec2 clip=p*2.-1.;
++  vec4 h=vec4(clip.x,clip.y/((512./416.)*.5),0.,1.);
++  vec4 relative=inverse(-sky_camera)*h;
++  sky_ray=relative.xyz/relative.w;
++  gl_Position=vec4(clip,0.,1.);
++}
+diff --git a/game/kernel/jak3/kmachine.cpp b/game/kernel/jak3/kmachine.cpp
+index f6c87f2e..4356b69c 100644
+--- a/game/kernel/jak3/kmachine.cpp
++++ b/game/kernel/jak3/kmachine.cpp
+@@ -32,6 +32,7 @@
+ #include "game/sce/sif_ee.h"
+ #include "game/sce/stubs.h"
+ #include "game/graphics/opengl_renderer/WaterContacts.h"
++#include "game/graphics/opengl_renderer/SkyState.h"
+ #include "game/graphics/opengl_renderer/CityFireSources.h"
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
+ 
+@@ -53,6 +54,10 @@ static u64 prototype_water_contact(u32 packet) {
+   WaterContacts::push(Ptr<float>(packet).c());
+   return 0;
+ }
++static u64 prototype_sky_state(u32 upload, u32 misc) {
++  SkyState::publish(Ptr<float>(upload).c(), Ptr<float>(misc).c());
++  return 0;
++}
+ static u64 prototype_water_stroke(u32 packet, u32 hand) {
+   WaterContacts::push_stroke(Ptr<float>(packet).c(),hand);
+   return 0;
+@@ -443,6 +448,7 @@ void InitMachine_PCPort() {
+   make_function_symbol_from_c("pc-remaster-water-contact", (void*)prototype_water_contact);
+   make_function_symbol_from_c("pc-remaster-grass-contact", (void*)prototype_grass_contact);
+   make_function_symbol_from_c("pc-remaster-water-stroke", (void*)prototype_water_stroke);
++  make_function_symbol_from_c("pc-remaster-sky-state", (void*)prototype_sky_state);
+   // PC Port added functions
+   init_common_pc_port_functions(
+       make_function_symbol_from_c,
+-- 
+2.54.0.windows.1
+

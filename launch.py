@@ -311,10 +311,21 @@ def place_jak_in_city(game, game_log, capture):
 def face_jak(sock, position, face):
     """Tourne Jak (et donc la camera, qui suit) vers le point (x, z) en metres."""
     import math
-    yaw = math.atan2(face[0] - position[0], face[1] - position[2])
+    dx, dz = face[0] - position[0], face[1] - position[2]
+    length = math.hypot(dx, dz) or 1.0
+    yaw = math.atan2(dx, dz) + math.pi   # l'avant de Jak est -Z a rotation nulle (verifie au port)
     nrepl_send(sock, '(when (and *target* (-> *target* control)) '
                      f'(quaternion-axis-angle! (-> *target* control quat) 0.0 1.0 0.0 {yaw!r}) '
                      f'(quaternion-axis-angle! (-> *target* root quat) 0.0 1.0 0.0 {yaw!r}))')
+    # Camera replacee 7 m derriere Jak (a l'oppose du point vise), 2,5 m plus haut : elle regarde Jak,
+    # donc dans la direction visee, puis reprend son suivi normal depuis la.
+    cx = (position[0] - dx / length * 7.0) * 4096.0
+    cy = (position[1] + 2.5) * 4096.0
+    cz = (position[2] - dz / length * 7.0) * 4096.0
+    time.sleep(0.5)
+    nrepl_send(sock, "(let ((cam (new 'stack-no-clear 'vector))) "
+                     f'(set! (-> cam x) {cx!r}) (set! (-> cam y) {cy!r}) (set! (-> cam z) {cz!r}) (set! (-> cam w) 1.0) '
+                     "(send-event *camera* 'teleport-to-vector-start-string cam))")
 
 
 def burst(sock, profile, count, prefix, say):
