@@ -4,7 +4,7 @@
   "runtime": "runtime/liquids-v3/gk.exe",
   "sha256": "0439354cd3aab672800b0ea92bbe1cb382e7ce1b1a9fb9110a695a8b847c4ad9",
   "routes": {
-    "arena": "dfaa2aa6c62843ad66a8381f7dfab9555eb42185f77f323a80b00618abcbdd49",
-    "palace": "64117771985a7711cc4bcff847fcf8663ae1fc4ef7733e97fd617dcaecfabeb2"
+    "arena": "e947f42a8a8c0cf8b9780c77228b3efbf952494c7fc5247a9d8d94198ed2c1fd",
+    "palace": "80781eb540fbf28907e8082b51b3a595e7c6db09ed73d77dabe57ce3446d32d6"
   }
 }
