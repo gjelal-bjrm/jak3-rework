@@ -115,7 +115,7 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "f2386dfa1f4b93779c6087daf48c6395f8dfc5444b7bf09ff2611b473c6fa3c8"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "a7b9c4312b78829b3a136def435c8e2e4fc5f723dc8ec5baa5cd0d3c5f2b1fe4"
   },
   "remaster": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "7e1b3747f803f508cbf4bd204efc4910a3a3a1268627ac6e2fddb02c23107a42",
@@ -233,7 +233,7 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "f2386dfa1f4b93779c6087daf48c6395f8dfc5444b7bf09ff2611b473c6fa3c8"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "a7b9c4312b78829b3a136def435c8e2e4fc5f723dc8ec5baa5cd0d3c5f2b1fe4"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
@@ -351,6 +351,6 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "f2386dfa1f4b93779c6087daf48c6395f8dfc5444b7bf09ff2611b473c6fa3c8"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "a7b9c4312b78829b3a136def435c8e2e4fc5f723dc8ec5baa5cd0d3c5f2b1fe4"
   }
 }

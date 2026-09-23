@@ -70,21 +70,21 @@ float cloudDensity(vec3 p,float coverage,float lod){
   float base=smoothstep(threshold,threshold+.34,d);
   if(base<=0.)return 0.;
   // profil : base nette, sommet arrondi, plus haut ou la masse est dense
-  float top=.35+.65*base;
-  float profile=smoothstep(0.,.12,hf)*(1.-smoothstep(top-.30,top,hf));
+  float top=.45+.55*base;
+  float profile=smoothstep(0.,.40,hf)*(1.-smoothstep(top-.50,top,hf));
   // erosion fine aux bords (plus forte en haut : les sommets sont dechiquetes)
   float erode=(1.-lod)*(fbm(p.xz*.0011+vec2(hf*1.7,-sky_time*.003))-.5)*(.5+.5*hf);
-  return clamp(base*profile+erode*.9*base*(1.-base)*4.,0.,1.);
+  return clamp(base*profile*(1.+erode*1.2),0.,1.);
 }
 // Transmittance vers la lumiere depuis p (3 pas courts).
 float cloudLightTransmittance(vec3 p,vec3 L,float coverage){
-  float dsum=0.,step=140.;
-  for(int i=1;i<=3;i++){
+  float dsum=0.,step=210.;
+  for(int i=1;i<=2;i++){
     vec3 q=p+L*step*float(i);
     if(q.y>CLOUD_TOP+50.)break;
     dsum+=cloudDensity(q,coverage,.7)*step;
   }
-  return exp(-dsum*.0075);
+  return exp(-dsum*.0060);
 }
 float henyeyGreenstein(float mu,float g){
   float g2=g*g;
@@ -117,14 +117,14 @@ void main(){
     if(far>.01){
       // pas adaptatifs : plus nombreux en rasant (la tranche est traversee sur des kilometres),
       // decalage par pixel en bruit a gradient entrelace (fin, sans taches) pour casser les bandes.
-      int N=int(mix(24.,12.,smoothstep(.05,.45,ray.y)));
+      int N=int(mix(30.,16.,smoothstep(.05,.45,ray.y)));
       float dt=(t1-t0)/float(N);
       float transmittance=1.;vec3 scattered=vec3(0);
       float mu=dot(ray,L);
       float phase=henyeyGreenstein(mu,.42)*.75+henyeyGreenstein(mu,-.18)*.25+.06;
       float lod=clamp(t0/60000.,0.,1.);
-      float jitter=fract(52.9829189*fract(.06711056*gl_FragCoord.x+.00583715*gl_FragCoord.y));
-      for(int i=0;i<24;i++){
+      float jitter=.25+.5*fract(52.9829189*fract(.06711056*gl_FragCoord.x+.00583715*gl_FragCoord.y));
+      for(int i=0;i<30;i++){
         if(i>=N)break;
         float t=t0+dt*(float(i)+jitter);
         vec3 p=ray*t;
