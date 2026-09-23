@@ -53,4 +53,17 @@ def main():
     print('sky-tng.gc : etat publie, nuages/soleil/etoile natifs desactives sous *pc-remaster-sky*')
 
 
-if __name__ == '__main__': main()
+def disable_day_star_particle():
+    """La lueur blanche a aigrettes de l'etoile du jour est une particule de time-of-day-proc (champ day-star),
+    spawnee tant que day-star-enable est vrai : sous *pc-remaster-sky* on la coupe (le ciel moderne la redessine)."""
+    s = PATH.read_text()
+    old = "                     (set! (-> *time-of-day* 0 day-star-enable) #t)\n"
+    new = "                     (set! (-> *time-of-day* 0 day-star-enable) (not *pc-remaster-sky*))\n"
+    if new in s: print('sky-tng.gc : particule de l etoile deja coupee'); return
+    assert s.count(old) == 1, 'activation native de l etoile introuvable'
+    PATH.write_text(s.replace(old, new, 1)); print('sky-tng.gc : particule native de l etoile coupee sous *pc-remaster-sky*')
+
+
+if __name__ == '__main__':
+    main()
+    disable_day_star_particle()

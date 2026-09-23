@@ -1,0 +1,288 @@
+From 034af2c430f088a14ea2abbecf0fcd11c67943e4 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 23 Sep 2026 18:06:03 +0200
+Subject: [PATCH 15/15] =?UTF-8?q?Ciel=20v2=20:=20cumulus=20volumiques=20(t?=
+ =?UTF-8?q?ranche=201400-2300=20m=20travers=C3=A9e,=20Beer-Powder,=20diffu?=
+ =?UTF-8?q?sion=20avant,=20pas=20adaptatifs=20et=20tramage=20fin),=20?=
+ =?UTF-8?q?=C3=A9toile=20du=20jour=20en=20disque=20noir=20cern=C3=A9=20de?=
+ =?UTF-8?q?=20violet?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ .../opengl_renderer/shaders/modern_sky.frag   | 220 ++++++++++++------
+ 1 file changed, 145 insertions(+), 75 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.frag b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+index 0c4fb0b8..3407e844 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_sky.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+@@ -1,12 +1,15 @@
+ #version 410 core
+-// Ciel moderne de Jak 3 (remaster). Sur les pixels de ciel :
+-//  1. degrade d'ambiance natif du niveau (conserve : c'est lui qui porte l'identite de chaque zone) ;
+-//  2. eclaircissement vers le soleil (diffusion), soleil : disque net + lueur ;
+-//  3. nuages : couche principale (cumulus, ~1,6 km) eclairee par le soleil avec ombre propre et lisere
+-//     lumineux, plus une couche haute de cirrus etires par le vent ; les deux s'ecrasent dans la brume
+-//     d'horizon ;
+-//  4. etoile du jour (vaisseau des Dark Makers) : coeur blanc-violet, halo, anneau d'eco noir qui ondule,
+-//     quatre aigrettes, pulsation lente.
++// Ciel moderne de Jak 3 (remaster), v2.
++//  1. Degrade d'ambiance natif du niveau conserve (identite de chaque zone, cycle jour-nuit natif).
++//  2. Nuages volumiques : une couche de cumulus entre 1400 et 2300 m traversee par le rayon (10 pas),
++//     densite = formes fbm deformees + erosion fine aux bords + profil vertical (base plate, sommets
++//     bombes) ; eclairage Beer-Powder vers le soleil (ou la lune la nuit), diffusion avant
++//     (Henyey-Greenstein), ambiance du ciel plus claire au sommet ; fondu dans la brume au loin.
++//     Une couche haute de cirrus etires complete.
++//  3. Soleil : disque, couronne, lueur ; ciel eclairci et rechauffe autour ; teinte selon l'elevation.
++//  4. Etoile du jour = le vaisseau des Dark Makers : un disque NOIR cerne d'un liseret violet-blanc,
++//     couronne d'eco noir qui flamboie, zone de ciel corrompue (assombrie, desaturee) avec de lents
++//     filaments sombres, et un battement sourd toutes les ~4 s. Menacant, jamais spectaculaire.
+ in vec3 sky_ray;
+ out vec4 color;
+ uniform sampler2D tex_T25;
+@@ -34,105 +37,172 @@ vec2 project(vec3 ray){
+ }
+ float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+ float noise(vec2 p){
+-  vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
++  vec2 i=floor(p),f=fract(p);f=f*f*f*(f*(f*6.-15.)+10.);
+   return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);
+ }
+ float fbm(vec2 p){
+   float v=0.,a=.5;mat2 r=mat2(.8,.6,-.6,.8);
+-  for(int i=0;i<5;i++){v+=a*noise(p);p=r*p*2.03+vec2(7.1,3.7);a*=.5;}
++  for(int i=0;i<4;i++){v+=a*noise(p);p=r*p*2.07+vec2(7.1,3.7);a*=.5;}
+   return v;
+ }
+-// Densite de la couche principale au point plan p (m). Grandes masses + detail, seuil par couverture.
+-float cloudDensity(vec2 p,float coverage){
+-  float shape=fbm(p*.00055+vec2(sky_time*.0011,0.));
+-  float detail=fbm(p*.0028-vec2(0.,sky_time*.0021));
+-  // fbm vaut ~0,3-0,65 : on etire son contraste avant le seuil de couverture.
+-  float d=(shape*.7+detail*.3-.47)*3.2+.5;
+-  float threshold=.92-coverage*.9;                      // couverture .36 -> .60 ; .54 -> .43
+-  return smoothstep(threshold,threshold+.42,d);
++// Echantillon natif du ciel dans une direction (couleur d'ambiance), ou repli sur la couleur du pixel.
++vec3 nativeSky(vec3 dir,vec3 fallback){
++  vec2 uv=project(normalize(dir));
++  if(any(lessThan(uv,vec2(.002)))||any(greaterThan(uv,vec2(.998))))return fallback;
++  return skyDepth(texture(tex_T26,uv).r)?texture(tex_T25,uv).rgb:fallback;
++}
++// ---- Nuages ----
++const float CLOUD_BOTTOM=1400.,CLOUD_TOP=2300.;
++// Formes de la couche (0..1) au point plan xz (m), independantes de la hauteur.
++float cloudShape(vec2 xz){
++  vec2 p=xz*.00030+vec2(sky_time*.0008,sky_time*.0003);
++  vec2 warp=vec2(fbm(p*1.6+3.1),fbm(p*1.6-2.7))-.5;
++  p+=warp*.6;
++  float shape=fbm(p);
++  float detail=fbm(p*4.1+vec2(1.7,9.2)-vec2(sky_time*.0016,0.));
++  return shape+(detail-.5)*.38;
++}
++// Densite au point 3D (m, relatif a l'oeil au sol).
++float cloudDensity(vec3 p,float coverage,float lod){
++  float hf=clamp((p.y-CLOUD_BOTTOM)/(CLOUD_TOP-CLOUD_BOTTOM),0.,1.);
++  float d=cloudShape(p.xz);
++  float threshold=1.04-coverage*.85;
++  float base=smoothstep(threshold,threshold+.34,d);
++  if(base<=0.)return 0.;
++  // profil : base nette, sommet arrondi, plus haut ou la masse est dense
++  float top=.35+.65*base;
++  float profile=smoothstep(0.,.12,hf)*(1.-smoothstep(top-.30,top,hf));
++  // erosion fine aux bords (plus forte en haut : les sommets sont dechiquetes)
++  float erode=(1.-lod)*(fbm(p.xz*.0011+vec2(hf*1.7,-sky_time*.003))-.5)*(.5+.5*hf);
++  return clamp(base*profile+erode*.9*base*(1.-base)*4.,0.,1.);
++}
++// Transmittance vers la lumiere depuis p (3 pas courts).
++float cloudLightTransmittance(vec3 p,vec3 L,float coverage){
++  float dsum=0.,step=140.;
++  for(int i=1;i<=3;i++){
++    vec3 q=p+L*step*float(i);
++    if(q.y>CLOUD_TOP+50.)break;
++    dsum+=cloudDensity(q,coverage,.7)*step;
++  }
++  return exp(-dsum*.0075);
++}
++float henyeyGreenstein(float mu,float g){
++  float g2=g*g;
++  return (1.-g2)/(4.*3.14159*pow(1.+g2-2.*g*mu,1.5));
+ }
+ void main(){
+   vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
+   vec3 native=texture(tex_T25,screen).rgb;
+   if(!skyDepth(texture(tex_T26,screen).r)){color=vec4(native,1.);return;}
+   vec3 ray=normalize(sky_ray);
+-  vec3 sun=normalize(sky_sun);
+-  float sunUp=clamp(sun.y*2.5,0.,1.);                  // 0 sous l'horizon, 1 des 24 deg d'elevation
+-  vec3 sunColor=mix(vec3(1.,.62,.32),vec3(1.,.96,.88),sunUp);
+-  // Couleur de brume a l'horizon dans la direction du pixel (echantillon natif juste au-dessus de l'horizon)
++  vec3 sun=normalize(sky_sun),moon=normalize(sky_moon);
++  float sunUp=clamp(sun.y*2.5,0.,1.);
++  float dayness=smoothstep(-.08,.06,sun.y);             // 0 nuit, 1 jour
++  vec3 sunColor=mix(vec3(1.,.55,.28),vec3(1.,.96,.88),sunUp);
++  // Lumiere principale des nuages : soleil le jour, lune la nuit.
++  vec3 L=dayness>.02?sun:moon;
++  vec3 lightColor=mix(vec3(.30,.36,.52)*.55,sunColor,dayness);
+   vec3 horizonRay=normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z));
+-  vec2 huv=clamp(project(horizonRay),vec2(.003),vec2(.997));
+-  vec3 haze=skyDepth(texture(tex_T26,huv).r)?texture(tex_T25,huv).rgb:native;
++  vec3 haze=nativeSky(horizonRay,native);
++  vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),native);
+   vec3 result=native;
+-  // ---- Diffusion vers le soleil : le ciel s'eclaircit et se rechauffe autour de lui, surtout bas.
++  // ---- Diffusion vers le soleil dans le ciel clair
+   float toSun=max(dot(ray,sun),0.);
+-  result+=sunColor*haze*pow(toSun,4.)*.22*(1.-.6*clamp(ray.y*3.,0.,1.));
+-  // ---- Nuages (au-dessus de l'horizon seulement)
+-  if(ray.y>.005){
+-    float y=max(ray.y,.02);
+-    // Couche principale : cumulus a 1,6 km, epaisseur simulee 500 m.
+-    vec2 p=ray.xz/y*1600.+vec2(sky_time*9.,sky_time*3.5);
+-    float far=exp(-length(ray.xz/y*1600.)*.000038);          // les nuages lointains fondent dans la brume
+-    float d=cloudDensity(p,sky_coverage);
+-    if(d>.001){
+-      // ombre propre : densite decalee vers le soleil (les bords tournes vers lui sont eclaires)
+-      vec2 toward=sun.xz/max(sun.y,.18)*420.;
+-      float dSun=cloudDensity(p+toward,sky_coverage);
+-      float lit=exp(-dSun*2.6)*.75+.25*(1.-d);
+-      float powder=1.-exp(-d*4.);                              // bords fins plus clairs, coeur plus dense
+-      vec3 ambient=mix(native,vec3(.62,.66,.74),.25)*1.15;
+-      vec3 shade=ambient*.62;
+-      vec3 bright=mix(ambient,sunColor,.55)*1.25;
+-      vec3 cloud=mix(shade,bright,lit*powder);
+-      // lisere lumineux : diffusion avant a travers les bords minces
+-      float rim=pow(toSun,14.)*(1.-d)*d*3.2;
+-      cloud+=sunColor*rim;
+-      float alpha=smoothstep(.0,.55,d)*(1.-exp(-d*2.2))*far*smoothstep(.0,.06,ray.y);
+-      result=mix(result,mix(cloud,haze,1.-far),alpha*.96);
++  result+=sunColor*haze*pow(toSun,4.)*.20*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
++  // ---- Nuages volumiques
++  float cloudAlpha=0.;vec3 cloudColor=vec3(0);
++  if(ray.y>.008){
++    float t0=CLOUD_BOTTOM/ray.y,t1=CLOUD_TOP/ray.y;
++    float far=exp(-t0*.000030);                           // fondu dans la brume au loin
++    if(far>.01){
++      // pas adaptatifs : plus nombreux en rasant (la tranche est traversee sur des kilometres),
++      // decalage par pixel en bruit a gradient entrelace (fin, sans taches) pour casser les bandes.
++      int N=int(mix(24.,12.,smoothstep(.05,.45,ray.y)));
++      float dt=(t1-t0)/float(N);
++      float transmittance=1.;vec3 scattered=vec3(0);
++      float mu=dot(ray,L);
++      float phase=henyeyGreenstein(mu,.42)*.75+henyeyGreenstein(mu,-.18)*.25+.06;
++      float lod=clamp(t0/60000.,0.,1.);
++      float jitter=fract(52.9829189*fract(.06711056*gl_FragCoord.x+.00583715*gl_FragCoord.y));
++      for(int i=0;i<24;i++){
++        if(i>=N)break;
++        float t=t0+dt*(float(i)+jitter);
++        vec3 p=ray*t;
++        float dens=cloudDensity(p,sky_coverage,lod);
++        if(dens<=.002)continue;
++        float hf=clamp((p.y-CLOUD_BOTTOM)/(CLOUD_TOP-CLOUD_BOTTOM),0.,1.);
++        float lightT=cloudLightTransmittance(p,L,sky_coverage);
++        float powder=1.-exp(-dens*2.4);                    // bords fins lumineux, coeur mat
++        vec3 ambient=mix(haze*.70,zenith*1.25,hf)*(.6+.4*(1.-dens*.6));
++        vec3 direct=lightColor*lightT*phase*10.5*(.55+.45*powder);
++        vec3 sample_=ambient+direct;
++        float extinction=1.-exp(-dens*dt*.0072);
++        scattered+=transmittance*extinction*sample_;
++        transmittance*=1.-extinction;
++        if(transmittance<.02)break;
++      }
++      cloudAlpha=(1.-transmittance)*far*smoothstep(.008,.05,ray.y);
++      cloudColor=mix(scattered/max(1.-transmittance,.001),haze,1.-far);
++      // lisere argente : diffusion avant a travers les bords minces
++      float rim=pow(toSun,20.)*(1.-transmittance)*transmittance*2.6*dayness;
++      cloudColor+=sunColor*rim;
+     }
+-    // Cirrus : haute couche etiree dans le sens du vent, tres legere.
++    result=mix(result,cloudColor,cloudAlpha);
++    // ---- Cirrus (haute couche etiree, tres fine)
+     if(ray.y>.04){
+-      vec2 q=ray.xz/y*7000.+vec2(sky_time*22.,sky_time*4.);
++      float y=max(ray.y,.04);
++      vec2 q=ray.xz/y*8000.+vec2(sky_time*22.,sky_time*4.);
+       mat2 stretch=mat2(.96,.28,-.28,.96);
+-      q=stretch*q;q.y*=3.6;
+-      float c=fbm(q*.00016)*.6+fbm(q*.0007+vec2(3.3,1.1))*.4;
+-      float cirrus=smoothstep(.58,.82,c)*smoothstep(.04,.2,ray.y)*exp(-length(ray.xz/y)*.09);
+-      vec3 cirrusColor=mix(vec3(.93,.94,.97),sunColor,.3*pow(toSun,3.));
+-      result=mix(result,cirrusColor,cirrus*.42);
++      q=stretch*q;q.y*=3.4;
++      float c=fbm(q*.00015)*.6+fbm(q*.00068+vec2(3.3,1.1))*.4;
++      float cirrus=smoothstep(.56,.80,c)*smoothstep(.04,.2,ray.y)*exp(-length(ray.xz/y)*.10);
++      vec3 cirrusColor=mix(mix(zenith*1.3,vec3(.94,.95,.98),.5),sunColor,.35*pow(toSun,3.))*mix(.35,1.,dayness);
++      result=mix(result,cirrusColor,cirrus*.40*(1.-cloudAlpha*.7));
+     }
+   }
+-  // ---- Soleil : disque net, couronne, lueur large (par-dessus les nuages, attenue par eux via la brume)
++  // ---- Soleil (au-dessus des nuages minces : les nuages epais l'attenuent)
+   {
+     float c=dot(ray,sun);
+     float disc=smoothstep(.99990,.99997,c);
+     float corona=pow(max(c,0.),600.)*.7+pow(max(c,0.),2500.)*.6;
+     float glow=pow(max(c,0.),40.)*.35+pow(max(c,0.),7.)*.06;
+-    result+=sunColor*(disc*1.5+corona)*step(0.,sun.y+.05)+sunColor*glow*(.6+.4*sunUp);
++    float occlusion=1.-cloudAlpha*.85;
++    result+=sunColor*((disc*1.5+corona)*occlusion*step(0.,sun.y+.05)+glow*(.6+.4*sunUp)*(1.-cloudAlpha*.5))*max(dayness,.15);
+   }
+-  // ---- Etoile du jour : le vaisseau des Dark Makers, fixe dans le ciel.
++  // ---- Etoile du jour : le vaisseau des Dark Makers.
+   if(sky_day_star_on>.5){
+     vec3 ds=normalize(sky_day_star);
+     float c=dot(ray,ds);
+-    if(c>.985){
+-      float angle=acos(clamp(c,-1.,1.));                       // rad depuis le centre
++    if(c>.990){
++      float angle=acos(clamp(c,-1.,1.));
+       vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
+       vec2 local=vec2(dot(ray,right),dot(ray,up));
+-      float pulse=.88+.12*sin(sky_time*1.7)+.05*sin(sky_time*4.3);
+-      vec3 core=vec3(.92,.86,1.);
+-      vec3 violet=vec3(.62,.38,1.);
+-      vec3 dark=vec3(.30,.06,.48);
+-      float coreDisc=smoothstep(.0075,.0025,angle);
+-      float halo=exp(-angle*angle/(2.*.006*.006))*.9+exp(-angle*angle/(2.*.02*.02))*.35;
+-      // anneau d'eco noir : rayon ~1,6 deg, epaisseur variable, tourne lentement
+       float theta=atan(local.y,local.x);
+-      float wobble=.0022*sin(theta*5.+sky_time*.9)+.0012*sin(theta*9.-sky_time*1.7);
+-      float ring=exp(-pow((angle-.040-wobble)*420.,2.))*(.45+.55*noise(vec2(theta*3.+sky_time*.4,sky_time*.2)));
+-      // quatre aigrettes fines
+-      float spikes=(exp(-abs(local.x)*900.)*exp(-abs(local.y)*40.)+exp(-abs(local.y)*900.)*exp(-abs(local.x)*40.))*smoothstep(.06,.0,angle);
+-      vec3 star=core*coreDisc*2.4*pulse+violet*halo*pulse+violet*spikes*.9;
+-      result=mix(result,dark,ring*.40*smoothstep(.0,.008,angle));
+-      result+=star;
+-      result+=violet*ring*.12;
++      // battement sourd : lent, avec un second coup plus faible
++      float beat=pow(max(sin(sky_time*1.55),0.),12.)+.45*pow(max(sin(sky_time*1.55-.9),0.),12.);
++      vec3 violet=vec3(.58,.30,1.);
++      vec3 rimColor=mix(vec3(.85,.72,1.),vec3(1.),.35);
++      // 1. zone corrompue : le ciel s'assombrit et se desature autour du vaisseau (rayon ~2,5 deg)
++      float corrupt=exp(-angle*angle/(2.*.030*.030));
++      vec3 grey=vec3(dot(result,vec3(.3,.5,.2)));
++      result=mix(result,mix(grey,vec3(.10,.05,.16),.5),corrupt*.40);
++      // 2. rais sombres continus qui partent du disque, lents, irreguliers en longueur
++      float rayNoise=noise(vec2(theta*4.5+sky_time*.04,.5))*.7+noise(vec2(theta*11.-sky_time*.07,3.1))*.3;
++      float rayLen=.03+.06*rayNoise;
++      float rays=smoothstep(.55,.85,rayNoise)*smoothstep(rayLen,rayLen*.3,angle)*smoothstep(.011,.016,angle);
++      result=mix(result,vec3(.06,.02,.10),rays*.5);
++      // 3. couronne d'eco noir : flammes violettes irregulieres, a l'exterieur du disque
++      float flame=noise(vec2(theta*3.5+sky_time*.6,sky_time*.9))*.6+noise(vec2(theta*9.-sky_time*1.3,angle*200.))*.4;
++      float coronaR=.0150+.006*flame;
++      float coronaMask=smoothstep(coronaR+.005,coronaR-.003,angle)*smoothstep(.0105,.0125,angle);
++      result=mix(result,violet*.75,coronaMask*(.45+.3*beat));
++      // 4. disque noir (le vaisseau vu de face) cerne d'un liseret clair et fin
++      float core=smoothstep(.0105,.0092,angle);
++      float rim=smoothstep(.0118,.0105,angle)*(1.-core);
++      result=mix(result,vec3(.02,.0,.035),core);
++      result+=rimColor*rim*(.8+.7*beat);
++      // 5. lueur violette diffuse, hors du disque, plus forte au battement
++      result+=violet*exp(-angle*angle/(2.*.024*.024))*(1.-core)*(.05+.10*beat);
+     }
+   }
+   color=vec4(result,1.);
+-- 
+2.54.0.windows.1
+

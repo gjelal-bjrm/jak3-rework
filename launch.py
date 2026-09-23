@@ -30,6 +30,9 @@ parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N 
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
 parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--replace', action='store_true', help='ferme la partie deja ouverte au lieu de refuser de demarrer (tests)')
+parser.add_argument('--hour', type=float, metavar='H', help="heure du jour a imposer apres le placement (0-24, decimales acceptees)")
+parser.add_argument('--time-ratio', type=float, metavar='R', help="vitesse du temps (0 = fige, 1 = temps reel, 30 = un jour en 48 min)")
+parser.add_argument('--hours', metavar='H1,H2,...', help='tests : impose chaque heure a son tour et prend une rafale (qa/burst-<scene>-hNN-*.png)')
 parser.add_argument('--quit', action='store_true', help='ferme le jeu une fois les captures faites (tests enchaines)')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
@@ -241,9 +244,11 @@ def capture_in_scene(game, game_log):
     if args.face and position:
         face_jak(sock, position, tuple(float(v) for v in args.face.split(',')))
         time.sleep(4)
+    apply_time_options(sock, say)
     if args.burst:
         burst(sock, profile, args.burst, f'burst-{args.scene}', say)
     run_stops(sock, game, game_log, tag, say)
+    run_hours(sock, say)
     if args.quit: game.kill()
     return goalc
 
@@ -295,6 +300,7 @@ def place_jak_in_city(game, game_log, capture):
         face_jak(sock, position, face)
         say(f'Jak se tourne vers {face} (la camera suit en quelques secondes)')
         time.sleep(4)
+    apply_time_options(sock, say)
     if capture:
         time.sleep(4)
         nrepl_send(sock, '(pc-screen-shot)')
@@ -302,6 +308,7 @@ def place_jak_in_city(game, game_log, capture):
     if args.burst:
         burst(sock, profile, args.burst, f'burst-{args.scene}', say)
     run_stops(sock, game, game_log, tag, say)
+    run_hours(sock, say)
     if args.tour:
         tour(sock, game, game_log, tag, say)
     if args.quit: game.kill()
@@ -325,7 +332,48 @@ def face_jak(sock, position, face):
     time.sleep(0.5)
     nrepl_send(sock, "(let ((cam (new 'stack-no-clear 'vector))) "
                      f'(set! (-> cam x) {cx!r}) (set! (-> cam y) {cy!r}) (set! (-> cam z) {cz!r}) (set! (-> cam w) 1.0) '
-                     "(send-event *camera* 'teleport-to-vector-start-string cam))")
+                     + goal_event('*camera*', "'teleport-to-vector-start-string", 'cam') + ')')
+
+
+def goal_event(target, message, *params):
+    """Forme GOAL explicite equivalente a (send-event target message params...) : les macros ne sont pas
+    disponibles dans le compilateur neuf du lanceur. Les parametres sont des textes GOAL deja formes."""
+    sets = ' '.join(f'(set! (-> event-data param {i}) (the-as uint {value}))' for i, value in enumerate(params))
+    return ("(let ((event-data (new 'stack-no-clear 'event-message-block))) "
+            f"(set! (-> event-data from) (-> (the-as process {target}) ppointer)) "   # send-event-function ignore les messages sans expediteur
+            f"(set! (-> event-data num-params) {len(params)}) "
+            f"(set! (-> event-data message) {message}) {sets} "
+            f"(send-event-function {target} event-data))")
+
+
+TIME_OF_DAY = '(-> *time-of-day* 0)'
+
+
+def set_time(sock, hour=None, ratio=None):
+    """Impose l'heure et/ou la vitesse du temps du jeu (evenements natifs du processus *time-of-day*)."""
+    if ratio is not None:
+        nrepl_send(sock, goal_event(TIME_OF_DAY, "'change", "'ratio", f'{float(ratio)!r}'))
+    if hour is not None:
+        h = int(hour) % 24; m = int(round((hour - int(hour)) * 60)) % 60
+        nrepl_send(sock, goal_event(TIME_OF_DAY, "'change", "'hour", str(h)))
+        nrepl_send(sock, goal_event(TIME_OF_DAY, "'change", "'minutes", str(m)))
+        nrepl_send(sock, goal_event(TIME_OF_DAY, "'change", "'seconds", '0'))
+
+
+def apply_time_options(sock, say):
+    if args.hour is not None or args.time_ratio is not None:
+        set_time(sock, args.hour, args.time_ratio)
+        say(f"heure {args.hour if args.hour is not None else 'inchangee'}, vitesse {args.time_ratio if args.time_ratio is not None else 'inchangee'}")
+        time.sleep(3)
+
+
+def run_hours(sock, say):
+    """--hours : pour chaque heure, l'impose, laisse le ciel se mettre a jour et prend une rafale."""
+    for h in [float(v) for v in (args.hours or '').split(',') if v.strip()]:
+        set_time(sock, h, 0.0)
+        say(f'heure {h:g}')
+        time.sleep(5)
+        burst(sock, profile, args.burst or 1, f'burst-{args.scene}-h{int(h):02d}', say)
 
 
 def burst(sock, profile, count, prefix, say):
@@ -429,7 +477,7 @@ with game_log.open('w', encoding='utf-8') as log:
     try:
         if args.scene in CITY_SCENES:
             goalc = place_jak_in_city(process, game_log, args.capture)
-        elif args.burst or args.stops or args.viewpoint:
+        elif args.burst or args.stops or args.viewpoint or args.hours or args.hour is not None or args.time_ratio is not None:
             goalc = capture_in_scene(process, game_log)
         result = process.wait()
     finally:
