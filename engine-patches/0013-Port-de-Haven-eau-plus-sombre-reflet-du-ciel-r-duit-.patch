@@ -1,0 +1,31 @@
+From 43675f53d208b00d6e3c8fa2c39bd6a1f1a5ac5d Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 23 Sep 2026 17:15:25 +0200
+Subject: [PATCH 13/13] =?UTF-8?q?Port=20de=20Haven=20:=20eau=20plus=20somb?=
+ =?UTF-8?q?re,=20reflet=20du=20ciel=20r=C3=A9duit=20(retour=20utilisateur?=
+ =?UTF-8?q?=20:=20trop=20de=20lumi=C3=A8re=20r=C3=A9fl=C3=A9chie)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ocean/ModernOcean.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/game/graphics/opengl_renderer/ocean/ModernOcean.h b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+index e703cfec..9f536e87 100644
+--- a/game/graphics/opengl_renderer/ocean/ModernOcean.h
++++ b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+@@ -30,7 +30,7 @@ inline const OceanRegion OCEAN_SPARGUS{"spargus", "was", 9.f, -60.f, 180.f,
+ // tire vers le bleu a la demande de l'utilisateur.
+ inline const OceanRegion OCEAN_HAVEN{"haven", "cty", OceanCoastMaskCity::LEVEL, -80.f, 260.f,
+   OceanCoastMaskCity::ORIGIN_X, OceanCoastMaskCity::ORIGIN_Z, OceanCoastMaskCity::SIZE, OceanCoastMaskCity::cell, OceanCoastMaskCity::contains,
+-  {.12f, .27f, .42f}, {.03f, .09f, .20f}, {.14f, .20f, .32f}, {.70f, .38f, .14f}, {.80f, .84f, .92f}, {.03f, .09f, .20f}, .7f};
++  {.09f, .21f, .34f}, {.02f, .06f, .14f}, {.10f, .15f, .25f}, {.70f, .38f, .14f}, {.52f, .56f, .66f}, {.02f, .06f, .14f}, .7f};
+ 
+ class ModernOcean {
+  public:
+-- 
+2.54.0.windows.1
+
