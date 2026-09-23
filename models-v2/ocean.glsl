@@ -203,9 +203,13 @@ vec3 shadeModernOcean() {
   body+=ocean_shallow*.18*crest;
   float far=smoothstep(80.,700.,range);
   body=mix(body,ocean_far,far*.7);
+  // Ombrage des ondulations : la face des vaguelettes tournee vers le soleil s'eclaire, l'autre s'assombrit.
+  // Sans cela, vue du dessus, l'eau devient un plan uni ou les vagues n'existent plus.
+  float shade=dot(n,oceanSunDirection)*.5+.5;
+  body*=mix(.72,1.30,shade);
   // ---- Reflet : le ciel (avec soleil) et le decor proche ; Fresnel releve pour une surface bien miroir
   float facing=max(dot(n,v),0.);
-  float fresnel=.06+.94*pow(1.-facing,4.);
+  float fresnel=.09+.91*pow(1.-facing,4.);
   vec3 reflection=oceanReflection(p,n,v);
   vec3 result=mix(body,reflection,fresnel);
   // ---- Trainee de soleil : scintillement serre sur le grain, lobe doux sur les vaguelettes
@@ -222,7 +226,7 @@ vec3 shadeModernOcean() {
     float age=ocean_time-fluid_contacts[i].w;
     if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-ocean_level)>1.)continue;
     float d=length(p.xz-fluid_contacts[i].xz);
-    wake+=exp(-d*d/1.3-age*2.4)*smoothstep(.03,.10,fluid_strength[i])*.16;
+    wake+=exp(-d*d/1.6-age*2.0)*smoothstep(.03,.10,fluid_strength[i])*.26;
   }
   float shoreFoam=(1.-smoothstep(.10,.8,thickness))*(.35+.65*foamNoise)*.65;
   float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.7;

@@ -217,7 +217,7 @@ def run_stops(sock, game, game_log, tag, say):
             fx, fz = (float(v) for v in toward.split(','))
             face_jak(sock, position, (fx, fz))
         say(f'arret {index + 1} : Jak en {tuple(round(v, 1) for v in position)}' + (f', tourne vers ({toward})' if toward.strip() else ''))
-        time.sleep(4)
+        time.sleep(4 if position[1] > 1.5 or args.scene != 'port' else 9)   # dans l'eau, la camera met plus longtemps a redescendre derriere Jak
         burst(sock, profile, args.burst or 1, f'burst-{args.scene}-{index + 1}', say)
     return tag
 
