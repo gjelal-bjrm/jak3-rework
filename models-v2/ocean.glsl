@@ -219,19 +219,25 @@ vec3 shadeModernOcean() {
   float sheen=pow(max(dot(n,h),0.),70.);
   result+=oceanSunColor*(glitter*2.2+sheen*.14)*sunVis*mix(1.,.6,far);
   // ---- Ecume : sillage de Jak, lisere des cotes, moutons en eau peu profonde, plage
-  float foamNoise=.45*smoothstep(.35,.85,oceanNoise(p.xz*2.3+ocean_time*vec2(.3,-.15)))
-                 +.55*smoothstep(.45,.9,oceanNoise(p.xz*8.5-ocean_time*vec2(.7,.3)));
+  // Bruit d'ecume : deux echelles moyennes, fondues (pas de grille de points : le bruit de valeur a 8 cycles/m
+  // faisait un semis de taches claires regulieres autour de Jak, tres visible sur l'eau sombre de Haven).
+  float foamNoise=.55*smoothstep(.30,.80,oceanNoise(p.xz*1.6+ocean_time*vec2(.3,-.15)))
+                 +.45*smoothstep(.35,.85,oceanNoise(p.xz*3.4-ocean_time*vec2(.5,.25)+vec2(7.3,2.1)));
+  // Sillage de Jak : voile laiteux serre autour du corps, qui s'efface vite ; les anneaux viennent du relief.
   float wake=0.;
   for(int i=0;i<32;i++) {
     float age=ocean_time-fluid_contacts[i].w;
-    if(fluid_strength[i]<=0. || age<0. || age>2. || abs(fluid_contacts[i].y-ocean_level)>1.)continue;
+    if(fluid_strength[i]<=0. || age<0. || age>1.6 || abs(fluid_contacts[i].y-ocean_level)>1.)continue;
     float d=length(p.xz-fluid_contacts[i].xz);
-    wake+=exp(-d*d/1.6-age*2.0)*smoothstep(.03,.10,fluid_strength[i])*.26;
+    wake+=exp(-d*d/.9-age*2.6)*smoothstep(.03,.10,fluid_strength[i])*.22;
   }
+  float wakeFoam=clamp(wake*(.45+.55*foamNoise),0.,.5);
   float shoreFoam=(1.-smoothstep(.10,.8,thickness))*(.35+.65*foamNoise)*.65;
   float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.7;
   float beachFoam=shore.y*(.25+.95*foamNoise)+shore.z*(.12+.6*foamNoise)+shore.w*.95;
-  float foam=clamp(max(max(wake*foamNoise*1.2,shoreFoam),max(crestFoam,beachFoam)),0.,.92);
+  float foam=clamp(max(shoreFoam,max(crestFoam,beachFoam)),0.,.92);
+  // L'ecume du sillage eclaircit l'eau (eau aeree) au lieu de poser du blanc pur dessus.
+  result=mix(result,mix(result,vec3(.88,.91,.90),.55),wakeFoam);
   result=mix(result,vec3(.88,.91,.90),foam);
   // ---- Brume vers le vrai ciel de l'horizon, puis extinction au tres loin
   vec3 horizonSky=oceanHorizonSky(-v);

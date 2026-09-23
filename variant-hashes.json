@@ -149,7 +149,7 @@
     "game/graphics/opengl_renderer/shaders/ocean_common.frag": "ca7daf116835a7d6d672e4b855061e6b9dd43a304ab501a4835278d692afc6a6",
     "game/graphics/opengl_renderer/shaders/direct_basic_textured.frag": "65b9bd704200df99ea4b652754555f54e26a710dd6da3f273c8d7aa47811f4ae",
     "game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert": "b95703f2b10d42d46726d20b43f52d4add5508e876d2d9025ce96d9898811133",
-    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "9e4ab960f44d61c529ac14f7358f999ffc935c165180114cece572158a25b34f",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "fe3288be403b58f8a8cb8cbdc30501c3fd4d3becfb4964335dd4f6fd98507246",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.vert": "88459cbc1824b6cf6a65dbc9fd8654122a92524a7c3bb099045971ad5bc15d2a",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.frag": "368f500680b97d42083b06257fc180b46767dd08027d0820d3d685f59c4b6f0b",
     "game/graphics/opengl_renderer/shaders/coast_spray.vert": "703350e8da29ff342278ff14879033014920d7b19c8b5432d832b278efe1f971",
