@@ -20,7 +20,9 @@ new = '''(lambda ()
         ;; Let play-boot return and the initial game processes initialize first.
         (dotimes (frame 120) (suspend))
         (start 'play (get-continue-by-name *game-info* "game-start"))
-        (send-event (ppointer->process *time-of-day*) 'change 'ratio 0.0)
+        ;; Remaster : le cycle jour-nuit tourne. Natif : 1 h de jeu = 60 s (ratio 1 = 24 min par jour) ;
+        ;; ratio 0.5 = une journee complete en 48 minutes reelles (lever ~6 h, coucher ~18 h 30).
+        (send-event (ppointer->process *time-of-day*) 'change 'ratio 0.5)
         (send-event (ppointer->process *time-of-day*) 'change 'hour 9)
         (send-event (ppointer->process *time-of-day*) 'change 'minutes 0)
         (send-event (ppointer->process *time-of-day*) 'change 'seconds 0)

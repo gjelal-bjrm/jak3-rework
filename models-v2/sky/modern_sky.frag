@@ -22,6 +22,9 @@ uniform vec3 sky_moon;
 uniform vec3 sky_day_star;
 uniform float sky_day_star_on;
 uniform float sky_coverage;
+uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
+uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
+uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
 
 bool skyDepth(float depth){
   const float step24=1./16777215.;
@@ -106,7 +109,10 @@ void main(){
   vec3 result=native;
   // ---- Diffusion vers le soleil dans le ciel clair
   float toSun=max(dot(ray,sun),0.);
-  result+=sunColor*haze*pow(toSun,4.)*.20*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
+  result+=sunColor*haze*pow(toSun,4.)*.20*(1.+1.6*(1.-sunUp))*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
+  // Lune : lueur douce autour du disque natif, la nuit seulement.
+  float toMoon=max(dot(ray,moon),0.);
+  result+=vec3(.62,.68,.85)*(pow(toMoon,70.)*.22+pow(toMoon,9.)*.035)*(1.-dayness)*step(0.,moon.y+.02);
   // ---- Nuages (couche 2D eclairee)
   float cloudAlpha=0.;vec3 cloudColor=vec3(0);
   float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));   // hors de toute branche (derivees)
@@ -170,23 +176,33 @@ void main(){
     float occlusion=1.-cloudAlpha;
     result+=sunColor*((disc*1.5+corona)*occlusion*step(0.,sun.y+.05)+glow*(.6+.4*sunUp)*(1.-cloudAlpha*.5))*max(dayness,.15);
   }
-  // ---- Etoile du jour : fidele a l'original (coeur blanc, halo violet, quatre aigrettes), rendu plus
-  //      propre et une respiration lente. Aucun effet ajoute : l'utilisateur veut la retrouver telle quelle.
+  // ---- Etoile du jour : fidele a l'original (coeur clair, halo violet, quatre aigrettes), avec :
+  //  - progression : le vaisseau approche au fil de l'histoire (taille +40 %, pulsation plus rapide) ;
+  //  - Dark Jak : l'etoile repond a l'eco noir (plus intense, halo violet profond) puis se calme ;
+  //  - scintillement atmospherique : eclat et position tremblent legerement (air chaud du desert).
   if(sky_day_star_on>.5){
     vec3 ds=normalize(sky_day_star);
+    vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
+    float tw1=noise(vec2(sky_time*5.7,2.3))-.5,tw2=noise(vec2(sky_time*6.9,7.1))-.5;
+    ds=normalize(ds+(right*tw1+up*tw2)*.0011*sky_turbulence);          // tremblement angulaire (~0,06 deg)
+    float twinkle=1.+.22*sky_turbulence*(noise(vec2(sky_time*8.3,11.7))-.5)*2.;
     float c=dot(ray,ds);
-    if(c>.995){
+    if(c>.993){
       float angle=acos(clamp(c,-1.,1.));
-      vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
       vec2 local=vec2(dot(ray,right),dot(ray,up));
-      float pulse=.94+.06*sin(sky_time*1.1);
+      float grow=1.+.40*sky_progress;
+      float pulse=.94+.06*sin(sky_time*(1.1+.9*sky_progress));
       vec3 core=vec3(1.,.97,1.);
-      vec3 violet=vec3(.66,.42,1.);
-      float disc=smoothstep(.0062,.0030,angle);
-      float halo=exp(-angle*angle/(2.*.0085*.0085))*.85+exp(-angle*angle/(2.*.020*.020))*.30;
-      float spikes=(exp(-abs(local.x)*700.)*exp(-abs(local.y)*28.)+exp(-abs(local.y)*700.)*exp(-abs(local.x)*28.))*smoothstep(.07,.0,angle);
+      vec3 violet=mix(vec3(.66,.42,1.),vec3(.52,.16,1.),sky_dark_jak);
+      float disc=smoothstep(.0062*grow,.0030*grow,angle);
+      float halo=exp(-angle*angle/(2.*pow(.0085*grow,2.)))*.85+exp(-angle*angle/(2.*pow(.020*grow,2.)))*.30;
+      float spikes=(exp(-abs(local.x)*700./grow)*exp(-abs(local.y)*28./grow)+exp(-abs(local.y)*700./grow)*exp(-abs(local.x)*28./grow))*smoothstep(.07*grow,.0,angle);
+      float intensity=twinkle*(1.+.9*sky_dark_jak);
+      vec3 star=(core*disc*2.0*pulse+violet*halo*pulse+mix(violet,core,.4)*spikes*.7)*intensity;
+      // Dark Jak : lueur violette diffuse supplementaire autour de l'etoile
+      star+=violet*exp(-angle*angle/(2.*.035*.035))*.35*sky_dark_jak;
       float behindClouds=1.-cloudAlpha;   // les nuages passent devant l'etoile
-      result+=(core*disc*2.0*pulse+violet*halo*pulse+mix(violet,core,.4)*spikes*.7)*behindClouds;
+      result+=star*behindClouds;
     }
   }
   color=vec4(result,1.);

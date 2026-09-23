@@ -1,0 +1,268 @@
+From bac824e7c95f0d3a45df3e2ee10a40f7357880dc Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 23 Sep 2026 18:59:33 +0200
+Subject: [PATCH 18/18] =?UTF-8?q?=C3=89toile=20du=20jour=20:=20r=C3=A9acti?=
+ =?UTF-8?q?on=20=C3=A0=20Dark=20Jak,=20croissance=20avec=20l'histoire,=20s?=
+ =?UTF-8?q?cintillement=20;=20mer=20=C3=A9clair=C3=A9e=20par=20le=20vrai?=
+ =?UTF-8?q?=20soleil=20du=20cycle=20jour-nuit=20;=20lueurs=20d'aube=20et?=
+ =?UTF-8?q?=20de=20lune?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernSky.h     | 18 ++++++++-
+ game/graphics/opengl_renderer/SkyState.h      | 12 +++++-
+ .../opengl_renderer/ocean/ModernOcean.h       |  8 ++++
+ .../shaders/modern_ocean_surface.frag         | 11 ++++--
+ .../opengl_renderer/shaders/modern_sky.frag   | 38 +++++++++++++------
+ game/kernel/jak3/kmachine.cpp                 |  8 ++++
+ 6 files changed, 79 insertions(+), 16 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernSky.h b/game/graphics/opengl_renderer/ModernSky.h
+index 2ecd2d25..95851a8d 100644
+--- a/game/graphics/opengl_renderer/ModernSky.h
++++ b/game/graphics/opengl_renderer/ModernSky.h
+@@ -1,4 +1,5 @@
+ #pragma once
++#include <algorithm>
+ #include <memory>
+ #include "game/graphics/opengl_renderer/Shader.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
+@@ -15,12 +16,19 @@ class ModernSky {
+   ~ModernSky() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
+   void render(SharedRenderState* state) {
+     if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
+-    std::array<float, 3> sun, green, moon, star; float hour; bool star_on, valid;
++    std::array<float, 3> sun, green, moon, star; float hour, progress; bool star_on, valid, dark;
+     {
+       std::lock_guard<std::mutex> guard(SkyState::mutex);
+       valid = SkyState::valid; sun = SkyState::sun; green = SkyState::green_sun; moon = SkyState::moon;
+       star = SkyState::day_star; hour = SkyState::hour; star_on = SkyState::day_star_on;
++      dark = SkyState::dark_jak; progress = SkyState::progress;
+     }
++    // Reaction de l'etoile a Dark Jak : montee en ~0,4 s, retombee en ~3 s.
++    const float now = LiquidSnapshot::seconds();
++    const float dt = std::clamp(now - m_last_time, 0.f, .1f); m_last_time = now;
++    const float target = dark ? 1.f : 0.f;
++    const float rate = dark ? 2.5f : .33f;
++    m_dark_intensity += (target - m_dark_intensity) * std::min(1.f, dt * rate * 3.f);
+     if (!valid) return;
+     GLint program, old_vao, depth_func, old_active, tex25, tex26;
+     GLboolean depth_write, color_mask[4];
+@@ -47,6 +55,13 @@ class ModernSky {
+       glUniform3fv(glGetUniformLocation(id, "sky_moon"), 1, moon.data());
+       glUniform3fv(glGetUniformLocation(id, "sky_day_star"), 1, star.data());
+       glUniform1f(glGetUniformLocation(id, "sky_day_star_on"), star_on ? 1.f : 0.f);
++      glUniform1f(glGetUniformLocation(id, "sky_dark_jak"), m_dark_intensity);
++      glUniform1f(glGetUniformLocation(id, "sky_progress"), progress);
++      // Turbulence atmospherique (scintillement) : forte au-dessus du desert de Spargus, calme au port.
++      float turbulence = .6f;
++      if (ModernOcean::level_loaded(state, "was")) turbulence = 1.f;
++      else if (ModernOcean::level_loaded(state, "cty")) turbulence = .35f;
++      glUniform1f(glGetUniformLocation(id, "sky_turbulence"), turbulence);
+       // Couverture nuageuse par region : desert de Spargus plus degage, Haven plus charge.
+       float coverage = .46f;
+       if (ModernOcean::level_loaded(state, "was")) coverage = .44f;
+@@ -67,4 +82,5 @@ class ModernSky {
+   std::unique_ptr<Shader> m_shader;
+   LiquidSnapshot m_snapshot;
+   GLuint m_vao = 0;
++  float m_dark_intensity = 0.f, m_last_time = 0.f;
+ };
+diff --git a/game/graphics/opengl_renderer/SkyState.h b/game/graphics/opengl_renderer/SkyState.h
+index 0a7cb5d7..9a4e52f6 100644
+--- a/game/graphics/opengl_renderer/SkyState.h
++++ b/game/graphics/opengl_renderer/SkyState.h
+@@ -1,4 +1,5 @@
+ #pragma once
++#include <algorithm>
+ #include <array>
+ #include <cmath>
+ #include <cstring>
+@@ -13,10 +14,12 @@ inline std::mutex mutex;
+ inline std::array<float, 3> sun{0.f, 1.f, 0.f}, green_sun{0.f, 1.f, 0.f}, moon{0.f, 1.f, 0.f}, day_star{0.f, .217f, -.976f};
+ inline float hour = 9.f;
+ inline bool day_star_on = true;
++inline bool dark_jak = false;      // Jak sous forme Dark : l'etoile du jour reagit
++inline float progress = 0.f;      // avancement de l'histoire (0..1), lu depuis percent-complete
+ inline bool valid = false;
+ inline unsigned frame = 0;
+ 
+-// upload : sky-upload-data (16 x uint128) ; misc : vecteur (x = heure, y = etoile du jour 1/0)
++// upload : sky-upload-data (16 x uint128) ; misc : (x = heure, y = etoile du jour 1/0, z = Dark Jak 1/0, w = % histoire)
+ inline void publish(const float* upload, const float* misc) {
+   std::lock_guard<std::mutex> guard(mutex);
+   auto direction = [](const float* p, std::array<float, 3>& out) {
+@@ -33,4 +36,11 @@ inline void publish(const float* upload, const float* misc) {
+   valid = true;
+   ++frame;
+ }
++// Publie par le controle d'eau de Jak (water.gc, chaque image) : compile apres target et game-info,
++// contrairement au code du ciel.
++inline void set_actor(bool dark, float percent) {
++  std::lock_guard<std::mutex> guard(mutex);
++  dark_jak = dark;
++  if (std::isfinite(percent)) progress = std::clamp(percent * .01f, 0.f, 1.f);
++}
+ }  // namespace SkyState
+diff --git a/game/graphics/opengl_renderer/ocean/ModernOcean.h b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+index 9f536e87..2775b794 100644
+--- a/game/graphics/opengl_renderer/ocean/ModernOcean.h
++++ b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+@@ -1,4 +1,5 @@
+ #pragma once
++#include <algorithm>
+ #include <cstdint>
+ #include <map>
+ #include <string>
+@@ -8,6 +9,7 @@
+ #include "game/graphics/opengl_renderer/ocean/OceanCoastMask.h"
+ #include "game/graphics/opengl_renderer/ocean/OceanCoastMaskCity.h"
+ #include "game/graphics/opengl_renderer/ocean/CoastalBreakers.h"
++#include "game/graphics/opengl_renderer/SkyState.h"
+ 
+ // Region de mer : niveau, palette, masque de cote et bornes. La region est choisie d'apres les niveaux
+ // charges (Spargus : was*, Haven : cty*) puis la position de la camera dans la carte d'ocean native.
+@@ -85,6 +87,12 @@ class ModernOcean {
+     glUniform3fv(glGetUniformLocation(shader,"ocean_absorb"),1,r->absorb);
+     glUniform3fv(glGetUniformLocation(shader,"ocean_body_color"),1,r->body);
+     glUniform3fv(glGetUniformLocation(shader,"ocean_reflection_tint"),1,r->tint);
++    // Soleil du cycle jour-nuit : direction publiee par le ciel (repli : soleil fixe de 9 h), force nulle la nuit.
++    std::array<float,3> sun{-.32f,.66f,-.68f}; bool valid;
++    { std::lock_guard<std::mutex> guard(SkyState::mutex); valid=SkyState::valid; if(valid) sun=SkyState::sun; }
++    const float strength=std::clamp((sun[1]+.04f)/.14f,0.f,1.f);
++    glUniform3fv(glGetUniformLocation(shader,"ocean_sun"),1,sun.data());
++    glUniform1f(glGetUniformLocation(shader,"ocean_sun_strength"),strength);
+     return true;
+   }
+  private:
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+index 417c6e03..c6b6e62e 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+@@ -264,8 +264,12 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
+ vec3 oceanSkyFallback(vec3 ray) {
+   return mix(vec3(.66,.70,.72),vec3(.44,.56,.70),smoothstep(0.,.6,ray.y));
+ }
+-const vec3 oceanSunDirection=normalize(vec3(-.32,.66,-.68));
+-const vec3 oceanSunColor=vec3(1.,.93,.78);
++// Soleil du cycle jour-nuit (publie par le ciel) : direction et force (0 la nuit, 1 le jour).
++uniform vec3 ocean_sun;
++uniform float ocean_sun_strength;
++#define oceanSunDirection normalize(ocean_sun)
++// Teinte : orangee quand le soleil est bas, blanche a midi.
++#define oceanSunColor (mix(vec3(1.,.58,.30),vec3(1.,.93,.78),clamp(ocean_sun.y*2.5,0.,1.))*ocean_sun_strength)
+ // Soleil dans le reflet : disque net et lueur large (le ciel natif n'a pas de soleil marque).
+ vec3 oceanSunReflection(vec3 ray) {
+   float c=max(dot(ray,oceanSunDirection),0.);
+@@ -371,7 +375,8 @@ vec3 shadeModernOcean() {
+   body=mix(body,ocean_far,far*.7);
+   // Ombrage des ondulations : la face des vaguelettes tournee vers le soleil s'eclaire, l'autre s'assombrit.
+   // Sans cela, vue du dessus, l'eau devient un plan uni ou les vagues n'existent plus.
+-  float shade=dot(n,oceanSunDirection)*.5+.5;
++  // La nuit (force 0), l'ombrage des vaguelettes devient neutre : pas de faces "au soleil" sous un ciel noir.
++  float shade=mix(.5,dot(n,oceanSunDirection)*.5+.5,ocean_sun_strength);
+   body*=mix(.72,1.30,shade);
+   // ---- Reflet : le ciel (avec soleil) et le decor proche ; Fresnel releve pour une surface bien miroir
+   float facing=max(dot(n,v),0.);
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.frag b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+index d7bb2c36..a3e007ef 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_sky.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+@@ -22,6 +22,9 @@ uniform vec3 sky_moon;
+ uniform vec3 sky_day_star;
+ uniform float sky_day_star_on;
+ uniform float sky_coverage;
++uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
++uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
++uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
+ 
+ bool skyDepth(float depth){
+   const float step24=1./16777215.;
+@@ -106,7 +109,10 @@ void main(){
+   vec3 result=native;
+   // ---- Diffusion vers le soleil dans le ciel clair
+   float toSun=max(dot(ray,sun),0.);
+-  result+=sunColor*haze*pow(toSun,4.)*.20*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
++  result+=sunColor*haze*pow(toSun,4.)*.20*(1.+1.6*(1.-sunUp))*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
++  // Lune : lueur douce autour du disque natif, la nuit seulement.
++  float toMoon=max(dot(ray,moon),0.);
++  result+=vec3(.62,.68,.85)*(pow(toMoon,70.)*.22+pow(toMoon,9.)*.035)*(1.-dayness)*step(0.,moon.y+.02);
+   // ---- Nuages (couche 2D eclairee)
+   float cloudAlpha=0.;vec3 cloudColor=vec3(0);
+   float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));   // hors de toute branche (derivees)
+@@ -170,23 +176,33 @@ void main(){
+     float occlusion=1.-cloudAlpha;
+     result+=sunColor*((disc*1.5+corona)*occlusion*step(0.,sun.y+.05)+glow*(.6+.4*sunUp)*(1.-cloudAlpha*.5))*max(dayness,.15);
+   }
+-  // ---- Etoile du jour : fidele a l'original (coeur blanc, halo violet, quatre aigrettes), rendu plus
+-  //      propre et une respiration lente. Aucun effet ajoute : l'utilisateur veut la retrouver telle quelle.
++  // ---- Etoile du jour : fidele a l'original (coeur clair, halo violet, quatre aigrettes), avec :
++  //  - progression : le vaisseau approche au fil de l'histoire (taille +40 %, pulsation plus rapide) ;
++  //  - Dark Jak : l'etoile repond a l'eco noir (plus intense, halo violet profond) puis se calme ;
++  //  - scintillement atmospherique : eclat et position tremblent legerement (air chaud du desert).
+   if(sky_day_star_on>.5){
+     vec3 ds=normalize(sky_day_star);
++    vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
++    float tw1=noise(vec2(sky_time*5.7,2.3))-.5,tw2=noise(vec2(sky_time*6.9,7.1))-.5;
++    ds=normalize(ds+(right*tw1+up*tw2)*.0011*sky_turbulence);          // tremblement angulaire (~0,06 deg)
++    float twinkle=1.+.22*sky_turbulence*(noise(vec2(sky_time*8.3,11.7))-.5)*2.;
+     float c=dot(ray,ds);
+-    if(c>.995){
++    if(c>.993){
+       float angle=acos(clamp(c,-1.,1.));
+-      vec3 right=normalize(cross(ds,vec3(0.,1.,0.)));vec3 up=cross(right,ds);
+       vec2 local=vec2(dot(ray,right),dot(ray,up));
+-      float pulse=.94+.06*sin(sky_time*1.1);
++      float grow=1.+.40*sky_progress;
++      float pulse=.94+.06*sin(sky_time*(1.1+.9*sky_progress));
+       vec3 core=vec3(1.,.97,1.);
+-      vec3 violet=vec3(.66,.42,1.);
+-      float disc=smoothstep(.0062,.0030,angle);
+-      float halo=exp(-angle*angle/(2.*.0085*.0085))*.85+exp(-angle*angle/(2.*.020*.020))*.30;
+-      float spikes=(exp(-abs(local.x)*700.)*exp(-abs(local.y)*28.)+exp(-abs(local.y)*700.)*exp(-abs(local.x)*28.))*smoothstep(.07,.0,angle);
++      vec3 violet=mix(vec3(.66,.42,1.),vec3(.52,.16,1.),sky_dark_jak);
++      float disc=smoothstep(.0062*grow,.0030*grow,angle);
++      float halo=exp(-angle*angle/(2.*pow(.0085*grow,2.)))*.85+exp(-angle*angle/(2.*pow(.020*grow,2.)))*.30;
++      float spikes=(exp(-abs(local.x)*700./grow)*exp(-abs(local.y)*28./grow)+exp(-abs(local.y)*700./grow)*exp(-abs(local.x)*28./grow))*smoothstep(.07*grow,.0,angle);
++      float intensity=twinkle*(1.+.9*sky_dark_jak);
++      vec3 star=(core*disc*2.0*pulse+violet*halo*pulse+mix(violet,core,.4)*spikes*.7)*intensity;
++      // Dark Jak : lueur violette diffuse supplementaire autour de l'etoile
++      star+=violet*exp(-angle*angle/(2.*.035*.035))*.35*sky_dark_jak;
+       float behindClouds=1.-cloudAlpha;   // les nuages passent devant l'etoile
+-      result+=(core*disc*2.0*pulse+violet*halo*pulse+mix(violet,core,.4)*spikes*.7)*behindClouds;
++      result+=star*behindClouds;
+     }
+   }
+   color=vec4(result,1.);
+diff --git a/game/kernel/jak3/kmachine.cpp b/game/kernel/jak3/kmachine.cpp
+index 4356b69c..87e0bf0c 100644
+--- a/game/kernel/jak3/kmachine.cpp
++++ b/game/kernel/jak3/kmachine.cpp
+@@ -58,6 +58,13 @@ static u64 prototype_sky_state(u32 upload, u32 misc) {
+   SkyState::publish(Ptr<float>(upload).c(), Ptr<float>(misc).c());
+   return 0;
+ }
++// Etat de Jak et de l'histoire pour le ciel : Dark Jak actif (1/0) et pourcentage d'avancement.
++static u64 prototype_sky_actor(u32 dark_bits, u32 percent_bits) {
++  float dark, percent;
++  std::memcpy(&dark, &dark_bits, 4); std::memcpy(&percent, &percent_bits, 4);
++  SkyState::set_actor(dark > .5f, percent);
++  return 0;
++}
+ static u64 prototype_water_stroke(u32 packet, u32 hand) {
+   WaterContacts::push_stroke(Ptr<float>(packet).c(),hand);
+   return 0;
+@@ -449,6 +456,7 @@ void InitMachine_PCPort() {
+   make_function_symbol_from_c("pc-remaster-grass-contact", (void*)prototype_grass_contact);
+   make_function_symbol_from_c("pc-remaster-water-stroke", (void*)prototype_water_stroke);
+   make_function_symbol_from_c("pc-remaster-sky-state", (void*)prototype_sky_state);
++  make_function_symbol_from_c("pc-remaster-sky-actor", (void*)prototype_sky_actor);
+   // PC Port added functions
+   init_common_pc_port_functions(
+       make_function_symbol_from_c,
+-- 
+2.54.0.windows.1
+

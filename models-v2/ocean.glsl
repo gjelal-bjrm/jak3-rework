@@ -98,8 +98,12 @@ vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
 vec3 oceanSkyFallback(vec3 ray) {
   return mix(vec3(.66,.70,.72),vec3(.44,.56,.70),smoothstep(0.,.6,ray.y));
 }
-const vec3 oceanSunDirection=normalize(vec3(-.32,.66,-.68));
-const vec3 oceanSunColor=vec3(1.,.93,.78);
+// Soleil du cycle jour-nuit (publie par le ciel) : direction et force (0 la nuit, 1 le jour).
+uniform vec3 ocean_sun;
+uniform float ocean_sun_strength;
+#define oceanSunDirection normalize(ocean_sun)
+// Teinte : orangee quand le soleil est bas, blanche a midi.
+#define oceanSunColor (mix(vec3(1.,.58,.30),vec3(1.,.93,.78),clamp(ocean_sun.y*2.5,0.,1.))*ocean_sun_strength)
 // Soleil dans le reflet : disque net et lueur large (le ciel natif n'a pas de soleil marque).
 vec3 oceanSunReflection(vec3 ray) {
   float c=max(dot(ray,oceanSunDirection),0.);
@@ -205,7 +209,8 @@ vec3 shadeModernOcean() {
   body=mix(body,ocean_far,far*.7);
   // Ombrage des ondulations : la face des vaguelettes tournee vers le soleil s'eclaire, l'autre s'assombrit.
   // Sans cela, vue du dessus, l'eau devient un plan uni ou les vagues n'existent plus.
-  float shade=dot(n,oceanSunDirection)*.5+.5;
+  // La nuit (force 0), l'ombrage des vaguelettes devient neutre : pas de faces "au soleil" sous un ciel noir.
+  float shade=mix(.5,dot(n,oceanSunDirection)*.5+.5,ocean_sun_strength);
   body*=mix(.72,1.30,shade);
   // ---- Reflet : le ciel (avec soleil) et le decor proche ; Fresnel releve pour une surface bien miroir
   float facing=max(dot(n,v),0.);

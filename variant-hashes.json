@@ -115,7 +115,7 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "35f7597be93c8622e434d680ba3fa9c072859428e6b91bc6636b2c42276ae836"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "309d64e784a946a3773a84a1025fd2a00ccc4de63623aa95dea7681a4bb1f538"
   },
   "remaster": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "7e1b3747f803f508cbf4bd204efc4910a3a3a1268627ac6e2fddb02c23107a42",
@@ -151,7 +151,7 @@
     "game/graphics/opengl_renderer/shaders/ocean_common.frag": "ca7daf116835a7d6d672e4b855061e6b9dd43a304ab501a4835278d692afc6a6",
     "game/graphics/opengl_renderer/shaders/direct_basic_textured.frag": "65b9bd704200df99ea4b652754555f54e26a710dd6da3f273c8d7aa47811f4ae",
     "game/graphics/opengl_renderer/shaders/modern_ocean_surface.vert": "b95703f2b10d42d46726d20b43f52d4add5508e876d2d9025ce96d9898811133",
-    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "fe3288be403b58f8a8cb8cbdc30501c3fd4d3becfb4964335dd4f6fd98507246",
+    "game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag": "6f985565f6b1df94a2b2a0eb8f67e809a22d99db23d638ad352dc90377c2d3cf",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.vert": "88459cbc1824b6cf6a65dbc9fd8654122a92524a7c3bb099045971ad5bc15d2a",
     "game/graphics/opengl_renderer/shaders/ocean_underwater.frag": "368f500680b97d42083b06257fc180b46767dd08027d0820d3d685f59c4b6f0b",
     "game/graphics/opengl_renderer/shaders/coast_spray.vert": "703350e8da29ff342278ff14879033014920d7b19c8b5432d832b278efe1f971",
@@ -233,7 +233,7 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "35f7597be93c8622e434d680ba3fa9c072859428e6b91bc6636b2c42276ae836"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "309d64e784a946a3773a84a1025fd2a00ccc4de63623aa95dea7681a4bb1f538"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
@@ -351,6 +351,6 @@
     "game/graphics/opengl_renderer/shaders/sand_drift.frag": "52342579a859023ee5be7dc5e6ed637321676010bc7d09cb0c285d548193d3dd",
     "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba": "c0ae51dfa302f30048bcbca9c8c26b0bc9126ce016378c3ddb0e3ee66bb7b5c3",
     "game/graphics/opengl_renderer/shaders/modern_sky.vert": "2cccc21cf925a9509348e7beb532c3aa2c19130bf9303f79a9e2bfe143c38b30",
-    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "35f7597be93c8622e434d680ba3fa9c072859428e6b91bc6636b2c42276ae836"
+    "game/graphics/opengl_renderer/shaders/modern_sky.frag": "309d64e784a946a3773a84a1025fd2a00ccc4de63623aa95dea7681a4bb1f538"
   }
 }
