@@ -65,7 +65,7 @@ float mist(vec3 p){
   float ns=noise(qs)*.65+noise(qs*2.4+vec3(3.,fluid_time*1.1,7.))*.35;
   vec3 qc=p*vec3(.75,.38,.75)+vec3(0.,fluid_time*1.3,0.);
   float nc=noise(qc)*.6+noise(qc*2.3+vec3(7.,fluid_time*.9,3.))*.4;
-  return (sheathSum*.70*smoothstep(.50,.88,ns)+cloudSum*1.9*smoothstep(.24,.80,nc)+lowSum*.12*smoothstep(.24,.8,nc)
+  return (sheathSum*.30*smoothstep(.50,.88,ns)+cloudSum*1.2*smoothstep(.30,.82,nc)+lowSum*.12*smoothstep(.24,.8,nc)
           +curtain*.16*smoothstep(.38,.85,ns))*boxFade;
 }
 void main(){

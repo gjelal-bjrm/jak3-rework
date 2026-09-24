@@ -123,11 +123,11 @@
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.vert": "c81ae812fb13103fe353bbf76253134854b87ba7987ef8cdf4ea3971c0d2a512",
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.frag": "42e0fd25c716f3e9fb4b9403fd054a817debc75ad5b861a73be16643c10d870b",
     "game/graphics/opengl_renderer/shaders/fountain_mist.vert": "c97d672e7b6879ba5679bd2acac1ce317c4f9f5121e07a972e355bf4d7b5bef0",
-    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "76398c574ed3ba65bad6c6afe0436c45925097532a2f67636d5d800464c497e7"
+    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "8749bda2d0182c8f5c34e37238d176c479d1a3b8acd8f90e6a430f84726ce764"
   },
   "remaster": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "7e1b3747f803f508cbf4bd204efc4910a3a3a1268627ac6e2fddb02c23107a42",
-    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "98aa45500e2f804f143669ea688b6560503f6bf8a20ba878571cc5b96690eef1",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "73cba48cc3e18b66fa3242ef76f060577cbd0523010bf8f101f7f1654ae8393b",
     "game/graphics/opengl_renderer/shaders/tie_wind.vert": "d0014420a8c797d402b68c6c6a7d679b6ac5fc1b30efac638fa5fd5446b12772",
     "game/graphics/opengl_renderer/shaders/tie_wind.frag": "e090d25fd90f2e5ec1b957336a3c7b6e5c30e7987be3e9e3e7c2fd82fd7c0e46",
     "game/graphics/opengl_renderer/shaders/etie_base.vert": "19aa9c7b268b862c903ee06b49a10fe7efe30fc1cc37cfeadb318f946e45a612",
@@ -137,15 +137,15 @@
     "out/jak3/iso/WASSTADA.DGO": "5459ce898571173b494de1042f2934b11257217d2b492847aa456a31f8e3f4cc",
     "out/jak3/fr3/game.fr3": "bcfa3b786f624fec2c2276369195132b81600952aa319195d94ad14698f9e3e1",
     "out/jak3/fr3/waspala.fr3": "18af49de0bb31b2e45fbd4a89ff35444cc4e76476cbd3932850f0f28f605ef24",
-    "out/jak3/iso/WASPALA.DGO": "e3be994261b2379d4b25b83689587383521b08b08a50e238cb2a54741e70eace",
-    "game/graphics/opengl_renderer/shaders/generic.frag": "7cdf1eb7e1a4ead4d5075a487eb059ee79e0bc7e6d6de3cfb3ccd581afdd67e5",
-    "game/graphics/opengl_renderer/shaders/merc2.frag": "e80369c8e542200c732c0a05cf124d27b662f3d1275d24b7d95b440e4756dcf7",
+    "out/jak3/iso/WASPALA.DGO": "9edaea731c4941aa9fa223db7ff21379295fe94c3329707f6523a88ef076127b",
+    "game/graphics/opengl_renderer/shaders/generic.frag": "295a0676c161a7510e90f0dbc41f4f8dc9c5c8b6fa74d201f8cd8fbdd3310ab9",
+    "game/graphics/opengl_renderer/shaders/merc2.frag": "970a1e56a2c4ef43c929cc38e6318edd23f2123949a013b3878e74389e13812d",
     "game/graphics/opengl_renderer/shaders/liquid_bloom.vert": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576",
     "game/graphics/opengl_renderer/shaders/liquid_bloom.frag": "a0dc3ae39033599e3cecf42f62e36a9e30b7b36a772194092366d27c63e8288a",
-    "game/graphics/opengl_renderer/shaders/water_spray.vert": "a1888cdfb9fbd75513df95da349a3380e3bf516e8962e6b274008a9f55388926",
+    "game/graphics/opengl_renderer/shaders/water_spray.vert": "9bc77c92608fdf9ab368e520d66cccdf48dcccc9983ba0ff581b68c2b334b679",
     "game/graphics/opengl_renderer/shaders/water_spray.frag": "f14d5b8c09adb0deda4de2d39a9b3a9453eb0491f0eebb7390a70cf0576e4af1",
     "game/graphics/opengl_renderer/shaders/fountain.vert": "c08189a38d7ecd758cc7a54a16042f7cee7fc13a53016457d8cf1c18b9cb3b73",
-    "game/graphics/opengl_renderer/shaders/fountain.frag": "77ea8ed8d502f8ae3b4061229d413b9dd69d83be68e8401e6ab7c6f21387ab8c",
+    "game/graphics/opengl_renderer/shaders/fountain.frag": "30703de7faf33f7a151c8fea4ea6c739643d90860b3ce4a1243b5528d881ad35",
     "game/graphics/opengl_renderer/shaders/merc2.vert": "4da3a2f0723d1ef2c4d6049aa3d66e06c736b18d18a2c0e8e09dc5873aa9e161",
     "game/graphics/opengl_renderer/shaders/palace-shore.bin": "5363dddebcbbfdb72aff086251a84a0f4faf92b923afaa29c34e4cef545235e3",
     "game/graphics/opengl_renderer/shaders/palace_fire.vert": "1eaffb40d17fcc1e23d068765d7e530ff67dcf8968faa301b7dea6c3b2069f34",
@@ -249,7 +249,7 @@
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.vert": "c81ae812fb13103fe353bbf76253134854b87ba7987ef8cdf4ea3971c0d2a512",
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.frag": "42e0fd25c716f3e9fb4b9403fd054a817debc75ad5b861a73be16643c10d870b",
     "game/graphics/opengl_renderer/shaders/fountain_mist.vert": "c97d672e7b6879ba5679bd2acac1ce317c4f9f5121e07a972e355bf4d7b5bef0",
-    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "76398c574ed3ba65bad6c6afe0436c45925097532a2f67636d5d800464c497e7"
+    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "8749bda2d0182c8f5c34e37238d176c479d1a3b8acd8f90e6a430f84726ce764"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
@@ -375,6 +375,6 @@
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.vert": "c81ae812fb13103fe353bbf76253134854b87ba7987ef8cdf4ea3971c0d2a512",
     "game/graphics/opengl_renderer/shaders/modern_weather_particles.frag": "42e0fd25c716f3e9fb4b9403fd054a817debc75ad5b861a73be16643c10d870b",
     "game/graphics/opengl_renderer/shaders/fountain_mist.vert": "c97d672e7b6879ba5679bd2acac1ce317c4f9f5121e07a972e355bf4d7b5bef0",
-    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "76398c574ed3ba65bad6c6afe0436c45925097532a2f67636d5d800464c497e7"
+    "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "8749bda2d0182c8f5c34e37238d176c479d1a3b8acd8f90e6a430f84726ce764"
   }
 }

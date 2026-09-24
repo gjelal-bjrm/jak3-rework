@@ -21,15 +21,17 @@ def main():
         path = root / REL / 'fountain.frag'
         s = path.read_text()
         at = s.index('void main() {')
-        comment = s.rfind('\n// Chutes du plafond du palais (v2)', 0, at)
+        comment = s.rfind('\n// Chutes du plafond du palais', 0, at)
         if comment >= 0: at = comment + 1
         path.write_text(s[:at] + new_main)
         print('fountain.frag :', path.relative_to(R))
     positions = (R / 'liquids-v3/fountain_positions.glsl').read_text()
     files = json.loads((R / 'variant-files.json').read_text(encoding='utf-8'))
     hashes = json.loads((R / 'variant-hashes.json').read_text(encoding='utf-8'))
+    falls = (H / 'palace_falls.glsl').read_text(encoding='utf-8')
     for name in ('fountain_mist.vert', 'fountain_mist.frag'):
         text = (H / name).read_text(encoding='utf-8').replace('// FOUNTAIN_POSITIONS', positions)
+        text = text.replace('// PALACE_FALLS', falls)
         rel = REL + name
         for root in (R / 'data', R / 'engine-src'):
             (root / rel).write_text(text)
@@ -41,7 +43,16 @@ def main():
         print('installe :', rel)
     (R / 'variant-files.json').write_text(json.dumps(files, indent=2) + '\n', encoding='utf-8')
     (R / 'variant-hashes.json').write_text(json.dumps(hashes, indent=2) + '\n', encoding='utf-8')
-    subprocess.run([sys.executable, str(R / 'sync_variant.py'), REL + 'fountain.frag'], check=True)
+    # Gerbes (water_spray.vert) : grands impacts, pieds des petites chutes et pieds d'origine.
+    spray = (H / 'spray_impacts.glsl').read_text(encoding='utf-8')
+    for root in (R / 'data', R / 'engine-src'):
+        path = root / REL / 'water_spray.vert'
+        text = path.read_text()
+        start = text.index('const int water_impact_count=')
+        end = text.index(');\n', text.index('const vec3 water_impacts[', start)) + 3
+        path.write_text(text[:start] + spray + text[end:])
+    subprocess.run([sys.executable, str(R / 'sync_variant.py'), REL + 'fountain.frag', REL + 'water_spray.vert'],
+                   check=True)
 
 
 if __name__ == '__main__': main()

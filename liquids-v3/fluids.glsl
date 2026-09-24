@@ -9,6 +9,8 @@ uniform sampler2D tex_T26; // matching reversed-Z scene depth
 uniform vec4 fluid_contacts[32]; // world position in metres, birth time
 uniform float fluid_strength[32];
 
+// Couverture floue de la texture d'origine (posee par tfrag3 avant shadeModernWater ; -1 ailleurs).
+float fluidCoverHint = -1.0;
 float fluidHash(vec2 p) {
   vec3 q = fract(vec3(p.xyx) * 0.1031);
   q += dot(q, q.yzx + 33.33);
@@ -200,6 +202,45 @@ vec4 waterReflection(vec3 P, vec3 V, vec3 N) {
 }
 
 // PALACE_FIRE_REFLECTION_HELPER
+// PALACE_IMPACT_BEGIN (genere par models-v2/palace/build_falls.py)
+// Pieds des chutes : eau blanche qui bouillonne, anneaux de vagues qui s'eloignent, ecume qui derive vers
+// l'exterieur. Renvoie la pente de la surface (xy) et l'ecume (z).
+vec3 palaceImpact(vec3 P) {
+  const vec4 impacts[14]=vec4[14](vec4(1990.605,241.491,-439.565,1.10),vec4(2007.471,241.491,-442.773,1.10),vec4(2005.301,241.491,-453.336,1.10),vec4(1989.295,241.491,-450.188,1.10),vec4(2044.023,241.502,-426.044,0.45),vec4(2035.390,241.501,-431.432,0.45),vec4(2019.907,241.498,-437.438,0.45),vec4(2006.281,241.499,-437.681,0.45),vec4(1989.839,241.495,-437.778,0.45),vec4(1972.779,241.497,-437.860,0.45),vec4(2026.199,240.630,-485.042,0.45),vec4(2046.131,240.632,-486.036,0.45),vec4(2029.992,240.629,-484.546,0.45),vec4(1997.982,240.650,-484.783,0.45));
+  vec2 slope=vec2(0.0);float foam=0.0;
+  for(int i=0;i<14;i++) {
+    vec4 im=impacts[i];
+    if(abs(P.y-im.y)>0.8)continue;
+    vec2 dp=P.xz-im.xz;float d=length(dp);float R=im.w;
+    if(d>R*5.0)continue;
+    vec2 dir=dp/max(d,1e-3);
+    float t=fluid_time+float(i)*3.7;
+    // coeur : eau aeree qui bouillonne
+    float core=exp(-d*d/(R*R)*1.4);
+    float churn=fluidNoise(dp*10.0/R+vec2(t*2.3,-t*1.7))*0.50+fluidNoise(dp*21.0/R-vec2(t*3.1,t*2.4))*0.32
+               +fluidNoise(dp*43.0/R+vec2(t*4.0,t*3.3))*0.18;
+    float bubbles=smoothstep(0.30,0.70,churn);
+    foam+=core*(0.35+0.65*bubbles);
+    // couronne d'ecume qui s'ouvre autour du point d'impact
+    float crown=exp(-pow((d-R*0.9)/(R*0.35),2.0))*smoothstep(0.45,0.7,churn);
+    foam+=crown*0.55;
+    // ecume qui derive vers l'exterieur par plaques
+    float ang=atan(dp.y,dp.x);
+    float drift=fluidNoise(vec2(ang*2.2+float(i),d*2.4/R-t*1.1))*0.65+fluidNoise(vec2(ang*5.0,d*5.0/R-t*1.6)+4.0)*0.35;
+    foam+=smoothstep(0.62,0.92,drift)*exp(-d/(R*1.3))*(1.0-core)*0.35;
+    // anneaux de vagues qui s'eloignent et s'amortissent
+    float k=6.5/R,w=7.0;
+    float amp=0.10*exp(-d/(R*2.2))*smoothstep(0.0,R*0.5,d);
+    slope+=dir*amp*cos(d*k-t*w);
+    // surface agitee au coeur
+    vec2 e=vec2(0.05,0.0);
+    float c0=fluidNoise(dp*4.0/R+t*2.0);
+    slope+=vec2(fluidNoise((dp+e.xy)*4.0/R+t*2.0)-c0,fluidNoise((dp+e.yx)*4.0/R+t*2.0)-c0)/0.05*0.02*core;
+  }
+  return vec3(slope,clamp(foam,0.0,1.0));
+}
+// PALACE_IMPACT_END
+
 vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
   vec2 screen = gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
   vec3 originalScene = texture(tex_T25,screen).rgb;
@@ -213,35 +254,42 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
     // cards while retaining the small cascades around the stepping stones.
     // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
-    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
-    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
-    float across=P.x+P.z;
-    float fall=P.y+fluid_time*3.6;
-    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
-    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+    // Petite cascade (v3) : vraie nappe d'eau qui deborde de la pierre. La texture d'origine ne sert plus
+    // qu'a savoir OU il y a de l'eau (couverture large, sans ses fines lignes) ; l'eau elle-meme est
+    // dessinee : lisse et vitreuse en haut, filets qui accelerent et blanchissent vers le bas, on voit la
+    // pierre a travers, deformee.
+    float across=(P.x+P.z)*0.7071;
+    float fall=P.y+fluid_time*3.2;
+    float strands=fluidNoise(vec2(across*6.0,fall*1.1))*0.6+fluidNoise(vec2(across*13.0,fall*2.2)+7.3)*0.4;
     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
-    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+    N = normalize(geometricNormal+tangent*(strands-0.5)*0.5);
     if (dot(N,V)<0.0) N = -N;
-    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
-    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.10).xy-fluidProject(P).xy);
+    vec2 maxOffset=vec2(4.0)/vec2(textureSize(tex_T25,0));
     offset=clamp(offset,-maxOffset,maxOffset);
     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
     vec3 transmitted=texture(tex_T25,uv).rgb;
-    float white=smoothstep(0.45,0.85,strands+speck*0.2);
-    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
-    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
-    float mask=smoothstep(0.05,0.55,legacyTexture.a);
-    float opacity=mask*(0.30+0.55*white);
-    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
-    film+=palaceFireReflection(P,N,V)*0.9;
-    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
+    // couverture : la moindre trace d'eau de la texture d'origine suffit (plus de lignes separees)
+    float cover=fluidCoverHint>=0.0 ? fluidCoverHint : legacyTexture.a;
+    float mask=smoothstep(0.03,0.22,cover)*0.85+0.15*smoothstep(0.0,0.1,legacyTexture.a);
+    // aeration : eau vive, blanche par endroits, avec des passages plus clairs
+    float aer=0.12+0.88*smoothstep(0.42,0.86,strands);
+    float fres=0.05+0.95*pow(1.0-max(dot(N,V),0.0),4.0);
+    vec3 light=vec3(0.97,0.91,0.82);
+    vec3 glass=mix(transmitted*vec3(0.84,0.93,0.95),vec3(0.46,0.52,0.52)*light,0.18+0.40*fres);
+    vec3 film=mix(glass,vec3(0.93,0.94,0.92)*light,aer*0.85);
+    film+=palaceFireReflection(P,N,V)*0.8;
+    film+=vec3(1.0,0.84,0.60)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),56.0)*0.35;
     float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
-    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+    return mix(originalScene,film,nearFade*mask);
   }
   // The basin is visible from both sides. Preserve the accepted upper face;
   // only its underside needs the normal oriented toward the submerged camera.
   bool belowSurface = cam_trans.y/4096.0 < P.y;
+  // pieds des chutes : bouillonnement, anneaux de vagues, ecume
+  vec3 impact = palaceImpact(P);
+  N = normalize(N+vec3(-impact.x,0.0,-impact.y));
   if (belowSurface && dot(N,V)<0.0) N = -N;
   vec3 projectedOffset = fluidProject(P+vec3(N.x,0.0,N.z)*0.16);
   vec2 refractUV = clamp(screen+(projectedOffset.xy-fluidProject(P).xy),vec2(0.001),vec2(0.999));
@@ -277,6 +325,9 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
   // Foam belongs to moving contacts and falling-water impacts, not a bank outline.
   float foam=wakeFoam*smoothstep(0.25,0.65,fluidNoise(local*19.0+fluid_time*vec2(1.9,0.7)));
   result = mix(result,vec3(0.68,0.76,0.73),clamp(foam,0.0,0.48));
+  // ecume des chutes : blanche, eclairee par les braseros, avec un peu de relief
+  float impactFoam = impact.z*(0.75+0.25*fluidNoise(P.xz*9.0+fluid_time*vec2(1.3,-0.8)));
+  result = mix(result,vec3(0.86,0.87,0.83)*vec3(1.0,0.93,0.84),clamp(impactFoam,0.0,0.85));
   if (horizontal<0.5) {
     float strands = pow(fluidNoise(vec2((P.x+P.z)*14.0,P.y*1.4+fluid_time*4.2)),3.0);
     float film = clamp(legacyTexture.a*0.65+strands*0.42,0.05,0.65);

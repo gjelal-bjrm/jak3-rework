@@ -482,23 +482,13 @@ if pc_settings.exists():
             shutil.copy2(pc_settings, backup)
         pc_settings.write_text(muted, encoding='utf-8')
 # Clavier toujours actif, en plus de la manette : OpenGOAL coupe le clavier des qu'il detecte une manette
-# (l'utilisateur ne pouvait plus deplacer Jak au clavier).
+# (l'utilisateur ne pouvait plus deplacer Jak au clavier). Touches d'origine W A S D (clavier suisse QWERTZ).
 input_settings = settings / 'input-settings.json'
 if input_settings.exists():
     try:
         inputs = json.loads(input_settings.read_text(encoding='utf-8'))
         changed = not inputs.get('keyboard_enabled')
         inputs['keyboard_enabled'] = True
-        # Clavier francais (AZERTY) : deplacements Z Q S D au lieu de W A S D ; L1 passe de Q a A.
-        keyboard = inputs.get('keyboard_binds', {})
-        axes, buttons = keyboard.get('analog_axii', []), keyboard.get('buttons', [])
-        if any(code == ord('w') for code, _ in axes) and not any(code == ord('z') for code, _ in axes):
-            for entry in axes:
-                if entry[0] == ord('w'): entry[0] = ord('z')
-                elif entry[0] == ord('a'): entry[0] = ord('q')
-            for entry in buttons:
-                if entry[0] == ord('q'): entry[0] = ord('a')
-            changed = True
         if changed:
             input_settings.write_text(json.dumps(inputs, indent=2), encoding='utf-8')
     except ValueError:
