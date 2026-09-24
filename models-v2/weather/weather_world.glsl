@@ -33,6 +33,64 @@ vec3 wxRipples(vec2 p,float t){
   }
   return vec3(slope,crest);
 }
+// Reflets des flaques : rayon reflechi lance dans l'image precedente (WeatherReflect, unites 21/22).
+uniform int weather_reflect;
+uniform sampler2D weather_prev_color;
+uniform sampler2D weather_prev_depth;
+uniform mat4 weather_prev_camera;
+uniform mat4 weather_prev_inverse;     // inverse(-camera)
+uniform vec3 weather_prev_eye;
+uniform vec4 weather_prev_viewport;
+vec3 wxProject(vec3 P){
+  vec4 h=-weather_prev_camera*vec4((P-weather_prev_eye)*4096.,1.);
+  h.y*=(512./416.)*.5;
+  if(h.w<=0.)return vec3(-1.);
+  vec3 n=h.xyz/h.w;
+  vec2 px=weather_prev_viewport.xy+(n.xy*.5+.5)*weather_prev_viewport.zw;
+  return vec3(px/vec2(textureSize(weather_prev_depth,0)),n.z*.5+.5);
+}
+vec3 wxUnproject(vec2 uv,float depth){
+  vec2 px=uv*vec2(textureSize(weather_prev_depth,0));
+  vec4 h=vec4((px-weather_prev_viewport.xy)/weather_prev_viewport.zw*2.-1.,depth*2.-1.,1.);
+  h.y/=(512./416.)*.5;
+  vec4 w=weather_prev_inverse*h;
+  return w.xyz/w.w/4096.+weather_prev_eye;
+}
+bool wxSkyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
+bool wxOnScreen(vec3 uv){return uv.z>=0.&&all(greaterThan(uv.xy,vec2(.002)))&&all(lessThan(uv.xy,vec2(.998)));}
+// Renvoie la couleur reflechie et sa confiance (0 = rien trouve).
+vec4 wxReflect(vec3 P,vec3 R){
+  float t=.15;
+  for(int i=0;i<28;i++){
+    float stepLen=.16+float(i)*.11;          // ~50 m au total, pas plus fins pres de la flaque
+    t+=stepLen;
+    vec3 uv=wxProject(P+R*t);
+    if(!wxOnScreen(uv))break;
+    float d=texture(weather_prev_depth,uv.xy).r;
+    if(d>uv.z&&!wxSkyDepth(d)){
+      float a=t-stepLen,b=t;
+      for(int j=0;j<6;j++){
+        float m=(a+b)*.5;vec3 u2=wxProject(P+R*m);
+        if(texture(weather_prev_depth,u2.xy).r>u2.z)b=m;else a=m;
+      }
+      vec3 huv=wxProject(P+R*b);
+      vec3 hit=wxUnproject(huv.xy,texture(weather_prev_depth,huv.xy).r);
+      float err=length(hit-(P+R*b));
+      float conf=1.-smoothstep(.25+b*.03,1.+b*.08,err);          // derriere un objet mince : pas de reflet
+      vec2 e=min(huv.xy,1.-huv.xy);
+      conf*=smoothstep(0.,.05,min(e.x,e.y));                      // fondu au bord de l'ecran
+      if(conf>.01)return vec4(texture(weather_prev_color,huv.xy).rgb,conf);
+      return vec4(0.);
+    }
+  }
+  // Pas de decor touche : le vrai ciel (nuages compris) dans la direction reflechie
+  vec3 s=wxProject(P+R*3000.);
+  if(wxOnScreen(s)&&wxSkyDepth(texture(weather_prev_depth,s.xy).r)){
+    vec2 e=min(s.xy,1.-s.xy);
+    return vec4(texture(weather_prev_color,s.xy).rgb,.9*smoothstep(0.,.05,min(e.x,e.y)));
+  }
+  return vec4(0.);
+}
 vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
   if(weather_wet<.003&&weather_snow<.003)return color;
   vec3 E=cam_trans.xyz/4096.;
@@ -45,7 +103,7 @@ vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
     color*=mix(1.,.62,porous);
     // flaques dans les creux : bruit a grande echelle, seulement sur le plat
     float n=wxNoise(P.xz*.23)*.62+wxNoise(P.xz*.9+3.7)*.38;
-    float th=mix(.82,.64,weather_puddles);
+    float th=mix(.80,.58,weather_puddles);
     float puddle=smoothstep(th,th+.06,n)*smoothstep(.93,.985,N.y)*smoothstep(.05,.3,weather_puddles);
     // ronds de pluie dans les flaques (plus faibles sur le sol simplement mouille)
     vec3 Nw=N;float crest=0.;
@@ -60,10 +118,15 @@ vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
     vec3 R=reflect(-V,Nw);
     // ciel reflechi : plus sombre vers l'horizon (facades), plus clair au zenith : les rides se voient
     vec3 sky=weather_sky*(.45+1.05*clamp(R.y,0.,1.));
+    // flaques proches : vrai reflet des batiments, des personnages et du ciel
+    if(weather_reflect!=0&&puddle>.02&&dist<70.){
+      vec4 ss=wxReflect(P+N*.03,R);
+      sky=mix(sky,ss.rgb,ss.a*(1.-smoothstep(45.,70.,dist)));
+    }
     float spec=pow(max(dot(R,normalize(weather_sun_dir)),0.),mix(60.,600.,puddle));
     // eau stagnante : fond assombri, reflet presque miroir aux angles rasants
-    color=mix(color,color*.55,puddle);
-    float refl=mix(fres*.55*porous,mix(.30,.95,fres),puddle);
+    color=mix(color,color*.62,puddle);
+    float refl=mix(fres*.55*porous,mix(.42,.95,fres),puddle);
     color=mix(color,sky,clamp(refl,0.,1.));
     color+=weather_sky*crest*.28;
     color+=weather_sun_color*spec*(porous*.25+puddle*1.4);
