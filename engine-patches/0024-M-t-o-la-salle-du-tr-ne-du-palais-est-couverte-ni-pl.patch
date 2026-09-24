@@ -1,0 +1,83 @@
+From 4b9891762e062af6f5af8135e5cd2d7d2d4645ff Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 24 Sep 2026 12:29:29 +0200
+Subject: [PATCH 24/24] =?UTF-8?q?M=C3=A9t=C3=A9o=20:=20la=20salle=20du=20t?=
+ =?UTF-8?q?r=C3=B4ne=20du=20palais=20est=20couverte=20(ni=20pluie,=20ni=20?=
+ =?UTF-8?q?neige,=20ni=20sol=20mouill=C3=A9,=20ni=20brouillard=20=C3=A0=20?=
+ =?UTF-8?q?l'int=C3=A9rieur=20;=20ciel=20visible=20par=20les=20verri=C3=A8?=
+ =?UTF-8?q?res)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernWeather.h |  8 +++++++-
+ game/graphics/opengl_renderer/WeatherState.h  | 12 ++++++++----
+ 2 files changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernWeather.h b/game/graphics/opengl_renderer/ModernWeather.h
+index a5e2cc23..539c0c18 100644
+--- a/game/graphics/opengl_renderer/ModernWeather.h
++++ b/game/graphics/opengl_renderer/ModernWeather.h
+@@ -41,7 +41,13 @@ class ModernWeather {
+     if (ModernOcean::level_loaded(state, "was")) region = WeatherState::REGION_SPARGUS;
+     else if (ModernOcean::level_loaded(state, "cty")) region = WeatherState::REGION_HAVEN;
+     else if (ModernOcean::level_loaded(state, "des")) region = WeatherState::REGION_DESERT;
+-    WeatherState::update(dt, region, hour);
++    // Salle du trone du palais : le jeu d'origine la traite en exterieur (verriere) ; on y voit la meteo
++    // par les fenetres mais il n'y pleut ni n'y neige.
++    const auto eye = state->camera_pos / 4096.f;
++    const float px = eye[0] - 1998.f, py = eye[1] - 253.f, pz = eye[2] + 446.f;
++    const bool covered = ModernOcean::level_loaded(state, "waspala") && std::abs(py) < 35.f &&
++                         px * px + pz * pz < 75.f * 75.f;
++    WeatherState::update(dt, region, hour, covered);
+     WeatherState::Params p; float flash;
+     {
+       std::lock_guard<std::mutex> guard(WeatherState::mutex);
+diff --git a/game/graphics/opengl_renderer/WeatherState.h b/game/graphics/opengl_renderer/WeatherState.h
+index 647273b7..7db77216 100644
+--- a/game/graphics/opengl_renderer/WeatherState.h
++++ b/game/graphics/opengl_renderer/WeatherState.h
+@@ -63,7 +63,9 @@ inline float remaining = 300.f;           // temps restant avant la meteo suivan
+ inline int forced = -1;                   // meteo imposee (commande de test) ou -1
+ inline bool started = false;
+ inline float wetness = 0.f, puddles = 0.f, snow_cover = 0.f;
+-inline float outdoor = 1.f;               // exterior-level natif (0 a l'interieur)
++inline float exterior = 1.f;              // exterior-level natif (0 a l'interieur)
++inline bool covered = false;              // sous un toit que le jeu d'origine croit exterieur (salle du trone)
++inline float outdoor = 1.f;               // exterieur et a decouvert : precipitations, sol mouille, brouillard
+ inline float native_flash = 0.f;          // eclair natif en cours (lumiere)
+ inline int native_flash_index = 0;
+ inline float flash = 0.f;                 // eclair dans les nuages (0..1)
+@@ -96,8 +98,10 @@ inline int pick(int reg, float hour, int previous) {
+ }
+ 
+ // Appele une fois par image par le rendu. `hour` : heure du jour ; dt en secondes.
+-inline void update(float dt, int reg, float hour) {
++inline void update(float dt, int reg, float hour, bool under_roof = false) {
+   std::lock_guard<std::mutex> guard(mutex);
++  covered = under_roof;
++  outdoor = covered ? 0.f : exterior;
+   static Params from_params = preset(CLEAR);
+   region = reg;
+   if (!started) {
+@@ -163,13 +167,13 @@ inline void update(float dt, int reg, float hour) {
+ // io[12] = neige native, io[13] = eclairs natifs autorises
+ inline void exchange(float* io) {
+   std::lock_guard<std::mutex> guard(mutex);
+-  if (std::isfinite(io[4])) outdoor = std::clamp(io[4], 0.f, 1.f);   // exterior-level natif
++  if (std::isfinite(io[4])) exterior = std::clamp(io[4], 0.f, 1.f);   // exterior-level natif
+   if (std::isfinite(io[1])) native_flash = std::max(0.f, io[1]);
+   native_flash_index = int(io[2]);
+   io[8] = started ? 1.f : 0.f;
+   io[9] = current.native_cloud;
+   io[10] = current.native_fog;
+-  io[11] = std::min(.75f, current.rain * .75f);
++  io[11] = covered ? 0.f : std::min(.75f, current.rain * .75f);   // pas de pluie native sous un toit
+   io[12] = 0.f;   // neige native (points etires en traits bleutes) coupee : flocons modernes
+   io[13] = current.lightning > .5f ? 1.f : 0.f;
+ }
+-- 
+2.54.0.windows.1
+
