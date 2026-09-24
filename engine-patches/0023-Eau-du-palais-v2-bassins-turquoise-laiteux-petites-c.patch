@@ -1,0 +1,567 @@
+From 35764e213e9ad1f63bc8ba4001555d559b043643 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 24 Sep 2026 12:10:59 +0200
+Subject: [PATCH 23/23] =?UTF-8?q?Eau=20du=20palais=20v2=20:=20bassins=20tu?=
+ =?UTF-8?q?rquoise=20laiteux,=20petites=20cascades=20qui=20coulent,=20chut?=
+ =?UTF-8?q?es=20du=20plafond=20en=20eau=20a=C3=A9r=C3=A9e=20translucide,?=
+ =?UTF-8?q?=20brume=20en=20volume=20(gaines,=20embruns=20au=20pied,=20napp?=
+ =?UTF-8?q?e=20basse,=20rideau)=20;=20chutes=20actives=20d=C3=A8s=20que=20?=
+ =?UTF-8?q?la=20cam=C3=A9ra=20est=20dans=20la=20salle=20du=20tr=C3=B4ne?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../graphics/opengl_renderer/WaterFountains.h |  30 +++++
+ .../opengl_renderer/shaders/fountain.frag     |  89 +++++++++-----
+ .../shaders/fountain_mist.frag                | 112 ++++++++++++++++++
+ .../shaders/fountain_mist.vert                |  12 ++
+ .../opengl_renderer/shaders/generic.frag      |  45 ++++---
+ .../opengl_renderer/shaders/merc2.frag        |  45 ++++---
+ .../opengl_renderer/shaders/tfrag3.frag       |  45 ++++---
+ 7 files changed, 292 insertions(+), 86 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/shaders/fountain_mist.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/fountain_mist.vert
+
+diff --git a/game/graphics/opengl_renderer/WaterFountains.h b/game/graphics/opengl_renderer/WaterFountains.h
+index e70dc92e..0491cf31 100644
+--- a/game/graphics/opengl_renderer/WaterFountains.h
++++ b/game/graphics/opengl_renderer/WaterFountains.h
+@@ -1,10 +1,14 @@
+ #pragma once
+ #include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++#include "game/graphics/opengl_renderer/loader/Loader.h"
+ 
+ class WaterFountains {
+  public:
+   ~WaterFountains(){ if(m_vao)glDeleteVertexArrays(1,&m_vao); }
+   void render(SharedRenderState* state) {
++    // Chutes et brume actives des que la camera est dans la salle du trone (et plus seulement quand un
++    // bassin anime est a l'ecran : elles disparaissaient dans la vue d'arrivee).
++    if(state->has_pc_data && !state->prototype_water_visible && palace_near(state))state->prototype_water_visible=true;
+     if(!state->prototype_water_visible || !state->has_pc_data)return;
+     GLint program,vao,depth_func,active;
+     GLboolean depth_write,color_mask[4];
+@@ -18,6 +22,22 @@ class WaterFountains {
+     GLboolean enabled[5];
+     for(int i=0;i<5;i++){enabled[i]=glIsEnabled(flags[i]);glDisable(flags[i]);}
+     if(!m_shader){m_shader=std::make_unique<Shader>("fountain",state->version);glGenVertexArrays(1,&m_vao);}
++    glBindVertexArray(m_vao);
++    // Voile de brume des chutes (avant les chutes elles-memes) : plein ecran, marche de rayon limitee par la
++    // profondeur de la scene ; remplace les pixels par le decor vu a travers la brume.
++    if(!m_mist)m_mist=std::make_unique<Shader>("fountain_mist",state->version);
++    if(m_mist->okay()){
++      m_mist->activate();
++      const auto mist=m_mist->id();
++      m_scene.bind(state,mist);
++      glUniform1i(glGetUniformLocation(mist,"tex_T25"),25);
++      glUniform1i(glGetUniformLocation(mist,"tex_T26"),26);
++      glUniform1f(glGetUniformLocation(mist,"fluid_time"),LiquidSnapshot::seconds());
++      glUniformMatrix4fv(glGetUniformLocation(mist,"pc_camera"),1,GL_FALSE,state->prototype_camera);
++      glUniform4fv(glGetUniformLocation(mist,"cam_trans"),1,state->camera_pos.data());
++      glDepthMask(GL_FALSE);
++      glDrawArrays(GL_TRIANGLES,0,3);
++    }
+     m_shader->activate();
+     auto shader=m_shader->id();
+     m_scene.bind(state,shader);
+@@ -39,6 +59,16 @@ class WaterFountains {
+     for(int i=0;i<5;i++){if(enabled[i])glEnable(flags[i]);else glDisable(flags[i]);}
+   }
+  private:
++  static bool palace_near(const SharedRenderState* state){
++    if(state->version!=GameVersion::Jak3 || !state->loader)return false;
++    const auto eye=state->camera_pos/4096.f;
++    const float dx=eye.x()-1998.f,dy=eye.y()-253.f,dz=eye.z()+446.f;
++    if(dx*dx+dy*dy+dz*dz>90.f*90.f)return false;
++    for(const auto* data:state->loader->get_in_use_levels())
++      if(data && data->level && data->level->level_name=="waspala")return true;
++    return false;
++  }
++  std::unique_ptr<Shader> m_mist;
+   std::unique_ptr<Shader> m_shader;
+   LiquidSnapshot m_scene;
+   GLuint m_vao=0;
+diff --git a/game/graphics/opengl_renderer/shaders/fountain.frag b/game/graphics/opengl_renderer/shaders/fountain.frag
+index 42a9d764..efb0fca0 100644
+--- a/game/graphics/opengl_renderer/shaders/fountain.frag
++++ b/game/graphics/opengl_renderer/shaders/fountain.frag
+@@ -257,29 +257,35 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   float wakeFoam;
+   vec3 N = waterNormal(local,P,wakeFoam);
+   if (horizontal<0.5) {
+-    // The palace's central jet cards overlap the new volume jets. Retire those
++    // The palace's central jet cards overlap the new volume jets and mist. Retire those
+     // cards while retaining the small cascades around the stepping stones.
++    // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
+     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
+-    // An elongated flowing film, with small bright streaks instead of cloudy noise.
+-    vec2 q=vec2((P.x+P.z)*7.0,P.y*0.50+fluid_time*2.8);
+-    float flow=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.8,1.9));
++    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
++    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
++    float across=P.x+P.z;
++    float fall=P.y+fluid_time*3.6;
++    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
++    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
+-    N = normalize(geometricNormal+tangent*(flow-0.55)*0.40);
++    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+     if (dot(N,V)<0.0) N = -N;
+-    vec2 offset=(fluidProject(P+tangent*(flow-0.5)*0.09).xy-fluidProject(P).xy);
+-    vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
++    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
++    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+     offset=clamp(offset,-maxOffset,maxOffset);
+     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
+     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
+     vec3 transmitted=texture(tex_T25,uv).rgb;
+-    float streak=smoothstep(0.67,1.02,flow);
+-    float facing=0.10+0.35*pow(1.0-max(dot(N,V),0.0),3.0);
+-    vec3 film=mix(transmitted,vec3(0.48,0.56,0.54),facing+streak*0.28);
+-    film+=vec3(0.20,0.23,0.22)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0);
+-    float coverage=clamp(legacyTexture.a*legacyTexture.a*2.0,0.0,0.8)
+-      *(0.55+streak*0.45);
+-    coverage *= smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
+-    return mix(originalScene,film,coverage);
++    float white=smoothstep(0.45,0.85,strands+speck*0.2);
++    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
++    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
++    float mask=smoothstep(0.05,0.55,legacyTexture.a);
++    float opacity=mask*(0.30+0.55*white);
++    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
++    film+=palaceFireReflection(P,N,V)*0.9;
++    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
++    float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
++    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+   }
+   // The basin is visible from both sides. Preserve the accepted upper face;
+   // only its underside needs the normal oriented toward the submerged camera.
+@@ -297,9 +303,12 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  vec3 transmission = exp(-vec3(0.21,0.072,0.045)*thickness);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission;
+-  below += vec3(0.018,0.078,0.083)*(1.0-transmission);
++  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
++  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
++  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
++  float murk = 1.0-exp(-thickness*1.4);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
++  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+   // Caustics follow the bed through refraction and disappear on deep water.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+@@ -324,28 +333,44 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   return result;
+ }
+ 
++// Chutes du plafond du palais (v2) : eau aeree qui tombe de 23 m. Elle accelere (les filets
++// s'etirent et filent de plus en plus vite), blanchit, puis se defait en filets et en trous vers le bas ;
++// on voit a travers, deforme. Eclairage chaud des braseros et de la verriere.
+ void main() {
+   vec2 screen=gl_FragCoord.xy/vec2(textureSize(tex_T25,0));
+-  vec2 q=vec2(flow_uv.x*15.0,flow_uv.y*38.0-fluid_time*7.0);
+-  float turbulence=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.1,2.8));
+-  vec3 N=normalize(normal+vec3(
+-    fluidNoise(q+vec2(0.18,0.0))-fluidNoise(q-vec2(0.18,0.0)),
+-    fluidNoise(q+vec2(0.0,0.18))-fluidNoise(q-vec2(0.0,0.18)),
+-    fluidNoise(q+9.1)-0.5)*0.85);
++  float s=flow_uv.y;                                   // 0 en haut, 1 au pied de la chute
++  float speed=5.0+11.0*s;                              // chute libre : de plus en plus vite
++  vec2 q=vec2(flow_uv.x*24.0,s*13.0-fluid_time*speed*0.55);          // longs filets verticaux
++  float strands=fluidNoise(q)*0.6+fluidNoise(q*vec2(2.3,1.7)+5.1)*0.4;
++  float fine=fluidNoise(q*vec2(4.1,3.2)+9.7);
++  vec3 bump=vec3(fluidNoise(q+vec2(0.2,0.0))-fluidNoise(q-vec2(0.2,0.0)),0.0,
++                 fluidNoise(q+vec2(0.0,0.2))-fluidNoise(q-vec2(0.0,0.2)));
++  vec3 N=normalize(normal+bump*0.9);
+   vec3 V=normalize(cam_trans.xyz/4096.0-world);
+   if(dot(N,V)<0.0)N=-N;
+-  vec2 offset=fluidProject(world+N*0.10*(turbulence-0.3)).xy-fluidProject(world).xy;
+-  vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
++  float facing=max(dot(normalize(normal),V),0.0);
++  // Longues stries verticales qui filent vers le bas ; peu de contraste (eau aeree, pas de taches).
++  float streak=fluidNoise(vec2(flow_uv.x*18.0,s*6.0-fluid_time*speed*0.30))*0.5
++              +fluidNoise(vec2(flow_uv.x*40.0,s*14.0-fluid_time*speed*0.62)+3.0)*0.5;
++  float white=0.60+0.40*smoothstep(0.20,0.85,streak);
++  float breakup=smoothstep(0.35,1.0,s);
++  // en haut l'eau sort claire (vitreuse), elle blanchit en tombant, se desagrege un peu en bas
++  float opacity=mix(0.28,0.82,smoothstep(0.02,0.30,s))*(1.0-0.40*breakup*(1.0-streak));
++  opacity*=smoothstep(0.0,0.55,facing);                 // silhouette douce
++  // ce qu'on voit a travers, deforme par l'eau
++  vec2 offset=fluidProject(world+N*0.12*(streak-0.5)).xy-fluidProject(world).xy;
++  vec2 maxOffset=vec2(6.0)/vec2(textureSize(tex_T25,0));
+   offset=clamp(offset,-maxOffset,maxOffset);
+   vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
+   if(texture(tex_T26,uv).r>gl_FragCoord.z)uv=screen;
+   vec3 behind=texture(tex_T25,uv).rgb;
+-  float edge=pow(1.0-max(dot(N,V),0.0),4.0);
+-  float foam=smoothstep(0.65,1.03,turbulence)*(0.35+flow_uv.y*0.45);
+-  vec3 reflection=mix(vec3(0.23,0.30,0.30),vec3(0.69,0.76,0.73),foam);
+-  vec3 result=mix(behind,reflection,0.10+0.26*edge+foam*0.44);
+-  float glint=pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),64.0);
+-  result+=vec3(0.5,0.51,0.45)*glint*0.20;
++  vec3 light=vec3(0.82,0.72,0.60);                     // salle sombre eclairee par les braseros
++  vec3 waterCol=vec3(0.92,0.93,0.90)*white*light;
++  vec3 result=mix(behind*vec3(0.90,0.95,0.97),waterCol,opacity);
++  float solid=opacity;
++  // eclats dores sur les filets (lumiere des braseros)
++  float glint=pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),56.0);
++  result+=vec3(1.0,0.78,0.45)*glint*0.45*solid;
+   float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-world));
+   result=mix(texture(tex_T25,screen).rgb,result,nearFade);
+   color=vec4(result,1.0);
+diff --git a/game/graphics/opengl_renderer/shaders/fountain_mist.frag b/game/graphics/opengl_renderer/shaders/fountain_mist.frag
+new file mode 100644
+index 00000000..269ecba2
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/fountain_mist.frag
+@@ -0,0 +1,112 @@
++#version 410 core
++// Voile de brume des quatre chutes du palais (remplace les grandes cartes de brume de l'original) :
++//  - une gaine de gouttelettes autour de chaque chute, fine en haut, large en bas ;
++//  - un nuage d'embruns au pied de chaque chute, qui roule au ras de l'eau ;
++//  - bruit 3D qui descend avec l'eau et se disperse ; eclairage chaud des braseros.
++// Marche de rayon limitee par la profondeur de la scene. On voit a travers : le decor derriere est
++// legerement trouble et tremble dans la brume.
++in vec3 view_ray;
++out vec4 color;
++uniform sampler2D tex_T25;
++uniform sampler2D tex_T26;
++uniform vec4 fluid_viewport;
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform float fluid_time;
++const vec3 fountain_start[4]=vec3[4](vec3(1994.614868,264.832062,-442.705597),vec3(2002.219360,264.929993,-444.610809),vec3(2001.289551,264.773468,-450.020844),vec3(1993.675171,264.988983,-448.157776));
++const vec3 fountain_end[4]=vec3[4](vec3(1990.604980,241.491302,-439.565002),vec3(2007.471069,241.491302,-442.773376),vec3(2005.300903,241.491302,-453.336182),vec3(1989.294556,241.491302,-450.188232));
++
++
++bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
++vec3 unproject(vec2 uv,float depth){
++  vec2 pixel=uv*vec2(textureSize(tex_T26,0));
++  vec4 h=vec4((pixel-fluid_viewport.xy)/fluid_viewport.zw*2.-1.,depth*2.-1.,1.);
++  h.y/=(512./416.)*.5;
++  vec4 w=inverse(-pc_camera)*h;
++  return w.xyz/w.w/4096.;
++}
++float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
++float noise(vec3 x){
++  vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
++  return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
++             mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);
++}
++vec3 gLo,gHi;   // boite de calcul (posee par main)
++// Densite de brume au point p (m) : somme des quatre chutes, nulle en approchant des faces de la boite
++// (sinon la brume est coupee net : bande verticale a bord droit).
++float mist(vec3 p){
++  vec3 inside=min(p-gLo,gHi-p);
++  float boxFade=smoothstep(0.,2.5,min(inside.x,inside.z))*smoothstep(0.,.8,min(inside.y,99.));
++  if(boxFade<=0.)return 0.;
++  float sheathSum=0.,cloudSum=0.;
++  for(int k=0;k<4;k++){
++    vec3 A=fountain_start[k],B=fountain_end[k];
++    float h=clamp((A.y-p.y)/(A.y-B.y),0.,1.);                 // fraction de la hauteur de chute
++    float s=(-.22+sqrt(.0484+3.12*h))/1.56;                    // inverse de fall=mix(s,s*s,.78)
++    vec2 axis=mix(A.xz,B.xz,s);
++    vec2 dxz=p.xz-axis;
++    float R=.8+3.2*pow(h,1.5);                                 // gaine d'embruns : large en bas (jusqu'a 4 m)
++    sheathSum+=exp(-dot(dxz,dxz)/(R*R))*smoothstep(.05,.35,h)*(1.-smoothstep(1.,1.08,h));
++    vec3 e=p-B;
++    float up=max(e.y+.2,0.);
++    cloudSum+=exp(-dot(e.xz,e.xz)/5.5-up*up/1.6)*step(-.4,e.y);   // embruns au pied
++  }
++  // nappe basse sur les bassins, entre les chutes
++  vec2 c=(fountain_end[0].xz+fountain_end[1].xz+fountain_end[2].xz+fountain_end[3].xz)*.25;
++  vec2 o=p.xz-c;
++  float low=max(p.y-fountain_end[0].y+.3,0.);
++  float lowSum=(1.-smoothstep(3.,7.,length(o)))*exp(-low*low/2.5);
++  // rideau d'embruns entre les chutes (la ou l'original avait ses cartes de brume) : fine pluie qui tombe
++  // du plafond, plus dense en bas, bords doux
++  vec3 cLo=vec3(1987.,241.5,-456.),cHi=vec3(2011.,262.,-438.8);
++  vec3 ci=min(p-cLo,cHi-p);
++  float curtain=smoothstep(0.,3.,min(ci.x,ci.z))*smoothstep(0.,2.,ci.y)*mix(.35,1.,exp(-(p.y-241.5)/7.));
++  if(sheathSum+cloudSum+lowSum+curtain<.01)return 0.;
++  // gaine : voiles etires qui filent vers le bas avec l'eau ; embruns : volutes plus rondes
++  vec3 qs=p*vec3(.5,.18,.5)+vec3(0.,fluid_time*1.8,0.);        // grandes volutes etirees
++  float ns=noise(qs)*.65+noise(qs*2.4+vec3(3.,fluid_time*1.1,7.))*.35;
++  vec3 qc=p*vec3(.75,.38,.75)+vec3(0.,fluid_time*1.3,0.);
++  float nc=noise(qc)*.6+noise(qc*2.3+vec3(7.,fluid_time*.9,3.))*.4;
++  return (sheathSum*.70*smoothstep(.50,.88,ns)+cloudSum*1.9*smoothstep(.24,.80,nc)+lowSum*.12*smoothstep(.24,.8,nc)
++          +curtain*.16*smoothstep(.38,.85,ns))*boxFade;
++}
++void main(){
++  vec2 uv=gl_FragCoord.xy/vec2(textureSize(tex_T26,0));
++  vec3 rd=normalize(view_ray);
++  vec3 eye=cam_trans.xyz/4096.;
++  // boite englobante des quatre chutes
++  vec3 lo=min(min(fountain_start[0],fountain_end[0]),min(fountain_start[1],fountain_end[1]));
++  vec3 hi=max(max(fountain_start[0],fountain_end[0]),max(fountain_start[1],fountain_end[1]));
++  lo=min(lo,min(min(fountain_start[2],fountain_end[2]),min(fountain_start[3],fountain_end[3])));
++  hi=max(hi,max(max(fountain_start[2],fountain_end[2]),max(fountain_start[3],fountain_end[3])));
++  lo-=vec3(10.,.6,10.);hi+=vec3(10.,1.,10.);
++  gLo=lo;gHi=hi;
++  vec3 inv=1./(abs(rd)+1e-6)*sign(rd+1e-9);
++  vec3 ta=(lo-eye)*inv,tb=(hi-eye)*inv;
++  float t0=max(max(min(ta.x,tb.x),min(ta.y,tb.y)),min(ta.z,tb.z));
++  float t1=min(min(max(ta.x,tb.x),max(ta.y,tb.y)),max(ta.z,tb.z));
++  t0=max(t0,.3);
++  float depth=texture(tex_T26,uv).r;
++  if(!skyDepth(depth))t1=min(t1,length(unproject(uv,depth)));
++  if(t1<=t0)discard;
++  const int N=26;
++  float dt=(t1-t0)/float(N);
++  float jitter=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);
++  float T=1.;
++  for(int i=0;i<N;i++){
++    vec3 p=eye+rd*(t0+dt*(float(i)+jitter));
++    float d=mist(p);
++    T*=exp(-d*.80*dt);
++    if(T<.02)break;
++  }
++  float alpha=1.-T;
++  if(alpha<.004)discard;
++  // on voit a travers : leger tremblement du decor dans la brume
++  vec2 wobble=vec2(noise(vec3(gl_FragCoord.xy*.02,fluid_time*1.3))-.5,noise(vec3(gl_FragCoord.yx*.02,fluid_time*1.1+5.))-.5);
++  vec2 px=vec2(1.)/vec2(textureSize(tex_T25,0));
++  vec3 behind=texture(tex_T25,clamp(uv+wobble*px*7.*alpha,vec2(.001),vec2(.999))).rgb;
++  // lumiere chaude des braseros, et lumiere qui traverse la brume par-derriere (verrieres) : la brume
++  // n'assombrit pas un fond clair
++  vec3 mistCol=mix(vec3(.80,.80,.76)*vec3(1.,.88,.72),behind*1.08+.03,.45);
++  color=vec4(mix(behind,mistCol,alpha*.80),1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/fountain_mist.vert b/game/graphics/opengl_renderer/shaders/fountain_mist.vert
+new file mode 100644
+index 00000000..bf958224
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/fountain_mist.vert
+@@ -0,0 +1,12 @@
++#version 410 core
++// Voile de brume des chutes du palais : triangle plein ecran, rayon de vue reconstruit.
++uniform mat4 pc_camera;
++out vec3 view_ray;
++void main(){
++  vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);
++  vec2 clip=p*2.-1.;
++  vec4 h=vec4(clip.x,clip.y/((512./416.)*.5),0.,1.);
++  vec4 r=inverse(-pc_camera)*h;
++  view_ray=r.xyz/r.w;
++  gl_Position=vec4(clip,0.,1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/generic.frag b/game/graphics/opengl_renderer/shaders/generic.frag
+index 7c39b3e5..52e5a77e 100644
+--- a/game/graphics/opengl_renderer/shaders/generic.frag
++++ b/game/graphics/opengl_renderer/shaders/generic.frag
+@@ -275,29 +275,35 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   float wakeFoam;
+   vec3 N = waterNormal(local,P,wakeFoam);
+   if (horizontal<0.5) {
+-    // The palace's central jet cards overlap the new volume jets. Retire those
++    // The palace's central jet cards overlap the new volume jets and mist. Retire those
+     // cards while retaining the small cascades around the stepping stones.
++    // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
+     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
+-    // An elongated flowing film, with small bright streaks instead of cloudy noise.
+-    vec2 q=vec2((P.x+P.z)*7.0,P.y*0.50+fluid_time*2.8);
+-    float flow=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.8,1.9));
++    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
++    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
++    float across=P.x+P.z;
++    float fall=P.y+fluid_time*3.6;
++    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
++    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
+-    N = normalize(geometricNormal+tangent*(flow-0.55)*0.40);
++    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+     if (dot(N,V)<0.0) N = -N;
+-    vec2 offset=(fluidProject(P+tangent*(flow-0.5)*0.09).xy-fluidProject(P).xy);
+-    vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
++    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
++    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+     offset=clamp(offset,-maxOffset,maxOffset);
+     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
+     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
+     vec3 transmitted=texture(tex_T25,uv).rgb;
+-    float streak=smoothstep(0.67,1.02,flow);
+-    float facing=0.10+0.35*pow(1.0-max(dot(N,V),0.0),3.0);
+-    vec3 film=mix(transmitted,vec3(0.48,0.56,0.54),facing+streak*0.28);
+-    film+=vec3(0.20,0.23,0.22)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0);
+-    float coverage=clamp(legacyTexture.a*legacyTexture.a*2.0,0.0,0.8)
+-      *(0.55+streak*0.45);
+-    coverage *= smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
+-    return mix(originalScene,film,coverage);
++    float white=smoothstep(0.45,0.85,strands+speck*0.2);
++    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
++    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
++    float mask=smoothstep(0.05,0.55,legacyTexture.a);
++    float opacity=mask*(0.30+0.55*white);
++    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
++    film+=palaceFireReflection(P,N,V)*0.9;
++    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
++    float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
++    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+   }
+   // The basin is visible from both sides. Preserve the accepted upper face;
+   // only its underside needs the normal oriented toward the submerged camera.
+@@ -315,9 +321,12 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  vec3 transmission = exp(-vec3(0.21,0.072,0.045)*thickness);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission;
+-  below += vec3(0.018,0.078,0.083)*(1.0-transmission);
++  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
++  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
++  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
++  float murk = 1.0-exp(-thickness*1.4);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
++  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+   // Caustics follow the bed through refraction and disappear on deep water.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index 40cedae7..9742d488 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -270,29 +270,35 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   float wakeFoam;
+   vec3 N = waterNormal(local,P,wakeFoam);
+   if (horizontal<0.5) {
+-    // The palace's central jet cards overlap the new volume jets. Retire those
++    // The palace's central jet cards overlap the new volume jets and mist. Retire those
+     // cards while retaining the small cascades around the stepping stones.
++    // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
+     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
+-    // An elongated flowing film, with small bright streaks instead of cloudy noise.
+-    vec2 q=vec2((P.x+P.z)*7.0,P.y*0.50+fluid_time*2.8);
+-    float flow=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.8,1.9));
++    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
++    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
++    float across=P.x+P.z;
++    float fall=P.y+fluid_time*3.6;
++    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
++    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
+-    N = normalize(geometricNormal+tangent*(flow-0.55)*0.40);
++    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+     if (dot(N,V)<0.0) N = -N;
+-    vec2 offset=(fluidProject(P+tangent*(flow-0.5)*0.09).xy-fluidProject(P).xy);
+-    vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
++    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
++    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+     offset=clamp(offset,-maxOffset,maxOffset);
+     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
+     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
+     vec3 transmitted=texture(tex_T25,uv).rgb;
+-    float streak=smoothstep(0.67,1.02,flow);
+-    float facing=0.10+0.35*pow(1.0-max(dot(N,V),0.0),3.0);
+-    vec3 film=mix(transmitted,vec3(0.48,0.56,0.54),facing+streak*0.28);
+-    film+=vec3(0.20,0.23,0.22)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0);
+-    float coverage=clamp(legacyTexture.a*legacyTexture.a*2.0,0.0,0.8)
+-      *(0.55+streak*0.45);
+-    coverage *= smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
+-    return mix(originalScene,film,coverage);
++    float white=smoothstep(0.45,0.85,strands+speck*0.2);
++    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
++    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
++    float mask=smoothstep(0.05,0.55,legacyTexture.a);
++    float opacity=mask*(0.30+0.55*white);
++    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
++    film+=palaceFireReflection(P,N,V)*0.9;
++    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
++    float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
++    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+   }
+   // The basin is visible from both sides. Preserve the accepted upper face;
+   // only its underside needs the normal oriented toward the submerged camera.
+@@ -310,9 +316,12 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  vec3 transmission = exp(-vec3(0.21,0.072,0.045)*thickness);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission;
+-  below += vec3(0.018,0.078,0.083)*(1.0-transmission);
++  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
++  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
++  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
++  float murk = 1.0-exp(-thickness*1.4);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
++  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+   // Caustics follow the bed through refraction and disappear on deep water.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index ed0d88ab..2b9b0ed6 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -300,29 +300,35 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   float wakeFoam;
+   vec3 N = waterNormal(local,P,wakeFoam);
+   if (horizontal<0.5) {
+-    // The palace's central jet cards overlap the new volume jets. Retire those
++    // The palace's central jet cards overlap the new volume jets and mist. Retire those
+     // cards while retaining the small cascades around the stepping stones.
++    // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
+     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
+-    // An elongated flowing film, with small bright streaks instead of cloudy noise.
+-    vec2 q=vec2((P.x+P.z)*7.0,P.y*0.50+fluid_time*2.8);
+-    float flow=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.8,1.9));
++    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
++    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
++    float across=P.x+P.z;
++    float fall=P.y+fluid_time*3.6;
++    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
++    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
+-    N = normalize(geometricNormal+tangent*(flow-0.55)*0.40);
++    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+     if (dot(N,V)<0.0) N = -N;
+-    vec2 offset=(fluidProject(P+tangent*(flow-0.5)*0.09).xy-fluidProject(P).xy);
+-    vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
++    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
++    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+     offset=clamp(offset,-maxOffset,maxOffset);
+     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
+     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
+     vec3 transmitted=texture(tex_T25,uv).rgb;
+-    float streak=smoothstep(0.67,1.02,flow);
+-    float facing=0.10+0.35*pow(1.0-max(dot(N,V),0.0),3.0);
+-    vec3 film=mix(transmitted,vec3(0.48,0.56,0.54),facing+streak*0.28);
+-    film+=vec3(0.20,0.23,0.22)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0);
+-    float coverage=clamp(legacyTexture.a*legacyTexture.a*2.0,0.0,0.8)
+-      *(0.55+streak*0.45);
+-    coverage *= smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
+-    return mix(originalScene,film,coverage);
++    float white=smoothstep(0.45,0.85,strands+speck*0.2);
++    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
++    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
++    float mask=smoothstep(0.05,0.55,legacyTexture.a);
++    float opacity=mask*(0.30+0.55*white);
++    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
++    film+=palaceFireReflection(P,N,V)*0.9;
++    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
++    float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
++    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+   }
+   // The basin is visible from both sides. Preserve the accepted upper face;
+   // only its underside needs the normal oriented toward the submerged camera.
+@@ -340,9 +346,12 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  vec3 transmission = exp(-vec3(0.21,0.072,0.045)*thickness);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission;
+-  below += vec3(0.018,0.078,0.083)*(1.0-transmission);
++  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
++  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
++  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
++  float murk = 1.0-exp(-thickness*1.4);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
++  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+   // Caustics follow the bed through refraction and disappear on deep water.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+-- 
+2.54.0.windows.1
+

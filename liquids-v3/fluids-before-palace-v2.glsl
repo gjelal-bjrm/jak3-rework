@@ -209,35 +209,29 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
   float wakeFoam;
   vec3 N = waterNormal(local,P,wakeFoam);
   if (horizontal<0.5) {
-    // The palace's central jet cards overlap the new volume jets and mist. Retire those
+    // The palace's central jet cards overlap the new volume jets. Retire those
     // cards while retaining the small cascades around the stepping stones.
-    // Cartes centrales autour des quatre chutes : remplacees par le voile de brume en volume (fountain_mist).
     if(P.x>1987.0 && P.x<2011.0 && P.z> -456.0 && P.z< -438.8) discard;
-    // Petite cascade (v2) : nappe d'eau aeree qui file vers le bas, filets blancs et trous ou l'on voit
-    // la pierre a travers (deformee) ; la forme dessinee par l'original (alpha de sa texture animee) est gardee.
-    float across=P.x+P.z;
-    float fall=P.y+fluid_time*3.6;
-    float strands=fluidNoise(vec2(across*10.0,fall*0.9))*0.6+fluidNoise(vec2(across*23.0,fall*2.1)+7.3)*0.4;
-    float speck=fluidNoise(vec2(across*41.0,fall*4.3)+2.9);
+    // An elongated flowing film, with small bright streaks instead of cloudy noise.
+    vec2 q=vec2((P.x+P.z)*7.0,P.y*0.50+fluid_time*2.8);
+    float flow=fluidNoise(q)+0.35*fluidNoise(q*vec2(2.8,1.9));
     vec3 tangent = normalize(vec3(geometricNormal.z,0.0,-geometricNormal.x)+vec3(0.001));
-    N = normalize(geometricNormal+tangent*(strands-0.5)*0.6);
+    N = normalize(geometricNormal+tangent*(flow-0.55)*0.40);
     if (dot(N,V)<0.0) N = -N;
-    vec2 offset=(fluidProject(P+tangent*(strands-0.5)*0.12).xy-fluidProject(P).xy);
-    vec2 maxOffset=vec2(5.0)/vec2(textureSize(tex_T25,0));
+    vec2 offset=(fluidProject(P+tangent*(flow-0.5)*0.09).xy-fluidProject(P).xy);
+    vec2 maxOffset=vec2(3.0)/vec2(textureSize(tex_T25,0));
     offset=clamp(offset,-maxOffset,maxOffset);
     vec2 uv=clamp(screen+offset,vec2(0.001),vec2(0.999));
     if(texture(tex_T26,uv).r>gl_FragCoord.z) uv=screen;
     vec3 transmitted=texture(tex_T25,uv).rgb;
-    float white=smoothstep(0.45,0.85,strands+speck*0.2);
-    vec3 light=vec3(0.95,0.80,0.62);                     // braseros et verriere
-    vec3 waterCol=mix(vec3(0.28,0.36,0.36),vec3(0.86,0.89,0.87),white)*light;
-    float mask=smoothstep(0.05,0.55,legacyTexture.a);
-    float opacity=mask*(0.30+0.55*white);
-    vec3 film=mix(transmitted*vec3(0.85,0.93,0.95),waterCol,opacity);
-    film+=palaceFireReflection(P,N,V)*0.9;
-    film+=vec3(0.9,0.85,0.7)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0)*0.25*mask;
-    float nearFade=smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
-    return mix(originalScene,film,nearFade*mask);         // hors de la forme dessinee : invisible
+    float streak=smoothstep(0.67,1.02,flow);
+    float facing=0.10+0.35*pow(1.0-max(dot(N,V),0.0),3.0);
+    vec3 film=mix(transmitted,vec3(0.48,0.56,0.54),facing+streak*0.28);
+    film+=vec3(0.20,0.23,0.22)*pow(max(dot(N,normalize(V+vec3(-0.3,0.8,-0.2))),0.0),48.0);
+    float coverage=clamp(legacyTexture.a*legacyTexture.a*2.0,0.0,0.8)
+      *(0.55+streak*0.45);
+    coverage *= smoothstep(0.5,2.2,length(cam_trans.xyz/4096.0-P));
+    return mix(originalScene,film,coverage);
   }
   // The basin is visible from both sides. Preserve the accepted upper face;
   // only its underside needs the normal oriented toward the submerged camera.
@@ -255,12 +249,9 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
   // From below, the submerged segment ends at the surface. The remaining ray
   // goes through air; a distant wall must not add metres of water absorption.
   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
-  float murk = 1.0-exp(-thickness*1.4);
-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+  vec3 transmission = exp(-vec3(0.21,0.072,0.045)*thickness);
+  vec3 below = texture(tex_T25,refractUV).rgb*transmission;
+  below += vec3(0.018,0.078,0.083)*(1.0-transmission);
   // Caustics follow the bed through refraction and disappear on deep water.
   vec3 bed = fluidUnproject(refractUV,z);
   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
