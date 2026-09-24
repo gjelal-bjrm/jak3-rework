@@ -32,6 +32,9 @@ parser.add_argument('--prepare-only', action='store_true')
 parser.add_argument('--replace', action='store_true', help='ferme la partie deja ouverte au lieu de refuser de demarrer (tests)')
 parser.add_argument('--hour', type=float, metavar='H', help="heure du jour a imposer apres le placement (0-24, decimales acceptees)")
 parser.add_argument('--time-ratio', type=float, metavar='R', help="vitesse du temps (0 = fige, 1 = temps reel, 30 = un jour en 48 min)")
+WEATHERS = ['beau-temps', 'voile', 'couvert', 'pluie', 'orage', 'neige', 'tempete-de-sable', 'brouillard']
+parser.add_argument('--weather', choices=WEATHERS + ['hasard'],
+                    help="meteo imposee apres le placement (sinon tirage au hasard selon la ville et l'heure)")
 parser.add_argument('--eval', metavar='FORME;;FORME', help='tests : formes GOAL envoyees au jeu apres le placement (separees par ;;)')
 parser.add_argument('--eval-end', metavar='FORME;;FORME', help='tests : formes GOAL envoyees apres les arrets et les heures')
 parser.add_argument('--hours', metavar='H1,H2,...', help='tests : impose chaque heure a son tour et prend une rafale (qa/burst-<scene>-hNN-*.png)')
@@ -365,6 +368,10 @@ def set_time(sock, hour=None, ratio=None):
 
 
 def apply_time_options(sock, say):
+    if args.weather:
+        kind = -1 if args.weather == 'hasard' else WEATHERS.index(args.weather)
+        nrepl_send(sock, '(define-extern pc-remaster-weather-force (function int none))'); time.sleep(.5)
+        nrepl_send(sock, f'(pc-remaster-weather-force {kind})'); say(f'meteo : {args.weather}')
     for form in [f.strip() for f in (args.eval or '').split(';;') if f.strip()]:
         nrepl_send(sock, form); say(f'eval : {form[:70]}'); time.sleep(1.5)
     if args.hour is not None or args.time_ratio is not None:
@@ -488,7 +495,7 @@ with game_log.open('w', encoding='utf-8') as log:
     try:
         if args.scene in CITY_SCENES:
             goalc = place_jak_in_city(process, game_log, args.capture)
-        elif args.burst or args.stops or args.viewpoint or args.hours or args.eval or args.hour is not None or args.time_ratio is not None:
+        elif args.burst or args.stops or args.viewpoint or args.hours or args.eval or args.weather or args.hour is not None or args.time_ratio is not None:
             goalc = capture_in_scene(process, game_log)
         result = process.wait()
     finally:

@@ -23,6 +23,14 @@ uniform sampler2D cloud_result;   // tampon des nuages volumiques (unite 30)
 uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
 uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
 uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
+// Meteo (WeatherState) :
+uniform float sky_gloom;         // 0..1 : ciel d'orage (bleu natif assombri et desature)
+uniform float sky_cirrus;        // voile de cirrus (.6 beau temps, 1 temps voile)
+uniform float sky_flash;         // eclair en cours (0..1)
+uniform vec3 sky_flash_dir;      // direction de l'eclair (sous la base des nuages)
+uniform float sky_flash_seed;    // forme de l'eclair
+float bolt1(float x){float i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
+  return mix(fract(sin(i*127.1)*43758.5),fract(sin((i+1.)*127.1)*43758.5),f);}
 
 bool skyDepth(float depth){
   const float step24=1./16777215.;
@@ -78,7 +86,9 @@ void main(){
   vec3 horizonRay=normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z));
   vec3 haze=nativeSky(horizonRay,native);
   vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),native);
-  vec3 result=native;
+  // Ciel d'orage : le bleu natif entre les nuages devient gris et sombre.
+  float nativeLuma=dot(native,vec3(.3,.59,.11));
+  vec3 result=mix(native,vec3(nativeLuma)*vec3(.92,.96,1.05),sky_gloom*.65)*(1.-.45*sky_gloom);
   // ---- Diffusion vers le soleil dans le ciel clair
   float toSun=max(dot(ray,sun),0.);
   result+=sunColor*haze*pow(toSun,4.)*.20*(1.+1.6*(1.-sunUp))*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
@@ -91,6 +101,27 @@ void main(){
   vec4 cl=texture(cloud_result,cuv);
   float cloudAlpha=1.-cl.a;
   result=result*cl.a+cl.rgb;
+  // ---- Eclair : les nuages s'illuminent de l'interieur autour de l'impact, le ciel s'eclaire un instant,
+  //      et un trait fourchu descend de la base des nuages vers l'horizon.
+  if(sky_flash>.01){
+    vec3 fd=normalize(sky_flash_dir);
+    float g=pow(max(dot(ray,fd),0.),6.);
+    result+=vec3(.78,.82,1.)*sky_flash*(g*1.6+.18)*cloudAlpha;
+    result+=vec3(.45,.5,.7)*sky_flash*(g*.35+.05)*(1.-cloudAlpha);
+    float top=fd.y,elev=ray.y;
+    if(elev>0.&&elev<top){
+      vec3 rgt=normalize(cross(fd,vec3(0.,1.,0.)));
+      float t=(top-elev)/top;
+      float off=(bolt1(t*5.+sky_flash_seed)-.5)*.06+(bolt1(t*21.+sky_flash_seed*3.1)-.5)*.018+(bolt1(t*67.+sky_flash_seed*7.)-.5)*.005;
+      off*=smoothstep(0.,.15,t);
+      float a=dot(ray,rgt)/max(length(ray.xz),.2);
+      float pix=max(length(dFdx(ray)),length(dFdy(ray)));
+      float w=max(pix*.9,.0007);
+      float d=abs(a-off);
+      float bolt=exp(-d*d/(w*w))*1.6+exp(-d/.012)*.35;
+      result+=vec3(.85,.88,1.)*bolt*sky_flash*smoothstep(1.,.85,t);
+    }
+  }
   float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));
   if(ray.y>.008){
     // ---- Cirrus (haute couche etiree, tres fine)
@@ -104,7 +135,16 @@ void main(){
       float c=fbmLod(q*.00015,footC*.00015)*.6+fbmLod(q*.00068+vec2(3.3,1.1),footC*.00068)*.4;
       float cirrus=smoothstep(.56,.80,c)*smoothstep(.04,.2,ray.y)*exp(-length(ray.xz/y)*.10);
       vec3 cirrusColor=mix(mix(zenith*1.3,vec3(.94,.95,.98),.5),sunColor,.35*pow(toSun,3.))*mix(.35,1.,dayness);
-      result=mix(result,cirrusColor,cirrus*.40*(1.-cloudAlpha*.7));
+      result=mix(result,cirrusColor,cirrus*.66*sky_cirrus*(1.-cloudAlpha*.7));
+      // temps voile : voile laiteux uniforme (cirrostratus) et halo de 22 degres autour du soleil
+      float veil=clamp((sky_cirrus-.6)/.4,0.,1.);
+      if(veil>0.){
+        result=mix(result,mix(zenith,vec3(.86,.89,.94),.55)*mix(.3,1.,dayness),veil*.48*smoothstep(.04,.35,ray.y)*(1.-cloudAlpha));
+        float ang=acos(clamp(dot(ray,sun),-1.,1.));
+        float ring=exp(-pow((ang-.384)/.011,2.));
+        vec3 tint=mix(vec3(1.,.72,.55),vec3(.75,.85,1.),smoothstep(.37,.40,ang));
+        result+=tint*ring*.10*veil*dayness*(1.-cloudAlpha);
+      }
     }
   }
   // ---- Soleil (au-dessus des nuages minces : les nuages epais l'attenuent)

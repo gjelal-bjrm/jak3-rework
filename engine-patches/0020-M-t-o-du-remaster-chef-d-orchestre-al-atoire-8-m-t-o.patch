@@ -1,0 +1,1156 @@
+From 6c0336566364823f27b1255df15af5cf35dd764d Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 24 Sep 2026 10:44:52 +0200
+Subject: [PATCH 20/20] =?UTF-8?q?M=C3=A9t=C3=A9o=20du=20remaster=20:=20che?=
+ =?UTF-8?q?f=20d'orchestre=20al=C3=A9atoire=20(8=20m=C3=A9t=C3=A9os=20pond?=
+ =?UTF-8?q?=C3=A9r=C3=A9es=20par=20r=C3=A9gion=20et=20par=20heure)=20pilot?=
+ =?UTF-8?q?=C3=A9=20par=20le=20moteur,=20=C3=A9change=20avec=20mood.gc=20;?=
+ =?UTF-8?q?=20pluie,=20neige=20et=20sable=20en=20vraie=203D,=20voile,=20br?=
+ =?UTF-8?q?ouillard=20matinal=20et=20temp=C3=AAte=20de=20sable=20;=20sol?=
+ =?UTF-8?q?=20mouill=C3=A9,=20flaques=20avec=20ronds=20de=20pluie,=20neige?=
+ =?UTF-8?q?=20au=20sol=20;=20nuages,=20ciel=20d'orage,=20=C3=A9clairs=20et?=
+ =?UTF-8?q?=20halo=20du=20temps=20voil=C3=A9?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernSky.h     |  32 ++-
+ game/graphics/opengl_renderer/ModernWeather.h | 217 ++++++++++++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |   5 +
+ .../graphics/opengl_renderer/OpenGLRenderer.h |   2 +
+ game/graphics/opengl_renderer/WeatherState.h  | 182 +++++++++++++++
+ game/graphics/opengl_renderer/WeatherWorld.h  |  44 ++++
+ .../background/PalaceMaterials.h              |   2 +
+ .../shaders/modern_clouds.frag                |  14 +-
+ .../opengl_renderer/shaders/modern_sky.frag   |  44 +++-
+ .../shaders/modern_weather_fog.frag           |  79 +++++++
+ .../shaders/modern_weather_fog.vert           |  12 +
+ .../shaders/modern_weather_particles.frag     |  22 ++
+ .../shaders/modern_weather_particles.vert     |  78 +++++++
+ .../opengl_renderer/shaders/tfrag3.frag       | 125 ++++++++++
+ game/kernel/jak3/kmachine.cpp                 |  13 ++
+ 15 files changed, 857 insertions(+), 14 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/ModernWeather.h
+ create mode 100644 game/graphics/opengl_renderer/WeatherState.h
+ create mode 100644 game/graphics/opengl_renderer/WeatherWorld.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_weather_fog.vert
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_weather_particles.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_weather_particles.vert
+
+diff --git a/game/graphics/opengl_renderer/ModernSky.h b/game/graphics/opengl_renderer/ModernSky.h
+index 2a169c3a..a655f9ca 100644
+--- a/game/graphics/opengl_renderer/ModernSky.h
++++ b/game/graphics/opengl_renderer/ModernSky.h
+@@ -9,6 +9,7 @@
+ #include "game/graphics/opengl_renderer/CloudNoise.h"
+ #include "game/graphics/opengl_renderer/Shader.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
++#include "game/graphics/opengl_renderer/WeatherState.h"
+ #include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ 
+@@ -65,10 +66,20 @@ class ModernSky {
+     const int cw = std::max(1, viewport[2] / 2), ch = std::max(1, viewport[3] / 2);
+     ensure_targets(cw, ch);
+ 
+-    // Parametres de nuages par region (la meteo les pilotera) : desert plus degage, Haven plus charge.
+-    float coverage = .46f, type = .45f;
+-    if (ModernOcean::level_loaded(state, "was")) { coverage = .42f; type = .35f; }
+-    else if (ModernOcean::level_loaded(state, "cty")) { coverage = .55f; type = .6f; }
++    // Nuages pilotes par la meteo (WeatherState), nuances par region : desert plus degage, Haven plus charge.
++    WeatherState::Params wx; float flash, flash_seed; std::array<float, 3> flash_dir;
++    {
++      std::lock_guard<std::mutex> guard(WeatherState::mutex);
++      wx = WeatherState::current; flash = WeatherState::flash; flash_dir = WeatherState::flash_dir;
++      flash_seed = WeatherState::flash_seed;
++    }
++    float coverage = wx.coverage, type = wx.type;
++    if (ModernOcean::level_loaded(state, "was")) { coverage -= .03f; type -= .08f; }
++    else if (ModernOcean::level_loaded(state, "cty")) { coverage += .09f * (1.f - coverage); type += .15f * (1.f - type); }
++    coverage = std::clamp(coverage, 0.f, 1.f); type = std::clamp(type, 0.f, 1.f);
++    // vent : direction fixe, vitesse de la meteo ; deplacement cumule (pas de saut quand la vitesse change)
++    const float wind_x = wx.wind * .93f, wind_z = wx.wind * .35f;
++    m_cloud_offset[0] += wind_x * dt; m_cloud_offset[1] += wind_z * dt;
+     const auto eye = state->camera_pos / 4096.f;
+ 
+     // ---- 1. Nuages volumiques (demi-resolution)
+@@ -95,9 +106,10 @@ class ModernSky {
+       glUniform1f(glGetUniformLocation(id, "cloud_history_valid"), m_history_valid ? 1.f : 0.f);
+       glUniform1f(glGetUniformLocation(id, "sky_coverage"), coverage);
+       glUniform1f(glGetUniformLocation(id, "cloud_type"), type);
+-      glUniform1f(glGetUniformLocation(id, "cloud_density"), 1.f);
+-      glUniform1f(glGetUniformLocation(id, "cloud_darkness"), 0.f);
+-      glUniform2f(glGetUniformLocation(id, "cloud_wind"), 4.f, 1.5f);
++      glUniform1f(glGetUniformLocation(id, "cloud_density"), wx.density);
++      glUniform1f(glGetUniformLocation(id, "cloud_darkness"), wx.darkness);
++      glUniform2f(glGetUniformLocation(id, "cloud_wind"), wind_x, wind_z);
++      glUniform2f(glGetUniformLocation(id, "cloud_offset"), m_cloud_offset[0], m_cloud_offset[1]);
+       glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[m_cur]);
+       glViewport(0, 0, cw, ch);
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+@@ -142,6 +154,11 @@ class ModernSky {
+       else if (ModernOcean::level_loaded(state, "cty")) turbulence = .35f;
+       glUniform1f(glGetUniformLocation(id, "sky_turbulence"), turbulence);
+       glUniform1f(glGetUniformLocation(id, "sky_coverage"), coverage);
++      glUniform1f(glGetUniformLocation(id, "sky_gloom"), wx.darkness);
++      glUniform1f(glGetUniformLocation(id, "sky_cirrus"), wx.cirrus);
++      glUniform1f(glGetUniformLocation(id, "sky_flash"), flash);
++      glUniform3fv(glGetUniformLocation(id, "sky_flash_dir"), 1, flash_dir.data());
++      glUniform1f(glGetUniformLocation(id, "sky_flash_seed"), flash_seed);
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+     }
+     std::memcpy(m_prev_camera, state->prototype_camera, sizeof(m_prev_camera));
+@@ -241,6 +258,7 @@ class ModernSky {
+   int m_w = 0, m_h = 0, m_cur = 0;
+   bool m_history_valid = false;
+   float m_prev_camera[16] = {};
++  float m_cloud_offset[2] = {0.f, 0.f};
+   unsigned m_frame = 0, m_reload_tick = 0;
+   long long m_stamp_sky = 0, m_stamp_clouds = 0;
+   float m_dark_intensity = 0.f, m_last_time = 0.f;
+diff --git a/game/graphics/opengl_renderer/ModernWeather.h b/game/graphics/opengl_renderer/ModernWeather.h
+new file mode 100644
+index 00000000..a5e2cc23
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernWeather.h
+@@ -0,0 +1,217 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <cmath>
++#include <cstring>
++#include <filesystem>
++#include <memory>
++#include "common/log/log.h"
++#include "common/util/FileUtil.h"
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/SkyState.h"
++#include "game/graphics/opengl_renderer/WeatherState.h"
++#include "game/graphics/opengl_renderer/WeatherWorld.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++#include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
++
++// Rendu de la meteo du remaster.
++//  update() (debut de BUCKET567, avant le ciel) : region, chef d'orchestre (WeatherState), couleurs du
++//    moment (ciel couvert, brouillard, gouttes) publiees pour le ciel, le decor et cette passe ;
++//  render() (apres les particules et la distorsion, avant l'interface) : atmosphere plein ecran
++//    (voile, brouillard matinal, sable) puis precipitations instanciees en 3D (pluie, neige, sable).
++// Shaders recharges a chaud depuis data/ (reglages en direct).
++class ModernWeather {
++ public:
++  ~ModernWeather() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++
++  void update(SharedRenderState* state) {
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
++    if (m_updated_frame == state->frame_idx) return;
++    m_updated_frame = state->frame_idx;
++    const float now = LiquidSnapshot::seconds();
++    const float dt = m_last_time < 0.f ? 0.f : std::clamp(now - m_last_time, 0.f, .1f);
++    m_last_time = now;
++    std::array<float, 3> sun, moon; float hour; bool valid;
++    {
++      std::lock_guard<std::mutex> guard(SkyState::mutex);
++      sun = SkyState::sun; moon = SkyState::moon; hour = SkyState::hour; valid = SkyState::valid;
++    }
++    if (!valid) return;
++    int region = WeatherState::REGION_OTHER;
++    if (ModernOcean::level_loaded(state, "was")) region = WeatherState::REGION_SPARGUS;
++    else if (ModernOcean::level_loaded(state, "cty")) region = WeatherState::REGION_HAVEN;
++    else if (ModernOcean::level_loaded(state, "des")) region = WeatherState::REGION_DESERT;
++    WeatherState::update(dt, region, hour);
++    WeatherState::Params p; float flash;
++    {
++      std::lock_guard<std::mutex> guard(WeatherState::mutex);
++      p = WeatherState::current; flash = WeatherState::flash;
++    }
++    // Couleurs du moment : jour clair / aube / nuit, assombries par la couverture.
++    const float dayness = smooth(-.08f, .06f, sun[1]);
++    const float sun_up = std::clamp(sun[1] * 2.5f, 0.f, 1.f);
++    const V3 day{.60f, .66f, .74f}, dusk{.66f, .50f, .44f}, night{.035f, .045f, .075f};
++    V3 ambient = mix(night, mix(dusk, day, sun_up), dayness);
++    const float gloom = 1.f - .6f * p.darkness;
++    ambient = ambient * gloom;
++    const float luma = ambient.x * .3f + ambient.y * .59f + ambient.z * .11f;
++    m_fog_color = mix(ambient, V3{luma, luma * 1.02f, luma * 1.06f}, .45f);
++    m_sand_color = V3{.74f, .56f, .37f} * (dayness * .85f + .08f) * (1.f - .25f * p.darkness);
++    const V3 sc = mix(V3{1.f, .55f, .30f}, V3{1.f, .95f, .86f}, sun_up);
++    m_sun_color = sc * (dayness * p.sun);
++    m_sun_dir = dayness > .02f ? V3{sun[0], sun[1], sun[2]} : V3{moon[0], moon[1], moon[2]};
++    if (dayness <= .02f) m_sun_color = V3{.12f, .14f, .2f} * p.sun;
++    m_drop_color = ambient * 1.45f + m_sun_color * .12f + V3{.7f, .75f, .9f} * flash;
++    m_params = p; m_flash = flash; m_region = region;
++    {
++      std::lock_guard<std::mutex> guard(WeatherLook::mutex);
++      const V3 sky = ambient * 1.05f + V3{.6f, .65f, .8f} * (flash * .25f);
++      WeatherLook::sky = {sky.x, sky.y, sky.z};
++      WeatherLook::sun_dir = {m_sun_dir.x, m_sun_dir.y, m_sun_dir.z};
++      WeatherLook::sun_color = {m_sun_color.x, m_sun_color.y, m_sun_color.z};
++      WeatherLook::time = now;
++    }
++  }
++
++  void render(SharedRenderState* state) {
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
++    float outdoor;
++    { std::lock_guard<std::mutex> guard(WeatherState::mutex); outdoor = WeatherState::outdoor; }
++    const auto& p = m_params;
++    const float rain = p.rain * outdoor, snow = p.snow * outdoor, sand = p.sand * outdoor;
++    const float fog = p.fog * outdoor;
++    if (rain < .01f && snow < .01f && sand < .01f && fog < .01f) return;
++    hot_reload();
++
++    GLint program, old_vao, depth_func, old_active, viewport[4];
++    GLboolean depth_write, color_mask[4];
++    GLint src_rgb, dst_rgb, src_a, dst_a, eq_rgb, eq_a;
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &old_vao);
++    glGetIntegerv(GL_DEPTH_FUNC, &depth_func); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
++    glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active);
++    glGetIntegerv(GL_VIEWPORT, viewport);
++    glGetIntegerv(GL_BLEND_SRC_RGB, &src_rgb); glGetIntegerv(GL_BLEND_DST_RGB, &dst_rgb);
++    glGetIntegerv(GL_BLEND_SRC_ALPHA, &src_a); glGetIntegerv(GL_BLEND_DST_ALPHA, &dst_a);
++    glGetIntegerv(GL_BLEND_EQUATION_RGB, &eq_rgb); glGetIntegerv(GL_BLEND_EQUATION_ALPHA, &eq_a);
++    GLint saved25, saved26;
++    glActiveTexture(GL_TEXTURE25); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved25);
++    glActiveTexture(GL_TEXTURE26); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved26);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST};
++    GLboolean was[5];
++    for (int i = 0; i < 5; i++) { was[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
++    glDepthMask(GL_FALSE); glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
++    glEnable(GL_BLEND); glBlendEquation(GL_FUNC_ADD); glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
++    if (!m_vao) glGenVertexArrays(1, &m_vao);
++    glBindVertexArray(m_vao);
++    const float now = LiquidSnapshot::seconds();
++    const auto eye = state->camera_pos / 4096.f;
++    const float wind_x = p.wind * .8f, wind_z = p.wind * .6f;
++
++    // ---- 1. Atmosphere
++    if (!m_fog) m_fog = std::make_unique<Shader>("modern_weather_fog", state->version);
++    if (m_fog->okay()) {
++      m_fog->activate(); const GLuint id = m_fog->id();
++      m_snapshot.bind(state, id);
++      glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++      glUniformMatrix4fv(glGetUniformLocation(id, "pc_camera"), 1, GL_FALSE, state->prototype_camera);
++      glUniform3f(glGetUniformLocation(id, "wx_eye"), eye[0], eye[1], eye[2]);
++      glUniform1f(glGetUniformLocation(id, "wx_time"), now);
++      glUniform3f(glGetUniformLocation(id, "wx_sun"), m_sun_dir.x, m_sun_dir.y, m_sun_dir.z);
++      glUniform3f(glGetUniformLocation(id, "wx_sun_color"), m_sun_color.x, m_sun_color.y, m_sun_color.z);
++      glUniform3f(glGetUniformLocation(id, "wx_fog_color"), m_fog_color.x, m_fog_color.y, m_fog_color.z);
++      glUniform3f(glGetUniformLocation(id, "wx_sand_color"), m_sand_color.x, m_sand_color.y, m_sand_color.z);
++      // densites calculees dans le shader (reglables a chaud) a partir des intensites de la meteo
++      glUniform1f(glGetUniformLocation(id, "wx_fog"), fog);
++      glUniform1f(glGetUniformLocation(id, "wx_rain"), rain);
++      glUniform1f(glGetUniformLocation(id, "wx_snow"), snow);
++      // brouillard au ras de l'eau : port de Haven a 0 m, baie de Spargus a 9 m
++      glUniform1f(glGetUniformLocation(id, "wx_ground_level"), m_region == WeatherState::REGION_SPARGUS ? 9.f : 0.f);
++      glUniform1f(glGetUniformLocation(id, "wx_ground_height"), 14.f);
++      glUniform1f(glGetUniformLocation(id, "wx_sand"), sand);
++      glUniform2f(glGetUniformLocation(id, "wx_wind"), wind_x, wind_z);
++      glUniform1f(glGetUniformLocation(id, "wx_flash"), m_flash);
++      glDrawArrays(GL_TRIANGLES, 0, 3);
++    }
++
++    // ---- 2. Precipitations
++    if (!m_particles) m_particles = std::make_unique<Shader>("modern_weather_particles", state->version);
++    if (m_particles->okay() && (rain > .01f || snow > .01f || sand > .01f)) {
++      m_particles->activate(); const GLuint id = m_particles->id();
++      glEnable(GL_DEPTH_TEST); glDepthFunc(GL_GEQUAL);
++      glUniformMatrix4fv(glGetUniformLocation(id, "pc_camera"), 1, GL_FALSE, state->prototype_camera);
++      glUniform4fv(glGetUniformLocation(id, "cam_trans"), 1, state->camera_pos.data());
++      glUniform1f(glGetUniformLocation(id, "wx_time"), now);
++      glUniform2f(glGetUniformLocation(id, "wx_wind"), wind_x, wind_z);
++      glUniform2f(glGetUniformLocation(id, "wx_viewport"), float(viewport[2]), float(viewport[3]));
++      auto draw = [&](int kind, int layer, float amount, float bx, float by, float bz, int max_count, float alpha, V3 light) {
++        glUniform1i(glGetUniformLocation(id, "wx_kind"), kind);
++        glUniform1i(glGetUniformLocation(id, "wx_layer"), layer);
++        glUniform3f(glGetUniformLocation(id, "wx_box"), bx, by, bz);
++        glUniform1f(glGetUniformLocation(id, "wx_alpha"), alpha);
++        glUniform3f(glGetUniformLocation(id, "wx_light"), light.x, light.y, light.z);
++        const int count = int(float(max_count) * std::clamp(amount, 0.f, 1.f));
++        if (count > 0) glDrawArraysInstanced(GL_TRIANGLES, 0, 6, count);
++      };
++      // deux couches : gouttes proches denses (bien visibles) et rideau lointain
++      if (rain > .01f) {
++        draw(0, 0, rain, 12.f, 10.f, 12.f, 16000, .42f, m_drop_color);
++        draw(0, 1, rain, 44.f, 28.f, 44.f, 60000, .34f, m_drop_color);
++      }
++      if (snow > .01f) {
++        draw(1, 0, snow, 12.f, 10.f, 12.f, 6000, .9f, m_drop_color * 1.35f + m_sun_color * .25f);
++        draw(1, 1, snow, 34.f, 22.f, 34.f, 26000, .85f, m_drop_color * 1.35f + m_sun_color * .25f);
++      }
++      if (sand > .01f) {
++        draw(2, 0, sand, 14.f, 8.f, 14.f, 14000, .5f, m_sand_color * 1.1f + m_sun_color * .15f);
++        draw(2, 1, sand, 44.f, 14.f, 44.f, 40000, .45f, m_sand_color * 1.1f + m_sun_color * .15f);
++      }
++    }
++
++    glUseProgram(program); glBindVertexArray(old_vao); glDepthFunc(depth_func); glDepthMask(depth_write);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]);
++    glBlendFuncSeparate(src_rgb, dst_rgb, src_a, dst_a); glBlendEquationSeparate(eq_rgb, eq_a);
++    for (int i = 0; i < 5; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
++    glActiveTexture(GL_TEXTURE25); glBindTexture(GL_TEXTURE_2D, saved25);
++    glActiveTexture(GL_TEXTURE26); glBindTexture(GL_TEXTURE_2D, saved26);
++    glActiveTexture(old_active);
++  }
++
++ private:
++  struct V3 {
++    float x, y, z;
++    V3 operator*(float s) const { return {x * s, y * s, z * s}; }
++    V3 operator+(const V3& o) const { return {x + o.x, y + o.y, z + o.z}; }
++  };
++  static V3 mix(const V3& a, const V3& b, float t) { return {a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t}; }
++  static float smooth(float e0, float e1, float x) {
++    const float t = std::clamp((x - e0) / (e1 - e0), 0.f, 1.f);
++    return t * t * (3.f - 2.f * t);
++  }
++  void hot_reload() {
++    if (++m_reload_counter % 30) return;
++    const char* names[] = {"modern_weather_fog.vert", "modern_weather_fog.frag", "modern_weather_particles.vert",
++                           "modern_weather_particles.frag"};
++    for (int i = 0; i < 4; i++) {
++      std::error_code ec;
++      const auto path = file_util::get_file_path({Shader::shader_folder, names[i]});
++      const auto t = std::filesystem::last_write_time(path, ec);
++      if (ec) continue;
++      if (m_mtime[i] != decltype(t){} && t != m_mtime[i]) {
++        if (i < 2) m_fog.reset(); else m_particles.reset();
++        lg::info("ModernWeather: {} recharge", names[i]);
++      }
++      m_mtime[i] = t;
++    }
++  }
++  std::unique_ptr<Shader> m_fog, m_particles;
++  LiquidSnapshot m_snapshot;
++  GLuint m_vao = 0;
++  u64 m_updated_frame = UINT64_MAX;
++  float m_last_time = -1.f, m_flash = 0.f;
++  int m_region = 0;
++  unsigned m_reload_counter = 0;
++  std::filesystem::file_time_type m_mtime[4]{};
++  WeatherState::Params m_params = WeatherState::preset(WeatherState::CLEAR);
++  V3 m_fog_color{.5f, .55f, .6f}, m_sand_color{.7f, .55f, .38f}, m_sun_color{1.f, 1.f, 1.f},
++      m_sun_dir{0.f, 1.f, 0.f}, m_drop_color{.6f, .65f, .7f};
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 2c2e3737..1d963bca 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1445,11 +1445,16 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+       m_palace_fire.render(&m_render_state);
+     }
+     if (bucket_id == (int)jak3::BucketId::BUCKET567) {
++      m_modern_weather.update(&m_render_state);   // meteo : nuages, couleurs du moment
+       m_modern_sky.render(&m_render_state);   // avant la mer : elle reflete le nouveau ciel
+       m_modern_ocean.render(&m_render_state);
+       m_water_fountains.render(&m_render_state);
+       m_water_spray.render(&m_render_state);
+     }
++    if (bucket_id == (int)jak3::BucketId::GENERIC_WARP) {
++      auto p = prof.make_scoped_child("modern-weather");
++      m_modern_weather.render(&m_render_state);   // brouillard, pluie, neige, sable (avant l'interface)
++    }
+     if (bucket_id == (int)jak3::BucketId::TEX_HUD_HUD_ALPHA) {
+       auto p = prof.make_scoped_child("color-filter");
+       m_blit_displays->apply_color_filter(&m_render_state, p);
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index b1a78d39..27f6f6a2 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -14,6 +14,7 @@
+ #include "game/graphics/opengl_renderer/WaterSpray.h"
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ #include "game/graphics/opengl_renderer/ModernSky.h"
++#include "game/graphics/opengl_renderer/ModernWeather.h"
+ #include "game/graphics/opengl_renderer/WaterFountains.h"
+ #include "game/graphics/opengl_renderer/PalaceFire.h"
+ #include "game/graphics/opengl_renderer/CityInteriors.h"
+@@ -123,6 +124,7 @@ class OpenGLRenderer {
+   LiquidBloom m_liquid_bloom;
+   WaterSpray m_water_spray;
+   ModernSky m_modern_sky;
++  ModernWeather m_modern_weather;
+   ModernOceanSurface m_modern_ocean;
+   WaterFountains m_water_fountains;
+   CityInteriors m_city_interiors;
+diff --git a/game/graphics/opengl_renderer/WeatherState.h b/game/graphics/opengl_renderer/WeatherState.h
+new file mode 100644
+index 00000000..931e80fb
+--- /dev/null
++++ b/game/graphics/opengl_renderer/WeatherState.h
+@@ -0,0 +1,182 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <cmath>
++#include <cstring>
++#include <mutex>
++#include <random>
++
++#include "common/log/log.h"
++
++// Meteo du remaster : un chef d'orchestre choisit une meteo au hasard (ponderee par region et par
++// heure), la fait durer quelques minutes puis passe a la suivante par un fondu. Il pilote :
++//  - le systeme natif de Jak 3 (mood-control : tables de lumiere couverte, pluie native, eclairs,
++//    tonnerre, son de pluie, neige), via l'echange pc-remaster-weather appele par mood.gc ;
++//  - le rendu moderne : nuages volumiques (couverture, type, bases sombres, vent), pluie, neige, sable,
++//    brouillard (ModernWeather.h), sol mouille / flaques / neige au sol (tfrag3.frag).
++// Le sol seche et la neige fond lentement apres la fin des precipitations.
++namespace WeatherState {
++
++enum Kind { CLEAR = 0, HAZY, OVERCAST, DRIZZLE, STORM, SNOW, SANDSTORM, FOG, COUNT };
++inline const char* const kNames[COUNT] = {"beau-temps", "voile", "couvert", "pluie", "orage",
++                                          "neige", "tempete-de-sable", "brouillard"};
++
++struct Params {
++  float native_cloud, native_fog;       // mood-control (lumiere couverte native ; fog .5 = neutre)
++  float rain, snow, sand, fog;          // intensites 0..1 du rendu moderne
++  float coverage, type, density, darkness, cirrus;   // nuages
++  float wind;                           // m/s (nuages, pluie oblique, neige, sable)
++  float lightning;                      // 1 : eclairs et tonnerre natifs
++  float sun;                            // lumiere directe restante (reflets, eclat du soleil)
++};
++
++inline Params preset(int k) {
++  switch (k) {
++    //                 cloud fog   rain snow sand fog   cov  type dens dark cirr  wind  light sun
++    case HAZY:      return {.40f, .50f, 0.f, 0.f, 0.f, .10f, .38f, .30f, .85f, .10f, 1.f, 5.f, 0.f, .75f};
++    case OVERCAST:  return {.62f, .50f, 0.f, 0.f, 0.f, .08f, .86f, .55f, 1.1f, .45f, .3f, 6.f, 0.f, .25f};
++    case DRIZZLE:   return {.78f, .55f, .45f, 0.f, 0.f, .22f, .94f, .50f, 1.2f, .60f, 0.f, 6.f, 0.f, .12f};
++    case STORM:     return {1.0f, .65f, 1.0f, 0.f, 0.f, .32f, 1.0f, .90f, 1.4f, .90f, 0.f, 11.f, 1.f, .04f};
++    case SNOW:      return {.66f, .55f, 0.f, 1.0f, 0.f, .28f, .92f, .40f, 1.1f, .35f, 0.f, 3.f, 0.f, .15f};
++    case SANDSTORM: return {.55f, .50f, 0.f, 0.f, 1.0f, 0.f, .30f, .35f, .8f, .20f, .2f, 14.f, 0.f, .35f};
++    case FOG:       return {.45f, .50f, 0.f, 0.f, 0.f, 1.0f, .60f, .30f, .9f, .20f, .1f, 1.5f, 0.f, .45f};
++    default:        return {.20f, .50f, 0.f, 0.f, 0.f, 0.f, .44f, .40f, 1.f, 0.f, .6f, 4.f, 0.f, 1.f};
++  }
++}
++inline Params mix(const Params& a, const Params& b, float t) {
++  Params r;
++  const float* pa = &a.native_cloud; const float* pb = &b.native_cloud; float* pr = &r.native_cloud;
++  for (size_t i = 0; i < sizeof(Params) / sizeof(float); ++i) pr[i] = pa[i] + (pb[i] - pa[i]) * t;
++  return r;
++}
++
++enum Region { REGION_OTHER = 0, REGION_SPARGUS, REGION_HAVEN, REGION_DESERT };
++
++// ---- etat partage (fil de rendu <-> fil du jeu)
++inline std::mutex mutex;
++inline Params current = preset(CLEAR);
++inline int from_kind = CLEAR, to_kind = CLEAR;
++inline float blend = 1.f;                 // 0 = from, 1 = to
++inline float transition = 60.f;           // duree du fondu en cours (s)
++inline float remaining = 300.f;           // temps restant avant la meteo suivante (s)
++inline int forced = -1;                   // meteo imposee (commande de test) ou -1
++inline bool started = false;
++inline float wetness = 0.f, puddles = 0.f, snow_cover = 0.f;
++inline float outdoor = 1.f;               // exterior-level natif (0 a l'interieur)
++inline float native_flash = 0.f;          // eclair natif en cours (lumiere)
++inline int native_flash_index = 0;
++inline float flash = 0.f;                 // eclair dans les nuages (0..1)
++inline std::array<float, 3> flash_dir{0.f, .3f, 1.f};
++inline float flash_seed = 0.f;           // forme du trait de foudre
++inline int region = REGION_OTHER;
++inline float test_flash = 0.f;            // commande de test : eclair tenu (s)
++inline std::mt19937 rng{std::random_device{}()};
++
++inline float urand(float a, float b) { return std::uniform_real_distribution<float>(a, b)(rng); }
++
++// Tirage de la meteo suivante : poids par region, brouillard seulement le matin, pas deux fois de suite
++// la meme meteo speciale.
++inline int pick(int reg, float hour, int previous) {
++  std::array<float, COUNT> w{};
++  switch (reg) {
++    case REGION_SPARGUS: w = {42, 18, 12, 8, 4, 0, 12, 0}; break;
++    case REGION_DESERT:  w = {45, 15, 8, 3, 2, 0, 25, 0}; break;
++    case REGION_HAVEN:   w = {28, 16, 16, 15, 10, 5, 0, 10}; break;
++    default:             w = {40, 20, 20, 10, 5, 0, 0, 5}; break;
++  }
++  const bool morning = hour > 4.5f && hour < 10.f;
++  if (!morning) w[FOG] = 0;
++  else w[FOG] *= 2.5f;
++  if (previous >= DRIZZLE) w[previous] *= .25f;
++  float total = 0; for (float x : w) total += x;
++  float r = urand(0.f, total);
++  for (int k = 0; k < COUNT; ++k) { if (r < w[k]) return k; r -= w[k]; }
++  return CLEAR;
++}
++
++// Appele une fois par image par le rendu. `hour` : heure du jour ; dt en secondes.
++inline void update(float dt, int reg, float hour) {
++  std::lock_guard<std::mutex> guard(mutex);
++  static Params from_params = preset(CLEAR);
++  region = reg;
++  if (!started) {
++    started = true;
++    to_kind = pick(reg, hour, -1); from_kind = to_kind; blend = 1.f;
++    current = preset(to_kind); from_params = current;
++    remaining = urand(240.f, 540.f);
++    lg::info("Meteo initiale : {}", kNames[to_kind]);
++  }
++  auto begin = [&](int kind, float fade) {
++    from_params = current; from_kind = to_kind; to_kind = kind;
++    transition = std::max(fade, .01f); blend = fade <= 0.f ? 1.f : 0.f;
++    lg::info("Meteo : {} (fondu {:.0f} s)", kNames[kind], fade);
++  };
++  if (forced >= 0 && forced != to_kind) begin(forced, 4.f);
++  if (forced < 0) {
++    remaining -= dt;
++    if (remaining <= 0.f) {
++      begin(pick(reg, hour, to_kind), urand(45.f, 90.f));
++      remaining = urand(240.f, 600.f);
++    }
++  }
++  // Changement de region (Spargus -> Haven) : une tempete de sable n'a rien a faire au port.
++  if (forced < 0 && to_kind == SANDSTORM && reg == REGION_HAVEN) begin(OVERCAST, 20.f);
++  if (forced < 0 && (to_kind == SNOW || to_kind == FOG) && (reg == REGION_SPARGUS || reg == REGION_DESERT))
++    begin(CLEAR, 20.f);
++  blend = std::min(1.f, blend + dt / transition);
++  const float s = blend * blend * (3.f - 2.f * blend);
++  current = mix(from_params, preset(to_kind), s);
++
++  // Sol mouille : se mouille en ~25 s sous la pluie, seche en ~3 min ; flaques plus lentes.
++  const float rain = current.rain * outdoor, snow = current.snow * outdoor;
++  auto approach = [dt](float& v, float target, float up, float down) {
++    const float tau = target > v ? up : down;
++    v += (target - v) * (1.f - std::exp(-dt / tau));
++  };
++  approach(wetness, rain > .05f ? std::min(1.f, .55f + rain) : 0.f, 25.f, 180.f);
++  approach(puddles, rain > .05f ? rain : 0.f, 60.f, 240.f);
++  approach(snow_cover, snow > .05f ? snow : 0.f, 70.f, 300.f);
++  if (forced >= 0 && blend >= 1.f && dt > 0.f) {
++    // meteo imposee pour un test : etat installe tout de suite (captures)
++    const float wet_target = rain > .05f ? std::min(1.f, .55f + rain) : 0.f;
++    wetness = wet_target; puddles = rain > .05f ? rain : 0.f; snow_cover = snow > .05f ? snow : 0.f;
++  }
++
++  // Eclairs dans les nuages : suivent l'eclair natif (meme instant que le tonnerre et la lumiere).
++  static float last_native = 0.f;
++  float native = native_flash;
++  if (test_flash > 0.f) { test_flash -= dt; native = std::max(native, .5f); }
++  if (native > .01f && last_native <= .01f) {
++    const float az = urand(0.f, 6.2831853f), el = urand(.08f, .45f);
++    flash_dir = {std::cos(az) * std::cos(el), std::sin(el), std::sin(az) * std::cos(el)};
++    flash_seed = urand(0.f, 97.f);
++    lg::info("Meteo : eclair (intensite native {:.2f}, indice {})", native_flash, native_flash_index);
++  }
++  last_native = native;
++  flash = std::clamp(native * 3.f, 0.f, 1.f) * std::max(current.lightning, test_flash > 0.f ? 1.f : 0.f);
++}
++
++// Echange avec GOAL (fil du jeu), appele par mood.gc (init-weather!) a chaque image.
++// io[0] = max-rain du niveau, io[1] = eclair natif, io[2] = indice d'eclair, io[4] = exterieur (1/0)
++// io[8] = actif, io[9] = nuages natifs, io[10] = brouillard natif, io[11] = pluie native,
++// io[12] = neige native, io[13] = eclairs natifs autorises
++inline void exchange(float* io) {
++  std::lock_guard<std::mutex> guard(mutex);
++  if (std::isfinite(io[4])) outdoor = std::clamp(io[4], 0.f, 1.f);   // exterior-level natif
++  if (std::isfinite(io[1])) native_flash = std::max(0.f, io[1]);
++  native_flash_index = int(io[2]);
++  io[8] = started ? 1.f : 0.f;
++  io[9] = current.native_cloud;
++  io[10] = current.native_fog;
++  io[11] = std::min(.75f, current.rain * .75f);
++  io[12] = 0.f;   // neige native (points etires en traits bleutes) coupee : flocons modernes
++  io[13] = current.lightning > .5f ? 1.f : 0.f;
++}
++
++inline void force(int kind) {
++  std::lock_guard<std::mutex> guard(mutex);
++  if (kind == 100) { test_flash = 2.f; return; }   // test : eclair tenu 2 s (captures)
++  forced = (kind >= 0 && kind < COUNT) ? kind : -1;
++  if (forced < 0) { remaining = urand(60.f, 180.f); lg::info("Meteo : retour au hasard"); }
++}
++}  // namespace WeatherState
+diff --git a/game/graphics/opengl_renderer/WeatherWorld.h b/game/graphics/opengl_renderer/WeatherWorld.h
+new file mode 100644
+index 00000000..dfba987f
+--- /dev/null
++++ b/game/graphics/opengl_renderer/WeatherWorld.h
+@@ -0,0 +1,44 @@
++#pragma once
++#include <array>
++#include <mutex>
++#include "game/graphics/opengl_renderer/BucketRenderer.h"
++#include "game/graphics/opengl_renderer/WeatherState.h"
++
++// Couleurs du moment calculees par ModernWeather::update (ciel reflechi, soleil) et uniformes meteo du
++// decor. En-tete leger : inclus par PalaceMaterials.h (tfrag / tie).
++namespace WeatherLook {
++inline std::mutex mutex;
++inline std::array<float, 3> sky{.55f, .6f, .68f};       // ciel reflechi par les flaques
++inline std::array<float, 3> sun_dir{0.f, 1.f, 0.f};
++inline std::array<float, 3> sun_color{0.f, 0.f, 0.f};
++inline float time = 0.f;
++}  // namespace WeatherLook
++
++// Uniformes du decor (tfrag3 : sol mouille, flaques, gouttes qui tombent dans les flaques, neige au sol).
++inline void weather_bind_world(GLuint program) {
++  float wet, puddles, snow, rain, flash;
++  {
++    std::lock_guard<std::mutex> guard(WeatherState::mutex);
++    wet = WeatherState::wetness * WeatherState::outdoor;
++    puddles = WeatherState::puddles * WeatherState::outdoor;
++    snow = WeatherState::snow_cover * WeatherState::outdoor;
++    rain = WeatherState::current.rain * WeatherState::outdoor;
++    flash = WeatherState::flash;
++  }
++  std::array<float, 3> sky, sun_dir, sun_color; float time;
++  {
++    std::lock_guard<std::mutex> guard(WeatherLook::mutex);
++    sky = WeatherLook::sky; sun_dir = WeatherLook::sun_dir; sun_color = WeatherLook::sun_color;
++    time = WeatherLook::time;
++  }
++  glUniform1f(glGetUniformLocation(program, "weather_wet"), wet);
++  glUniform1f(glGetUniformLocation(program, "weather_puddles"), puddles);
++  glUniform1f(glGetUniformLocation(program, "weather_snow"), snow);
++  glUniform1f(glGetUniformLocation(program, "weather_rain"), rain);
++  glUniform1f(glGetUniformLocation(program, "weather_time"), time);
++  glUniform1f(glGetUniformLocation(program, "weather_flash"), flash);
++  glUniform3fv(glGetUniformLocation(program, "weather_sky"), 1, sky.data());
++  glUniform3fv(glGetUniformLocation(program, "weather_sun_dir"), 1, sun_dir.data());
++  glUniform3fv(glGetUniformLocation(program, "weather_sun_color"), 1, sun_color.data());
++}
++
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 979dce4c..99d3dd5c 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -5,6 +5,7 @@
+ #include "PalaceMaterialAudit.h"
+ #include "LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
++#include "game/graphics/opengl_renderer/WeatherWorld.h"
+ 
+ // Cache static scenery classifications at level load. Animated liquids,
+ // characters and other levels sharing the shader programs keep their own path.
+@@ -41,6 +42,7 @@ class PalaceMaterials {
+     const int kind=state->version==GameVersion::Jak3 && texture>=0 &&
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
++    weather_bind_world(program);   // sol mouille, flaques, neige au sol
+     const bool palm=kind && (m_names[texture]=="waspala-palmplant-leaf-02" || m_names[texture]=="waspala-shrub-plant" || m_names[texture]=="for-shrub-moss");
+     const bool market_shrub=kind && m_names[texture]=="market-shrub-orange-v1";
+     const bool market_wind=kind && m_names[texture]=="market-palm-leaf-v1";
+diff --git a/game/graphics/opengl_renderer/shaders/modern_clouds.frag b/game/graphics/opengl_renderer/shaders/modern_clouds.frag
+index 93f1da2d..fa1b95cf 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_clouds.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_clouds.frag
+@@ -32,7 +32,8 @@ uniform float sky_coverage;         // 0..1 : part du ciel couverte
+ uniform float cloud_type;           // 0 = petits cumulus de beau temps, 1 = gros cumulus bourgeonnants
+ uniform float cloud_density;        // multiplicateur de densite
+ uniform float cloud_darkness;       // 0..1 : bases sombres (pluie, orage)
+-uniform vec2 cloud_wind;            // m/s
++uniform vec2 cloud_wind;            // m/s (sens du vent)
++uniform vec2 cloud_offset;          // deplacement cumule par le vent (m) : pas de saut quand le vent change
+ 
+ const float PLANET=120000.;
+ const float CLOUD_BASE=1500.,CLOUD_TOP=4200.;
+@@ -68,7 +69,7 @@ float henyeyGreenstein(float mu,float g){
+ // boucle n'ont pas de derivees fiables ; sans cela, le detail se replie en motifs en escalier).
+ float lodFor(float foot,float texelMetres){return max(log2(max(foot/texelMetres,1.)),0.);}
+ vec2 weather(vec2 xz,float foot){
+-  vec2 w=xz+cloud_wind*sky_time;
++  vec2 w=xz+cloud_offset;
+   float big=textureLod(cloud_weather,w/16000.,lodFor(foot,16000./256.)).r;
+   float mid=textureLod(cloud_weather,w/5200.+vec2(.37,.71),lodFor(foot,5200./256.)).r;
+   float field=big*.55+mid*.45;
+@@ -87,7 +88,7 @@ float cloudDensity(vec3 p,float h,bool cheap,float foot){
+   top*=.6+.4*wx.x;
+   float profile=smoothstep(0.,.06,hf)*(1.-smoothstep(top*.45,top,hf));
+   if(profile<=0.)return 0.;
+-  vec3 q=vec3(p.x,h,p.z)+vec3(cloud_wind.x,0.,cloud_wind.y)*sky_time;
++  vec3 q=vec3(p.x,h,p.z)+vec3(cloud_offset.x,0.,cloud_offset.y);
+   vec4 low=textureLod(cloud_noise,q/2600.,lodFor(foot,2600./64.));
+   float lowFbm=low.g*.625+low.b*.25+low.a*.125;
+   float base=remap(low.r,-(1.-lowFbm),1.,0.,1.);
+@@ -117,8 +118,11 @@ void main(){
+   // ecran), ciel de secours qui suit l'heure (sinon les nuages restent blancs la nuit)
+   vec3 fallback=mix(vec3(.045,.055,.095),vec3(.55,.62,.75),dayness);
+   fallback=mix(fallback,vec3(.62,.45,.40),(1.-sunUp)*dayness*.6);
+-  vec3 haze=nativeSky(normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z)),fallback);
+-  vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),haze);
++  // Couleur du ciel natif juste derriere le nuage (le pixel lui-meme) : continue en azimut. Echantillonner
++  // l'horizon dans la meme direction faisait des bandes verticales la ou un rocher ou une ile le cachait.
++  vec3 own=nativeSky(ray,fallback);
++  vec3 haze=own;
++  vec3 zenith=own*vec3(.95,1.,1.08);
+   // Traversee de la couche
+   vec3 o=vec3(0.,PLANET+cloud_eye.y,0.);
+   float t0=sphereExit(o,ray,PLANET+CLOUD_BASE),t1=sphereExit(o,ray,PLANET+CLOUD_TOP);
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.frag b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+index 490110c7..1e921041 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_sky.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+@@ -23,6 +23,14 @@ uniform sampler2D cloud_result;   // tampon des nuages volumiques (unite 30)
+ uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
+ uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
+ uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
++// Meteo (WeatherState) :
++uniform float sky_gloom;         // 0..1 : ciel d'orage (bleu natif assombri et desature)
++uniform float sky_cirrus;        // voile de cirrus (.6 beau temps, 1 temps voile)
++uniform float sky_flash;         // eclair en cours (0..1)
++uniform vec3 sky_flash_dir;      // direction de l'eclair (sous la base des nuages)
++uniform float sky_flash_seed;    // forme de l'eclair
++float bolt1(float x){float i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
++  return mix(fract(sin(i*127.1)*43758.5),fract(sin((i+1.)*127.1)*43758.5),f);}
+ 
+ bool skyDepth(float depth){
+   const float step24=1./16777215.;
+@@ -78,7 +86,9 @@ void main(){
+   vec3 horizonRay=normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z));
+   vec3 haze=nativeSky(horizonRay,native);
+   vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),native);
+-  vec3 result=native;
++  // Ciel d'orage : le bleu natif entre les nuages devient gris et sombre.
++  float nativeLuma=dot(native,vec3(.3,.59,.11));
++  vec3 result=mix(native,vec3(nativeLuma)*vec3(.92,.96,1.05),sky_gloom*.65)*(1.-.45*sky_gloom);
+   // ---- Diffusion vers le soleil dans le ciel clair
+   float toSun=max(dot(ray,sun),0.);
+   result+=sunColor*haze*pow(toSun,4.)*.20*(1.+1.6*(1.-sunUp))*(1.-.6*clamp(ray.y*3.,0.,1.))*dayness;
+@@ -91,6 +101,27 @@ void main(){
+   vec4 cl=texture(cloud_result,cuv);
+   float cloudAlpha=1.-cl.a;
+   result=result*cl.a+cl.rgb;
++  // ---- Eclair : les nuages s'illuminent de l'interieur autour de l'impact, le ciel s'eclaire un instant,
++  //      et un trait fourchu descend de la base des nuages vers l'horizon.
++  if(sky_flash>.01){
++    vec3 fd=normalize(sky_flash_dir);
++    float g=pow(max(dot(ray,fd),0.),6.);
++    result+=vec3(.78,.82,1.)*sky_flash*(g*1.6+.18)*cloudAlpha;
++    result+=vec3(.45,.5,.7)*sky_flash*(g*.35+.05)*(1.-cloudAlpha);
++    float top=fd.y,elev=ray.y;
++    if(elev>0.&&elev<top){
++      vec3 rgt=normalize(cross(fd,vec3(0.,1.,0.)));
++      float t=(top-elev)/top;
++      float off=(bolt1(t*5.+sky_flash_seed)-.5)*.06+(bolt1(t*21.+sky_flash_seed*3.1)-.5)*.018+(bolt1(t*67.+sky_flash_seed*7.)-.5)*.005;
++      off*=smoothstep(0.,.15,t);
++      float a=dot(ray,rgt)/max(length(ray.xz),.2);
++      float pix=max(length(dFdx(ray)),length(dFdy(ray)));
++      float w=max(pix*.9,.0007);
++      float d=abs(a-off);
++      float bolt=exp(-d*d/(w*w))*1.6+exp(-d/.012)*.35;
++      result+=vec3(.85,.88,1.)*bolt*sky_flash*smoothstep(1.,.85,t);
++    }
++  }
+   float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));
+   if(ray.y>.008){
+     // ---- Cirrus (haute couche etiree, tres fine)
+@@ -104,7 +135,16 @@ void main(){
+       float c=fbmLod(q*.00015,footC*.00015)*.6+fbmLod(q*.00068+vec2(3.3,1.1),footC*.00068)*.4;
+       float cirrus=smoothstep(.56,.80,c)*smoothstep(.04,.2,ray.y)*exp(-length(ray.xz/y)*.10);
+       vec3 cirrusColor=mix(mix(zenith*1.3,vec3(.94,.95,.98),.5),sunColor,.35*pow(toSun,3.))*mix(.35,1.,dayness);
+-      result=mix(result,cirrusColor,cirrus*.40*(1.-cloudAlpha*.7));
++      result=mix(result,cirrusColor,cirrus*.66*sky_cirrus*(1.-cloudAlpha*.7));
++      // temps voile : voile laiteux uniforme (cirrostratus) et halo de 22 degres autour du soleil
++      float veil=clamp((sky_cirrus-.6)/.4,0.,1.);
++      if(veil>0.){
++        result=mix(result,mix(zenith,vec3(.86,.89,.94),.55)*mix(.3,1.,dayness),veil*.48*smoothstep(.04,.35,ray.y)*(1.-cloudAlpha));
++        float ang=acos(clamp(dot(ray,sun),-1.,1.));
++        float ring=exp(-pow((ang-.384)/.011,2.));
++        vec3 tint=mix(vec3(1.,.72,.55),vec3(.75,.85,1.),smoothstep(.37,.40,ang));
++        result+=tint*ring*.10*veil*dayness*(1.-cloudAlpha);
++      }
+     }
+   }
+   // ---- Soleil (au-dessus des nuages minces : les nuages epais l'attenuent)
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+new file mode 100644
+index 00000000..7f0f16b3
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+@@ -0,0 +1,79 @@
++#version 410 core
++// Atmosphere meteo (apres le decor, les particules et la mer ; avant l'interface) :
++//  - voile de pluie / neige : densite uniforme, les lointains se fondent dans le gris du ciel couvert ;
++//  - brouillard matinal : brouillard de hauteur exponentiel (epais au ras de l'eau, ciel visible au-dessus),
++//    integre analytiquement le long du rayon ;
++//  - tempete de sable : nuee ocre animee par rafales qui defilent dans le sens du vent, plus dense au sol.
++// Le soleil eclaire le brouillard vers l'avant (halo). Sortie premultipliee (ONE, ONE_MINUS_SRC_ALPHA).
++in vec3 view_ray;
++out vec4 color;
++uniform sampler2D tex_T26;          // profondeur de la scene (copie)
++uniform vec4 fluid_viewport;
++uniform mat4 pc_camera;
++uniform vec3 wx_eye;                // m
++uniform float wx_time;
++uniform vec3 wx_sun;                // direction du soleil (ou de la lune)
++uniform vec3 wx_sun_color;          // lumiere directe restante
++uniform vec3 wx_fog_color;          // couleur du voile (ciel couvert a cette heure)
++uniform vec3 wx_sand_color;
++uniform float wx_fog;               // 0..1 : voile de la meteo (1 = brouillard matinal)
++uniform float wx_rain;              // 0..1
++uniform float wx_snow;              // 0..1
++uniform float wx_ground_level;      // m
++uniform float wx_ground_height;     // decroissance du brouillard (m)
++uniform float wx_sand;              // 0..1
++uniform vec2 wx_wind;               // m/s
++uniform float wx_flash;             // eclair
++
++bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
++vec3 unproject(vec2 uv,float depth){
++  vec2 pixel=uv*vec2(textureSize(tex_T26,0));
++  vec4 h=vec4((pixel-fluid_viewport.xy)/fluid_viewport.zw*2.-1.,depth*2.-1.,1.);
++  h.y/=(512./416.)*.5;
++  vec4 w=inverse(-pc_camera)*h;
++  return w.xyz/w.w/4096.;
++}
++float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
++float noise(vec3 x){
++  vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
++  return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
++             mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);
++}
++void main(){
++  vec2 uv=gl_FragCoord.xy/vec2(textureSize(tex_T26,0));
++  float depth=texture(tex_T26,uv).r;
++  vec3 rd=normalize(view_ray);
++  float dist=3000.;
++  if(!skyDepth(depth)) dist=min(length(unproject(uv,depth)),3000.);
++  // voile uniforme (1/m) : pluie ~ 2 km de visibilite, neige ~ 1 km
++  float haze=.00030*wx_fog+.0011*wx_rain+.0022*wx_snow;
++  float tauFog=haze*dist;
++  // brouillard de hauteur (brouillard matinal) : integrale de d0*exp(-(h-h0)/H) le long du rayon
++  float groundFog=.022*clamp((wx_fog-.4)/.6,0.,1.);
++  if(groundFog>0.){
++    float k=1./wx_ground_height;
++    float base=groundFog*exp(-(wx_eye.y-wx_ground_level)*k);
++    float a=rd.y*k;
++    tauFog+=abs(a)<1e-5?base*dist:base*(1.-exp(-dist*a))/a;
++  }
++  // sable : densite de base x rafales (bruit 3D qui defile avec le vent), concentree pres du sol
++  float tauSand=0.;
++  if(wx_sand>0.){
++    float tMid=min(dist,28.);
++    vec3 p=wx_eye+rd*tMid; p.xz-=wx_wind*wx_time; p.y-=wx_time*.6;
++    float gust=noise(p*vec3(.045,.08,.045))*.65+noise(p*vec3(.13,.2,.13)+17.)*.35;
++    gust=.45+1.1*gust;
++    float low=exp(-max(rd.y,0.)*2.2);           // le ciel au-dessus reste un peu plus clair
++    tauSand=wx_sand*wx_sand*.020*min(dist,400.)*gust*mix(.55,1.,low);
++  }
++  float tau=tauFog+tauSand;
++  if(tau<1e-4){color=vec4(0.);return;}
++  float f=1.-exp(-tau);
++  vec3 L=normalize(wx_sun);
++  float mu=max(dot(rd,L),0.);
++  vec3 fogCol=wx_fog_color+wx_sun_color*(pow(mu,8.)*.55+pow(mu,48.)*.6);
++  vec3 sandCol=wx_sand_color+wx_sun_color*vec3(1.,.8,.55)*(pow(mu,5.)*.45);
++  vec3 col=(fogCol*tauFog+sandCol*tauSand)/tau;
++  col+=vec3(.55,.6,.75)*wx_flash*.18;
++  color=vec4(col*f,f);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_fog.vert b/game/graphics/opengl_renderer/shaders/modern_weather_fog.vert
+new file mode 100644
+index 00000000..cfb1acd1
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_fog.vert
+@@ -0,0 +1,12 @@
++#version 410 core
++// Atmosphere meteo : triangle plein ecran ; rayon de vue reconstruit depuis la camera du prototype.
++uniform mat4 pc_camera;
++out vec3 view_ray;
++void main(){
++  vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);
++  vec2 clip=p*2.-1.;
++  vec4 h=vec4(clip.x,clip.y/((512./416.)*.5),0.,1.);
++  vec4 r=inverse(-pc_camera)*h;
++  view_ray=r.xyz/r.w;
++  gl_Position=vec4(clip,0.,1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_particles.frag b/game/graphics/opengl_renderer/shaders/modern_weather_particles.frag
+new file mode 100644
+index 00000000..5c86f063
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_particles.frag
+@@ -0,0 +1,22 @@
++#version 410 core
++// Gouttes : trainee fine aux bouts effiles ; flocons : disque doux ; sable : trainee courte ocre.
++in vec2 local;
++in float fade;
++out vec4 color;
++uniform int wx_kind;
++uniform vec3 wx_light;              // couleur des gouttes / flocons / grains a cette heure
++uniform float wx_alpha;             // opacite de base
++void main(){
++  float a;
++  if(wx_kind==1){
++    float d=length(local);
++    a=smoothstep(1.,.25,d);
++  }else{
++    float across=1.-local.x*local.x;
++    float along=smoothstep(0.,.3,local.y)*smoothstep(1.,.55,local.y);
++    a=across*along;
++  }
++  a*=wx_alpha*fade;
++  if(a<.002)discard;
++  color=vec4(wx_light*a,a);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_particles.vert b/game/graphics/opengl_renderer/shaders/modern_weather_particles.vert
+new file mode 100644
+index 00000000..4263b944
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_particles.vert
+@@ -0,0 +1,78 @@
++#version 410 core
++// Precipitations en vraie 3D : chaque instance est une goutte (trainee), un flocon ou un grain de sable
++// dans une boite qui suit la camera. Les positions sont fixes dans le monde (parallaxe correcte quand la
++// camera bouge) et replongent dans la boite par modulo. Test de profondeur materiel contre la scene :
++// les gouttes passent derriere les murs et les toits.
++// Largeur tenue a >= 1,2 pixel, l'opacite compensant (pas de scintillement des gouttes lointaines).
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;             // unites du jeu (4096 / m)
++uniform float wx_time;
++uniform int wx_kind;                // 0 pluie, 1 neige, 2 sable
++uniform int wx_layer;               // 0 couche proche, 1 rideau lointain
++uniform vec3 wx_box;                // m
++uniform vec2 wx_wind;               // m/s
++uniform vec2 wx_viewport;           // pixels
++out vec2 local;                     // x : -1..1 en travers ; y : 0..1 le long (ou -1..1 pour un flocon)
++out float fade;
++
++float hash(uint n){n=(n<<13U)^n;n=n*(n*n*15731U+789221U)+1376312589U;return float(n&0x7fffffffU)/float(0x7fffffff);}
++vec4 project(vec3 rel){vec4 h=-pc_camera*vec4(rel*4096.,1.);h.y*=(512./416.)*.5;return h;}
++vec2 toPixels(vec4 h){return h.xy/h.w*wx_viewport*.5;}
++
++void main(){
++  uint id=uint(gl_InstanceID)+uint(wx_layer)*1000003U;
++  vec3 r=vec3(hash(id*3U+11U),hash(id*3U+12U),hash(id*3U+13U));
++  float s=hash(id+90001U),s2=hash(id+70001U);
++  vec3 eye=cam_trans.xyz/4096.;
++  vec3 vel;float len,width;
++  if(wx_kind==0){        // pluie : 7 a 9,5 m/s, trainee = flou de mouvement
++    vel=vec3(wx_wind.x*.9,-mix(7.,9.5,s),wx_wind.y*.9);
++    len=mix(.45,.75,s2);width=mix(.0018,.003,s);
++  }else if(wx_kind==1){  // neige : chute lente, derive
++    vel=vec3(wx_wind.x*.8,-mix(.65,1.35,s),wx_wind.y*.8);
++    len=0.;width=mix(.012,.028,s2*s2);
++  }else{                 // sable : grains rapides a l'horizontale, legere turbulence
++    vel=vec3(wx_wind.x,-.3+.8*(s-.5),wx_wind.y)*mix(.75,1.25,s);
++    len=mix(.12,.35,s2);width=mix(.0012,.0025,s);
++  }
++  vec3 p=r*wx_box+vel*wx_time;
++  if(wx_kind==1){float ph=s*6.2831;p.x+=.35*sin(wx_time*1.3+ph);p.z+=.35*cos(wx_time*1.05+ph*1.7);p.y+=.08*sin(wx_time*2.3+ph);}
++  if(wx_kind==2){float ph=s2*6.2831;p.y+=.25*sin(wx_time*3.1+ph);}
++  vec3 q=mod(p-eye,wx_box)-wx_box*.5;       // position dans la boite centree sur l'oeil
++  // fondu aux bords de la boite et tout pres de l'oeil
++  vec3 edge=abs(q)/(wx_box*.5);
++  fade=1.-smoothstep(.72,1.,max(max(edge.x,edge.z),edge.y*.9));
++  vec3 rel=q;
++  if(wx_kind==0)rel.y+=wx_box.y*.2;         // pluie : plus de gouttes au-dessus de l'oeil
++  float d=length(rel);
++  fade*=smoothstep(.35,1.2,d);
++  // la couche lointaine laisse le centre a la couche proche (pas de double densite pres de l'oeil)
++  if(wx_layer==1)fade*=smoothstep(4.,7.,length(q.xz));
++  vec3 dir=length(vel)>0.?normalize(vel):vec3(0.,-1.,0.);
++  vec4 ha=project(rel);
++  if(ha.w<.3||fade<=0.){gl_Position=vec4(2.,2.,2.,1.);local=vec2(0.);return;}
++  // pixels par metre a cette distance
++  vec4 hx=project(rel+vec3(.1,0.,0.)),hz=project(rel+vec3(0.,0.,.1)),hy=project(rel+vec3(0.,.1,0.));
++  vec2 pa=toPixels(ha);
++  float ppm=max(max(length(toPixels(hx)-pa),length(toPixels(hz)-pa)),length(toPixels(hy)-pa))*10.;
++  float widthPx=width*ppm;
++  float drawn=max(widthPx,wx_kind==1?1.6:1.2);
++  fade*=min(1.,widthPx/drawn);
++  vec2 corner=vec2[6](vec2(-1,0),vec2(1,0),vec2(1,1),vec2(-1,0),vec2(1,1),vec2(-1,1))[gl_VertexID];
++  vec2 pos;float z;
++  if(wx_kind==1){
++    vec2 c=corner*vec2(1.,2.)-vec2(0.,1.);   // carre -1..1
++    pos=pa+c*drawn*.5;local=c;z=ha.z/ha.w;
++  }else{
++    vec4 hb=project(rel-dir*len);
++    if(hb.w<.3)hb=ha;
++    vec2 pb=toPixels(hb);
++    vec2 axis=pb-pa;float l=length(axis);
++    axis=l>1e-3?axis/l:vec2(0.,1.);
++    l=max(l,drawn*1.5);
++    vec2 nrm=vec2(-axis.y,axis.x);
++    pos=pa+axis*l*corner.y+nrm*corner.x*drawn*.5;
++    local=corner;z=mix(ha.z/ha.w,hb.z/hb.w,corner.y);
++  }
++  gl_Position=vec4(pos/(wx_viewport*.5),z,1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index e2f1467b..dc1483e9 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -571,6 +571,130 @@ vec3 beachWetSand(vec3 color,vec3 P){
+ }
+ // BEACH_WET_END
+ 
++
++
++
++
++
++
++// WEATHER_WORLD_BEGIN
++// Meteo sur le decor (tfrag / tie) : sol mouille, flaques, ronds de pluie, neige au sol.
++// Uniformes fournis par weather_bind_world (WeatherWorld.h), a chaque dessin.
++uniform float weather_wet;          // 0..1 : sol mouille (monte vite sous la pluie, seche en minutes)
++uniform float weather_puddles;      // 0..1 : etendue des flaques
++uniform float weather_snow;         // 0..1 : neige tombee
++uniform float weather_rain;         // 0..1 : pluie en cours (ronds dans les flaques)
++uniform float weather_time;
++uniform float weather_flash;        // eclair
++uniform vec3 weather_sky;           // ciel reflechi a cette heure et par ce temps
++uniform vec3 weather_sun_dir;
++uniform vec3 weather_sun_color;
++float wxHash(vec2 p){p=fract(p*vec2(.1031,.1030));p+=dot(p,p.yx+33.33);return fract((p.x+p.y)*p.x);}
++vec2 wxHash2(vec2 p){vec3 q=fract(vec3(p.xyx)*vec3(.1031,.1030,.0973));q+=dot(q,q.yzx+33.33);return fract((q.xx+q.yz)*q.zy);}
++float wxNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
++  return mix(mix(wxHash(i),wxHash(i+vec2(1,0)),f.x),mix(wxHash(i+vec2(0,1)),wxHash(i+vec2(1,1)),f.x),f.y);}
++// Ronds de pluie : un impact par cellule de ~0,4 m (deux grilles decalees), chacun a son rythme.
++// Renvoie la pente de la surface (xy, perturbation de la normale) et l'eclat des cretes (z).
++vec3 wxRipples(vec2 p,float t){
++  vec2 slope=vec2(0.);float crest=0.;
++  for(int layer=0;layer<2;layer++){
++    vec2 q=p*2.6+float(layer)*vec2(.37,.61);
++    vec2 c=floor(q),f=fract(q);
++    for(int j=-1;j<=1;j++)for(int i=-1;i<=1;i++){
++      vec2 o=vec2(i,j);vec2 h=wxHash2(c+o+float(layer)*17.);
++      vec2 d=o+.15+.7*h-f;
++      float ph=fract(t*(.9+.5*h.x)+h.y*7.);
++      float len=length(d);
++      float x=(len-ph*.9)*14.;
++      float ring=sin(x*3.14159)*exp(-x*x)*(1.-ph)*(1.-ph);
++      slope+=d/max(len,1e-3)*ring;
++      crest+=max(ring,0.);
++    }
++  }
++  return vec3(slope,crest);
++}
++vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
++  if(weather_wet<.003&&weather_snow<.003)return color;
++  vec3 E=cam_trans.xyz/4096.;
++  vec3 V=normalize(E-P);float dist=length(E-P);
++  if(dot(N,V)<0.)N=-N;
++  float up=smoothstep(.45,.9,N.y);
++  if(weather_wet>.003){
++    // materiau poreux mouille : plus sombre
++    float porous=weather_wet*(.45+.55*up);
++    color*=mix(1.,.62,porous);
++    // flaques dans les creux : bruit a grande echelle, seulement sur le plat
++    float n=wxNoise(P.xz*.23)*.62+wxNoise(P.xz*.9+3.7)*.38;
++    float th=mix(.82,.64,weather_puddles);
++    float puddle=smoothstep(th,th+.06,n)*smoothstep(.93,.985,N.y)*smoothstep(.05,.3,weather_puddles);
++    // ronds de pluie dans les flaques (plus faibles sur le sol simplement mouille)
++    vec3 Nw=N;float crest=0.;
++    float near=1.-smoothstep(12.,30.,dist);
++    if(weather_rain>.02&&near>0.){
++      vec3 rp=wxRipples(P.xz,weather_time)*weather_rain*near;
++      Nw=normalize(N+vec3(rp.x,0.,rp.y)*mix(.12,.35,puddle));
++      crest=rp.z*mix(.25*porous,1.,puddle);
++    }
++    float NdV=max(dot(Nw,V),0.);
++    float fres=.02+.98*pow(1.-NdV,5.);
++    vec3 R=reflect(-V,Nw);
++    // ciel reflechi : plus sombre vers l'horizon (facades), plus clair au zenith : les rides se voient
++    vec3 sky=weather_sky*(.45+1.05*clamp(R.y,0.,1.));
++    float spec=pow(max(dot(R,normalize(weather_sun_dir)),0.),mix(60.,600.,puddle));
++    // eau stagnante : fond assombri, reflet presque miroir aux angles rasants
++    color=mix(color,color*.55,puddle);
++    float refl=mix(fres*.55*porous,mix(.30,.95,fres),puddle);
++    color=mix(color,sky,clamp(refl,0.,1.));
++    color+=weather_sky*crest*.28;
++    color+=weather_sun_color*spec*(porous*.25+puddle*1.4);
++    color+=vec3(.7,.75,.9)*weather_flash*refl*.15;
++  }
++  if(weather_snow>.003){
++    // Neige fraiche sur une ville portuaire : couche fine au debut (le bois se devine), congeres etirees
++    // par le vent, plaques fondues (bois mouille sombre), joints et creux sombres qui gardent moins de
++    // neige, relief granuleux qui accroche la lumiere, paillettes.
++    float light=dot(lit,vec3(.3,.59,.11));
++    float albedo=clamp(dot(color,vec3(.3,.59,.11))/max(light,.05),0.,1.5);   // clarte de la texture
++    vec2 w=vec2(P.x*.93+P.z*.37,P.z*.93-P.x*.37);                          // axes du vent
++    float drift=wxNoise(w*vec2(.16,.6))*.6+wxNoise(w*vec2(.45,1.6)+5.3)*.4;
++    float depth=weather_snow*up*(.45+1.1*drift);                          // epaisseur relative
++    float seams=smoothstep(.22,.7,albedo);                                 // joints / creux de la texture
++    float cover=smoothstep(.12,.8,depth*mix(.35,1.,seams));
++    // plaques de neige fondue : bois mouille, un peu brillant
++    // (contours irreguliers : bruit deforme par un second bruit, bordure de neige mouillee grise)
++    vec2 warp=vec2(wxNoise(P.xz*1.3),wxNoise(P.xz*1.3+7.))*1.6;
++    float slushN=wxNoise(P.xz*.5+warp+11.)*.65+wxNoise(P.xz*2.4+warp*.5+2.)*.35;
++    float thin=(1.-smoothstep(.9,1.3,depth))*up*weather_snow;
++    float slush=smoothstep(.71,.81,slushN)*thin;
++    float rim=smoothstep(.63,.73,slushN)*thin-slush;
++    vec3 wetWood=color*.80;
++    float fresS=.02+.98*pow(1.-max(dot(N,V),0.),5.);
++    wetWood=mix(wetWood,weather_sky*(.45+1.05*clamp(reflect(-V,N).y,0.,1.)),fresS*.6);
++    color=mix(color,wetWood,slush*.85);
++    cover*=1.-slush;
++    // relief granuleux (attenue au loin, pas de scintillement)
++    float near=1.-smoothstep(6.,22.,dist);
++    float g0=wxNoise(P.xz*6.5),gx=wxNoise((P.xz+vec2(.06,0.))*6.5),gz=wxNoise((P.xz+vec2(0.,.06))*6.5);
++    vec3 bn=normalize(vec3((g0-gx)*.9*near,1.,(g0-gz)*.9*near));
++    vec3 L=normalize(weather_sun_dir);
++    float relief=1.+.55*(dot(bn,L)-L.y)*step(0.,L.y);
++    float grain=1.+(wxNoise(P.xz*23.)-.5)*.10*near;
++    // couleur : blanc legerement bleute a l'ombre, suit l'eclairage de la scene
++    vec3 snowCol=mix(vec3(.80,.86,.97),vec3(.95,.96,.98),clamp(light*1.2,0.,1.));
++    // albedo de la neige ~3 fois celui du bois : nettement plus claire que le decor, meme par temps gris
++    snowCol*=clamp(light*1.35+.03,.03,1.05)*relief*grain;
++    // couche mince : la texture transparait
++    snowCol=mix(color*.9+snowCol*.35,snowCol,smoothstep(.25,.9,depth));
++    vec2 gc=floor(P.xz*55.);
++    float sparkle=step(.988,wxHash(gc+floor(dot(V,vec3(13.,7.,11.)))))*near;
++    snowCol+=weather_sun_color*sparkle*.5;
++    snowCol=mix(snowCol,snowCol*.72+wetWood*.2,clamp(rim,0.,1.));   // neige mouillee en bordure des plaques
++    color=mix(color,snowCol,cover);
++  }
++  return color;
++}
++// WEATHER_WORLD_END
++
+ void main() {
+   vec3 arena_light = arenaRelight(fragment_color.rgb, arena_world);
+   vec3 surface_normal = normalize(cross(dFdx(arena_world),dFdy(arena_world)));
+@@ -587,6 +711,7 @@ void main() {
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
+     if (palace_material==4) color.a *= mix(.48,1.0,smoothstep(.36,.49,T0.a));
+     color.rgb=beachWetSand(color.rgb,arena_world);   // plage de Spargus
++    color.rgb=weatherSurface(color.rgb,arena_light,arena_world,surface_normal);   // meteo
+     }
+   } else {
+     color = fragment_color/2;
+diff --git a/game/kernel/jak3/kmachine.cpp b/game/kernel/jak3/kmachine.cpp
+index 87e0bf0c..25b38ee5 100644
+--- a/game/kernel/jak3/kmachine.cpp
++++ b/game/kernel/jak3/kmachine.cpp
+@@ -33,6 +33,7 @@
+ #include "game/sce/stubs.h"
+ #include "game/graphics/opengl_renderer/WaterContacts.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
++#include "game/graphics/opengl_renderer/WeatherState.h"
+ #include "game/graphics/opengl_renderer/CityFireSources.h"
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
+ 
+@@ -65,6 +66,16 @@ static u64 prototype_sky_actor(u32 dark_bits, u32 percent_bits) {
+   SkyState::set_actor(dark > .5f, percent);
+   return 0;
+ }
++// Meteo du remaster : echange d'un tableau de 16 flottants avec mood.gc (init-weather!, chaque image).
++static u64 prototype_weather(u32 io) {
++  WeatherState::exchange(Ptr<float>(io).c());
++  return 0;
++}
++// Commande de test : impose une meteo (0..7) ou rend la main au hasard (-1).
++static u64 prototype_weather_force(u32 kind) {
++  WeatherState::force(int(s32(kind)));
++  return 0;
++}
+ static u64 prototype_water_stroke(u32 packet, u32 hand) {
+   WaterContacts::push_stroke(Ptr<float>(packet).c(),hand);
+   return 0;
+@@ -457,6 +468,8 @@ void InitMachine_PCPort() {
+   make_function_symbol_from_c("pc-remaster-water-stroke", (void*)prototype_water_stroke);
+   make_function_symbol_from_c("pc-remaster-sky-state", (void*)prototype_sky_state);
+   make_function_symbol_from_c("pc-remaster-sky-actor", (void*)prototype_sky_actor);
++  make_function_symbol_from_c("pc-remaster-weather", (void*)prototype_weather);
++  make_function_symbol_from_c("pc-remaster-weather-force", (void*)prototype_weather_force);
+   // PC Port added functions
+   init_common_pc_port_functions(
+       make_function_symbol_from_c,
+-- 
+2.54.0.windows.1
+

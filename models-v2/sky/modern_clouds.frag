@@ -32,7 +32,8 @@ uniform float sky_coverage;         // 0..1 : part du ciel couverte
 uniform float cloud_type;           // 0 = petits cumulus de beau temps, 1 = gros cumulus bourgeonnants
 uniform float cloud_density;        // multiplicateur de densite
 uniform float cloud_darkness;       // 0..1 : bases sombres (pluie, orage)
-uniform vec2 cloud_wind;            // m/s
+uniform vec2 cloud_wind;            // m/s (sens du vent)
+uniform vec2 cloud_offset;          // deplacement cumule par le vent (m) : pas de saut quand le vent change
 
 const float PLANET=120000.;
 const float CLOUD_BASE=1500.,CLOUD_TOP=4200.;
@@ -68,7 +69,7 @@ float henyeyGreenstein(float mu,float g){
 // boucle n'ont pas de derivees fiables ; sans cela, le detail se replie en motifs en escalier).
 float lodFor(float foot,float texelMetres){return max(log2(max(foot/texelMetres,1.)),0.);}
 vec2 weather(vec2 xz,float foot){
-  vec2 w=xz+cloud_wind*sky_time;
+  vec2 w=xz+cloud_offset;
   float big=textureLod(cloud_weather,w/16000.,lodFor(foot,16000./256.)).r;
   float mid=textureLod(cloud_weather,w/5200.+vec2(.37,.71),lodFor(foot,5200./256.)).r;
   float field=big*.55+mid*.45;
@@ -87,7 +88,7 @@ float cloudDensity(vec3 p,float h,bool cheap,float foot){
   top*=.6+.4*wx.x;
   float profile=smoothstep(0.,.06,hf)*(1.-smoothstep(top*.45,top,hf));
   if(profile<=0.)return 0.;
-  vec3 q=vec3(p.x,h,p.z)+vec3(cloud_wind.x,0.,cloud_wind.y)*sky_time;
+  vec3 q=vec3(p.x,h,p.z)+vec3(cloud_offset.x,0.,cloud_offset.y);
   vec4 low=textureLod(cloud_noise,q/2600.,lodFor(foot,2600./64.));
   float lowFbm=low.g*.625+low.b*.25+low.a*.125;
   float base=remap(low.r,-(1.-lowFbm),1.,0.,1.);
@@ -117,8 +118,11 @@ void main(){
   // ecran), ciel de secours qui suit l'heure (sinon les nuages restent blancs la nuit)
   vec3 fallback=mix(vec3(.045,.055,.095),vec3(.55,.62,.75),dayness);
   fallback=mix(fallback,vec3(.62,.45,.40),(1.-sunUp)*dayness*.6);
-  vec3 haze=nativeSky(normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z)),fallback);
-  vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),haze);
+  // Couleur du ciel natif juste derriere le nuage (le pixel lui-meme) : continue en azimut. Echantillonner
+  // l'horizon dans la meme direction faisait des bandes verticales la ou un rocher ou une ile le cachait.
+  vec3 own=nativeSky(ray,fallback);
+  vec3 haze=own;
+  vec3 zenith=own*vec3(.95,1.,1.08);
   // Traversee de la couche
   vec3 o=vec3(0.,PLANET+cloud_eye.y,0.);
   float t0=sphereExit(o,ray,PLANET+CLOUD_BASE),t1=sphereExit(o,ray,PLANET+CLOUD_TOP);

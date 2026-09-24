@@ -116,5 +116,9 @@
   "game/graphics/opengl_renderer/shaders/modern_sky.vert",
   "game/graphics/opengl_renderer/shaders/modern_sky.frag",
   "game/graphics/opengl_renderer/shaders/modern_clouds.vert",
-  "game/graphics/opengl_renderer/shaders/modern_clouds.frag"
+  "game/graphics/opengl_renderer/shaders/modern_clouds.frag",
+  "game/graphics/opengl_renderer/shaders/modern_weather_fog.vert",
+  "game/graphics/opengl_renderer/shaders/modern_weather_fog.frag",
+  "game/graphics/opengl_renderer/shaders/modern_weather_particles.vert",
+  "game/graphics/opengl_renderer/shaders/modern_weather_particles.frag"
 ]

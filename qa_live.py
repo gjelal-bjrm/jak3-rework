@@ -1,6 +1,6 @@
 """Capture rapide sur la partie deja ouverte par le lanceur (sans relancer le jeu).
 
-  python qa_live.py <scene> <nom> [--hour H] [--eval "FORME;;FORME"] [--wait S] [--count N]
+  python qa_live.py <scene> <nom> [--hour H] [--weather orage] [--eval "FORME;;FORME"] [--wait S] [--count N]
 
 Se connecte au compilateur goalc du lanceur (nREPL, port 8189), envoie les formes demandees, attend,
 prend N captures et les copie dans qa/live-<nom>-NN.png. Avec les shaders du ciel recharges a chaud,
@@ -11,6 +11,7 @@ import argparse, shutil, socket, struct, sys, time
 
 ROOT = Path(__file__).resolve().parent
 PORT = 8189
+WEATHERS = ['beau-temps', 'voile', 'couvert', 'pluie', 'orage', 'neige', 'tempete-de-sable', 'brouillard']
 
 
 def goal_event(target, message, *params):
@@ -29,7 +30,7 @@ def send(sock, form):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('scene'); ap.add_argument('name')
-    ap.add_argument('--hour', type=float); ap.add_argument('--eval', default='')
+    ap.add_argument('--hour', type=float); ap.add_argument('--weather'); ap.add_argument('--eval', default='')
     ap.add_argument('--wait', type=float, default=2.5); ap.add_argument('--count', type=int, default=1)
     a = ap.parse_args()
     sock = socket.create_connection(('127.0.0.1', PORT), timeout=5)
@@ -42,6 +43,10 @@ def main():
         send(sock, goal_event(tod, "'change", "'ratio", '0.0'))
         send(sock, goal_event(tod, "'change", "'hour", str(h)))
         send(sock, goal_event(tod, "'change", "'minutes", str(m)))
+    if a.weather:
+        kind = -1 if a.weather == 'hasard' else WEATHERS.index(a.weather)
+        send(sock, '(define-extern pc-remaster-weather-force (function int none))'); time.sleep(.3)
+        send(sock, f'(pc-remaster-weather-force {kind})')
     for form in [f.strip() for f in a.eval.split(';;') if f.strip()]:
         send(sock, form); time.sleep(.3)
     time.sleep(a.wait)
