@@ -5,7 +5,8 @@ journee et la version (remaster ou jeu d'origine pour comparer), puis « Lancer 
 demarrage et peut fermer le jeu. Les derniers choix sont memorises (lanceur-choix.json).
 """
 from pathlib import Path
-import json, subprocess, sys, threading, time
+import ctypes, json, subprocess, sys, threading, time
+from ctypes import wintypes
 import tkinter as tk
 from tkinter import ttk
 
@@ -33,6 +34,44 @@ HOURS = [
     ('Comme en jeu (9 h, le jour avance)', None), ('Aube (6 h 30)', 6.5), ('Matin (9 h)', 9.0),
     ('Midi (13 h)', 13.0), ('Après-midi (16 h)', 16.0), ('Coucher du soleil (18 h 30)', 18.5), ('Nuit (22 h)', 22.0),
 ]
+user32 = ctypes.windll.user32
+kernel32 = ctypes.windll.kernel32
+
+
+def game_windows():
+    """Fenetres visibles du jeu (gk.exe)."""
+    found = []
+
+    @ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
+    def visit(hwnd, _):
+        if not user32.IsWindowVisible(hwnd): return True
+        pid = wintypes.DWORD(); user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
+        handle = kernel32.OpenProcess(0x1000, False, pid.value)   # PROCESS_QUERY_LIMITED_INFORMATION
+        if handle:
+            buffer = ctypes.create_unicode_buffer(512); size = wintypes.DWORD(512)
+            if kernel32.QueryFullProcessImageNameW(handle, 0, buffer, ctypes.byref(size)) \
+                    and buffer.value.lower().endswith('gk.exe'):
+                found.append(hwnd)
+            kernel32.CloseHandle(handle)
+        return True
+    user32.EnumWindows(visit, 0)
+    return found
+
+
+def bring_to_front(hwnd):
+    """Met la fenetre du jeu au premier plan : clavier et manette (le jeu ignore la manette en arriere-plan)."""
+    user32.ShowWindow(hwnd, 9)                                            # SW_RESTORE
+    foreground = user32.GetForegroundWindow()
+    theirs = user32.GetWindowThreadProcessId(foreground, None)
+    mine = kernel32.GetCurrentThreadId()
+    attached = bool(theirs) and theirs != mine and user32.AttachThreadInput(mine, theirs, True)
+    user32.keybd_event(0x12, 0, 0, 0); user32.keybd_event(0x12, 0, 2, 0)   # Alt : autorise le changement
+    user32.SetForegroundWindow(hwnd); user32.BringWindowToTop(hwnd); user32.SetFocus(hwnd)
+    if attached: user32.AttachThreadInput(mine, theirs, False)
+    if user32.GetForegroundWindow() != hwnd:
+        user32.SwitchToThisWindow(hwnd, True)                             # secours
+
+
 # Lignes du journal du lanceur montrees dans la fenetre (le reste est technique).
 SHOWN = ('jeu demarre', 'liaison etablie', 'Jak est', 'arrivee', 'meteo', 'heure', 'Erreur', 'erreur', 'ferme')
 
@@ -80,7 +119,8 @@ class Launcher(tk.Tk):
         self.status = tk.Text(frame, width=62, height=8, font=('Segoe UI', 9), state='disabled', relief='flat', background='#f3f3f3')
         self.status.grid(row=7, column=0, columnspan=2, pady=(6, 0))
         self.say('Choisis un lieu, une météo et un moment, puis clique sur « Lancer ».\n'
-                 'Le jeu met environ 30 secondes à se mettre en place.')
+                 'Le jeu met environ 30 secondes à se mettre en place, puis passe au premier plan.\n'
+                 'Si Jak ne répond pas, clique une fois dans la fenêtre du jeu.')
         self.refresh()
         self.protocol('WM_DELETE_WINDOW', self.destroy)
 
@@ -112,11 +152,19 @@ class Launcher(tk.Tk):
         self.say(f'Lancement : {PLACES[self.place.get()][0]}'
                  + (f', {WEATHERS[self.weather.current()][0].lower()}' if variant == 'remaster' else ', jeu d’origine')
                  + f', {HOURS[self.hour.current()][0].lower()}…')
+        user32.AllowSetForegroundWindow(-1)        # ASFW_ANY : le jeu pourra prendre le premier plan
         self.process = subprocess.Popen(args, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, creationflags=NO_WINDOW)
         threading.Thread(target=self.follow, args=(self.process,), daemon=True).start()
 
+    def focus_game(self):
+        windows = game_windows()
+        if not windows: return
+        self.iconify()                             # la fenetre de lancement se range
+        bring_to_front(windows[0])
+
     def follow(self, process):
         seen = 0
+        focused_at = []
         while True:
             try: lines = LOG.read_text(encoding='utf-8', errors='replace').splitlines()
             except Exception: lines = []
@@ -125,6 +173,13 @@ class Launcher(tk.Tk):
                     text = line.split(': ', 1)[-1] if ' : ' in line else line
                     self.after(0, self.say, '• ' + text.strip(), False)
             seen = len(lines)
+            # premier plan : des que la fenetre du jeu existe, puis apres chaque etape de mise en place
+            text = '\n'.join(lines)
+            if not focused_at and game_windows():
+                focused_at.append('fenetre'); self.after(0, self.focus_game)
+            for key in ('jeu demarre', 'liaison etablie', 'meteo', 'heure'):
+                if key in text and key not in focused_at:
+                    focused_at.append(key); self.after(0, self.focus_game)
             if process.poll() is not None:
                 code = process.returncode
                 message = 'Le jeu est fermé.' if code in (0, 1) else f'Le lanceur s’est arrêté (code {code}). Voir qa/lanceur.log.'
