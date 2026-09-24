@@ -38,6 +38,7 @@ parser.add_argument('--weather', choices=WEATHERS + ['hasard'],
 parser.add_argument('--eval', metavar='FORME;;FORME', help='tests : formes GOAL envoyees au jeu apres le placement (separees par ;;)')
 parser.add_argument('--eval-end', metavar='FORME;;FORME', help='tests : formes GOAL envoyees apres les arrets et les heures')
 parser.add_argument('--hours', metavar='H1,H2,...', help='tests : impose chaque heure a son tour et prend une rafale (qa/burst-<scene>-hNN-*.png)')
+parser.add_argument('--sound', action='store_true', help='avec le son du jeu (sinon muet, pour les tests)')
 parser.add_argument('--quit', action='store_true', help='ferme le jeu une fois les captures faites (tests enchaines)')
 parser.add_argument('--capture', action='store_true',
                     help="scene city : prendre une capture d'ecran une fois Jak place (test)")
@@ -475,12 +476,20 @@ if not settings.exists():
 pc_settings = settings / 'pc-settings.gc'
 if pc_settings.exists():
     content = pc_settings.read_text(encoding='utf-8')
-    muted = re.sub(r'(\(memcard-volume-(?:sfx|music|dialog)\s+)[^)]*', r'\g<1>0.0000', content)
-    if muted != content:
-        backup = pc_settings.with_name('pc-settings-before-mute.gc')
-        if not backup.exists():
-            shutil.copy2(pc_settings, backup)
-        pc_settings.write_text(muted, encoding='utf-8')
+    if args.sound:
+        # son du jeu : volumes d'origine (effets .50, musique .40, dialogues .75)
+        volumes = {'sfx': '0.5000', 'music': '0.4000', 'dialog': '0.7500'}
+        audible = re.sub(r'(\(memcard-volume-(sfx|music|dialog)\s+)[^)]*',
+                         lambda m: m.group(1) + volumes[m.group(2)], content)
+        if audible != content:
+            pc_settings.write_text(audible, encoding='utf-8')
+    else:
+        muted = re.sub(r'(\(memcard-volume-(?:sfx|music|dialog)\s+)[^)]*', r'\g<1>0.0000', content)
+        if muted != content:
+            backup = pc_settings.with_name('pc-settings-before-mute.gc')
+            if not backup.exists():
+                shutil.copy2(pc_settings, backup)
+            pc_settings.write_text(muted, encoding='utf-8')
 # Clavier toujours actif, en plus de la manette : OpenGOAL coupe le clavier des qu'il detecte une manette
 # (l'utilisateur ne pouvait plus deplacer Jak au clavier). Touches d'origine W A S D (clavier suisse QWERTZ).
 input_settings = settings / 'input-settings.json'
@@ -494,13 +503,14 @@ if input_settings.exists():
     except ValueError:
         pass
 environment = os.environ.copy()
-environment['OPENGOAL_TEST_MUTE'] = '1'
+if not args.sound:
+    environment['OPENGOAL_TEST_MUTE'] = '1'
 game_log = ROOT / f'{args.variant}-runtime.log'
 goalc = None
 with game_log.open('w', encoding='utf-8') as log:
     process = subprocess.Popen([str(runtime), '--game', 'jak3', '--proj-path', str(ROOT / 'data'),
                                 '--config-path', str(profile), '--disable-ansi', '--',
-                                '-fakeiso', '-boot', '-debug', '-nosound'], cwd=ROOT, stdout=log,
+                                '-fakeiso', '-boot', '-debug'] + ([] if args.sound else ['-nosound']), cwd=ROOT, stdout=log,
                                 stderr=subprocess.STDOUT, env=environment,
                                 creationflags=subprocess.CREATE_NO_WINDOW)
     (ROOT / f'{args.variant}.pid').write_text(str(process.pid), encoding='utf-8')

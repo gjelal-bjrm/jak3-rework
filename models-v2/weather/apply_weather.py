@@ -60,8 +60,22 @@ def outdoor():
     PATH.write_text(s); print('mood.gc : pluie et neige natives suivent l exterieur')
 
 
+def native_rain_particles():
+    """Gouttes de pluie d'origine (update-rain) : chaque goutte s'arrete sur la premiere surface au-dessus du
+    sol (toiles de l'arene, toits) et y laisse une eclaboussure bleue : pluie « figee » en hauteur. Coupees
+    quand la meteo du remaster est active (pluie moderne en 3D) ; son de pluie et eclairs natifs gardes."""
+    s = TOD.read_text()
+    old = ("        (if (< 0.0 (-> *setting-control* user-current rain))\n"
+           "            (update-rain (-> *setting-control* user-current rain) s5-0 s4-0)\n")
+    new = ("        (if (and (< 0.0 (-> *setting-control* user-current rain)) (>= 0.5 (-> *pc-weather-io* data 8)))\n"
+           "            (update-rain (-> *setting-control* user-current rain) s5-0 s4-0)\n")
+    if new in s: print('time-of-day.gc : gouttes natives deja coupees'); return
+    TOD.write_text(replace_once(s, old, new, 'update-rain')); print('time-of-day.gc : gouttes natives coupees sous la meteo du remaster')
+
+
 def main():
     lens_drops()
+    native_rain_particles()
     s = PATH.read_text()
     if 'pc-remaster-weather' in s:
         print('mood.gc : deja patche'); outdoor(); return

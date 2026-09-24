@@ -1,0 +1,33 @@
+From 29da9d1c5914556db925380ae7efacdc161f8d11 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 24 Sep 2026 13:16:19 +0200
+Subject: [PATCH 26/26] =?UTF-8?q?Mer=20:=20exclue=20de=20l'enceinte=20de?=
+ =?UTF-8?q?=20l'ar=C3=A8ne=20(les=20cr=C3=AAtes=20des=20vagues=20d'orage?=
+ =?UTF-8?q?=20d=C3=A9passaient=20le=20lac=20de=20lave=20:=20taches=20gris-?=
+ =?UTF-8?q?bleu=20mobiles)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../graphics/opengl_renderer/shaders/modern_ocean_surface.frag | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+index 6e3d8890..96f41fca 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_ocean_surface.frag
+@@ -202,6 +202,9 @@ vec3 oceanContacts(vec2 p) {
+ }
+ 
+ bool oceanContainsPoint(vec2 xz) {
++  // Arene de Spargus : la mer (9 m) passe sous le lac de lave (10,4 m). Par gros temps, les cretes des
++  // vagues depassaient la lave (taches gris-bleu qui se deplacent). Pas de mer dans l'enceinte de l'arene.
++  if(ocean_level>8. && length(xz-vec2(2320.,-470.))<112.)return false;
+   vec2 cell=floor((xz-ocean_coast_map.xy)/ocean_coast_map.z);
+   // Au-dela de la carte native finie (4608 m), la mer lointaine native continue. A l'interieur,
+   // on respecte les cellules d'exclusion de 3 m (sous les routes et les batiments).
+-- 
+2.54.0.windows.1
+

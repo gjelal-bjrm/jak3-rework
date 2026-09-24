@@ -28,6 +28,9 @@ in vec3 ocean_world;
 #endif
 // OCEAN_SWELL_INSERT
 bool oceanContainsPoint(vec2 xz) {
+  // Arene de Spargus : la mer (9 m) passe sous le lac de lave (10,4 m). Par gros temps, les cretes des
+  // vagues depassaient la lave (taches gris-bleu qui se deplacent). Pas de mer dans l'enceinte de l'arene.
+  if(ocean_level>8. && length(xz-vec2(2320.,-470.))<112.)return false;
   vec2 cell=floor((xz-ocean_coast_map.xy)/ocean_coast_map.z);
   // Au-dela de la carte native finie (4608 m), la mer lointaine native continue. A l'interieur,
   // on respecte les cellules d'exclusion de 3 m (sous les routes et les batiments).

@@ -103,7 +103,10 @@ class Launcher(tk.Tk):
         self.hour = ttk.Combobox(frame, state='readonly', width=36, values=[h[0] for h in HOURS])
         self.hour.current(min(saved.get('hour', 0), len(HOURS) - 1)); self.hour.grid(row=3, column=1, sticky='w', **pad)
         self.freeze = tk.BooleanVar(value=saved.get('freeze', False))
-        ttk.Checkbutton(frame, text='Figer l’heure (le soleil ne bouge plus)', variable=self.freeze).grid(row=4, column=1, sticky='w', padx=10)
+        options = ttk.Frame(frame); options.grid(row=4, column=1, sticky='w', padx=10)
+        ttk.Checkbutton(options, text='Figer l’heure (le soleil ne bouge plus)', variable=self.freeze).grid(row=0, column=0, sticky='w')
+        self.sound = tk.BooleanVar(value=saved.get('sound', True))
+        ttk.Checkbutton(options, text='Avec le son du jeu (musique, effets, pluie, tonnerre)', variable=self.sound).grid(row=1, column=0, sticky='w')
 
         ttk.Label(frame, text='Version').grid(row=5, column=0, sticky='nw', **pad)
         self.variant = tk.StringVar(value=saved.get('variant', 'remaster'))
@@ -142,9 +145,11 @@ class Launcher(tk.Tk):
         hour = HOURS[self.hour.current()][1]
         if hour is not None: args += ['--hour', str(hour)]
         if self.freeze.get(): args += ['--time-ratio', '0']
+        if self.sound.get(): args += ['--sound']
         try:
             CHOICES.write_text(json.dumps({'place': self.place.get(), 'weather': self.weather.current(),
                                            'hour': self.hour.current(), 'freeze': self.freeze.get(),
+                                           'sound': self.sound.get(),
                                            'variant': variant}), encoding='utf-8')
         except Exception: pass
         LOG.parent.mkdir(exist_ok=True)
