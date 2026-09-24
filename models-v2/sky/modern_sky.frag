@@ -1,13 +1,10 @@
 #version 410 core
-// Ciel moderne de Jak 3 (remaster), v3.
+// Ciel moderne de Jak 3 (remaster), v4 : composition.
 //  1. Degrade d'ambiance natif du niveau conserve (identite de chaque zone, cycle jour-nuit natif).
-//  2. Nuages : couche 2D eclairee a 1450 m, nuages individuels de tailles et formes variees (cumulus
-//     moyens et petits) qui derivent lentement ; epaisseur analytique selon l'inclinaison du regard,
-//     relief par gradient de densite, ombre propre vers le soleil, poudre et lisere argente ; filtrage
-//     par l'empreinte du pixel (pas d'aliasing a l'horizon). Cirrus etires en haute altitude.
-//  3. Soleil : disque, couronne, lueur ; ciel eclairci et rechauffe autour ; masque par les nuages.
-//  4. Etoile du jour fidele a l'original (coeur clair, halo violet, aigrettes), masquee par les nuages
-//     qui passent devant.
+//  2. Nuages volumiques calcules par modern_clouds (demi-resolution, accumulation temporelle) et
+//     composes ici ; cirrus etires en haute altitude.
+//  3. Soleil : disque, couronne, lueur ; lueurs d'aube, de crepuscule et de lune ; masques par les nuages.
+//  4. Etoile du jour fidele a l'original, avec reaction a Dark Jak, progression et scintillement.
 in vec3 sky_ray;
 out vec4 color;
 uniform sampler2D tex_T25;
@@ -22,6 +19,7 @@ uniform vec3 sky_moon;
 uniform vec3 sky_day_star;
 uniform float sky_day_star_on;
 uniform float sky_coverage;
+uniform sampler2D cloud_result;   // tampon des nuages volumiques (unite 30)
 uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
 uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
 uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
@@ -52,14 +50,7 @@ vec3 nativeSky(vec3 dir,vec3 fallback){
   if(any(lessThan(uv,vec2(.002)))||any(greaterThan(uv,vec2(.998))))return fallback;
   return skyDepth(texture(tex_T26,uv).r)?texture(tex_T25,uv).rgb:fallback;
 }
-// ---- Nuages ----
-// Nuages individuels de tailles et formes variees (cumulus moyens 600-900 m, petits 250-400 m) qui
-// derivent a ~4 m/s, sur une couche a 1450 m. Rendu en couche 2D eclairee (pas de traversee par pas :
-// une traversee echantillonnee bandait des que les nuages devenaient petits et nets). L'epaisseur est
-// analytique : plus le regard rase, plus il traverse de nuage.
-const float CLOUD_HEIGHT=1450.;
-// fbm dont les octaves trop fines pour l'espacement d'echantillonnage sont eteintes (anti-aliasing).
-// w = espacement / longueur d'onde de l'octave : une octave est eteinte avant Nyquist (w = .5).
+// Cirrus : fbm filtre par l'empreinte du pixel (anti-aliasing a l'horizon).
 float fbmLod(vec2 p,float cell){
   float v=0.,a=.5,w=cell;mat2 r=mat2(.8,.6,-.6,.8);
   for(int i=0;i<4;i++){
@@ -67,25 +58,6 @@ float fbmLod(vec2 p,float cell){
     p=r*p*2.07+vec2(7.1,3.7);a*=.5;w*=2.07;
   }
   return v;
-}
-float puffField(vec2 xz,float scale,float seedOffset,float cell){
-  vec2 p=xz*scale+seedOffset;
-  float c=cell*scale;
-  vec2 warp=vec2(fbmLod(p*1.3+3.1,c*1.3),fbmLod(p*1.3-2.7,c*1.3))-.5;
-  p+=warp*.55;                                  // contours irreguliers
-  return fbmLod(p,c)+(fbmLod(p*3.3+vec2(1.7,9.2),c*3.3)-.5)*.30;
-}
-// Densite de la couche (0..1) au point plan xz (m). cell = empreinte de filtrage (m).
-float cloudLayer(vec2 xz,float coverage,float cell){
-  vec2 wind=vec2(sky_time*3.8,sky_time*1.4);   // m
-  float medium=puffField(xz+wind,1./780.,0.,cell);
-  float small=puffField(xz+wind*1.25,1./330.,17.3,cell);
-  // Seuils calibres sur la distribution du champ (mediane .49, p90 .66) : couverture .58 -> ~35 % de
-  // cumulus moyens et ~18 % de petits ; couverture .44 -> ~22 % et ~10 %.
-  float thM=.75-coverage*.35,thS=.82-coverage*.35;
-  float m=smoothstep(thM,thM+.16,medium);
-  float sm=smoothstep(thS,thS+.13,small)*.85;
-  return max(m,sm);
 }
 float henyeyGreenstein(float mu,float g){
   float g2=g*g;
@@ -113,46 +85,14 @@ void main(){
   // Lune : lueur douce autour du disque natif, la nuit seulement.
   float toMoon=max(dot(ray,moon),0.);
   result+=vec3(.62,.68,.85)*(pow(toMoon,70.)*.22+pow(toMoon,9.)*.035)*(1.-dayness)*step(0.,moon.y+.02);
-  // ---- Nuages (couche 2D eclairee)
-  float cloudAlpha=0.;vec3 cloudColor=vec3(0);
-  float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));   // hors de toute branche (derivees)
+  // ---- Nuages volumiques (passe demi-resolution modern_clouds, accumulee dans le temps)
+  //      cloud_result : rgb = lumiere diffusee premultipliee, a = transmittance.
+  vec2 cuv=(gl_FragCoord.xy-fluid_viewport.xy)/fluid_viewport.zw;
+  vec4 cl=texture(cloud_result,cuv);
+  float cloudAlpha=1.-cl.a;
+  result=result*cl.a+cl.rgb;
+  float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));
   if(ray.y>.008){
-    float t=CLOUD_HEIGHT/max(ray.y,.008);
-    vec2 xz=ray.xz*t;
-    float far=exp(-t*.000045);                             // fondu dans la brume au loin
-    if(far>.01){
-      // empreinte d'un pixel sur la couche (tres allongee pres de l'horizon) : filtre anti-aliasing
-      float cell=pixelAngle*CLOUD_HEIGHT/max(ray.y*ray.y,1e-4);
-      float d=cloudLayer(xz,sky_coverage,cell);
-      if(d>.001){
-        // epaisseur optique : un cumulus de ~450 m, traverse obliquement (1/ray.y), plafonne
-        float slant=1./max(ray.y,.12);
-        float tau=d*2.6*slant;
-        cloudAlpha=(1.-exp(-tau))*far*smoothstep(.008,.05,ray.y);
-        // relief : gradient de la densite -> normale de la face inferieure/bord (bosses)
-        float e=max(cell,25.)*1.5;
-        float dx=cloudLayer(xz+vec2(e,0.),sky_coverage,cell)-cloudLayer(xz-vec2(e,0.),sky_coverage,cell);
-        float dz=cloudLayer(xz+vec2(0.,e),sky_coverage,cell)-cloudLayer(xz-vec2(0.,e),sky_coverage,cell);
-        vec3 n=normalize(vec3(-dx*380./e,1.,-dz*380./e));
-        // ombre portee par le nuage sur lui-meme : densite vers le soleil
-        vec2 toward=L.xz/max(L.y,.15)*380.;
-        float dSun=cloudLayer(xz+toward,sky_coverage,cell);
-        float shadow=exp(-dSun*2.2);
-        float powder=1.-exp(-d*3.5);                       // bords fins lumineux, coeur mat
-        float mu=dot(ray,L);
-        float phase=henyeyGreenstein(mu,.40)*.7+henyeyGreenstein(mu,-.15)*.3+.05;
-        float ndl=clamp(dot(n,L)*.5+.5,0.,1.);
-        // le dessous est dans l'ombre du nuage lui-meme : les bords et le cote du soleil s'eclairent
-        vec3 ambient=mix(haze*.72,zenith*1.20,.5)*(.62+.38*(1.-d*.7));
-        vec3 direct=lightColor*shadow*phase*8.5*(.30+.70*powder)*ndl;
-        cloudColor=ambient+direct;
-        // lisere argente : diffusion avant a travers les bords minces
-        float rim=pow(toSun,20.)*cloudAlpha*(1.-cloudAlpha)*3.0*dayness;
-        cloudColor+=sunColor*rim;
-        cloudColor=mix(cloudColor,haze,1.-far);
-      }
-    }
-    result=mix(result,cloudColor,cloudAlpha);
     // ---- Cirrus (haute couche etiree, tres fine)
     if(ray.y>.04){
       float y=max(ray.y,.04);

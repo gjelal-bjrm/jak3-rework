@@ -9,7 +9,7 @@ REL = 'game/graphics/opengl_renderer/shaders/'
 def main():
     files = json.loads((R / 'variant-files.json').read_text(encoding='utf-8'))
     hashes = json.loads((R / 'variant-hashes.json').read_text(encoding='utf-8'))
-    for name in ('modern_sky.vert', 'modern_sky.frag'):
+    for name in ('modern_sky.vert', 'modern_sky.frag', 'modern_clouds.vert', 'modern_clouds.frag'):
         rel = REL + name
         for root in (R / 'data', R / 'engine-src'):
             (root / rel).parent.mkdir(parents=True, exist_ok=True); shutil.copy2(H / name, root / rel)

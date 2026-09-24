@@ -1,0 +1,777 @@
+From 5f345c243c5b5b1f4d3e398a611395b3f36e6a1e Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Thu, 24 Sep 2026 09:59:36 +0200
+Subject: [PATCH 19/19] =?UTF-8?q?Nuages=20volumiques=20:=20bruit=203D=20Pe?=
+ =?UTF-8?q?rlin-Worley,=20carte=20m=C3=A9t=C3=A9o,=20marche=20de=20rayons?=
+ =?UTF-8?q?=20=C3=A0=20demi-r=C3=A9solution=20avec=20accumulation=20tempor?=
+ =?UTF-8?q?elle=20;=20=C3=A9clairage=20soleil/lune,=20diffusion=20multiple?=
+ =?UTF-8?q?,=20perspective=20a=C3=A9rienne=20;=20rechargement=20=C3=A0=20c?=
+ =?UTF-8?q?haud=20des=20shaders=20du=20ciel?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/CloudNoise.h    | 130 +++++++++++
+ game/graphics/opengl_renderer/ModernSky.h     | 209 ++++++++++++++++--
+ .../shaders/modern_clouds.frag                | 196 ++++++++++++++++
+ .../shaders/modern_clouds.vert                |  13 ++
+ .../opengl_renderer/shaders/modern_sky.frag   |  88 ++------
+ 5 files changed, 538 insertions(+), 98 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/CloudNoise.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_clouds.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_clouds.vert
+
+diff --git a/game/graphics/opengl_renderer/CloudNoise.h b/game/graphics/opengl_renderer/CloudNoise.h
+new file mode 100644
+index 00000000..88a989b5
+--- /dev/null
++++ b/game/graphics/opengl_renderer/CloudNoise.h
+@@ -0,0 +1,130 @@
++#pragma once
++#include <algorithm>
++#include <cmath>
++#include <cstdint>
++#include <vector>
++
++// Textures de bruit des nuages volumiques, generees une fois au demarrage (aucun fichier).
++//  - forme 3D 64^3 RGBA8, tuilable : R = Perlin-Worley (masses bombees), G/B/A = Worley inverse en fbm
++//    a 3 frequences croissantes (erosion : bourgeonnements, bords dechiquetes) ;
++//  - carte meteo 2D 256^2 R8, tuilable : Perlin fbm (ou sont les nuages, a grande echelle).
++// Chaque canal est normalise sur [0,1] a partir de ses extremes.
++namespace CloudNoise {
++
++inline uint32_t mix32(uint32_t x) {
++  x ^= x >> 16; x *= 0x7feb352dU; x ^= x >> 15; x *= 0x846ca68bU; x ^= x >> 16;
++  return x;
++}
++inline float hash01(int x, int y, int z, int seed) {
++  const uint32_t h = mix32(uint32_t(x) * 73856093u ^ uint32_t(y) * 19349663u ^ uint32_t(z) * 83492791u ^
++                           uint32_t(seed) * 2654435761u);
++  return float(h & 0xFFFFFFu) / 16777216.f;
++}
++inline int wrap(int v, int period) {
++  v %= period;
++  return v < 0 ? v + period : v;
++}
++
++// Worley F1 tuilable. (x,y,z) dans [0,1), `cells` cellules par axe. Distance en unites de cellule.
++inline float worley(float x, float y, float z, int cells, int seed) {
++  const float fx = x * cells, fy = y * cells, fz = z * cells;
++  const int ix = int(std::floor(fx)), iy = int(std::floor(fy)), iz = int(std::floor(fz));
++  float best = 8.f;
++  for (int dz = -1; dz <= 1; ++dz)
++    for (int dy = -1; dy <= 1; ++dy)
++      for (int dx = -1; dx <= 1; ++dx) {
++        const int cx = ix + dx, cy = iy + dy, cz = iz + dz;
++        const int wx = wrap(cx, cells), wy = wrap(cy, cells), wz = wrap(cz, cells);
++        const float px = cx + hash01(wx, wy, wz, seed);
++        const float py = cy + hash01(wx, wy, wz, seed + 101);
++        const float pz = cz + hash01(wx, wy, wz, seed + 211);
++        const float d = (px - fx) * (px - fx) + (py - fy) * (py - fy) + (pz - fz) * (pz - fz);
++        best = std::min(best, d);
++      }
++  return std::min(1.f, std::sqrt(best));
++}
++// Trois octaves de Worley inverse (1 = sur un point) : bourgeonnements.
++inline float worley_fbm(float x, float y, float z, int cells, int seed) {
++  return (1.f - worley(x, y, z, cells, seed)) * .625f + (1.f - worley(x, y, z, cells * 2, seed + 7)) * .25f +
++         (1.f - worley(x, y, z, cells * 4, seed + 13)) * .125f;
++}
++
++inline float fade(float t) { return t * t * t * (t * (t * 6.f - 15.f) + 10.f); }
++inline float gradient(int x, int y, int z, int seed, float dx, float dy, float dz) {
++  static const float g[12][3] = {{1, 1, 0}, {-1, 1, 0}, {1, -1, 0}, {-1, -1, 0}, {1, 0, 1}, {-1, 0, 1},
++                                 {1, 0, -1}, {-1, 0, -1}, {0, 1, 1}, {0, -1, 1}, {0, 1, -1}, {0, -1, -1}};
++  const int i = int(mix32(uint32_t(x) * 1619u ^ uint32_t(y) * 31337u ^ uint32_t(z) * 6971u ^ uint32_t(seed) * 1013u) % 12u);
++  return g[i][0] * dx + g[i][1] * dy + g[i][2] * dz;
++}
++// Perlin tuilable de periode `cells` (resultat ~[-1,1]).
++inline float perlin(float x, float y, float z, int cells, int seed) {
++  const float fx = x * cells, fy = y * cells, fz = z * cells;
++  const int ix = int(std::floor(fx)), iy = int(std::floor(fy)), iz = int(std::floor(fz));
++  const float rx = fx - ix, ry = fy - iy, rz = fz - iz;
++  const float u = fade(rx), v = fade(ry), w = fade(rz);
++  auto corner = [&](int ox, int oy, int oz) {
++    return gradient(wrap(ix + ox, cells), wrap(iy + oy, cells), wrap(iz + oz, cells), seed, rx - ox, ry - oy, rz - oz);
++  };
++  const float x00 = corner(0, 0, 0) + (corner(1, 0, 0) - corner(0, 0, 0)) * u;
++  const float x10 = corner(0, 1, 0) + (corner(1, 1, 0) - corner(0, 1, 0)) * u;
++  const float x01 = corner(0, 0, 1) + (corner(1, 0, 1) - corner(0, 0, 1)) * u;
++  const float x11 = corner(0, 1, 1) + (corner(1, 1, 1) - corner(0, 1, 1)) * u;
++  const float y0 = x00 + (x10 - x00) * v, y1 = x01 + (x11 - x01) * v;
++  return y0 + (y1 - y0) * w;
++}
++inline float perlin_fbm(float x, float y, float z, int cells, int seed, int octaves) {
++  float sum = 0.f, amp = .5f, norm = 0.f;
++  for (int i = 0; i < octaves; ++i) {
++    sum += amp * perlin(x, y, z, cells << i, seed + i * 17);
++    norm += amp; amp *= .5f;
++  }
++  return sum / norm;
++}
++
++inline void normalize_channel(std::vector<float>& values) {
++  const auto [lo, hi] = std::minmax_element(values.begin(), values.end());
++  const float a = *lo, range = std::max(*hi - *lo, 1e-6f);
++  for (auto& v : values) v = (v - a) / range;
++}
++
++// Forme 3D : size^3 texels RGBA8.
++inline std::vector<uint8_t> shape_volume(int size) {
++  const size_t n = size_t(size) * size * size;
++  std::vector<float> r(n), g(n), b(n), a(n);
++  for (int z = 0; z < size; ++z)
++    for (int y = 0; y < size; ++y)
++      for (int x = 0; x < size; ++x) {
++        const float fx = (x + .5f) / size, fy = (y + .5f) / size, fz = (z + .5f) / size;
++        const size_t i = (size_t(z) * size + y) * size + x;
++        const float wf = worley_fbm(fx, fy, fz, 4, 11);
++        const float pf = perlin_fbm(fx, fy, fz, 4, 3, 5) * .5f + .5f;
++        r[i] = wf + std::clamp(pf, 0.f, 1.f) * (1.f - wf);   // Perlin-Worley : remap(perlin, 0, 1, worley, 1)
++        g[i] = worley_fbm(fx, fy, fz, 4, 29);
++        b[i] = worley_fbm(fx, fy, fz, 8, 47);
++        a[i] = worley_fbm(fx, fy, fz, 16, 61);
++      }
++  normalize_channel(r); normalize_channel(g); normalize_channel(b); normalize_channel(a);
++  std::vector<uint8_t> out(n * 4);
++  for (size_t i = 0; i < n; ++i) {
++    out[i * 4 + 0] = uint8_t(std::lround(r[i] * 255.f));
++    out[i * 4 + 1] = uint8_t(std::lround(g[i] * 255.f));
++    out[i * 4 + 2] = uint8_t(std::lround(b[i] * 255.f));
++    out[i * 4 + 3] = uint8_t(std::lround(a[i] * 255.f));
++  }
++  return out;
++}
++
++// Carte meteo 2D : size^2 texels R8 (Perlin fbm tuilable, 5 octaves).
++inline std::vector<uint8_t> weather_map(int size) {
++  const size_t n = size_t(size) * size;
++  std::vector<float> v(n);
++  for (int y = 0; y < size; ++y)
++    for (int x = 0; x < size; ++x)
++      v[size_t(y) * size + x] = perlin_fbm((x + .5f) / size, (y + .5f) / size, .37f, 4, 91, 5);
++  normalize_channel(v);
++  std::vector<uint8_t> out(n);
++  for (size_t i = 0; i < n; ++i) out[i] = uint8_t(std::lround(v[i] * 255.f));
++  return out;
++}
++
++}  // namespace CloudNoise
+diff --git a/game/graphics/opengl_renderer/ModernSky.h b/game/graphics/opengl_renderer/ModernSky.h
+index 95851a8d..2a169c3a 100644
+--- a/game/graphics/opengl_renderer/ModernSky.h
++++ b/game/graphics/opengl_renderer/ModernSky.h
+@@ -1,19 +1,33 @@
+ #pragma once
+ #include <algorithm>
++#include <array>
++#include <cstring>
++#include <filesystem>
+ #include <memory>
++#include "common/log/log.h"
++#include "common/util/FileUtil.h"
++#include "game/graphics/opengl_renderer/CloudNoise.h"
+ #include "game/graphics/opengl_renderer/Shader.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
+ #include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ 
+-// Ciel moderne : passe plein ecran, apres le decor opaque et avant la mer (qui le reflete). Sur les pixels
+-// de ciel (profondeur du brouillard natif), garde le degrade d'ambiance natif du niveau et ajoute des
+-// nuages en couches eclaires par le soleil, un soleil avec lueur, et l'etoile du jour redessinee.
++// Ciel moderne, en deux passes, apres le decor opaque et avant la mer (qui le reflete) :
++//  1. modern_clouds : nuages volumiques en demi-resolution dans un tampon RGBA16F, accumules dans le
++//     temps (double tampon, reprojection par direction) ;
++//  2. modern_sky : composition sur les pixels de ciel (degrade natif conserve), cirrus, soleil, lune,
++//     etoile du jour.
+ // Active seulement si GOAL publie l'etat du ciel (sky-tng.gc patche : nuages plats, soleil et etoile
+-// natifs non dessines).
++// natifs non dessines). Les shaders sont recharges a chaud quand leurs fichiers changent (reglages).
+ class ModernSky {
+  public:
+-  ~ModernSky() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++  ~ModernSky() {
++    if (m_vao) glDeleteVertexArrays(1, &m_vao);
++    clear_targets();
++    if (m_noise) glDeleteTextures(1, &m_noise);
++    if (m_weather) glDeleteTextures(1, &m_weather);
++  }
++
+   void render(SharedRenderState* state) {
+     if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
+     std::array<float, 3> sun, green, moon, star; float hour, progress; bool star_on, valid, dark;
+@@ -26,29 +40,94 @@ class ModernSky {
+     // Reaction de l'etoile a Dark Jak : montee en ~0,4 s, retombee en ~3 s.
+     const float now = LiquidSnapshot::seconds();
+     const float dt = std::clamp(now - m_last_time, 0.f, .1f); m_last_time = now;
+-    const float target = dark ? 1.f : 0.f;
+-    const float rate = dark ? 2.5f : .33f;
+-    m_dark_intensity += (target - m_dark_intensity) * std::min(1.f, dt * rate * 3.f);
++    m_dark_intensity += ((dark ? 1.f : 0.f) - m_dark_intensity) * std::min(1.f, dt * (dark ? 2.5f : .33f) * 3.f);
+     if (!valid) return;
+-    GLint program, old_vao, depth_func, old_active, tex25, tex26;
++    hot_reload(state);
++
++    GLint program, old_vao, depth_func, old_active, old_read, old_draw, viewport[4];
+     GLboolean depth_write, color_mask[4];
+     glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &old_vao);
+     glGetIntegerv(GL_DEPTH_FUNC, &depth_func); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
+     glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active);
+-    glActiveTexture(GL_TEXTURE25); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex25);
+-    glActiveTexture(GL_TEXTURE26); glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex26);
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &old_read); glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &old_draw);
++    glGetIntegerv(GL_VIEWPORT, viewport);
++    GLint saved2d[7], saved3d = 0;
++    for (int u = 25; u <= 31; u++) { glActiveTexture(GL_TEXTURE0 + u); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved2d[u - 25]); }
++    glActiveTexture(GL_TEXTURE29); glGetIntegerv(GL_TEXTURE_BINDING_3D, &saved3d);
+     const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST};
+     GLboolean was[5];
+     for (int i = 0; i < 5; i++) { was[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
+-    if (!m_shader) { m_shader = std::make_unique<Shader>("modern_sky", state->version); glGenVertexArrays(1, &m_vao); }
++    glDepthMask(GL_FALSE); glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
++
++    if (!m_vao) glGenVertexArrays(1, &m_vao);
++    glBindVertexArray(m_vao);
++    ensure_noise();
++    const int cw = std::max(1, viewport[2] / 2), ch = std::max(1, viewport[3] / 2);
++    ensure_targets(cw, ch);
++
++    // Parametres de nuages par region (la meteo les pilotera) : desert plus degage, Haven plus charge.
++    float coverage = .46f, type = .45f;
++    if (ModernOcean::level_loaded(state, "was")) { coverage = .42f; type = .35f; }
++    else if (ModernOcean::level_loaded(state, "cty")) { coverage = .55f; type = .6f; }
++    const auto eye = state->camera_pos / 4096.f;
++
++    // ---- 1. Nuages volumiques (demi-resolution)
++    if (!m_clouds) m_clouds = std::make_unique<Shader>("modern_clouds", state->version);
++    if (m_clouds->okay()) {
++      m_clouds->activate();
++      const GLuint id = m_clouds->id();
++      m_snapshot.bind(state, id);   // ciel natif -> tex_T25 / tex_T26, fluid_viewport = vue principale
++      glUniform1i(glGetUniformLocation(id, "tex_T25"), 25);
++      glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++      glActiveTexture(GL_TEXTURE29); glBindTexture(GL_TEXTURE_3D, m_noise);
++      glUniform1i(glGetUniformLocation(id, "cloud_noise"), 29);
++      glActiveTexture(GL_TEXTURE31); glBindTexture(GL_TEXTURE_2D, m_weather);
++      glUniform1i(glGetUniformLocation(id, "cloud_weather"), 31);
++      glActiveTexture(GL_TEXTURE30); glBindTexture(GL_TEXTURE_2D, m_tex[1 - m_cur]);
++      glUniform1i(glGetUniformLocation(id, "cloud_history"), 30);
++      glUniformMatrix4fv(glGetUniformLocation(id, "sky_camera"), 1, GL_FALSE, state->prototype_camera);
++      glUniformMatrix4fv(glGetUniformLocation(id, "cloud_prev_camera"), 1, GL_FALSE, m_prev_camera);
++      glUniform3fv(glGetUniformLocation(id, "cloud_eye"), 1, eye.data());
++      glUniform1f(glGetUniformLocation(id, "sky_time"), now);
++      glUniform3fv(glGetUniformLocation(id, "sky_sun"), 1, sun.data());
++      glUniform3fv(glGetUniformLocation(id, "sky_moon"), 1, moon.data());
++      glUniform1f(glGetUniformLocation(id, "cloud_frame"), float(m_frame % 4096));
++      glUniform1f(glGetUniformLocation(id, "cloud_history_valid"), m_history_valid ? 1.f : 0.f);
++      glUniform1f(glGetUniformLocation(id, "sky_coverage"), coverage);
++      glUniform1f(glGetUniformLocation(id, "cloud_type"), type);
++      glUniform1f(glGetUniformLocation(id, "cloud_density"), 1.f);
++      glUniform1f(glGetUniformLocation(id, "cloud_darkness"), 0.f);
++      glUniform2f(glGetUniformLocation(id, "cloud_wind"), 4.f, 1.5f);
++      glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[m_cur]);
++      glViewport(0, 0, cw, ch);
++      glDrawArrays(GL_TRIANGLES, 0, 3);
++      glBindFramebuffer(GL_READ_FRAMEBUFFER, old_read);
++      glBindFramebuffer(GL_DRAW_FRAMEBUFFER, old_draw);
++      glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
++      m_history_valid = true;
++    } else {
++      // shader en erreur : tampon transparent
++      GLfloat cc[4]; glGetFloatv(GL_COLOR_CLEAR_VALUE, cc);
++      glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[m_cur]);
++      glClearColor(0.f, 0.f, 0.f, 1.f); glClear(GL_COLOR_BUFFER_BIT);
++      glClearColor(cc[0], cc[1], cc[2], cc[3]);
++      glBindFramebuffer(GL_READ_FRAMEBUFFER, old_read);
++      glBindFramebuffer(GL_DRAW_FRAMEBUFFER, old_draw);
++      m_history_valid = false;
++    }
++
++    // ---- 2. Composition du ciel
++    if (!m_shader) m_shader = std::make_unique<Shader>("modern_sky", state->version);
+     if (m_shader->okay()) {
+       m_shader->activate();
+       const GLuint id = m_shader->id();
+-      m_snapshot.bind(state, id);   // couleur (ciel natif deja dessine) + profondeur -> tex_T25 / tex_T26
++      m_snapshot.bind(state, id);   // meme image : pas de nouvelle copie
+       glUniform1i(glGetUniformLocation(id, "tex_T25"), 25);
+       glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++      glActiveTexture(GL_TEXTURE30); glBindTexture(GL_TEXTURE_2D, m_tex[m_cur]);
++      glUniform1i(glGetUniformLocation(id, "cloud_result"), 30);
+       glUniformMatrix4fv(glGetUniformLocation(id, "sky_camera"), 1, GL_FALSE, state->prototype_camera);
+-      glUniform1f(glGetUniformLocation(id, "sky_time"), LiquidSnapshot::seconds());
++      glUniform1f(glGetUniformLocation(id, "sky_time"), now);
+       glUniform1f(glGetUniformLocation(id, "sky_hour"), hour);
+       glUniform3fv(glGetUniformLocation(id, "sky_sun"), 1, sun.data());
+       glUniform3fv(glGetUniformLocation(id, "sky_green_sun"), 1, green.data());
+@@ -62,25 +141,107 @@ class ModernSky {
+       if (ModernOcean::level_loaded(state, "was")) turbulence = 1.f;
+       else if (ModernOcean::level_loaded(state, "cty")) turbulence = .35f;
+       glUniform1f(glGetUniformLocation(id, "sky_turbulence"), turbulence);
+-      // Couverture nuageuse par region : desert de Spargus plus degage, Haven plus charge.
+-      float coverage = .46f;
+-      if (ModernOcean::level_loaded(state, "was")) coverage = .44f;
+-      else if (ModernOcean::level_loaded(state, "cty")) coverage = .58f;
+       glUniform1f(glGetUniformLocation(id, "sky_coverage"), coverage);
+-      glBindVertexArray(m_vao);
+-      glDepthMask(GL_FALSE); glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+     }
++    std::memcpy(m_prev_camera, state->prototype_camera, sizeof(m_prev_camera));
++    m_cur = 1 - m_cur;
++    ++m_frame;
++
+     glUseProgram(program); glBindVertexArray(old_vao); glDepthFunc(depth_func); glDepthMask(depth_write);
+     glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]);
+     for (int i = 0; i < 5; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
+-    glActiveTexture(GL_TEXTURE25); glBindTexture(GL_TEXTURE_2D, tex25);
+-    glActiveTexture(GL_TEXTURE26); glBindTexture(GL_TEXTURE_2D, tex26); glActiveTexture(old_active);
++    for (int u = 25; u <= 31; u++) { glActiveTexture(GL_TEXTURE0 + u); glBindTexture(GL_TEXTURE_2D, saved2d[u - 25]); }
++    glActiveTexture(GL_TEXTURE29); glBindTexture(GL_TEXTURE_3D, saved3d);
++    glActiveTexture(old_active);
+   }
+ 
+  private:
+-  std::unique_ptr<Shader> m_shader;
++  void ensure_noise() {
++    if (m_noise) return;
++    constexpr int N = 64;
++    const auto shape = CloudNoise::shape_volume(N);
++    glGenTextures(1, &m_noise);
++    glActiveTexture(GL_TEXTURE29);
++    glBindTexture(GL_TEXTURE_3D, m_noise);
++    glTexImage3D(GL_TEXTURE_3D, 0, GL_RGBA8, N, N, N, 0, GL_RGBA, GL_UNSIGNED_BYTE, shape.data());
++    glGenerateMipmap(GL_TEXTURE_3D);
++    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_REPEAT);
++    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_REPEAT);
++    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_REPEAT);
++    constexpr int W = 256;
++    const auto weather = CloudNoise::weather_map(W);
++    glGenTextures(1, &m_weather);
++    glActiveTexture(GL_TEXTURE31);
++    glBindTexture(GL_TEXTURE_2D, m_weather);
++    GLint unpack; glGetIntegerv(GL_UNPACK_ALIGNMENT, &unpack); glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, W, W, 0, GL_RED, GL_UNSIGNED_BYTE, weather.data());
++    glPixelStorei(GL_UNPACK_ALIGNMENT, unpack);
++    glGenerateMipmap(GL_TEXTURE_2D);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
++    lg::info("ModernSky: bruit de nuages {}^3 et carte meteo {}^2 generes", N, W);
++  }
++  void ensure_targets(int w, int h) {
++    if (w == m_w && h == m_h && m_fbo[0]) return;
++    clear_targets();
++    m_w = w; m_h = h;
++    GLfloat clear_color[4]; glGetFloatv(GL_COLOR_CLEAR_VALUE, clear_color);
++    GLint unpack_buffer; glGetIntegerv(GL_PIXEL_UNPACK_BUFFER_BINDING, &unpack_buffer);
++    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
++    glGenFramebuffers(2, m_fbo); glGenTextures(2, m_tex);
++    glActiveTexture(GL_TEXTURE30);
++    for (int i = 0; i < 2; i++) {
++      glBindTexture(GL_TEXTURE_2D, m_tex[i]);
++      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, w, h, 0, GL_RGBA, GL_FLOAT, nullptr);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++      glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[i]);
++      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_tex[i], 0);
++      glClearColor(0.f, 0.f, 0.f, 1.f); glClear(GL_COLOR_BUFFER_BIT);   // transparent (transmittance 1)
++    }
++    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, unpack_buffer);
++    glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
++    m_history_valid = false;
++  }
++  void clear_targets() {
++    if (m_fbo[0]) glDeleteFramebuffers(2, m_fbo);
++    if (m_tex[0]) glDeleteTextures(2, m_tex);
++    m_fbo[0] = m_fbo[1] = m_tex[0] = m_tex[1] = 0;
++  }
++  // Rechargement a chaud : si un fichier .vert/.frag du ciel change, le shader est recompile.
++  void hot_reload(SharedRenderState* state) {
++    if (++m_reload_tick % 30) return;
++    auto stamp = [](const char* name) {
++      std::error_code ec;
++      long long total = 0;
++      for (const char* ext : {".vert", ".frag"}) {
++        const auto p = file_util::get_file_path({Shader::shader_folder, std::string(name) + ext});
++        const auto t = std::filesystem::last_write_time(p, ec);
++        if (!ec) total += t.time_since_epoch().count();
++      }
++      return total;
++    };
++    const long long sky = stamp("modern_sky"), clouds = stamp("modern_clouds");
++    if (m_stamp_sky && sky != m_stamp_sky) { m_shader.reset(); lg::info("ModernSky: modern_sky recharge"); }
++    if (m_stamp_clouds && clouds != m_stamp_clouds) { m_clouds.reset(); m_history_valid = false; lg::info("ModernSky: modern_clouds recharge"); }
++    m_stamp_sky = sky; m_stamp_clouds = clouds;
++    (void)state;
++  }
++
++  std::unique_ptr<Shader> m_shader, m_clouds;
+   LiquidSnapshot m_snapshot;
+-  GLuint m_vao = 0;
++  GLuint m_vao = 0, m_noise = 0, m_weather = 0, m_fbo[2] = {}, m_tex[2] = {};
++  int m_w = 0, m_h = 0, m_cur = 0;
++  bool m_history_valid = false;
++  float m_prev_camera[16] = {};
++  unsigned m_frame = 0, m_reload_tick = 0;
++  long long m_stamp_sky = 0, m_stamp_clouds = 0;
+   float m_dark_intensity = 0.f, m_last_time = 0.f;
+ };
+diff --git a/game/graphics/opengl_renderer/shaders/modern_clouds.frag b/game/graphics/opengl_renderer/shaders/modern_clouds.frag
+new file mode 100644
+index 00000000..93f1da2d
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_clouds.frag
+@@ -0,0 +1,196 @@
++#version 410 core
++// Nuages volumiques du remaster (demi-resolution, accumulation temporelle).
++//  - Couche de cumulus entre 1500 et 4200 m, sur une planete de 120 km de rayon (l'horizon reste a
++//    distance finie). Densite : carte meteo 2D (ou sont les nuages, 2 echelles) x profil vertical
++//    (base plate, sommet bombe, hauteur variable) x bruit 3D Perlin-Worley (masses) erode par un Worley
++//    fin (bourgeonnements au sommet, bords effiloches a la base).
++//  - Eclairage : transmittance vers le soleil (6 pas croissants), diffusion multiple approchee
++//    (3 octaves), Henyey-Greenstein double lobe (lisere argente a contre-jour), effet "poudre" sur les
++//    bords minces, ambiance du ciel natif (plus claire au sommet, plus sombre a la base).
++//  - Perspective aerienne : les nuages lointains se fondent dans la brume d'horizon du niveau.
++//  - Chaque image decale le point de depart des pas (bruit entrelace + nombre d'or) ; l'historique
++//    reprojete par direction (les nuages sont a plusieurs km) moyenne ce decalage : ni bandes ni grain.
++// Sortie : rgb = lumiere diffusee (premultipliee), a = transmittance.
++in vec3 sky_ray;
++out vec4 color;
++uniform sampler2D tex_T25;          // ciel natif (instantane)
++uniform sampler2D tex_T26;
++uniform sampler3D cloud_noise;      // forme 3D
++uniform sampler2D cloud_weather;    // carte meteo 2D
++uniform sampler2D cloud_history;    // image precedente (meme tampon demi-resolution)
++uniform vec4 fluid_viewport;
++uniform mat4 sky_camera;
++uniform mat4 cloud_prev_camera;
++uniform vec3 cloud_eye;             // position de l'oeil (m)
++uniform float sky_time;
++uniform vec3 sky_sun;
++uniform vec3 sky_moon;
++uniform float cloud_frame;
++uniform float cloud_history_valid;
++// Parametres meteo
++uniform float sky_coverage;         // 0..1 : part du ciel couverte
++uniform float cloud_type;           // 0 = petits cumulus de beau temps, 1 = gros cumulus bourgeonnants
++uniform float cloud_density;        // multiplicateur de densite
++uniform float cloud_darkness;       // 0..1 : bases sombres (pluie, orage)
++uniform vec2 cloud_wind;            // m/s
++
++const float PLANET=120000.;
++const float CLOUD_BASE=1500.,CLOUD_TOP=4200.;
++const float SIGMA=.045;             // extinction par metre pour une densite 1
++
++bool skyDepth(float depth){
++  const float step24=1./16777215.;
++  return depth<=1.5*step24 || abs(depth-400.*step24)<=1.5*step24;
++}
++vec2 project(vec3 ray){
++  vec4 h=-sky_camera*vec4(ray*4096.,1.);
++  h.y*=(512./416.)*.5;
++  vec2 n=h.xy/h.w;
++  return (fluid_viewport.xy+(n*.5+.5)*fluid_viewport.zw)/vec2(textureSize(tex_T25,0));
++}
++vec3 nativeSky(vec3 dir,vec3 fallback){
++  vec2 uv=project(normalize(dir));
++  if(any(lessThan(uv,vec2(.002)))||any(greaterThan(uv,vec2(.998))))return fallback;
++  return skyDepth(texture(tex_T26,uv).r)?texture(tex_T25,uv).rgb:fallback;
++}
++float remap(float v,float l0,float h0,float l1,float h1){return l1+(v-l0)*(h1-l1)/max(h0-l0,1e-4);}
++// Sortie de la sphere de rayon r depuis o (o a l'interieur).
++float sphereExit(vec3 o,vec3 d,float r){
++  float b=dot(o,d),c=dot(o,o)-r*r;
++  return -b+sqrt(max(b*b-c,0.));
++}
++float henyeyGreenstein(float mu,float g){
++  float g2=g*g;
++  return (1.-g2)/(4.*3.14159*pow(max(1.+g2-2.*g*mu,1e-4),1.5));
++}
++// Carte meteo : couverture locale (0..1) et hauteur relative du sommet.
++// foot = empreinte d'un pixel a cette distance (m) : niveau de detail explicite (les lectures dans la
++// boucle n'ont pas de derivees fiables ; sans cela, le detail se replie en motifs en escalier).
++float lodFor(float foot,float texelMetres){return max(log2(max(foot/texelMetres,1.)),0.);}
++vec2 weather(vec2 xz,float foot){
++  vec2 w=xz+cloud_wind*sky_time;
++  float big=textureLod(cloud_weather,w/16000.,lodFor(foot,16000./256.)).r;
++  float mid=textureLod(cloud_weather,w/5200.+vec2(.37,.71),lodFor(foot,5200./256.)).r;
++  float field=big*.55+mid*.45;
++  float cov=clamp(remap(field,1.-sky_coverage*1.15,1.,0.,1.),0.,1.);
++  float tall=clamp(textureLod(cloud_weather,w/9000.+vec2(.61,.13),lodFor(foot,9000./256.)).r*1.4-.2,0.,1.);
++  return vec2(cov,tall);
++}
++// Densite au point monde p (m) d'altitude h. `cheap` : sans erosion fine (pas de lumiere).
++float cloudDensity(vec3 p,float h,bool cheap,float foot){
++  float hf=(h-CLOUD_BASE)/(CLOUD_TOP-CLOUD_BASE);
++  if(hf<0.||hf>1.)return 0.;
++  vec2 wx=weather(p.xz,foot);
++  if(wx.x<=.002)return 0.;
++  // profil vertical : base nette, sommet arrondi ; hauteur selon le type de nuage et la carte
++  float top=mix(.22,.55,cloud_type)+mix(.0,.45,cloud_type)*wx.y;
++  top*=.6+.4*wx.x;
++  float profile=smoothstep(0.,.06,hf)*(1.-smoothstep(top*.45,top,hf));
++  if(profile<=0.)return 0.;
++  vec3 q=vec3(p.x,h,p.z)+vec3(cloud_wind.x,0.,cloud_wind.y)*sky_time;
++  vec4 low=textureLod(cloud_noise,q/2600.,lodFor(foot,2600./64.));
++  float lowFbm=low.g*.625+low.b*.25+low.a*.125;
++  float base=remap(low.r,-(1.-lowFbm),1.,0.,1.);
++  base*=profile;
++  base=remap(base,1.-wx.x,1.,0.,1.)*wx.x;
++  if(base<=0.)return 0.;
++  if(!cheap){
++    vec3 hi=textureLod(cloud_noise,q/650.+vec3(sky_time*.004,0.,0.),lodFor(foot,650./64.)).gba;
++    float hiFbm=hi.r*.625+hi.g*.25+hi.b*.125;
++    float hiMod=mix(hiFbm,1.-hiFbm,clamp(hf*6.,0.,1.));   // effiloche a la base, bourgeonne au sommet
++    base=remap(base,hiMod*.32,1.,0.,1.);
++  }
++  return clamp(base,0.,1.)*cloud_density;
++}
++void main(){
++  vec3 ray=normalize(sky_ray);
++  float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));   // avant toute branche
++  // Sous l'horizon (le sol cache le ciel) : rien a calculer.
++  if(ray.y<-.03){color=vec4(0.,0.,0.,1.);return;}
++  vec3 sun=normalize(sky_sun),moon=normalize(sky_moon);
++  float sunUp=clamp(sun.y*2.5,0.,1.);
++  float dayness=smoothstep(-.08,.06,sun.y);
++  vec3 sunColor=mix(vec3(1.,.55,.30),vec3(1.,.96,.90),sunUp);
++  vec3 L=dayness>.02?sun:moon;
++  vec3 lightColor=mix(vec3(.30,.36,.52)*.26,sunColor,dayness);
++  // Couleurs d'ambiance tirees du ciel natif du niveau ; si la direction est cachee (batiment, hors
++  // ecran), ciel de secours qui suit l'heure (sinon les nuages restent blancs la nuit)
++  vec3 fallback=mix(vec3(.045,.055,.095),vec3(.55,.62,.75),dayness);
++  fallback=mix(fallback,vec3(.62,.45,.40),(1.-sunUp)*dayness*.6);
++  vec3 haze=nativeSky(normalize(vec3(ray.x,max(.03,ray.y*.15),ray.z)),fallback);
++  vec3 zenith=nativeSky(vec3(ray.x*.25,1.,ray.z*.25),haze);
++  // Traversee de la couche
++  vec3 o=vec3(0.,PLANET+cloud_eye.y,0.);
++  float t0=sphereExit(o,ray,PLANET+CLOUD_BASE),t1=sphereExit(o,ray,PLANET+CLOUD_TOP);
++  t1=min(t1,t0+8000.);
++  float T=1.;vec3 S=vec3(0.);float tWeighted=0.,wSum=0.;
++  if(t0<60000.){
++    const int N=64;
++    float dt=(t1-t0)/float(N);
++    // decalage de depart : bruit entrelace + nombre d'or par image (moyenne par l'historique)
++    // bruit entrelace dont la position glisse a chaque image (motif different, pas seulement decale) :
++    // la moyenne temporelle ne laisse pas de stries residuelles
++    // depart aleatoire par pixel (sans orientation) + suite du nombre d'or dans le temps : chaque pixel
++    // parcourt uniformement tous les decalages, sans motif spatial residuel
++    vec3 hq=fract(vec3(gl_FragCoord.xyx)*.1031);hq+=dot(hq,hq.yzx+33.33);
++    float jitter=fract(fract((hq.x+hq.y)*hq.z)+cloud_frame*.61803398);
++    float mu=dot(ray,L);
++    float sigma=SIGMA*mix(1.,1.5,cloud_darkness);
++    for(int i=0;i<N;i++){
++      float t=t0+dt*(float(i)+jitter);
++      vec3 op=o+ray*t;
++      float h=length(op)-PLANET;
++      vec3 wp=cloud_eye+ray*t;
++      // filtrage : empreinte du pixel ou fraction du pas (sinon le detail fin, echantillonne tous les
++      // 125 m, fait des stries)
++      float foot=max(t*pixelAngle,dt*.35);
++      float dens=cloudDensity(wp,h,false,foot);
++      if(dens<=.003)continue;
++      float hf=clamp((h-CLOUD_BASE)/(CLOUD_TOP-CLOUD_BASE),0.,1.);
++      // transmittance vers la lumiere : 6 pas croissants (60 m ... 1,9 km)
++      float tauL=0.,stepL=60.;vec3 lp=wp;float lh=h;
++      for(int j=0;j<6;j++){
++        lp+=L*stepL;lh+=L.y*stepL;
++        tauL+=cloudDensity(lp,lh,true,max(foot,stepL*.5))*stepL;
++        stepL*=2.;
++      }
++      // diffusion multiple approchee (Wrenninge) : 3 octaves
++      float lum=0.,a=1.,b=1.,c=1.;
++      for(int k=0;k<3;k++){
++        lum+=a*(henyeyGreenstein(mu,.55*c)*.7+henyeyGreenstein(mu,-.2*c)*.3)*exp(-tauL*sigma*b);
++        a*=.5;b*=.35;c*=.5;
++      }
++      float powder=1.-exp(-dens*dt*sigma*1.6);
++      vec3 direct=lightColor*lum*11.*mix(.55,1.,powder);
++      vec3 ambient=mix(haze*.55,zenith*1.15,smoothstep(0.,.7,hf))*mix(1.,.45,cloud_darkness);
++      vec3 radiance=direct+ambient;
++      float stepT=exp(-dens*sigma*dt);
++      float absorbed=T*(1.-stepT);
++      S+=radiance*absorbed;
++      tWeighted+=t*absorbed;wSum+=absorbed;
++      T*=stepT;
++      if(T<.01)break;
++    }
++  }
++  // Perspective aerienne : fondu dans la brume d'horizon selon la distance moyenne
++  float alpha=1.-T;
++  if(wSum>1e-4){
++    float dist=tWeighted/wSum;
++    float fog=1.-exp(-dist/22000.);
++    vec3 col=S/max(alpha,1e-4);
++    col=mix(col,haze,fog);
++    alpha*=1.-fog*.55;
++    S=col*alpha;
++  }
++  vec4 current=vec4(S,1.-alpha);
++  // Accumulation temporelle : historique reprojete par direction (w = 0 : direction a l'infini)
++  vec4 h=-cloud_prev_camera*vec4(ray,0.);
++  h.y*=(512./416.)*.5;
++  vec2 prev=h.xy/max(h.w,1e-6)*.5+.5;
++  bool inside=h.w>0. && all(greaterThanEqual(prev,vec2(0.))) && all(lessThanEqual(prev,vec2(1.)));
++  if(cloud_history_valid>.5 && inside){
++    vec4 hist=texture(cloud_history,prev);
++    current=mix(hist,current,.07);
++  }
++  color=current;
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_clouds.vert b/game/graphics/opengl_renderer/shaders/modern_clouds.vert
+new file mode 100644
+index 00000000..0a4d6f8a
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_clouds.vert
+@@ -0,0 +1,13 @@
++#version 410 core
++// Nuages volumiques : triangle plein ecran dans le tampon demi-resolution ; rayon de vue reconstruit
++// depuis la matrice camera du prototype (identique a modern_sky.vert).
++uniform mat4 sky_camera;
++out vec3 sky_ray;
++void main(){
++  vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);
++  vec2 clip=p*2.-1.;
++  vec4 h=vec4(clip.x,clip.y/((512./416.)*.5),0.,1.);
++  vec4 relative=inverse(-sky_camera)*h;
++  sky_ray=relative.xyz/relative.w;
++  gl_Position=vec4(clip,0.,1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_sky.frag b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+index a3e007ef..490110c7 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_sky.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_sky.frag
+@@ -1,13 +1,10 @@
+ #version 410 core
+-// Ciel moderne de Jak 3 (remaster), v3.
++// Ciel moderne de Jak 3 (remaster), v4 : composition.
+ //  1. Degrade d'ambiance natif du niveau conserve (identite de chaque zone, cycle jour-nuit natif).
+-//  2. Nuages : couche 2D eclairee a 1450 m, nuages individuels de tailles et formes variees (cumulus
+-//     moyens et petits) qui derivent lentement ; epaisseur analytique selon l'inclinaison du regard,
+-//     relief par gradient de densite, ombre propre vers le soleil, poudre et lisere argente ; filtrage
+-//     par l'empreinte du pixel (pas d'aliasing a l'horizon). Cirrus etires en haute altitude.
+-//  3. Soleil : disque, couronne, lueur ; ciel eclairci et rechauffe autour ; masque par les nuages.
+-//  4. Etoile du jour fidele a l'original (coeur clair, halo violet, aigrettes), masquee par les nuages
+-//     qui passent devant.
++//  2. Nuages volumiques calcules par modern_clouds (demi-resolution, accumulation temporelle) et
++//     composes ici ; cirrus etires en haute altitude.
++//  3. Soleil : disque, couronne, lueur ; lueurs d'aube, de crepuscule et de lune ; masques par les nuages.
++//  4. Etoile du jour fidele a l'original, avec reaction a Dark Jak, progression et scintillement.
+ in vec3 sky_ray;
+ out vec4 color;
+ uniform sampler2D tex_T25;
+@@ -22,6 +19,7 @@ uniform vec3 sky_moon;
+ uniform vec3 sky_day_star;
+ uniform float sky_day_star_on;
+ uniform float sky_coverage;
++uniform sampler2D cloud_result;   // tampon des nuages volumiques (unite 30)
+ uniform float sky_dark_jak;      // 0..1 : reaction de l'etoile a Dark Jak (lissee par le moteur)
+ uniform float sky_progress;      // 0..1 : avancement de l'histoire (le vaisseau approche)
+ uniform float sky_turbulence;    // scintillement atmospherique (1 = desert, .35 = port)
+@@ -52,14 +50,7 @@ vec3 nativeSky(vec3 dir,vec3 fallback){
+   if(any(lessThan(uv,vec2(.002)))||any(greaterThan(uv,vec2(.998))))return fallback;
+   return skyDepth(texture(tex_T26,uv).r)?texture(tex_T25,uv).rgb:fallback;
+ }
+-// ---- Nuages ----
+-// Nuages individuels de tailles et formes variees (cumulus moyens 600-900 m, petits 250-400 m) qui
+-// derivent a ~4 m/s, sur une couche a 1450 m. Rendu en couche 2D eclairee (pas de traversee par pas :
+-// une traversee echantillonnee bandait des que les nuages devenaient petits et nets). L'epaisseur est
+-// analytique : plus le regard rase, plus il traverse de nuage.
+-const float CLOUD_HEIGHT=1450.;
+-// fbm dont les octaves trop fines pour l'espacement d'echantillonnage sont eteintes (anti-aliasing).
+-// w = espacement / longueur d'onde de l'octave : une octave est eteinte avant Nyquist (w = .5).
++// Cirrus : fbm filtre par l'empreinte du pixel (anti-aliasing a l'horizon).
+ float fbmLod(vec2 p,float cell){
+   float v=0.,a=.5,w=cell;mat2 r=mat2(.8,.6,-.6,.8);
+   for(int i=0;i<4;i++){
+@@ -68,25 +59,6 @@ float fbmLod(vec2 p,float cell){
+   }
+   return v;
+ }
+-float puffField(vec2 xz,float scale,float seedOffset,float cell){
+-  vec2 p=xz*scale+seedOffset;
+-  float c=cell*scale;
+-  vec2 warp=vec2(fbmLod(p*1.3+3.1,c*1.3),fbmLod(p*1.3-2.7,c*1.3))-.5;
+-  p+=warp*.55;                                  // contours irreguliers
+-  return fbmLod(p,c)+(fbmLod(p*3.3+vec2(1.7,9.2),c*3.3)-.5)*.30;
+-}
+-// Densite de la couche (0..1) au point plan xz (m). cell = empreinte de filtrage (m).
+-float cloudLayer(vec2 xz,float coverage,float cell){
+-  vec2 wind=vec2(sky_time*3.8,sky_time*1.4);   // m
+-  float medium=puffField(xz+wind,1./780.,0.,cell);
+-  float small=puffField(xz+wind*1.25,1./330.,17.3,cell);
+-  // Seuils calibres sur la distribution du champ (mediane .49, p90 .66) : couverture .58 -> ~35 % de
+-  // cumulus moyens et ~18 % de petits ; couverture .44 -> ~22 % et ~10 %.
+-  float thM=.75-coverage*.35,thS=.82-coverage*.35;
+-  float m=smoothstep(thM,thM+.16,medium);
+-  float sm=smoothstep(thS,thS+.13,small)*.85;
+-  return max(m,sm);
+-}
+ float henyeyGreenstein(float mu,float g){
+   float g2=g*g;
+   return (1.-g2)/(4.*3.14159*pow(1.+g2-2.*g*mu,1.5));
+@@ -113,46 +85,14 @@ void main(){
+   // Lune : lueur douce autour du disque natif, la nuit seulement.
+   float toMoon=max(dot(ray,moon),0.);
+   result+=vec3(.62,.68,.85)*(pow(toMoon,70.)*.22+pow(toMoon,9.)*.035)*(1.-dayness)*step(0.,moon.y+.02);
+-  // ---- Nuages (couche 2D eclairee)
+-  float cloudAlpha=0.;vec3 cloudColor=vec3(0);
+-  float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));   // hors de toute branche (derivees)
++  // ---- Nuages volumiques (passe demi-resolution modern_clouds, accumulee dans le temps)
++  //      cloud_result : rgb = lumiere diffusee premultipliee, a = transmittance.
++  vec2 cuv=(gl_FragCoord.xy-fluid_viewport.xy)/fluid_viewport.zw;
++  vec4 cl=texture(cloud_result,cuv);
++  float cloudAlpha=1.-cl.a;
++  result=result*cl.a+cl.rgb;
++  float pixelAngle=max(length(dFdx(ray)),length(dFdy(ray)));
+   if(ray.y>.008){
+-    float t=CLOUD_HEIGHT/max(ray.y,.008);
+-    vec2 xz=ray.xz*t;
+-    float far=exp(-t*.000045);                             // fondu dans la brume au loin
+-    if(far>.01){
+-      // empreinte d'un pixel sur la couche (tres allongee pres de l'horizon) : filtre anti-aliasing
+-      float cell=pixelAngle*CLOUD_HEIGHT/max(ray.y*ray.y,1e-4);
+-      float d=cloudLayer(xz,sky_coverage,cell);
+-      if(d>.001){
+-        // epaisseur optique : un cumulus de ~450 m, traverse obliquement (1/ray.y), plafonne
+-        float slant=1./max(ray.y,.12);
+-        float tau=d*2.6*slant;
+-        cloudAlpha=(1.-exp(-tau))*far*smoothstep(.008,.05,ray.y);
+-        // relief : gradient de la densite -> normale de la face inferieure/bord (bosses)
+-        float e=max(cell,25.)*1.5;
+-        float dx=cloudLayer(xz+vec2(e,0.),sky_coverage,cell)-cloudLayer(xz-vec2(e,0.),sky_coverage,cell);
+-        float dz=cloudLayer(xz+vec2(0.,e),sky_coverage,cell)-cloudLayer(xz-vec2(0.,e),sky_coverage,cell);
+-        vec3 n=normalize(vec3(-dx*380./e,1.,-dz*380./e));
+-        // ombre portee par le nuage sur lui-meme : densite vers le soleil
+-        vec2 toward=L.xz/max(L.y,.15)*380.;
+-        float dSun=cloudLayer(xz+toward,sky_coverage,cell);
+-        float shadow=exp(-dSun*2.2);
+-        float powder=1.-exp(-d*3.5);                       // bords fins lumineux, coeur mat
+-        float mu=dot(ray,L);
+-        float phase=henyeyGreenstein(mu,.40)*.7+henyeyGreenstein(mu,-.15)*.3+.05;
+-        float ndl=clamp(dot(n,L)*.5+.5,0.,1.);
+-        // le dessous est dans l'ombre du nuage lui-meme : les bords et le cote du soleil s'eclairent
+-        vec3 ambient=mix(haze*.72,zenith*1.20,.5)*(.62+.38*(1.-d*.7));
+-        vec3 direct=lightColor*shadow*phase*8.5*(.30+.70*powder)*ndl;
+-        cloudColor=ambient+direct;
+-        // lisere argente : diffusion avant a travers les bords minces
+-        float rim=pow(toSun,20.)*cloudAlpha*(1.-cloudAlpha)*3.0*dayness;
+-        cloudColor+=sunColor*rim;
+-        cloudColor=mix(cloudColor,haze,1.-far);
+-      }
+-    }
+-    result=mix(result,cloudColor,cloudAlpha);
+     // ---- Cirrus (haute couche etiree, tres fine)
+     if(ray.y>.04){
+       float y=max(ray.y,.04);
+-- 
+2.54.0.windows.1
+

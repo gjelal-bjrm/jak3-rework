@@ -114,5 +114,7 @@
   "game/graphics/opengl_renderer/shaders/sand_drift.frag",
   "custom_assets/jak3/city-dust/dirtpuff01-hd.rgba",
   "game/graphics/opengl_renderer/shaders/modern_sky.vert",
-  "game/graphics/opengl_renderer/shaders/modern_sky.frag"
+  "game/graphics/opengl_renderer/shaders/modern_sky.frag",
+  "game/graphics/opengl_renderer/shaders/modern_clouds.vert",
+  "game/graphics/opengl_renderer/shaders/modern_clouds.frag"
 ]
