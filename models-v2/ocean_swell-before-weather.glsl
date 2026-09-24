@@ -32,21 +32,13 @@ vec3 swellTrain(vec2 p,vec2 d,float wavelength,float amplitude,float offset,floa
   float dh=cos(phase)+.36*sin(2.*phase);
   return amplitude*resolved*vec3(h,dh*gradient);
 }
-// Etat de la mer impose par la meteo (0 calme .. 1 mer forte d'orage).
-uniform float ocean_storm;
-// Bassin abrite (port de Haven, grandes vagues a .7) : la tempete y agite moins l'eau qu'en pleine mer.
-float oceanStormLocal(){return ocean_storm*mix(.5,1.,clamp((ocean_swell_scale-.7)/.3,0.,1.));}
 vec3 oceanSwellFiltered(vec2 p,float footprint) {
   vec2 cameraDelta=p-ocean_eye.xz;
-  // Mer forte : grandes vagues plus hautes, houle plus hachee. Pres de la camera (et donc de Jak qui nage
-  // a hauteur fixe), la houle reste nageable ; elle grossit au-dela de 12-40 m.
-  float stormFar=oceanStormLocal()*smoothstep(12.,40.,length(cameraDelta));
-  float bigBoost=1.+1.1*stormFar,chopBoost=1.+1.6*stormFar;
   vec2 world=p;
   p-=vec2(1700.,-350.);vec3 result=vec3(0);
   // 1. Grandes vagues vers la cote (44, 27, 15 et 8,5 m). Elles s'effacent sur la plage, ou les
   //    vagues de bord prennent le relais ; elles frappent les cotes rocheuses de plein fouet.
-  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused))*ocean_swell_scale*bigBoost;   // amplitude des grandes vagues par region (bassin portuaire calme)
+  vec2 unused;float coast=smoothstep(-6.,30.,shoreSigned(world,unused))*ocean_swell_scale;   // amplitude des grandes vagues par region (bassin portuaire calme)
   vec2 d=normalize(swellDirection);
   result+=swellTrain(p,d,44.,.42,0.,footprint)*coast;
   result+=swellTrain(p,swellRotate(d,.21),27.,.26,2.1,footprint)*coast;
@@ -62,8 +54,8 @@ vec3 oceanSwellFiltered(vec2 p,float footprint) {
     float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.8*warp.x+fi*2.14;
     vec2 gradient=k*dd+3.8*warp.yz*k*.17;
     float resolved=1.-smoothstep(.65,2.8,footprint*k);
-    result.x+=amps[i]*chopBoost*resolved*(sin(phase)+.08*sin(phase*2.));
-    result.yz+=amps[i]*chopBoost*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
+    result.x+=amps[i]*resolved*(sin(phase)+.08*sin(phase*2.));
+    result.yz+=amps[i]*resolved*(cos(phase)+.16*cos(phase*2.))*gradient;
   }
   // 3. Au loin, les composantes fines deviennent sous-pixel : une houle longue prend le relais pour
   //    que la mer ne devienne pas une bande plate.
@@ -79,7 +71,7 @@ vec3 oceanSwellFiltered(vec2 p,float footprint) {
     float phase=dot(p,dd)*k-ocean_time*sqrt(9.81*k)+3.1*warp.x+fi*4.37;
     vec2 gradient=k*dd+3.1*warp.yz*k*.27;
     float resolved=1.-smoothstep(.65,2.8,footprint*k);
-    distant+=longAmps[i]*(1.+.9*ocean_storm)*resolved*vec3(sin(phase),cos(phase)*gradient);
+    distant+=longAmps[i]*resolved*vec3(sin(phase),cos(phase)*gradient);
   }
   float blend=smoothstep(120.,640.,distance);
   float u=clamp((distance-120.)/520.,0.,1.);

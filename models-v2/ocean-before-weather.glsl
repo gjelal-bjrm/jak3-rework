@@ -77,38 +77,6 @@ vec2 oceanRipples(vec2 xz,float footprint,out vec2 glitterSlope) {
   glitterSlope=transpose(rot)*(g.yz*7.)*.0019*(1.-smoothstep(.3,1.2,footprint*7.));
   return slope;
 }
-// Meteo : pluie sur la mer, ciel d'orage (ocean_storm est declare avec la houle).
-uniform float ocean_rain;
-uniform float ocean_gloom;
-// Pluie : chaque goutte fait un anneau qui s'elargit et s'amortit (deux grilles decalees de ~0,45 m),
-// et une petite gerbe claire a l'impact. Renvoie la pente (xy) et l'eclat des gerbes (z).
-vec3 oceanRainRings(vec2 p,float t) {
-  vec2 slope=vec2(0);float splash=0.;
-  for(int layer=0;layer<2;layer++) {
-    vec2 q=p*2.2+float(layer)*vec2(.41,.73);
-    vec2 c=floor(q),f=fract(q);
-    for(int j=-1;j<=1;j++)for(int i=-1;i<=1;i++) {
-      vec2 o=vec2(i,j),cell=c+o+float(layer)*19.;
-      vec2 h=fract(sin(vec2(dot(cell,vec2(127.1,311.7)),dot(cell,vec2(269.5,183.3))))*43758.5453);
-      vec2 d=o+.15+.7*h-f;
-      float ph=fract(t*(1.1+.6*h.x)+h.y*7.);
-      float len=length(d);
-      float x=(len-ph*1.1)*12.;
-      float ring=sin(x*3.14159)*exp(-x*x)*(1.-ph)*(1.-ph);
-      slope+=d/max(len,1e-3)*ring;
-      splash+=exp(-len*len*160.)*smoothstep(.12,0.,ph);
-    }
-  }
-  return vec3(slope,splash);
-}
-// Ecume de mer forte : dentelle fractale deformee, etiree dans le sens du vent (ws = axes du vent) ;
-// au loin (sous-pixel) elle devient une teinte moyenne, sans grain qui scintille.
-float oceanStormLace(vec2 ws,float footprint) {
-  vec2 w=ws+vec2(oceanNoise(ws*.7),oceanNoise(ws*.7+5.2))*1.5;
-  float f=oceanNoise(w*vec2(1.2,2.4))*.5+oceanNoise(w*vec2(2.7,5.1)+3.1)*.3+oceanNoise(w*vec2(6.1,11.)+7.7)*.2;
-  float lace=smoothstep(.40,.70,f);
-  return mix(.42,lace,1.-smoothstep(.03,.16,footprint));
-}
 vec3 oceanSkySample(vec3 ray,float minimumElevation,out float confidence) {
   vec3 lookup=normalize(vec3(ray.x,max(ray.y,minimumElevation),ray.z));
   vec2 dimensions=vec2(textureSize(tex_T25,0));
@@ -205,13 +173,7 @@ vec3 shadeModernOcean() {
     slopeBase+=shoreDir*((ahead-shore.x)/.2);
   }
   vec2 glitterSlope;vec2 slopeRipple=oceanRipples(p.xz,footprint,glitterSlope);
-  // ---- Meteo : mer hachee par le vent ; pluie qui crible la surface (anneaux resolus de pres seulement)
-  float storm=oceanStormLocal();
-  slopeRipple*=1.+1.4*storm;
-  vec3 rainRings=vec3(0);
-  float rainNear=ocean_rain*(1.-smoothstep(.012,.045,footprint));
-  if(rainNear>.01)rainRings=oceanRainRings(p.xz,ocean_time)*rainNear;
-  vec2 slope=slopeBase+slopeRipple+rainRings.xy*.30;
+  vec2 slope=slopeBase+slopeRipple;
   vec3 n=normalize(vec3(-slope.x,1.,-slope.y));                       // reflets, refraction, Fresnel
   vec3 nGlitter=normalize(vec3(-(slope.x+glitterSlope.x),1.,-(slope.y+glitterSlope.y)));   // eclat solaire
   // ---- Sous l'eau : fenetre de Snell
@@ -245,9 +207,6 @@ vec3 shadeModernOcean() {
   body+=ocean_shallow*.18*crest;
   float far=smoothstep(80.,700.,range);
   body=mix(body,ocean_far,far*.7);
-  // Ciel d'orage : eau plus sombre et plus grise
-  body*=mix(1.,.62,ocean_gloom);
-  body=mix(body,vec3(dot(body,vec3(.3,.59,.11))),ocean_gloom*.35);
   // Ombrage des ondulations : la face des vaguelettes tournee vers le soleil s'eclaire, l'autre s'assombrit.
   // Sans cela, vue du dessus, l'eau devient un plan uni ou les vagues n'existent plus.
   // La nuit (force 0), l'ombrage des vaguelettes devient neutre : pas de faces "au soleil" sous un ciel noir.
@@ -257,12 +216,7 @@ vec3 shadeModernOcean() {
   float facing=max(dot(n,v),0.);
   float fresnel=.09+.91*pow(1.-facing,4.);
   vec3 reflection=oceanReflection(p,n,v);
-  // Pluie au loin : la surface criblee de gouttes renvoie un reflet plus terne et plus laiteux
-  float rainMatte=ocean_rain*(1.-rainNear*.7);
-  reflection=mix(reflection,vec3(dot(reflection,vec3(.3,.59,.11)))*1.05,rainMatte*.35);
   vec3 result=mix(body,reflection,fresnel);
-  // Gerbes des gouttes : petits points clairs a l'impact, eclaires par le ciel
-  result+=(reflection*1.1+.02)*rainRings.z*.55;
   // ---- Trainee de soleil : scintillement serre sur le grain, lobe doux sur les vaguelettes
   vec3 h=normalize(oceanSunDirection+v);
   float sunVis=max(dot(n,oceanSunDirection),0.);
@@ -287,21 +241,9 @@ vec3 shadeModernOcean() {
   float crestFoam=smoothstep(.45,.9,crest)*smoothstep(5.,1.2,thickness)*foamNoise*.7;
   float beachFoam=shore.y*(.25+.95*foamNoise)+shore.z*(.12+.6*foamNoise)+shore.w*.95;
   float foam=clamp(max(shoreFoam,max(crestFoam,beachFoam)),0.,.92);
-  // Mer forte : moutons sur les cretes et trainees d'ecume etirees dans le sens du vent
-  if(storm>.01) {
-    vec2 wd=vec2(.936,.352),ws=vec2(dot(p.xz,wd),dot(p.xz,vec2(-wd.y,wd.x)));
-    vec2 drift=ws-vec2(ocean_time*.9,0.);
-    float lace=oceanStormLace(drift,footprint);
-    float capNoise=oceanNoise(p.xz*.30-ocean_time*vec2(.22,.09));
-    // moutons : seulement au sommet des plus hautes cretes
-    float whitecap=smoothstep(.55,.95,swell.x*.8+capNoise*.45-.1)*storm;
-    // trainees : longues bandes d'ecume laissees par les moutons, alignees sur le vent
-    float streaks=smoothstep(.55,.80,oceanNoise(drift*vec2(.07,.8)))*storm*.22*(1.-far*.6);
-    foam=max(foam,clamp(whitecap*lace*.80+streaks*lace,0.,.75));
-  }
   // L'ecume du sillage eclaircit l'eau (eau aeree) au lieu de poser du blanc pur dessus.
   result=mix(result,mix(result,vec3(.88,.91,.90),.55),wakeFoam);
-  result=mix(result,vec3(.88,.91,.90)*mix(1.,.55,ocean_gloom),foam);
+  result=mix(result,vec3(.88,.91,.90),foam);
   // ---- Brume vers le vrai ciel de l'horizon, puis extinction au tres loin
   vec3 horizonSky=oceanHorizonSky(-v);
   float haze=1.-exp(-range*.0007);
