@@ -111,3 +111,6 @@ city-remaster/city-block-v3/interiors/fit/
 city-remaster/city-block-v3/east-house-restore/native-east-current.json
 models-v2/shore/beach-native.json
 lanceur-choix.json
+
+# Kit ChatGPT de l arene : contient des textures du jeu
+/arena-remaster/chatgpt/
