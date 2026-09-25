@@ -257,7 +257,7 @@
     "game/graphics/opengl_renderer/shaders/modern_beam.frag": "f28edbed3d504c22c06046c359e35347cba0a4d0facda8a628d6299642fc86a0",
     "out/jak3/fr3/wasstadc.fr3": "d9be9f880abd814d6af96b14ad878b9d2d77be3a947c72c6f3b9d5951f3c321e",
     "game/graphics/opengl_renderer/shaders/modern_ao.vert": "34c3235a9b0296c2d03013961ab45aef6daa12838ceda435ac34bc75dfccc65e",
-    "game/graphics/opengl_renderer/shaders/modern_ao.frag": "d05805f058c2ea547e1733a56ce925069ca0774e9a87c035d3aec6531786f3cd"
+    "game/graphics/opengl_renderer/shaders/modern_ao.frag": "39c44d7b53df6815b6c05def7320233f6968967d6bfa71794bd6cafa4ed1f86e"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
