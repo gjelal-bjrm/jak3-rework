@@ -4,8 +4,8 @@
 // graine, intensite.
 uniform mat4 pc_camera;
 uniform vec4 cam_trans;
-uniform vec4 fire_pos[48];
-uniform vec4 fire_info[48];
+uniform vec4 fire_pos[128];
+uniform vec4 fire_info[128];
 out vec2 local;          // x : en rayons (-1,5..1,5) ; y : en hauteurs de flamme (-0,12..1,35)
 out vec3 world;
 flat out int src;

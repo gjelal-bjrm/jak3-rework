@@ -13,11 +13,12 @@ flat in int layer;
 out vec4 color;
 uniform vec4 cam_trans;
 uniform mat4 pc_camera;
-uniform vec4 fire_pos[48];
-uniform vec4 fire_info[48];
+uniform vec4 fire_pos[128];
+uniform vec4 fire_info[128];
 uniform float fire_time;
 uniform vec4 fluid_viewport;
 uniform sampler2D tex_T26;
+uniform mat4 fire_inv_camera;   // inverse(-pc_camera), calculee sur le processeur
 
 float hash(vec2 p) { vec3 q = fract(vec3(p.xyx) * .1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
 float noise(vec2 p) {
@@ -37,7 +38,7 @@ float sceneDistance() {
   vec2 px = uv * vec2(textureSize(tex_T26, 0));
   vec4 h = vec4((px - fluid_viewport.xy) / fluid_viewport.zw * 2. - 1., d * 2. - 1., 1.);
   h.y /= (512. / 416.) * .5;
-  vec4 w = inverse(-pc_camera) * h;
+  vec4 w = fire_inv_camera * h;
   return length(w.xyz / w.w / 4096.);
 }
 

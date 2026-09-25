@@ -6,11 +6,12 @@ uniform mat4 pc_camera;
 uniform vec4 cam_trans;
 uniform float fire_time;
 uniform int fire_count;
-uniform vec4 fire_pos[48];
-uniform vec4 fire_info[48];
+uniform vec4 fire_pos[128];
+uniform vec4 fire_info[128];
 uniform vec4 fluid_viewport;
 uniform sampler2D tex_T25;
 uniform sampler2D tex_T26;
+uniform mat4 fire_inv_camera;
 
 mat4 inv_camera;
 vec3 project(vec3 P) {
@@ -29,7 +30,7 @@ float flicker(float seed) {
   return .80 + .12 * sin(fire_time * 3.1 + seed) + .07 * sin(fire_time * 7.7 + seed * 1.7) + .05 * sin(fire_time * 13.3 + seed * .3);
 }
 void main() {
-  inv_camera = inverse(-pc_camera);
+  inv_camera = fire_inv_camera;
   vec2 uv = gl_FragCoord.xy / vec2(textureSize(tex_T25, 0));
   float depth = texture(tex_T26, uv).r;
   vec3 scene = texture(tex_T25, uv).rgb;

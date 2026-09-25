@@ -3,8 +3,8 @@
 uniform mat4 pc_camera;
 uniform vec4 cam_trans;
 uniform float fire_time;
-uniform vec4 fire_pos[48];
-uniform vec4 fire_info[48];
+uniform vec4 fire_pos[128];
+uniform vec4 fire_info[128];
 uniform float viewport_height;
 out float heat;
 void main() {

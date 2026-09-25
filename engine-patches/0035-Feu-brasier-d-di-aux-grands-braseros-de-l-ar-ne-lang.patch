@@ -1,0 +1,414 @@
+From 56506a9e8b2765de438dd447cd31161cebb3ad4a Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 01:25:59 +0200
+Subject: [PATCH 35/35] =?UTF-8?q?Feu=20:=20brasier=20d=C3=A9di=C3=A9=20aux?=
+ =?UTF-8?q?=20grands=20braseros=20de=20l'ar=C3=A8ne=20(langue=20centrale?=
+ =?UTF-8?q?=20et=20couronne=20de=20six=20langues=20sur=20toutes=20les=20br?=
+ =?UTF-8?q?aises)=20;=20seules=20les=20flammes=20natives=20des=20foyers=20?=
+ =?UTF-8?q?continus=20sont=20remplac=C3=A9es=20(gerbes=20et=20jets=20gard?=
+ =?UTF-8?q?=C3=A9s)=20;=20foyers=20qui=20se=20chevauchent=20fusionn=C3=A9s?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../opengl_renderer/ArenaFireSources.inc      | 22 +++++
+ game/graphics/opengl_renderer/FireField.h     | 16 ++++
+ game/graphics/opengl_renderer/ModernFire.h    | 90 ++++++++++++++++---
+ .../opengl_renderer/shaders/modern_fire.frag  |  7 +-
+ .../opengl_renderer/shaders/modern_fire.vert  |  4 +-
+ .../shaders/modern_fire_light.frag            |  7 +-
+ .../shaders/modern_fire_sparks.vert           |  4 +-
+ .../opengl_renderer/sprite/Sprite3.cpp        | 22 +++--
+ 8 files changed, 146 insertions(+), 26 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/ArenaFireSources.inc
+
+diff --git a/game/graphics/opengl_renderer/ArenaFireSources.inc b/game/graphics/opengl_renderer/ArenaFireSources.inc
+new file mode 100644
+index 00000000..03f8afd1
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ArenaFireSources.inc
+@@ -0,0 +1,22 @@
++// Braseros de l arene de Spargus (wasstada) : centre des braises x, y (dessus), z et rayon des braises (m).
++// Mesures sur les faces natives wstd-torchbowl-coal-01 (arena-remaster/objects/brazier-coals.json).
++constexpr float kArenaBraziers[18][4] = {
++  {2362.94f, 53.43f, -366.13f, 0.94f},
++  {2331.49f, 56.93f, -399.81f, 0.94f},
++  {2320.77f, 56.93f, -399.81f, 0.94f},
++  {2290.07f, 53.62f, -349.31f, 0.94f},
++  {2342.15f, 62.41f, -396.71f, 2.97f},
++  {2411.57f, 52.29f, -413.63f, 2.97f},
++  {2375.21f, 28.18f, -396.14f, 4.47f},
++  {2310.10f, 63.74f, -397.82f, 2.97f},
++  {2275.87f, 28.75f, -390.57f, 4.47f},
++  {2238.42f, 52.49f, -416.25f, 2.97f},
++  {2428.25f, 34.19f, -456.15f, 4.47f},
++  {2452.10f, 51.48f, -507.31f, 2.97f},
++  {2429.04f, 38.27f, -543.74f, 4.47f},
++  {2218.01f, 36.58f, -459.82f, 4.46f},
++  {2331.64f, 48.50f, -563.34f, 4.46f},
++  {2289.07f, 58.77f, -556.77f, 4.46f},
++  {2202.70f, 51.85f, -504.04f, 2.97f},
++  {2208.97f, 29.02f, -556.51f, 4.46f},
++};
+diff --git a/game/graphics/opengl_renderer/FireField.h b/game/graphics/opengl_renderer/FireField.h
+index 9ef64c1b..50173b30 100644
+--- a/game/graphics/opengl_renderer/FireField.h
++++ b/game/graphics/opengl_renderer/FireField.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include <mutex>
++#include <string>
+ #include <vector>
+ #include "common/common_types.h"
+ 
+@@ -28,6 +29,21 @@ inline std::vector<Particle> take(u64 frame) {
+   else if (building_frame != frame) building.clear();
+   return out;
+ }
++// Foyers continus acceptes par ModernFire (x, y base, z, rayon, hauteur) : seules les flammes natives
++// qui s'y trouvent sont masquees ; les gerbes ponctuelles (jets, explosions) gardent leur rendu d'origine.
++struct Zone {
++  float x, y, z, r, h;
++};
++inline std::vector<Zone> zones;
++inline void set_zones(std::vector<Zone> z) { std::lock_guard<std::mutex> guard(mutex); zones = std::move(z); }
++inline bool replaced(const Particle& p) {
++  std::lock_guard<std::mutex> guard(mutex);
++  for (const auto& z : zones) {
++    const float dx = p.x - z.x, dz = p.z - z.z, reach = z.r * 1.6f + .6f;
++    if (dx * dx + dz * dz < reach * reach && p.y > z.y - 1.2f && p.y < z.y + z.h + 2.f) return true;
++  }
++  return false;
++}
+ inline bool matches(const std::string& name) {
+   return name.size() >= 8 && name.compare(name.size() - 8, 8, "/flame01") == 0;
+ }
+diff --git a/game/graphics/opengl_renderer/ModernFire.h b/game/graphics/opengl_renderer/ModernFire.h
+index df35ebae..026b722a 100644
+--- a/game/graphics/opengl_renderer/ModernFire.h
++++ b/game/graphics/opengl_renderer/ModernFire.h
+@@ -3,6 +3,7 @@
+ #include <array>
+ #include <cmath>
+ #include <functional>
++#include <iterator>
+ #include <map>
+ #include <memory>
+ #include <unordered_map>
+@@ -13,12 +14,16 @@
+ #include "game/graphics/opengl_renderer/CityFireSources.h"
+ #include "game/graphics/opengl_renderer/FireField.h"
+ #include "game/graphics/opengl_renderer/ModernAO.h"
++#include "game/graphics/opengl_renderer/WeatherWorld.h"
+ #include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/loader/Loader.h"
+ 
+ namespace PalaceFireTable {
+ #include "PalaceFireSources.inc"
+ }
++namespace ArenaFireTable {
++#include "ArenaFireSources.inc"
++}
+ 
+ // Feu du remaster, partout dans le jeu (remplace le prototype du palais et de la ville).
+ // Foyers : les 24 braseros du palais, les 61 feux ajustes de la ville (part-spawners) et, partout ailleurs, les
+@@ -76,6 +81,9 @@ class ModernFire {
+       pos[4 * i] = sources[i].x; pos[4 * i + 1] = sources[i].y; pos[4 * i + 2] = sources[i].z; pos[4 * i + 3] = sources[i].r;
+       info[4 * i] = sources[i].h; info[4 * i + 1] = sources[i].seed; info[4 * i + 2] = sources[i].strength; info[4 * i + 3] = 0;
+     }
++    float negated[16], inv_camera[16];
++    for (int i = 0; i < 16; i++) negated[i] = -state->prototype_camera[i];
++    if (!WeatherReflect::invert(negated, inv_camera)) return;
+     auto bind = [&](Shader& shader, int count) {
+       shader.activate();
+       const GLuint id = shader.id();
+@@ -86,6 +94,7 @@ class ModernFire {
+       glUniform4fv(glGetUniformLocation(id, "fire_pos"), count, pos.data());
+       glUniform4fv(glGetUniformLocation(id, "fire_info"), count, info.data());
+       glUniform1f(glGetUniformLocation(id, "viewport_height"), float(state->render_fb_h));
++      glUniformMatrix4fv(glGetUniformLocation(id, "fire_inv_camera"), 1, GL_FALSE, inv_camera);
+       m_scene.bind(state, id);
+     };
+     // 1. lumiere et air chaud (remplace l'image : lit la copie de la scene)
+@@ -108,11 +117,12 @@ class ModernFire {
+   }
+ 
+  private:
+-  static constexpr size_t kMaxFlames = 48;
++  static constexpr size_t kMaxFlames = 128;
+   static constexpr int kSparks = 12;
+   struct Tracked {
+     Source s;
+     float seen = 0, born = 0;
++    int hits = 0;           // images ou le foyer a ete revu (feu continu si >= 8)
+   };
+ 
+   void init(SharedRenderState* state) {
+@@ -125,7 +135,17 @@ class ModernFire {
+   }
+ 
+   // Regroupe les particules de flamme de l'image precedente en foyers et les suit d'une image a l'autre.
+-  void track(const std::vector<FireField::Particle>& parts, float now) {
++  // Braseros de l'arene : leurs flammes natives sont remplacees par le brasier dedie (pas de suivi).
++  static bool in_arena_brazier(float x, float y, float z) {
++    for (const auto& b : ArenaFireTable::kArenaBraziers) {
++      const float dx = x - b[0], dz = z - b[2], reach = b[3] * 1.5f + .8f;
++      if (dx * dx + dz * dz < reach * reach && y > b[1] - 2.f && y < b[1] + b[3] * 3.f) return true;
++    }
++    return false;
++  }
++  void track(std::vector<FireField::Particle> parts, float now) {
++    parts.erase(std::remove_if(parts.begin(), parts.end(), [](const FireField::Particle& p) {
++      return in_arena_brazier(p.x, p.y, p.z); }), parts.end());
+     if (!parts.empty()) {
+       const float cell = 1.1f;
+       std::unordered_map<long long, std::vector<int>> grid;
+@@ -152,14 +172,21 @@ class ModernFire {
+       std::map<int, std::vector<int>> clusters;
+       for (int i = 0; i < int(parts.size()); i++) clusters[find(i)].push_back(i);
+       for (auto& [root, members] : clusters) {
+-        float w = 0, cx = 0, cz = 0, base = 1e9f, top = -1e9f, size = 0;
++        float w = 0, cx = 0, cz = 0, size = 0;
++        std::vector<float> heights;
+         for (int i : members) {
+           const auto& p = parts[i];
+           const float wi = std::max(p.alpha, .02f) * std::max(p.size, .05f);
+           w += wi; cx += wi * p.x; cz += wi * p.z; size += p.size;
+-          base = std::min(base, p.y - p.size * .35f); top = std::max(top, p.y + p.size * .5f);
++          heights.push_back(p.y);
+         }
+         cx /= w; cz /= w; size /= float(members.size());
++        // base et sommet robustes : les grosses particules du feu natif debordent largement du foyer
++        std::sort(heights.begin(), heights.end());
++        const float low = heights[size_t(.15f * (heights.size() - 1))];
++        const float high = heights[size_t(.9f * (heights.size() - 1))];
++        const float base = low - std::min(size * .15f, .25f);
++        const float top = high + size * .3f;
+         float spread = 0;
+         for (int i : members) {
+           const auto& p = parts[i];
+@@ -167,8 +194,8 @@ class ModernFire {
+           spread += wi * ((p.x - cx) * (p.x - cx) + (p.z - cz) * (p.z - cz));
+         }
+         spread = std::sqrt(spread / w);
+-        Source s{cx, base, cz, std::clamp(spread * 1.3f + size * .35f, .18f, 3.f),
+-                 std::clamp((top - base) * 1.1f, .45f, 7.f), 0.f, 1.f};
++        Source s{cx, base, cz, std::clamp(spread * 1.3f + size * .35f, .18f, 1.6f),
++                 std::clamp((top - base) * 1.1f, .45f, 4.f), 0.f, 1.f};
+         // foyer deja suivi ?
+         Tracked* best = nullptr; float bd = 1e9f;
+         for (auto& t : m_tracked) {
+@@ -179,28 +206,54 @@ class ModernFire {
+           auto& t = best->s;
+           t.x += (s.x - t.x) * .12f; t.z += (s.z - t.z) * .12f; t.y += (s.y - t.y) * .08f;
+           t.r += (s.r - t.r) * .06f; t.h += (s.h - t.h) * .06f;
+-          best->seen = now;
+-        } else {
++          best->seen = now; ++best->hits;
++        } else if (members.size() >= 2) {    // une particule isolee (gerbe, jet) ne cree pas de foyer
+           Tracked t; t.s = s; t.s.seed = float(m_tracked.size() * 7 + 3) * .731f; t.seen = t.born = now;
+           m_tracked.push_back(t);
+         }
++        if (best && best->hits == 8 && m_logged < 16) {   // controle : foyers continus retenus
++          ++m_logged;
++          lg::info("Feu continu remplace : ({:.2f}, {:.2f}, {:.2f}) rayon {:.2f} hauteur {:.2f}, {} flammes natives",
++                   best->s.x, best->s.y, best->s.z, best->s.r, best->s.h, members.size());
++        }
+       }
+     }
+-    // intensite : monte en 0,3 s, s'eteint 0,5 s apres la derniere flamme native
++    // foyers qui se chevauchent (grandes flammes natives qui bougent beaucoup) : fusion dans le plus ancien
++    for (size_t a = 0; a < m_tracked.size(); a++)
++      for (size_t b = a + 1; b < m_tracked.size();) {
++        auto& A = m_tracked[a]; auto& B = m_tracked[b];
++        const float d = std::hypot(A.s.x - B.s.x, A.s.z - B.s.z);
++        if (d < (A.s.r + B.s.r) * .9f && std::abs(A.s.y - B.s.y) < 2.5f) {
++          Tracked& keep = A.born <= B.born ? A : B;
++          const Tracked& drop = A.born <= B.born ? B : A;
++          keep.hits = std::max(keep.hits, drop.hits); keep.seen = std::max(keep.seen, drop.seen);
++          if (&keep == &B) std::swap(m_tracked[a], m_tracked[b]);
++          m_tracked.erase(m_tracked.begin() + long(b));
++        } else ++b;
++      }
++    // intensite : un foyer n'est remplace qu'une fois stable (feu continu), monte en 0,3 s, s'eteint 0,5 s
++    // apres la derniere flamme native
++    std::vector<FireField::Zone> zones;
++    for (const auto& b : ArenaFireTable::kArenaBraziers)
++      zones.push_back({b[0], b[1], b[2], b[3], b[3] * 3.f});
+     for (auto& t : m_tracked) {
++      if (t.hits < 8) { t.s.strength = 0.f; t.born = now; continue; }
++      zones.push_back({t.s.x, t.s.y, t.s.z, t.s.r, t.s.h});
+       const float rise = std::clamp((now - t.born) / .3f, 0.f, 1.f);
+       const float fall = 1.f - std::clamp((now - t.seen - .15f) / .5f, 0.f, 1.f);
+       t.s.strength = rise * fall;
+     }
+     m_tracked.erase(std::remove_if(m_tracked.begin(), m_tracked.end(), [&](const Tracked& t) { return now - t.seen > .7f; }),
+                     m_tracked.end());
++    FireField::set_zones(std::move(zones));
+   }
+ 
+   std::vector<Source> gather(SharedRenderState* state, float now) {
+     std::vector<Source> out;
+-    unsigned regions = 0; bool palace = false;
++    unsigned regions = 0; bool palace = false, arena = false;
+     for (auto* level : state->loader->get_in_use_levels()) {
+       const auto& name = level->level->level_name;
++      if (name == "wasstada") arena = true;
+       if (name == "wascitya") regions |= 1u << 1;
+       if (name == "wascityb") regions |= 1u << 2;
+       if (name == "waspala") palace = true;
+@@ -213,6 +266,22 @@ class ModernFire {
+         out.push_back({f[0], base, f[2], f[3] * 1.f, f[4] * .6f, float(i) * 1.713f, 1.f});
+       }
+     }
++    if (arena) {
++      // Grands braseros de l'arene : un vrai brasier, pas une flamme de vasque. Langue centrale haute et
++      // couronne de six langues sur toute la surface des braises, hauteurs et phases differentes.
++      for (int i = 0; i < int(std::size(ArenaFireTable::kArenaBraziers)); i++) {
++        const auto* b = ArenaFireTable::kArenaBraziers[i];
++        const float R = b[3], y = b[1] - .1f, seed = 11.f + float(i) * 2.37f;
++        out.push_back({b[0], y, b[2], R * .48f, R * 2.3f, seed, 1.f});
++        const int ring = R > 1.5f ? 6 : 3;
++        for (int k = 0; k < ring; k++) {
++          const float a = seed + 6.2831853f * float(k) / float(ring);
++          const float h = R * (1.25f + .6f * std::abs(std::sin(seed * 3.1f + float(k) * 1.7f)));
++          out.push_back({b[0] + std::cos(a) * R * .55f, y, b[2] + std::sin(a) * R * .55f, R * .34f, h,
++                         seed + float(k) * 1.31f, 1.f});
++        }
++      }
++    }
+     if (regions) {
+       for (const auto& c : CityFireSources::snapshot(regions, state->camera_pos.data()))
+         out.push_back({c.position[0], c.position[1] - .3f, c.position[2], c.position[3] * .6f, c.height * .8f, c.seed, 1.f});
+@@ -232,4 +301,5 @@ class ModernFire {
+   GLuint m_vao = 0;
+   u64 m_render_frame = UINT64_MAX;
+   std::vector<Tracked> m_tracked;
++  int m_logged = 0;
+ };
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire.frag b/game/graphics/opengl_renderer/shaders/modern_fire.frag
+index c74ae97a..9db26254 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_fire.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_fire.frag
+@@ -13,11 +13,12 @@ flat in int layer;
+ out vec4 color;
+ uniform vec4 cam_trans;
+ uniform mat4 pc_camera;
+-uniform vec4 fire_pos[48];
+-uniform vec4 fire_info[48];
++uniform vec4 fire_pos[128];
++uniform vec4 fire_info[128];
+ uniform float fire_time;
+ uniform vec4 fluid_viewport;
+ uniform sampler2D tex_T26;
++uniform mat4 fire_inv_camera;   // inverse(-pc_camera), calculee sur le processeur
+ 
+ float hash(vec2 p) { vec3 q = fract(vec3(p.xyx) * .1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
+ float noise(vec2 p) {
+@@ -37,7 +38,7 @@ float sceneDistance() {
+   vec2 px = uv * vec2(textureSize(tex_T26, 0));
+   vec4 h = vec4((px - fluid_viewport.xy) / fluid_viewport.zw * 2. - 1., d * 2. - 1., 1.);
+   h.y /= (512. / 416.) * .5;
+-  vec4 w = inverse(-pc_camera) * h;
++  vec4 w = fire_inv_camera * h;
+   return length(w.xyz / w.w / 4096.);
+ }
+ 
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire.vert b/game/graphics/opengl_renderer/shaders/modern_fire.vert
+index 3adcc001..dd2f1963 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_fire.vert
++++ b/game/graphics/opengl_renderer/shaders/modern_fire.vert
+@@ -4,8 +4,8 @@
+ // graine, intensite.
+ uniform mat4 pc_camera;
+ uniform vec4 cam_trans;
+-uniform vec4 fire_pos[48];
+-uniform vec4 fire_info[48];
++uniform vec4 fire_pos[128];
++uniform vec4 fire_info[128];
+ out vec2 local;          // x : en rayons (-1,5..1,5) ; y : en hauteurs de flamme (-0,12..1,35)
+ out vec3 world;
+ flat out int src;
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_light.frag b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+index 8c1c846f..ae36aa3c 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+@@ -6,11 +6,12 @@ uniform mat4 pc_camera;
+ uniform vec4 cam_trans;
+ uniform float fire_time;
+ uniform int fire_count;
+-uniform vec4 fire_pos[48];
+-uniform vec4 fire_info[48];
++uniform vec4 fire_pos[128];
++uniform vec4 fire_info[128];
+ uniform vec4 fluid_viewport;
+ uniform sampler2D tex_T25;
+ uniform sampler2D tex_T26;
++uniform mat4 fire_inv_camera;
+ 
+ mat4 inv_camera;
+ vec3 project(vec3 P) {
+@@ -29,7 +30,7 @@ float flicker(float seed) {
+   return .80 + .12 * sin(fire_time * 3.1 + seed) + .07 * sin(fire_time * 7.7 + seed * 1.7) + .05 * sin(fire_time * 13.3 + seed * .3);
+ }
+ void main() {
+-  inv_camera = inverse(-pc_camera);
++  inv_camera = fire_inv_camera;
+   vec2 uv = gl_FragCoord.xy / vec2(textureSize(tex_T25, 0));
+   float depth = texture(tex_T26, uv).r;
+   vec3 scene = texture(tex_T25, uv).rgb;
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
+index 0c87fcc8..2b62c005 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
+@@ -3,8 +3,8 @@
+ uniform mat4 pc_camera;
+ uniform vec4 cam_trans;
+ uniform float fire_time;
+-uniform vec4 fire_pos[48];
+-uniform vec4 fire_info[48];
++uniform vec4 fire_pos[128];
++uniform vec4 fire_info[128];
+ uniform float viewport_height;
+ out float heat;
+ void main() {
+diff --git a/game/graphics/opengl_renderer/sprite/Sprite3.cpp b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+index 04705620..c314eef2 100644
+--- a/game/graphics/opengl_renderer/sprite/Sprite3.cpp
++++ b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+@@ -668,14 +668,24 @@ void Sprite3::flush_sprites(SharedRenderState* render_state,
+     // ModernFire, qui dessine le nouveau feu a leur place (dans tous les lieux).
+     if (render_state->version == GameVersion::Jak3 && render_state->has_pc_data && FireField::enabled &&
+         FireField::matches(render_state->texture_pool->get_debug_texture_name_from_tbp(tbp))) {
++      m_coastal_native_runs.clear();
+       for (u32 i = 0; i < bucket->ids.size(); i += 5) {
+-        const u32 id = bucket->ids[i];
+-        if (id >= m_vertices_3d.size()) continue;
+-        const auto& v = m_vertices_3d[id];
+-        FireField::collect(render_state->frame_idx, {v.xyz_sx.x() / 4096.f, v.xyz_sx.y() / 4096.f,
+-                                                     v.xyz_sx.z() / 4096.f, v.xyz_sx.w() / 4096.f, v.rgba.w()});
++        const u32 count = std::min<u32>(5, u32(bucket->ids.size()) - i), id = bucket->ids[i];
++        bool keep = true;
++        if (count == 5 && id < m_vertices_3d.size()) {
++          const auto& v = m_vertices_3d[id];
++          const FireField::Particle part{v.xyz_sx.x() / 4096.f, v.xyz_sx.y() / 4096.f, v.xyz_sx.z() / 4096.f,
++                                         v.xyz_sx.w() / 4096.f, v.rgba.w()};
++          FireField::collect(render_state->frame_idx, part);
++          keep = !FireField::replaced(part);
++        }
++        if (!keep) continue;
++        if (!m_coastal_native_runs.empty() &&
++            m_coastal_native_runs.back().start + m_coastal_native_runs.back().count == i)
++          m_coastal_native_runs.back().count += count;
++        else m_coastal_native_runs.push_back({i, count});
+       }
+-      continue;
++      if (m_coastal_native_runs.empty()) continue;
+     }
+ 
+     {
+-- 
+2.54.0.windows.1
+
