@@ -136,7 +136,7 @@
     "game/graphics/opengl_renderer/shaders/etie_base.vert": "19aa9c7b268b862c903ee06b49a10fe7efe30fc1cc37cfeadb318f946e45a612",
     "game/graphics/opengl_renderer/shaders/etie_base.frag": "fd12cd835dcb4e78c9e2c26eae24bf304d2734f3b6cbdfcffb68f73c78d15bf6",
     "out/jak3/fr3/wasstada.fr3": "2b8800ddf6ae0e5e0472fa74d17d4a0957708fd714e25b66e2daf205cec3e62d",
-    "out/jak3/fr3/wasstadb.fr3": "828ab6f6b878f4eaafe128feb463c269ef757fcb4eed1d899e686f5df77510ca",
+    "out/jak3/fr3/wasstadb.fr3": "5e7a0ae52a6b8015b2c6d099e43c05ffaafe8e51cfc283aa5abe20cd5b708fb9",
     "out/jak3/iso/WASSTADA.DGO": "5459ce898571173b494de1042f2934b11257217d2b492847aa456a31f8e3f4cc",
     "out/jak3/fr3/game.fr3": "bcfa3b786f624fec2c2276369195132b81600952aa319195d94ad14698f9e3e1",
     "out/jak3/fr3/waspala.fr3": "18af49de0bb31b2e45fbd4a89ff35444cc4e76476cbd3932850f0f28f605ef24",
@@ -255,7 +255,7 @@
     "game/graphics/opengl_renderer/shaders/fountain_mist.frag": "8749bda2d0182c8f5c34e37238d176c479d1a3b8acd8f90e6a430f84726ce764",
     "game/graphics/opengl_renderer/shaders/modern_beam.vert": "f21d0af80d99db18f0993de883354b915248682d02113c90812323fc7924f7d9",
     "game/graphics/opengl_renderer/shaders/modern_beam.frag": "f28edbed3d504c22c06046c359e35347cba0a4d0facda8a628d6299642fc86a0",
-    "out/jak3/fr3/wasstadc.fr3": "7ca740d2482b61a5b871fe47e38641c6e6fdd1bd22b2dc2d376d07db91043938"
+    "out/jak3/fr3/wasstadc.fr3": "d9be9f880abd814d6af96b14ad878b9d2d77be3a947c72c6f3b9d5951f3c321e"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",

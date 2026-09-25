@@ -1,0 +1,45 @@
+From 02b73b32fe807b5ab0e888528b911b104e1d81ea Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 23:46:14 +0200
+Subject: [PATCH 31/31] =?UTF-8?q?Bridge=20:=20textures=5Foptional=20(m?=
+ =?UTF-8?q?=C3=AAme=20liste=20de=20textures=20pour=20toutes=20les=20partie?=
+ =?UTF-8?q?s=20d'un=20lieu)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ tools/palace_mesh_bridge.cpp | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/tools/palace_mesh_bridge.cpp b/tools/palace_mesh_bridge.cpp
+index e32c977c..574712af 100644
+--- a/tools/palace_mesh_bridge.cpp
++++ b/tools/palace_mesh_bridge.cpp
+@@ -377,7 +377,7 @@ void patch_wind_tree(tfrag3::TieTree& tree,int geom,size_t ti,const json& patch,
+ }
+ 
+ int patch_level(tfrag3::Level& level,const json& patch,const fs::path& output_path) {
+-  size_t added_triangles=0,removed_triangles=0;
++  size_t added_triangles=0,removed_triangles=0,replaced_textures=0;
+   const auto texture_ids=append_patch_textures(level,patch);
+   if(patch.contains("textures"))for(const auto& replacement:patch.at("textures")) {
+     bool found=false;
+@@ -388,8 +388,12 @@ int patch_level(tfrag3::Level& level,const json& patch,const fs::path& output_pa
+       texture.data.resize(size_t(texture.w)*texture.h);memcpy(texture.data.data(),rgba.data(),rgba.size());
+       found=true;
+     }
+-    ASSERT_MSG(found,"Requested model texture was not found");
++    // "textures_optional" : meme liste pour toutes les parties d'un lieu ; une texture absente de ce
++    // niveau est simplement ignoree (le jeu affiche la copie du niveau charge qui la contient).
++    if(found)++replaced_textures;
++    else ASSERT_MSG(patch.value("textures_optional",false),"Requested model texture was not found");
+   }
++  if(patch.contains("textures"))fmt::print("Textures replaced in this level: {}\n",replaced_textures);
+   auto patch_tree=[&](const char* type,int geom,size_t ti,auto& tree,auto& draws) {
+       constexpr bool tie=std::is_same_v<std::decay_t<decltype(tree)>,tfrag3::TieTree>;
+       std::set<std::pair<size_t,size_t>> remove;
+-- 
+2.54.0.windows.1
+
