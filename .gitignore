@@ -118,3 +118,9 @@ lanceur-choix.json
 /arena-remaster/objects/*-native.json
 /arena-remaster/objects/*.blend
 /arena-remaster/objects/*.blend1
+# Falaises de l arene : export natif, patch (geometrie derivee du jeu), apercus (textures du jeu), journaux
+/arena-remaster/rocks/*-native.json
+/arena-remaster/rocks/*-patch.json
+/arena-remaster/rocks/preview/
+/arena-remaster/rocks/*.log
+/arena-remaster/rocks/log-*.txt

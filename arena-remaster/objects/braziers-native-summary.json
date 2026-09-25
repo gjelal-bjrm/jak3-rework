@@ -1,0 +1,21 @@
+{
+  "status": "Native export only; no models generated or installed",
+  "level": "wasstada",
+  "source_sha256": "01e28268eee85401f3597e5109c9164c6efe2fea20a984fed2523aaa07f89f26",
+  "selection_sha256": "dbb5f01921ab7a9f0b41c53f0d824373b4ba5f6efac1f124b1fd4d4cb865a2da",
+  "export_sha256": "be778a78417d69fb14891056b7eaed7f02a66342e42e823e23e381ef32ab645e",
+  "faces": 26308,
+  "by_tree_type_and_geom": {
+    "tie/0": 7952,
+    "tie/1": 7952,
+    "tie/2": 7952,
+    "tie/3": 2452
+  },
+  "by_material": {
+    "wstd-torchbowl-02": 6496,
+    "wstd-torchbowl-coal-01": 1872,
+    "wstd-torchbowl-01": 8112,
+    "wstd-spike-01": 9828
+  },
+  "unique_native_keys": true
+}

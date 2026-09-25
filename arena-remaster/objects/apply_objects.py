@@ -1,7 +1,7 @@
-"""Combine les modifications d'objets de l'arene (braseros, lames...) et les applique en UNE passe du bridge sur
+"""Combine les modifications d'objets de l'arene (braseros, lames, falaises...) et les applique en UNE passe du bridge sur
 la copie d'origine wasstada-before-objects.fr3 (les indices natifs changent apres un patch : ne jamais enchainer),
 puis installe le resultat dans data/ et la variante remaster.
-Usage : python arena-remaster/objects/apply_objects.py braziers-patch.json spikes-patch.json
+Usage : python arena-remaster/objects/apply_objects.py [patchs relatifs a ce dossier ; par defaut : tous]
 """
 from pathlib import Path
 import json, shutil, subprocess, sys
@@ -10,7 +10,7 @@ BRIDGE = R / 'engine-build/bin/Release/palace_mesh_bridge.exe'
 
 
 def main(parts):
-    combined = {'description': 'Arene : objets remodeles (' + ', '.join(parts) + ')', 'remove': [], 'add': []}
+    combined = {'description': 'Arene : objets remodeles (' + ', '.join(Path(n).stem for n in parts) + ')', 'remove': [], 'add': []}
     seen = set()
     for name in parts:
         part = json.loads((H / name).read_text())
@@ -19,7 +19,8 @@ def main(parts):
             assert key not in seen, ('remplacements qui se chevauchent', name, key)
             seen.add(key)
         combined['remove'] += part['remove']; combined['add'] += part['add']
-        print(name, len(part['remove']), '->', len(part['add']))
+        print(name, len(part['remove']), '->', len(part['add']), flush=True)
+        del part
     (H / 'combined-patch.json').write_text(json.dumps(combined, separators=(',', ':')))
     out = H / 'wasstada-objects.fr3'
     subprocess.run([str(BRIDGE), str(H / 'wasstada-before-objects.fr3'), str(H / 'combined-patch.json'), str(out)], check=True)
@@ -28,4 +29,4 @@ def main(parts):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:] or ['braziers-patch.json', 'spikes-patch.json'])
+    main(sys.argv[1:] or ['braziers-patch.json', 'spikes-patch.json', '../rocks/rocks-patch.json'])

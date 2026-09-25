@@ -1,0 +1,155 @@
+From 8e7b1762cd64fb350ee8d75f5fe2b3a591753b2d Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 20:48:00 +0200
+Subject: [PATCH 29/29] =?UTF-8?q?TIE=20:=20palette=20heure-du-jour=20port?=
+ =?UTF-8?q?=C3=A9e=20=C3=A0=2032768=20couleurs=20;=20le=20bridge=20regroup?=
+ =?UTF-8?q?e=20les=20couleurs=20par=20coupe=20m=C3=A9diane=20au-del=C3=A0?=
+ =?UTF-8?q?=20de=20la=20capacit=C3=A9=20(falaises=20remodel=C3=A9es=20de?=
+ =?UTF-8?q?=20l'ar=C3=A8ne,=20plus=20de=20couleurs=20=C2=AB=20en=20plaques?=
+ =?UTF-8?q?=20=C2=BB)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../opengl_renderer/background/Tie3.h         |  3 +-
+ tools/palace_mesh_bridge.cpp                  | 85 ++++++++++++++++++-
+ 2 files changed, 84 insertions(+), 4 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/background/Tie3.h b/game/graphics/opengl_renderer/background/Tie3.h
+index 39b4609c..4195a718 100644
+--- a/game/graphics/opengl_renderer/background/Tie3.h
++++ b/game/graphics/opengl_renderer/background/Tie3.h
+@@ -154,7 +154,8 @@ class Tie3 : public BucketRenderer {
+ 
+   std::vector<math::Vector<u8, 4>> m_color_result;
+ 
+-  static constexpr int TIME_OF_DAY_COLOR_COUNT = 8192;
++  // Remaster : 32768 (8192 a l'origine) pour les decors remodeles tres detailles (falaises de l'arene).
++  static constexpr int TIME_OF_DAY_COLOR_COUNT = 32768;
+ 
+   bool m_has_level = false;
+   bool m_debug_all_visible = false;
+diff --git a/tools/palace_mesh_bridge.cpp b/tools/palace_mesh_bridge.cpp
+index 3f75dc2e..e32c977c 100644
+--- a/tools/palace_mesh_bridge.cpp
++++ b/tools/palace_mesh_bridge.cpp
+@@ -183,6 +183,60 @@ std::map<std::string,int> append_patch_textures(tfrag3::Level& level,const json&
+   return result;
+ }
+ 
++// Time-of-day palette capacity: TIE trees use a 32768-texel colour texture (Tie3.h), other trees 8192.
++constexpr u32 kTiePaletteCapacity=32768,kPaletteCapacity=8192;
++
++// When a remodel needs more time-of-day colours than the tree can hold, pick `count` representative
++// colours by weighted median cut (split the box with the largest squared error along its widest
++// channel) and map every wanted colour to the mean of its box. Dense new vertices then keep smooth
++// lighting, instead of snapping to one native corner colour (visible patches).
++std::vector<std::pair<std::array<u8,32>,std::vector<size_t>>> median_cut(
++    const std::vector<std::pair<std::array<u8,32>,u32>>& wanted,size_t count) {
++  struct Box {size_t begin,end;double error;int axis;};
++  std::vector<size_t> order(wanted.size());for(size_t i=0;i<order.size();++i)order[i]=i;
++  auto measure=[&](size_t begin,size_t end) {
++    double w=0,sum[32]={},sq[32]={};
++    for(size_t i=begin;i<end;++i) {
++      const auto& [p,n]=wanted[order[i]];w+=n;
++      for(int c=0;c<32;++c){sum[c]+=double(n)*p[c];sq[c]+=double(n)*p[c]*p[c];}
++    }
++    Box box{begin,end,0,0};double widest=-1;
++    for(int c=0;c<32;++c) {
++      const double e=sq[c]-sum[c]*sum[c]/std::max(w,1.);box.error+=e;
++      if(e>widest){widest=e;box.axis=c;}
++    }
++    if(end-begin<2)box.error=0;
++    return box;
++  };
++  auto cmp=[](const Box& a,const Box& b){return a.error<b.error;};
++  std::vector<Box> heap{measure(0,order.size())},done;
++  while(heap.size()+done.size()<count && !heap.empty()) {
++    std::pop_heap(heap.begin(),heap.end(),cmp);Box box=heap.back();heap.pop_back();
++    if(box.error<=0){done.push_back(box);continue;}
++    std::sort(order.begin()+box.begin,order.begin()+box.end,
++              [&](size_t a,size_t b){return wanted[a].first[box.axis]<wanted[b].first[box.axis];});
++    double total=0,run=0;for(size_t i=box.begin;i<box.end;++i)total+=wanted[order[i]].second;
++    size_t split=box.begin+1;
++    for(size_t i=box.begin;i+1<box.end;++i){run+=wanted[order[i]].second;split=i+1;if(run>=total/2)break;}
++    for(const auto& half:{measure(box.begin,split),measure(split,box.end)}) {
++      heap.push_back(half);std::push_heap(heap.begin(),heap.end(),cmp);
++    }
++  }
++  done.insert(done.end(),heap.begin(),heap.end());
++  std::vector<std::pair<std::array<u8,32>,std::vector<size_t>>> result;
++  for(const auto& box:done) {
++    double w=0,sum[32]={};std::vector<size_t> members;
++    for(size_t i=box.begin;i<box.end;++i) {
++      const auto& [p,n]=wanted[order[i]];w+=n;members.push_back(order[i]);
++      for(int c=0;c<32;++c)sum[c]+=double(n)*p[c];
++    }
++    std::array<u8,32> mean{};
++    for(int c=0;c<32;++c)mean[c]=u8(std::clamp(std::lround(sum[c]/std::max(w,1.)),0l,255l));
++    result.emplace_back(mean,std::move(members));
++  }
++  return result;
++}
++
+ struct PatchPalette {
+   using Key=std::array<u8,32>;
+   tfrag3::PackedTimeOfDay& colors;
+@@ -209,7 +263,7 @@ struct PatchPalette {
+       key[p*4+c]=u8(std::clamp(std::lround(value),0l,255l));
+     }
+     auto found=ids.find(key);if(found!=ids.end())return found->second;
+-    if(colors.color_count<8192) {
++    if(colors.color_count<kTiePaletteCapacity) {
+       const u16 id=u16(colors.color_count++);colors.data.resize(((colors.color_count+3)/4)*128);
+       for(int p=0;p<8;++p)for(int c=0;c<4;++c)colors.read(id,p,c)=key[p*4+c];
+       ids.emplace(key,id);return id;
+@@ -359,7 +413,8 @@ int patch_level(tfrag3::Level& level,const json& patch,const fs::path& output_pa
+         Palette key{};for(int p=0;p<8;p++)for(int c=0;c<4;c++)key[p*4+c]=tree.colors.read(i,p,c);
+         palette_ids.emplace(key,u16(i));
+       }
+-      auto append_vertex=[&](const json& source) -> u32 {
++      const u32 capacity=tie?kTiePaletteCapacity:kPaletteCapacity;
++      auto blend=[&](const json& source) {
+         Palette palette{};
+         for(int p=0;p<8;p++)for(int c=0;c<4;c++) {
+           float value=0;
+@@ -367,9 +422,33 @@ int patch_level(tfrag3::Level& level,const json& patch,const fs::path& output_pa
+             tree.colors.read(source.at("color_indices")[v].get<int>(),p,c);
+           palette[p*4+c]=u8(std::clamp(std::lround(value),0l,255l));
+         }
++        return palette;
++      };
++      {
++        // Too many new colours for the tree: share representative colours (median cut).
++        std::map<Palette,u32> counts;
++        for(const auto& [key,faces]:additions)for(const auto& face:faces)
++          for(const auto& vertex:face.at("vertices")) {
++            auto palette=blend(vertex);if(!palette_ids.count(palette))++counts[palette];
++          }
++        const size_t room=capacity>tree.colors.color_count?capacity-tree.colors.color_count:0;
++        if(counts.size()>room && room>0) {
++          std::vector<std::pair<Palette,u32>> wanted(counts.begin(),counts.end());
++          for(const auto& [mean,members]:median_cut(wanted,room)) {
++            const u16 color=u16(tree.colors.color_count++);
++            tree.colors.data.resize(((tree.colors.color_count+3)/4)*128);
++            for(int p=0;p<8;p++)for(int c=0;c<4;c++)tree.colors.read(color,p,c)=mean[p*4+c];
++            for(size_t m:members)palette_ids.emplace(wanted[m].first,color);
++          }
++          fmt::print("{} LOD {} tree {}: {} wanted colours shared as {} representative colours\n",
++                     type,geom,ti,wanted.size(),room);
++        }
++      }
++      auto append_vertex=[&](const json& source) -> u32 {
++        const Palette palette=blend(source);
+         auto found=palette_ids.find(palette);u16 color;
+         if(found!=palette_ids.end())color=found->second;
+-        else if(tree.colors.color_count<8192) {
++        else if(tree.colors.color_count<capacity) {
+           color=u16(tree.colors.color_count++);
+           tree.colors.data.resize(((tree.colors.color_count+3)/4)*128);
+           for(int p=0;p<8;p++)for(int c=0;c<4;c++)tree.colors.read(color,p,c)=palette[p*4+c];
+-- 
+2.54.0.windows.1
+
