@@ -129,5 +129,11 @@
   "game/graphics/opengl_renderer/shaders/modern_ao.vert",
   "game/graphics/opengl_renderer/shaders/modern_ao.frag",
   "game/graphics/opengl_renderer/shaders/modern_shadow.vert",
-  "game/graphics/opengl_renderer/shaders/modern_shadow.frag"
+  "game/graphics/opengl_renderer/shaders/modern_shadow.frag",
+  "game/graphics/opengl_renderer/shaders/modern_fire.vert",
+  "game/graphics/opengl_renderer/shaders/modern_fire.frag",
+  "game/graphics/opengl_renderer/shaders/modern_fire_light.vert",
+  "game/graphics/opengl_renderer/shaders/modern_fire_light.frag",
+  "game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert",
+  "game/graphics/opengl_renderer/shaders/modern_fire_sparks.frag"
 ]

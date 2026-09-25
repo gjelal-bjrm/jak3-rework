@@ -303,17 +303,20 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
   // From below, the submerged segment ends at the surface. The remaining ray
   // goes through air; a distant wall must not add metres of water absorption.
   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
-  float murk = 1.0-exp(-thickness*1.4);
-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
-  // Caustics follow the bed through refraction and disappear on deep water.
+  // Eau de bassin claire (v4, demande du joueur : l'eau laiteuse paraissait sombre et epaisse, « un autre
+  // liquide ») : on voit le fond, teinte turquoise qui ne se renforce qu'avec la profondeur, reflets dansants
+  // de la lumiere sur le fond ; la surface reste lisible grace aux reflets et aux rides.
+  vec3 transmission = exp(-vec3(0.30,0.11,0.085)*thickness);
+  float murk = 1.0-exp(-thickness*0.55);
+  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.15*murk);
+  below = mix(below,vec3(0.30,0.60,0.62),clamp(murk*0.30+0.04,0.0,0.45));
+  // Caustiques : suivent le fond a travers la refraction, s'effacent en eau profonde.
   vec3 bed = fluidUnproject(refractUV,z);
   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
-                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0);
-  below *= 1.0+caustic*0.22*exp(-thickness*0.85)*horizontal;
+                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0)
+                + .6*pow(max(0.0,1.0-abs(sin(bed.z*6.3-fluid_time*0.7+
+                      sin(bed.x*3.7+fluid_time*0.5)*1.6))),10.0);
+  below *= 1.0+caustic*0.38*exp(-thickness*0.7)*horizontal;
   float fresnel = 0.035+0.72*pow(1.0-max(dot(N,V),0.0),5.0);
   vec3 reflected = waterReflection(P,V,N).rgb;
   vec3 result = mix(below,reflected,fresnel);

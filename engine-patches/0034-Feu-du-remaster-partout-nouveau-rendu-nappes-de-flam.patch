@@ -1,0 +1,834 @@
+From 5905646d7bbba120c8bf991fbaea1630478e527e Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 01:15:21 +0200
+Subject: [PATCH 34/34] =?UTF-8?q?Feu=20du=20remaster=20partout=20:=20nouve?=
+ =?UTF-8?q?au=20rendu=20(nappes=20de=20flammes=20peintes,=20langues,=20lum?=
+ =?UTF-8?q?i=C3=A8re=20vacillante,=20air=20chaud,=20=C3=A9tincelles)=20pou?=
+ =?UTF-8?q?r=20le=20palais,=20la=20ville=20et=20toutes=20les=20flammes=20n?=
+ =?UTF-8?q?atives=20flame01=20d=C3=A9tect=C3=A9es=20par=20Sprite3=20;=20ea?=
+ =?UTF-8?q?u=20des=20bassins=20du=20palais=20plus=20claire?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/FireField.h     |  34 +++
+ game/graphics/opengl_renderer/ModernAO.h      |   4 +-
+ game/graphics/opengl_renderer/ModernFire.h    | 235 ++++++++++++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |   3 +-
+ .../graphics/opengl_renderer/OpenGLRenderer.h |   2 +
+ .../opengl_renderer/PalaceFireSources.inc     |  28 +++
+ .../opengl_renderer/shaders/fountain.frag     |  21 +-
+ .../opengl_renderer/shaders/generic.frag      |  21 +-
+ .../opengl_renderer/shaders/merc2.frag        |  21 +-
+ .../opengl_renderer/shaders/modern_fire.frag  |  76 ++++++
+ .../opengl_renderer/shaders/modern_fire.vert  |  31 +++
+ .../shaders/modern_fire_light.frag            |  72 ++++++
+ .../shaders/modern_fire_light.vert            |   6 +
+ .../shaders/modern_fire_sparks.frag           |  11 +
+ .../shaders/modern_fire_sparks.vert           |  25 ++
+ .../opengl_renderer/shaders/tfrag3.frag       |  21 +-
+ .../opengl_renderer/sprite/Sprite3.cpp        |  15 ++
+ 17 files changed, 587 insertions(+), 39 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/FireField.h
+ create mode 100644 game/graphics/opengl_renderer/ModernFire.h
+ create mode 100644 game/graphics/opengl_renderer/PalaceFireSources.inc
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire.vert
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire_light.vert
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire_sparks.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
+
+diff --git a/game/graphics/opengl_renderer/FireField.h b/game/graphics/opengl_renderer/FireField.h
+new file mode 100644
+index 00000000..9ef64c1b
+--- /dev/null
++++ b/game/graphics/opengl_renderer/FireField.h
+@@ -0,0 +1,34 @@
++#pragma once
++#include <mutex>
++#include <vector>
++#include "common/common_types.h"
++
++// Flammes natives (particules « flame01 ») reperees par Sprite3 au moment de leur dessin, dans n'importe quel
++// lieu. Elles ne sont plus dessinees : ModernFire les regroupe en foyers et dessine le nouveau feu a leur place.
++// Les particules d'une image sont lues par ModernFire a l'image suivante (le feu est dessine avant les sprites).
++namespace FireField {
++struct Particle {
++  float x, y, z, size, alpha;
++};
++inline std::mutex mutex;
++inline std::vector<Particle> building;
++inline u64 building_frame = UINT64_MAX;
++inline bool enabled = false;   // ModernFire actif : les flammes natives sont remplacees
++
++inline void collect(u64 frame, const Particle& p) {
++  std::lock_guard<std::mutex> guard(mutex);
++  if (building_frame != frame) { building.clear(); building_frame = frame; }
++  building.push_back(p);
++}
++// Particules de l'image precedente (vide si aucune flamme n'a ete dessinee).
++inline std::vector<Particle> take(u64 frame) {
++  std::lock_guard<std::mutex> guard(mutex);
++  std::vector<Particle> out;
++  if (building_frame + 1 == frame) out.swap(building);
++  else if (building_frame != frame) building.clear();
++  return out;
++}
++inline bool matches(const std::string& name) {
++  return name.size() >= 8 && name.compare(name.size() - 8, 8, "/flame01") == 0;
++}
++}  // namespace FireField
+diff --git a/game/graphics/opengl_renderer/ModernAO.h b/game/graphics/opengl_renderer/ModernAO.h
+index 7f9e2438..89357571 100644
+--- a/game/graphics/opengl_renderer/ModernAO.h
++++ b/game/graphics/opengl_renderer/ModernAO.h
+@@ -5,9 +5,9 @@
+ #include "game/graphics/opengl_renderer/BucketRenderer.h"
+ 
+ // Eclairage moderne du remaster. Les options sont reglees depuis GOAL (pc-remaster-lighting) :
+-// bit 0 = occlusion ambiante, bit 1 = ombres portees du soleil. Actifs par defaut.
++// bit 0 = occlusion ambiante, bit 1 = ombres portees du soleil, bit 2 = feu du remaster. Actifs par defaut.
+ namespace LightingState {
+-inline std::atomic<int> flags{3};
++inline std::atomic<int> flags{7};
+ }
+ 
+ // Etape 1 : occlusion ambiante sur l'image. Dessinee juste apres le decor opaque (avant les objets
+diff --git a/game/graphics/opengl_renderer/ModernFire.h b/game/graphics/opengl_renderer/ModernFire.h
+new file mode 100644
+index 00000000..df35ebae
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernFire.h
+@@ -0,0 +1,235 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <cmath>
++#include <functional>
++#include <map>
++#include <memory>
++#include <unordered_map>
++#include <vector>
++#include "common/log/log.h"
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/BucketRenderer.h"
++#include "game/graphics/opengl_renderer/CityFireSources.h"
++#include "game/graphics/opengl_renderer/FireField.h"
++#include "game/graphics/opengl_renderer/ModernAO.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++#include "game/graphics/opengl_renderer/loader/Loader.h"
++
++namespace PalaceFireTable {
++#include "PalaceFireSources.inc"
++}
++
++// Feu du remaster, partout dans le jeu (remplace le prototype du palais et de la ville).
++// Foyers : les 24 braseros du palais, les 61 feux ajustes de la ville (part-spawners) et, partout ailleurs, les
++// flammes natives « flame01 » reperees par Sprite3, regroupees en foyers suivis d'une image a l'autre.
++// Rendu (avant l'eau, pour que les reflets et la refraction les voient) :
++//   1. lumiere vacillante sur le decor proche et air qui tremble au-dessus des flammes (image entiere) ;
++//   2. flammes : trois nappes par foyer tournees vers la camera, langues decoupees par une turbulence qui monte,
++//      coeur jaune-blanc, bords orange puis rouges, bouts qui se detachent en haut (style peint, bords nets) ;
++//   3. etincelles qui s'envolent en tournoyant.
++class ModernFire {
++ public:
++  struct Source {
++    float x, y, z, r, h, seed, strength;
++  };
++
++  ~ModernFire() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++
++  bool enabled() const { return LightingState::flags.load() & 4; }
++
++  void render(SharedRenderState* state) {
++    FireField::enabled = enabled();
++    if (!FireField::enabled || !state->has_pc_data || state->version != GameVersion::Jak3) return;
++    if (m_render_frame == state->frame_idx) return;
++    m_render_frame = state->frame_idx;
++    const float now = LiquidSnapshot::seconds();
++    const float ex = state->camera_pos[0] / 4096.f, ey = state->camera_pos[1] / 4096.f, ez = state->camera_pos[2] / 4096.f;
++    track(FireField::take(state->frame_idx), now);
++    std::vector<Source> sources = gather(state, now);
++    if (sources.empty()) return;
++    // du plus loin au plus proche (melange additif : l'ordre ne change que les etincelles)
++    auto d2 = [&](const Source& s) { return (s.x - ex) * (s.x - ex) + (s.y - ey) * (s.y - ey) + (s.z - ez) * (s.z - ez); };
++    std::sort(sources.begin(), sources.end(), [&](const Source& a, const Source& b) { return d2(a) < d2(b); });
++    if (sources.size() > kMaxFlames) sources.resize(kMaxFlames);
++    if (!m_flames) init(state);
++    if (!m_flames->okay() || !m_light->okay() || !m_sparks->okay()) return;
++
++    GLint program, vao, depth_func, active, src_rgb, dst_rgb, src_alpha, dst_alpha, eq_rgb, eq_alpha;
++    GLboolean depth_write, color_mask[4];
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
++    glGetIntegerv(GL_DEPTH_FUNC, &depth_func); glGetIntegerv(GL_ACTIVE_TEXTURE, &active);
++    glGetIntegerv(GL_BLEND_SRC_RGB, &src_rgb); glGetIntegerv(GL_BLEND_DST_RGB, &dst_rgb);
++    glGetIntegerv(GL_BLEND_SRC_ALPHA, &src_alpha); glGetIntegerv(GL_BLEND_DST_ALPHA, &dst_alpha);
++    glGetIntegerv(GL_BLEND_EQUATION_RGB, &eq_rgb); glGetIntegerv(GL_BLEND_EQUATION_ALPHA, &eq_alpha);
++    glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write); glGetBooleanv(GL_COLOR_WRITEMASK, color_mask);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST, GL_PROGRAM_POINT_SIZE};
++    GLboolean was[6];
++    for (int i = 0; i < 6; i++) { was[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
++    glBindVertexArray(m_vao);
++    glDepthMask(GL_FALSE); glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
++
++    // tableaux des foyers (lumiere : les 12 plus proches)
++    const int n = int(sources.size());
++    std::vector<float> pos(4 * n), info(4 * n);
++    for (int i = 0; i < n; i++) {
++      pos[4 * i] = sources[i].x; pos[4 * i + 1] = sources[i].y; pos[4 * i + 2] = sources[i].z; pos[4 * i + 3] = sources[i].r;
++      info[4 * i] = sources[i].h; info[4 * i + 1] = sources[i].seed; info[4 * i + 2] = sources[i].strength; info[4 * i + 3] = 0;
++    }
++    auto bind = [&](Shader& shader, int count) {
++      shader.activate();
++      const GLuint id = shader.id();
++      glUniformMatrix4fv(glGetUniformLocation(id, "pc_camera"), 1, GL_FALSE, state->prototype_camera);
++      glUniform4fv(glGetUniformLocation(id, "cam_trans"), 1, state->camera_pos.data());
++      glUniform1f(glGetUniformLocation(id, "fire_time"), now);
++      glUniform1i(glGetUniformLocation(id, "fire_count"), count);
++      glUniform4fv(glGetUniformLocation(id, "fire_pos"), count, pos.data());
++      glUniform4fv(glGetUniformLocation(id, "fire_info"), count, info.data());
++      glUniform1f(glGetUniformLocation(id, "viewport_height"), float(state->render_fb_h));
++      m_scene.bind(state, id);
++    };
++    // 1. lumiere et air chaud (remplace l'image : lit la copie de la scene)
++    bind(*m_light, std::min(n, 12));
++    glDrawArrays(GL_TRIANGLES, 0, 3);
++    // 2. flammes (additives, cachees par le decor)
++    bind(*m_flames, n);
++    glEnable(GL_BLEND); glBlendEquation(GL_FUNC_ADD); glBlendFunc(GL_ONE, GL_ONE);
++    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_GEQUAL);
++    glDrawArraysInstanced(GL_TRIANGLES, 0, 6, n * 3);
++    // 3. etincelles
++    bind(*m_sparks, n);
++    glEnable(GL_PROGRAM_POINT_SIZE);
++    glDrawArrays(GL_POINTS, 0, n * kSparks);
++
++    glUseProgram(program); glBindVertexArray(vao); glDepthFunc(depth_func); glDepthMask(depth_write);
++    glBlendFuncSeparate(src_rgb, dst_rgb, src_alpha, dst_alpha); glBlendEquationSeparate(eq_rgb, eq_alpha);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]); glActiveTexture(active);
++    for (int i = 0; i < 6; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
++  }
++
++ private:
++  static constexpr size_t kMaxFlames = 48;
++  static constexpr int kSparks = 12;
++  struct Tracked {
++    Source s;
++    float seen = 0, born = 0;
++  };
++
++  void init(SharedRenderState* state) {
++    m_flames = std::make_unique<Shader>("modern_fire", state->version);
++    m_light = std::make_unique<Shader>("modern_fire_light", state->version);
++    m_sparks = std::make_unique<Shader>("modern_fire_sparks", state->version);
++    glGenVertexArrays(1, &m_vao);
++    CityFireSources::ready();          // les feux ajustes de la ville ne dessinent plus leurs flammes natives
++    lg::info("Feu du remaster : palais, ville et flammes natives remplacees partout");
++  }
++
++  // Regroupe les particules de flamme de l'image precedente en foyers et les suit d'une image a l'autre.
++  void track(const std::vector<FireField::Particle>& parts, float now) {
++    if (!parts.empty()) {
++      const float cell = 1.1f;
++      std::unordered_map<long long, std::vector<int>> grid;
++      auto key = [&](float x, float z) {
++        return (long long)std::floor(x / cell) * 1000003LL + (long long)std::floor(z / cell);
++      };
++      for (int i = 0; i < int(parts.size()); i++) grid[key(parts[i].x, parts[i].z)].push_back(i);
++      std::vector<int> parent(parts.size());
++      for (size_t i = 0; i < parent.size(); i++) parent[i] = int(i);
++      std::function<int(int)> find = [&](int a) { return parent[a] == a ? a : parent[a] = find(parent[a]); };
++      for (int i = 0; i < int(parts.size()); i++) {
++        const auto& p = parts[i];
++        for (int dx = -1; dx <= 1; dx++)
++          for (int dz = -1; dz <= 1; dz++) {
++            auto it = grid.find(key(p.x + dx * cell, p.z + dz * cell));
++            if (it == grid.end()) continue;
++            for (int j : it->second) {
++              const auto& q = parts[j];
++              if (std::abs(q.x - p.x) < cell && std::abs(q.z - p.z) < cell && std::abs(q.y - p.y) < 3.f)
++                parent[find(i)] = find(j);
++            }
++          }
++      }
++      std::map<int, std::vector<int>> clusters;
++      for (int i = 0; i < int(parts.size()); i++) clusters[find(i)].push_back(i);
++      for (auto& [root, members] : clusters) {
++        float w = 0, cx = 0, cz = 0, base = 1e9f, top = -1e9f, size = 0;
++        for (int i : members) {
++          const auto& p = parts[i];
++          const float wi = std::max(p.alpha, .02f) * std::max(p.size, .05f);
++          w += wi; cx += wi * p.x; cz += wi * p.z; size += p.size;
++          base = std::min(base, p.y - p.size * .35f); top = std::max(top, p.y + p.size * .5f);
++        }
++        cx /= w; cz /= w; size /= float(members.size());
++        float spread = 0;
++        for (int i : members) {
++          const auto& p = parts[i];
++          const float wi = std::max(p.alpha, .02f) * std::max(p.size, .05f);
++          spread += wi * ((p.x - cx) * (p.x - cx) + (p.z - cz) * (p.z - cz));
++        }
++        spread = std::sqrt(spread / w);
++        Source s{cx, base, cz, std::clamp(spread * 1.3f + size * .35f, .18f, 3.f),
++                 std::clamp((top - base) * 1.1f, .45f, 7.f), 0.f, 1.f};
++        // foyer deja suivi ?
++        Tracked* best = nullptr; float bd = 1e9f;
++        for (auto& t : m_tracked) {
++          const float d = std::hypot(t.s.x - s.x, t.s.z - s.z);
++          if (d < std::max(1.2f, t.s.r * 1.5f) && std::abs(t.s.y - s.y) < 3.f && d < bd) { bd = d; best = &t; }
++        }
++        if (best) {
++          auto& t = best->s;
++          t.x += (s.x - t.x) * .12f; t.z += (s.z - t.z) * .12f; t.y += (s.y - t.y) * .08f;
++          t.r += (s.r - t.r) * .06f; t.h += (s.h - t.h) * .06f;
++          best->seen = now;
++        } else {
++          Tracked t; t.s = s; t.s.seed = float(m_tracked.size() * 7 + 3) * .731f; t.seen = t.born = now;
++          m_tracked.push_back(t);
++        }
++      }
++    }
++    // intensite : monte en 0,3 s, s'eteint 0,5 s apres la derniere flamme native
++    for (auto& t : m_tracked) {
++      const float rise = std::clamp((now - t.born) / .3f, 0.f, 1.f);
++      const float fall = 1.f - std::clamp((now - t.seen - .15f) / .5f, 0.f, 1.f);
++      t.s.strength = rise * fall;
++    }
++    m_tracked.erase(std::remove_if(m_tracked.begin(), m_tracked.end(), [&](const Tracked& t) { return now - t.seen > .7f; }),
++                    m_tracked.end());
++  }
++
++  std::vector<Source> gather(SharedRenderState* state, float now) {
++    std::vector<Source> out;
++    unsigned regions = 0; bool palace = false;
++    for (auto* level : state->loader->get_in_use_levels()) {
++      const auto& name = level->level->level_name;
++      if (name == "wascitya") regions |= 1u << 1;
++      if (name == "wascityb") regions |= 1u << 2;
++      if (name == "waspala") palace = true;
++    }
++    if (palace) {                      // braseros : flamme posee sur les braises (fond du combustible)
++      for (int i = 0; i < 24; i++) {
++        const auto* f = PalaceFireTable::kPalaceFires[i];
++        // braseros sur pied (fond de braises connu) : juste sous le bord ; vasques murales : plus profondes
++        const float base = f[6] < 0.f ? f[1] + f[6] * .3f : f[1] + f[4] * .30f - .2f;
++        out.push_back({f[0], base, f[2], f[3] * 1.f, f[4] * .6f, float(i) * 1.713f, 1.f});
++      }
++    }
++    if (regions) {
++      for (const auto& c : CityFireSources::snapshot(regions, state->camera_pos.data()))
++        out.push_back({c.position[0], c.position[1] - .3f, c.position[2], c.position[3] * .6f, c.height * .8f, c.seed, 1.f});
++    }
++    for (const auto& t : m_tracked)
++      if (t.s.strength > .01f) out.push_back(t.s);
++    // au-dela de 150 m, le feu natif lointain n'est de toute facon plus lisible
++    const float ex = state->camera_pos[0] / 4096.f, ez = state->camera_pos[2] / 4096.f;
++    out.erase(std::remove_if(out.begin(), out.end(), [&](const Source& s) {
++      return std::hypot(s.x - ex, s.z - ez) > 150.f; }), out.end());
++    (void)now;
++    return out;
++  }
++
++  std::unique_ptr<Shader> m_flames, m_light, m_sparks;
++  LiquidSnapshot m_scene;
++  GLuint m_vao = 0;
++  u64 m_render_frame = UINT64_MAX;
++  std::vector<Tracked> m_tracked;
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 66a119d2..13010fb3 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1452,7 +1452,8 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+     if (bucket_id == (int)jak3::BucketId::OCEAN_NEAR) {
+       auto fire_prof = prof.make_scoped_child("palace-fire-before-water");
+       m_city_interiors.render(&m_render_state);
+-      m_palace_fire.render(&m_render_state);
++      if (m_modern_fire.enabled()) m_modern_fire.render(&m_render_state);   // feu du remaster, partout
++      else m_palace_fire.render(&m_render_state);                           // ancien prototype (comparaison)
+     }
+     if (bucket_id == (int)jak3::BucketId::BUCKET567) {
+       m_modern_weather.update(&m_render_state);   // meteo : nuages, couleurs du moment
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index 9c6d8885..41af3a79 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -18,6 +18,7 @@
+ #include "game/graphics/opengl_renderer/ModernBeam.h"
+ #include "game/graphics/opengl_renderer/ModernAO.h"
+ #include "game/graphics/opengl_renderer/ModernShadows.h"
++#include "game/graphics/opengl_renderer/ModernFire.h"
+ #include "game/graphics/opengl_renderer/WaterFountains.h"
+ #include "game/graphics/opengl_renderer/PalaceFire.h"
+ #include "game/graphics/opengl_renderer/CityInteriors.h"
+@@ -131,6 +132,7 @@ class OpenGLRenderer {
+   ModernBeam m_modern_beam;
+   ModernAO m_modern_ao;
+   ModernShadows m_modern_shadows;
++  ModernFire m_modern_fire;
+   ModernOceanSurface m_modern_ocean;
+   WaterFountains m_water_fountains;
+   CityInteriors m_city_interiors;
+diff --git a/game/graphics/opengl_renderer/PalaceFireSources.inc b/game/graphics/opengl_renderer/PalaceFireSources.inc
+new file mode 100644
+index 00000000..92ca22ea
+--- /dev/null
++++ b/game/graphics/opengl_renderer/PalaceFireSources.inc
+@@ -0,0 +1,28 @@
++// Foyers du palais de Spargus (24 braseros ; flammes natives deja coupees dans WASPALA.DGO).
++// Extrait de l ancien shader palace_fire.vert : x, y, z (m), rayon, hauteur, empreinte, fond du combustible.
++constexpr float kPalaceFires[24][7] = {
++  {2068.347656,245.195191,-439.520416,0.850, 3.500, 0.896473, -0.602500},
++  {2044.332520,260.605389,-427.963776,1.750, 7.000, 1.500000, 0.000000},
++  {2012.435425,256.637372,-416.933777,1.200, 5.000, 1.000000, 0.000000},
++  {2017.756592,247.652466,-427.581390,0.850, 3.500, 0.906730, -0.639686},
++  {2021.635132,247.511597,-414.157471,0.850, 3.500, 0.906680, -0.639701},
++  {2030.881958,251.703870,-423.380585,1.200, 5.000, 1.000000, 0.000000},
++  {2047.177368,251.070966,-440.113129,1.200, 5.000, 1.000000, 0.000000},
++  {1996.695557,248.875825,-410.387360,0.850, 3.500, 0.896406, -0.602500},
++  {2006.619873,248.875825,-410.387360,0.850, 3.500, 0.896406, -0.602500},
++  {1980.074219,251.162625,-428.589844,1.200, 5.000, 1.000000, 0.000000},
++  {1984.552734,247.492097,-427.279144,0.850, 3.500, 0.896423, -0.602500},
++  {1982.396606,247.511597,-414.157471,0.850, 3.500, 0.906680, -0.639701},
++  {1969.389648,260.605389,-433.689301,1.750, 7.000, 1.500000, 0.000000},
++  {1991.966309,254.317990,-416.675903,1.200, 5.000, 1.000000, 0.000000},
++  {1967.893677,250.980099,-446.651794,1.200, 5.000, 1.000000, 0.000000},
++  {2027.325928,250.861111,-501.077118,1.200, 5.000, 1.000000, 0.000000},
++  {2035.419434,247.474076,-519.398621,0.850, 3.500, 0.896406, -0.602500},
++  {2041.876587,260.605389,-494.716095,1.750, 7.000, 1.500000, 0.000000},
++  {2048.688232,251.067761,-479.644440,1.200, 5.000, 1.000000, 0.000000},
++  {1998.561401,251.097028,-503.746338,1.200, 5.000, 1.000000, 0.000000},
++  {2013.424316,260.605389,-507.685303,1.750, 7.000, 1.500000, 0.000000},
++  {1949.805908,245.182191,-485.345551,0.850, 3.500, 0.913050, -0.651099},
++  {1971.172852,251.053128,-483.306976,1.200, 5.000, 1.000000, 0.000000},
++  {1981.258423,260.605389,-497.629883,1.750, 7.000, 1.500000, 0.000000},
++};
+diff --git a/game/graphics/opengl_renderer/shaders/fountain.frag b/game/graphics/opengl_renderer/shaders/fountain.frag
+index cb2ac04a..542eab91 100644
+--- a/game/graphics/opengl_renderer/shaders/fountain.frag
++++ b/game/graphics/opengl_renderer/shaders/fountain.frag
+@@ -347,17 +347,20 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
+-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
+-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
+-  float murk = 1.0-exp(-thickness*1.4);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
+-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+-  // Caustics follow the bed through refraction and disappear on deep water.
++  // Eau de bassin claire (v4, demande du joueur : l'eau laiteuse paraissait sombre et epaisse, « un autre
++  // liquide ») : on voit le fond, teinte turquoise qui ne se renforce qu'avec la profondeur, reflets dansants
++  // de la lumiere sur le fond ; la surface reste lisible grace aux reflets et aux rides.
++  vec3 transmission = exp(-vec3(0.30,0.11,0.085)*thickness);
++  float murk = 1.0-exp(-thickness*0.55);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.15*murk);
++  below = mix(below,vec3(0.30,0.60,0.62),clamp(murk*0.30+0.04,0.0,0.45));
++  // Caustiques : suivent le fond a travers la refraction, s'effacent en eau profonde.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+-                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0);
+-  below *= 1.0+caustic*0.22*exp(-thickness*0.85)*horizontal;
++                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0)
++                + .6*pow(max(0.0,1.0-abs(sin(bed.z*6.3-fluid_time*0.7+
++                      sin(bed.x*3.7+fluid_time*0.5)*1.6))),10.0);
++  below *= 1.0+caustic*0.38*exp(-thickness*0.7)*horizontal;
+   float fresnel = 0.035+0.72*pow(1.0-max(dot(N,V),0.0),5.0);
+   vec3 reflected = waterReflection(P,V,N).rgb;
+   vec3 result = mix(below,reflected,fresnel);
+diff --git a/game/graphics/opengl_renderer/shaders/generic.frag b/game/graphics/opengl_renderer/shaders/generic.frag
+index ff1c6d55..43265957 100644
+--- a/game/graphics/opengl_renderer/shaders/generic.frag
++++ b/game/graphics/opengl_renderer/shaders/generic.frag
+@@ -365,17 +365,20 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
+-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
+-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
+-  float murk = 1.0-exp(-thickness*1.4);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
+-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+-  // Caustics follow the bed through refraction and disappear on deep water.
++  // Eau de bassin claire (v4, demande du joueur : l'eau laiteuse paraissait sombre et epaisse, « un autre
++  // liquide ») : on voit le fond, teinte turquoise qui ne se renforce qu'avec la profondeur, reflets dansants
++  // de la lumiere sur le fond ; la surface reste lisible grace aux reflets et aux rides.
++  vec3 transmission = exp(-vec3(0.30,0.11,0.085)*thickness);
++  float murk = 1.0-exp(-thickness*0.55);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.15*murk);
++  below = mix(below,vec3(0.30,0.60,0.62),clamp(murk*0.30+0.04,0.0,0.45));
++  // Caustiques : suivent le fond a travers la refraction, s'effacent en eau profonde.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+-                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0);
+-  below *= 1.0+caustic*0.22*exp(-thickness*0.85)*horizontal;
++                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0)
++                + .6*pow(max(0.0,1.0-abs(sin(bed.z*6.3-fluid_time*0.7+
++                      sin(bed.x*3.7+fluid_time*0.5)*1.6))),10.0);
++  below *= 1.0+caustic*0.38*exp(-thickness*0.7)*horizontal;
+   float fresnel = 0.035+0.72*pow(1.0-max(dot(N,V),0.0),5.0);
+   vec3 reflected = waterReflection(P,V,N).rgb;
+   vec3 result = mix(below,reflected,fresnel);
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index d6863880..0517a2a2 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -376,17 +376,20 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
+-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
+-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
+-  float murk = 1.0-exp(-thickness*1.4);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
+-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+-  // Caustics follow the bed through refraction and disappear on deep water.
++  // Eau de bassin claire (v4, demande du joueur : l'eau laiteuse paraissait sombre et epaisse, « un autre
++  // liquide ») : on voit le fond, teinte turquoise qui ne se renforce qu'avec la profondeur, reflets dansants
++  // de la lumiere sur le fond ; la surface reste lisible grace aux reflets et aux rides.
++  vec3 transmission = exp(-vec3(0.30,0.11,0.085)*thickness);
++  float murk = 1.0-exp(-thickness*0.55);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.15*murk);
++  below = mix(below,vec3(0.30,0.60,0.62),clamp(murk*0.30+0.04,0.0,0.45));
++  // Caustiques : suivent le fond a travers la refraction, s'effacent en eau profonde.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+-                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0);
+-  below *= 1.0+caustic*0.22*exp(-thickness*0.85)*horizontal;
++                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0)
++                + .6*pow(max(0.0,1.0-abs(sin(bed.z*6.3-fluid_time*0.7+
++                      sin(bed.x*3.7+fluid_time*0.5)*1.6))),10.0);
++  below *= 1.0+caustic*0.38*exp(-thickness*0.7)*horizontal;
+   float fresnel = 0.035+0.72*pow(1.0-max(dot(N,V),0.0),5.0);
+   vec3 reflected = waterReflection(P,V,N).rgb;
+   vec3 result = mix(below,reflected,fresnel);
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire.frag b/game/graphics/opengl_renderer/shaders/modern_fire.frag
+new file mode 100644
+index 00000000..c74ae97a
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire.frag
+@@ -0,0 +1,76 @@
++#version 410 core
++// Feu du remaster : nappe de flamme peinte, style Genshin mais crédible.
++//  - enveloppe en goutte (base large et ronde, pointe fine), hauteur qui respire ;
++//  - langues de flamme : turbulence etiree verticalement qui monte vite, deformee (domaine tordu) ;
++//  - bouts qui se detachent au-dessus de la pointe ;
++//  - bords nets (aspect peint), coeur jaune-blanc, orange puis rouge sombre vers les bords et le haut,
++//    racine legerement bleutee ; halo doux autour ;
++//  - fondu au contact du decor (pas d'arete la ou la flamme touche les braises).
++in vec2 local;
++in vec3 world;
++flat in int src;
++flat in int layer;
++out vec4 color;
++uniform vec4 cam_trans;
++uniform mat4 pc_camera;
++uniform vec4 fire_pos[48];
++uniform vec4 fire_info[48];
++uniform float fire_time;
++uniform vec4 fluid_viewport;
++uniform sampler2D tex_T26;
++
++float hash(vec2 p) { vec3 q = fract(vec3(p.xyx) * .1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
++float noise(vec2 p) {
++  vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f);
++  return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
++}
++float fbm(vec2 p) {
++  float v = 0., a = .5;
++  for (int i = 0; i < 4; i++) { v += a * noise(p); p = mat2(1.6, 1.2, -1.2, 1.6) * p + 3.1; a *= .5; }
++  return v;
++}
++bool skyDepth(float d) { const float s = 1. / 16777215.; return d <= 1.5 * s || abs(d - 400. * s) <= 1.5 * s; }
++float sceneDistance() {
++  vec2 uv = gl_FragCoord.xy / vec2(textureSize(tex_T26, 0));
++  float d = texture(tex_T26, uv).r;
++  if (skyDepth(d)) return 1e6;
++  vec2 px = uv * vec2(textureSize(tex_T26, 0));
++  vec4 h = vec4((px - fluid_viewport.xy) / fluid_viewport.zw * 2. - 1., d * 2. - 1., 1.);
++  h.y /= (512. / 416.) * .5;
++  vec4 w = inverse(-pc_camera) * h;
++  return length(w.xyz / w.w / 4096.);
++}
++
++void main() {
++  float seed = fire_info[src].y + float(layer) * 3.71;
++  float strength = fire_info[src].z;
++  float x = local.x, y = local.y;
++  float t = fire_time * (1.05 + .1 * sin(seed)) + seed * 7.;
++  // turbulence qui monte (domaine tordu), plus forte en hauteur
++  float w1 = fbm(vec2(x * 1.5 + seed, y * 1.8 - t * 1.7));
++  float w2 = fbm(vec2(x * 3.4 - seed * 1.3, y * 3.9 - t * 2.9));
++  float xw = x + (w1 - .5) * 1.1 * y + (w2 - .5) * .42 * y;
++  float tip = .95 + .10 * sin(t * 2.1 + seed) + .06 * sin(t * 4.9 + seed * 2.1);   // la hauteur respire
++  float yy = y / tip;
++  // plusieurs langues : largeur modulee par un bruit horizontal qui monte
++  float tongues = fbm(vec2(xw * 2.9 + seed * 5.1, yy - t * 1.55));
++  float width = mix(.95, .02, pow(clamp(yy, 0., 1.), .55)) * (.18 + 1.45 * tongues);
++  float body = width - abs(xw) * 1.05;
++  // lechage fin des bords, bouts qui se detachent au-dessus
++  float lick = fbm(vec2(xw * 6. + seed * 3., yy * 2.4 - t * 4.2));
++  body += (lick - .5) * .42 * smoothstep(.08, .8, yy);
++  body -= smoothstep(.55, 1.08, yy + (w2 - .5) * .7) * .6;
++  float mask = smoothstep(0., .045, body) * smoothstep(-.07, .10, yy);     // bord net (peint), base adoucie
++  float inner = smoothstep(.10, .42, body);
++  float heat = clamp(inner * (1.05 - yy * .9) + (1. - yy) * .10, 0., 1.) * smoothstep(-.05, .12, yy);
++  vec3 c = mix(vec3(.78, .10, .02), vec3(1.45, .46, .06), smoothstep(0., .40, heat));
++  c = mix(c, vec3(1.65, 1.12, .40), smoothstep(.50, .95, heat));
++  float glow = exp(-x * x * 1.2) * exp(-max(yy, 0.) * 1.6) * smoothstep(-.10, .05, yy) * .18;
++  float pulse = .93 + .07 * sin(t * 7.7 + seed);
++  vec3 rgb = (c * mask * (layer == 1 ? 1. : .72) + vec3(1.2, .38, .06) * glow) * .95 * pulse * strength;
++  // fondu au contact du decor
++  float soft = clamp((sceneDistance() - length(world - cam_trans.xyz / 4096.)) / .35, 0., 1.);
++  rgb *= soft;
++  if (max(rgb.r, max(rgb.g, rgb.b)) < .003) discard;
++  color = vec4(rgb, 0.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire.vert b/game/graphics/opengl_renderer/shaders/modern_fire.vert
+new file mode 100644
+index 00000000..3adcc001
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire.vert
+@@ -0,0 +1,31 @@
++#version 410 core
++// Feu du remaster : trois nappes par foyer, tournees vers la camera autour de l'axe vertical du foyer,
++// decalees en largeur et en profondeur (impression de volume). fire_pos = base (m) + rayon ; fire_info = hauteur,
++// graine, intensite.
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform vec4 fire_pos[48];
++uniform vec4 fire_info[48];
++out vec2 local;          // x : en rayons (-1,5..1,5) ; y : en hauteurs de flamme (-0,12..1,35)
++out vec3 world;
++flat out int src;
++flat out int layer;
++void main() {
++  const vec2 c[6] = vec2[6](vec2(-1, 0), vec2(1, 0), vec2(1, 1), vec2(-1, 0), vec2(1, 1), vec2(-1, 1));
++  src = gl_InstanceID / 3; layer = gl_InstanceID % 3;
++  vec3 base = fire_pos[src].xyz; float r = fire_pos[src].w, H = fire_info[src].x;
++  vec3 eye = cam_trans.xyz / 4096.;
++  vec2 toEye = eye.xz - base.xz; float l = length(toEye);
++  vec2 dir = l > 1e-3 ? toEye / l : vec2(0, 1);
++  vec2 side = vec2(-dir.y, dir.x);
++  vec2 k = c[gl_VertexID];
++  float spread = layer == 1 ? 1.25 : 1.5;
++  float lat = (float(layer) - 1.) * .16 * r, dep = (float(layer) - 1.) * .22 * r;
++  vec3 p = base + vec3(side.x, 0., side.y) * (k.x * spread * r + lat) - vec3(dir.x, 0., dir.y) * dep;
++  float y = -.12 + k.y * 1.47;
++  p.y += y * H;
++  local = vec2(k.x * spread, y);
++  world = p;
++  gl_Position = -pc_camera * vec4(p * 4096. - cam_trans.xyz, 1.);
++  gl_Position.y *= (512. / 416.) * .5;
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_light.frag b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+new file mode 100644
+index 00000000..8c1c846f
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+@@ -0,0 +1,72 @@
++#version 410 core
++// Feu du remaster : lumiere des flammes sur le decor proche (vacille, cachee par les obstacles) et air chaud
++// qui ondule au-dessus. Remplace l'image a partir de sa copie (tex_T25 couleur, tex_T26 profondeur).
++out vec4 color;
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform float fire_time;
++uniform int fire_count;
++uniform vec4 fire_pos[48];
++uniform vec4 fire_info[48];
++uniform vec4 fluid_viewport;
++uniform sampler2D tex_T25;
++uniform sampler2D tex_T26;
++
++mat4 inv_camera;
++vec3 project(vec3 P) {
++  vec4 h = -pc_camera * vec4(P * 4096. - cam_trans.xyz, 1.);
++  h.y *= (512. / 416.) * .5;
++  vec3 n = h.xyz / h.w;
++  return vec3((fluid_viewport.xy + (n.xy * .5 + .5) * fluid_viewport.zw) / vec2(textureSize(tex_T25, 0)), n.z * .5 + .5);
++}
++vec3 unproject(vec2 uv, float depth) {
++  vec4 h = vec4((uv * vec2(textureSize(tex_T25, 0)) - fluid_viewport.xy) / fluid_viewport.zw * 2. - 1., depth * 2. - 1., 1.);
++  h.y /= (512. / 416.) * .5;
++  vec4 w = inv_camera * h;
++  return w.xyz / w.w / 4096. + cam_trans.xyz / 4096.;
++}
++float flicker(float seed) {
++  return .80 + .12 * sin(fire_time * 3.1 + seed) + .07 * sin(fire_time * 7.7 + seed * 1.7) + .05 * sin(fire_time * 13.3 + seed * .3);
++}
++void main() {
++  inv_camera = inverse(-pc_camera);
++  vec2 uv = gl_FragCoord.xy / vec2(textureSize(tex_T25, 0));
++  float depth = texture(tex_T26, uv).r;
++  vec3 scene = texture(tex_T25, uv).rgb;
++  if (depth < .00001) { color = vec4(scene, 1); return; }
++  vec3 P = unproject(uv, depth), eye = cam_trans.xyz / 4096.;
++  vec3 N = normalize(cross(dFdx(P), dFdy(P)));
++  if (dot(N, eye - P) < 0.) N = -N;
++  vec3 ray = normalize(P - eye);
++  vec3 light = vec3(0); vec2 haze = vec2(0);
++  for (int i = 0; i < fire_count; i++) {
++    float r = fire_pos[i].w, H = fire_info[i].x, seed = fire_info[i].y, strength = fire_info[i].z;
++    vec3 source = fire_pos[i].xyz + vec3(0, H * .35, 0);
++    float reach = 3.5 + H * 1.6;
++    vec3 delta = source - P; float d = length(delta);
++    if (d < reach) {
++      float visible = 1.;
++      for (int k = 1; k <= 4; k++) {
++        vec3 probe = mix(P + N * .08, source, float(k) / 5.);
++        vec3 s = project(probe);
++        if (any(lessThan(s.xy, vec2(.001))) || any(greaterThan(s.xy, vec2(.999)))) continue;
++        float z = texture(tex_T26, s.xy).r;
++        if (z > s.z && length(unproject(s.xy, z) - probe) > .3) { visible = .08; break; }
++      }
++      float att = (1. - smoothstep(reach * .45, reach, d)) / (1. + d * d * .45);
++      light += vec3(1.0, .42, .10) * max(dot(N, delta / max(d, .01)), 0.) * att * flicker(seed) * visible * strength * (.35 + .1 * H);
++    }
++    // air chaud au-dessus de la pointe
++    vec3 hot = fire_pos[i].xyz + vec3(0, H * 1.05, 0);
++    float along = dot(hot - eye, ray);
++    if (along > 0. && along < length(P - eye)) {
++      vec3 q = eye + along * ray - hot;
++      float plume = exp(-dot(q.xz, q.xz) / (r * r * .9) - q.y * q.y / (H * H * .45)) * strength;
++      haze += vec2(sin(q.y * 10. - fire_time * 6.3 + seed), cos(q.y * 7.5 - fire_time * 4.9 + seed)) * plume * .9;
++    }
++  }
++  vec2 shifted = clamp(uv + haze / vec2(textureSize(tex_T25, 0)), vec2(.001), vec2(.999));
++  if (abs(length(unproject(shifted, texture(tex_T26, shifted).r) - eye) - length(P - eye)) < 1.)
++    scene = texture(tex_T25, shifted).rgb;
++  color = vec4(scene + scene * light, 1.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_light.vert b/game/graphics/opengl_renderer/shaders/modern_fire_light.vert
+new file mode 100644
+index 00000000..91e90270
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_light.vert
+@@ -0,0 +1,6 @@
++#version 410 core
++// Feu du remaster : triangle plein ecran (lumiere vacillante et air chaud).
++void main() {
++  vec2 p = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
++  gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_sparks.frag b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.frag
+new file mode 100644
+index 00000000..80b63e52
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.frag
+@@ -0,0 +1,11 @@
++#version 410 core
++// Feu du remaster : etincelle ronde, coeur jaune, bord orange.
++in float heat;
++out vec4 color;
++void main() {
++  vec2 c = gl_PointCoord * 2. - 1.;
++  float r = dot(c, c);
++  if (r > 1. || heat < .01) discard;
++  float core = exp(-r * 3.);
++  color = vec4(mix(vec3(1.6, .45, .06), vec3(2., 1.5, .7), core) * core * heat, 0.);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
+new file mode 100644
+index 00000000..0c87fcc8
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert
+@@ -0,0 +1,25 @@
++#version 410 core
++// Feu du remaster : etincelles (12 par foyer) qui montent en tournoyant, clignotent et s'eteignent.
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform float fire_time;
++uniform vec4 fire_pos[48];
++uniform vec4 fire_info[48];
++uniform float viewport_height;
++out float heat;
++void main() {
++  int id = gl_VertexID / 12, k = gl_VertexID % 12;
++  float seed = fire_info[id].y * 13.7 + float(k) * 2.731;
++  float r = fire_pos[id].w, H = fire_info[id].x, strength = fire_info[id].z;
++  float life = 1.4 + .6 * fract(sin(seed) * 43758.5);
++  float age = mod(fire_time * (.8 + .3 * fract(seed)) + seed, life);
++  vec3 p = fire_pos[id].xyz + vec3(sin(seed * 1.3) * r * .45, H * .25, cos(seed * 1.7) * r * .45);
++  float rise = age * (1.1 + H * .35);
++  p += vec3(sin(age * 3.1 + seed) * age * .28, rise, cos(age * 2.6 + seed) * age * .24);
++  gl_Position = -pc_camera * vec4(p * 4096. - cam_trans.xyz, 1.);
++  gl_Position.y *= (512. / 416.) * .5;
++  float d = length(p - cam_trans.xyz / 4096.);
++  gl_PointSize = clamp(viewport_height * .03 / max(d, 1.), 1.5, 6.);
++  float twinkle = .6 + .4 * sin(fire_time * 23. + seed * 5.);
++  heat = smoothstep(0., .1, age) * (1. - smoothstep(life * .35, life, age)) * twinkle * strength;
++}
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index f341543e..70850834 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -390,17 +390,20 @@ vec3 shadeModernWater(vec3 P, vec3 geometricNormal, vec4 legacyTexture) {
+   // From below, the submerged segment ends at the surface. The remaining ray
+   // goes through air; a distant wall must not add metres of water absorption.
+   if (belowSurface) thickness = min(length(cam_trans.xyz/4096.0-P),3.0);
+-  // Eau de bassin laiteuse, turquoise gris comme l'original : absorption et diffusion bien visibles
+-  // (la version limpide faisait croire qu'il n'y avait pas d'eau entre les pierres).
+-  vec3 transmission = exp(-vec3(0.55,0.30,0.26)*thickness);
+-  float murk = 1.0-exp(-thickness*1.4);
+-  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.45*murk);
+-  below = mix(below,vec3(0.24,0.33,0.34),clamp(murk*0.55+0.12,0.0,0.8));
+-  // Caustics follow the bed through refraction and disappear on deep water.
++  // Eau de bassin claire (v4, demande du joueur : l'eau laiteuse paraissait sombre et epaisse, « un autre
++  // liquide ») : on voit le fond, teinte turquoise qui ne se renforce qu'avec la profondeur, reflets dansants
++  // de la lumiere sur le fond ; la surface reste lisible grace aux reflets et aux rides.
++  vec3 transmission = exp(-vec3(0.30,0.11,0.085)*thickness);
++  float murk = 1.0-exp(-thickness*0.55);
++  vec3 below = texture(tex_T25,refractUV).rgb*transmission*(1.0-0.15*murk);
++  below = mix(below,vec3(0.30,0.60,0.62),clamp(murk*0.30+0.04,0.0,0.45));
++  // Caustiques : suivent le fond a travers la refraction, s'effacent en eau profonde.
+   vec3 bed = fluidUnproject(refractUV,z);
+   float caustic = pow(max(0.0,1.0-abs(sin(bed.x*5.1+fluid_time*0.8+
+-                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0);
+-  below *= 1.0+caustic*0.22*exp(-thickness*0.85)*horizontal;
++                      sin(bed.z*4.2-fluid_time*0.6)*1.9))),8.0)
++                + .6*pow(max(0.0,1.0-abs(sin(bed.z*6.3-fluid_time*0.7+
++                      sin(bed.x*3.7+fluid_time*0.5)*1.6))),10.0);
++  below *= 1.0+caustic*0.38*exp(-thickness*0.7)*horizontal;
+   float fresnel = 0.035+0.72*pow(1.0-max(dot(N,V),0.0),5.0);
+   vec3 reflected = waterReflection(P,V,N).rgb;
+   vec3 result = mix(below,reflected,fresnel);
+diff --git a/game/graphics/opengl_renderer/sprite/Sprite3.cpp b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+index a26033e9..04705620 100644
+--- a/game/graphics/opengl_renderer/sprite/Sprite3.cpp
++++ b/game/graphics/opengl_renderer/sprite/Sprite3.cpp
+@@ -1,3 +1,4 @@
++#include "game/graphics/opengl_renderer/FireField.h"
+ #include <set>
+ #include "Sprite3.h"
+ 
+@@ -663,6 +664,20 @@ void Sprite3::flush_sprites(SharedRenderState* render_state,
+       if(m_coastal_native_runs.empty())continue;
+     }
+ 
++    // Feu du remaster : les flammes natives (flame01) ne sont plus dessinees ; leurs positions sont confiees a
++    // ModernFire, qui dessine le nouveau feu a leur place (dans tous les lieux).
++    if (render_state->version == GameVersion::Jak3 && render_state->has_pc_data && FireField::enabled &&
++        FireField::matches(render_state->texture_pool->get_debug_texture_name_from_tbp(tbp))) {
++      for (u32 i = 0; i < bucket->ids.size(); i += 5) {
++        const u32 id = bucket->ids[i];
++        if (id >= m_vertices_3d.size()) continue;
++        const auto& v = m_vertices_3d[id];
++        FireField::collect(render_state->frame_idx, {v.xyz_sx.x() / 4096.f, v.xyz_sx.y() / 4096.f,
++                                                     v.xyz_sx.z() / 4096.f, v.xyz_sx.w() / 4096.f, v.rgba.w()});
++      }
++      continue;
++    }
++
+     {
+       // Diagnostic (gouttes de lave de l'arene) : journaliser une fois chaque texture de sprite vue en jeu.
+       static std::set<std::string> logged_sprite_textures;
+-- 
+2.54.0.windows.1
+
