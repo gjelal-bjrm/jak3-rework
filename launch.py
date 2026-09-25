@@ -29,6 +29,8 @@ parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) v
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
 parser.add_argument('--prepare-only', action='store_true')
+parser.add_argument('--textures', choices=('fidele', 'genshin', 'sans'),
+                    help="remaster : textures de l'arene (Codex couleurs d'origine, Codex couleurs vives, textures du jeu)")
 parser.add_argument('--replace', action='store_true', help='ferme la partie deja ouverte au lieu de refuser de demarrer (tests)')
 parser.add_argument('--hour', type=float, metavar='H', help="heure du jour a imposer apres le placement (0-24, decimales acceptees)")
 parser.add_argument('--time-ratio', type=float, metavar='R', help="vitesse du temps (0 = fige, 1 = temps reel, 30 = un jour en 48 min)")
@@ -96,6 +98,18 @@ if not route.is_file():
     sys.exit(f'Point de test manquant : {route}')
 if args.variant == 'remaster' and hashlib.sha256(route.read_bytes()).hexdigest() != manifest['routes'][route_scene]:
     sys.exit('Code de demarrage V3 modifie. Relancer le conditionnement du prototype.')
+if args.variant == 'remaster' and args.textures:
+    # textures de l'arene choisies dans le lanceur : la version choisie devient celle du remaster
+    for level in ('wasstada', 'wasstadb'):
+        chosen = ROOT / 'arena-remaster/objects' / f'{level}-{args.textures}.fr3'
+        relative = f'out/jak3/fr3/{level}.fr3'
+        if not chosen.is_file() or relative not in files: continue
+        target = ROOT / 'variants/remaster' / relative
+        if hashlib.sha256(chosen.read_bytes()).hexdigest() != expected['remaster'][relative]:
+            shutil.copy2(chosen, target)
+            expected['remaster'][relative] = hashlib.sha256(target.read_bytes()).hexdigest()
+            (ROOT / 'variant-hashes.json').write_text(json.dumps(expected, indent=2) + '\n', encoding='utf-8')
+    print(f'textures de l arene : {args.textures}', flush=True)
 for relative in files:
     source = ROOT / 'variants' / args.variant / relative
     if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != expected[args.variant][relative]:

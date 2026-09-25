@@ -2,7 +2,7 @@
 bridge sur la copie d'origine wasstada-before-objects.fr3 (les indices natifs changent apres un patch : ne jamais
 enchainer), puis installe le resultat dans data/ et la variante remaster.
 
-Usage : python arena-remaster/objects/apply_objects.py [--textures genshin|fidele] [patchs relatifs a ce dossier]
+Usage : python arena-remaster/objects/apply_objects.py [--textures genshin|fidele|sans] [patchs relatifs a ce dossier]
   sans patch : tous (braseros, lames, falaises) ; --textures : textures HD preparees par
   arena-remaster/textures/prepare_textures.py (le resultat est aussi garde dans wasstada-<version>.fr3).
 """
@@ -25,9 +25,9 @@ def main(parts, textures=None):
         combined['remove'] += part['remove']; combined['add'] += part['add']
         print(name, len(part['remove']), '->', len(part['add']), flush=True)
         del part
-    hd = json.loads((R / f'arena-remaster/textures/textures-{textures}.json').read_text())['textures'] if textures else []
+    hd = json.loads((R / f'arena-remaster/textures/textures-{textures}.json').read_text())['textures']         if textures and textures != 'sans' else []
     level_of = lambda t: t['page'].split('-')[0]
-    if textures:
+    if hd:
         combined['textures'] = [t for t in hd if level_of(t) == 'wasstada']
         combined['description'] += f' + textures HD ({textures})'
         print('textures', textures, len(combined['textures']), flush=True)
@@ -35,6 +35,10 @@ def main(parts, textures=None):
     out = H / 'wasstada-objects.fr3'
     subprocess.run([str(BRIDGE), str(H / 'wasstada-before-objects.fr3'), str(H / 'combined-patch.json'), str(out)], check=True)
     if textures: shutil.copy2(out, H / f'wasstada-{textures}.fr3')
+    if textures == 'sans':                  # version de comparaison : textures d'origine partout
+        for level in ('wasstadb',):
+            base = H / f'{level}-before-textures.fr3'
+            if base.exists(): shutil.copy2(base, H / f'{level}-sans.fr3')
     shutil.copy2(out, R / 'data/out/jak3/fr3/wasstada.fr3')
     subprocess.run([sys.executable, str(R / 'sync_variant.py'), 'out/jak3/fr3/wasstada.fr3'], check=True)
     # autres parties de l'arene (wasstadb, wasstadc) : textures seulement, depuis leur copie d'avant textures

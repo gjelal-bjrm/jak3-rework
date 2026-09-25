@@ -1,7 +1,7 @@
 """Lanceur de tests du remaster : une fenetre, pas de ligne de commande.
 
 Double-clic sur LANCEUR-DE-TESTS.cmd (ou sur ce fichier). On choisit le lieu, la meteo, le moment de la
-journee et la version (remaster ou jeu d'origine pour comparer), puis « Lancer ». La fenetre suit le
+journee, la version (remaster ou jeu d'origine pour comparer) et les textures de l'arene, puis « Lancer ». La fenetre suit le
 demarrage et peut fermer le jeu. Les derniers choix sont memorises (lanceur-choix.json).
 """
 from pathlib import Path
@@ -29,6 +29,11 @@ WEATHERS = [
     ('Au hasard (comme en jeu)', 'hasard'), ('Beau temps', 'beau-temps'), ('Voilé', 'voile'),
     ('Couvert', 'couvert'), ('Pluie', 'pluie'), ('Orage', 'orage'), ('Neige', 'neige'),
     ('Tempête de sable (Spargus)', 'tempete-de-sable'), ('Brouillard matinal', 'brouillard'),
+]
+TEXTURES = [
+    ('Nouvelles, couleurs d’origine (« Genshin fidèle »)', 'fidele'),
+    ('Nouvelles, couleurs vives (« Genshin »)', 'genshin'),
+    ('Celles du jeu (pour voir ce que changent les objets seuls)', 'sans'),
 ]
 HOURS = [
     ('Comme en jeu (9 h, le jour avance)', None), ('Aube (6 h 30)', 6.5), ('Matin (9 h)', 9.0),
@@ -114,13 +119,20 @@ class Launcher(tk.Tk):
         ttk.Radiobutton(versions, text='Remaster (nouvelle version)', variable=self.variant, value='remaster', command=self.refresh).grid(row=0, column=0, sticky='w')
         ttk.Radiobutton(versions, text='Jeu d’origine (pour comparer)', variable=self.variant, value='original', command=self.refresh).grid(row=1, column=0, sticky='w')
 
-        buttons = ttk.Frame(frame); buttons.grid(row=6, column=0, columnspan=2, pady=(10, 4))
+        ttk.Label(frame, text='Textures\nde l’arène').grid(row=6, column=0, sticky='nw', **pad)
+        self.textures = tk.StringVar(value=saved.get('textures', 'fidele'))
+        textures = ttk.Frame(frame); textures.grid(row=6, column=1, sticky='w', **pad)
+        self.texture_buttons = [ttk.Radiobutton(textures, text=label, variable=self.textures, value=value)
+                                for label, value in TEXTURES]
+        for i, button in enumerate(self.texture_buttons): button.grid(row=i, column=0, sticky='w')
+
+        buttons = ttk.Frame(frame); buttons.grid(row=7, column=0, columnspan=2, pady=(10, 4))
         self.start_button = ttk.Button(buttons, text='▶  Lancer', command=self.start, width=18)
         self.start_button.grid(row=0, column=0, padx=6)
         ttk.Button(buttons, text='■  Fermer le jeu', command=self.stop, width=18).grid(row=0, column=1, padx=6)
 
         self.status = tk.Text(frame, width=62, height=8, font=('Segoe UI', 9), state='disabled', relief='flat', background='#f3f3f3')
-        self.status.grid(row=7, column=0, columnspan=2, pady=(6, 0))
+        self.status.grid(row=8, column=0, columnspan=2, pady=(6, 0))
         self.say('Choisis un lieu, une météo et un moment, puis clique sur « Lancer ».\n'
                  'Le jeu met environ 30 secondes à se mettre en place, puis passe au premier plan.\n'
                  'Si Jak ne répond pas, clique une fois dans la fenêtre du jeu.')
@@ -130,6 +142,7 @@ class Launcher(tk.Tk):
     def refresh(self):
         original = self.variant.get() == 'original'
         self.weather.configure(state='disabled' if original else 'readonly')
+        for button in self.texture_buttons: button.configure(state='disabled' if original else 'normal')
 
     def say(self, text, replace=True):
         self.status.configure(state='normal')
@@ -141,7 +154,7 @@ class Launcher(tk.Tk):
         variant = self.variant.get()
         args = [str(PYTHON), str(ROOT / 'launch.py'), variant, '--replace'] + PLACES[self.place.get()][1]
         if variant == 'remaster':
-            args += ['--weather', WEATHERS[self.weather.current()][1]]
+            args += ['--weather', WEATHERS[self.weather.current()][1], '--textures', self.textures.get()]
         hour = HOURS[self.hour.current()][1]
         if hour is not None: args += ['--hour', str(hour)]
         if self.freeze.get(): args += ['--time-ratio', '0']
@@ -150,7 +163,7 @@ class Launcher(tk.Tk):
             CHOICES.write_text(json.dumps({'place': self.place.get(), 'weather': self.weather.current(),
                                            'hour': self.hour.current(), 'freeze': self.freeze.get(),
                                            'sound': self.sound.get(),
-                                           'variant': variant}), encoding='utf-8')
+                                           'variant': variant, 'textures': self.textures.get()}), encoding='utf-8')
         except Exception: pass
         LOG.parent.mkdir(exist_ok=True)
         log = LOG.open('w', encoding='utf-8')
