@@ -1,7 +1,7 @@
 """Lames sculptees qui tiennent les braseros de l'arene (TIE prototype 13, 42 exemplaires, 4 niveaux de detail).
 
 Lancement : blender.exe --background --python arena-remaster/objects/remodel_spikes.py
-Meme forme, memes UV et couleurs d'origine ; aretes arrondies (chanfrein a 3 segments) et faces subdivisees
+Meme forme, memes UV et couleurs d'origine (niveaux de detail 0 a 2 ; le 3, tres lointain, reste d'origine) ; aretes arrondies (chanfrein a 3 segments) et faces subdivisees
 en douceur, comme une piece sculptee et polie plutot qu'un solide a facettes. Sortie : spikes-patch.json.
 """
 import sys, json, math
@@ -35,11 +35,10 @@ for instance in instances:
             targets[f['geom']].append(f)
     reset()
     high = NativeMesh(f'Lame_{instance}', targets[0]); soften(high, .05, 3)
-    low = NativeMesh(f'Lame_loin_{instance}', targets[3]); soften(low, .05, 1)
     info = {'instance': instance, 'original_triangles': {}, 'new_triangles': {}}
     for lod, tfaces in sorted(targets.items()):
-        asset = low if lod == 3 else high
-        remove, add, dist = asset.records(tfaces)
+        if lod == 3: continue          # version lointaine (18 triangles) gardee d'origine : l'arrondi y bloque Blender
+        remove, add, dist = high.records(tfaces)
         patch['remove'].extend(remove); patch['add'].extend(add)
         info['original_triangles'][lod] = len(tfaces); info['new_triangles'][lod] = len(add)
     reports.append(info)

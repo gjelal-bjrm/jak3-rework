@@ -1,0 +1,548 @@
+[
+  {
+    "instance": 521,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 522,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 523,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 524,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 514,
+      "1": 514,
+      "2": 514
+    }
+  },
+  {
+    "instance": 525,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 531,
+      "1": 531,
+      "2": 531
+    }
+  },
+  {
+    "instance": 526,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 538,
+      "1": 538,
+      "2": 538
+    }
+  },
+  {
+    "instance": 527,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 528,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 529,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 530,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 531,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 532,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 533,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 531,
+      "1": 531,
+      "2": 531
+    }
+  },
+  {
+    "instance": 534,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 535,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 536,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 537,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 531,
+      "1": 531,
+      "2": 531
+    }
+  },
+  {
+    "instance": 538,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 531,
+      "1": 531,
+      "2": 531
+    }
+  },
+  {
+    "instance": 539,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 540,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 541,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 542,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 543,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 544,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 545,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 546,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 547,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 531,
+      "1": 531,
+      "2": 531
+    }
+  },
+  {
+    "instance": 548,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 549,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 550,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 551,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 552,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 553,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 554,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 555,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 556,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 557,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  },
+  {
+    "instance": 558,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 559,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 560,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 561,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 521,
+      "1": 521,
+      "2": 521
+    }
+  },
+  {
+    "instance": 562,
+    "original_triangles": {
+      "0": 72,
+      "1": 72,
+      "2": 72
+    },
+    "new_triangles": {
+      "0": 545,
+      "1": 545,
+      "2": 545
+    }
+  }
+]

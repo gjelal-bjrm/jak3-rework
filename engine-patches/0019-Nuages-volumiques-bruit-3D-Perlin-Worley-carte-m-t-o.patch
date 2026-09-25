@@ -1,7 +1,7 @@
 From 5f345c243c5b5b1f4d3e398a611395b3f36e6a1e Mon Sep 17 00:00:00 2001
 From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
 Date: Thu, 24 Sep 2026 09:59:36 +0200
-Subject: [PATCH 19/27] =?UTF-8?q?Nuages=20volumiques=20:=20bruit=203D=20Pe?=
+Subject: [PATCH 19/28] =?UTF-8?q?Nuages=20volumiques=20:=20bruit=203D=20Pe?=
  =?UTF-8?q?rlin-Worley,=20carte=20m=C3=A9t=C3=A9o,=20marche=20de=20rayons?=
  =?UTF-8?q?=20=C3=A0=20demi-r=C3=A9solution=20avec=20accumulation=20tempor?=
  =?UTF-8?q?elle=20;=20=C3=A9clairage=20soleil/lune,=20diffusion=20multiple?=

@@ -1,0 +1,73 @@
+From fa122293ce4bfd297be56effd2f2f5488553876a Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 20:05:16 +0200
+Subject: [PATCH 28/28] =?UTF-8?q?Ar=C3=A8ne=20:=20r=C3=A9ponse=20des=20mat?=
+ =?UTF-8?q?i=C3=A8res=20(relief,=20lumi=C3=A8re,=20brillance)=20=C3=A9tend?=
+ =?UTF-8?q?ue=20=C3=A0=20toutes=20les=20grandes=20surfaces=20de=20wasstad*?=
+ =?UTF-8?q?=20(falaises,=20plaques,=20gradins,=20=C3=A9chafaudages,=20dall?=
+ =?UTF-8?q?es)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../background/PalaceMaterials.h              | 24 +++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 99d3dd5c..e6222f4e 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -18,21 +18,23 @@ class PalaceMaterials {
+     m_high_res.clear();
+     const bool market = level.level_name == "wascityb" || level.level_name == "wascitya" ||
+                         level.level_name == "waswide";
+-    if (level.level_name != "waspala" && !market) return;
++    const bool arena = level.level_name.rfind("wasstad", 0) == 0;
++    if (level.level_name != "waspala" && !market && !arena) return;
+     int count=0, high_res=0;
+     for (const auto& texture : level.textures) {
+       // Regional response only for explicit, high-resolution replacement
+       // materials. Alpha decals, windows, liquids and unchanged atlases keep
+       // the native path. The palace classification is unchanged.
+-      const int kind=market ? (std::max(texture.w,texture.h)>=512 ?
++      const int kind=arena ? classify_arena(texture.debug_name) :
++          market ? (std::max(texture.w,texture.h)>=512 ?
+           classify_market(texture.debug_name) : 0) : classify(texture.debug_name);
+       m_kinds.push_back(kind);
+       m_names.push_back(texture.debug_name);
+       m_high_res.push_back(std::max(texture.w,texture.h)>=512);
+       if (kind) { ++count; if (std::max(texture.w,texture.h)>=512) ++high_res; }
+     }
+-    static bool reported_palace=false, reported_market=false;
+-    bool& reported=market ? reported_market : reported_palace;
++    static bool reported_palace=false, reported_market=false, reported_arena=false;
++    bool& reported=arena ? reported_arena : (market ? reported_market : reported_palace);
+     if (!reported && count) {
+       lg::info("Remaster material response [{}]: {} static materials, {} textures at 512px or above",level.level_name,count,high_res);
+       reported=true;
+@@ -69,6 +71,20 @@ class PalaceMaterials {
+         state->camera_pos[0]/4096.f,state->camera_pos[1]/4096.f,state->camera_pos[2]/4096.f);
+   }
+  private:
++  // Arene de Spargus : relief et reponse a la lumiere par matiere, sur toutes les grandes surfaces
++  // (falaises, gradins, plaques, echafaudages, dalles). Lave, braises, bannieres et decalques exclus.
++  static int classify_arena(const std::string& name) {
++    if (name.rfind("wstd-",0)!=0 && name.rfind("common_sandstone_",0)!=0) return 0;
++    if (name.find("lava")!=std::string::npos || name.find("coal")!=std::string::npos ||
++        name=="wstd-flag" || name=="wstd-canopy" || name=="wstd-stands-black" ||
++        name=="wstd-rock-shrubs" || name=="wstd-shrub-pebbles") return 0;
++    if (name.find("rock")!=std::string::npos) return 7;                       // falaises et parois
++    if (name=="wstd-throne-wall02" || name=="wstd-ladder" ||
++        name=="wstd-fight-plat-box-top") return 2;                            // bois
++    if (name.rfind("common_sandstone_",0)==0 || name=="wstd-stands-seats01" ||
++        name=="wstd-spike-01" || name.find("throne-floor")!=std::string::npos) return 1;   // pierre, os
++    return 3;                                                                 // metal (plaques, gradins, echafaudages)
++  }
+   static int classify_market(const std::string& name) {
+     if (name=="market-support-wood-v1" || name=="market-palm-trunk-v1") return 2;
+     if (name=="market-support-metal-v1") return 3;
+-- 
+2.54.0.windows.1
+
