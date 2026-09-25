@@ -134,3 +134,7 @@ lanceur-choix.json
 /arena-remaster/uv/log-*.txt
 # Kit Codex de tout le decor (contient des textures du jeu)
 /textures-remaster/codex/
+# Falaises de la ville : exports natifs et copies des niveaux
+/city-remaster/cliffs/*-native.json
+/city-remaster/cliffs/*.fr3
+/city-remaster/cliffs/sel-*.json

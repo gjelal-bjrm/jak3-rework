@@ -1,0 +1,134 @@
+From 9efe398165d2aed9f80ff1b9479971c9f815da4e Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 01:46:33 +0200
+Subject: [PATCH 37/37] =?UTF-8?q?Ar=C3=A8ne=20:=20brume=20de=20fum=C3=A9e?=
+ =?UTF-8?q?=20et=20de=20chaleur=20de=20la=20lave=20permanente=20;=20feu=20?=
+ =?UTF-8?q?:=20zones=20des=20braseros=20sur=20toute=20leur=20hauteur,=20lu?=
+ =?UTF-8?q?mi=C3=A8re=20arr=C3=AAt=C3=A9e=20sous=20les=20braises?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernFire.h    |  7 +++---
+ game/graphics/opengl_renderer/ModernWeather.h | 10 ++++++++-
+ .../shaders/modern_fire_light.frag            |  2 ++
+ .../shaders/modern_weather_fog.frag           | 22 +++++++++++++++++--
+ 4 files changed, 35 insertions(+), 6 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernFire.h b/game/graphics/opengl_renderer/ModernFire.h
+index 026b722a..e33130a7 100644
+--- a/game/graphics/opengl_renderer/ModernFire.h
++++ b/game/graphics/opengl_renderer/ModernFire.h
+@@ -139,7 +139,8 @@ class ModernFire {
+   static bool in_arena_brazier(float x, float y, float z) {
+     for (const auto& b : ArenaFireTable::kArenaBraziers) {
+       const float dx = x - b[0], dz = z - b[2], reach = b[3] * 1.5f + .8f;
+-      if (dx * dx + dz * dz < reach * reach && y > b[1] - 2.f && y < b[1] + b[3] * 3.f) return true;
++      // toute la hauteur du brasero : l'effet natif fait aussi des flammes sous la vasque (a ne pas suivre)
++      if (dx * dx + dz * dz < reach * reach && y > b[1] - b[3] * 2.6f && y < b[1] + b[3] * 3.f) return true;
+     }
+     return false;
+   }
+@@ -234,8 +235,8 @@ class ModernFire {
+     // intensite : un foyer n'est remplace qu'une fois stable (feu continu), monte en 0,3 s, s'eteint 0,5 s
+     // apres la derniere flamme native
+     std::vector<FireField::Zone> zones;
+-    for (const auto& b : ArenaFireTable::kArenaBraziers)
+-      zones.push_back({b[0], b[1], b[2], b[3], b[3] * 3.f});
++    for (const auto& b : ArenaFireTable::kArenaBraziers)   // de sous la vasque jusqu'au-dessus des flammes
++      zones.push_back({b[0], b[1] - b[3] * 2.6f + 1.2f, b[2], b[3], b[3] * 5.6f});
+     for (auto& t : m_tracked) {
+       if (t.hits < 8) { t.s.strength = 0.f; t.born = now; continue; }
+       zones.push_back({t.s.x, t.s.y, t.s.z, t.s.r, t.s.h});
+diff --git a/game/graphics/opengl_renderer/ModernWeather.h b/game/graphics/opengl_renderer/ModernWeather.h
+index 539c0c18..7c1aceb7 100644
+--- a/game/graphics/opengl_renderer/ModernWeather.h
++++ b/game/graphics/opengl_renderer/ModernWeather.h
+@@ -86,7 +86,13 @@ class ModernWeather {
+     const auto& p = m_params;
+     const float rain = p.rain * outdoor, snow = p.snow * outdoor, sand = p.sand * outdoor;
+     const float fog = p.fog * outdoor;
+-    if (rain < .01f && snow < .01f && sand < .01f && fog < .01f) return;
++    // arene : brume de fumee et de chaleur (niveau wasstada charge, camera dans le cirque), par tous les temps
++    float arena = 0.f;
++    if (ModernOcean::level_loaded(state, "wasstada")) {
++      const float d = std::hypot(state->camera_pos[0] / 4096.f - 2320.f, state->camera_pos[2] / 4096.f + 470.f);
++      arena = 1.f - std::clamp((d - 170.f) / 80.f, 0.f, 1.f);
++    }
++    if (rain < .01f && snow < .01f && sand < .01f && fog < .01f && arena < .01f) return;
+     hot_reload();
+ 
+     GLint program, old_vao, depth_func, old_active, viewport[4];
+@@ -136,6 +142,8 @@ class ModernWeather {
+       glUniform1f(glGetUniformLocation(id, "wx_sand"), sand);
+       glUniform2f(glGetUniformLocation(id, "wx_wind"), wind_x, wind_z);
+       glUniform1f(glGetUniformLocation(id, "wx_flash"), m_flash);
++      glUniform1f(glGetUniformLocation(id, "wx_arena"), arena);
++      glUniform1f(glGetUniformLocation(id, "wx_arena_level"), 11.5f);   // surface de la lave
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+     }
+ 
+diff --git a/game/graphics/opengl_renderer/shaders/modern_fire_light.frag b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+index ae36aa3c..33695668 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_fire_light.frag
+@@ -55,6 +55,8 @@ void main() {
+         if (z > s.z && length(unproject(s.xy, z) - probe) > .3) { visible = .08; break; }
+       }
+       float att = (1. - smoothstep(reach * .45, reach, d)) / (1. + d * d * .45);
++      // la vasque (ou le sol) arrete la lumiere : rien n'est eclaire sous le niveau des braises
++      att *= smoothstep(fire_pos[i].y - .6, fire_pos[i].y + .3, P.y);
+       light += vec3(1.0, .42, .10) * max(dot(N, delta / max(d, .01)), 0.) * att * flicker(seed) * visible * strength * (.35 + .1 * H);
+     }
+     // air chaud au-dessus de la pointe
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+index 7f0f16b3..60bc8f6a 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+@@ -24,6 +24,8 @@ uniform float wx_ground_height;     // decroissance du brouillard (m)
+ uniform float wx_sand;              // 0..1
+ uniform vec2 wx_wind;               // m/s
+ uniform float wx_flash;             // eclair
++uniform float wx_arena;             // 0..1 : brume de l'arene (fumee et chaleur de la lave)
++uniform float wx_arena_level;       // m : niveau de la lave
+ 
+ bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
+ vec3 unproject(vec2 uv,float depth){
+@@ -66,14 +68,30 @@ void main(){
+     float low=exp(-max(rd.y,0.)*2.2);           // le ciel au-dessus reste un peu plus clair
+     tauSand=wx_sand*wx_sand*.020*min(dist,400.)*gust*mix(.55,1.,low);
+   }
+-  float tau=tauFog+tauSand;
++  // Arene de Spargus : fumee de la lave toujours presente. Voile leger dans tout le cirque, nappe plus dense
++  // au ras de la lave (integrale d'une densite qui decroit avec la hauteur), qui derive et ondule lentement.
++  float tauArena=0.;
++  if(wx_arena>0.){
++    vec3 pm=wx_eye+rd*min(dist,40.); pm.xz-=vec2(.7,.4)*wx_time; pm.y-=wx_time*.35;
++    float drift=.55+.9*(noise(pm*vec3(.05,.09,.05))*.7+noise(pm*vec3(.16,.22,.16)+9.)*.3);
++    float k=1./9.;
++    float base=.009*exp(-(wx_eye.y-wx_arena_level)*k);
++    float a=rd.y*k;
++    float layer=abs(a)<1e-5?base*dist:base*(1.-exp(-dist*a))/a;
++    tauArena=wx_arena*(.0022*min(dist,600.)+min(layer,1.5))*drift;
++  }
++  float tau=tauFog+tauSand+tauArena;
+   if(tau<1e-4){color=vec4(0.);return;}
+   float f=1.-exp(-tau);
+   vec3 L=normalize(wx_sun);
+   float mu=max(dot(rd,L),0.);
+   vec3 fogCol=wx_fog_color+wx_sun_color*(pow(mu,8.)*.55+pow(mu,48.)*.6);
+   vec3 sandCol=wx_sand_color+wx_sun_color*vec3(1.,.8,.55)*(pow(mu,5.)*.45);
+-  vec3 col=(fogCol*tauFog+sandCol*tauSand)/tau;
++  // fumee grise et chaude, eclairee en orange par la lave (plus fort pres du sol et loin de la camera)
++  float lowRay=exp(-max(rd.y,-.2)*2.5);
++  vec3 smokeCol=mix(vec3(.46,.40,.36),vec3(.95,.42,.14),.42*lowRay)*(.55+.45*length(wx_sun_color))
++               +wx_sun_color*vec3(1.,.85,.65)*pow(mu,6.)*.35;
++  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena)/tau;
+   col+=vec3(.55,.6,.75)*wx_flash*.18;
+   color=vec4(col*f,f);
+ }
+-- 
+2.54.0.windows.1
+

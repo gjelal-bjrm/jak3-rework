@@ -85,7 +85,7 @@ def build(centre, base_y, phase, segments=48, smooth=2, rivets=True):
     # coupe
     rows = []
     for p in chaikin(BOWL_PROFILE, smooth):
-        h, r = p.y, max(p.x, 0.0)
+        h, r = p.x, max(p.y, 0.0)          # BOWL_PROFILE = (hauteur, rayon) : ne pas inverser
         bump = .06 * (math.exp(-((h - 1.55) / .09) ** 2) + math.exp(-((h - 3.29) / .09) ** 2))
         rows.append(ring(h, r + bump, piecewise(h, BOWL_V), 90.0, ribs if r > .5 else None))
     band(rows, BOWL)

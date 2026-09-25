@@ -55,6 +55,8 @@ void main() {
         if (z > s.z && length(unproject(s.xy, z) - probe) > .3) { visible = .08; break; }
       }
       float att = (1. - smoothstep(reach * .45, reach, d)) / (1. + d * d * .45);
+      // la vasque (ou le sol) arrete la lumiere : rien n'est eclaire sous le niveau des braises
+      att *= smoothstep(fire_pos[i].y - .6, fire_pos[i].y + .3, P.y);
       light += vec3(1.0, .42, .10) * max(dot(N, delta / max(d, .01)), 0.) * att * flicker(seed) * visible * strength * (.35 + .1 * H);
     }
     // air chaud au-dessus de la pointe

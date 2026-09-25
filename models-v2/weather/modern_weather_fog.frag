@@ -24,6 +24,8 @@ uniform float wx_ground_height;     // decroissance du brouillard (m)
 uniform float wx_sand;              // 0..1
 uniform vec2 wx_wind;               // m/s
 uniform float wx_flash;             // eclair
+uniform float wx_arena;             // 0..1 : brume de l'arene (fumee et chaleur de la lave)
+uniform float wx_arena_level;       // m : niveau de la lave
 
 bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
 vec3 unproject(vec2 uv,float depth){
@@ -66,14 +68,30 @@ void main(){
     float low=exp(-max(rd.y,0.)*2.2);           // le ciel au-dessus reste un peu plus clair
     tauSand=wx_sand*wx_sand*.020*min(dist,400.)*gust*mix(.55,1.,low);
   }
-  float tau=tauFog+tauSand;
+  // Arene de Spargus : fumee de la lave toujours presente. Voile leger dans tout le cirque, nappe plus dense
+  // au ras de la lave (integrale d'une densite qui decroit avec la hauteur), qui derive et ondule lentement.
+  float tauArena=0.;
+  if(wx_arena>0.){
+    vec3 pm=wx_eye+rd*min(dist,40.); pm.xz-=vec2(.7,.4)*wx_time; pm.y-=wx_time*.35;
+    float drift=.55+.9*(noise(pm*vec3(.05,.09,.05))*.7+noise(pm*vec3(.16,.22,.16)+9.)*.3);
+    float k=1./9.;
+    float base=.009*exp(-(wx_eye.y-wx_arena_level)*k);
+    float a=rd.y*k;
+    float layer=abs(a)<1e-5?base*dist:base*(1.-exp(-dist*a))/a;
+    tauArena=wx_arena*(.0022*min(dist,600.)+min(layer,1.5))*drift;
+  }
+  float tau=tauFog+tauSand+tauArena;
   if(tau<1e-4){color=vec4(0.);return;}
   float f=1.-exp(-tau);
   vec3 L=normalize(wx_sun);
   float mu=max(dot(rd,L),0.);
   vec3 fogCol=wx_fog_color+wx_sun_color*(pow(mu,8.)*.55+pow(mu,48.)*.6);
   vec3 sandCol=wx_sand_color+wx_sun_color*vec3(1.,.8,.55)*(pow(mu,5.)*.45);
-  vec3 col=(fogCol*tauFog+sandCol*tauSand)/tau;
+  // fumee grise et chaude, eclairee en orange par la lave (plus fort pres du sol et loin de la camera)
+  float lowRay=exp(-max(rd.y,-.2)*2.5);
+  vec3 smokeCol=mix(vec3(.46,.40,.36),vec3(.95,.42,.14),.42*lowRay)*(.55+.45*length(wx_sun_color))
+               +wx_sun_color*vec3(1.,.85,.65)*pow(mu,6.)*.35;
+  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena)/tau;
   col+=vec3(.55,.6,.75)*wx_flash*.18;
   color=vec4(col*f,f);
 }
