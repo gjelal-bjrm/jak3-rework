@@ -11,7 +11,7 @@ from pathlib import Path
 import json, shutil, subprocess, sys
 H = Path(__file__).resolve().parent; R = H.parents[1]
 BRIDGE = R / 'engine-build/bin/Release/palace_mesh_bridge.exe'
-DEFAULT = ['braziers-patch.json', 'spikes-patch.json', '../rocks/rocks-patch.json']
+DEFAULT = ['braziers-patch.json', 'spikes-patch.json', '../rocks/rocks-patch.json', '../uv/uv-patch-wasstada.json']
 
 
 def main(parts, textures=None, others_only=False):
@@ -49,8 +49,13 @@ def main(parts, textures=None, others_only=False):
     for level in ('wasstadb', 'wasstadc') if hd else ():
         base = H / f'{level}-before-textures.fr3'
         if not base.exists(): shutil.copy2(R / f'data/out/jak3/fr3/{level}.fr3', base)
-        (H / f'{level}-patch.json').write_text(json.dumps({'description': f'Arene : textures HD ({textures})', 'remove': [], 'add': [],
-                                                           'textures': hd, 'textures_optional': True}))
+        other = {'description': f'Arene : textures HD ({textures})', 'remove': [], 'add': [], 'textures': hd,
+                 'textures_optional': True}
+        uv = R / f'arena-remaster/uv/uv-patch-{level}.json'           # plaquage sans etirement de cette partie
+        if uv.exists():
+            part = json.loads(uv.read_text()); other['remove'] = part['remove']; other['add'] = part['add']
+            other['description'] += ' + plaquage sans etirement'
+        (H / f'{level}-patch.json').write_text(json.dumps(other, separators=(',', ':')))
         target = H / f'{level}-{textures}.fr3'
         subprocess.run([str(BRIDGE), str(base), str(H / f'{level}-patch.json'), str(target)], check=True)
         shutil.copy2(target, R / f'data/out/jak3/fr3/{level}.fr3')

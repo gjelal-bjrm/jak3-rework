@@ -1,0 +1,306 @@
+{
+ "wstd-floor-panel01": {
+  "surface_m2": 23151,
+  "etirement_median_avant": 1.43,
+  "cm_par_pixel_origine": 8.96,
+  "mode": "motif",
+  "etirement_median_apres": 1.07,
+  "etirement_90pc_apres": 1.31
+ },
+ "wstd-stands-shell01": {
+  "surface_m2": 27077,
+  "etirement_median_avant": 1.73,
+  "cm_par_pixel_origine": 7.39,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.17
+ },
+ "wstd-stands-shell02": {
+  "surface_m2": 689,
+  "etirement_median_avant": 1.34,
+  "cm_par_pixel_origine": 3.75,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-throne-plat03": {
+  "surface_m2": 1302,
+  "etirement_median_avant": 1.32,
+  "cm_par_pixel_origine": 4.55,
+  "mode": "motif",
+  "etirement_median_apres": 1.02,
+  "etirement_90pc_apres": 1.03
+ },
+ "wstd-throne-wall01": {
+  "surface_m2": 6214,
+  "etirement_median_avant": 1.45,
+  "cm_par_pixel_origine": 5.1,
+  "mode": "motif",
+  "etirement_median_apres": 1.22,
+  "etirement_90pc_apres": 1.54
+ },
+ "wstd-throne-chair01": {
+  "surface_m2": 13,
+  "etirement_median_avant": 1.46,
+  "cm_par_pixel_origine": 3.41,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-throne-floor01": {
+  "surface_m2": 2758,
+  "etirement_median_avant": 1.08,
+  "cm_par_pixel_origine": 8.26,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-throne-floor02": {
+  "surface_m2": 282,
+  "etirement_median_avant": 1.3,
+  "cm_par_pixel_origine": 7.32,
+  "mode": "motif",
+  "etirement_median_apres": 1.21,
+  "etirement_90pc_apres": 1.33
+ },
+ "wstd-throne-wall02": {
+  "surface_m2": 327,
+  "etirement_median_avant": 1.35,
+  "cm_par_pixel_origine": 5.31,
+  "mode": "motif",
+  "etirement_median_apres": 1.22,
+  "etirement_90pc_apres": 1.22
+ },
+ "wstd-stands-seats02": {
+  "surface_m2": 9765,
+  "etirement_median_avant": 1.52,
+  "cm_par_pixel_origine": 4.54,
+  "mode": "motif",
+  "etirement_median_apres": 1.03,
+  "etirement_90pc_apres": 1.06
+ },
+ "wstd-stands-seats01": {
+  "surface_m2": 14881,
+  "etirement_median_avant": 1.16,
+  "cm_par_pixel_origine": 5.57,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-stands-stairs02": {
+  "surface_m2": 2562,
+  "etirement_median_avant": 1.36,
+  "cm_par_pixel_origine": 5.67,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-stands-stairs01": {
+  "surface_m2": 3557,
+  "etirement_median_avant": 1.25,
+  "cm_par_pixel_origine": 7.19,
+  "mode": "motif",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ },
+ "wstd-tentacle-plate03": {
+  "surface_m2": 15296,
+  "etirement_median_avant": 1.34,
+  "cm_par_pixel_origine": 5.01,
+  "mode": "motif",
+  "etirement_median_apres": 1.1,
+  "etirement_90pc_apres": 1.13
+ },
+ "wstd-tentacle-plate01": {
+  "surface_m2": 181,
+  "etirement_median_avant": 1.2,
+  "cm_par_pixel_origine": 3.66,
+  "mode": "continu",
+  "etirement_median_apres": 1.15,
+  "etirement_90pc_apres": 1.3
+ },
+ "wstd-floor-panel02": {
+  "surface_m2": 1890,
+  "etirement_median_avant": 1.78,
+  "cm_par_pixel_origine": 5.36,
+  "mode": "motif",
+  "etirement_median_apres": 1.04,
+  "etirement_90pc_apres": 1.13
+ },
+ "wstd-floor-panel03": {
+  "surface_m2": 266,
+  "etirement_median_avant": 1.48,
+  "cm_par_pixel_origine": 3.16,
+  "mode": "motif",
+  "etirement_median_apres": 1.15,
+  "etirement_90pc_apres": 1.33
+ },
+ "wstd-stands-plate01": {
+  "surface_m2": 6030,
+  "etirement_median_avant": 2.75,
+  "cm_par_pixel_origine": 6.49,
+  "mode": "continu",
+  "etirement_median_apres": 1.27,
+  "etirement_90pc_apres": 1.55
+ },
+ "wstd-stands-shell": {
+  "surface_m2": 125,
+  "etirement_median_avant": 2.42,
+  "cm_par_pixel_origine": 3.74,
+  "mode": "continu",
+  "etirement_median_apres": 1.22,
+  "etirement_90pc_apres": 1.47
+ },
+ "wstd-throne-plat02": {
+  "surface_m2": 299,
+  "etirement_median_avant": 2.32,
+  "cm_par_pixel_origine": 4.16,
+  "mode": "motif",
+  "etirement_median_apres": 1.2,
+  "etirement_90pc_apres": 1.2
+ },
+ "wstd-stands-plate02": {
+  "surface_m2": 4183,
+  "etirement_median_avant": 3.19,
+  "cm_par_pixel_origine": 6.16,
+  "mode": "continu",
+  "etirement_median_apres": 1.27,
+  "etirement_90pc_apres": 1.55
+ },
+ "wstd-stands-lowall01": {
+  "surface_m2": 1279,
+  "etirement_median_avant": 1.52,
+  "cm_par_pixel_origine": 4.85,
+  "mode": "motif",
+  "etirement_median_apres": 1.47,
+  "etirement_90pc_apres": 1.99
+ },
+ "wstd-throne-arch02": {
+  "surface_m2": 308,
+  "etirement_median_avant": 1.4,
+  "cm_par_pixel_origine": 4.16,
+  "mode": "continu",
+  "etirement_median_apres": 1.11,
+  "etirement_90pc_apres": 1.54
+ },
+ "wstd-throne-arch01": {
+  "surface_m2": 50,
+  "etirement_median_avant": 1.51,
+  "cm_par_pixel_origine": 4.57,
+  "mode": "continu",
+  "etirement_median_apres": 1.11,
+  "etirement_90pc_apres": 1.54
+ },
+ "wstd-stands-plate03": {
+  "surface_m2": 4303,
+  "etirement_median_avant": 2.85,
+  "cm_par_pixel_origine": 6.96,
+  "mode": "continu",
+  "etirement_median_apres": 1.27,
+  "etirement_90pc_apres": 1.55
+ },
+ "wstd-stands-plate05": {
+  "surface_m2": 3057,
+  "etirement_median_avant": 1.61,
+  "cm_par_pixel_origine": 10.02,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.29
+ },
+ "wstd-stands-plate04": {
+  "surface_m2": 4127,
+  "etirement_median_avant": 1.56,
+  "cm_par_pixel_origine": 9.81,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.29
+ },
+ "wstd-stands-rib": {
+  "surface_m2": 6451,
+  "etirement_median_avant": 1.8,
+  "cm_par_pixel_origine": 4.08,
+  "mode": "continu",
+  "etirement_median_apres": 1.12,
+  "etirement_90pc_apres": 1.45
+ },
+ "wstd-stands-ceiling": {
+  "surface_m2": 26782,
+  "etirement_median_avant": 1.75,
+  "cm_par_pixel_origine": 9.18,
+  "mode": "motif",
+  "etirement_median_apres": 1.04,
+  "etirement_90pc_apres": 1.15
+ },
+ "wstd-stands-ceilingplate": {
+  "surface_m2": 7320,
+  "etirement_median_avant": 1.44,
+  "cm_par_pixel_origine": 10.06,
+  "mode": "motif",
+  "etirement_median_apres": 1.04,
+  "etirement_90pc_apres": 1.41
+ },
+ "wstd-stands-plateedge": {
+  "surface_m2": 2696,
+  "etirement_median_avant": 1.41,
+  "cm_par_pixel_origine": 6.15,
+  "mode": "motif",
+  "etirement_median_apres": 1.2,
+  "etirement_90pc_apres": 1.61
+ },
+ "wstd-scaffold-plate-01": {
+  "surface_m2": 4637,
+  "etirement_median_avant": 1.58,
+  "cm_par_pixel_origine": 6.48,
+  "mode": "continu",
+  "etirement_median_apres": 1.25,
+  "etirement_90pc_apres": 1.66
+ },
+ "wstd-scaffold-wall-03": {
+  "surface_m2": 3782,
+  "etirement_median_avant": 2.2,
+  "cm_par_pixel_origine": 5.71,
+  "mode": "continu",
+  "etirement_median_apres": 1.27,
+  "etirement_90pc_apres": 2.0
+ },
+ "wstd-tentacle-barrel": {
+  "surface_m2": 20,
+  "etirement_median_avant": 1.46,
+  "cm_par_pixel_origine": 1.08,
+  "mode": "continu",
+  "etirement_median_apres": 1.05,
+  "etirement_90pc_apres": 1.06
+ },
+ "wstd-scaffold-strut": {
+  "surface_m2": 1258,
+  "etirement_median_avant": 2.26,
+  "cm_par_pixel_origine": 2.34,
+  "mode": "continu",
+  "etirement_median_apres": 1.01,
+  "etirement_90pc_apres": 1.14
+ },
+ "wstd-mount-post": {
+  "surface_m2": 298,
+  "etirement_median_avant": 2.69,
+  "cm_par_pixel_origine": 2.5,
+  "mode": "motif",
+  "etirement_median_apres": 1.05,
+  "etirement_90pc_apres": 1.07
+ },
+ "wstd-scaffold-wall-01": {
+  "surface_m2": 77,
+  "etirement_median_avant": 1.99,
+  "cm_par_pixel_origine": 1.3,
+  "mode": "continu",
+  "etirement_median_apres": 1.03,
+  "etirement_90pc_apres": 1.05
+ },
+ "wstd-throne-table-big": {
+  "surface_m2": 9,
+  "etirement_median_avant": 1.15,
+  "cm_par_pixel_origine": 1.14,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.0
+ }
+}

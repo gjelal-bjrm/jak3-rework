@@ -1,0 +1,146 @@
+{
+ "wstd-floor-panel01": {
+  "surface_m2": 1262,
+  "etirement_median_avant": 1.41,
+  "cm_par_pixel_origine": 1.58,
+  "mode": "motif",
+  "etirement_median_apres": 1.14,
+  "etirement_90pc_apres": 1.45
+ },
+ "wstd-stands-shell01": {
+  "surface_m2": 590,
+  "etirement_median_avant": 1.55,
+  "cm_par_pixel_origine": 1.53,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.27
+ },
+ "wstd-stands-rib": {
+  "surface_m2": 403,
+  "etirement_median_avant": 1.4,
+  "cm_par_pixel_origine": 4.5,
+  "mode": "continu",
+  "etirement_median_apres": 1.03,
+  "etirement_90pc_apres": 1.27
+ },
+ "wstd-tentacle-plate03": {
+  "surface_m2": 125,
+  "etirement_median_avant": 1.62,
+  "cm_par_pixel_origine": 1.28,
+  "mode": "motif",
+  "etirement_median_apres": 1.28,
+  "etirement_90pc_apres": 1.28
+ },
+ "wstd-stands-lowall01": {
+  "surface_m2": 109,
+  "etirement_median_avant": 1.28,
+  "cm_par_pixel_origine": 1.24,
+  "mode": "motif",
+  "etirement_median_apres": 1.27,
+  "etirement_90pc_apres": 1.27
+ },
+ "wstd-throne-plat03": {
+  "surface_m2": 62,
+  "etirement_median_avant": 1.04,
+  "cm_par_pixel_origine": 2.02,
+  "mode": "motif",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.05
+ },
+ "wstd-tentacle-plate02": {
+  "surface_m2": 738,
+  "etirement_median_avant": 1.27,
+  "cm_par_pixel_origine": 3.35,
+  "mode": "motif",
+  "etirement_median_apres": 1.03,
+  "etirement_90pc_apres": 1.07
+ },
+ "wstd-scaffold-strut": {
+  "surface_m2": 19921,
+  "etirement_median_avant": 2.3,
+  "cm_par_pixel_origine": 2.37,
+  "mode": "continu",
+  "etirement_median_apres": 1.26,
+  "etirement_90pc_apres": 1.66
+ },
+ "wstd-ladder": {
+  "surface_m2": 18,
+  "etirement_median_avant": 3.0,
+  "cm_par_pixel_origine": 0.58,
+  "mode": "motif",
+  "etirement_median_apres": 1.01,
+  "etirement_90pc_apres": 1.08
+ },
+ "wstd-scaffold-teeth": {
+  "surface_m2": 303,
+  "etirement_median_avant": 1.46,
+  "cm_par_pixel_origine": 1.29,
+  "mode": "motif",
+  "etirement_median_apres": 1.16,
+  "etirement_90pc_apres": 1.32
+ },
+ "wstd-scaffold-wall-01": {
+  "surface_m2": 5057,
+  "etirement_median_avant": 1.21,
+  "cm_par_pixel_origine": 2.9,
+  "mode": "continu",
+  "etirement_median_apres": 1.12,
+  "etirement_90pc_apres": 1.29
+ },
+ "wstd-scaffold-wall-02": {
+  "surface_m2": 3970,
+  "etirement_median_avant": 1.26,
+  "cm_par_pixel_origine": 1.73,
+  "mode": "continu",
+  "etirement_median_apres": 1.04,
+  "etirement_90pc_apres": 1.08
+ },
+ "wstd-scaffold-wall-edge": {
+  "surface_m2": 5479,
+  "etirement_median_avant": 1.88,
+  "cm_par_pixel_origine": 2.29,
+  "mode": "motif",
+  "etirement_median_apres": 1.05,
+  "etirement_90pc_apres": 1.18
+ },
+ "wstd-scaffold-wall-03": {
+  "surface_m2": 4193,
+  "etirement_median_avant": 1.52,
+  "cm_par_pixel_origine": 1.68,
+  "mode": "continu",
+  "etirement_median_apres": 1.04,
+  "etirement_90pc_apres": 1.11
+ },
+ "wstd-scaffold-floor-01": {
+  "surface_m2": 11898,
+  "etirement_median_avant": 1.24,
+  "cm_par_pixel_origine": 3.0,
+  "mode": "continu",
+  "etirement_median_apres": 1.05,
+  "etirement_90pc_apres": 1.06
+ },
+ "wstd-stands-ceilingplate": {
+  "surface_m2": 10173,
+  "etirement_median_avant": 2.08,
+  "cm_par_pixel_origine": 8.34,
+  "mode": "motif",
+  "etirement_median_apres": 1.14,
+  "etirement_90pc_apres": 1.36
+ },
+ "wstd-scaffold-bar": {
+  "surface_m2": 2522,
+  "etirement_median_avant": 3.69,
+  "cm_par_pixel_origine": 2.6,
+  "mode": "continu",
+  "etirement_median_apres": 1.14,
+  "etirement_90pc_apres": 1.92
+ },
+ "wstd-stands-shell02": {
+  "surface_m2": 245,
+  "etirement_median_avant": 1.61,
+  "cm_par_pixel_origine": 2.05,
+  "mode": "continu",
+  "etirement_median_apres": 1.0,
+  "etirement_90pc_apres": 1.08
+ }
+}

@@ -128,3 +128,9 @@ lanceur-choix.json
 /arena-remaster/textures/out/
 /arena-remaster/textures/textures-*.json
 /arena-remaster/textures/*.log
+# Replaquage des textures de l arene : exports natifs, patchs, selections
+/arena-remaster/uv/*-native.json
+/arena-remaster/uv/sel-*.json
+/arena-remaster/uv/log-*.txt
+# Kit Codex de tout le decor (contient des textures du jeu)
+/textures-remaster/codex/
