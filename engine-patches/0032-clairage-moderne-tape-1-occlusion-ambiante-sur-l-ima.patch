@@ -1,7 +1,7 @@
 From 7474d7ce75a7dc89cf21a05ee821b994c82787af Mon Sep 17 00:00:00 2001
 From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
 Date: Sat, 26 Sep 2026 00:13:22 +0200
-Subject: [PATCH 32/32] =?UTF-8?q?=C3=89clairage=20moderne,=20=C3=A9tape=20?=
+Subject: [PATCH 32/33] =?UTF-8?q?=C3=89clairage=20moderne,=20=C3=A9tape=20?=
  =?UTF-8?q?1=20:=20occlusion=20ambiante=20sur=20l'image=20(d=C3=A9cor=20op?=
  =?UTF-8?q?aque),=20deux=20=C3=A9chelles,=20flou=20respectant=20les=20bord?=
  =?UTF-8?q?s=20;=20commande=20pc-remaster-lighting=20pour=20les=20comparai?=

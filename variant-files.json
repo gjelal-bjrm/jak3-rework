@@ -127,5 +127,7 @@
   "game/graphics/opengl_renderer/shaders/modern_beam.frag",
   "out/jak3/fr3/wasstadc.fr3",
   "game/graphics/opengl_renderer/shaders/modern_ao.vert",
-  "game/graphics/opengl_renderer/shaders/modern_ao.frag"
+  "game/graphics/opengl_renderer/shaders/modern_ao.frag",
+  "game/graphics/opengl_renderer/shaders/modern_shadow.vert",
+  "game/graphics/opengl_renderer/shaders/modern_shadow.frag"
 ]

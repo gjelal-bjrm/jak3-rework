@@ -1,0 +1,535 @@
+From 05605148faf98835fe946e09dc7df31ef2c0e6d1 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 00:48:02 +0200
+Subject: [PATCH 33/33] =?UTF-8?q?=C3=89clairage=20moderne,=20=C3=A9tape=20?=
+ =?UTF-8?q?2=20:=20ombres=20port=C3=A9es=20du=20soleil=20(carte=20de=20pro?=
+ =?UTF-8?q?fondeur=204096=C2=B2=20du=20d=C3=A9cor=20opaque=20vue=20du=20so?=
+ =?UTF-8?q?leil,=20centr=C3=A9e=20sur=20la=20cam=C3=A9ra,=2012=20=C3=A9cha?=
+ =?UTF-8?q?ntillons=20adoucis)=20sur=20le=20d=C3=A9cor=20et=20les=20person?=
+ =?UTF-8?q?nages=20;=20force=20selon=20la=20hauteur=20du=20soleil=20et=20l?=
+ =?UTF-8?q?a=20m=C3=A9t=C3=A9o?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernAO.h      |   4 +-
+ game/graphics/opengl_renderer/ModernShadows.h | 246 ++++++++++++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |   5 +
+ .../graphics/opengl_renderer/OpenGLRenderer.h |   2 +
+ .../background/PalaceMaterials.h              |   2 +
+ .../opengl_renderer/foreground/Merc2.cpp      |  13 +
+ .../opengl_renderer/shaders/merc2.frag        |  20 ++
+ .../opengl_renderer/shaders/merc2.vert        |  12 +
+ .../shaders/modern_shadow.frag                |   3 +
+ .../shaders/modern_shadow.vert                |   7 +
+ .../opengl_renderer/shaders/tfrag3.frag       |  38 +++
+ 11 files changed, 350 insertions(+), 2 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/ModernShadows.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_shadow.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_shadow.vert
+
+diff --git a/game/graphics/opengl_renderer/ModernAO.h b/game/graphics/opengl_renderer/ModernAO.h
+index 08996de5..7f9e2438 100644
+--- a/game/graphics/opengl_renderer/ModernAO.h
++++ b/game/graphics/opengl_renderer/ModernAO.h
+@@ -5,9 +5,9 @@
+ #include "game/graphics/opengl_renderer/BucketRenderer.h"
+ 
+ // Eclairage moderne du remaster. Les options sont reglees depuis GOAL (pc-remaster-lighting) :
+-// bit 0 = occlusion ambiante. Actif par defaut.
++// bit 0 = occlusion ambiante, bit 1 = ombres portees du soleil. Actifs par defaut.
+ namespace LightingState {
+-inline std::atomic<int> flags{1};
++inline std::atomic<int> flags{3};
+ }
+ 
+ // Etape 1 : occlusion ambiante sur l'image. Dessinee juste apres le decor opaque (avant les objets
+diff --git a/game/graphics/opengl_renderer/ModernShadows.h b/game/graphics/opengl_renderer/ModernShadows.h
+new file mode 100644
+index 00000000..d0e8c390
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernShadows.h
+@@ -0,0 +1,246 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <cmath>
++#include <map>
++#include <memory>
++#include <set>
++#include <tuple>
++#include <vector>
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/BucketRenderer.h"
++#include "game/graphics/opengl_renderer/ModernAO.h"
++#include "game/graphics/opengl_renderer/WeatherWorld.h"
++#include "game/graphics/opengl_renderer/loader/Loader.h"
++
++// Eclairage moderne, etape 2 : ombres portees du soleil. Chaque image, le decor opaque des niveaux charges
++// (tfrag et tie, niveau de detail 0 ; ni eau, ni lave, ni transparents) est redessine depuis le soleil dans une
++// carte de profondeur de 4096 x 4096 centree sur la camera (rayon 110 m). Le shader du decor (tfrag3) y lit si
++// chaque point voit le soleil : les echafaudages, tribunes, rochers et batiments projettent leur ombre, qui suit
++// l'heure. Force selon la hauteur du soleil et la meteo (nulle la nuit, faible par temps couvert).
++namespace ShadowState {
++inline float matrix[16] = {};     // monde (m) -> coordonnees de la carte [0,1]^3
++inline float strength = 0.f;
++inline float texel = 0.f;         // metres par texel
++inline bool valid = false;
++inline float eye[3] = {};         // camera (m)
++}  // namespace ShadowState
++
++// Appele par PalaceMaterials::bind avant chaque dessin du decor (programme tfrag3, shrub...).
++inline void shadow_bind(GLuint program) {
++  glUniform1i(glGetUniformLocation(program, "shadow_map"), 29);   // toujours : pas de conflit avec l'unite 0
++  const bool on = ShadowState::valid && ShadowState::strength > .01f;
++  glUniform1i(glGetUniformLocation(program, "shadow_on"), on ? 1 : 0);
++  if (!on) return;
++  glUniformMatrix4fv(glGetUniformLocation(program, "shadow_matrix"), 1, GL_FALSE, ShadowState::matrix);
++  glUniform1f(glGetUniformLocation(program, "shadow_strength"), ShadowState::strength);
++  glUniform1f(glGetUniformLocation(program, "shadow_texel"), ShadowState::texel);
++  glUniform3fv(glGetUniformLocation(program, "shadow_eye"), 1, ShadowState::eye);
++}
++
++class ModernShadows {
++ public:
++  static constexpr int kSize = 4096;
++  static constexpr float kRadius = 110.f;
++
++  ~ModernShadows() {
++    for (auto& [k, t] : m_trees) release(t);
++    if (m_depth) glDeleteTextures(1, &m_depth);
++    if (m_fbo) glDeleteFramebuffers(1, &m_fbo);
++  }
++
++  void render(SharedRenderState* state) {
++    ShadowState::valid = false;
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data || !state->loader) return;
++    if (!(LightingState::flags.load() & 2)) return;
++    std::array<float, 3> sun, color;
++    {
++      std::lock_guard<std::mutex> guard(WeatherLook::mutex);
++      sun = WeatherLook::sun_dir; color = WeatherLook::sun_color;
++    }
++    const float len = std::sqrt(sun[0] * sun[0] + sun[1] * sun[1] + sun[2] * sun[2]);
++    if (len < 1e-4f) return;
++    for (auto& c : sun) c /= len;
++    const float lum = .2126f * color[0] + .7152f * color[1] + .0722f * color[2];
++    const float elevation = std::clamp((sun[1] - .03f) / .22f, 0.f, 1.f);
++    const float strength = elevation * std::clamp(lum / .55f, 0.f, 1.f);
++    if (strength < .01f) return;
++    if (!m_shader) init(state);
++    if (!m_shader->okay()) return;
++
++    // matrices : lumiere orthographique centree sur la camera, calee sur la grille des texels (pas de scintillement)
++    const float cx = state->camera_pos[0] / 4096.f, cy = state->camera_pos[1] / 4096.f, cz = state->camera_pos[2] / 4096.f;
++    float up[3] = {0.f, 1.f, 0.f};
++    if (std::abs(sun[1]) > .98f) { up[1] = 0.f; up[2] = 1.f; }
++    float f[3] = {-sun[0], -sun[1], -sun[2]};                       // direction de visee (vers le sol)
++    float s[3] = {f[1] * up[2] - f[2] * up[1], f[2] * up[0] - f[0] * up[2], f[0] * up[1] - f[1] * up[0]};
++    normalize(s);
++    float u[3] = {s[1] * f[2] - s[2] * f[1], s[2] * f[0] - s[0] * f[2], s[0] * f[1] - s[1] * f[0]};
++    const float texel = 2.f * kRadius / kSize;
++    float px = s[0] * cx + s[1] * cy + s[2] * cz, py = u[0] * cx + u[1] * cy + u[2] * cz;
++    px = std::floor(px / texel) * texel; py = std::floor(py / texel) * texel;
++    const float pz = f[0] * cx + f[1] * cy + f[2] * cz;
++    // vue * projection orthographique : x,y dans [-R,R] autour du centre cale, profondeur [-600, 600] m
++    const float near_ = -600.f, far_ = 600.f;
++    float light[16] = {
++        s[0] / kRadius, u[0] / kRadius, 2.f * f[0] / (far_ - near_), 0.f,
++        s[1] / kRadius, u[1] / kRadius, 2.f * f[1] / (far_ - near_), 0.f,
++        s[2] / kRadius, u[2] / kRadius, 2.f * f[2] / (far_ - near_), 0.f,
++        -px / kRadius, -py / kRadius, (-2.f * pz - (far_ + near_)) / (far_ - near_), 1.f};
++    // carte : [-1,1] -> [0,1]
++    for (int c = 0; c < 4; c++)
++      for (int r = 0; r < 3; r++) ShadowState::matrix[c * 4 + r] = .5f * light[c * 4 + r] + .5f * light[c * 4 + 3];
++    for (int c = 0; c < 4; c++) ShadowState::matrix[c * 4 + 3] = light[c * 4 + 3];
++
++    // sauvegarde de l'etat
++    GLint program, vao, read_fb, draw_fb, viewport[4], active, depth_func;
++    GLboolean depth_write, color_mask[4];
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &read_fb); glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &draw_fb);
++    glGetIntegerv(GL_VIEWPORT, viewport); glGetIntegerv(GL_ACTIVE_TEXTURE, &active);
++    glGetIntegerv(GL_DEPTH_FUNC, &depth_func);
++    glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write); glGetBooleanv(GL_COLOR_WRITEMASK, color_mask);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST,
++                            GL_POLYGON_OFFSET_FILL, GL_PRIMITIVE_RESTART};
++    GLboolean was[7];
++    for (int i = 0; i < 7; i++) was[i] = glIsEnabled(flags[i]);
++
++    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
++    glViewport(0, 0, kSize, kSize);
++    glDisable(GL_BLEND); glDisable(GL_CULL_FACE); glDisable(GL_SCISSOR_TEST); glDisable(GL_STENCIL_TEST);
++    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_LESS); glDepthMask(GL_TRUE);
++    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
++    glClearDepth(1.0); glClear(GL_DEPTH_BUFFER_BIT);
++    glEnable(GL_POLYGON_OFFSET_FILL); glPolygonOffset(1.6f, 4.f);
++    glEnable(GL_PRIMITIVE_RESTART); glPrimitiveRestartIndex(UINT32_MAX);
++    m_shader->activate();
++    glUniformMatrix4fv(glGetUniformLocation(m_shader->id(), "light_matrix"), 1, GL_FALSE, light);
++
++    std::set<Key> seen;
++    for (auto* level : state->loader->get_in_use_levels()) {
++      if (!level || !level->level) continue;
++      const auto& lev = *level->level;
++      for (size_t t = 0; t < lev.tfrag_trees[0].size() && t < level->tfrag_vertex_data[0].size(); t++) {
++        const auto& tree = lev.tfrag_trees[0][t];
++        if (tree.kind != tfrag3::TFragmentTreeKind::NORMAL && tree.kind != tfrag3::TFragmentTreeKind::DIRT &&
++            tree.kind != tfrag3::TFragmentTreeKind::ICE) continue;
++        Key key{level->load_id, 0, t};
++        seen.insert(key);
++        auto& cache = m_trees[key];
++        if (!cache.vao) build(cache, level->tfrag_vertex_data[0][t], 0, tree.draws, tree.use_strips,
++                              0, tree.draws.size(), &tree.unpacked.indices);
++        draw(cache);
++      }
++      for (size_t t = 0; t < lev.tie_trees[0].size() && t < level->tie_data[0].size(); t++) {
++        const auto& tree = lev.tie_trees[0][t];
++        Key key{level->load_id, 1, t};
++        seen.insert(key);
++        auto& cache = m_trees[key];
++        if (!cache.vao) {
++          // categories opaques : NORMAL et premier dessin des objets a reflets (NORMAL_ENVMAP)
++          const auto& cdi = tree.category_draw_indices;
++          build(cache, level->tie_data[0][t].vertex_buffer, level->tie_data[0][t].index_buffer, tree.static_draws,
++                tree.use_strips, cdi[0], cdi[1], nullptr, cdi[3], cdi[4]);
++        }
++        draw(cache);
++      }
++    }
++    for (auto it = m_trees.begin(); it != m_trees.end();) {      // niveaux decharges
++      if (!seen.count(it->first)) { release(it->second); it = m_trees.erase(it); }
++      else ++it;
++    }
++
++    // restauration
++    glUseProgram(program); glBindVertexArray(vao);
++    glBindFramebuffer(GL_READ_FRAMEBUFFER, read_fb); glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw_fb);
++    glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
++    glDepthFunc(depth_func); glDepthMask(depth_write);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]);
++    for (int i = 0; i < 7; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
++    glActiveTexture(GL_TEXTURE29); glBindTexture(GL_TEXTURE_2D, m_depth);
++    glActiveTexture(active);
++    ShadowState::eye[0] = cx; ShadowState::eye[1] = cy; ShadowState::eye[2] = cz;
++    ShadowState::strength = strength; ShadowState::texel = texel; ShadowState::valid = true;
++  }
++
++ private:
++  using Key = std::tuple<u64, int, size_t>;
++  struct TreeCache {
++    GLuint vao = 0, own_ibo = 0;
++    GLenum mode = GL_TRIANGLES;
++    std::vector<GLsizei> counts;
++    std::vector<const void*> offsets;
++  };
++
++  static void normalize(float* v) {
++    const float l = std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
++    for (int i = 0; i < 3; i++) v[i] /= std::max(l, 1e-9f);
++  }
++
++  void init(SharedRenderState* state) {
++    m_shader = std::make_unique<Shader>("modern_shadow", state->version);
++    glGenTextures(1, &m_depth);
++    glBindTexture(GL_TEXTURE_2D, m_depth);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, kSize, kSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
++    GLint old; glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old);
++    glGenFramebuffers(1, &m_fbo); glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
++    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_depth, 0);
++    glDrawBuffer(GL_NONE); glReadBuffer(GL_NONE);
++    glBindFramebuffer(GL_FRAMEBUFFER, old);
++  }
++
++  // Plages d'indices des dessins retenus (dans le tampon d'indices complet de l'arbre).
++  static void ranges(TreeCache& cache, const std::vector<tfrag3::StripDraw>& draws, size_t begin, size_t end) {
++    for (size_t d = begin; d < end && d < draws.size(); d++) {
++      GLsizei n = 0;
++      for (const auto& g : draws[d].vis_groups) n += g.num_inds;
++      if (!n) continue;
++      cache.counts.push_back(n);
++      cache.offsets.push_back((const void*)(size_t(draws[d].unpacked.idx_of_first_idx_in_full_buffer) * sizeof(u32)));
++    }
++  }
++
++  void build(TreeCache& cache, GLuint vbo, GLuint ibo, const std::vector<tfrag3::StripDraw>& draws, bool strips,
++             size_t begin, size_t end, const std::vector<u32>* cpu_indices, size_t begin2 = 0, size_t end2 = 0) {
++    glGenVertexArrays(1, &cache.vao);
++    glBindVertexArray(cache.vao);
++    glBindBuffer(GL_ARRAY_BUFFER, vbo);
++    glEnableVertexAttribArray(0);
++    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(tfrag3::PreloadedVertex),
++                          (void*)offsetof(tfrag3::PreloadedVertex, x));
++    if (cpu_indices) {
++      glGenBuffers(1, &cache.own_ibo);
++      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cache.own_ibo);
++      glBufferData(GL_ELEMENT_ARRAY_BUFFER, cpu_indices->size() * sizeof(u32), cpu_indices->data(), GL_STATIC_DRAW);
++    } else {
++      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
++    }
++    glBindVertexArray(0);
++    cache.mode = strips ? GL_TRIANGLE_STRIP : GL_TRIANGLES;
++    ranges(cache, draws, begin, end);
++    if (end2 > begin2) ranges(cache, draws, begin2, end2);
++  }
++
++  static void draw(const TreeCache& cache) {
++    if (cache.counts.empty()) return;
++    glBindVertexArray(cache.vao);
++    glMultiDrawElements(cache.mode, cache.counts.data(), GL_UNSIGNED_INT, cache.offsets.data(),
++                        GLsizei(cache.counts.size()));
++  }
++
++  static void release(TreeCache& cache) {
++    if (cache.vao) glDeleteVertexArrays(1, &cache.vao);
++    if (cache.own_ibo) glDeleteBuffers(1, &cache.own_ibo);
++    cache = TreeCache{};
++  }
++
++  std::unique_ptr<Shader> m_shader;
++  GLuint m_fbo = 0, m_depth = 0;
++  std::map<Key, TreeCache> m_trees;
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 834a03fb..66a119d2 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1432,6 +1432,11 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+     vif_interrupt_callback(bucket_id + 1);
+     m_category_times[(int)m_bucket_categories[bucket_id]] += bucket_prof.get_elapsed_time();
+ 
++    // eclairage moderne : carte des ombres du soleil, juste avant le premier decor
++    if (m_version == GameVersion::Jak3 && bucket_id + 1 == (int)jak3::BucketId::TEX_L0_TFRAG) {
++      auto p = prof.make_scoped_child("modern-shadows");
++      m_modern_shadows.render(&m_render_state);
++    }
+     // eclairage moderne : occlusion ambiante sur le decor opaque (avant transparents et personnages)
+     if (m_version == GameVersion::Jak3 && bucket_id + 1 == (int)jak3::BucketId::TEX_L0_ALPHA) {
+       auto p = prof.make_scoped_child("modern-ao");
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index 6ec5c421..9c6d8885 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -17,6 +17,7 @@
+ #include "game/graphics/opengl_renderer/ModernWeather.h"
+ #include "game/graphics/opengl_renderer/ModernBeam.h"
+ #include "game/graphics/opengl_renderer/ModernAO.h"
++#include "game/graphics/opengl_renderer/ModernShadows.h"
+ #include "game/graphics/opengl_renderer/WaterFountains.h"
+ #include "game/graphics/opengl_renderer/PalaceFire.h"
+ #include "game/graphics/opengl_renderer/CityInteriors.h"
+@@ -129,6 +130,7 @@ class OpenGLRenderer {
+   ModernWeather m_modern_weather;
+   ModernBeam m_modern_beam;
+   ModernAO m_modern_ao;
++  ModernShadows m_modern_shadows;
+   ModernOceanSurface m_modern_ocean;
+   WaterFountains m_water_fountains;
+   CityInteriors m_city_interiors;
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 75f414a0..70761832 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -6,6 +6,7 @@
+ #include "LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
+ #include "game/graphics/opengl_renderer/WeatherWorld.h"
++#include "game/graphics/opengl_renderer/ModernShadows.h"
+ 
+ // Cache static scenery classifications at level load. Animated liquids,
+ // characters and other levels sharing the shader programs keep their own path.
+@@ -45,6 +46,7 @@ class PalaceMaterials {
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
+     weather_bind_world(program);   // sol mouille, flaques, neige au sol
++    shadow_bind(program);          // ombres portees du soleil
+     const bool palm=kind && (m_names[texture]=="waspala-palmplant-leaf-02" || m_names[texture]=="waspala-shrub-plant" || m_names[texture]=="for-shrub-moss");
+     const bool market_shrub=kind && m_names[texture]=="market-shrub-orange-v1";
+     const bool market_wind=kind && m_names[texture]=="market-palm-leaf-v1";
+diff --git a/game/graphics/opengl_renderer/foreground/Merc2.cpp b/game/graphics/opengl_renderer/foreground/Merc2.cpp
+index 301ddb70..b0f617da 100644
+--- a/game/graphics/opengl_renderer/foreground/Merc2.cpp
++++ b/game/graphics/opengl_renderer/foreground/Merc2.cpp
+@@ -1,6 +1,7 @@
+ #include "Merc2.h"
+ #include "common/texture/texture_slots.h"
+ #include "game/graphics/opengl_renderer/WaterContacts.h"
++#include "game/graphics/opengl_renderer/ModernShadows.h"
+ 
+ #include "common/global_profiler/GlobalProfiler.h"
+ #include "common/util/fnv.h"
+@@ -1228,6 +1229,18 @@ void Merc2::do_draws(const Draw* draw_array,
+   bool normal_vtx_buffer_bound = true;
+ 
+   bool fog_on = true;
++  if (!set_fade && render_state->version == GameVersion::Jak3 && render_state->has_pc_data) {
++    // ombres du soleil sur les personnages : meme carte que le decor
++    const auto shader = render_state->shaders[ShaderId::MERC2].id();
++    shadow_bind(shader);
++    float negated[16], inverse[16];
++    for (int i = 0; i < 16; i++) negated[i] = -render_state->prototype_camera[i];
++    if (WeatherReflect::invert(negated, inverse))
++      glUniformMatrix4fv(glGetUniformLocation(shader, "shadow_inv_camera"), 1, GL_FALSE, inverse);
++    else
++      glUniform1i(glGetUniformLocation(shader, "shadow_on"), 0);
++    glUniform4fv(glGetUniformLocation(shader, "cam_trans"), 1, render_state->camera_pos.data());
++  }
+ 
+   for (u32 di = 0; di < num_draws; di++) {
+     auto& draw = draw_array[di];
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index 6092263c..d6863880 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -4,6 +4,22 @@ out vec4 color;
+ in vec4 vtx_color;
+ in vec2 vtx_st;
+ in float fog;
++in vec3 merc_world;
++// ombres portees du soleil (ModernShadows.h) : les personnages s'assombrissent dans l'ombre du decor
++uniform int shadow_on;
++uniform sampler2DShadow shadow_map;
++uniform mat4 shadow_matrix;
++uniform float shadow_strength;
++uniform float shadow_texel;
++float mercSunVisibility(vec3 P) {
++  vec4 sc = shadow_matrix * vec4(P, 1.);
++  vec2 edge = abs(sc.xy * 2. - 1.);
++  if (max(edge.x, edge.y) > 1. || sc.z > 1.) return 1.;
++  float lit = 0.;
++  for (int i = -1; i <= 1; i++)
++    for (int j = -1; j <= 1; j++) lit += texture(shadow_map, vec3(sc.xy + vec2(i, j) * 1.5 / 4096., sc.z - .0004));
++  return mix(1., lit / 9., smoothstep(1., .82, max(edge.x, edge.y)));
++}
+ 
+ uniform sampler2D tex_T0;
+ 
+@@ -432,5 +448,9 @@ void main() {
+     discard;
+   }
+ 
++  if (shadow_on != 0) {
++    float shade = (1. - mercSunVisibility(merc_world)) * shadow_strength;
++    color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);
++  }
+    color.xyz = mix(color.xyz, fog_color.rgb, clamp(fog_color.a * fog, 0, 1));
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.vert b/game/graphics/opengl_renderer/shaders/merc2.vert
+index e2395624..04c5fcca 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.vert
++++ b/game/graphics/opengl_renderer/shaders/merc2.vert
+@@ -28,6 +28,9 @@ out vec4 vtx_color;
+ out vec2 vtx_st;
+ 
+ out float fog;
++out vec3 merc_world;
++uniform int shadow_on;
++uniform mat4 shadow_inv_camera;   // inverse(-pc_camera), calculee sur le processeur
+ 
+ struct MercMatrixData {
+   mat4 X;
+@@ -125,6 +128,15 @@ void main() {
+ 
+ 
+ 
++  // ombres du soleil (ModernShadows) : position monde reconstruite depuis la position a l'ecran
++  if (shadow_on != 0) {
++    vec4 clip = gl_Position;
++    clip.y /= (512.0/416.0)*0.5;
++    vec4 r = shadow_inv_camera * clip;
++    merc_world = r.xyz / r.w / 4096.0 + cam_trans.xyz / 4096.0;
++  } else {
++    merc_world = vec3(0.0);
++  }
+   vtx_color = rgba * light_color;
+   vtx_st = st_in;
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_shadow.frag b/game/graphics/opengl_renderer/shaders/modern_shadow.frag
+new file mode 100644
+index 00000000..6895c78b
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_shadow.frag
+@@ -0,0 +1,3 @@
++#version 410 core
++// Ombres du soleil : seule la profondeur compte.
++void main() {}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_shadow.vert b/game/graphics/opengl_renderer/shaders/modern_shadow.vert
+new file mode 100644
+index 00000000..3cb81b56
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_shadow.vert
+@@ -0,0 +1,7 @@
++#version 410 core
++// Ombres du soleil : profondeur du decor vue depuis le soleil (positions en unites du jeu).
++layout (location = 0) in vec3 position_in;
++uniform mat4 light_matrix;
++void main() {
++  gl_Position = light_matrix * vec4(position_in / 4096.0, 1.0);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 477ed31a..f341543e 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -817,6 +817,42 @@ vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
+ }
+ // WEATHER_WORLD_END
+ 
++// SUN_SHADOW_BEGIN
++// Eclairage moderne : ombres portees du soleil (carte de profondeur du decor vue du soleil, ModernShadows.h).
++uniform int shadow_on;
++uniform sampler2DShadow shadow_map;
++uniform mat4 shadow_matrix;
++uniform float shadow_strength;
++uniform float shadow_texel;
++uniform vec3 shadow_eye;          // camera (m)
++const vec2 shadow_taps[12] = vec2[12](vec2(-.326,-.406), vec2(-.840,-.074), vec2(-.696,.457), vec2(-.203,.621),
++  vec2(.962,-.195), vec2(.473,-.480), vec2(.519,.767), vec2(.185,-.893), vec2(.507,.064), vec2(.896,.412),
++  vec2(-.322,-.933), vec2(-.792,-.598));
++float sunVisibility(vec3 P, vec3 N) {
++  vec3 L = normalize(weather_sun_dir);
++  float ndl = dot(N, L);
++  // decalage le long de la normale et vers le soleil : pas d'auto-ombrage en damier
++  vec3 Po = P + N * (.05 + 2. * shadow_texel) + L * shadow_texel;
++  vec4 sc = shadow_matrix * vec4(Po, 1.);
++  vec2 edge = abs(sc.xy * 2. - 1.);
++  if (max(edge.x, edge.y) > 1. || sc.z > 1.) return 1.;
++  float a = 6.2831853 * fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(.06711056, .00583715))));
++  mat2 rot = mat2(cos(a), sin(a), -sin(a), cos(a));
++  float radius = 2.2 / 4096.;
++  float lit = 0.;
++  for (int i = 0; i < 12; i++) lit += texture(shadow_map, vec3(sc.xy + rot * shadow_taps[i] * radius, sc.z - .00008));
++  lit /= 12.;
++  lit = min(lit, smoothstep(-.03, .12, ndl));         // face tournee a l'oppose du soleil : dans sa propre ombre
++  float fade = smoothstep(1., .82, max(edge.x, edge.y));  // bord de la zone couverte : transition douce
++  return mix(1., lit, fade);
++}
++vec3 applySunShadow(vec3 c, vec3 P, vec3 N) {
++  if (shadow_on == 0) return c;
++  float shade = (1. - sunVisibility(P, N)) * shadow_strength;
++  return c * mix(vec3(1.), vec3(.60, .64, .74), shade);     // ombre eclairee par le ciel : un peu bleutee
++}
++// SUN_SHADOW_END
++
+ // ARENA_WORLD_UV_BEGIN
+ // Roches de l'arene : texture plaquee selon le monde plutot que selon le plaquage natif (qui l'etire de
+ // 2 a 9 fois et la cisaille : invisible avec les textures floues de 2004, « tordu » avec les textures HD).
+@@ -854,6 +890,8 @@ void main() {
+     } else {
+       color = vec4(arena_light, fragment_color.a) * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
++    vec3 shadow_normal = dot(surface_normal, shadow_eye-arena_world) < 0. ? -surface_normal : surface_normal;
++    color.rgb = applySunShadow(color.rgb, arena_world, shadow_normal);   // ombres portees du soleil
+     if (palace_material==4) color.a *= mix(.48,1.0,smoothstep(.36,.49,T0.a));
+     color.rgb=beachWetSand(color.rgb,arena_world);   // plage de Spargus
+     color.rgb=weatherSurface(color.rgb,arena_light,arena_world,surface_normal);   // meteo
+-- 
+2.54.0.windows.1
+
