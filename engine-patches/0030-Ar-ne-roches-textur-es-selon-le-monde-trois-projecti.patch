@@ -1,0 +1,94 @@
+From b53126acc3c2bf132ede75035cad51cc7387087d Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 23:31:17 +0200
+Subject: [PATCH 30/30] =?UTF-8?q?Ar=C3=A8ne=20:=20roches=20textur=C3=A9es?=
+ =?UTF-8?q?=20selon=20le=20monde=20(trois=20projections=20m=C3=A9lang?=
+ =?UTF-8?q?=C3=A9es=20selon=20la=20normale)=20au=20lieu=20du=20plaquage=20?=
+ =?UTF-8?q?natif=20qui=20=C3=A9tirait=20les=20textures=20HD=20de=202=20?=
+ =?UTF-8?q?=C3=A0=209=20fois=20(effet=20=C2=AB=20tordu=20=C2=BB)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../background/PalaceMaterials.h              | 20 ++++++++++++++++
+ .../opengl_renderer/shaders/tfrag3.frag       | 24 ++++++++++++++++++-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index e6222f4e..75f414a0 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -69,8 +69,28 @@ class PalaceMaterials {
+     }
+     if (kind) glUniform3f(glGetUniformLocation(program,"palace_eye"),
+         state->camera_pos[0]/4096.f,state->camera_pos[1]/4096.f,state->camera_pos[2]/4096.f);
++    // Roches de l'arene : texture plaquee selon le monde (strates horizontales, ni etirement ni torsion).
++    // Le plaquage natif etire ces textures de 2 a 9 fois ; invisible en 2004, flagrant avec les textures HD.
++    const float* tile = kind == 7 ? world_tile(m_names[texture]) : nullptr;
++    glUniform1i(glGetUniformLocation(program,"palace_world_uv"), tile ? 1 : 0);
++    if (tile) {
++      glUniform4f(glGetUniformLocation(program,"palace_world_tile"), tile[0], tile[1], tile[2], tile[3]);
++      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
++      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
++    }
+   }
+  private:
++  // metres par repetition (u, v), axe vertical (0 : u, 1 : v), sens (+1 : la coordonnee monte avec le monde),
++  // mesures sur le plaquage natif (moyenne ponderee par l'aire des flancs).
++  static const float* world_tile(const std::string& name) {
++    static const float rockwall[4] = {12.2f, 10.8f, 0.f, 1.f};
++    static const float small_rockwall[4] = {6.6f, 5.3f, 1.f, -1.f};
++    static const float interior_rock[4] = {10.5f, 11.0f, 1.f, -1.f};
++    if (name == "wstd-rockwall-01") return rockwall;
++    if (name == "wstd-small-rockwall-01") return small_rockwall;
++    if (name == "wstd-interior-rock01") return interior_rock;
++    return nullptr;
++  }
+   // Arene de Spargus : relief et reponse a la lumiere par matiere, sur toutes les grandes surfaces
+   // (falaises, gradins, plaques, echafaudages, dalles). Lave, braises, bannieres et decalques exclus.
+   static int classify_arena(const std::string& name) {
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index bd1d597b..477ed31a 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -817,12 +817,34 @@ vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
+ }
+ // WEATHER_WORLD_END
+ 
++// ARENA_WORLD_UV_BEGIN
++// Roches de l'arene : texture plaquee selon le monde plutot que selon le plaquage natif (qui l'etire de
++// 2 a 9 fois et la cisaille : invisible avec les textures floues de 2004, « tordu » avec les textures HD).
++// Trois projections (flancs face a x, flancs face a z, dessus) melangees selon la normale lissee :
++// les strates restent horizontales, a la meme echelle partout.
++uniform int palace_world_uv;
++uniform vec4 palace_world_tile;   // metres par repetition (u, v), axe vertical (0 : u, 1 : v), sens
++vec4 arenaWorldTexture(vec3 p, vec3 n) {
++  vec3 w = pow(abs(n) + 1e-4, vec3(6.0)); w /= w.x + w.y + w.z;
++  vec2 per = 1.0 / palace_world_tile.xy;
++  float up = p.y * palace_world_tile.w;
++  vec2 sx = palace_world_tile.z < .5 ? vec2(up, p.z) : vec2(p.z, up);
++  vec2 sz = palace_world_tile.z < .5 ? vec2(up, p.x) : vec2(p.x, up);
++  // trois lectures sans condition : derivees continues, pas de scintillement des niveaux de mip
++  return texture(tex_T0, sx * per) * w.x + texture(tex_T0, sz * per) * w.z
++       + texture(tex_T0, vec2(p.x, p.z) * per) * w.y;
++}
++// ARENA_WORLD_UV_END
++
+ void main() {
+   vec3 arena_light = arenaRelight(fragment_color.rgb, arena_world);
+   vec3 surface_normal = normalize(cross(dFdx(arena_world),dFdy(arena_world)));
+   if (gfx_hack_no_tex == 0) {
+     //vec4 T0 = texture(tex_T0, tex_coord);
+-    vec4 T0 = texture(tex_T0, tex_coord.xy);
++    vec3 world_uv_normal = dot(palace_smooth_normal, palace_smooth_normal) > .01 ? normalize(palace_smooth_normal)
++                                                                                 : surface_normal;
++    vec4 T0 = palace_world_uv != 0 ? arenaWorldTexture(arena_world, world_uv_normal)
++                                   : texture(tex_T0, tex_coord.xy);
+     if (fluid_kind == 1) {
+       color = vec4(shadeModernLava(arena_world),1.0);
+     } else if (fluid_kind == 2) {
+-- 
+2.54.0.windows.1
+
