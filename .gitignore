@@ -114,3 +114,7 @@ lanceur-choix.json
 
 # Kit ChatGPT de l arene : contient des textures du jeu
 /arena-remaster/chatgpt/
+# Objets de l arene : exports natifs et .blend (geometrie et textures du jeu) hors Git
+/arena-remaster/objects/*-native.json
+/arena-remaster/objects/*.blend
+/arena-remaster/objects/*.blend1

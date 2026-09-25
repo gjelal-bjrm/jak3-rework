@@ -1,0 +1,14 @@
+{
+  "level": "wasstada",
+  "source_fr3": {
+    "path": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\out\\jak3\\fr3\\wasstada.fr3",
+    "sha256": "01e28268eee85401f3597e5109c9164c6efe2fea20a984fed2523aaa07f89f26",
+    "bytes": 8344815
+  },
+  "materials": [
+    "wstd-torchbowl-01",
+    "wstd-torchbowl-02",
+    "wstd-torchbowl-coal-01",
+    "wstd-spike-01"
+  ]
+}
