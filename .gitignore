@@ -124,3 +124,7 @@ lanceur-choix.json
 /arena-remaster/rocks/preview/
 /arena-remaster/rocks/*.log
 /arena-remaster/rocks/log-*.txt
+# Textures HD de l arene (derivees des textures du jeu) et journaux
+/arena-remaster/textures/out/
+/arena-remaster/textures/textures-*.json
+/arena-remaster/textures/*.log
