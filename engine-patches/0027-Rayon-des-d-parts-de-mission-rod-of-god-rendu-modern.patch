@@ -1,0 +1,305 @@
+From 714ae44ec37ab559f53b58fe8ebb9e70ef253b6d Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Fri, 25 Sep 2026 19:27:48 +0200
+Subject: [PATCH 27/27] =?UTF-8?q?Rayon=20des=20d=C3=A9parts=20de=20mission?=
+ =?UTF-8?q?=20(rod-of-god)=20:=20rendu=20moderne=20translucide=20et=20addi?=
+ =?UTF-8?q?tif=20(c=C5=93ur=20lumineux,=20filets=20qui=20montent,=20fondu?=
+ =?UTF-8?q?=20en=20hauteur=20et=20au=20contact=20du=20d=C3=A9cor,=20lueur?=
+ =?UTF-8?q?=20au=20sol),=20publi=C3=A9=20par=20task-arrow?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernBeam.h    | 102 ++++++++++++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |   1 +
+ .../graphics/opengl_renderer/OpenGLRenderer.h |   2 +
+ .../opengl_renderer/shaders/modern_beam.frag  |  64 +++++++++++
+ .../opengl_renderer/shaders/modern_beam.vert  |  29 +++++
+ game/kernel/jak3/kmachine.cpp                 |   7 ++
+ 6 files changed, 205 insertions(+)
+ create mode 100644 game/graphics/opengl_renderer/ModernBeam.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_beam.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_beam.vert
+
+diff --git a/game/graphics/opengl_renderer/ModernBeam.h b/game/graphics/opengl_renderer/ModernBeam.h
+new file mode 100644
+index 00000000..8a965bd7
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernBeam.h
+@@ -0,0 +1,102 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <chrono>
++#include <cmath>
++#include <memory>
++#include <mutex>
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++
++// Rayon de lumiere des departs de mission (« rod-of-god » de task-arrow) : le modele natif (cylindre jaune
++// opaque d'apparence) est masque par GOAL, qui publie chaque image la position, le rayon et l'intensite.
++// Rendu moderne : puits de lumiere translucide et additif (coeur plus lumineux, bords doux, filets de
++// lumiere qui montent, s'estompe en hauteur), lueur douce au sol, fondu au contact du decor.
++namespace BeamState {
++struct Beam {
++  float x = 0, y = 0, z = 0, radius = 0, alpha = 0;
++  std::chrono::steady_clock::time_point stamp;
++};
++inline std::mutex mutex;
++inline std::array<Beam, 4> beams{};
++
++// io : x y z (unites du jeu), w = rayon (unites), puis alpha (0..1) au flottant suivant.
++inline void publish(const float* io) {
++  std::lock_guard<std::mutex> guard(mutex);
++  const auto now = std::chrono::steady_clock::now();
++  Beam b; b.x = io[0] / 4096.f; b.y = io[1] / 4096.f; b.z = io[2] / 4096.f;
++  b.radius = io[3] / 4096.f; b.alpha = io[4]; b.stamp = now;
++  if (!std::isfinite(b.x) || !std::isfinite(b.radius) || !std::isfinite(b.alpha)) return;
++  // meme rayon qu'une entree existante (a 1 m pres) ou emplacement le plus ancien
++  int slot = 0; auto oldest = now;
++  for (int i = 0; i < int(beams.size()); i++) {
++    const auto& e = beams[i];
++    if (std::abs(e.x - b.x) < 1.f && std::abs(e.z - b.z) < 1.f) { slot = i; oldest = {}; break; }
++    if (e.stamp < oldest) { oldest = e.stamp; slot = i; }
++  }
++  beams[slot] = b;
++}
++}  // namespace BeamState
++
++class ModernBeam {
++ public:
++  ~ModernBeam() { if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++  void render(SharedRenderState* state) {
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
++    std::array<BeamState::Beam, 4> beams;
++    {
++      std::lock_guard<std::mutex> guard(BeamState::mutex);
++      beams = BeamState::beams;
++    }
++    const auto now = std::chrono::steady_clock::now();
++    int live = 0;
++    for (auto& b : beams) {
++      if (now - b.stamp > std::chrono::milliseconds(250) || b.alpha <= .002f || b.radius <= .01f) b.alpha = 0.f;
++      else ++live;
++    }
++    if (!live) return;
++    if (!m_shader) { m_shader = std::make_unique<Shader>("modern_beam", state->version); glGenVertexArrays(1, &m_vao); }
++    if (!m_shader->okay()) return;
++    GLint program, vao, depth_func, active, src_rgb, dst_rgb, src_a, dst_a, eq_rgb, eq_a;
++    GLboolean depth_write, color_mask[4];
++    glGetIntegerv(GL_CURRENT_PROGRAM, &program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &vao);
++    glGetIntegerv(GL_DEPTH_FUNC, &depth_func); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
++    glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetIntegerv(GL_ACTIVE_TEXTURE, &active);
++    glGetIntegerv(GL_BLEND_SRC_RGB, &src_rgb); glGetIntegerv(GL_BLEND_DST_RGB, &dst_rgb);
++    glGetIntegerv(GL_BLEND_SRC_ALPHA, &src_a); glGetIntegerv(GL_BLEND_DST_ALPHA, &dst_a);
++    glGetIntegerv(GL_BLEND_EQUATION_RGB, &eq_rgb); glGetIntegerv(GL_BLEND_EQUATION_ALPHA, &eq_a);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST};
++    GLboolean was[5];
++    for (int i = 0; i < 5; i++) { was[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
++    m_shader->activate();
++    const GLuint id = m_shader->id();
++    m_scene.bind(state, id);   // profondeur de la scene : fondu doux au contact du decor
++    glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++    glUniformMatrix4fv(glGetUniformLocation(id, "pc_camera"), 1, GL_FALSE, state->prototype_camera);
++    glUniform4fv(glGetUniformLocation(id, "cam_trans"), 1, state->camera_pos.data());
++    glUniform1f(glGetUniformLocation(id, "beam_time"), LiquidSnapshot::seconds());
++    glBindVertexArray(m_vao);
++    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_GEQUAL); glDepthMask(GL_FALSE);
++    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_FALSE);
++    glEnable(GL_BLEND); glBlendEquation(GL_FUNC_ADD); glBlendFunc(GL_ONE, GL_ONE);
++    for (const auto& b : beams) {
++      if (b.alpha <= 0.f) continue;
++      glUniform4f(glGetUniformLocation(id, "beam_base"), b.x, b.y, b.z, b.radius);
++      glUniform1f(glGetUniformLocation(id, "beam_alpha"), std::min(b.alpha, 1.f));
++      glUniform1i(glGetUniformLocation(id, "beam_part"), 0);
++      glDrawArrays(GL_TRIANGLES, 0, 6);   // puits de lumiere
++      glUniform1i(glGetUniformLocation(id, "beam_part"), 1);
++      glDrawArrays(GL_TRIANGLES, 0, 6);   // lueur au sol
++    }
++    glUseProgram(program); glBindVertexArray(vao); glDepthFunc(depth_func); glDepthMask(depth_write);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]);
++    glBlendFuncSeparate(src_rgb, dst_rgb, src_a, dst_a); glBlendEquationSeparate(eq_rgb, eq_a);
++    for (int i = 0; i < 5; i++) { if (was[i]) glEnable(flags[i]); else glDisable(flags[i]); }
++    glActiveTexture(active);
++  }
++
++ private:
++  std::unique_ptr<Shader> m_shader;
++  LiquidSnapshot m_scene;
++  GLuint m_vao = 0;
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index f6dabf27..214f58b1 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1453,6 +1453,7 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+     }
+     if (bucket_id == (int)jak3::BucketId::GENERIC_WARP) {
+       auto p = prof.make_scoped_child("modern-weather");
++      m_modern_beam.render(&m_render_state);      // rayon des departs de mission (avant la meteo)
+       WeatherReflect::capture(&m_render_state);   // image pour les reflets des flaques (avant brouillard et pluie)
+       m_modern_weather.render(&m_render_state);   // brouillard, pluie, neige, sable (avant l'interface)
+     }
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index 27f6f6a2..32838102 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -15,6 +15,7 @@
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ #include "game/graphics/opengl_renderer/ModernSky.h"
+ #include "game/graphics/opengl_renderer/ModernWeather.h"
++#include "game/graphics/opengl_renderer/ModernBeam.h"
+ #include "game/graphics/opengl_renderer/WaterFountains.h"
+ #include "game/graphics/opengl_renderer/PalaceFire.h"
+ #include "game/graphics/opengl_renderer/CityInteriors.h"
+@@ -125,6 +126,7 @@ class OpenGLRenderer {
+   WaterSpray m_water_spray;
+   ModernSky m_modern_sky;
+   ModernWeather m_modern_weather;
++  ModernBeam m_modern_beam;
+   ModernOceanSurface m_modern_ocean;
+   WaterFountains m_water_fountains;
+   CityInteriors m_city_interiors;
+diff --git a/game/graphics/opengl_renderer/shaders/modern_beam.frag b/game/graphics/opengl_renderer/shaders/modern_beam.frag
+new file mode 100644
+index 00000000..7dc65ba4
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_beam.frag
+@@ -0,0 +1,64 @@
++#version 410 core
++// Rayon de mission (remplace le cylindre jaune natif) : lumiere doree translucide et additive.
++//  - epaisseur traversee d'un cylindre (plus lumineux au centre, bords qui s'effacent), coeur plus vif ;
++//  - filets de lumiere qui montent lentement ; scintillement doux ;
++//  - s'estompe en hauteur (reste visible de loin comme repere : renforce avec la distance) ;
++//  - fondu doux la ou il traverse le sol ou un objet (profondeur de la scene) ;
++//  - lueur au sol : halo doux et anneau qui pulse.
++in vec3 world;
++in vec2 local;
++out vec4 color;
++uniform sampler2D tex_T26;
++uniform vec4 fluid_viewport;
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform vec4 beam_base;
++uniform float beam_alpha;
++uniform int beam_part;
++uniform float beam_time;
++float hash(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}
++float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
++  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
++bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
++float sceneDistance(){
++  vec2 uv=gl_FragCoord.xy/vec2(textureSize(tex_T26,0));
++  float d=texture(tex_T26,uv).r;
++  if(skyDepth(d))return 1e6;
++  vec2 px=uv*vec2(textureSize(tex_T26,0));
++  vec4 h=vec4((px-fluid_viewport.xy)/fluid_viewport.zw*2.-1.,d*2.-1.,1.);
++  h.y/=(512./416.)*.5;
++  vec4 w=inverse(-pc_camera)*h;
++  return length(w.xyz/w.w/4096.);
++}
++void main(){
++  vec3 eye=cam_trans.xyz/4096.;
++  float dist=length(world-eye);
++  // fondu au contact du decor (pas d'arete nette la ou le rayon entre dans le sol)
++  float soft=clamp((sceneDistance()-dist)/1.2,0.,1.);
++  vec3 gold=vec3(1.,.82,.42);
++  if(beam_part==0){
++    float u=local.x,h=local.y;
++    float thick=sqrt(max(0.,1.-u*u));
++    float core=exp(-u*u*7.);
++    float body=thick*.45+core*.75;
++    // filets qui montent
++    float n=noise(vec2(u*2.6+3.,h*.18-beam_time*1.1))*.6+noise(vec2(u*5.3,h*.45-beam_time*1.9)+7.)*.4;
++    body*=.72+.55*n;
++    // hauteur : fort pres du sol, s'efface en montant, fine trace jusqu'au ciel
++    float up=exp(-max(h,0.)/38.)*.85+exp(-max(h,0.)/220.)*.22;
++    up*=smoothstep(-1.5,.4,h);
++    float far=mix(1.,2.4,smoothstep(40.,220.,dist));          // repere visible de loin
++    float flick=.93+.07*sin(beam_time*3.1)+.04*sin(beam_time*7.3);
++    float I=body*up*far*flick*beam_alpha*.55*soft;
++    if(I<.002)discard;
++    color=vec4(gold*I+vec3(1.,.95,.8)*core*up*I*.35,0.);
++  }else{
++    float r=length(local);
++    float halo=exp(-r*r*.55)*.32;
++    float pulse=fract(beam_time*.35);
++    float ring=exp(-pow((r-(.6+pulse*2.4))/.22,2.))*(1.-pulse)*.35;
++    float I=(halo+ring)*beam_alpha*smoothstep(3.2,2.4,r);          // au ras du sol : pas de fondu de contact
++    if(I<.002)discard;
++    color=vec4(gold*I,0.);
++  }
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_beam.vert b/game/graphics/opengl_renderer/shaders/modern_beam.vert
+new file mode 100644
+index 00000000..08786b12
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_beam.vert
+@@ -0,0 +1,29 @@
++#version 410 core
++// Rayon de mission : partie 0 = puits de lumiere (quad vertical tourne vers la camera autour de l'axe du
++// rayon), partie 1 = lueur au sol (quad horizontal centre sur la base).
++uniform mat4 pc_camera;
++uniform vec4 cam_trans;
++uniform vec4 beam_base;      // xyz base (m), w rayon (m)
++uniform int beam_part;
++out vec3 world;
++out vec2 local;              // partie 0 : x en travers (-1.3..1.3 rayons), y hauteur (m) ; partie 1 : x,z (rayons)
++void main(){
++  const vec2 c[6]=vec2[6](vec2(-1,0),vec2(1,0),vec2(1,1),vec2(-1,0),vec2(1,1),vec2(-1,1));
++  vec2 k=c[gl_VertexID];
++  vec3 base=beam_base.xyz;float r=beam_base.w;
++  vec3 eye=cam_trans.xyz/4096.;
++  if(beam_part==0){
++    vec2 toEye=eye.xz-base.xz;
++    vec2 side=length(toEye)>1e-3?normalize(vec2(-toEye.y,toEye.x)):vec2(1,0);
++    float H=420.;
++    float across=k.x*1.3;
++    world=base+vec3(side.x*across*r,-1.5+k.y*H,side.y*across*r);
++    local=vec2(across,k.y*H-1.5);
++  }else{
++    vec2 q=vec2(k.x,k.y*2.-1.)*3.2;
++    world=base+vec3(q.x*r,.06,q.y*r);
++    local=q;
++  }
++  gl_Position=-pc_camera*vec4(world*4096.-cam_trans.xyz,1.);
++  gl_Position.y*=(512./416.)*.5;
++}
+diff --git a/game/kernel/jak3/kmachine.cpp b/game/kernel/jak3/kmachine.cpp
+index 25b38ee5..26ec6e1c 100644
+--- a/game/kernel/jak3/kmachine.cpp
++++ b/game/kernel/jak3/kmachine.cpp
+@@ -34,6 +34,7 @@
+ #include "game/graphics/opengl_renderer/WaterContacts.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
+ #include "game/graphics/opengl_renderer/WeatherState.h"
++#include "game/graphics/opengl_renderer/ModernBeam.h"
+ #include "game/graphics/opengl_renderer/CityFireSources.h"
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
+ 
+@@ -76,6 +77,11 @@ static u64 prototype_weather_force(u32 kind) {
+   WeatherState::force(int(s32(kind)));
+   return 0;
+ }
++// Rayon des departs de mission (task-arrow) : position, rayon, intensite ; dessine par ModernBeam.
++static u64 prototype_beam(u32 io) {
++  BeamState::publish(Ptr<float>(io).c());
++  return 0;
++}
+ static u64 prototype_water_stroke(u32 packet, u32 hand) {
+   WaterContacts::push_stroke(Ptr<float>(packet).c(),hand);
+   return 0;
+@@ -469,6 +475,7 @@ void InitMachine_PCPort() {
+   make_function_symbol_from_c("pc-remaster-sky-state", (void*)prototype_sky_state);
+   make_function_symbol_from_c("pc-remaster-sky-actor", (void*)prototype_sky_actor);
+   make_function_symbol_from_c("pc-remaster-weather", (void*)prototype_weather);
++  make_function_symbol_from_c("pc-remaster-beam", (void*)prototype_beam);
+   make_function_symbol_from_c("pc-remaster-weather-force", (void*)prototype_weather_force);
+   // PC Port added functions
+   init_common_pc_port_functions(
+-- 
+2.54.0.windows.1
+

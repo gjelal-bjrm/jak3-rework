@@ -122,5 +122,7 @@
   "game/graphics/opengl_renderer/shaders/modern_weather_particles.vert",
   "game/graphics/opengl_renderer/shaders/modern_weather_particles.frag",
   "game/graphics/opengl_renderer/shaders/fountain_mist.vert",
-  "game/graphics/opengl_renderer/shaders/fountain_mist.frag"
+  "game/graphics/opengl_renderer/shaders/fountain_mist.frag",
+  "game/graphics/opengl_renderer/shaders/modern_beam.vert",
+  "game/graphics/opengl_renderer/shaders/modern_beam.frag"
 ]
