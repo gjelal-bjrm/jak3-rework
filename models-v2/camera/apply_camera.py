@@ -1,18 +1,24 @@
 """Camera orbitale du remaster (manette) : patch idempotent de
-data/goal_src/jak3/engine/camera/cam-states.gc (camera « a ficelle » cam-string).
+data/goal_src/jak3/engine/camera/camera.gc et cam-states.gc (camera « a ficelle » cam-string).
 
 Le jeu d'origine n'utilise le stick droit vertical que pour rapprocher / eloigner la camera le long d'une
-courbe fixe : impossible de regarder le ciel ou le sol. Ici, le stick droit vertical incline vraiment la
-camera autour de Jak (de -60 deg, camera basse qui regarde le ciel, a +75 deg, vue plongeante). La
-rotation horizontale, le suivi, les collisions et les cameras fixes / cinematiques restent ceux du jeu.
+courbe fixe : impossible de regarder le ciel ou le sol. Ici, le stick droit vertical incline la camera :
+  - vers le bas (jusqu'a +75 deg) : la camera monte en orbite autour de Jak, vue plongeante ;
+  - vers le haut (jusqu'a -50 deg) : la camera descend en orbite jusqu'a 1,1 m du sol, puis c'est le regard
+    qui se leve vers le ciel (comme dans les jeux recents) : pas de rapprochement brutal de Jak.
+La rotation horizontale, le suivi, les collisions et les cameras fixes / cinematiques restent ceux du jeu.
 Modes arme, vehicule et BOMBBOT : camera d'origine.
+Sources : copies non patchees cam-states-before.gc / camera-before.gc (a recopier avant de relancer ce script).
 Apres : python liquids-v3/rebuild_routes.py arena palace (le code camera est dans GAME.CGO).
 """
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[2]
+H = Path(__file__).resolve().parent
+ROOT = H.parents[1]
 PATH = ROOT / 'data/goal_src/jak3/engine/camera/cam-states.gc'
 CAMERA = ROOT / 'data/goal_src/jak3/engine/camera/camera.gc'
 MARK = ';; ---- Camera orbitale du remaster'
+PC_TILT_SIGN = '-1.0'   # sens de rotation du regard (verifie en jeu : le regard doit monter)
+
 STATE = """;; ---- Camera orbitale du remaster : etat partage (defini ici, camera.gc est compile avant cam-states.gc)
 (define *pc-orbit-enable* #t)
 (deftype pc-orbit-state (structure)
@@ -21,6 +27,7 @@ STATE = """;; ---- Camera orbitale du remaster : etat partage (defini ici, camer
    (ready   int32)
    (active  int32)
    (stamp   time-frame)
+   (tilt    float)
    )
   )
 (define *pc-orbit* (new 'static 'pc-orbit-state))
@@ -28,11 +35,9 @@ STATE = """;; ---- Camera orbitale du remaster : etat partage (defini ici, camer
 """
 
 ORBIT = r''';; ---- Camera orbitale du remaster (manette) -------------------------------------------------------
-;; Stick droit vertical = inclinaison autour de Jak : -60 deg (camera basse, on voit le ciel) a +75 deg (vue
-;; plongeante). Distance nominale de la zone (hypotenuse de string-max-val) ; vers le haut, la camera glisse
-;; au ras du sol en se rapprochant (elle ne s'enfonce plus dans le sol) et vise a travers la tete de Jak. Sans toucher au stick pendant 3 s, l'inclinaison
-;; revient doucement a celle de la zone quand Jak se deplace. Le reglage d'inversion verticale d'OpenGOAL
-;; est respecte (par defaut : pousser le stick vers le haut fait regarder vers le haut).
+;; Stick droit vertical : de -50 deg (regard vers le ciel) a +75 deg (vue plongeante). Sans toucher au stick
+;; pendant 3 s, l'inclinaison revient doucement a celle de la zone quand Jak se deplace. Le reglage
+;; d'inversion verticale d'OpenGOAL est respecte (par defaut : stick vers le haut = regarder vers le haut).
 (defbehavior pc-orbit-joystick camera-slave ()
   (set! (-> *pc-orbit* active) 0)
   (when (and *pc-orbit-enable*
@@ -72,20 +77,47 @@ ORBIT = r''';; ---- Camera orbitale du remaster (manette) ----------------------
             )
           )
         )
-      (set! (-> *pc-orbit* pitch) (fmax -60.0 (fmin 75.0 (-> *pc-orbit* pitch))))
+      (set! (-> *pc-orbit* pitch) (fmax -50.0 (fmin 75.0 (-> *pc-orbit* pitch))))
       (let* ((p (-> *pc-orbit* pitch))
-             (a (* 182.04445 p))
+             (g p)
              (d dist)
              )
-        ;; vers le haut : la camera glisse au ras du sol (40 cm) en se rapprochant de Jak, sans s'y enfoncer ;
-        ;; elle vise toujours a travers sa tete, donc vers le ciel
+        ;; Vers le haut (p < 0) : la camera se rapproche un peu (jusqu'a 60 % de sa distance) et descend en
+        ;; orbite jusqu'a 1,1 m du sol (plus bas, sa bulle de collision de 40 cm frolerait le sol et la camera
+        ;; resterait coincee) ; au-dela, elle ne bouge plus et c'est le regard qui se leve (tilt, camera.gc).
+        (set! (-> *pc-orbit* tilt) 0.0)
         (when (< p 0.0)
-          (set! d (fmin d (/ (fmax 2048.0 (- (-> *camera* settings target-height) 1638.4)) (- (sin a)))))
-          (set! d (fmax 3276.8 d))
+          (set! d (* dist (lerp 1.0 0.6 (/ (- p) 50.0))))
+          (let ((gfloor (* -0.0054931640625
+                           (asin (fmin 0.9 (/ (fmax 1024.0 (- (-> *camera* settings target-height) 4505.6)) d)))
+                           )
+                        )
+                )
+            (when (< p gfloor)
+              (set! g gfloor)
+              (set! (-> *pc-orbit* tilt) (- gfloor p))
+              )
+            )
           )
-        (set! (-> self view-off z) (* d (cos a)))
-        (set! (-> self view-off y) (* d (sin a)))
-        (set! (-> self view-off-param) 1.0)
+        (let ((a (* 182.04445 g)))
+          (set! (-> self view-off z) (* d (cos a)))
+          (set! (-> self view-off y) (* d (sin a)))
+          (set! (-> self view-off-param) 1.0)
+          ;; La camera « a ficelle » ne recule jamais d'elle-meme (seulement quand Jak s'eloigne) : quand le
+          ;; joueur incline la camera, on amene sa distance horizontale a la bonne valeur (8 m/s).
+          (when (or (< (-> *pc-orbit* idle) 3.0) (< 3.0 (fabs (- p rest))))
+            (let ((cur (vector-length (-> self view-flat)))
+                  (hz (* d (cos a)))
+                  )
+              (when (< 40.96 cur)
+                (let ((target (seek cur hz (* 32768.0 (seconds-per-frame)))))
+                  (vector-normalize! (-> self view-flat) target)
+                  (set! (-> self min-z-override) target)
+                  )
+                )
+              )
+            )
+          )
         )
       (set! (-> *pc-orbit* active) 1)
       (set! (-> *pc-orbit* stamp) (-> *display* real-clock frame-counter))
@@ -96,6 +128,9 @@ ORBIT = r''';; ---- Camera orbitale du remaster (manette) ----------------------
 
 '''
 
+RECENT = ("(and (nonzero? (-> *pc-orbit* active))\n"
+          "                   (< (- (-> *display* real-clock frame-counter) (-> *pc-orbit* stamp)) (seconds 0.1))\n")
+
 
 def replace_once(s, old, new, what):
     assert s.count(old) == 1, f'{what} : ancre introuvable ou multiple ({s.count(old)})'
@@ -103,29 +138,39 @@ def replace_once(s, old, new, what):
 
 
 def patch_camera():
-    """Etat partage + regle « les pieds de Jak restent a l'ecran » (vector-into-frustum-nosmooth!) desactivee
-    quand la camera orbitale regarde vers le haut : sinon la vue plonge vers ses pieds des que la camera est basse."""
+    """Etat partage ; regle « les pieds de Jak restent a l'ecran » (vector-into-frustum-nosmooth!) sautee quand
+    la camera orbitale regarde vers le haut ; regard leve (tilt) quand la camera touche le sol."""
     s = CAMERA.read_text()
     if MARK in s:
         print('camera.gc : deja patche'); return
     s = replace_once(s, ';; DECOMP BEGINS\n', ';; DECOMP BEGINS\n\n' + STATE, 'debut de camera.gc')
-    s = replace_once(s, '      (vector-into-frustum-nosmooth! s1-0 arg1 (lerp-clamp arg3 (/ arg3 4) (-> arg0 underwater-blend value)))\n',
-                     '      (if (not (and (nonzero? (-> *pc-orbit* active))\n'
-                     '                    (< (- (-> *display* real-clock frame-counter) (-> *pc-orbit* stamp)) (seconds 0.1))\n'
+    frustum = '      (vector-into-frustum-nosmooth! s1-0 arg1 (lerp-clamp arg3 (/ arg3 4) (-> arg0 underwater-blend value)))\n'
+    s = replace_once(s, frustum,
+                     '      (if (not ' + RECENT.replace('\n                   (<', '\n                    (<') +
                      '                    (< (-> *pc-orbit* pitch) 4.0)\n'
                      '                    )\n'
                      '               )\n'
-                     '          (vector-into-frustum-nosmooth! s1-0 arg1 (lerp-clamp arg3 (/ arg3 4) (-> arg0 underwater-blend value)))\n'
+                     '    ' + frustum +
                      '          )\n', 'cadrage des pieds')
+    look = '        (forward-down->inv-matrix s1-0 s0-0 (-> *camera* local-down))\n'
+    s = replace_once(s, look, look +
+                     '        (when ' + RECENT +
+                     '                   (< 0.01 (-> *pc-orbit* tilt))\n'
+                     '                   )\n'
+                     "          (let ((pc-tilt (new 'stack-no-clear 'matrix)))\n"
+                     f'            (matrix-rotate-x! pc-tilt (* {PC_TILT_SIGN} 182.04445 (-> *pc-orbit* tilt)))\n'
+                     '            (matrix*! s1-0 pc-tilt s1-0)\n'
+                     '            )\n'
+                     '          )\n', 'regard vers le ciel')
     CAMERA.write_text(s)
-    print('camera.gc : etat de la camera orbitale, cadrage des pieds libere vers le haut')
+    print('camera.gc : etat de la camera orbitale, cadrage des pieds et regard vers le ciel')
 
 
 def main():
+    CAMERA.write_text((H / 'camera-before.gc').read_text())
+    PATH.write_text((H / 'cam-states-before.gc').read_text())
     patch_camera()
     s = PATH.read_text()
-    if MARK in s:
-        print('cam-states.gc : deja patche'); return
     s = replace_once(s, '(defbehavior cam-string-joystick camera-slave ()\n',
                      ORBIT + '(defbehavior cam-string-joystick camera-slave ()\n', 'cam-string-joystick')
     # 1. partie verticale d'origine (distance le long de la courbe) : seulement si la camera orbitale ne s'en charge pas
