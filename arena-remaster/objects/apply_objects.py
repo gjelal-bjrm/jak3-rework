@@ -36,7 +36,7 @@ def main(parts, textures=None):
     subprocess.run([str(BRIDGE), str(H / 'wasstada-before-objects.fr3'), str(H / 'combined-patch.json'), str(out)], check=True)
     if textures: shutil.copy2(out, H / f'wasstada-{textures}.fr3')
     if textures == 'sans':                  # version de comparaison : textures d'origine partout
-        for level in ('wasstadb',):
+        for level in ('wasstadb', 'wasstadc'):
             base = H / f'{level}-before-textures.fr3'
             if base.exists(): shutil.copy2(base, H / f'{level}-sans.fr3')
     shutil.copy2(out, R / 'data/out/jak3/fr3/wasstada.fr3')

@@ -31,8 +31,8 @@ WEATHERS = [
     ('Tempête de sable (Spargus)', 'tempete-de-sable'), ('Brouillard matinal', 'brouillard'),
 ]
 TEXTURES = [
+    ('Nouvelles, couleurs vives (« Genshin », choisie)', 'genshin'),
     ('Nouvelles, couleurs d’origine (« Genshin fidèle »)', 'fidele'),
-    ('Nouvelles, couleurs vives (« Genshin »)', 'genshin'),
     ('Celles du jeu (pour voir ce que changent les objets seuls)', 'sans'),
 ]
 HOURS = [
@@ -120,7 +120,7 @@ class Launcher(tk.Tk):
         ttk.Radiobutton(versions, text='Jeu d’origine (pour comparer)', variable=self.variant, value='original', command=self.refresh).grid(row=1, column=0, sticky='w')
 
         ttk.Label(frame, text='Textures\nde l’arène').grid(row=6, column=0, sticky='nw', **pad)
-        self.textures = tk.StringVar(value=saved.get('textures', 'fidele'))
+        self.textures = tk.StringVar(value=saved.get('textures', 'genshin'))
         textures = ttk.Frame(frame); textures.grid(row=6, column=1, sticky='w', **pad)
         self.texture_buttons = [ttk.Radiobutton(textures, text=label, variable=self.textures, value=value)
                                 for label, value in TEXTURES]

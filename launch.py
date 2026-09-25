@@ -100,8 +100,9 @@ if args.variant == 'remaster' and hashlib.sha256(route.read_bytes()).hexdigest()
     sys.exit('Code de demarrage V3 modifie. Relancer le conditionnement du prototype.')
 if args.variant == 'remaster' and args.textures:
     # textures de l'arene choisies dans le lanceur : la version choisie devient celle du remaster
-    for level in ('wasstada', 'wasstadb'):
+    for level in ('wasstada', 'wasstadb', 'wasstadc'):
         chosen = ROOT / 'arena-remaster/objects' / f'{level}-{args.textures}.fr3'
+        if not chosen.is_file(): chosen = ROOT / 'arena-remaster/objects' / f'{level}-before-textures.fr3'
         relative = f'out/jak3/fr3/{level}.fr3'
         if not chosen.is_file() or relative not in files: continue
         target = ROOT / 'variants/remaster' / relative
