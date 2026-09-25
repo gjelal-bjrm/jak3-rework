@@ -43,6 +43,8 @@ float sceneDistance() {
 }
 
 void main() {
+  // rien sous le niveau des braises : la flamme ne deborde jamais sous le brasero
+  if (world.y < fire_pos[src].y - .02) discard;
   float seed = fire_info[src].y + float(layer) * 3.71;
   float strength = fire_info[src].z;
   float x = local.x, y = local.y;
@@ -61,12 +63,12 @@ void main() {
   float lick = fbm(vec2(xw * 6. + seed * 3., yy * 2.4 - t * 4.2));
   body += (lick - .5) * .42 * smoothstep(.08, .8, yy);
   body -= smoothstep(.55, 1.08, yy + (w2 - .5) * .7) * .6;
-  float mask = smoothstep(0., .045, body) * smoothstep(-.07, .10, yy);     // bord net (peint), base adoucie
+  float mask = smoothstep(0., .045, body) * smoothstep(0., .10, yy);     // bord net (peint), base adoucie
   float inner = smoothstep(.10, .42, body);
   float heat = clamp(inner * (1.05 - yy * .9) + (1. - yy) * .10, 0., 1.) * smoothstep(-.05, .12, yy);
   vec3 c = mix(vec3(.78, .10, .02), vec3(1.45, .46, .06), smoothstep(0., .40, heat));
   c = mix(c, vec3(1.65, 1.12, .40), smoothstep(.50, .95, heat));
-  float glow = exp(-x * x * 1.2) * exp(-max(yy, 0.) * 1.6) * smoothstep(-.10, .05, yy) * .18;
+  float glow = exp(-x * x * 1.2) * exp(-max(yy, 0.) * 1.6) * smoothstep(0., .08, yy) * .18;
   float pulse = .93 + .07 * sin(t * 7.7 + seed);
   vec3 rgb = (c * mask * (layer == 1 ? 1. : .72) + vec3(1.2, .38, .06) * glow) * .95 * pulse * strength;
   // fondu au contact du decor

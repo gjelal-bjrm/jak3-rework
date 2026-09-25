@@ -261,7 +261,7 @@
     "game/graphics/opengl_renderer/shaders/modern_shadow.vert": "8521067e5bfc187ae34b9e25b91c524d5ac43a2cd5051011de35efdd89951568",
     "game/graphics/opengl_renderer/shaders/modern_shadow.frag": "c692c7c2b078e7d0a05096cbc3a180c9860d994b2fb4408bf61960ebd531c39b",
     "game/graphics/opengl_renderer/shaders/modern_fire.vert": "9b55c38fb46e2401902451a179bfdd55bd9fbd12e8e5e688d18ffedd02eba2d3",
-    "game/graphics/opengl_renderer/shaders/modern_fire.frag": "ce0e044ef72d215df28112f7ddfc937c1dbe264817a213b7a0adad5c06c35925",
+    "game/graphics/opengl_renderer/shaders/modern_fire.frag": "900ee1244927c6ccfada8413e8c3ebf230a44295060b419cf8d0c4085665e1df",
     "game/graphics/opengl_renderer/shaders/modern_fire_light.vert": "6e4b4b1e9108f195e6149f11b091ecf7ad1adc58e7ccd87aac9dde9eaa36a632",
     "game/graphics/opengl_renderer/shaders/modern_fire_light.frag": "4b93547bb3493dde38785d20a86d521a0956f04dd10c8f784e15be867e502e3b",
     "game/graphics/opengl_renderer/shaders/modern_fire_sparks.vert": "dae6ccacb983410d403cff1db8b38f4ff4afafc80992d94ca6bfa448e7686367",
