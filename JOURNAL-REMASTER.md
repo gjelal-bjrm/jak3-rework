@@ -228,3 +228,37 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   Corrigé au passage : de fausses taches d'eau turquoise au pied des rochers (ombres bleutées prises pour la
   cascade peinte) — `qa/water-threshold.png`.
 - Pour comparer toi-même : le rendu se coupe en test avec `pc-remaster-lighting 263` (256 = rendu Genshin coupé).
+
+### 17. Désert — les lointains et l'air (ton retour : « de loin il redevient moche », « il manque une ambiance aérienne »)
+- **Pourquoi le sable redevenait « l'ancien » au loin** : le carreau de sable d'origine (8 m, sans version réduite
+  pour la distance) donnait au loin un texel au hasard par pixel. Ce grésillement, c'est exactement l'aspect de
+  l'ancien sol. Au loin, le carreau est remplacé par sa couleur moyenne (calculée au chargement).
+- **Taches sombres sur le sable au loin** : ce n'étaient ni les ombres du soleil ni les couleurs d'origine
+  (vérifié en les coupant une à une). C'était mon éclairage des bosses moyennes du terrain (15 à 40 m), qui
+  basculaient d'un coup dans l'ombre. Maintenant, l'ombre franche est réservée aux grandes dunes et aux rides, et
+  les bosses moyennes ont un modelé doux. Les ombres à l'ombre sont aussi plus claires et plus fraîches (plus
+  d'aspect « sale »).
+- **Le sable garde son dessin plus loin** :
+  - les grandes ondulations de 47 m restent visibles jusqu'à ~400 m au ras du sol ;
+  - des paillettes lointaines, d'un pixel, restent des points même en vue rasante ;
+  - un éclat du soleil sur le sable face au soleil ;
+  - du sable qui court au ras du sol avec le vent, par bouffées, autour du joueur.
+- **L'air du désert** :
+  - **ciel dégagé** : moitié moins de nuages au-dessus du désert, azur franc en haut, blanc-bleuté lumineux à
+    l'horizon. La bande gris-brun d'origine au-dessus de l'horizon a disparu. La fumée du volcan reste intacte,
+    avec une frange grise et non un halo bleu. Tout cela uniquement en plein jour : l'aube et le couchant gardent
+    leurs couleurs ;
+  - **air chaud** : au ras de l'horizon, les lointains ondulent comme au-dessus du sable brûlant (discret sur une
+    image fixe, visible en jeu). Le haut des montagnes et les objets proches restent nets ;
+  - **brume** : poussière chaude et lumineuse jusqu'à ~1 km, qui dérive avec le vent. Très loin, elle rejoint le
+    blanc-bleuté du bas du ciel, sans bande à l'horizon.
+- **Ombres des nuages** : grandes taches douces (plusieurs centaines de mètres), plus légères. Les petites taches
+  nettes ressemblaient à des salissures.
+- **Corrigé au passage** : au couchant, le sable à l'ombre bleuissait et devenait de l'« eau » par taches (repérage
+  de la cascade peinte fait sur la couleur du moment). L'eau est maintenant repérée une fois pour toutes, avec
+  l'éclairage de 13 h relevé en jeu. La cascade est intacte de jour, et il n'y a plus d'eau parasite au couchant.
+- Contrôlé :
+  - 6 cadrages près et loin, jeu d'origine / version testée / maintenant (`qa/desert-air-3way.png`) ;
+  - aube, matinée et couchant (`qa/gs-hours.png`, `qa/casc14-dusk.png`) ;
+  - cascade (`qa/casc15.png`) ;
+  - 60 images/s.
