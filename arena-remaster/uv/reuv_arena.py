@@ -26,8 +26,13 @@ OUT = Path(__file__).resolve().parent
 ROOT = OUT.parents[1]
 
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
+CONFIG = {}
+if args and args[0].endswith('.json'):
+    # autre lieu : {level, native, materials (a replaquer), motif (textures a motif), out (dossier)}
+    CONFIG = json.loads(Path(args[0]).read_text()); args = [CONFIG['level'], str(ROOT / CONFIG['native'])]
 LEVEL = args[0] if args else 'wasstada'
 SOURCE = Path(args[1]) if len(args) > 1 else ROOT / 'arena-remaster/objects/wasstada-all-native.json'
+if CONFIG.get('out'): OUT = ROOT / CONFIG['out']
 
 MOTIF = {
     'wstd-floor-panel01', 'wstd-floor-panel02', 'wstd-floor-panel03', 'wstd-tentacle-plate02', 'wstd-tentacle-plate03',
@@ -54,7 +59,11 @@ def texture_size(name):
     return None
 
 
+if CONFIG.get('motif'): MOTIF = set(CONFIG['motif'])
+
+
 def eligible(name):
+    if CONFIG.get('materials'): return name in CONFIG['materials'] and texture_size(name) is not None
     return (name.startswith('wstd-') or name.startswith('common_sandstone_')) and name not in SKIP and \
         'lava' not in name and texture_size(name) is not None
 

@@ -71,3 +71,13 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   constructions lancées en même temps ; corrigé et verrou ajouté pour que ça n'arrive plus).
 - **Rochers du rivage** (168 000 m²) : sculptés en couches (couches ×1,4). 6 448 → 847 000 triangles.
   60 images/s. Comparaison : `qa/sh-compare.png`.
+
+### 5. Ville de Spargus — plaquage sans étirement (effet « tordu »)
+- Même méthode que l'arène : chaque surface est « dépliée » à plat, puis la texture y est reposée à sa taille
+  réelle. Les motifs réguliers (panneaux, tôles, toits) gardent leur alignement.
+- 10 matériaux, 203 000 faces (murs de tôle extérieurs, toits, route, pièces de métal…). Étirement typique :
+  tôle des remparts **2,6 → 1,1**, pièces de métal **7,1 → 1,2**, route **1,8 → 1,0** (1,0 = parfait).
+- Essayé puis retiré : les bidons de feu (le résultat était pire qu'avant).
+- Rochers du rivage plaqués selon le monde, comme les montagnes.
+- **Vérifié en jeu** : textures HD toutes affichées (contrôle d'affichage : 54 + 6 + 3, aucune manquante).
+  Captures : `qa/uv-city-compare.png`, éclairage moderne coupé / actif : `qa/wall-shadow.png`.

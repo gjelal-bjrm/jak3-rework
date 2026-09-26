@@ -8,7 +8,14 @@
  "wascityb": {
   "base": "city-remaster/cliffs/wascityb-before-cliffs.fr3",
   "patches": [
-   "city-remaster/cliffs/wascityb-shore-patch.json"
+   "city-remaster/cliffs/wascityb-shore-patch.json",
+   "city-remaster/uv/uv-patch-wascityb.json"
+  ]
+ },
+ "wascitya": {
+  "base": "city-remaster/cliffs/wascitya-before-cliffs.fr3",
+  "patches": [
+   "city-remaster/uv/uv-patch-wascitya.json"
   ]
  }
 }

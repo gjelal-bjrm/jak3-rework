@@ -2,7 +2,7 @@
   "base": "OpenGOAL v0.3.6",
   "revision": "Prototype liquides V3",
   "runtime": "runtime/liquids-v3/gk.exe",
-  "sha256": "b42c193499e3f6cc27f312c8dcfe3bf0a96f321816afbd7d1298e3a2c8084c66",
+  "sha256": "0798731f68ea88310f2cc648f3387ea6420284b1934104bda752453e16cf33fc",
   "routes": {
     "arena": "7fd05dd138ee58f0c504c134f6c321b9db8b7cc198848aac7effd7227356a602",
     "palace": "8d50ea159cdeeb521ff6270d903c34114ee40b086816509f8395c246ec462e76"

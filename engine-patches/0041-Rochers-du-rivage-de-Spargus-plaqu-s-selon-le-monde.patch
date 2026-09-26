@@ -1,0 +1,34 @@
+From 14b5f0be8adbd94d16cb8e69342d6bc5fb4b43be Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 03:35:46 +0200
+Subject: [PATCH] =?UTF-8?q?Rochers=20du=20rivage=20de=20Spargus=20plaqu?=
+ =?UTF-8?q?=C3=A9s=20selon=20le=20monde?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/background/PalaceMaterials.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index e956b1ef..207affca 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -96,10 +96,12 @@ class PalaceMaterials {
+     static const float small_rockwall[4] = {6.6f, 5.3f, 1.f, -1.f};
+     static const float interior_rock[4] = {10.5f, 11.0f, 1.f, -1.f};
+     static const float spargus_mountain[4] = {27.8f, 20.2f, 0.f, 1.f};   // montagnes de Spargus (waswide)
++    static const float spargus_shore[4] = {8.3f, 18.8f, 1.f, -1.f};       // rochers du rivage (wascityb)
+     if (name == "wstd-rockwall-01") return rockwall;
+     if (name == "wstd-small-rockwall-01") return small_rockwall;
+     if (name == "wstd-interior-rock01") return interior_rock;
+     if (name == "wascity-outerwall-rock") return spargus_mountain;
++    if (name == "wascity-ocean-shore-rocks") return spargus_shore;
+     return nullptr;
+   }
+   // Arene de Spargus : relief et reponse a la lumiere par matiere, sur toutes les grandes surfaces
+-- 
+2.54.0.windows.1
+
