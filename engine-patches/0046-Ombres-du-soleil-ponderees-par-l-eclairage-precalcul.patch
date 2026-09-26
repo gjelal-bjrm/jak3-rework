@@ -1,0 +1,45 @@
+From 690bcda3c4691eb4e5c01dd0726fd64e4d00d1ae Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 07:44:10 +0200
+Subject: [PATCH] Ombres du soleil ponderees par l'eclairage precalcule : plus
+ de double ombre dans les lieux encaisses (volcan) (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/shaders/hfrag.frag  | 3 ++-
+ game/graphics/opengl_renderer/shaders/tfrag3.frag | 5 ++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.frag b/game/graphics/opengl_renderer/shaders/hfrag.frag
+index cce9b9cd..e1331920 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.frag
++++ b/game/graphics/opengl_renderer/shaders/hfrag.frag
+@@ -125,7 +125,8 @@ void main() {
+     if ((sand_detail & 1) != 0) color.rgb = remasterSand(color.rgb);
+     if (sand_detail == 0) color.rgb = vec3(1., 0., 1.);   // test : toutes les options du sable coupees -> magenta
+     if (shadow_on != 0) {
+-      float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength;
++      float baked = dot(fragment_color.rgb * 2., vec3(.2126, .7152, .0722));   // eclairage precalcule (1 = plein)
++      float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength * smoothstep(.35, .85, baked);
+       color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);   // ombre eclairee par le ciel, un peu bleutee
+     }
+   } else {
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 91d2be2a..2289b4d3 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -853,7 +853,10 @@ float sunVisibility(vec3 P, vec3 N) {
+ }
+ vec3 applySunShadow(vec3 c, vec3 P, vec3 N) {
+   if (shadow_on == 0) return c;
+-  float shade = (1. - sunVisibility(P, N)) * shadow_strength;
++  // l'eclairage precalcule du jeu contient deja l'ombre des lieux encaisses (canyons du volcan, interieurs) :
++  // l'ombre du soleil n'agit pleinement que sur les surfaces que le jeu eclaire au soleil (sinon double ombre)
++  float baked = dot(max(fragment_color.rgb, vec3(0.)), vec3(.2126, .7152, .0722));
++  float shade = (1. - sunVisibility(P, N)) * shadow_strength * smoothstep(.35, .85, baked);
+   return c * mix(vec3(1.), vec3(.60, .64, .74), shade);     // ombre eclairee par le ciel : un peu bleutee
+ }
+ // SUN_SHADOW_END
+-- 
+2.54.0.windows.1
+

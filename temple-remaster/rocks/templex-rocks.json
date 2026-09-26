@@ -1,0 +1,7 @@
+{"native": "temple-remaster/rocks/templex-rocks-native.json",
+ "materials": ["temple_sandstone_out_01"],
+ "centre": [4161.0, 4144.0], "near": 0.0, "strata_top": 420.0,
+ "strata_scale": 3.0, "depth_scale": 1.0, "depth_max": 3.0, "sigma_max": 0.8, "far_spacing": 2.5, "thin_ratio": 0.07,
+ "patch": "temple-remaster/rocks/templex-rocks-patch.json", "report": "temple-remaster/rocks/templex-rocks-report.json",
+ "preview_prefix": "templex",
+ "views": [[[4161,125,4144],[4161,140,4230]], [[4161,125,4144],[4245,135,4144]], [[4161,125,4144],[4161,135,4060]]]}

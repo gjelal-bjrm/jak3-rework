@@ -1,0 +1,60 @@
+{
+ "native": "volcano-remaster/rocks/volcanox-rocks-native.json",
+ "materials": [
+  "vola-lava-rock-01"
+ ],
+ "style": "lave",
+ "centre": [
+  -93.6,
+  -429.0
+ ],
+ "near": 0.0,
+ "strata_top": 400.0,
+ "depth_scale": 1.0,
+ "depth_max": 1.6,
+ "sigma_max": 0.8,
+ "far_spacing": 1.4,
+ "thin_ratio": 0.07,
+ "lava_scale": 1.0,
+ "patch": "volcano-remaster/rocks/volcanox-rocks-patch.json",
+ "report": "volcano-remaster/rocks/volcanox-rocks-report.json",
+ "preview_prefix": "volcanox",
+ "views": [
+  [
+   [
+    -93.6,
+    4,
+    -429
+   ],
+   [
+    -93.6,
+    20,
+    -370
+   ]
+  ],
+  [
+   [
+    -93.6,
+    4,
+    -429
+   ],
+   [
+    -150,
+    20,
+    -429
+   ]
+  ],
+  [
+   [
+    -93.6,
+    4,
+    -429
+   ],
+   [
+    -40,
+    20,
+    -429
+   ]
+  ]
+ ]
+}

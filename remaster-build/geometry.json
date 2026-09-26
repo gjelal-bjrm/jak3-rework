@@ -82,5 +82,17 @@
    "desert-remaster/rocks/desertg-rocks-patch.json",
    "desert-remaster/plants/desertg-grass-patch.json"
   ]
+ },
+ "templex": {
+  "base": "temple-remaster/rocks/templex-before-rocks.fr3",
+  "patches": [
+   "temple-remaster/rocks/templex-rocks-patch.json"
+  ]
+ },
+ "volcanox": {
+  "base": "volcano-remaster/rocks/volcanox-before-rocks.fr3",
+  "patches": [
+   "volcano-remaster/rocks/volcanox-rocks-patch.json"
+  ]
  }
 }

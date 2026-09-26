@@ -43,6 +43,7 @@ MATS = tuple(CONFIG['materials'])
 ARENA = np.array(CONFIG['centre'])           # centre du lieu (x, z)
 NEAR = float(CONFIG['near'])                 # exemplaires plus proches : strates plus fines
 MODE = args[0] if args else 'tout'
+STYLE = CONFIG.get('style', 'strates')        # 'strates' (gres en couches) ou 'lave' (roche volcanique : bosses, fissures)
 if MODE in ('apercu', 'partiel'):
     FOCUS = np.array([float(args[1]), float(args[2])]); RADIUS = float(args[3])
 
@@ -236,6 +237,16 @@ def crossings(P, levels):
     return out
 
 
+def lava_depth(P, dmax):
+    """Roche volcanique : grosses bosses arrondies et fissures profondes (bruit « a cretes »), vers l'interieur."""
+    s = CONFIG.get('lava_scale', 1.0)
+    lumps = (fbm(P / (7.0 * s), 3) + 1) * .5
+    ridge = 1 - np.abs(vnoise(P / (3.2 * s) + 11.3))
+    ridge2 = 1 - np.abs(vnoise(P / (1.4 * s) + 4.1))
+    cracks = smoothstep(.86, .985, ridge) + .45 * smoothstep(.9, .99, ridge2)
+    return dmax * np.clip(.45 * lumps ** 1.4 + .8 * cracks, 0, 1.2)
+
+
 # ---------------------------------------------------------------- arrondi (champ par prototype, repere de reference)
 def build_field(ref):
     pts = np.array([v['p'] for f in ref for v in f['vertices']])
@@ -287,7 +298,7 @@ def mesh_instance(faces, near, sigma):
     FS = 1.0 if near else CONFIG.get('far_spacing', 1.0)
     hx = 1.0 if near else 1.8 * FS
     h_fine, h_coarse = .85 * sigma, (2.0 if near else 3.0 * FS)
-    steep = {index: abs(n[1]) < .8 for index, n in fn.items()}
+    steep = {index: abs(n[1]) < .8 and STYLE == 'strates' for index, n in fn.items()}
     edges = defaultdict(list)
     for index, ids in F:
         for a, b in ((0, 1), (1, 2), (2, 0)): edges[tuple(sorted((ids[a], ids[b])))].append(index)
@@ -443,7 +454,7 @@ def sculpt(field, faces, near):
         axis = np.linalg.eigh(H.T @ H)[1][:, 0]
         minor = float(np.ptp(H @ axis))
         dmax = min(dmax, CONFIG['thin_ratio'] * minor)
-    depth = strata_depth(P0, dmax) * steepw
+    depth = strata_depth(P0, dmax) * steepw if STYLE == 'strates' else lava_depth(P0, dmax) * (.35 + .65 * steepw)
     walk = np.clip((N[:, 1] - .55) / .3, 0, 1)
     bump = min(max(field['size'] * .008, .03), .2) * fbm(P0 / max(6., field['size'] / 5), 2) * (1 - walk)
     bump = np.minimum(bump, 0) + np.maximum(bump, 0) * (1 - walk)

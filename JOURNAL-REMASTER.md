@@ -147,3 +147,28 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   coupant les effets un par un (`qa/grass-light.png`). Les plantes sont maintenant exclues de l'assombrissement
   (le sol autour garde son ombre de contact).
 - Test par zone : `qa_zones.py <zone>` (scènes `desa`…`desh`, `oasis` ajoutées au lanceur) → `qa/zone-*.png`.
+- **Vérifié en jeu (zones D et E)** : 60 images/s constantes, textures toutes affichées. Herbe : paille dorée
+  comme l'original mais en vrais brins ; troncs sans stries bleues ; roches en couches. `qa/zone-dese-compare.png`,
+  `qa/zone-desd-compare.png`.
+- **Sable du désert** (rendu « hfrag », tout le sol des grandes étendues) : vérifié actif (mode test magenta).
+  Les rides étaient trop discrètes sous un soleil haut ; relief stylisé renforcé : fines rides de vent visibles
+  de près, qui s'effacent au loin, teinte légèrement variée. Effet réel mais modeste (`qa/sand-zoom2.png`).
+  Les ombres des roches tombent maintenant aussi sur ce sable.
+- **Dalles plates du désert** : ressortaient en « biscuits » orange vif sur le sable pâle. Leur texture
+  (`des-rock-01`) reprend la teinte d'origine (sable kaki) ; les montagnes gardent leur grès chaud.
+
+### 11. Temple précurseur — falaises extérieures
+- Mesure : l'extérieur du temple (`temple_sandstone_out_01`) = 4,6 millions de m², le reste est de
+  l'architecture en blocs (textures Codex déjà posées). Falaises sculptées en couches : 52 000 → 792 000
+  triangles. Scènes de test `temple` (ravin d'entrée) et `templea` (entrée intérieure).
+- Correction : l'empaquetage des sommets du moteur refusait les nouveaux sommets au-delà de x = 4 096 m
+  (contrôle de précision fait en flottants simples) ; calcul passé en double. Temple reconstruit sans erreur.
+
+### 12. Volcan — entrée
+- Roches volcaniques sculptées dans un style propre (bosses et fissures, pas de couches de grès) :
+  13 854 → 191 876 triangles.
+- **Trop sombre en jeu** (luminosité moyenne 16 contre 30 pour l'original). Mesuré en coupant les effets un par
+  un : l'ombre du soleil s'ajoutait à l'ombre déjà peinte dans l'éclairage du jeu (canyon encaissé = double
+  ombre). L'ombre du soleil n'agit maintenant pleinement que sur les surfaces que le jeu éclaire au soleil :
+  volcan revenu à 25 (original 30), ombres du désert intactes (`qa/volcano-fix.png`, `qa/shadow-check.png`).
+- Outil de test : les coordonnées négatives (volcan) étaient lues comme des options ; corrigé.

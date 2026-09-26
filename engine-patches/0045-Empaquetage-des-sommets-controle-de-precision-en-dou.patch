@@ -1,0 +1,46 @@
+From 764f436e35d9a9cf7409b2acbe33579b9fb03db2 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 07:25:32 +0200
+Subject: [PATCH] Empaquetage des sommets : controle de precision en double
+ (au-dela de 4096 m l'arrondi float depassait la tolerance) (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ common/custom_data/pack_helpers.cpp | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/common/custom_data/pack_helpers.cpp b/common/custom_data/pack_helpers.cpp
+index 6bed3468..713c4e12 100644
+--- a/common/custom_data/pack_helpers.cpp
++++ b/common/custom_data/pack_helpers.cpp
+@@ -7,18 +7,20 @@
+ constexpr float kClusterSize = 4096 * 40;  // 100 in-game meters
+ constexpr float kMasterOffset = 12000 * 4096;
+ 
+-std::pair<u64, u16> position_to_cluster_and_offset(float in) {
+-  in += kMasterOffset;
++std::pair<u64, u16> position_to_cluster_and_offset(float in_f) {
++  // remaster : calcul en double. En float, au-dela de x = 4096 m (in > 2^26) l'arrondi seul depassait la
++  // tolerance de 7 unites (temple, desert est) ; le format stocke reste identique (precision ~0,6 mm).
++  double in = double(in_f) + double(kMasterOffset);
+   if (in < 0) {
+     lg::print("negative: {}\n", in);
+   }
+   ASSERT(in >= 0);
+-  int cluster_cell = (in / kClusterSize);
+-  float leftover = in - (cluster_cell * kClusterSize);
+-  u16 offset = (leftover / kClusterSize) * float(UINT16_MAX);
++  int cluster_cell = int(in / kClusterSize);
++  double leftover = in - (double(cluster_cell) * kClusterSize);
++  u16 offset = u16((leftover / kClusterSize) * double(UINT16_MAX));
+ 
+-  float recovered = ((float)cluster_cell + ((float)offset / UINT16_MAX)) * kClusterSize;
+-  float diff = std::fabs(recovered - in);
++  double recovered = (double(cluster_cell) + (double(offset) / UINT16_MAX)) * kClusterSize;
++  double diff = std::fabs(recovered - in);
+   ASSERT(diff < 7);
+   ASSERT(cluster_cell >= 0);
+   ASSERT(cluster_cell < UINT16_MAX);
+-- 
+2.54.0.windows.1
+

@@ -30,11 +30,13 @@ from prepare_textures import seam_ratio, fix_seam, srgb_to_lab, lab_to_srgb   # 
 KIT = HERE / 'codex'
 OUT = HERE / 'out'
 MAX_SIDE = 1024
-VERSION = 3                      # 3 : teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
+VERSION = 4                      # 3 : balance des blancs ; 4 : + FORCE_HUE ; teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
 HUE_LIMIT, HUE_BACK, LIGHT_BACK = 20.0, .8, .5
+# teinte ramenee quel que soit l'ecart (constat en jeu) : dalles plates du desert, orange vif sur le sable pale
+FORCE_HUE = {'des-rock-01'}
 
 
-def keep_hue(pix, orig_rgb):
+def keep_hue(pix, orig_rgb, force=False):
     """Teinte et luminosite moyennes ramenees vers l'original, dessin intact. Renvoie (pixels, ecart a*b*).
 
     Correction du type « balance des blancs » : chaque canal est multiplie (en lumiere lineaire) ; les zones sombres
@@ -43,7 +45,7 @@ def keep_hue(pix, orig_rgb):
     a = srgb_to_lab(pix); b = srgb_to_lab(orig_rgb.astype(float))
     d = b[..., 1:].reshape(-1, 2).mean(0) - a[..., 1:].reshape(-1, 2).mean(0)
     gap = float(np.linalg.norm(d))
-    if gap <= HUE_LIMIT: return pix, gap
+    if gap <= HUE_LIMIT and not force: return pix, gap
     lin = lambda c: np.where(c <= .04045, c / 12.92, ((c + .055) / 1.055) ** 2.4)
     srgb = lambda c: np.where(c <= .0031308, 12.92 * c, 1.055 * np.clip(c, 0, None) ** (1 / 2.4) - .055)
     L = np.array([.2126, .7152, .0722])
@@ -81,7 +83,7 @@ def main():
             if h > MAX_SIDE: h = MAX_SIDE; w = max(4, int(round(h * ow / oh / 4)) * 4)
             pix = np.asarray(tile.resize((w, h), Image.LANCZOS), float)
             orig = np.asarray(Image.open(ROOT / e['source']).convert('RGBA'))
-            pix, gap = keep_hue(pix, orig[..., :3])
+            pix, gap = keep_hue(pix, orig[..., :3], png.stem in FORCE_HUE)
             for axis in (1, 0):
                 if seam_ratio(orig[..., :3], axis) < 2.0 and seam_ratio(pix, axis) > 1.6: pix = fix_seam(pix, axis)
             alpha = np.full((h, w), int(orig[..., 3].max()), np.uint8)
@@ -92,7 +94,7 @@ def main():
                 Image.fromarray(out[..., :3]).save(OUT / f'{png.stem}.png')
                 made += 1
             entry = {'name': png.stem, 'rgba_file': str(rgba), 'width': w, 'height': h, 'version': VERSION,
-                     'hue_gap': round(gap, 1), 'hue_back': gap > HUE_LIMIT}
+                     'hue_gap': round(gap, 1), 'hue_back': gap > HUE_LIMIT or png.stem in FORCE_HUE}
             (OUT / f'{png.stem}.json').write_text(json.dumps(entry))
         listing.append(entry)
     (HERE / 'textures.json').write_text(json.dumps({'textures': listing}, indent=1))
