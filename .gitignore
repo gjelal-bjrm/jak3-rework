@@ -138,3 +138,10 @@ lanceur-choix.json
 /city-remaster/cliffs/*-native.json
 /city-remaster/cliffs/*.fr3
 /city-remaster/cliffs/sel-*.json
+# Chaine generale : textures pretes, niveaux de base et sorties (donnees du jeu)
+/textures-remaster/out/
+/textures-remaster/textures.json
+/remaster-build/bases/
+/remaster-build/out/
+/remaster-build/patches/
+/remaster-build/textures-by-level.json

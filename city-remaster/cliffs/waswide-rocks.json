@@ -1,0 +1,55 @@
+{
+ "native": "city-remaster/cliffs/waswide-rocks-native.json",
+ "materials": [
+  "wascity-outerwall-rock"
+ ],
+ "centre": [
+  2050.0,
+  -230.0
+ ],
+ "near": 260.0,
+ "strata_top": 300.0,
+ "patch": "city-remaster/cliffs/waswide-rocks-patch.json",
+ "report": "city-remaster/cliffs/waswide-rocks-report.json",
+ "preview_prefix": "city",
+ "views": [
+  [
+   [
+    2160,
+    30,
+    -170
+   ],
+   [
+    2060,
+    110,
+    -235
+   ]
+  ],
+  [
+   [
+    1975,
+    32,
+    -140
+   ],
+   [
+    2045,
+    100,
+    -230
+   ]
+  ],
+  [
+   [
+    2110,
+    40,
+    -330
+   ],
+   [
+    2050,
+    95,
+    -240
+   ]
+  ]
+ ],
+ "strata_scale": 2.0,
+ "depth_scale": 1.5
+}

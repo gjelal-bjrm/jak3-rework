@@ -29,22 +29,30 @@ from mathutils.geometry import delaunay_2d_cdt
 from mathutils.kdtree import KDTree
 OUT = Path(__file__).resolve().parent
 
-MATS = ('wstd-rockwall-01', 'wstd-small-rockwall-01')
-ARENA = np.array([2275.0, -450.0])           # centre de l'arene (x, z)
-NEAR = 100.0                                 # exemplaires plus proches : strates plus fines
+# Reglages du lieu : arene par defaut ; autre lieu : premier argument apres -- = fichier de reglages JSON
+# {native, materials, centre [x, z], near (m), strata_top (m), patch, report, preview_prefix}
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
+CONFIG = {'native': str(OUT / 'rocks-native.json'), 'materials': ['wstd-rockwall-01', 'wstd-small-rockwall-01'],
+          'centre': [2275.0, -450.0], 'near': 100.0, 'strata_top': 240.0,
+          'patch': str(OUT / 'rocks-patch.json'), 'report': str(OUT / 'rocks-report.json'), 'preview_prefix': 'v2'}
+if args and args[0].endswith('.json'):
+    CONFIG.update(json.loads(Path(args[0]).read_text())); args = args[1:]
+MATS = tuple(CONFIG['materials'])
+ARENA = np.array(CONFIG['centre'])           # centre du lieu (x, z)
+NEAR = float(CONFIG['near'])                 # exemplaires plus proches : strates plus fines
 MODE = args[0] if args else 'tout'
 if MODE in ('apercu', 'partiel'):
     FOCUS = np.array([float(args[1]), float(args[2])]); RADIUS = float(args[3])
 
-native = json.loads((OUT / 'rocks-native.json').read_text())
+native = json.loads(Path(CONFIG['native']).read_text())
+if isinstance(native, dict): native = native['faces']
 groups = defaultdict(list)
 for f in native:
-    if f['tree_type'] == 'tie' and f['geom'] == 0 and f['material'] in MATS:
-        groups[(f['proto'], f['instance'])].append(f)
+    if f['geom'] == 0 and f['material'] in MATS and f['tree_type'] in ('tie', 'tfrag'):
+        groups[(f['tree_type'], f['tree'], f['proto'], f['instance'])].append(f)
 protos = defaultdict(list)
-for (p, i), fs in sorted(groups.items()):
-    protos[p].append((i, fs))
+for (tt, tree, p, i), fs in sorted(groups.items()):
+    protos[(tt, tree, p)].append((i, fs))
 
 
 # ---------------------------------------------------------------- outils
@@ -171,9 +179,9 @@ def orient(F, NV):
 # ---------------------------------------------------------------- strates (coordonnees du monde)
 BOUNDS, CAP, DEPTH = [-40.0], [], []
 k = 0
-while BOUNDS[-1] < 240:
-    T_ = 1.0 + 1.8 * hash01(k) ** 1.5
-    if hash01(k + 1000) > .82: T_ = 3.5 + 2.5 * hash01(k + 2000)       # banc massif
+while BOUNDS[-1] < CONFIG['strata_top']:
+    T_ = (1.0 + 1.8 * hash01(k) ** 1.5) * CONFIG.get('strata_scale', 1.0)
+    if hash01(k + 1000) > .82: T_ = (3.5 + 2.5 * hash01(k + 2000)) * CONFIG.get('strata_scale', 1.0)   # banc massif
     hard = hash01(k + 5000) < .25                                        # couche dure : presque a fleur
     BOUNDS.append(BOUNDS[-1] + T_); CAP.append(.14 + .22 * hash01(k + 3000))
     DEPTH.append(.08 + .12 * hash01(k + 4000) if hard else .45 + .55 * hash01(k + 4000))
@@ -425,7 +433,7 @@ def sculpt(field, faces, near):
     R = R @ M                                                      # vecteurs -> monde
     N = NF @ Minv.T; N /= np.maximum(np.linalg.norm(N, axis=1, keepdims=True), 1e-12)
     steepw = 1 - smoothstep(.5, .78, np.abs(N[:, 1]))
-    dmax = min(.85 if near else 1.25, .08 * field['size'])
+    dmax = min(.85 if near else 1.25, .08 * field['size']) * CONFIG.get('depth_scale', 1.0)
     depth = strata_depth(P0, dmax) * steepw
     walk = np.clip((N[:, 1] - .55) / .3, 0, 1)
     bump = min(max(field['size'] * .008, .03), .2) * fbm(P0 / max(6., field['size'] / 5), 2) * (1 - walk)
@@ -487,7 +495,8 @@ def preview_scene(items, name):
 
 
 # points de vue du joueur (camera derriere Jak au centre de l'arene) : vers le tas de rochers, vers la lave
-VIEWS = [((2272.5, 19.5, -450.4), (2272.0, 24.0, -380.0)),
+VIEWS = [tuple(map(tuple, v)) for v in CONFIG['views']] if 'views' in CONFIG else [
+         ((2272.5, 19.5, -450.4), (2272.0, 24.0, -380.0)),
          ((2280.0, 19.5, -442.4), (2210.0, 22.0, -442.0)),
          ((2272.5, 30.0, -450.4), (2330.0, 60.0, -560.0))]
 
@@ -503,7 +512,7 @@ for p, lst in sorted(protos.items()):
         chosen.append((instance, fs, dist < NEAR))
     if not chosen: continue
     field = build_field(lst[0][1])
-    info = {'proto': p, 'instances': len(chosen), 'size_m': round(field['size'], 1), 'round_sigma_m': round(field['sigma'], 2),
+    info = {'proto': list(p), 'instances': len(chosen), 'size_m': round(field['size'], 1), 'round_sigma_m': round(field['sigma'], 2),
             'native_triangles': len(lst[0][1]), 'new_triangles': 0, 'max_affine_error_m': 0}
     for instance, fs, near in chosen:
         W, NW, T, S, uv, bary, err = sculpt(field, fs, near)
@@ -521,8 +530,8 @@ for p, lst in sorted(protos.items()):
           f"({time.time() - t0:.0f} s)", flush=True)
 
 if MODE == 'apercu':
-    preview_scene(before, 'v2-avant'); preview_scene(after, 'v2-apres')
+    preview_scene(before, CONFIG['preview_prefix'] + '-avant'); preview_scene(after, CONFIG['preview_prefix'] + '-apres')
 else:
-    (OUT / 'rocks-patch.json').write_text(json.dumps(patch, separators=(',', ':')))
-    (OUT / 'rocks-report.json').write_text(json.dumps(report, indent=2))
+    Path(CONFIG['patch']).write_text(json.dumps(patch, separators=(',', ':')))
+    Path(CONFIG['report']).write_text(json.dumps(report, indent=2))
     print('Enregistre :', len(patch['remove']), 'retires ->', len(patch['add']), 'ajoutes', flush=True)

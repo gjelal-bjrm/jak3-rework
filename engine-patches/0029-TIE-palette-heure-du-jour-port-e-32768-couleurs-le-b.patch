@@ -1,7 +1,7 @@
 From 8e7b1762cd64fb350ee8d75f5fe2b3a591753b2d Mon Sep 17 00:00:00 2001
 From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
 Date: Fri, 25 Sep 2026 20:48:00 +0200
-Subject: [PATCH 29/38] =?UTF-8?q?TIE=20:=20palette=20heure-du-jour=20port?=
+Subject: [PATCH 29/39] =?UTF-8?q?TIE=20:=20palette=20heure-du-jour=20port?=
  =?UTF-8?q?=C3=A9e=20=C3=A0=2032768=20couleurs=20;=20le=20bridge=20regroup?=
  =?UTF-8?q?e=20les=20couleurs=20par=20coupe=20m=C3=A9diane=20au-del=C3=A0?=
  =?UTF-8?q?=20de=20la=20capacit=C3=A9=20(falaises=20remodel=C3=A9es=20de?=

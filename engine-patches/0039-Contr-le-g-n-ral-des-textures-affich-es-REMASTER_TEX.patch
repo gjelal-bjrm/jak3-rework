@@ -1,0 +1,112 @@
+From c314d21da8a81cbeaa57de583313ec7bb73ceed5 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 02:33:48 +0200
+Subject: [PATCH 39/39] =?UTF-8?q?Contr=C3=B4le=20g=C3=A9n=C3=A9ral=20des?=
+ =?UTF-8?q?=20textures=20affich=C3=A9es=20(REMASTER=5FTEXTURE=5FAUDIT)=20;?=
+ =?UTF-8?q?=20bridge=20:=20inventaire=20des=20textures=20de=20tous=20les?=
+ =?UTF-8?q?=20niveaux?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../background/PalaceMaterialAudit.h          | 19 +++++++++++++++++++
+ .../background/PalaceMaterials.h              |  9 +++++++++
+ tools/palace_mesh_bridge.cpp                  | 18 ++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterialAudit.h b/game/graphics/opengl_renderer/background/PalaceMaterialAudit.h
+index 06538fbb..89ba83c1 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterialAudit.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterialAudit.h
+@@ -23,3 +23,22 @@ class PalaceMaterialAudit {
+              glGetUniformLocation(program,"palace_material"));
+   }
+ };
++
++// Controle general des textures (variable d'environnement REMASTER_TEXTURE_AUDIT=1) : a la premiere utilisation
++// de chaque texture de decor (tfrag, tie, shrub), note dans le journal son niveau, son nom et la taille de la
++// texture reellement liee sur la carte graphique. Permet de verifier qu'une texture HD est bien affichee.
++class TextureAudit {
++ public:
++  static bool enabled() {
++    static const bool on = std::getenv("REMASTER_TEXTURE_AUDIT") != nullptr;
++    return on;
++  }
++  static void record(const std::string& level, const std::string& name) {
++    static std::unordered_set<std::string> seen;
++    if (!seen.insert(level + "/" + name).second) return;
++    GLint w = 0, h = 0;
++    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
++    glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
++    lg::info("Texture audit: {} {} {}x{}", level, name, w, h);
++  }
++};
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 70761832..68200d66 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -20,6 +20,11 @@ class PalaceMaterials {
+     const bool market = level.level_name == "wascityb" || level.level_name == "wascitya" ||
+                         level.level_name == "waswide";
+     const bool arena = level.level_name.rfind("wasstad", 0) == 0;
++    m_level = level.level_name;
++    if (TextureAudit::enabled()) {           // controle : noms de toutes les textures, dans tous les niveaux
++      m_all_names.clear();
++      for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
++    }
+     if (level.level_name != "waspala" && !market && !arena) return;
+     int count=0, high_res=0;
+     for (const auto& texture : level.textures) {
+@@ -42,6 +47,8 @@ class PalaceMaterials {
+     }
+   }
+   void bind(GLuint program, int texture, const SharedRenderState* state) const {
++    if (TextureAudit::enabled() && texture >= 0 && size_t(texture) < m_all_names.size())
++      TextureAudit::record(m_level, m_all_names[texture]);
+     const int kind=state->version==GameVersion::Jak3 && texture>=0 &&
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
+@@ -151,6 +158,8 @@ class PalaceMaterials {
+   }
+   int m_grass_region = 0;
+   std::vector<int> m_kinds;
++  std::vector<std::string> m_all_names;
++  std::string m_level;
+   std::vector<std::string> m_names;
+   std::vector<bool> m_high_res;
+ };
+diff --git a/tools/palace_mesh_bridge.cpp b/tools/palace_mesh_bridge.cpp
+index 574712af..20a55cc3 100644
+--- a/tools/palace_mesh_bridge.cpp
++++ b/tools/palace_mesh_bridge.cpp
+@@ -888,7 +888,25 @@ int compare_native(const fs::path& source,const fs::path& candidate,const fs::pa
+   file_util::write_text_file(report_path,report.dump(2));return 0;
+ }
+ 
++// Inventaire : noms et tailles des textures de chaque niveau d'un dossier (copies comprises), en JSON.
++int list_textures(const fs::path& directory,const fs::path& output) {
++  json result=json::object();
++  for(const auto& entry:fs::directory_iterator(directory)) {
++    if(entry.path().extension()!=".fr3")continue;
++    try {
++      auto level=read_native_level(entry.path());
++      json textures=json::array();
++      for(const auto& t:level.textures)textures.push_back({t.debug_name,t.w,t.h});
++      result[entry.path().stem().string()]=textures;
++    }catch(const std::exception& error){fmt::print(stderr,"{} : {}\n",entry.path().string(),error.what());}
++  }
++  file_util::write_text_file(output,result.dump());
++  fmt::print("Texture inventory: {} levels\n",result.size());
++  return 0;
++}
++
+ int main(int argc,char** argv) {
++  if(argc==4&&std::string(argv[1])=="--list-textures")return list_textures(argv[2],argv[3]);
+   if(argc==5&&std::string(argv[1])=="--audit-bvh-coverage")
+     return audit_static_bvh_coverage(argv[2],argv[3],argv[4]);
+   if(argc==5&&std::string(argv[1])=="--compare-native")return compare_native(argv[2],argv[3],argv[4]);
+-- 
+2.54.0.windows.1
+
