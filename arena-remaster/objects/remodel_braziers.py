@@ -134,12 +134,17 @@ for number, instance in enumerate(instances):
     bottom = [p for p in pts if p[1] < ymin + .02]
     centre = (sum(p[0] for p in bottom) / len(bottom), sum(p[2] for p in bottom) / len(bottom))
     # phase des pans d'origine : angle d'un sommet de l'anneau a 3,78 m de rayon
-    ring_pts = [p for p in pts if abs(p[1] - ymin - 1.55) < .05]
+    # taille de l'exemplaire : certains braseros (tribunes) sont des copies reduites (x 0,66) du modele
+    scale = max(math.hypot(p[0] - centre[0], p[2] - centre[1]) for p in pts) / 6.51
+    ring_pts = [p for p in pts if abs(p[1] - ymin - 1.55 * scale) < .05 * max(scale, .5)]
     phase = math.atan2(ring_pts[0][2] - centre[1], ring_pts[0][0] - centre[0]) if ring_pts else 0.0
     reset()
     asset = NativeMesh(f'Brasero_{instance}', base)
     def make_mesh(label, **kw):
         verts, uvs, polys, mats = build(centre, ymin, phase, **kw)
+        # le profil est en metres pour le modele pleine taille : mise a l'echelle de l'exemplaire
+        verts = [(centre[0] + (v[0] - centre[0]) * scale, ymin + (v[1] - ymin) * scale,
+                  centre[1] + (v[2] - centre[1]) * scale) for v in verts]
         mesh = bpy.data.meshes.new(label)
         mesh.from_pydata([asset.local(p) for p in verts], [], polys); mesh.update()
         for m in asset.obj.data.materials: mesh.materials.append(m)
@@ -154,7 +159,7 @@ for number, instance in enumerate(instances):
         return mesh
     high = make_mesh(f'Brasero HD {instance}')
     low = make_mesh(f'Brasero lointain {instance}', segments=24, smooth=1, rivets=False)
-    info = {'instance': instance, 'centre': centre, 'original_triangles': {}, 'new_triangles': {}}
+    info = {'instance': instance, 'centre': centre, 'scale': round(scale, 3), 'original_triangles': {}, 'new_triangles': {}}
     for lod, tfaces in sorted(targets.items()):
         asset.obj.data = low if lod == 3 else high      # niveau 3 : le plus lointain
         remove, add, dist = asset.records(tfaces)

@@ -47,6 +47,8 @@ def main():
     ap.add_argument('scene'); ap.add_argument('name'); ap.add_argument('--variant', default='remaster')
     ap.add_argument('--hour', type=float); ap.add_argument('--weather'); ap.add_argument('--eval', default='')
     ap.add_argument('--place', help='Jak : X,Y,Z/FX,FZ[/RECUL,HAUTEUR] (m) ; la camera se pose derriere lui'); ap.add_argument('--aim', help='camera : EX,EY,EZ/TX,TY,TZ (m), posee juste avant chaque capture'); ap.add_argument('--wait', type=float, default=2.5); ap.add_argument('--count', type=int, default=1)
+    ap.add_argument('--freecam', help='camera libre posee en EX,EY,EZ/TX,TY,TZ (m) ; rendue au jeu apres la capture')
+    ap.add_argument('--keep-freecam', action='store_true', help='laisse la camera libre (captures enchainees)')
     a = ap.parse_args()
     sock = socket.create_connection(('127.0.0.1', PORT), timeout=5)
     sock.settimeout(1)
@@ -91,11 +93,16 @@ def main():
     profile = ROOT / 'profiles' / (f'{a.variant}-{a.scene}' if a.scene != 'arena' else a.variant)
     shot = profile / 'OpenGOAL/jak3/screenshots/screenshot.png'
     out = ROOT / 'qa'; out.mkdir(exist_ok=True)
+    if a.freecam:
+        # camera libre du jeu (cam-free-floating) : garde la pose qu'on lui donne tant que la manette ne bouge pas
+        send(sock, "(set-setting-by-param *setting-control* 'mode-name 'cam-free-floating 0 0)"); time.sleep(1.2)
+        a.aim = a.freecam
     for k in range(a.count):
         before = shot.stat().st_mtime if shot.exists() else 0
         if a.aim:
             e, t = a.aim.split('/')
             send(sock, aim_form([float(v) for v in e.split(',')], [float(v) for v in t.split(',')])); time.sleep(.35)
+        if a.freecam: time.sleep(.8)
         send(sock, '(pc-screen-shot)')
         for _ in range(40):
             time.sleep(.25)
@@ -104,6 +111,8 @@ def main():
         target = out / f'live-{a.name}-{k:02d}.png'
         shutil.copy2(shot, target); print(target)
         if k + 1 < a.count: time.sleep(2.)
+    if a.freecam and not a.keep_freecam:
+        send(sock, "(remove-setting-by-arg0 *setting-control* 'mode-name)")
     sock.close()
 
 

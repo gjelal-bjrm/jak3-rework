@@ -1,0 +1,142 @@
+From 2ba92bd96609cd5f8c9d34b08a5ebb58f0142936 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 02:10:52 +0200
+Subject: [PATCH 38/38] =?UTF-8?q?Feu=20dessin=C3=A9=20apr=C3=A8s=20le=20ci?=
+ =?UTF-8?q?el,=20la=20mer,=20les=20spectateurs=20et=20la=20brume=20(qui=20?=
+ =?UTF-8?q?l'effa=C3=A7aient)=20;=20foyers=20fixes=20=C3=A0=20toute=20dist?=
+ =?UTF-8?q?ance?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../opengl_renderer/ArenaFireSources.inc      | 42 +++++++++----------
+ game/graphics/opengl_renderer/FireField.h     |  8 ++--
+ game/graphics/opengl_renderer/ModernFire.h    |  6 +--
+ .../opengl_renderer/OpenGLRenderer.cpp        |  6 ++-
+ 4 files changed, 31 insertions(+), 31 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ArenaFireSources.inc b/game/graphics/opengl_renderer/ArenaFireSources.inc
+index 03f8afd1..f90dbb4c 100644
+--- a/game/graphics/opengl_renderer/ArenaFireSources.inc
++++ b/game/graphics/opengl_renderer/ArenaFireSources.inc
+@@ -1,22 +1,22 @@
+-// Braseros de l arene de Spargus (wasstada) : centre des braises x, y (dessus), z et rayon des braises (m).
+-// Mesures sur les faces natives wstd-torchbowl-coal-01 (arena-remaster/objects/brazier-coals.json).
+-constexpr float kArenaBraziers[18][4] = {
+-  {2362.94f, 53.43f, -366.13f, 0.94f},
+-  {2331.49f, 56.93f, -399.81f, 0.94f},
+-  {2320.77f, 56.93f, -399.81f, 0.94f},
+-  {2290.07f, 53.62f, -349.31f, 0.94f},
+-  {2342.15f, 62.41f, -396.71f, 2.97f},
+-  {2411.57f, 52.29f, -413.63f, 2.97f},
+-  {2375.21f, 28.18f, -396.14f, 4.47f},
+-  {2310.10f, 63.74f, -397.82f, 2.97f},
+-  {2275.87f, 28.75f, -390.57f, 4.47f},
+-  {2238.42f, 52.49f, -416.25f, 2.97f},
+-  {2428.25f, 34.19f, -456.15f, 4.47f},
+-  {2452.10f, 51.48f, -507.31f, 2.97f},
+-  {2429.04f, 38.27f, -543.74f, 4.47f},
+-  {2218.01f, 36.58f, -459.82f, 4.46f},
+-  {2331.64f, 48.50f, -563.34f, 4.46f},
+-  {2289.07f, 58.77f, -556.77f, 4.46f},
+-  {2202.70f, 51.85f, -504.04f, 2.97f},
+-  {2208.97f, 29.02f, -556.51f, 4.46f},
++// Braseros de l arene de Spargus (wasstada) : centre des braises x, y (dessus), z, rayon des braises,
++// hauteur du rebord au-dessus des braises, rayon de la vasque (m) ; mesures sur les faces natives.
++constexpr float kArenaBraziers[18][6] = {
++  {2362.94f, 53.43f, -366.13f, 0.94f, 0.27f, 1.36f},
++  {2331.49f, 56.93f, -399.81f, 0.94f, 0.27f, 1.36f},
++  {2320.77f, 56.93f, -399.81f, 0.94f, 0.27f, 1.36f},
++  {2290.07f, 53.62f, -349.31f, 0.94f, 0.27f, 1.36f},
++  {2342.15f, 62.41f, -396.71f, 2.97f, 0.84f, 4.33f},
++  {2411.57f, 52.29f, -413.63f, 2.97f, 0.84f, 4.33f},
++  {2375.21f, 28.18f, -396.14f, 4.47f, 1.27f, 6.51f},
++  {2310.10f, 63.74f, -397.82f, 2.97f, 0.84f, 4.33f},
++  {2275.87f, 28.75f, -390.57f, 4.47f, 1.27f, 6.51f},
++  {2238.42f, 52.49f, -416.25f, 2.97f, 0.84f, 4.33f},
++  {2428.25f, 34.19f, -456.15f, 4.47f, 1.27f, 6.51f},
++  {2452.10f, 51.48f, -507.31f, 2.97f, 0.84f, 4.33f},
++  {2429.04f, 38.27f, -543.74f, 4.47f, 1.27f, 6.51f},
++  {2218.01f, 36.58f, -459.82f, 4.46f, 1.27f, 6.50f},
++  {2331.64f, 48.50f, -563.34f, 4.46f, 1.27f, 6.50f},
++  {2289.07f, 58.77f, -556.77f, 4.46f, 1.27f, 6.50f},
++  {2202.70f, 51.85f, -504.04f, 2.97f, 0.84f, 4.33f},
++  {2208.97f, 29.02f, -556.51f, 4.46f, 1.27f, 6.50f},
+ };
+diff --git a/game/graphics/opengl_renderer/FireField.h b/game/graphics/opengl_renderer/FireField.h
+index 50173b30..48daed12 100644
+--- a/game/graphics/opengl_renderer/FireField.h
++++ b/game/graphics/opengl_renderer/FireField.h
+@@ -6,7 +6,7 @@
+ 
+ // Flammes natives (particules « flame01 ») reperees par Sprite3 au moment de leur dessin, dans n'importe quel
+ // lieu. Elles ne sont plus dessinees : ModernFire les regroupe en foyers et dessine le nouveau feu a leur place.
+-// Les particules d'une image sont lues par ModernFire a l'image suivante (le feu est dessine avant les sprites).
++// Les particules sont lues par ModernFire dans la meme image (le feu est dessine apres les sprites).
+ namespace FireField {
+ struct Particle {
+   float x, y, z, size, alpha;
+@@ -21,12 +21,12 @@ inline void collect(u64 frame, const Particle& p) {
+   if (building_frame != frame) { building.clear(); building_frame = frame; }
+   building.push_back(p);
+ }
+-// Particules de l'image precedente (vide si aucune flamme n'a ete dessinee).
++// Particules de cette image (le feu est dessine apres les sprites) ou de la precedente.
+ inline std::vector<Particle> take(u64 frame) {
+   std::lock_guard<std::mutex> guard(mutex);
+   std::vector<Particle> out;
+-  if (building_frame + 1 == frame) out.swap(building);
+-  else if (building_frame != frame) building.clear();
++  if (building_frame == frame || building_frame + 1 == frame) out.swap(building);
++  else building.clear();
+   return out;
+ }
+ // Foyers continus acceptes par ModernFire (x, y base, z, rayon, hauteur) : seules les flammes natives
+diff --git a/game/graphics/opengl_renderer/ModernFire.h b/game/graphics/opengl_renderer/ModernFire.h
+index e33130a7..8ffae8e9 100644
+--- a/game/graphics/opengl_renderer/ModernFire.h
++++ b/game/graphics/opengl_renderer/ModernFire.h
+@@ -287,12 +287,10 @@ class ModernFire {
+       for (const auto& c : CityFireSources::snapshot(regions, state->camera_pos.data()))
+         out.push_back({c.position[0], c.position[1] - .3f, c.position[2], c.position[3] * .6f, c.height * .8f, c.seed, 1.f});
+     }
++    // Foyers fixes (palais, ville, arene) : toujours dessines, a toute distance, car leurs flammes natives sont
++    // masquees partout. Les foyers suivis n'existent que la ou le jeu dessine des flammes (deja limites).
+     for (const auto& t : m_tracked)
+       if (t.s.strength > .01f) out.push_back(t.s);
+-    // au-dela de 150 m, le feu natif lointain n'est de toute facon plus lisible
+-    const float ex = state->camera_pos[0] / 4096.f, ez = state->camera_pos[2] / 4096.f;
+-    out.erase(std::remove_if(out.begin(), out.end(), [&](const Source& s) {
+-      return std::hypot(s.x - ex, s.z - ez) > 150.f; }), out.end());
+     (void)now;
+     return out;
+   }
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 13010fb3..4d0b53e7 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1452,8 +1452,7 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+     if (bucket_id == (int)jak3::BucketId::OCEAN_NEAR) {
+       auto fire_prof = prof.make_scoped_child("palace-fire-before-water");
+       m_city_interiors.render(&m_render_state);
+-      if (m_modern_fire.enabled()) m_modern_fire.render(&m_render_state);   // feu du remaster, partout
+-      else m_palace_fire.render(&m_render_state);                           // ancien prototype (comparaison)
++      if (!m_modern_fire.enabled()) m_palace_fire.render(&m_render_state);  // ancien prototype (comparaison)
+     }
+     if (bucket_id == (int)jak3::BucketId::BUCKET567) {
+       m_modern_weather.update(&m_render_state);   // meteo : nuages, couleurs du moment
+@@ -1467,6 +1466,9 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+       m_modern_beam.render(&m_render_state);      // rayon des departs de mission (avant la meteo)
+       WeatherReflect::capture(&m_render_state);   // image pour les reflets des flaques (avant brouillard et pluie)
+       m_modern_weather.render(&m_render_state);   // brouillard, pluie, neige, sable (avant l'interface)
++      // feu du remaster : apres le ciel, la mer, les sprites (spectateurs) et la brume. La brume se calcule
++      // sur la profondeur du decor : devant le ciel elle serait opaque et effacerait la flamme.
++      if (m_modern_fire.enabled()) m_modern_fire.render(&m_render_state);
+     }
+     if (bucket_id == (int)jak3::BucketId::TEX_HUD_HUD_ALPHA) {
+       auto p = prof.make_scoped_child("color-filter");
+-- 
+2.54.0.windows.1
+
