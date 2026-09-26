@@ -1,0 +1,43 @@
+From 2eac51983979aeb28aaab33d6201836874d6ca99 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 06:55:21 +0200
+Subject: [PATCH] Sable du desert : rides lisibles meme soleil haut (relief
+ stylise, cretes claires) ; mode de test magenta
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/shaders/hfrag.frag | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.frag b/game/graphics/opengl_renderer/shaders/hfrag.frag
+index a7baa399..cce9b9cd 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.frag
++++ b/game/graphics/opengl_renderer/shaders/hfrag.frag
+@@ -95,10 +95,12 @@ vec3 remasterSand(vec3 c) {
+     float e = .03;
+     float h0 = rippleHeight(q);
+     float hx = rippleHeight(q + vec2(e, 0.)), hz = rippleHeight(q + vec2(0., e));
+-    vec3 n = normalize(vec3(-(hx - h0) / e, 1., -(hz - h0) / e));
+-    float flat_ = max(L.y, .08);
+-    float lit = clamp(dot(n, L), 0., 1.5) / flat_;
+-    c *= mix(1., clamp(mix(1., lit, .8), .55, 1.35), ripples);
++    // relief stylise (pentes x3) : les rides restent lisibles meme sous un soleil haut
++    vec3 n = normalize(vec3(-3. * (hx - h0) / e, 1., -3. * (hz - h0) / e));
++    vec3 Ls = normalize(vec3(L.x, min(L.y, .55), L.z));             // eclairage rasant des rides
++    float lit = clamp(dot(n, Ls), 0., 1.5) / max(Ls.y, .08);
++    float crest = h0 / .016;                                         // cretes plus claires, creux plus sombres
++    c *= mix(1., clamp(mix(1., lit, .75), .6, 1.4) * (.93 + .14 * crest), ripples);
+   }
+   // grain du sable, tout pres
+   float grain = (sand_detail & 4) != 0 ? 1. - smoothstep(.004, .016, footprint) : 0.;
+@@ -121,6 +123,7 @@ void main() {
+     vec4 T0 = texture(tex_T0, tex_coord);
+     color = fragment_color * T0 * 2;
+     if ((sand_detail & 1) != 0) color.rgb = remasterSand(color.rgb);
++    if (sand_detail == 0) color.rgb = vec3(1., 0., 1.);   // test : toutes les options du sable coupees -> magenta
+     if (shadow_on != 0) {
+       float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength;
+       color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);   // ombre eclairee par le ciel, un peu bleutee
+-- 
+2.54.0.windows.1
+
