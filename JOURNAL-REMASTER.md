@@ -63,3 +63,11 @@ intégrées au fur et à mesure et **vérifiées à l'affichage**, chaque change
 Chaque nouveau fichier du remaster (shaders d'éclairage, du feu…) était ajouté à la liste vérifiée par le
 lanceur, mais pas à la version d'origine : le lanceur refusait de la démarrer. Corrigé, et `sync_variant.py`
 complète désormais automatiquement les autres versions. Les deux modes démarrent (vérifié).
+
+### 4. Ville de Spargus — textures Codex et rivage
+- **Textures** : 143 textures Codex intégrées (désert de l'intro, train aérien, ville, palais…). Dans la
+  ville : 75 + 62 textures HD posées. **Vérifié en jeu** : 109 textures HD affichées, aucune restée en basse
+  définition (le contrôle en avait trouvé 2 dans waswide lors d'un premier passage — cause : deux
+  constructions lancées en même temps ; corrigé et verrou ajouté pour que ça n'arrive plus).
+- **Rochers du rivage** (168 000 m²) : sculptés en couches (couches ×1,4). 6 448 → 847 000 triangles.
+  60 images/s. Comparaison : `qa/sh-compare.png`.

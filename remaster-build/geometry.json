@@ -4,5 +4,11 @@
   "patches": [
    "city-remaster/cliffs/waswide-rocks-patch.json"
   ]
+ },
+ "wascityb": {
+  "base": "city-remaster/cliffs/wascityb-before-cliffs.fr3",
+  "patches": [
+   "city-remaster/cliffs/wascityb-shore-patch.json"
+  ]
  }
 }

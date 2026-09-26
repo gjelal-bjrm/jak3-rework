@@ -1,0 +1,55 @@
+{
+ "native": "city-remaster/cliffs/wascityb-shore-native.json",
+ "materials": [
+  "wascity-ocean-shore-rocks"
+ ],
+ "centre": [
+  1680.0,
+  -480.0
+ ],
+ "near": 170.0,
+ "strata_top": 90.0,
+ "strata_scale": 1.4,
+ "depth_scale": 1.2,
+ "patch": "city-remaster/cliffs/wascityb-shore-patch.json",
+ "report": "city-remaster/cliffs/wascityb-shore-report.json",
+ "preview_prefix": "shore",
+ "views": [
+  [
+   [
+    1690,
+    22,
+    -440
+   ],
+   [
+    1610,
+    12,
+    -520
+   ]
+  ],
+  [
+   [
+    1550,
+    14,
+    -420
+   ],
+   [
+    1500,
+    10,
+    -480
+   ]
+  ],
+  [
+   [
+    1760,
+    30,
+    -420
+   ],
+   [
+    1700,
+    12,
+    -520
+   ]
+  ]
+ ]
+}

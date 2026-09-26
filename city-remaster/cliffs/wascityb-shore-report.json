@@ -1,0 +1,80 @@
+[
+  {
+    "proto": [
+      "tfrag",
+      0,
+      0
+    ],
+    "instances": 1,
+    "size_m": 411.3,
+    "round_sigma_m": 0.85,
+    "native_triangles": 516,
+    "new_triangles": 119895,
+    "max_affine_error_m": 0
+  },
+  {
+    "proto": [
+      "tie",
+      1,
+      11
+    ],
+    "instances": 12,
+    "size_m": 26.0,
+    "round_sigma_m": 0.78,
+    "native_triangles": 48,
+    "new_triangles": 119297,
+    "max_affine_error_m": 0.0002
+  },
+  {
+    "proto": [
+      "tie",
+      1,
+      12
+    ],
+    "instances": 13,
+    "size_m": 31.9,
+    "round_sigma_m": 0.85,
+    "native_triangles": 164,
+    "new_triangles": 238979,
+    "max_affine_error_m": 0.0002
+  },
+  {
+    "proto": [
+      "tie",
+      1,
+      13
+    ],
+    "instances": 23,
+    "size_m": 16.2,
+    "round_sigma_m": 0.49,
+    "native_triangles": 40,
+    "new_triangles": 86547,
+    "max_affine_error_m": 0.0003
+  },
+  {
+    "proto": [
+      "tie",
+      1,
+      14
+    ],
+    "instances": 32,
+    "size_m": 28.8,
+    "round_sigma_m": 0.85,
+    "native_triangles": 68,
+    "new_triangles": 271079,
+    "max_affine_error_m": 0.0002
+  },
+  {
+    "proto": [
+      "tie",
+      1,
+      32
+    ],
+    "instances": 8,
+    "size_m": 11.7,
+    "round_sigma_m": 0.35,
+    "native_triangles": 16,
+    "new_triangles": 11667,
+    "max_affine_error_m": 0.0002
+  }
+]

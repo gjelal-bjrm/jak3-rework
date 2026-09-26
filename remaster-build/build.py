@@ -149,4 +149,11 @@ def main(args):
 
 
 if __name__ == '__main__':
+    # une seule construction a la fois (deux constructions simultanees ecrasent les empreintes l'une de l'autre)
+    import msvcrt
+    lock = (HERE / 'build.lock').open('a+b')
+    try:
+        msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+    except OSError:
+        sys.exit('Une construction est deja en cours.')
     main(sys.argv[1:])

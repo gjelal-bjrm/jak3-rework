@@ -1,0 +1,171 @@
+[
+  {
+    "proto": [
+      "tfrag",
+      0,
+      0
+    ],
+    "instances": 1,
+    "size_m": 820.8,
+    "round_sigma_m": 0.85,
+    "native_triangles": 764,
+    "new_triangles": 683735,
+    "max_affine_error_m": 0
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      0
+    ],
+    "instances": 11,
+    "size_m": 37.6,
+    "round_sigma_m": 0.85,
+    "native_triangles": 100,
+    "new_triangles": 82322,
+    "max_affine_error_m": 0.0003
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      1
+    ],
+    "instances": 24,
+    "size_m": 39.5,
+    "round_sigma_m": 0.85,
+    "native_triangles": 100,
+    "new_triangles": 265400,
+    "max_affine_error_m": 0.0005
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      2
+    ],
+    "instances": 24,
+    "size_m": 67.8,
+    "round_sigma_m": 0.85,
+    "native_triangles": 376,
+    "new_triangles": 658794,
+    "max_affine_error_m": 0.0005
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      3
+    ],
+    "instances": 7,
+    "size_m": 45.0,
+    "round_sigma_m": 0.85,
+    "native_triangles": 128,
+    "new_triangles": 84017,
+    "max_affine_error_m": 0.0004
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      4
+    ],
+    "instances": 28,
+    "size_m": 55.9,
+    "round_sigma_m": 0.85,
+    "native_triangles": 380,
+    "new_triangles": 458092,
+    "max_affine_error_m": 0.0004
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      5
+    ],
+    "instances": 1,
+    "size_m": 49.2,
+    "round_sigma_m": 0.85,
+    "native_triangles": 60,
+    "new_triangles": 3302,
+    "max_affine_error_m": 0
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      6
+    ],
+    "instances": 7,
+    "size_m": 29.7,
+    "round_sigma_m": 0.85,
+    "native_triangles": 144,
+    "new_triangles": 71168,
+    "max_affine_error_m": 0.0003
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      7
+    ],
+    "instances": 5,
+    "size_m": 55.2,
+    "round_sigma_m": 0.85,
+    "native_triangles": 192,
+    "new_triangles": 64560,
+    "max_affine_error_m": 0.0005
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      8
+    ],
+    "instances": 26,
+    "size_m": 50.9,
+    "round_sigma_m": 0.85,
+    "native_triangles": 184,
+    "new_triangles": 404013,
+    "max_affine_error_m": 0.0005
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      9
+    ],
+    "instances": 4,
+    "size_m": 38.0,
+    "round_sigma_m": 0.85,
+    "native_triangles": 396,
+    "new_triangles": 84616,
+    "max_affine_error_m": 0.0007
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      10
+    ],
+    "instances": 24,
+    "size_m": 81.8,
+    "round_sigma_m": 0.85,
+    "native_triangles": 124,
+    "new_triangles": 485171,
+    "max_affine_error_m": 0.0003
+  },
+  {
+    "proto": [
+      "tie",
+      0,
+      11
+    ],
+    "instances": 17,
+    "size_m": 75.2,
+    "round_sigma_m": 0.85,
+    "native_triangles": 64,
+    "new_triangles": 253940,
+    "max_affine_error_m": 0.0002
+  }
+]
