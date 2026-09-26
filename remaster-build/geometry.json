@@ -1,0 +1,8 @@
+{
+ "waswide": {
+  "base": "city-remaster/cliffs/waswide-before-cliffs.fr3",
+  "patches": [
+   "city-remaster/cliffs/waswide-rocks-patch.json"
+  ]
+ }
+}

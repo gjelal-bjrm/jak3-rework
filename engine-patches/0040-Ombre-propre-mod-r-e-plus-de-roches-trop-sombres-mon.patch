@@ -1,0 +1,84 @@
+From 51fc3d5677d3307e9b8034495b265fefbc1f2ed8 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 02:58:01 +0200
+Subject: [PATCH 40/40] =?UTF-8?q?Ombre=20propre=20mod=C3=A9r=C3=A9e=20(plu?=
+ =?UTF-8?q?s=20de=20roches=20trop=20sombres)=20;=20montagnes=20de=20Spargu?=
+ =?UTF-8?q?s=20plaqu=C3=A9es=20selon=20le=20monde=20;=20mesure=20de=20flui?=
+ =?UTF-8?q?dit=C3=A9=20(REMASTER=5FPERF)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../graphics/opengl_renderer/OpenGLRenderer.cpp | 17 +++++++++++++++++
+ .../background/PalaceMaterials.h                |  2 ++
+ .../opengl_renderer/shaders/tfrag3.frag         |  4 +++-
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 4d0b53e7..2e728c1b 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1,3 +1,4 @@
++#include <chrono>
+ #include "OpenGLRenderer.h"
+ 
+ #include "common/goal_constants.h"
+@@ -982,6 +983,22 @@ void OpenGLRenderer::blit_display(ScopedProfilerNode& prof) {
+  * Main render function. This is called from the gfx loop with the chain passed from the game.
+  */
+ void OpenGLRenderer::render(DmaFollower dma, const RenderOptions& settings) {
++  {
++    // Mesure de fluidite (REMASTER_PERF=1) : temps moyen et pire temps par image, toutes les 5 s.
++    static const bool perf = std::getenv("REMASTER_PERF") != nullptr;
++    if (perf) {
++      static auto last = std::chrono::steady_clock::now(), window = last;
++      static double sum = 0, worst = 0; static int frames = 0;
++      const auto now = std::chrono::steady_clock::now();
++      const double ms = std::chrono::duration<double, std::milli>(now - last).count(); last = now;
++      if (ms < 1000.) { sum += ms; worst = std::max(worst, ms); ++frames; }
++      if (now - window > std::chrono::seconds(5) && frames) {
++        lg::info("Perf: {:.1f} ms par image en moyenne ({:.0f} images/s), pire {:.1f} ms", sum / frames,
++                 1000. * frames / sum, worst);
++        sum = worst = 0; frames = 0; window = now;
++      }
++    }
++  }
+   m_profiler.clear();
+   m_render_state.reset();
+   m_render_state.prototype_lava_visible = false;
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 68200d66..e956b1ef 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -95,9 +95,11 @@ class PalaceMaterials {
+     static const float rockwall[4] = {12.2f, 10.8f, 0.f, 1.f};
+     static const float small_rockwall[4] = {6.6f, 5.3f, 1.f, -1.f};
+     static const float interior_rock[4] = {10.5f, 11.0f, 1.f, -1.f};
++    static const float spargus_mountain[4] = {27.8f, 20.2f, 0.f, 1.f};   // montagnes de Spargus (waswide)
+     if (name == "wstd-rockwall-01") return rockwall;
+     if (name == "wstd-small-rockwall-01") return small_rockwall;
+     if (name == "wstd-interior-rock01") return interior_rock;
++    if (name == "wascity-outerwall-rock") return spargus_mountain;
+     return nullptr;
+   }
+   // Arene de Spargus : relief et reponse a la lumiere par matiere, sur toutes les grandes surfaces
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 70850834..91d2be2a 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -845,7 +845,9 @@ float sunVisibility(vec3 P, vec3 N) {
+   float lit = 0.;
+   for (int i = 0; i < 12; i++) lit += texture(shadow_map, vec3(sc.xy + rot * shadow_taps[i] * radius, sc.z - .00008));
+   lit /= 12.;
+-  lit = min(lit, smoothstep(-.03, .12, ndl));         // face tournee a l'oppose du soleil : dans sa propre ombre
++  // face tournee a l'oppose du soleil : ombre propre moderee (les couleurs du jeu contiennent deja un ombrage
++  // selon l'orientation ; l'appliquer en entier doublait l'effet et assombrissait trop les roches ocre)
++  lit = min(lit, mix(.45, 1., smoothstep(-.03, .12, ndl)));
+   float fade = smoothstep(1., .82, max(edge.x, edge.y));  // bord de la zone couverte : transition douce
+   return mix(1., lit, fade);
+ }
+-- 
+2.54.0.windows.1
+

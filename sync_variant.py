@@ -26,8 +26,26 @@ def main(paths):
         if relative not in files: files.append(relative)
         hashes['remaster'][relative] = sha(target)
         print(f'{relative}  {hashes["remaster"][relative][:12]}')
+    complete_other_variants(files, hashes)
     (ROOT / 'variant-files.json').write_text(json.dumps(files, indent=2) + '\n', encoding='utf-8')
     (ROOT / 'variant-hashes.json').write_text(json.dumps(hashes, indent=2) + '\n', encoding='utf-8')
+
+
+def complete_other_variants(files, hashes):
+    """Le lanceur verifie chaque fichier de la liste pour la variante lancee : les autres variantes (jeu
+    d'origine, remaster-v1) doivent donc aussi l'avoir. On y met la version du jeu d'origine si elle existe,
+    sinon le nouveau fichier (un shader que le jeu d'origine n'utilise pas : sans effet)."""
+    original_data = ROOT.parents[1] / 'active/jak3/data'
+    for variant in hashes:
+        if variant == 'remaster': continue
+        for relative in files:
+            target = ROOT / 'variants' / variant / relative
+            if relative in hashes[variant] and target.is_file(): continue
+            source = original_data / relative
+            if not source.is_file(): source = ROOT / 'variants/remaster' / relative
+            target.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(source, target)
+            hashes[variant][relative] = sha(target)
+            print(f'{variant} : {relative} ajoute')
 
 
 if __name__ == '__main__':

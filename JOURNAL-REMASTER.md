@@ -52,3 +52,14 @@ intégrées au fur et à mesure et **vérifiées à l'affichage**, chaque change
 - Sculpture en couches de grès, comme l'arène, mais avec des couches **deux fois plus épaisses et plus
   profondes** (à cette échelle, les couches fines de l'arène ressemblaient à du bois). Aperçus Blender :
   `arena-remaster/rocks/preview/city-cmp2.png`.
+- **Installé et vérifié en jeu** : 179 blocs, 3,6 millions de triangles ; **60 images/s** constantes dans la
+  ville (mesure `REMASTER_PERF=1`). Comparaison jeu d'origine / remaster aux mêmes cadrages :
+  `qa/mt-compare.png` et `qa/mt-compare2.png`.
+- **Réglage de l'éclairage** : la roche devenait trop sombre (ombre des faces dos au soleil, en plus de
+  l'ombrage déjà peint dans les couleurs du jeu). Ombre propre modérée : l'ocre chaud d'origine revient, les
+  ombres portées restent nettes. Vaut pour tout le jeu (arène comprise).
+
+### ⚠️ Réparé : le mode « Jeu d'origine » du lanceur ne démarrait plus
+Chaque nouveau fichier du remaster (shaders d'éclairage, du feu…) était ajouté à la liste vérifiée par le
+lanceur, mais pas à la version d'origine : le lanceur refusait de la démarrer. Corrigé, et `sync_variant.py`
+complète désormais automatiquement les autres versions. Les deux modes démarrent (vérifié).
