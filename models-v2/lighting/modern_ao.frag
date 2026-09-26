@@ -70,7 +70,8 @@ void main() {
         vec3 Q = relPos(s.xy, ds);
         float behind = length(S) - length(Q);
         float range = smoothstep(0., 1., R / max(length(Q - P), 1e-3));
-        occlusion += (behind > .03 * R ? 1. : 0.) * range * (scale == 0 ? .6 : .4);
+        // petite echelle allegee : les aretes ou deux plaques de roche se croisent faisaient des traits noirs
+        occlusion += (behind > .03 * R ? 1. : 0.) * range * (scale == 0 ? .35 : .45);
       }
     }
     float ao = clamp(1. - 1.35 * occlusion / 12., 0., 1.);
@@ -90,7 +91,9 @@ void main() {
     color = vec4(sum / total, c.g, 0., 1.);
   } else {
     vec2 c = texelFetch(ao_input, ivec2(px), 0).rg;
-    float ao = pow(c.r, 2.0);
+    // plafond : au plus -40 % (les plaques de roche qui se croisent donnaient des traits noirs « en epines »,
+    // et les lieux encaisses, deja sombres dans l'eclairage du jeu, devenaient noirs)
+    float ao = max(pow(c.r, 1.6), .6);
     float fade = 1. - smoothstep(180., 400., c.g);          // tres loin : la brume prend le relais
     color = vec4(vec3(mix(1., ao, ao_strength * fade)), 1.);
   }

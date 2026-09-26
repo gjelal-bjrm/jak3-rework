@@ -172,3 +172,16 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   ombre). L'ombre du soleil n'agit maintenant pleinement que sur les surfaces que le jeu éclaire au soleil :
   volcan revenu à 25 (original 30), ombres du désert intactes (`qa/volcano-fix.png`, `qa/shadow-check.png`).
 - Outil de test : les coordonnées négatives (volcan) étaient lues comme des options ; corrigé.
+
+### 13. Contrôle de luminosité par zone (nouveau réflexe) et corrections
+- Mesure systématique de la luminosité remaster / original aux mêmes cadrages. Désert et ville : 1,0 (identique).
+  **Lieux encaissés trop sombres** : temple 0,76, intérieur du volcan 0,77 (ombre du soleil + occlusion
+  ambiante qui s'ajoutent à l'ombre déjà peinte par le jeu).
+- Corrections (valables partout) : ombre du soleil un peu plus claire ; occlusion ambiante plafonnée à -40 %
+  et sa petite échelle allégée (elle faisait des **traits noirs « en épines »** là où des plaques de roche se
+  croisent, vus au volcan) ; au volcan, éclairé surtout par la lave dans le jeu, l'ombre du soleil est discrète.
+  Résultat : temple 1,01, volcan 0,84 à 0,95 ; désert et ville inchangés (vérifié `qa/cityl-compare.png`).
+- **Sol de mousse du volcan** : la texture Codex l'avait changé en pavés bruns ; teinte verte d'origine
+  remise (le dessin de Codex reste).
+- Outil : les captures attendent maintenant 30 s le chargement complet du lieu (au volcan, la 1ʳᵉ vue était
+  prise avant l'affichage).

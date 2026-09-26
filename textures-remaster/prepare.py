@@ -30,10 +30,10 @@ from prepare_textures import seam_ratio, fix_seam, srgb_to_lab, lab_to_srgb   # 
 KIT = HERE / 'codex'
 OUT = HERE / 'out'
 MAX_SIDE = 1024
-VERSION = 4                      # 3 : balance des blancs ; 4 : + FORCE_HUE ; teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
+VERSION = 5                      # 3 : balance des blancs ; 4 : + FORCE_HUE ; teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
 HUE_LIMIT, HUE_BACK, LIGHT_BACK = 20.0, .8, .5
 # teinte ramenee quel que soit l'ecart (constat en jeu) : dalles plates du desert, orange vif sur le sable pale
-FORCE_HUE = {'des-rock-01'}
+FORCE_HUE = {'des-rock-01', 'vola-grass-floor-01'}   # + sol de mousse du volcan devenu pave brun
 
 
 def keep_hue(pix, orig_rgb, force=False):

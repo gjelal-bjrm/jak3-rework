@@ -1,0 +1,101 @@
+From 776c0272ede480fd71dbcbb2a27129f3c27f18ce Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 08:14:11 +0200
+Subject: [PATCH] Eclairage moderne adouci dans les lieux encaisses : ombre du
+ soleil plus claire, occlusion plafonnee (plus de traits noirs), ombre
+ discrete au volcan (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernShadows.h        | 7 ++++++-
+ game/graphics/opengl_renderer/shaders/hfrag.frag     | 2 +-
+ game/graphics/opengl_renderer/shaders/merc2.frag     | 2 +-
+ game/graphics/opengl_renderer/shaders/modern_ao.frag | 7 +++++--
+ game/graphics/opengl_renderer/shaders/tfrag3.frag    | 2 +-
+ 5 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernShadows.h b/game/graphics/opengl_renderer/ModernShadows.h
+index d0e8c390..3cdeab9f 100644
+--- a/game/graphics/opengl_renderer/ModernShadows.h
++++ b/game/graphics/opengl_renderer/ModernShadows.h
+@@ -63,7 +63,12 @@ class ModernShadows {
+     for (auto& c : sun) c /= len;
+     const float lum = .2126f * color[0] + .7152f * color[1] + .0722f * color[2];
+     const float elevation = std::clamp((sun[1] - .03f) / .22f, 0.f, 1.f);
+-    const float strength = elevation * std::clamp(lum / .55f, 0.f, 1.f);
++    // volcan : lieux eclaires surtout par la lave dans le jeu d'origine ; le cratere cachait le soleil a des parois
++    // que l'eclairage du jeu montre eclairees (tout le lieu s'assombrissait) -> ombre du soleil discrete
++    bool volcano = false;
++    for (const auto* data : state->loader->get_in_use_levels())
++      if (data && data->level && data->level->level_name.rfind("volcano", 0) == 0) volcano = true;
++    const float strength = elevation * std::clamp(lum / .55f, 0.f, 1.f) * (volcano ? .35f : 1.f);
+     if (strength < .01f) return;
+     if (!m_shader) init(state);
+     if (!m_shader->okay()) return;
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.frag b/game/graphics/opengl_renderer/shaders/hfrag.frag
+index e1331920..e99509c2 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.frag
++++ b/game/graphics/opengl_renderer/shaders/hfrag.frag
+@@ -127,7 +127,7 @@ void main() {
+     if (shadow_on != 0) {
+       float baked = dot(fragment_color.rgb * 2., vec3(.2126, .7152, .0722));   // eclairage precalcule (1 = plein)
+       float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength * smoothstep(.35, .85, baked);
+-      color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);   // ombre eclairee par le ciel, un peu bleutee
++      color.rgb *= mix(vec3(1.), vec3(.70, .73, .81), shade);   // ombre eclairee par le ciel, un peu bleutee
+     }
+   } else {
+     color = fragment_color;
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index 0517a2a2..19a853a3 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -453,7 +453,7 @@ void main() {
+ 
+   if (shadow_on != 0) {
+     float shade = (1. - mercSunVisibility(merc_world)) * shadow_strength;
+-    color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);
++    color.rgb *= mix(vec3(1.), vec3(.70, .73, .81), shade);
+   }
+    color.xyz = mix(color.xyz, fog_color.rgb, clamp(fog_color.a * fog, 0, 1));
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ao.frag b/game/graphics/opengl_renderer/shaders/modern_ao.frag
+index d507fa8f..6889b39e 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ao.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_ao.frag
+@@ -70,7 +70,8 @@ void main() {
+         vec3 Q = relPos(s.xy, ds);
+         float behind = length(S) - length(Q);
+         float range = smoothstep(0., 1., R / max(length(Q - P), 1e-3));
+-        occlusion += (behind > .03 * R ? 1. : 0.) * range * (scale == 0 ? .6 : .4);
++        // petite echelle allegee : les aretes ou deux plaques de roche se croisent faisaient des traits noirs
++        occlusion += (behind > .03 * R ? 1. : 0.) * range * (scale == 0 ? .35 : .45);
+       }
+     }
+     float ao = clamp(1. - 1.35 * occlusion / 12., 0., 1.);
+@@ -90,7 +91,9 @@ void main() {
+     color = vec4(sum / total, c.g, 0., 1.);
+   } else {
+     vec2 c = texelFetch(ao_input, ivec2(px), 0).rg;
+-    float ao = pow(c.r, 2.0);
++    // plafond : au plus -40 % (les plaques de roche qui se croisent donnaient des traits noirs « en epines »,
++    // et les lieux encaisses, deja sombres dans l'eclairage du jeu, devenaient noirs)
++    float ao = max(pow(c.r, 1.6), .6);
+     float fade = 1. - smoothstep(180., 400., c.g);          // tres loin : la brume prend le relais
+     color = vec4(vec3(mix(1., ao, ao_strength * fade)), 1.);
+   }
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 2289b4d3..ec8d2d8c 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -857,7 +857,7 @@ vec3 applySunShadow(vec3 c, vec3 P, vec3 N) {
+   // l'ombre du soleil n'agit pleinement que sur les surfaces que le jeu eclaire au soleil (sinon double ombre)
+   float baked = dot(max(fragment_color.rgb, vec3(0.)), vec3(.2126, .7152, .0722));
+   float shade = (1. - sunVisibility(P, N)) * shadow_strength * smoothstep(.35, .85, baked);
+-  return c * mix(vec3(1.), vec3(.60, .64, .74), shade);     // ombre eclairee par le ciel : un peu bleutee
++  return c * mix(vec3(1.), vec3(.70, .73, .81), shade);     // ombre eclairee par le ciel : un peu bleutee
+ }
+ // SUN_SHADOW_END
+ 
+-- 
+2.54.0.windows.1
+

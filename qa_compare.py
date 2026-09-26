@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent
 W, H = 960, 540
+SETTLE = 30
 
 
 def launch(variant, scene, hour):
@@ -27,7 +28,7 @@ def launch(variant, scene, hour):
         time.sleep(2)
         text = log.read_text(encoding='utf-8', errors='replace')
         if any(k in text for k in ('vitesse', 'Traceback', 'quitte', 'Erreur')): break
-    time.sleep(15)
+    time.sleep(SETTLE)   # chargement complet du lieu (le volcan met plus longtemps que la ville)
     return log.read_text(encoding='utf-8', errors='replace')
 
 
