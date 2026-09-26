@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -64,6 +64,13 @@ CITY_SCENES = {
     # n'est actif que dans la region de Spargus.
     'port': {'continue': 'ctyport-start', 'arrival': (193.0, 1754.0), 'viewpoint': (193.0, 17.3, 1754.0),
              'label': 'au port de Haven, point de reprise ctyport-start (eau native)'},
+    # Desert : debut de l'histoire (Jak abandonne dans le desert), porte du desert de Spargus, grand desert.
+    'intro': {'continue': 'wasintro-start', 'arrival': (2.5, -13.1), 'viewpoint': (2.5, 2.0, -13.1),
+              'label': "dans le desert de l'intro (point de depart de l'histoire)"},
+    'wasdoors': {'continue': 'wasdoors-desert', 'arrival': (2266.8, 167.0), 'viewpoint': (2266.8, 33.0, 167.0),
+                 'label': 'a la porte du desert de Spargus (garage des vehicules)'},
+    'desert': {'continue': 'desert-start', 'arrival': (2266.4, 258.1), 'viewpoint': (2266.4, 33.0, 258.1),
+               'label': 'dans le grand desert, devant la porte de Spargus'},
 }
 route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 
@@ -506,6 +513,8 @@ if input_settings.exists():
     except ValueError:
         pass
 environment = os.environ.copy()
+if args.weather and args.weather != 'hasard':
+    environment['REMASTER_WEATHER_START'] = args.weather   # meteo installee des la premiere image (tests)
 if not args.sound:
     environment['OPENGOAL_TEST_MUTE'] = '1'
 game_log = ROOT / f'{args.variant}-runtime.log'

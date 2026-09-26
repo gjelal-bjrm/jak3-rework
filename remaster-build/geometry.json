@@ -17,5 +17,17 @@
   "patches": [
    "city-remaster/uv/uv-patch-wascitya.json"
   ]
+ },
+ "desertb": {
+  "base": "desert-remaster/rocks/desertb-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desertb-rocks-patch.json"
+  ]
+ },
+ "desert": {
+  "base": "desert-remaster/rocks/desert-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desert-rocks-patch.json"
+  ]
  }
 }

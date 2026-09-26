@@ -31,6 +31,8 @@ OUT = Path(__file__).resolve().parent
 
 # Reglages du lieu : arene par defaut ; autre lieu : premier argument apres -- = fichier de reglages JSON
 # {native, materials, centre [x, z], near (m), strata_top (m), patch, report, preview_prefix}
+# options d'echelle (grands lieux, ex. desert) : strata_scale, depth_scale, depth_max (m), sigma_max (m, arrondi),
+# far_spacing (x espacement du maillage loin du centre : moins de triangles)
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 CONFIG = {'native': str(OUT / 'rocks-native.json'), 'materials': ['wstd-rockwall-01', 'wstd-small-rockwall-01'],
           'centre': [2275.0, -450.0], 'near': 100.0, 'strata_top': 240.0,
@@ -238,7 +240,7 @@ def crossings(P, levels):
 def build_field(ref):
     pts = np.array([v['p'] for f in ref for v in f['vertices']])
     size = float((pts.max(0) - pts.min(0)).max())
-    sigma = min(max(size * .03, .2), .85)
+    sigma = min(max(size * .03, .2), CONFIG.get('sigma_max', .85))
     NV, F, fn = weld_orient(ref)
     spacing = sigma / 3
     SP, SN, SW = [], [], []
@@ -282,8 +284,9 @@ def field_eval(field, Q, VN):
 def mesh_instance(faces, near, sigma):
     NV, F, fn = weld_orient(faces)
     levels = LEVELS[near]
-    hx = 1.0 if near else 1.8
-    h_fine, h_coarse = .85 * sigma, (2.0 if near else 3.0)
+    FS = 1.0 if near else CONFIG.get('far_spacing', 1.0)
+    hx = 1.0 if near else 1.8 * FS
+    h_fine, h_coarse = .85 * sigma, (2.0 if near else 3.0 * FS)
     steep = {index: abs(n[1]) < .8 for index, n in fn.items()}
     edges = defaultdict(list)
     for index, ids in F:
@@ -342,7 +345,7 @@ def mesh_instance(faces, near, sigma):
             if e2[1] < 0: e2 = -e2
             to2 = lambda P: np.stack([(P - A) @ e1, (P - A) @ e2], -1)
             tri2 = to2(np.array([A, B, C])); lo, hi = tri2.min(0), tri2.max(0)
-            margin = .12 if near else .25
+            margin = .12 if near else .25 * FS
             cand = []
             for u in np.arange(lo[0] + hx / 2, hi[0], hx):
                 # intervalle vertical de la colonne u dans le triangle
@@ -359,7 +362,7 @@ def mesh_instance(faces, near, sigma):
                 rows = sorted(v0 + x * (v1 - v0) for x in ss)
                 full = [v0] + rows + [v1]; pts = []
                 for r0, r1 in zip(full, full[1:]):
-                    k = int(math.ceil((r1 - r0) / (.6 if near else 1.2)))
+                    k = int(math.ceil((r1 - r0) / (.6 if near else 1.2 * FS)))
                     pts += [r0 + (r1 - r0) * j / k for j in range(k)]
                 pts = pts[1:]
                 cand += [(u, v) for v in pts if v0 + margin < v < v1 - margin]
@@ -433,7 +436,13 @@ def sculpt(field, faces, near):
     R = R @ M                                                      # vecteurs -> monde
     N = NF @ Minv.T; N /= np.maximum(np.linalg.norm(N, axis=1, keepdims=True), 1e-12)
     steepw = 1 - smoothstep(.5, .78, np.abs(N[:, 1]))
-    dmax = min(.85 if near else 1.25, .08 * field['size']) * CONFIG.get('depth_scale', 1.0)
+    dmax = min(.85 if near else CONFIG.get('depth_max', 1.25), .08 * field['size']) * CONFIG.get('depth_scale', 1.0)
+    if 'thin_ratio' in CONFIG:
+        # aiguilles et lames : creuser au plus une fraction de leur epaisseur (sinon cous etrangles, piles d'assiettes)
+        H = B[:, [0, 2]] - B[:, [0, 2]].mean(0)
+        axis = np.linalg.eigh(H.T @ H)[1][:, 0]
+        minor = float(np.ptp(H @ axis))
+        dmax = min(dmax, CONFIG['thin_ratio'] * minor)
     depth = strata_depth(P0, dmax) * steepw
     walk = np.clip((N[:, 1] - .55) / .3, 0, 1)
     bump = min(max(field['size'] * .008, .03), .2) * fbm(P0 / max(6., field['size'] / 5), 2) * (1 - walk)

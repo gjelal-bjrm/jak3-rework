@@ -9,6 +9,8 @@ Pour chaque image de textures-remaster/codex/resultats/ (nouvelle ou modifiee) :
   2. taille : plus grand cote 1024 (au-dela, le chargement des niveaux ralentit sans gain visible en jeu) ;
   3. raccords : si la texture d'origine se repete sans couture, les bords de la nouvelle sont corriges ;
   4. alpha d'origine (textures a alpha uniforme seulement : les decoupes sont exclues du kit).
+Textures refusees apres controle (hors sujet, couleurs trahies) : rejets.json (nom -> raison) ; le jeu garde
+l'original, et la liste sert a redemander ces textures a Codex.
 Sorties : out/<nom>.rgba (+ .png d'apercu) et textures.json (liste pour remaster-build/build.py).
 """
 from pathlib import Path
@@ -28,11 +30,12 @@ MAX_SIDE = 1024
 
 def main():
     manifest = {e['name']: e for e in json.loads((KIT / 'manifest.json').read_text(encoding='utf-8'))}
+    rejects = json.loads((HERE / 'rejets.json').read_text(encoding='utf-8')) if (HERE / 'rejets.json').exists() else {}
     OUT.mkdir(exist_ok=True)
     listing, made = [], 0
     for png in sorted((KIT / 'resultats').glob('*.png')):
         e = manifest.get(png.stem)
-        if not e: continue
+        if not e or png.stem in rejects: continue
         rgba = OUT / f'{png.stem}.rgba'
         entry = None
         if rgba.exists() and rgba.stat().st_mtime >= png.stat().st_mtime:
@@ -61,7 +64,7 @@ def main():
             made += 1
         listing.append(entry)
     (HERE / 'textures.json').write_text(json.dumps({'textures': listing}, indent=1))
-    print(f'{len(listing)} textures pretes ({made} nouvelles)')
+    print(f'{len(listing)} textures pretes ({made} nouvelles, {len(rejects)} refusees)')
 
 
 if __name__ == '__main__':

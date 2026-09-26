@@ -1,0 +1,68 @@
+{
+ "native": "desert-remaster/rocks/desertd-rocks-native.json",
+ "materials": [
+  "des-mount-01",
+  "des-mount-02",
+  "des-mount-bottom-01",
+  "des-cliff-trans-01",
+  "des-rock-01",
+  "des-cliff-top-03",
+  "des-cliff-top-01",
+  "des-cliff-01",
+  "des-cliff-top-02",
+  "des-cliff-top-04"
+ ],
+ "centre": [
+  2266.0,
+  258.0
+ ],
+ "near": 0.0,
+ "strata_top": 250.0,
+ "strata_scale": 2.5,
+ "depth_scale": 1.0,
+ "depth_max": 2.5,
+ "sigma_max": 0.6,
+ "far_spacing": 1.6,
+ "patch": "desert-remaster/rocks/desertd-rocks-patch.json",
+ "report": "desert-remaster/rocks/desertd-rocks-report.json",
+ "preview_prefix": "desertd",
+ "views": [
+  [
+   [
+    2266,
+    38,
+    250
+   ],
+   [
+    2140,
+    60,
+    320
+   ]
+  ],
+  [
+   [
+    2200,
+    35,
+    240
+   ],
+   [
+    2130,
+    70,
+    320
+   ]
+  ],
+  [
+   [
+    2185,
+    40,
+    300
+   ],
+   [
+    2120,
+    75,
+    335
+   ]
+  ]
+ ],
+ "thin_ratio": 0.07
+}

@@ -1,0 +1,93 @@
+From 9613d881c82db0ea24d8ffed87517ba0bbdaf201 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 04:57:46 +0200
+Subject: [PATCH] Meteo de depart imposable pour les tests
+ (REMASTER_WEATHER_START) ; roches du desert plaquees selon le monde
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/WeatherState.h    | 10 +++++++++-
+ .../background/PalaceMaterials.h                | 17 +++++++++++++++--
+ 2 files changed, 24 insertions(+), 3 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/WeatherState.h b/game/graphics/opengl_renderer/WeatherState.h
+index 7db77216..10387dbb 100644
+--- a/game/graphics/opengl_renderer/WeatherState.h
++++ b/game/graphics/opengl_renderer/WeatherState.h
+@@ -2,6 +2,7 @@
+ #include <algorithm>
+ #include <array>
+ #include <cmath>
++#include <cstdlib>
+ #include <cstring>
+ #include <mutex>
+ #include <random>
+@@ -106,7 +107,14 @@ inline void update(float dt, int reg, float hour, bool under_roof = false) {
+   region = reg;
+   if (!started) {
+     started = true;
+-    to_kind = pick(reg, hour, -1); from_kind = to_kind; blend = 1.f;
++    to_kind = pick(reg, hour, -1);
++    // tests (captures avant/apres) : meteo de depart imposee, sinon le ciel natif garde longtemps la
++    // trace d'un orage tire au hasard au demarrage
++    if (const char* start = std::getenv("REMASTER_WEATHER_START")) {
++      for (int k = 0; k < COUNT; ++k)
++        if (!std::strcmp(start, kNames[k])) { to_kind = k; forced = k; }
++    }
++    from_kind = to_kind; blend = 1.f;
+     current = preset(to_kind); from_params = current;
+     remaining = urand(240.f, 540.f);
+     lg::info("Meteo initiale : {}", kNames[to_kind]);
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 207affca..c4dfbc9f 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -20,18 +20,20 @@ class PalaceMaterials {
+     const bool market = level.level_name == "wascityb" || level.level_name == "wascitya" ||
+                         level.level_name == "waswide";
+     const bool arena = level.level_name.rfind("wasstad", 0) == 0;
++    const bool desert = level.level_name.rfind("desert", 0) == 0;   // grand desert (desert, deserta..h)
+     m_level = level.level_name;
+     if (TextureAudit::enabled()) {           // controle : noms de toutes les textures, dans tous les niveaux
+       m_all_names.clear();
+       for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
+     }
+-    if (level.level_name != "waspala" && !market && !arena) return;
++    if (level.level_name != "waspala" && !market && !arena && !desert) return;
+     int count=0, high_res=0;
+     for (const auto& texture : level.textures) {
+       // Regional response only for explicit, high-resolution replacement
+       // materials. Alpha decals, windows, liquids and unchanged atlases keep
+       // the native path. The palace classification is unchanged.
+-      const int kind=arena ? classify_arena(texture.debug_name) :
++      const int kind=desert ? (world_tile(texture.debug_name) ? 7 : 0) :
++          arena ? classify_arena(texture.debug_name) :
+           market ? (std::max(texture.w,texture.h)>=512 ?
+           classify_market(texture.debug_name) : 0) : classify(texture.debug_name);
+       m_kinds.push_back(kind);
+@@ -97,11 +99,22 @@ class PalaceMaterials {
+     static const float interior_rock[4] = {10.5f, 11.0f, 1.f, -1.f};
+     static const float spargus_mountain[4] = {27.8f, 20.2f, 0.f, 1.f};   // montagnes de Spargus (waswide)
+     static const float spargus_shore[4] = {8.3f, 18.8f, 1.f, -1.f};       // rochers du rivage (wascityb)
++    // desert : echelle native mesuree sur les flancs (desert-remaster/rocks/measure_tiles.py)
++    static const float des_mount_01[4] = {19.4f, 18.9f, 1.f, -1.f};
++    static const float des_mount_02[4] = {17.2f, 19.9f, 1.f, -1.f};
++    static const float des_mount_bottom[4] = {13.2f, 11.8f, 1.f, -1.f};
++    static const float des_cliff_trans[4] = {10.0f, 9.2f, 1.f, -1.f};
++    static const float des_rock[4] = {4.0f, 4.7f, 1.f, -1.f};
+     if (name == "wstd-rockwall-01") return rockwall;
+     if (name == "wstd-small-rockwall-01") return small_rockwall;
+     if (name == "wstd-interior-rock01") return interior_rock;
+     if (name == "wascity-outerwall-rock") return spargus_mountain;
+     if (name == "wascity-ocean-shore-rocks") return spargus_shore;
++    if (name == "des-mount-01") return des_mount_01;
++    if (name == "des-mount-02") return des_mount_02;
++    if (name == "des-mount-bottom-01") return des_mount_bottom;
++    if (name == "des-cliff-trans-01") return des_cliff_trans;
++    if (name == "des-rock-01") return des_rock;
+     return nullptr;
+   }
+   // Arene de Spargus : relief et reponse a la lumiere par matiere, sur toutes les grandes surfaces
+-- 
+2.54.0.windows.1
+

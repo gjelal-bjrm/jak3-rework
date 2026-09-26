@@ -81,3 +81,36 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
 - Rochers du rivage plaqués selon le monde, comme les montagnes.
 - **Vérifié en jeu** : textures HD toutes affichées (contrôle d'affichage : 54 + 6 + 3, aucune manquante).
   Captures : `qa/uv-city-compare.png`, éclairage moderne coupé / actif : `qa/wall-shadow.png`.
+
+### 6. Textures Codex — 2ᵉ série (palais, train aérien, désert) et contrôle de chaque texture
+- 104 nouvelles textures Codex intégrées (palais de Damas, toits et intérieurs du train aérien, désert, vaisseau
+  des KG). Avant d'installer, chaque texture est comparée à son original (planches `qa/codex-new-*.png`,
+  `qa/codex-pairs-a.png`, tri automatique des plus grands changements de couleur `qa/codex-colorshift.png`).
+- **6 textures refusées** (le jeu garde l'original) : braises du palais devenues turquoise, feuilles de palmier
+  transformées en dalle de bassin ou en aplat orange, pierre grise des totems devenue terre orange, gravier à
+  paillettes sur une montagne lointaine. Liste et consigne pour les faire refaire par Codex :
+  `textures-remaster/codex/TEXTURES-A-REFAIRE.md` (refus notés dans `textures-remaster/rejets.json`).
+- **Vérifié en jeu** : palais — 56 textures HD affichées, aucune manquante ; désert — toutes affichées.
+  Comparaison jeu d'origine / remaster du palais : `qa/palx-compare.png` (l'identité du palais est gardée).
+
+### 7. Outils de contrôle
+- `qa_compare.py` : lance le remaster puis le jeu d'origine, prend les mêmes vues avec la caméra libre, fait la
+  planche côte à côte, le contrôle des textures affichées et la mesure de fluidité, en une commande.
+- Nouvelles scènes de test dans le lanceur : `desert` (grand désert devant la porte de Spargus), `wasdoors`
+  (porte du désert), `intro` (désert du début de l'histoire).
+- **Météo des captures** : la météo de départ est tirée au hasard ; un orage au démarrage laissait le ciel gris et
+  des flaques pendant les captures (faux « avant/après »). Les tests démarrent maintenant directement par beau
+  temps (le jeu normal garde sa météo au hasard).
+
+### 8. Désert — les montagnes (le plus voyant du désert)
+- Mesure : les roches font **85 % de la surface** du désert. Les grandes montagnes (niveau `desert`) :
+  12,8 millions de m² dessinés avec seulement 61 000 triangles, soit ~260 m² par facette : c'est ce qui donne
+  l'aspect « vieux jeu » (grandes facettes plates).
+- Sculpture en couches de grès adaptée à l'échelle : couches de 4 à 11 m creusées jusqu'à 4 m pour les grandes
+  montagnes, couches de 2,5 à 7 m pour les rochers du désert. Les pointes restent pointues (premier essai :
+  arrondi trop fort, pointes fondues en « bougies » — corrigé avant installation, aperçus
+  `arena-remaster/rocks/preview/desert*-cmp*.png`) ; creusement limité selon l'épaisseur des aiguilles.
+- Textures des roches plaquées selon le monde (échelle d'origine mesurée : `desert-remaster/rocks/measure_tiles.py`).
+- **Installé et vérifié en jeu** : grandes montagnes 63 828 → 3,0 millions de triangles ; rochers devant la porte
+  (desertb) 99 224 → 1,6 million. **60 images/s**, pire image 32 ms (comme avant). Comparaison aux mêmes
+  cadrages : `qa/desm-compare.png`.
