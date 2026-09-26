@@ -24,6 +24,17 @@ PLACES = [
     ('Ville de Spargus (entrée)', ['--scene', 'city']),
     ('Marché de Spargus', ['--scene', 'market']),
     ('Port de Haven (mer bleue, quai)', ['--scene', 'port']),
+    ('Désert : devant la porte de Spargus (dunes)', ['--scene', 'desert']),
+    ('Désert : zone A (pins, rochers)', ['--scene', 'desa']),
+    ('Désert : zone D (grande plaine, mer)', ['--scene', 'desd']),
+    ('Désert : zone E (oasis, palmiers)', ['--scene', 'dese']),
+    ('Désert : zone G (ruines)', ['--scene', 'desg']),
+    ('Désert : zone H (plage, totems)', ['--scene', 'desh']),
+    ('Désert : grande cascade et rivière', ['--scene', 'cascade']),
+    ('Désert de l’intro (début de l’histoire)', ['--scene', 'intro']),
+    ('Temple précurseur (ravin d’entrée)', ['--scene', 'temple']),
+    ('Volcan (entrée)', ['--scene', 'volcano']),
+    ('Volcan (intérieur, végétation, lave)', ['--scene', 'volcanoa']),
 ]
 WEATHERS = [
     ('Au hasard (comme en jeu)', 'hasard'), ('Beau temps', 'beau-temps'), ('Voilé', 'voile'),

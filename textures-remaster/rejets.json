@@ -30,5 +30,7 @@
  "vola-shrub-leaf": "roche/element sans lave dans l'original, Codex y a ajoute des fissures de lave orange partout : change l'identite du volcan (feuillage)",
  "vol-bark-burnt": "roche/element sans lave dans l'original, Codex y a ajoute des fissures de lave orange partout : change l'identite du volcan (ecorce)",
  "vol-bark-burnt-hole": "roche/element sans lave dans l'original, Codex y a ajoute des fissures de lave orange partout : change l'identite du volcan (ecorce)",
- "vol-ladder-wood": "roche/element sans lave dans l'original, Codex y a ajoute des fissures de lave orange partout : change l'identite du volcan (bois)"
+ "vol-ladder-wood": "roche/element sans lave dans l'original, Codex y a ajoute des fissures de lave orange partout : change l'identite du volcan (bois)",
+ "city-port-litwindow": "photo de l'equipe de Naughty Dog (clin d'oeil cache du jeu d'origine) remplacee par une fenetre : garder la photo",
+ "cityslumc-light-amber": "halo lumineux (degrade doux) devenu une peinture granuleuse : garder le degrade"
 }

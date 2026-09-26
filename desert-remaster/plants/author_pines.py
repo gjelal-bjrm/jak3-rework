@@ -1,13 +1,13 @@
-"""Herbe seche du desert : touffes refaites en vrais brins (au lieu de cartes croisees transparentes).
+"""Pins du desert : les cartes verticales d'aiguilles (des-pinetree-leaf-01, franges des etages de feuillage) sont
+remplacees par de vrais rameaux d'aiguilles en volume.
 
 Lancement :
-  blender --background --python desert-remaster/plants/author_grass.py -- <export.json> <sortie-patch.json> [apercu X Z R]
+  blender --background --python desert-remaster/plants/author_pines.py -- <export.json> <sortie-patch.json> [apercu X Z R]
 
-Chaque touffe d'origine (« shrub » des-sand-grass-01) = quelques cartes verticales avec une image de brins.
-On garde l'emplacement, la hauteur et l'etendue de chaque touffe, et on la remplace par des brins separes :
-effiles, qui s'ecartent du centre et se courbent, hauteurs variees. Construits une fois par prototype (exemplaire de
-reference) puis poses sur chaque exemplaire par sa transformation propre. Couleurs : palette et teinte du sommet
-d'origine le plus proche (de CET exemplaire). Texture : degrade paille (desert-remaster/plants/grass-blade.png).
+Chaque carte d'origine (colonnes de quads verticales, image d'aiguilles transparente) donne sa ligne de pied et sa
+hauteur ; on y plante des rameaux espaces de ~35 cm : rameau plie en V le long de sa nervure, courbe, penche vers
+l'exterieur, texture opaque d'aiguilles en chevrons (sprig.png). Construits une fois par prototype puis poses sur
+chaque exemplaire par sa transformation propre ; couleurs = palette du sommet d'origine le plus proche.
 """
 import sys, json, math, random
 from pathlib import Path
@@ -25,8 +25,8 @@ args = sys.argv[sys.argv.index('--') + 1:]
 SRC, OUT = args[0], args[1]
 MODE = args[2] if len(args) > 2 else 'tout'
 if MODE == 'apercu': FOCUS = np.array([float(args[3]), float(args[4])]); RADIUS = float(args[5])
-GRASS = 'des-sand-grass-01'
-BLADE_TEXTURE = 'des-grass-blade-v1'
+GRASS = 'des-pinetree-leaf-01'
+BLADE_TEXTURE = 'des-pine-sprig-v1'
 
 faces = json.load(open(SRC)); faces = faces['faces'] if isinstance(faces, dict) else faces
 instances = defaultdict(list)
@@ -37,57 +37,61 @@ protos = defaultdict(list)
 for (tree, proto, inst), fs in sorted(instances.items()): protos[(tree, proto)].append((inst, fs))
 
 
-def tufts(fs):
-    """Touffes de la reference : centre (x, z), sol, hauteur, rayon (cartes groupees par leur pied)."""
-    cards = []
+def cards(fs):
+    """Colonnes de cartes : (pied, sommet) pour chaque sommet du bas (v max), sommet = meme u, v min, le plus proche."""
+    V = {}
     for f in fs:
-        P = np.array([v['p'] for v in f['vertices']])
-        cards.append(P)
-    feet = [P[P[:, 1].argmin()] for P in cards]
-    groups = []
-    for i, p in enumerate(feet):
-        for g in groups:
-            if np.linalg.norm(np.array(g['feet']).mean(0)[[0, 2]] - p[[0, 2]]) < 1.3:
-                g['feet'].append(p); g['cards'].append(cards[i]); break
-        else:
-            groups.append({'feet': [p], 'cards': [cards[i]]})
-    out = []
-    for g in groups:
-        pts = np.concatenate(g['cards']); c = np.array(g['feet']).mean(0)
-        ground = float(pts[:, 1].min()); height = float(pts[:, 1].max() - ground)
-        radius = float(np.linalg.norm(pts[:, [0, 2]] - c[[0, 2]], axis=1).max())
-        out.append((c, ground, height, radius))
-    return out
+        for v in f['vertices']: V[tuple(round(x, 4) for x in v['p'])] = (np.array(v['p']), v['uv'])
+    pts = list(V.values())
+    vmax = max(uv[1] for _, uv in pts); vmin = min(uv[1] for _, uv in pts)
+    bottom = [(p, uv) for p, uv in pts if uv[1] > vmax - 60]
+    top = [(p, uv) for p, uv in pts if uv[1] < vmin + 60]
+    segs = []
+    for f in fs:                                              # aretes du bas (deux sommets au pied)
+        b = [np.array(v['p']) for v in f['vertices'] if v['uv'][1] > vmax - 60]
+        if len(b) == 2: segs.append(tuple(b))
+    def top_of(p, uv):
+        c = [q for q, w in top if abs(w[0] - uv[0]) < 40]
+        return min(c or [q for q, _ in top], key=lambda q: np.linalg.norm((q - p)[[0, 2]]))
+    colmap = {tuple(np.round(p, 4)): top_of(p, uv) for p, uv in bottom}
+    return segs, colmap
 
 
 def author(fs, seed):
     rng = random.Random(seed)
     tris = []
-    for c, ground, h, radius in tufts(fs):
-        n = int(max(5, min(16, 5 + 6 * radius)))          # budget : ~3 triangles par brin
+    segs, colmap = cards(fs)
+    centre = np.array([v['p'] for f in fs for v in f['vertices']]).mean(0)
+    for a, b in segs:
+        ta, tb = colmap[tuple(np.round(a, 4))], colmap[tuple(np.round(b, 4))]
+        L = float(np.linalg.norm(b - a)); n = max(2, int(L / .35))
         for k in range(n):
-            ang = rng.uniform(0, 2 * math.pi); rr = radius * .32 * math.sqrt(rng.random())
-            dirx, dirz = math.cos(ang), math.sin(ang)
-            base = Vector((c[0] + dirx * rr, ground - .04, c[2] + dirz * rr))
-            hh = h * rng.uniform(.5, 1.0)
-            lean = math.radians(rng.uniform(8, 32) + 18 * rr / max(radius, .1))
-            reach = math.sin(lean) * hh * 1.1
-            out = Vector((dirx, 0, dirz)); face = Vector((-dirz, 0, dirx))
-            w0 = max(.018, min(.08, .045 * hh))
+            t = (k + rng.uniform(.2, .8)) / n
+            base = a + (b - a) * t; tip0 = ta + (tb - ta) * t
+            up = tip0 - base; H = float(np.linalg.norm(up))
+            if H < .2: continue
+            up /= H
+            out = (base - centre); out[1] = 0; out = out / max(np.linalg.norm(out), 1e-6)
+            d = up + out * rng.uniform(.15, .45) + np.array([rng.uniform(-.15, .15), 0, rng.uniform(-.15, .15)])
+            d /= np.linalg.norm(d)
+            length = H * rng.uniform(.75, 1.05)
+            side = np.cross(d, [0, 1, 0]); side = side / max(np.linalg.norm(side), 1e-6)
+            if np.linalg.norm(side) < .5: side = np.array([1., 0, 0])
+            normal = np.cross(side, d)
+            w0 = min(.28, .16 * length); curl = rng.uniform(.05, .14) * length
             rows = []
-            for i, t in enumerate((0, .55, 1.0)):
-                bend = reach * t * t + rng.uniform(-.03, .03) * hh * t
-                p = base + Vector((0, hh * (t - .12 * t * t), 0)) + out * bend
-                w = w0 * (1 - t) ** .8
-                rows.append((p - face * w, p + face * w, 1 - t))
-            for i in range(2):
-                (a0, a1, va), (b0, b1, vb) = rows[i], rows[i + 1]
-                if i < 1:
-                    tris.append(((a0, a1, b1), ((0, va), (1, va), (1, vb))))
-                    tris.append(((a0, b1, b0), ((0, va), (1, vb), (0, vb))))
-                else:
-                    tip = (b0 + b1) * .5
-                    tris.append(((a0, a1, tip), ((0, va), (1, va), (.5, vb))))
+            for i, s_ in enumerate((0, .35, .7, 1.0)):
+                c = base + d * length * s_ + normal * (math.sin(math.pi * s_) * curl - .12 * length * s_ * s_)
+                w = w0 * (math.sin(math.pi * (.08 + .92 * s_)) ** .6) * (1 - .2 * s_)
+                if i == 3: w = .003
+                rows.append((c - side * w - normal * w * .25, c + normal * w * .15, c + side * w - normal * w * .25, 1 - s_))
+            for i in range(3):
+                r0, r1 = rows[i], rows[i + 1]
+                for j in range(2):
+                    p00, p01, p10, p11 = r0[j], r0[j + 1], r1[j], r1[j + 1]
+                    u0, u1 = j / 2, (j + 1) / 2
+                    tris.append(((Vector(p00), Vector(p01), Vector(p11)), ((u0, r0[3]), (u1, r0[3]), (u1, r1[3]))))
+                    tris.append(((Vector(p00), Vector(p11), Vector(p10)), ((u0, r0[3]), (u1, r1[3]), (u0, r1[3]))))
     return tris
 
 
@@ -139,7 +143,7 @@ def records(ref_fs, tris, chosen):
 
 def preview(items, name, focus):
     reset()
-    img = bpy.data.images.load(str(HERE / 'grass-blade.png'))
+    img = bpy.data.images.load(str(HERE / 'sprig.png'))
     mat = bpy.data.materials.new('brin'); mat.use_nodes = True
     tex = mat.node_tree.nodes.new('ShaderNodeTexImage'); tex.image = img
     mat.node_tree.links.new(tex.outputs['Color'], mat.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
@@ -167,9 +171,9 @@ def preview(items, name, focus):
     scene.render.filepath = str(HERE / 'preview' / name); bpy.ops.render.render(write_still=True)
 
 
-patch = {'description': 'Desert : herbe seche en vrais brins', 'remove': [], 'add': [],
-         'new_textures': [{'name': BLADE_TEXTURE, 'page': 'remaster-desert-plants', 'width': 64, 'height': 256,
-                           'rgba_file': str(HERE / 'grass-blade.rgba')}]}
+patch = {'description': 'Desert : rameaux d aiguilles de pin en volume', 'remove': [], 'add': [],
+         'new_textures': [{'name': BLADE_TEXTURE, 'page': 'remaster-desert-plants', 'width': 128, 'height': 256,
+                           'rgba_file': str(HERE / 'sprig.rgba')}]}
 before, after = [], []
 for (tree, proto), lst in sorted(protos.items()):
     chosen = lst
@@ -179,7 +183,7 @@ for (tree, proto), lst in sorted(protos.items()):
     ref_inst, ref_fs = lst[0]
     tris = author(ref_fs, proto * 131 + tree)
     remove, add, err = records(ref_fs, tris, chosen)
-    print(f'herbe tree {tree} proto {proto} : {len(chosen)} exemplaires, {len(ref_fs)} -> {len(tris)} triangles', flush=True)
+    print(f'pin tree {tree} proto {proto} : {len(chosen)} exemplaires, {len(ref_fs)} -> {len(tris)} triangles', flush=True)
     if MODE == 'apercu':
         for inst, fs in chosen:
             before.append((f'n{proto}_{inst}', [([Vector(v['p']) for v in f['vertices']], [(0, 0)] * 3) for f in fs], None))
@@ -194,8 +198,8 @@ if MODE == 'apercu':
     pts = np.array([list(p) for _, tl, _ in after for ps, _ in tl for p in ps])
     lo, hi = pts.min(0), pts.max(0); c = (lo + hi) / 2
     focus = (float(c[0]), float(c[1]), float(c[2]), float(max(hi - lo)))
-    preview([(a, b, 'carte') for a, b, _ in before], 'grass-avant.png', focus)
-    preview([(a, b, 'brin') for a, b, _ in after], 'grass-apres.png', focus)
+    preview([(a, b, 'carte') for a, b, _ in before], 'pines-avant.png', focus)
+    preview([(a, b, 'brin') for a, b, _ in after], 'pines-apres.png', focus)
 else:
     Path(OUT).write_text(json.dumps(patch, separators=(',', ':')))
     print('Enregistre :', len(patch['remove']), 'retires ->', len(patch['add']), 'ajoutes', flush=True)

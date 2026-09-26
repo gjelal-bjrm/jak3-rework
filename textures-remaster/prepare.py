@@ -30,10 +30,13 @@ from prepare_textures import seam_ratio, fix_seam, srgb_to_lab, lab_to_srgb   # 
 KIT = HERE / 'codex'
 OUT = HERE / 'out'
 MAX_SIDE = 1024
-VERSION = 5                      # 3 : balance des blancs ; 4 : + FORCE_HUE ; teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
+VERSION = 6                      # 3 : balance des blancs ; 4 : + FORCE_HUE ; 6 : ville en couleurs Codex ; teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
 HUE_LIMIT, HUE_BACK, LIGHT_BACK = 20.0, .8, .5
 # teinte ramenee quel que soit l'ecart (constat en jeu) : dalles plates du desert, orange vif sur le sable pale
 FORCE_HUE = {'des-rock-01', 'vola-grass-floor-01'}   # + sol de mousse du volcan devenu pave brun
+# ville de Spargus : les couleurs de Codex (gres chaud, style Genshin, choisi par l'utilisateur) sont gardees ; le
+# rendu du decor neutralise la teinte orangee de l'eclairage du jeu (plus de « orange x orange = jaune criard »)
+KEEP_CODEX_HUE = ('wascity', 'city-', 'market-')
 
 
 def keep_hue(pix, orig_rgb, force=False):
@@ -83,7 +86,10 @@ def main():
             if h > MAX_SIDE: h = MAX_SIDE; w = max(4, int(round(h * ow / oh / 4)) * 4)
             pix = np.asarray(tile.resize((w, h), Image.LANCZOS), float)
             orig = np.asarray(Image.open(ROOT / e['source']).convert('RGBA'))
-            pix, gap = keep_hue(pix, orig[..., :3], png.stem in FORCE_HUE)
+            if png.stem.startswith(KEEP_CODEX_HUE) and png.stem not in FORCE_HUE:
+                gap = 0.0                                   # couleurs de Codex gardees telles quelles
+            else:
+                pix, gap = keep_hue(pix, orig[..., :3], png.stem in FORCE_HUE)
             for axis in (1, 0):
                 if seam_ratio(orig[..., :3], axis) < 2.0 and seam_ratio(pix, axis) > 1.6: pix = fix_seam(pix, axis)
             alpha = np.full((h, w), int(orig[..., 3].max()), np.uint8)
@@ -94,7 +100,7 @@ def main():
                 Image.fromarray(out[..., :3]).save(OUT / f'{png.stem}.png')
                 made += 1
             entry = {'name': png.stem, 'rgba_file': str(rgba), 'width': w, 'height': h, 'version': VERSION,
-                     'hue_gap': round(gap, 1), 'hue_back': gap > HUE_LIMIT or png.stem in FORCE_HUE}
+                     'hue_gap': round(gap, 1), 'hue_back': (gap > HUE_LIMIT or png.stem in FORCE_HUE) and not png.stem.startswith(KEEP_CODEX_HUE)}
             (OUT / f'{png.stem}.json').write_text(json.dumps(entry))
         listing.append(entry)
     (HERE / 'textures.json').write_text(json.dumps({'textures': listing}, indent=1))

@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa', 'cascade'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -85,6 +85,8 @@ CITY_SCENES = {
                 'label': 'arrivee au volcan'},
     'volcanoa': {'continue': 'volcanoa-start', 'arrival': (-46.1, -354.9), 'viewpoint': (-46.1, 22.1, -354.9),
                  'label': 'interieur du volcan (vegetation, lave)'},
+    'cascade': {'continue': 'desert-nest-exit', 'arrival': (2210.0, 2218.2), 'viewpoint': (2150.0, 40.0, 1700.0),
+                'label': 'devant la grande cascade du desert (riviere)'},
     'oasis': {'continue': 'desert-nest-exit', 'arrival': (2210.0, 2218.2), 'viewpoint': (2210.0, 22.3, 2218.2),
               'label': 'sortie du nid, centre du desert'},
 }

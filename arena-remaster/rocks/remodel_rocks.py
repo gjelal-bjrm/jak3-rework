@@ -243,8 +243,8 @@ def lava_depth(P, dmax):
     lumps = (fbm(P / (7.0 * s), 3) + 1) * .5
     ridge = 1 - np.abs(vnoise(P / (3.2 * s) + 11.3))
     ridge2 = 1 - np.abs(vnoise(P / (1.4 * s) + 4.1))
-    cracks = smoothstep(.86, .985, ridge) + .45 * smoothstep(.9, .99, ridge2)
-    return dmax * np.clip(.45 * lumps ** 1.4 + .8 * cracks, 0, 1.2)
+    cracks = smoothstep(CONFIG.get('crack_lo', .86), .985, ridge) + .45 * smoothstep(.9, .99, ridge2)
+    return dmax * np.clip(CONFIG.get('lump_w', .45) * lumps ** 1.4 + CONFIG.get('crack_w', .8) * cracks, 0, 1.2)
 
 
 # ---------------------------------------------------------------- arrondi (champ par prototype, repere de reference)

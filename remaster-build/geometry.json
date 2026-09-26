@@ -29,21 +29,24 @@
  "desert": {
   "base": "desert-remaster/rocks/desert-before-rocks.fr3",
   "patches": [
-   "desert-remaster/rocks/desert-rocks-patch.json"
+   "desert-remaster/rocks/desert-rocks-patch.json",
+   "desert-remaster/sand/desert-sand-patch.json"
   ]
  },
  "deserta": {
   "base": "desert-remaster/rocks/deserta-before-rocks.fr3",
   "patches": [
    "desert-remaster/rocks/deserta-rocks-patch.json",
-   "desert-remaster/plants/deserta-grass-patch.json"
+   "desert-remaster/plants/deserta-grass-patch.json",
+   "desert-remaster/plants/deserta-pines-patch.json"
   ]
  },
  "desertc": {
   "base": "desert-remaster/rocks/desertc-before-rocks.fr3",
   "patches": [
    "desert-remaster/rocks/desertc-rocks-patch.json",
-   "desert-remaster/plants/desertc-grass-patch.json"
+   "desert-remaster/plants/desertc-grass-patch.json",
+   "desert-remaster/plants/desertc-pines-patch.json"
   ]
  },
  "desertd": {
@@ -93,6 +96,12 @@
   "base": "volcano-remaster/rocks/volcanox-before-rocks.fr3",
   "patches": [
    "volcano-remaster/rocks/volcanox-rocks-patch.json"
+  ]
+ },
+ "volcanoa": {
+  "base": "volcano-remaster/rocks/volcanoa-before-rocks.fr3",
+  "patches": [
+   "volcano-remaster/rocks/volcanoa-rocks-patch.json"
   ]
  }
 }

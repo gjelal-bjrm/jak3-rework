@@ -26,6 +26,7 @@ uniform vec2 wx_wind;               // m/s
 uniform float wx_flash;             // eclair
 uniform float wx_arena;             // 0..1 : brume de l'arene (fumee et chaleur de la lave)
 uniform float wx_arena_level;       // m : niveau de la lave
+uniform float wx_desert;            // 0..1 : brume chaude du desert (perspective aerienne facon Genshin)
 
 bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
 vec3 unproject(vec2 uv,float depth){
@@ -80,7 +81,18 @@ void main(){
     float layer=abs(a)<1e-5?base*dist:base*(1.-exp(-dist*a))/a;
     tauArena=wx_arena*(.0022*min(dist,600.)+min(layer,1.5))*drift;
   }
-  float tau=tauFog+tauSand+tauArena;
+  // Desert : brume chaude et lumineuse, plus dense au ras du sable (densite qui decroit avec la hauteur), qui
+  // fond les lointains dans une lumiere doree : profondeur des dunes et des rochers au loin. Le ciel reste net.
+  float tauDesert=0.;
+  if(wx_desert>0.){
+    float k=1./140.;
+    float base=.00042*exp(-(wx_eye.y-22.)*k);
+    float a=rd.y*k;
+    float layer=abs(a)<1e-6?base*dist:base*(1.-exp(-dist*a))/a;
+    float skyCut=skyDepth(depth)?smoothstep(.30,.0,rd.y):1.;
+    tauDesert=wx_desert*min(layer,1.4)*skyCut;
+  }
+  float tau=tauFog+tauSand+tauArena+tauDesert;
   if(tau<1e-4){color=vec4(0.);return;}
   float f=1.-exp(-tau);
   vec3 L=normalize(wx_sun);
@@ -91,7 +103,10 @@ void main(){
   float lowRay=exp(-max(rd.y,-.2)*2.5);
   vec3 smokeCol=mix(vec3(.46,.40,.36),vec3(.95,.42,.14),.42*lowRay)*(.55+.45*length(wx_sun_color))
                +wx_sun_color*vec3(1.,.85,.65)*pow(mu,6.)*.35;
-  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena)/tau;
+  // brume du desert : blanc dore pres de l'horizon, un peu de bleu du ciel vers le haut, eclat du soleil a contre-jour
+  vec3 desertCol=mix(vec3(.96,.86,.70),vec3(.80,.86,.95),smoothstep(-.02,.20,rd.y))*(.55+.45*min(length(wx_sun_color),1.2))
+                +wx_sun_color*vec3(1.,.86,.62)*(pow(mu,5.)*.45+pow(mu,32.)*.35);
+  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena+desertCol*tauDesert)/tau;
   col+=vec3(.55,.6,.75)*wx_flash*.18;
   color=vec4(col*f,f);
 }

@@ -1,0 +1,4292 @@
+From 96e8752a372536607356f6494f1fa6348e96c36f Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 11:01:59 +0200
+Subject: [PATCH] Desert : sable facon Genshin (relief des dunes eclaire,
+ grandes rides, paillettes), brume chaude, mer/riviere/oasis en eau moderne,
+ cascade peinte rendue en eau vive ; decor de la ville et du desert en rendu
+ clair facon Genshin (lumiere neutre, soleil stylise, ombres lavande, couleurs
+ vives) ; bridge --anim-bounds (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernWeather.h |   11 +-
+ .../opengl_renderer/background/Hfrag.cpp      |   86 +
+ .../opengl_renderer/background/Hfrag.h        |    2 +
+ .../background/PalaceMaterials.h              |    8 +
+ .../opengl_renderer/background/TFragment.cpp  |    9 +-
+ .../opengl_renderer/background/Tie3.cpp       |   17 +-
+ .../background/background_common.h            |   11 +
+ .../opengl_renderer/ocean/ModernOcean.h       |    9 +
+ .../ocean/OceanCoastMaskDesert.h              | 3384 +++++++++++++++++
+ .../opengl_renderer/shaders/hfrag.frag        |  234 +-
+ .../shaders/modern_weather_fog.frag           |   19 +-
+ .../opengl_renderer/shaders/shrub.frag        |   23 +-
+ .../opengl_renderer/shaders/tfrag3.frag       |   83 +-
+ tools/palace_mesh_bridge.cpp                  |   36 +
+ 14 files changed, 3872 insertions(+), 60 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/ocean/OceanCoastMaskDesert.h
+
+diff --git a/game/graphics/opengl_renderer/ModernWeather.h b/game/graphics/opengl_renderer/ModernWeather.h
+index 7c1aceb7..4803e7fa 100644
+--- a/game/graphics/opengl_renderer/ModernWeather.h
++++ b/game/graphics/opengl_renderer/ModernWeather.h
+@@ -92,7 +92,15 @@ class ModernWeather {
+       const float d = std::hypot(state->camera_pos[0] / 4096.f - 2320.f, state->camera_pos[2] / 4096.f + 470.f);
+       arena = 1.f - std::clamp((d - 170.f) / 80.f, 0.f, 1.f);
+     }
+-    if (rain < .01f && snow < .01f && sand < .01f && fog < .01f && arena < .01f) return;
++    // desert (niveaux des* charges, camera au nord de la porte de Spargus) : brume chaude, sauf tempete/brouillard
++    float desert = 0.f;
++    if (ModernOcean::level_loaded(state, "des"))
++      desert = std::clamp((state->camera_pos[2] / 4096.f - 100.f) / 200.f, 0.f, 1.f) *
++               (1.f - std::clamp(fog + sand, 0.f, 1.f) * .6f) * outdoor;
++    // ville de Spargus : meme brume de profondeur, plus legere (hors arene, qui a sa brume de lave)
++    if (ModernOcean::level_loaded(state, "wascity"))
++      desert = std::max(desert, .65f * (1.f - arena) * (1.f - std::clamp(fog + sand, 0.f, 1.f) * .6f) * outdoor);
++    if (rain < .01f && snow < .01f && sand < .01f && fog < .01f && arena < .01f && desert < .01f) return;
+     hot_reload();
+ 
+     GLint program, old_vao, depth_func, old_active, viewport[4];
+@@ -144,6 +152,7 @@ class ModernWeather {
+       glUniform1f(glGetUniformLocation(id, "wx_flash"), m_flash);
+       glUniform1f(glGetUniformLocation(id, "wx_arena"), arena);
+       glUniform1f(glGetUniformLocation(id, "wx_arena_level"), 11.5f);   // surface de la lave
++      glUniform1f(glGetUniformLocation(id, "wx_desert"), desert);
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+     }
+ 
+diff --git a/game/graphics/opengl_renderer/background/Hfrag.cpp b/game/graphics/opengl_renderer/background/Hfrag.cpp
+index 8092e290..c1fc9c9c 100644
+--- a/game/graphics/opengl_renderer/background/Hfrag.cpp
++++ b/game/graphics/opengl_renderer/background/Hfrag.cpp
+@@ -191,6 +191,8 @@ void Hfrag::unload_hfrag_level(Hfrag::HfragLevel* lev) {
+ 
+   glDeleteVertexArrays(1, &lev->montage_vao);
+   glDeleteBuffers(1, &lev->montage_vertices);
++  if (lev->height_texture) glDeleteTextures(1, &lev->height_texture);
++  lev->height_texture = 0;
+ 
+   lev->in_use = false;
+   lev->name.clear();
+@@ -211,6 +213,48 @@ void Hfrag::load_hfrag_level(const std::string& load_name,
+   lev->num_colors = data->level->hfrag.time_of_day_colors.color_count;
+   lev->hfrag = &data->level->hfrag;
+   lev->wang_texture = data->textures.at(data->level->hfrag.wang_tree_tex_id[0]);
++  lev->sand_hd_texture = 0;
++  // remaster : carte des hauteurs du terrain (le maillage est une grille 512 x 512 de sommets espaces de 8 m ;
++  // vi = x + 512 z). Sert a calculer au pixel la pente des dunes (eclairage du relief, rides, paillettes).
++  {
++    std::vector<float> heights(512 * 512, -1e30f);
++    for (const auto& v : lev->hfrag->vertices) {
++      if (v.vi < heights.size()) heights[v.vi] = v.height;
++    }
++    // trous (aucun sommet) : hauteur du voisin le plus proche, par dilatations successives
++    for (int pass = 0; pass < 64; pass++) {
++      bool missing = false;
++      auto next = heights;
++      for (int z = 0; z < 512; z++) {
++        for (int x = 0; x < 512; x++) {
++          if (heights[z * 512 + x] > -1e29f) continue;
++          float sum = 0; int n = 0;
++          const int dx[4] = {1, -1, 0, 0}, dz[4] = {0, 0, 1, -1};
++          for (int k = 0; k < 4; k++) {
++            const int xx = x + dx[k], zz = z + dz[k];
++            if (xx < 0 || zz < 0 || xx >= 512 || zz >= 512) continue;
++            const float h = heights[zz * 512 + xx];
++            if (h > -1e29f) { sum += h; n++; }
++          }
++          if (n) next[z * 512 + x] = sum / n; else missing = true;
++        }
++      }
++      heights.swap(next);
++      if (!missing) break;
++    }
++    for (auto& h : heights) if (h < -1e29f) h = 0.f;
++    glGenTextures(1, &lev->height_texture);
++    glBindTexture(GL_TEXTURE_2D, lev->height_texture);
++    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, 512, 512, 0, GL_RED, GL_FLOAT, heights.data());
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++    glBindTexture(GL_TEXTURE_2D, 0);
++  }
++  for (size_t i = 0; i < data->level->textures.size() && i < data->textures.size(); i++) {
++    if (data->level->textures[i].debug_name == "des-sand-hd-v1") lev->sand_hd_texture = data->textures[i];
++  }
+ 
+   if (m_color_result.size() < lev->num_colors) {
+     m_color_result.resize(lev->num_colors);
+@@ -417,6 +461,48 @@ void Hfrag::render_hfrag_level(Hfrag::HfragLevel* lev,
+     glUniform3fv(glGetUniformLocation(program, "weather_sun_dir"), 1, sun.data());
+     // tests : pc-remaster-lighting bit 3 = relief du sable coupe (bits 4..6 : rides, grain, teintes seuls)
+     glUniform1i(glGetUniformLocation(program, "sand_detail"), (~LightingState::flags.load() >> 3) & 15);
++    // tests : bit 7 = couleur des sommets seule (mesure des zones peintes en eau / herbe par les artistes)
++    glUniform1i(glGetUniformLocation(program, "sand_debug"), (LightingState::flags.load() >> 7) & 1);
++    {
++      float t;
++      { std::lock_guard<std::mutex> guard(WeatherLook::mutex); t = WeatherLook::time; }
++      glUniform1f(glGetUniformLocation(program, "sand_time"), t);
++    }
++    // relief du terrain (carte des hauteurs) : unite 5 ; lumiere du soleil et du ciel pour l'eclairage des dunes
++    glUniform1i(glGetUniformLocation(program, "sand_height"), 5);
++    glUniform1i(glGetUniformLocation(program, "sand_height_on"), lev->height_texture ? 1 : 0);
++    if (lev->height_texture) {
++      glActiveTexture(GL_TEXTURE5);
++      glBindTexture(GL_TEXTURE_2D, lev->height_texture);
++      glActiveTexture(GL_TEXTURE0);
++    }
++    {
++      std::array<float, 3> sun_color, sky;
++      float sun_strength;
++      {
++        std::lock_guard<std::mutex> guard(WeatherLook::mutex);
++        sun_color = WeatherLook::sun_color; sky = WeatherLook::sky;
++      }
++      {
++        std::lock_guard<std::mutex> guard(WeatherState::mutex);
++        sun_strength = WeatherState::current.sun;
++      }
++      glUniform3fv(glGetUniformLocation(program, "weather_sun_color"), 1, sun_color.data());
++      glUniform3fv(glGetUniformLocation(program, "weather_sky"), 1, sky.data());
++      glUniform1f(glGetUniformLocation(program, "weather_sun_strength"), sun_strength);
++    }
++    // sable HD (texture ajoutee au niveau du desert) : unite 4, repetee, avec niveaux de mip
++    glUniform1i(glGetUniformLocation(program, "sand_hd"), 4);
++    glUniform1i(glGetUniformLocation(program, "sand_hd_on"), lev->sand_hd_texture ? 1 : 0);
++    if (lev->sand_hd_texture) {
++      glActiveTexture(GL_TEXTURE4);
++      glBindTexture(GL_TEXTURE_2D, lev->sand_hd_texture);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++      glActiveTexture(GL_TEXTURE0);
++    }
+   }
+   setup_opengl_from_draw_mode(lev->hfrag->draw_mode, GL_TEXTURE0, false);
+ 
+diff --git a/game/graphics/opengl_renderer/background/Hfrag.h b/game/graphics/opengl_renderer/background/Hfrag.h
+index ca78abf4..b2344894 100644
+--- a/game/graphics/opengl_renderer/background/Hfrag.h
++++ b/game/graphics/opengl_renderer/background/Hfrag.h
+@@ -35,6 +35,8 @@ class Hfrag : public BucketRenderer {
+     u64 last_used_frame = 0;
+ 
+     GLuint wang_texture;
++    GLuint sand_hd_texture = 0;   // remaster : sable HD pose selon le monde (0 : absent)
++    GLuint height_texture = 0;    // remaster : hauteurs du terrain (grille 512 x 512, 8 m) -> relief eclaire au pixel
+ 
+     MontageTexture montage_texture[kNumBuckets];
+     GLuint montage_vertices;
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index c4dfbc9f..6c99cb88 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -22,6 +22,10 @@ class PalaceMaterials {
+     const bool arena = level.level_name.rfind("wasstad", 0) == 0;
+     const bool desert = level.level_name.rfind("desert", 0) == 0;   // grand desert (desert, deserta..h)
+     m_level = level.level_name;
++    // rendu « facon Genshin » du decor : ville de Spargus et desert (etendu region par region apres controle)
++    m_genshin = 0.f;
++    for (const char* prefix : {"wascity", "waswide", "wasdoors", "wasall", "desert", "wasintro"})
++      if (level.level_name.rfind(prefix, 0) == 0) m_genshin = 1.f;
+     if (TextureAudit::enabled()) {           // controle : noms de toutes les textures, dans tous les niveaux
+       m_all_names.clear();
+       for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
+@@ -54,6 +58,9 @@ class PalaceMaterials {
+     const int kind=state->version==GameVersion::Jak3 && texture>=0 &&
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
++    // tests : pc-remaster-lighting bit 8 (256) = rendu Genshin coupe (comparaisons avant/apres)
++    glUniform1f(glGetUniformLocation(program,"genshin_look"),
++                (LightingState::flags.load() & 256) ? 0.f : m_genshin);
+     weather_bind_world(program);   // sol mouille, flaques, neige au sol
+     shadow_bind(program);          // ombres portees du soleil
+     const bool palm=kind && (m_names[texture]=="waspala-palmplant-leaf-02" || m_names[texture]=="waspala-shrub-plant" || m_names[texture]=="for-shrub-moss");
+@@ -175,6 +182,7 @@ class PalaceMaterials {
+   }
+   int m_grass_region = 0;
+   std::vector<int> m_kinds;
++  float m_genshin = 0.f;
+   std::vector<std::string> m_all_names;
+   std::string m_level;
+   std::vector<std::string> m_names;
+diff --git a/game/graphics/opengl_renderer/background/TFragment.cpp b/game/graphics/opengl_renderer/background/TFragment.cpp
+index 7d663fbb..8916487c 100644
+--- a/game/graphics/opengl_renderer/background/TFragment.cpp
++++ b/game/graphics/opengl_renderer/background/TFragment.cpp
+@@ -1,4 +1,6 @@
+ #include "TFragment.h"
++
++#include <set>
+ #include "PalaceRockNormals.h"
+ #include "common/texture/texture_slots.h"
+ 
+@@ -496,15 +498,14 @@ void TFragment::render_tree(int geom,
+       const auto& material = jak3_animated_texture_slots().at(-(tex_idx + 1));
+       if (m_level_name == "wasstada" && material == "wstd-lava-base-dest") {
+         liquid_kind = 1;
+-      } else if (m_level_name == "waspala" &&
+-                 (material == "waspala-water-dest" || material == "waspala-waterfall-dest")) {
+-        liquid_kind = 2;
++      } else if (int kind = remaster_water_material(m_level_name, material)) {
++        liquid_kind = kind;
+       }
+     }
+     glUniform1i(glGetUniformLocation(liquid_shader, "fluid_kind"), liquid_kind);
+     m_palace_materials.bind(liquid_shader,tex_idx,render_state);
+     if (liquid_kind) {
+-      if (liquid_kind == 2) m_liquid_snapshot.bind(render_state, liquid_shader);
++      if (liquid_kind >= 2) m_liquid_snapshot.bind(render_state, liquid_shader);
+       if (liquid_kind == 1) {
+         glDepthMask(GL_TRUE);
+         if (!render_state->prototype_lava_visible) {
+diff --git a/game/graphics/opengl_renderer/background/Tie3.cpp b/game/graphics/opengl_renderer/background/Tie3.cpp
+index e5eadabc..849f67c5 100644
+--- a/game/graphics/opengl_renderer/background/Tie3.cpp
++++ b/game/graphics/opengl_renderer/background/Tie3.cpp
+@@ -1,4 +1,6 @@
+ #include "Tie3.h"
++
++#include <set>
+ #include "common/texture/texture_slots.h"
+ 
+ #include "common/global_profiler/GlobalProfiler.h"
+@@ -593,12 +595,12 @@ void Tie3::draw_matching_draws_for_tree(int idx,
+       last_texture = draw.tree_tex_id;
+     }
+ 
+-    bool modern_water = false;
+-    if (render_state->version == GameVersion::Jak3 && m_level_name == "waspala" &&
+-        draw.tree_tex_id < 0) {
++    int water_kind = 0;
++    if (render_state->version == GameVersion::Jak3 && draw.tree_tex_id < 0) {
+       const auto& material = jak3_animated_texture_slots().at(-(draw.tree_tex_id + 1));
+-      modern_water = material == "waspala-water-dest" || material == "waspala-waterfall-dest";
++      water_kind = remaster_water_material(m_level_name, material);
+     }
++    const bool modern_water = water_kind != 0;
+     const auto draw_shader = modern_water ? ShaderId::TFRAG3 : shader_id;
+     if (draw_shader != active_shader) {
+       first_tfrag_draw_setup(settings.camera, render_state, draw_shader);
+@@ -609,7 +611,7 @@ void Tie3::draw_matching_draws_for_tree(int idx,
+     auto double_draw = setup_tfrag_shader(render_state, draw.mode, draw_shader);
+     const auto program = render_state->shaders[draw_shader].id();
+     m_palace_materials.bind(program,draw.tree_tex_id,render_state);
+-    glUniform1i(glGetUniformLocation(program, "fluid_kind"), modern_water ? 2 : 0);
++    glUniform1i(glGetUniformLocation(program, "fluid_kind"), water_kind);
+     if (modern_water) {
+       if (!m_logged_prototype_water) {
+         fmt::print("Prototype water activated: tie {}, slot {}, category {}\n", m_level_name,
+@@ -718,10 +720,9 @@ void Tie3::envmap_second_pass_draw(const Tree& tree,
+       last_texture = draw.tree_tex_id;
+     }
+ 
+-    if (render_state->version == GameVersion::Jak3 && m_level_name == "waspala" &&
+-        draw.tree_tex_id < 0) {
++    if (render_state->version == GameVersion::Jak3 && draw.tree_tex_id < 0) {
+       const auto& material = jak3_animated_texture_slots().at(-(draw.tree_tex_id + 1));
+-      if (material == "waspala-water-dest" || material == "waspala-waterfall-dest") continue;
++      if (remaster_water_material(m_level_name, material)) continue;
+     }
+     auto double_draw = setup_tfrag_shader(render_state, draw.mode, ShaderId::ETIE);
+ 
+diff --git a/game/graphics/opengl_renderer/background/background_common.h b/game/graphics/opengl_renderer/background/background_common.h
+index 6993ae6a..bc08b945 100644
+--- a/game/graphics/opengl_renderer/background/background_common.h
++++ b/game/graphics/opengl_renderer/background/background_common.h
+@@ -107,3 +107,14 @@ u32 make_index_list_from_vis_and_proto_string(std::pair<int, int>* group_out,
+                                               const std::vector<u8>& proto_vis_data,
+                                               const u32* idx_in,
+                                               u32* num_tris_out);
++
++// Remaster : eaux dessinees par le rendu d'eau moderne (bassins et cascades du palais, cascades du desert et du
++// temple). Le nom est celui de la texture animee native de l'eau.
++// Retour : 0 = rendu natif, 2 = eau moderne du palais (bassins, petites cascades), 3 = grande cascade.
++inline int remaster_water_material(const std::string& level, const std::string& material) {
++  if (level == "waspala") return material == "waspala-water-dest" || material == "waspala-waterfall-dest" ? 2 : 0;
++  // noms de texture propres a ces cascades : pas de test sur le nom du niveau (les niveaux du desert ont des noms
++  // internes courts, ex. dst)
++  if (material == "des-waterfall-dest" || material == "temple-waterfall-dest") return 3;
++  return 0;
++}
+diff --git a/game/graphics/opengl_renderer/ocean/ModernOcean.h b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+index db6e5d8f..972a14bb 100644
+--- a/game/graphics/opengl_renderer/ocean/ModernOcean.h
++++ b/game/graphics/opengl_renderer/ocean/ModernOcean.h
+@@ -8,6 +8,7 @@
+ #include "game/graphics/opengl_renderer/WaterContacts.h"
+ #include "game/graphics/opengl_renderer/ocean/OceanCoastMask.h"
+ #include "game/graphics/opengl_renderer/ocean/OceanCoastMaskCity.h"
++#include "game/graphics/opengl_renderer/ocean/OceanCoastMaskDesert.h"
+ #include "game/graphics/opengl_renderer/ocean/CoastalBreakers.h"
+ #include "game/graphics/opengl_renderer/SkyState.h"
+ #include "game/graphics/opengl_renderer/WeatherState.h"
+@@ -35,6 +36,12 @@ inline const OceanRegion OCEAN_HAVEN{"haven", "cty", OceanCoastMaskCity::LEVEL,
+   OceanCoastMaskCity::ORIGIN_X, OceanCoastMaskCity::ORIGIN_Z, OceanCoastMaskCity::SIZE, OceanCoastMaskCity::cell, OceanCoastMaskCity::contains,
+   {.09f, .21f, .34f}, {.02f, .06f, .14f}, {.10f, .15f, .25f}, {.70f, .38f, .14f}, {.52f, .56f, .66f}, {.02f, .06f, .14f}, .7f};
+ 
++// Desert : mer autour du desert, oasis et riviere (carte *ocean-map-desert*). Eau de Spargus un peu plus turquoise
++// (lagons facon Genshin), houle moderee.
++inline const OceanRegion OCEAN_DESERT{"desert", "des", OceanCoastMaskDesert::LEVEL, -60.f, 400.f,
++  OceanCoastMaskDesert::ORIGIN_X, OceanCoastMaskDesert::ORIGIN_Z, OceanCoastMaskDesert::SIZE, OceanCoastMaskDesert::cell, OceanCoastMaskDesert::contains,
++  {.13f, .47f, .45f}, {.02f, .13f, .15f}, {.17f, .32f, .33f}, {.62f, .16f, .20f}, {.95f, 1.f, .97f}, {.055f, .092f, .086f}, .8f};
++
+ class ModernOcean {
+  public:
+   static bool level_loaded(const SharedRenderState* s, const char* prefix) {
+@@ -63,6 +70,8 @@ class ModernOcean {
+       cached = &OCEAN_SPARGUS;
+     else if (haven_levels && inside(OCEAN_HAVEN, eye.x(), eye.y(), eye.z()))
+       cached = &OCEAN_HAVEN;
++    else if (level_loaded(s, OCEAN_DESERT.level_prefix) && inside(OCEAN_DESERT, eye.x(), eye.y(), eye.z()))
++      cached = &OCEAN_DESERT;
+     return cached;
+   }
+   static bool enabled(const SharedRenderState* state) { return region(state) != nullptr; }
+diff --git a/game/graphics/opengl_renderer/ocean/OceanCoastMaskDesert.h b/game/graphics/opengl_renderer/ocean/OceanCoastMaskDesert.h
+new file mode 100644
+index 00000000..6794cb36
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ocean/OceanCoastMaskDesert.h
+@@ -0,0 +1,3384 @@
++#pragma once
++#include <cstdint>
++
++// Genere par models-v2/build_ocean_coast_mask_desert.py depuis *ocean-map-desert* (desert-ocean.gc).
++// Meme decodage que OceanCoastMask (Spargus) : 96 m -> 24 m -> 3 m ; un bit de masque leve = sec.
++class OceanCoastMaskDesert {
++ public:
++  static constexpr int SIZE = 1536;
++  static constexpr float ORIGIN_X = -256.0f;
++  static constexpr float ORIGIN_Z = -256.0f;
++  static constexpr float LEVEL = 9.0f;
++  static bool cell(int x, int z) {
++    if (x < 0 || z < 0 || x >= SIZE || z >= SIZE) return true;
++    const auto* transition = transitions[(z / 32) * 48 + x / 32];
++    if (transition[0] < 0) return false;
++    if (transition[1] < 0 || transition[1] >= 400) return false;
++    const auto mask = near_indices[transition[1]][((z / 8) & 3) * 4 + ((x / 8) & 3)];
++    return mask != 65535 && mask < 648 && !(masks[mask][z & 7] & (1 << (x & 7)));
++  }
++  static bool contains(float x, float z) {
++    x -= ORIGIN_X; z -= ORIGIN_Z;
++    if (x < 0.f || z < 0.f || x >= SIZE * 3.f || z >= SIZE * 3.f) return true;
++    return cell(int(x / 3.f), int(z / 3.f));
++  }
++ private:
++  inline static constexpr int16_t transitions[2304][2] = {
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {509,1},
++    {3,2},
++    {3,2},
++    {3,2},
++    {3,2},
++    {3,2},
++    {3,2},
++    {510,3},
++    {0,4},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,5},
++    {511,6},
++    {510,7},
++    {0,0},
++    {0,0},
++    {0,8},
++    {512,9},
++    {26,10},
++    {0,11},
++    {0,0},
++    {0,12},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,13},
++    {509,14},
++    {0,15},
++    {509,16},
++    {31,17},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {513,18},
++    {513,19},
++    {0,20},
++    {0,21},
++    {0,22},
++    {0,0},
++    {514,23},
++    {236,24},
++    {0,25},
++    {15,26},
++    {0,27},
++    {0,0},
++    {0,0},
++    {515,28},
++    {0,29},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {278,30},
++    {516,31},
++    {517,32},
++    {0,0},
++    {0,0},
++    {518,33},
++    {-1,-1},
++    {-1,-1},
++    {42,34},
++    {513,35},
++    {519,36},
++    {520,37},
++    {521,38},
++    {522,39},
++    {523,40},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {524,41},
++    {34,42},
++    {0,43},
++    {525,44},
++    {278,45},
++    {428,46},
++    {526,47},
++    {527,48},
++    {528,49},
++    {72,50},
++    {0,0},
++    {0,0},
++    {529,51},
++    {530,52},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,53},
++    {531,54},
++    {31,55},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {524,56},
++    {31,57},
++    {428,58},
++    {0,0},
++    {0,0},
++    {0,59},
++    {532,60},
++    {0,61},
++    {0,0},
++    {0,0},
++    {278,62},
++    {68,63},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,64},
++    {0,65},
++    {533,66},
++    {534,67},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {524,68},
++    {0,69},
++    {535,70},
++    {534,71},
++    {42,72},
++    {513,73},
++    {236,74},
++    {0,75},
++    {72,76},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,77},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {524,78},
++    {34,79},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {536,80},
++    {0,81},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {65,82},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {401,83},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,84},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {100,85},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {537,86},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {538,87},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {487,88},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {539,89},
++    {54,90},
++    {0,91},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {540,92},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {541,93},
++    {0,94},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,95},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {56,96},
++    {0,0},
++    {542,97},
++    {530,98},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,99},
++    {518,100},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {543,101},
++    {428,102},
++    {0,0},
++    {544,103},
++    {545,104},
++    {0,105},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {546,106},
++    {269,107},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {547,108},
++    {0,109},
++    {0,0},
++    {0,110},
++    {548,111},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {278,112},
++    {549,113},
++    {263,114},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {451,115},
++    {522,116},
++    {72,117},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {487,118},
++    {550,119},
++    {0,120},
++    {0,0},
++    {0,121},
++    {551,122},
++    {552,123},
++    {263,124},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {553,125},
++    {552,126},
++    {552,127},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {553,128},
++    {554,129},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {130,130},
++    {-1,-1},
++    {530,131},
++    {0,132},
++    {521,133},
++    {3,134},
++    {0,135},
++    {278,136},
++    {555,137},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {553,138},
++    {552,139},
++    {556,140},
++    {228,141},
++    {0,142},
++    {0,143},
++    {0,0},
++    {557,144},
++    {-1,-1},
++    {539,145},
++    {263,146},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {558,147},
++    {428,148},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,149},
++    {256,150},
++    {559,151},
++    {4,152},
++    {-1,-1},
++    {-1,-1},
++    {524,153},
++    {513,154},
++    {530,155},
++    {560,156},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {401,157},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {561,158},
++    {562,159},
++    {0,0},
++    {0,160},
++    {0,161},
++    {0,162},
++    {278,163},
++    {189,164},
++    {54,165},
++    {54,166},
++    {217,167},
++    {217,168},
++    {0,169},
++    {0,0},
++    {0,0},
++    {563,170},
++    {0,171},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,172},
++    {564,173},
++    {4,174},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {401,175},
++    {4,176},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {42,177},
++    {565,178},
++    {521,179},
++    {522,180},
++    {0,181},
++    {0,182},
++    {3,183},
++    {3,184},
++    {3,185},
++    {3,186},
++    {26,187},
++    {0,188},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,189},
++    {0,190},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,191},
++    {566,192},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {567,193},
++    {568,194},
++    {552,195},
++    {-1,-1},
++    {539,196},
++    {549,197},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {569,198},
++    {513,199},
++    {521,200},
++    {510,201},
++    {0,202},
++    {0,203},
++    {0,204},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {570,205},
++    {34,206},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {571,207},
++    {0,208},
++    {0,209},
++    {0,210},
++    {0,211},
++    {223,212},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {524,213},
++    {513,214},
++    {572,215},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,216},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {326,217},
++    {573,218},
++    {574,219},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {545,220},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,221},
++    {256,222},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {547,223},
++    {0,224},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {278,225},
++    {223,226},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {72,227},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {4,228},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {575,229},
++    {278,230},
++    {576,231},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {577,232},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {566,233},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {558,234},
++    {0,235},
++    {0,0},
++    {578,236},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {545,237},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {518,238},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {579,239},
++    {0,240},
++    {580,241},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {68,242},
++    {0,0},
++    {15,243},
++    {581,244},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {582,245},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,246},
++    {583,247},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {38,248},
++    {0,0},
++    {0,84},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {584,249},
++    {0,250},
++    {15,251},
++    {585,252},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {218,253},
++    {0,254},
++    {0,255},
++    {0,256},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {586,257},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {519,258},
++    {522,259},
++    {321,260},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {587,261},
++    {0,0},
++    {292,262},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {56,263},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {588,264},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {305,265},
++    {552,266},
++    {68,267},
++    {0,268},
++    {0,0},
++    {0,0},
++    {589,269},
++    {269,270},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {590,271},
++    {0,272},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {15,273},
++    {591,274},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {592,275},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {593,276},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {594,277},
++    {0,278},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {278,279},
++    {269,280},
++    {-1,-1},
++    {595,281},
++    {516,282},
++    {263,283},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {0,284},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {4,285},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {68,286},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {286,287},
++    {201,288},
++    {0,289},
++    {0,0},
++    {278,290},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {543,291},
++    {0,292},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,293},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {582,294},
++    {0,295},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,296},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {596,297},
++    {0,298},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {4,299},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {428,300},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {213,301},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {597,302},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,303},
++    {598,304},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {100,305},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {311,306},
++    {0,307},
++    {0,0},
++    {0,0},
++    {0,0},
++    {97,308},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {56,309},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {15,310},
++    {599,311},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {305,312},
++    {600,313},
++    {269,314},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {558,315},
++    {428,316},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {278,317},
++    {0,318},
++    {0,0},
++    {0,0},
++    {0,0},
++    {601,319},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {539,320},
++    {188,321},
++    {0,322},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {602,323},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {603,324},
++    {604,325},
++    {217,326},
++    {259,327},
++    {72,328},
++    {605,329},
++    {-1,-1},
++    {595,330},
++    {217,331},
++    {0,332},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {518,333},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {541,334},
++    {0,335},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {15,336},
++    {574,337},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {606,338},
++    {607,339},
++    {530,340},
++    {278,341},
++    {0,342},
++    {578,343},
++    {553,344},
++    {608,345},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,346},
++    {609,347},
++    {0,0},
++    {0,0},
++    {0,0},
++    {605,348},
++    {-1,-1},
++    {-1,-1},
++    {305,265},
++    {68,349},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,350},
++    {223,351},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {610,352},
++    {0,353},
++    {611,354},
++    {0,355},
++    {0,0},
++    {612,356},
++    {428,357},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {213,358},
++    {596,359},
++    {0,360},
++    {0,0},
++    {15,361},
++    {585,362},
++    {-1,-1},
++    {-1,-1},
++    {584,363},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {527,364},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {545,365},
++    {0,256},
++    {0,0},
++    {0,366},
++    {0,367},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {613,368},
++    {-1,-1},
++    {0,369},
++    {0,0},
++    {4,370},
++    {-1,-1},
++    {-1,-1},
++    {305,265},
++    {608,371},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,372},
++    {614,373},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {615,374},
++    {616,375},
++    {617,376},
++    {72,377},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {65,378},
++    {139,379},
++    {0,380},
++    {510,381},
++    {0,382},
++    {618,383},
++    {553,384},
++    {68,385},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,386},
++    {614,387},
++    {-1,-1},
++    {-1,-1},
++    {-1,-1},
++    {590,388},
++    {0,389},
++    {0,0},
++    {0,0},
++    {0,390},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,391},
++    {619,392},
++    {0,393},
++    {0,394},
++    {0,395},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,350},
++    {580,396},
++    {139,397},
++    {428,398},
++    {0,399},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++    {0,0},
++  };
++  inline static constexpr uint16_t near_indices[400][16] = {
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,1,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,65535,65535,65535,2},
++    {0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,22,0,0,0,4},
++    {0,0,0,0,11,6,6,12,23,65535,65535,24,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,25,9,26,0,65535,65535,65535,39},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,8,40,9},
++    {0,0,0,0,0,0,0,0,0,0,0,8,9,41,65535,42},
++    {0,0,0,0,0,0,0,0,6,27,0,0,65535,65535,43,44},
++    {0,0,0,0,0,0,0,0,0,0,0,0,6,6,7,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,8,45,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46},
++    {0,0,0,0,0,0,0,0,8,6,28,6,42,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,17,0,0,0,42,43,9,9},
++    {0,0,0,0,0,0,0,13,0,29,30,31,9,65535,65535,65535},
++    {4,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {5,6,7,0,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,14,0,0,0,14,0,0,0,14,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,47},
++    {0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,0},
++    {0,0,0,0,0,0,15,9,0,32,65535,65535,0,48,65535,65535},
++    {0,0,0,0,16,17,18,0,65535,33,34,0,65535,65535,49,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,50,6,6,17},
++    {0,0,0,0,0,0,0,0,0,0,35,6,0,51,52,65535},
++    {0,0,0,0,0,0,0,0,17,0,0,0,53,0,0,0},
++    {0,8,9,10,0,19,65535,20,0,36,65535,37,0,0,54,55},
++    {0,0,0,0,21,0,0,0,38,0,0,0,0,0,0,0},
++    {0,0,0,65535,0,0,0,75,0,0,0,88,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,89,65535,65535,65535,88,101,102,103},
++    {65535,65535,65535,56,65535,76,77,68,90,91,0,0,104,0,0,0},
++    {57,65535,65535,65535,78,65535,65535,65535,0,65535,65535,65535,8,65535,65535,65535},
++    {65535,65535,65535,58,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {44,6,46,59,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,60,17,65535,65535,65535,25,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,26,0,0,8,65535,65535,92,65535,65535,65535,65535,65535},
++    {0,0,0,0,46,9,9,16,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,27,0,0,0,65535,58,9,9,65535,65535,65535,65535},
++    {0,0,61,65535,8,59,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,62,6,6,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {6,63,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {64,0,0,0,14,0,0,0,14,0,0,0,14,0,0,0},
++    {0,0,0,0,0,0,0,0,0,8,65535,93,105,86,65535,71},
++    {0,65,66,65535,0,0,79,66,0,0,0,94,9,9,106,0},
++    {65535,67,68,0,80,81,0,0,55,0,0,0,0,0,0,0},
++    {65535,65535,65535,69,82,65535,65535,14,52,65535,95,96,107,108,109,0},
++    {0,70,65535,65535,0,83,84,65535,0,0,97,65535,0,0,99,65535},
++    {71,72,0,0,65535,65535,65535,58,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,85,0,0,0,87,98,0,0,65535,93,0,0},
++    {0,0,8,9,0,8,86,65535,0,99,65535,65535,0,110,65535,65535},
++    {73,74,0,0,65535,87,17,0,65535,65535,100,0,65535,65535,93,0},
++    {0,0,0,0,0,0,0,0,0,0,0,127,0,0,127,52},
++    {0,0,111,6,0,8,65535,65535,59,65535,65535,65535,65535,65535,65535,65535},
++    {112,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,113,6,114,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {86,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,115,116,0,122,123,0,0,14,0,0,0,133,134,0,0},
++    {0,0,117,118,0,0,0,0,0,0,0,0,0,0,0,15},
++    {119,65535,65535,65535,0,65535,65535,65535,128,65535,65535,80,65535,65535,65535,93},
++    {95,120,0,0,124,0,0,0,129,0,0,0,0,0,0,0},
++    {0,0,121,65535,0,0,125,66,0,0,0,130,0,0,0,0},
++    {65535,65535,49,0,65535,37,126,0,131,132,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8},
++    {0,0,0,0,0,0,0,0,0,0,0,138,9,9,9,31},
++    {0,0,98,0,137,65535,65535,65535,31,65535,65535,65535,65535,65535,65535,65535},
++    {8,6,31,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,135,6,17,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,14,0,0,0,14,0,0,0,5,17,0,0},
++    {0,0,6,6,0,0,65535,65535,0,0,139,65535,0,0,59,65535},
++    {6,114,59,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,71,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {136,6,114,16,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {45,0,0,0,5,17,0,0,65535,69,0,0,65535,65535,141,9},
++    {0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9},
++    {0,0,0,0,0,0,0,0,140,72,0,0,65535,69,0,0},
++    {0,0,0,142,0,0,0,70,0,0,0,70,0,0,138,31},
++    {65535,143,6,6,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {6,144,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,145,0,65535,65535,93,0,65535,65535,65535,93,65535,65535,65535,71},
++    {0,0,0,0,0,0,0,0,0,0,0,0,9,9,146,0},
++    {0,0,70,65535,0,0,70,65535,0,0,148,82,0,0,0,70},
++    {65535,65535,147,0,65535,65535,14,0,65535,65535,149,0,65535,65535,93,0},
++    {0,0,0,70,0,0,0,70,0,0,0,70,0,0,0,70},
++    {65535,76,150,0,65535,149,0,0,65535,93,0,0,65535,151,0,0},
++    {0,0,0,4,0,0,153,65535,0,0,70,65535,0,0,83,154},
++    {65535,152,0,0,65535,152,0,0,65535,152,0,0,76,116,0,0},
++    {0,0,0,155,0,0,0,4,0,0,52,65535,0,61,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,159,160},
++    {65535,65535,65535,65535,65535,65535,65535,65535,157,102,102,158,68,0,0,0},
++    {149,0,0,0,156,0,0,0,68,0,0,0,0,0,0,0},
++    {0,65535,65535,65535,0,65535,65535,65535,0,164,154,65535,0,0,155,65535},
++    {65535,65535,65535,65535,65535,65535,65535,162,65535,65535,65535,165,65535,65535,95,166},
++    {90,161,0,0,163,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,167,84,0,0,0,70,0,0,0,70,0,0,0,70},
++    {65535,65535,168,0,65535,65535,170,0,65535,65535,156,0,65535,171,68,0},
++    {0,0,0,169,0,0,128,65535,0,8,52,65535,0,172,65535,65535},
++    {6,17,0,0,65535,71,72,0,65535,65535,69,0,65535,65535,71,173},
++    {0,0,0,174,0,0,0,0,0,0,0,0,0,0,0,0},
++    {84,65535,65535,65535,176,65535,65535,65535,179,65535,65535,65535,181,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,65535,65535,65535,182},
++    {65535,175,0,0,177,68,0,0,129,0,0,0,0,0,0,0},
++    {0,65535,65535,65535,0,65535,65535,65535,0,180,65535,65535,0,183,66,65535},
++    {65535,65535,65535,93,65535,65535,65535,178,65535,65535,65535,14,65535,65535,65535,184},
++    {0,0,0,0,0,0,0,0,0,0,0,0,185,0,0,0},
++    {0,65535,65535,65535,0,84,65535,65535,0,190,191,65535,0,0,88,192},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,84,65535,65535,65535},
++    {65535,65535,65535,93,65535,65535,65535,93,65535,65535,65535,69,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,193,0,0,0},
++    {0,0,186,187,0,0,0,0,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,182,188,108,131,189,0,0,0,0,0,0,0,0},
++    {194,101,195,65535,0,0,197,198,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,201,202,203,65535,0,0,88,206},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,101,84,65535,65535},
++    {65535,62,196,0,65535,65535,25,199,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,200,0,0,0,65535,2,204,6,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,205,0,0,0,65535,207,196,0},
++    {0,0,0,0,0,0,29,211,0,0,213,65535,0,0,65535,65535},
++    {0,0,0,0,9,16,17,0,65535,65535,25,214,65535,65535,65535,25},
++    {0,0,0,0,0,0,0,0,0,0,0,0,214,0,0,0},
++    {0,208,209,102,0,0,0,0,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,212,84,65535,65535,0,190,191,65535,0,0,88,217},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,108,218,219,219},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,220,82,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,115,221},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,222,219,219,219},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,219,223,108,102},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,37,224},
++    {65535,65535,210,0,65535,65535,93,0,65535,215,216,0,225,0,0,0},
++    {0,0,65535,65535,0,0,230,65535,0,0,238,154,0,0,0,84},
++    {25,226,0,0,65535,87,17,0,65535,65535,239,0,65535,65535,69,0},
++    {0,0,0,0,0,0,0,0,0,0,0,138,0,0,0,52},
++    {0,0,0,0,231,9,232,196,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,58,9,240,241,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,243,7,0,0},
++    {0,190,84,65535,0,0,190,84,0,0,0,190,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,102,84,65535,65535,0,244,209,191},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,245,108},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,108,108,108,246},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,219,219,219,247},
++    {65535,65535,65535,65535,65535,65535,76,233,102,159,234,0,0,0,0,0},
++    {76,227,189,0,234,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,235,236,0,0,0,0,0,0,0,0,0,0},
++    {228,203,65535,65535,0,117,237,65535,0,0,117,65535,0,0,0,248},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,102,102,102},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,102,203,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,65535,65535,245,249},
++    {65535,37,229,0,95,229,0,0,242,0,0,0,0,0,0,0},
++    {0,0,0,70,0,0,0,260,0,0,0,88,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,269,65535,65535,65535,278,279,65535,65535},
++    {65535,65535,25,250,65535,65535,65535,261,65535,65535,65535,93,65535,65535,65535,14},
++    {0,0,1,65535,0,0,48,65535,0,0,70,65535,0,0,70,65535},
++    {65535,25,232,196,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,6,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {45,0,0,117,65535,243,17,0,65535,65535,270,0,65535,65535,93,0},
++    {251,65535,65535,65535,0,262,65535,65535,0,117,65535,65535,0,0,155,65535},
++    {65535,65535,152,0,65535,65535,152,0,65535,65535,152,0,65535,65535,2,280},
++    {252,86,65535,65535,263,66,65535,65535,0,271,272,108,0,0,0,0},
++    {253,0,0,0,65535,264,0,0,273,68,0,0,0,0,0,0},
++    {254,219,219,219,0,0,0,0,0,0,0,0,0,0,0,0},
++    {225,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,255,219,219,0,0,0,0,0,0,0,0,0,0,0,0},
++    {256,257,102,65535,0,0,0,265,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,108,187,203,65535,0,0,88,219,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,219,256,274,275,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,102,102,102,276,0,0,0,0},
++    {65535,65535,65535,65535,266,108,108,108,229,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,267,108,108,268,0,0,0,0,0,0,0,0},
++    {157,258,259,0,68,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,6,98,0,277,65535,71,0,70,65535,65535},
++    {0,0,0,0,0,0,0,0,85,0,0,0,152,0,0,0},
++    {0,0,281,108,0,0,0,0,0,0,0,0,0,0,0,0},
++    {203,65535,65535,282,88,288,289,68,0,0,0,0,0,0,0,0},
++    {0,0,70,65535,0,0,70,65535,0,0,292,65535,0,0,179,65535},
++    {65535,65535,93,0,65535,65535,93,0,65535,65535,93,0,65535,65535,93,0},
++    {0,0,70,65535,0,0,290,65535,0,0,179,65535,0,0,179,65535},
++    {65535,65535,65535,283,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {196,0,0,0,65535,2,9,26,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,291,114,9,9,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,240,7,0,0,65535,5,196,0,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,297,9,9,9},
++    {0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,59},
++    {0,0,0,0,0,0,0,0,0,0,0,11,65535,65535,65535,65535},
++    {54,284,54,285,0,0,0,0,6,6,6,6,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,6,6,6,6,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,293,9,294,295,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,6,296,0,0,65535,65535,298,9},
++    {0,0,0,0,0,0,0,0,0,0,0,0,44,196,0,0},
++    {0,286,102,287,0,0,0,0,0,0,0,0,0,0,0,0},
++    {259,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,231,46},
++    {0,0,179,65535,0,0,301,65535,0,138,65535,65535,59,65535,65535,65535},
++    {65535,65535,93,0,65535,65535,14,0,65535,65535,25,302,65535,65535,65535,304},
++    {0,291,299,65535,0,70,65535,65535,0,303,65535,65535,17,0,209,102},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,103,198,102,66},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,103,305},
++    {65535,65535,65535,65535,65535,65535,65535,65535,157,102,203,65535,68,0,117,82},
++    {65535,65535,43,9,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {300,6,7,0,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,297,9,136,196,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,58,9,199,196,65535,65535,65535,2},
++    {0,0,0,0,0,0,0,0,0,0,0,0,136,6,6,6},
++    {0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6},
++    {0,0,0,0,0,0,0,0,0,0,0,0,6,196,0,0},
++    {0,0,0,0,0,0,40,65535,0,61,65535,65535,61,65535,65535,65535},
++    {306,46,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {307,0,0,0,133,17,0,0,65535,43,232,196,65535,65535,65535,25},
++    {0,0,0,244,0,0,0,0,0,0,0,0,240,241,0,0},
++    {272,108,108,108,0,0,0,0,0,0,0,0,315,9,9,9},
++    {108,308,0,0,0,0,0,0,0,0,0,0,316,0,0,0},
++    {0,0,309,52,0,0,117,313,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,288,65535,65535,65535,0,82,65535,65535,0,70,65535,65535},
++    {65535,25,106,0,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,310,311,9,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {240,312,0,0,65535,25,314,0,65535,65535,133,196,65535,65535,65535,317},
++    {0,0,0,318,0,0,0,70,0,0,0,321,0,0,0,70},
++    {65535,253,0,0,65535,65535,65535,320,65535,65535,65535,25,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,128,322,6,61,65535,65535,65535,65535,65535},
++    {319,65535,65535,65535,59,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,93,65535,65535,65535,93,65535,65535,65535,93,65535,65535,65535,93},
++    {0,0,0,260,0,0,0,324,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,325,65535,65535,65535,0,89,65535,65535},
++    {65535,65535,65535,323,65535,65535,65535,152,65535,65535,65535,326,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,196,0,0,0,327,0,0,0},
++    {0,88,248,65535,0,0,0,328,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,84,65535,65535,65535,278,84,65535,65535,0,330,65535,65535},
++    {149,0,0,0,49,0,0,0,329,0,0,0,65535,331,0,0},
++    {0,0,82,65535,0,0,334,65535,0,0,0,65535,0,0,0,65535},
++    {65535,65535,65535,76,65535,65535,65535,335,65535,65535,65535,337,76,102,158,259},
++    {102,102,102,65535,0,0,0,336,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,219,272,65535,65535,0,0,65535,65535},
++    {65535,332,333,0,65535,65535,53,0,65535,65535,338,196,65535,65535,65535,339},
++    {0,0,1,65535,0,340,341,65535,0,172,65535,65535,0,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,343,65535,65535,345,38},
++    {335,0,0,0,342,0,0,0,259,0,0,0,0,0,0,0},
++    {0,309,65535,65535,0,341,65535,65535,0,65535,65535,65535,0,65535,65535,65535},
++    {65535,65535,65535,93,65535,65535,65535,93,65535,65535,65535,344,65535,65535,65535,93},
++    {0,65535,65535,65535,0,65535,65535,65535,0,65535,65535,65535,309,65535,65535,65535},
++    {65535,65535,65535,115,65535,65535,90,347,65535,76,349,0,65535,335,0,0},
++    {103,108,101,102,0,0,0,0,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,325,65535,65535,65535,0,219,219,82,0,0,0,70},
++    {65535,65535,346,0,65535,177,259,0,76,350,0,0,352,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,291,63,0,309,341,65535},
++    {0,65535,65535,65535,348,65535,65535,65535,341,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,49,65535,65535,95,126,65535,65535,351,0,65535,353,259,0},
++    {0,0,0,354,0,0,0,52,0,0,0,361,0,0,0,278},
++    {341,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,364,65535,65535,65535},
++    {65535,93,0,0,65535,69,0,0,65535,65535,362,0,65535,65535,365,0},
++    {65535,65535,65535,95,65535,65535,65535,357,65535,65535,95,38,65535,65535,357,0},
++    {38,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,153,0,0,309,65535},
++    {319,355,65535,65535,358,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,359,65535,65535,363,68,65535,65535,93,0},
++    {115,103,187,102,360,0,0,0,0,0,0,0,0,0,0,0},
++    {102,103,108,102,0,0,0,0,0,0,0,0,0,0,0,0},
++    {356,259,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {366,65535,65535,65535,0,325,65535,65535,0,0,373,65535,0,0,88,65535},
++    {65535,65535,14,0,65535,65535,65535,369,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,241,0,0,0,65535,25,9,9,65535,65535,65535,65535},
++    {0,0,309,65535,0,370,341,65535,341,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,367,0,65535,371,68,0,65535,182,0,0,76,81,0,0},
++    {0,0,368,65535,0,0,372,65535,0,0,374,65535,0,0,0,248},
++    {65535,65535,93,0,65535,65535,93,0,65535,65535,375,0,65535,76,376,0},
++    {0,0,0,65535,0,0,309,65535,0,309,341,65535,385,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,159,108,102,377},
++    {65535,65535,115,377,65535,380,189,0,37,383,0,0,386,0,0,0},
++    {378,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {248,65535,65535,65535,0,248,65535,65535,0,0,248,66,0,0,0,244},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,191,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,381,382,65535,384,259,0,67,259,0,0},
++    {80,379,0,0,189,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,153,0,0,0,65535},
++    {0,0,387,341,389,341,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,335,65535,65535,65535,390,65535,65535,95,392,65535,90,378,0},
++    {255,84,65535,65535,0,391,65535,65535,0,255,191,65535,0,0,125,65535},
++    {65535,65535,65535,76,65535,65535,65535,182,65535,65535,65535,393,65535,65535,363,259},
++    {388,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,65535,0,0,0,82,0,0,0,334,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,325,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,157,65535,90,313,259},
++    {65535,65535,65535,65535,65535,65535,65535,65535,203,65535,65535,65535,396,219,108,198},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,102,84,65535,65535},
++    {95,383,0,0,182,0,0,0,69,0,0,0,14,0,0,0},
++    {0,0,0,65535,0,0,309,65535,0,0,395,65535,0,0,397,65535},
++    {65535,65535,394,0,65535,353,259,0,371,259,0,0,149,0,0,0},
++    {0,325,65535,65535,0,0,288,279,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,102,65535,76,103,0,219,400,0,0,0,0,0},
++    {90,398,0,0,398,0,0,0,0,0,0,0,0,0,0,0},
++    {0,244,101,65535,0,0,0,82,0,0,0,290,0,0,0,179},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,95,65535,65535,65535,182},
++    {182,0,0,0,156,0,0,0,401,0,0,0,0,0,0,0},
++    {0,0,0,399,0,0,0,255,0,0,0,402,0,0,0,403},
++    {65535,65535,65535,76,65535,65535,80,379,65535,65535,49,0,65535,171,68,0},
++    {81,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,324,0,0,0,0,0,0,0,0,0,0,0,309},
++    {65535,65535,65535,93,65535,65535,65535,69,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,405,0,0,0,133,196,0,0},
++    {0,0,0,65535,0,0,0,65535,0,0,0,65535,0,0,402,65535},
++    {65535,49,0,0,95,404,0,0,14,0,0,0,25,406,0,0},
++    {0,0,0,368,0,0,0,52,0,0,137,65535,0,0,172,65535},
++    {65535,407,0,0,65535,93,0,0,65535,133,196,0,65535,65535,410,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
++    {0,0,403,65535,0,408,65535,65535,153,65535,65535,65535,65535,65535,65535,65535},
++    {65535,152,0,0,65535,409,0,0,65535,93,0,0,65535,93,0,0},
++    {0,0,0,0,0,0,0,0,0,0,354,9,0,0,65535,65535},
++    {0,0,0,0,0,0,0,0,414,0,0,0,14,0,0,0},
++    {0,0,70,65535,0,0,70,65535,0,0,415,65535,0,309,65535,65535},
++    {65535,65535,76,411,65535,65535,149,0,65535,65535,175,0,65535,343,259,0},
++    {0,0,0,0,0,0,0,0,0,0,309,15,0,416,86,65535},
++    {0,0,0,412,0,309,144,65535,59,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,67},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,219,399,65535,115},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,203,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,65535,65535,115,379},
++    {65535,413,0,0,95,38,0,0,379,0,0,0,0,0,0,0},
++    {0,0,89,65535,0,0,396,219,0,0,0,0,0,0,0,0},
++    {417,0,0,0,259,0,0,0,0,0,0,0,0,0,0,0},
++    {0,179,65535,65535,0,70,65535,65535,0,52,65535,65535,0,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,103,434},
++    {65535,65535,65535,65535,65535,76,423,219,245,378,0,0,259,0,0,0},
++    {343,259,0,0,259,0,0,0,0,0,0,0,0,0,0,0},
++    {309,341,65535,65535,179,65535,65535,65535,179,65535,65535,65535,179,65535,65535,65535},
++    {65535,65535,65535,65535,65535,95,108,289,65535,429,0,0,65535,133,196,0},
++    {65535,65535,65535,65535,424,65535,65535,65535,255,65535,65535,65535,0,65535,65535,65535},
++    {65535,65535,65535,65535,266,425,101,102,93,0,0,0,93,0,0,0},
++    {65535,65535,67,189,203,76,426,0,255,133,196,309,0,237,43,86},
++    {0,255,418,383,0,0,0,0,430,431,0,0,65535,435,436,0},
++    {419,82,65535,65535,0,427,65535,65535,0,432,65535,65535,0,437,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,433,65535,76,438,259},
++    {65535,65535,65535,65535,76,102,356,219,400,0,0,0,0,0,0,0},
++    {420,421,422,0,428,0,0,0,0,0,0,0,0,0,0,0},
++    {137,65535,65535,65535,179,65535,65535,65535,448,65535,65535,65535,88,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,76,65535,65535,65535,182,65535,65535,76,453},
++    {37,308,0,0,81,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,0,0,0,0,309,0,0,0,449,0,0,402,65535},
++    {368,65535,65535,65535,52,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,337,0,65535,371,259,0,65535,25,450,0,65535,65535,454,0},
++    {0,101,65535,65535,0,0,65535,65535,0,0,65535,65535,0,0,203,65535},
++    {304,439,0,0,65535,25,443,0,65535,65535,76,451,65535,65535,14,0},
++    {0,440,66,65535,0,0,397,187,0,0,0,0,0,0,0,0},
++    {37,441,0,0,444,0,0,0,0,0,0,0,0,0,0,0},
++    {0,442,65535,65535,445,144,65535,65535,101,65535,65535,65535,0,65535,65535,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,159},
++    {65535,429,0,0,65535,446,447,0,76,452,0,0,455,447,0,0},
++    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,340},
++    {0,0,0,0,0,0,0,0,291,40,461,0,52,65535,65535,467},
++    {0,82,65535,65535,0,334,65535,65535,0,0,65535,65535,0,0,65535,65535},
++    {65535,65535,417,0,65535,90,392,0,76,462,0,0,468,0,0,0},
++    {0,0,255,191,0,0,0,255,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,457,65535,65535,65535,125,84,65535,65535,0,391,65535,65535},
++    {65535,65535,152,0,65535,65535,458,0,65535,115,463,0,65535,469,0,0},
++    {0,0,255,219,0,0,0,0,0,0,0,0,0,0,0,0},
++    {84,65535,25,146,459,65535,65535,413,391,65535,65535,464,255,272,84,65535},
++    {0,0,0,0,0,0,0,0,0,0,0,0,93,0,0,0},
++    {402,65535,65535,65535,460,65535,65535,65535,391,65535,465,220,419,108,38,0},
++    {65535,456,400,0,371,259,0,0,466,0,0,0,0,0,0,0},
++    {0,0,0,470,0,0,0,475,0,0,471,65535,0,0,403,65535},
++    {65535,65535,65535,14,65535,65535,65535,14,65535,65535,65535,65535,65535,65535,65535,65535},
++    {0,0,0,0,0,0,0,0,479,0,0,0,409,0,0,0},
++    {0,0,0,0,0,0,0,0,0,0,480,59,0,0,172,65535},
++    {0,471,65535,65535,476,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535},
++    {65535,65535,65535,182,65535,65535,65535,477,65535,65535,371,259,65535,65535,282,0},
++    {0,255,65535,65535,0,0,82,65535,0,0,391,65535,0,0,481,65535},
++    {65535,65535,65535,76,65535,65535,65535,478,65535,65535,65535,413,65535,65535,65535,409},
++    {0,0,472,473,0,0,244,428,0,0,0,0,0,0,0,0},
++    {474,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,480,482,65535,0,179,65535,65535,0,179,65535,65535,0,179,65535,65535},
++    {93,0,0,0,14,0,0,0,14,0,0,0,14,0,0,0},
++    {0,0,70,65535,0,0,57,65535,0,0,448,65535,0,0,255,65535},
++    {65535,363,259,0,65535,346,0,0,363,259,0,0,453,0,0,0},
++    {0,0,0,82,0,0,0,278,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,66,65535,65535,65535,244,101,65535,65535,0,0,230,65535},
++    {65535,65535,65535,25,65535,65535,65535,65535,65535,65535,65535,65535,65535,76,356,492},
++    {9,146,0,483,65535,65535,58,65535,157,488,102,488,259,493,0,255},
++    {484,485,98,486,65535,65535,65535,65535,115,489,66,65535,189,0,494,102},
++    {196,0,0,0,93,0,487,0,25,490,491,0,65535,76,495,0},
++    {0,255,496,65535,0,0,366,65535,0,0,0,288,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,90,500,102,103,398,0,0,0,0},
++    {429,0,0,0,383,0,0,0,0,0,0,0,0,0,0,354},
++    {0,0,0,0,0,0,0,0,354,9,240,196,65535,65535,65535,60},
++    {0,0,0,497,0,0,0,334,0,0,0,0,196,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,65535,325,65535,65535,65535,0,325,84,65535},
++    {65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,65535,115,502},
++    {65535,65535,76,468,65535,76,468,0,90,378,0,0,189,0,0,0},
++    {0,0,125,66,0,0,0,499,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,198,65535,65535,65535,0,248,65535,65535,0,0,399,65535},
++    {65535,65535,65535,65535,65535,65535,90,313,65535,37,501,0,503,81,0,0},
++    {157,498,0,0,259,0,0,0,0,0,0,0,0,0,0,0},
++    {219,400,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,0,70,0,0,0,372,0,0,0,396,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,76,507,65535,76,468,396,219,400,0},
++    {152,0,0,0,506,0,0,0,0,0,0,0,0,0,0,0},
++    {0,0,504,288,0,0,0,0,0,0,0,0,0,0,0,0},
++    {108,313,422,0,0,0,0,0,0,0,0,0,0,0,0,0},
++    {65535,65535,65535,65535,191,65535,65535,65535,255,275,198,102,0,0,0,0},
++    {65535,65535,65535,65535,65535,65535,65535,157,102,508,313,259,0,0,0,0},
++    {65535,115,102,159,356,422,0,0,0,0,0,0,0,0,0,0},
++    {505,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
++  };
++  inline static constexpr uint8_t masks[648][8] = {
++    {0,0,0,0,0,0,0,0},
++    {0,0,0,224,224,192,192,192},
++    {15,15,31,255,255,255,255,255},
++    {0,0,0,15,15,31,127,127},
++    {248,248,248,248,248,248,255,255},
++    {127,127,127,127,127,127,255,255},
++    {0,0,0,0,0,0,255,255},
++    {0,0,0,0,0,8,15,31},
++    {0,0,0,0,0,0,224,224},
++    {0,0,0,255,255,255,255,255},
++    {0,0,0,15,15,15,127,127},
++    {0,0,0,0,0,0,192,224},
++    {0,0,0,0,0,0,31,63},
++    {192,224,224,192,192,232,248,252},
++    {127,127,127,127,127,127,127,127},
++    {0,0,0,248,252,252,255,255},
++    {0,0,0,127,127,127,255,255},
++    {0,0,0,0,0,0,3,3},
++    {0,0,0,0,0,8,12,28},
++    {232,252,248,248,248,248,248,248},
++    {127,255,255,255,255,255,255,255},
++    {1,3,1,1,1,1,1,1},
++    {0,0,0,192,224,192,192,192},
++    {224,252,252,255,255,255,255,255},
++    {191,255,255,255,255,255,255,255},
++    {127,127,127,255,255,255,255,255},
++    {0,0,0,3,3,3,127,127},
++    {0,0,0,0,0,0,31,31},
++    {0,0,0,0,14,15,255,255},
++    {0,0,0,0,0,0,128,128},
++    {0,0,128,248,252,252,255,255},
++    {254,255,255,255,255,255,255,255},
++    {0,0,0,224,224,224,192,192},
++    {193,225,225,255,255,255,255,255},
++    {60,127,127,127,127,127,127,15},
++    {0,0,0,0,0,0,252,248},
++    {248,248,248,248,224,224,224,0},
++    {255,255,255,255,127,127,127,15},
++    {1,1,3,3,0,0,0,0},
++    {1,3,3,1,3,1,1,3},
++    {0,0,0,248,248,252,255,255},
++    {240,248,248,255,255,255,255,255},
++    {247,255,255,255,255,255,255,255},
++    {15,31,31,255,255,255,255,255},
++    {0,0,0,3,3,3,255,255},
++    {0,0,0,0,0,0,127,127},
++    {0,0,0,192,224,224,255,255},
++    {0,0,0,120,124,124,255,255},
++    {192,192,192,248,248,248,248,248},
++    {15,15,15,15,1,1,1,1},
++    {0,0,0,0,0,0,248,252},
++    {0,0,0,0,0,128,252,248},
++    {248,248,248,255,255,255,255,255},
++    {1,1,1,15,15,15,15,15},
++    {255,255,0,0,0,0,0,0},
++    {15,15,0,0,0,0,0,0},
++    {3,3,3,1,1,3,1,3},
++    {248,248,248,248,248,248,248,192},
++    {1,3,3,255,255,255,255,255},
++    {192,224,224,255,255,255,255,255},
++    {15,31,31,127,127,255,255,255},
++    {192,224,224,248,248,252,255,255},
++    {1,3,3,15,15,31,255,255},
++    {0,0,0,224,224,224,255,255},
++    {15,15,31,63,127,127,127,127},
++    {248,232,192,192,224,224,224,0},
++    {255,255,255,255,255,255,255,252},
++    {255,127,127,127,15,15,15,15},
++    {3,1,0,0,0,0,0,0},
++    {15,15,15,127,127,127,127,127},
++    {248,248,248,248,248,248,248,248},
++    {63,127,127,255,255,255,255,255},
++    {0,0,0,1,3,3,15,15},
++    {0,0,0,15,15,15,255,255},
++    {0,0,0,0,0,0,1,3},
++    {255,254,248,248,248,248,248,224},
++    {255,255,255,255,255,255,255,127},
++    {255,255,127,127,3,3,3,0},
++    {192,192,192,192,192,224,192,0},
++    {248,232,224,224,0,0,0,0},
++    {255,255,255,255,255,255,255,15},
++    {15,15,15,15,3,3,1,0},
++    {255,255,255,255,248,248,248,248},
++    {248,248,248,248,0,0,0,0},
++    {255,255,255,255,255,255,255,248},
++    {0,0,0,1,3,1,1,1},
++    {248,252,252,255,255,255,255,255},
++    {15,15,15,127,127,127,255,255},
++    {224,64,0,0,0,0,0,0},
++    {255,255,255,255,248,248,248,224},
++    {255,255,255,255,127,127,127,31},
++    {127,115,3,3,0,0,0,0},
++    {193,227,227,255,255,255,255,255},
++    {15,15,15,15,15,15,15,15},
++    {248,248,0,0,0,0,0,0},
++    {255,255,255,255,127,127,127,127},
++    {127,63,15,15,0,0,0,0},
++    {248,248,248,252,224,224,192,224},
++    {0,0,0,0,0,0,15,15},
++    {224,224,224,224,224,224,224,224},
++    {1,1,1,1,1,1,15,15},
++    {255,255,255,255,224,224,192,0},
++    {255,255,255,255,255,255,255,0},
++    {255,255,255,255,31,31,15,0},
++    {31,11,3,3,0,0,0,0},
++    {0,0,0,0,0,128,224,224},
++    {0,0,0,3,3,1,1,1},
++    {255,255,255,255,28,28,12,0},
++    {255,255,255,255,0,0,0,0},
++    {127,127,127,127,127,127,127,0},
++    {224,224,224,224,0,0,0,0},
++    {0,0,0,0,0,0,248,248},
++    {192,192,192,248,248,252,255,255},
++    {1,3,3,127,127,127,255,255},
++    {0,0,0,0,0,128,255,255},
++    {255,255,255,255,255,255,255,31},
++    {1,1,1,1,1,3,1,0},
++    {224,192,0,0,0,0,0,0},
++    {255,191,0,0,0,0,0,0},
++    {255,255,255,255,224,224,224,0},
++    {15,15,3,3,0,0,0,0},
++    {255,255,248,248,248,252,248,224},
++    {255,255,255,255,255,255,127,127},
++    {15,15,3,1,1,1,0,0},
++    {127,63,15,15,15,15,15,15},
++    {192,192,224,224,0,0,0,0},
++    {1,1,3,1,0,0,0,0},
++    {0,0,0,248,248,248,248,248},
++    {0,0,0,224,224,224,248,252},
++    {15,15,1,1,1,3,1,0},
++    {252,152,0,0,0,0,0,0},
++    {255,127,127,127,0,0,0,0},
++    {15,12,0,0,0,0,0,0},
++    {127,127,127,127,127,255,255,255},
++    {0,0,0,0,0,1,1,3},
++    {15,15,31,127,127,127,255,255},
++    {0,0,0,1,3,3,255,255},
++    {192,224,192,192,192,192,192,192},
++    {0,0,0,192,224,224,248,248},
++    {255,247,224,224,0,0,0,0},
++    {0,0,0,224,224,224,252,252},
++    {15,15,15,255,255,255,255,255},
++    {192,192,192,192,192,224,248,248},
++    {1,1,1,127,127,127,255,255},
++    {192,224,224,248,252,252,255,255},
++    {1,3,3,15,15,15,15,15},
++    {0,0,0,15,15,15,15,15},
++    {63,127,127,127,127,127,127,127},
++    {248,184,0,0,0,0,0,0},
++    {127,127,127,127,127,127,127,15},
++    {7,1,1,1,1,3,1,0},
++    {15,15,1,1,1,1,1,1},
++    {1,1,1,1,1,1,1,1},
++    {192,224,224,248,248,248,248,248},
++    {255,255,255,255,255,255,254,255},
++    {255,254,248,248,248,248,248,248},
++    {15,15,15,15,3,1,1,1},
++    {255,255,255,255,255,255,255,3},
++    {255,255,127,127,3,3,1,0},
++    {255,255,255,255,3,3,1,0},
++    {255,247,0,0,0,0,0,0},
++    {127,47,3,3,0,0,0,0},
++    {255,255,255,255,255,127,127,127},
++    {15,15,3,1,1,0,0,0},
++    {255,230,224,192,0,0,0,0},
++    {127,63,15,15,15,15,7,1},
++    {1,1,1,1,1,0,0,0},
++    {248,248,248,248,248,248,248,0},
++    {127,127,127,127,127,127,127,63},
++    {0,0,0,0,0,8,248,252},
++    {63,15,15,15,15,15,15,15},
++    {255,255,127,127,127,127,127,15},
++    {192,192,224,248,248,248,248,248},
++    {0,0,0,1,1,1,1,1},
++    {248,248,192,192,192,224,192,0},
++    {15,15,15,15,3,1,1,3},
++    {248,248,192,192,192,192,192,192},
++    {255,255,127,127,15,15,15,15},
++    {15,15,15,15,15,15,127,127},
++    {192,192,192,192,192,192,192,192},
++    {255,255,255,255,255,255,248,252},
++    {128,0,0,0,0,0,0,0},
++    {127,127,127,127,15,15,15,15},
++    {252,232,224,224,0,0,0,0},
++    {63,63,127,255,255,127,63,127},
++    {0,0,0,3,1,0,0,0},
++    {252,136,0,0,0,0,0,0},
++    {255,255,255,255,252,252,248,0},
++    {255,225,224,224,0,0,0,0},
++    {15,8,0,0,0,0,0,0},
++    {248,232,224,192,0,0,0,0},
++    {255,255,255,255,252,248,248,224},
++    {255,252,248,248,128,128,0,0},
++    {1,3,3,1,3,15,31,31},
++    {248,152,0,0,0,0,0,0},
++    {255,255,255,255,255,255,255,254},
++    {0,0,0,0,0,1,3,3},
++    {254,224,224,192,0,0,0,0},
++    {255,255,255,255,252,248,248,0},
++    {0,0,0,15,15,31,255,255},
++    {0,0,0,0,0,4,15,15},
++    {255,194,128,0,0,0,0,0},
++    {255,255,255,255,192,192,128,0},
++    {255,255,255,255,255,255,255,224},
++    {0,0,0,127,255,255,255,255},
++    {0,0,0,0,0,0,15,31},
++    {255,225,224,192,0,0,0,0},
++    {7,15,15,127,127,127,255,255},
++    {248,88,0,0,0,0,0,0},
++    {255,252,248,248,0,0,0,0},
++    {7,15,15,15,15,15,15,15},
++    {0,0,0,248,248,248,255,255},
++    {255,242,224,224,0,0,0,0},
++    {192,240,248,248,248,248,255,255},
++    {0,0,0,3,3,3,15,31},
++    {255,255,255,255,255,255,127,0},
++    {15,11,3,1,1,0,0,0},
++    {255,240,224,224,0,0,0,0},
++    {255,7,3,3,0,0,0,0},
++    {255,0,0,0,0,0,0,0},
++    {255,128,0,0,0,0,0,0},
++    {255,255,255,255,7,3,3,0},
++    {255,127,63,63,0,0,0,0},
++    {255,254,252,252,0,0,0,0},
++    {255,127,63,31,0,0,0,0},
++    {255,32,0,0,0,0,0,0},
++    {0,0,0,3,3,3,31,15},
++    {255,255,127,127,7,7,3,0},
++    {255,243,224,224,0,0,0,0},
++    {15,11,3,1,0,0,0,0},
++    {255,248,248,248,248,248,248,192},
++    {0,0,0,0,0,8,248,248},
++    {0,0,0,15,31,31,255,255},
++    {255,255,255,255,31,15,15,0},
++    {127,35,3,3,0,0,0,0},
++    {0,0,0,255,3,0,0,0},
++    {0,0,1,3,1,0,0,0},
++    {255,255,255,255,252,252,248,224},
++    {192,192,192,192,0,0,0,0},
++    {1,1,3,15,31,15,15,15},
++    {0,0,0,127,127,255,255,255},
++    {0,0,0,0,0,8,31,31},
++    {127,63,15,15,3,3,1,0},
++    {1,3,3,127,127,255,255,255},
++    {248,8,0,0,0,0,0,0},
++    {255,255,255,255,127,127,127,3},
++    {255,255,127,127,0,0,0,0},
++    {127,32,0,0,0,0,0,0},
++    {255,252,252,248,224,224,192,0},
++    {127,39,3,3,0,0,0,0},
++    {0,0,0,3,3,3,3,3},
++    {255,255,255,255,240,240,224,0},
++    {0,0,0,224,224,232,248,252},
++    {1,3,3,15,31,31,127,127},
++    {255,3,0,0,0,0,0,0},
++    {224,0,0,0,0,0,0,0},
++    {255,255,254,252,0,0,0,0},
++    {255,255,255,255,128,128,0,0},
++    {255,255,127,127,1,1,0,0},
++    {3,0,0,0,0,0,0,0},
++    {248,248,248,248,192,192,192,192},
++    {1,3,1,1,3,11,15,15},
++    {255,254,248,248,224,192,192,224},
++    {255,255,255,252,224,224,192,0},
++    {1,3,1,1,1,1,1,3},
++    {255,131,0,0,0,0,0,0},
++    {255,255,255,255,15,15,15,15},
++    {255,255,255,255,4,0,0,0},
++    {255,3,3,1,0,0,0,0},
++    {255,255,255,254,255,255,255,248},
++    {15,31,15,15,15,127,127,15},
++    {252,8,0,0,0,0,0,0},
++    {255,224,224,224,0,0,0,0},
++    {255,63,63,63,0,0,0,0},
++    {255,63,31,31,0,0,0,0},
++    {255,252,252,248,0,0,0,0},
++    {255,255,255,255,63,63,31,0},
++    {192,224,224,248,252,248,248,248},
++    {248,224,224,192,0,0,0,0},
++    {255,255,255,255,248,248,248,0},
++    {0,0,0,3,3,11,15,15},
++    {255,2,0,0,0,0,0,0},
++    {127,31,15,15,15,31,15,3},
++    {15,15,15,15,15,31,255,255},
++    {227,225,0,0,0,0,0,0},
++    {127,127,0,0,0,0,0,0},
++    {252,224,224,224,0,0,0,0},
++    {255,127,127,127,15,15,15,0},
++    {255,224,224,192,0,0,0,0},
++    {255,31,15,15,0,0,0,0},
++    {248,248,248,248,224,192,192,192},
++    {0,0,0,0,0,64,224,224},
++    {248,248,248,240,192,192,192,192},
++    {0,0,0,128,192,192,255,255},
++    {0,0,0,63,255,255,255,255},
++    {0,0,0,0,0,1,255,255},
++    {0,0,0,0,0,0,7,7},
++    {15,63,63,255,255,255,255,255},
++    {127,127,255,255,255,255,255,255},
++    {192,192,224,248,248,252,255,255},
++    {0,0,0,1,1,3,255,255},
++    {240,248,248,248,248,248,248,248},
++    {0,0,0,3,3,11,31,15},
++    {248,232,192,192,192,224,192,0},
++    {15,15,15,127,127,255,255,255},
++    {255,15,15,7,0,0,0,0},
++    {0,0,0,0,0,2,255,255},
++    {1,1,3,15,31,31,127,127},
++    {127,3,3,3,0,0,0,0},
++    {0,0,0,0,0,192,224,224},
++    {0,0,0,0,0,0,252,254},
++    {0,0,0,252,252,254,255,255},
++    {0,0,0,0,0,8,15,15},
++    {255,31,31,15,0,0,0,0},
++    {0,0,0,1,3,11,15,15},
++    {0,0,0,0,0,136,248,252},
++    {0,0,0,3,3,67,127,127},
++    {1,1,1,1,1,7,15,15},
++    {192,224,192,192,192,232,248,248},
++    {0,0,0,0,0,0,192,192},
++    {15,31,15,15,15,31,127,127},
++    {248,248,254,255,255,255,255,248},
++    {0,0,0,3,3,7,255,255},
++    {15,7,7,1,1,1,1,1},
++    {192,192,224,192,0,0,0,0},
++    {255,252,248,248,224,224,192,0},
++    {1,7,7,127,127,127,255,255},
++    {15,15,15,15,15,31,127,127},
++    {255,226,224,192,0,0,0,0},
++    {15,15,15,15,15,63,127,127},
++    {248,248,224,192,224,224,192,0},
++    {1,3,1,1,1,11,15,15},
++    {15,63,63,127,127,127,255,255},
++    {0,0,0,0,0,1,3,1},
++    {248,224,192,192,192,224,192,0},
++    {127,31,15,15,15,15,15,15},
++    {255,252,248,248,248,248,248,0},
++    {15,15,15,15,15,15,15,3},
++    {127,127,127,63,127,127,255,255},
++    {1,1,1,1,1,11,15,15},
++    {0,0,0,0,0,64,224,192},
++    {248,248,252,255,255,255,255,255},
++    {15,11,1,1,1,1,1,3},
++    {255,255,127,127,31,31,15,3},
++    {31,31,15,15,15,15,15,15},
++    {255,255,255,255,127,127,127,63},
++    {15,15,31,15,3,1,1,3},
++    {15,11,3,3,0,0,0,0},
++    {192,224,224,192,192,192,192,192},
++    {15,11,3,1,3,3,3,0},
++    {15,11,3,1,1,1,1,0},
++    {127,31,15,15,1,1,1,1},
++    {127,63,15,15,15,31,15,3},
++    {255,127,127,127,15,15,15,3},
++    {0,0,0,192,224,232,248,248},
++    {248,248,248,248,254,254,255,255},
++    {255,127,127,127,3,3,1,0},
++    {127,31,15,15,15,15,15,3},
++    {192,240,248,248,248,254,255,255},
++    {255,255,127,127,7,7,1,3},
++    {31,0,0,0,0,0,0,0},
++    {255,252,248,248,248,248,248,248},
++    {0,1,1,3,3,1,1,3},
++    {255,127,127,127,127,127,127,15},
++    {255,255,255,255,255,255,254,248},
++    {15,31,15,15,15,15,15,15},
++    {248,248,248,248,224,224,192,0},
++    {3,1,1,1,1,1,1,3},
++    {192,192,192,192,192,248,248,248},
++    {1,3,3,15,31,63,255,255},
++    {0,0,0,0,0,136,248,248},
++    {255,127,127,127,127,127,127,127},
++    {248,248,248,248,248,248,248,224},
++    {255,252,248,248,192,192,192,224},
++    {192,192,192,192,224,224,192,0},
++    {15,15,15,15,15,127,127,127},
++    {63,15,15,15,3,3,1,0},
++    {255,255,255,255,127,127,127,0},
++    {127,31,31,15,0,0,0,0},
++    {127,31,15,15,3,3,1,0},
++    {255,255,255,127,15,15,15,15},
++    {255,255,255,255,255,255,127,3},
++    {255,127,127,127,1,1,0,0},
++    {15,3,3,3,0,0,0,0},
++    {255,127,127,127,31,31,15,3},
++    {0,0,0,224,224,242,255,255},
++    {15,15,31,15,0,0,0,0},
++    {0,0,0,192,224,232,248,252},
++    {15,3,1,1,1,3,1,0},
++    {0,0,0,192,224,226,255,255},
++    {15,11,3,1,1,3,1,1},
++    {248,248,248,248,224,192,192,224},
++    {1,3,3,3,0,0,0,0},
++    {15,15,15,15,1,1,1,3},
++    {15,15,15,15,15,15,7,3},
++    {192,192,192,192,192,248,248,252},
++    {192,0,0,0,0,0,0,0},
++    {248,224,224,224,0,0,0,0},
++    {31,3,3,3,0,0,0,0},
++    {255,252,252,248,224,192,192,224},
++    {127,0,0,0,0,0,0,0},
++    {3,3,3,3,0,0,0,0},
++    {0,0,0,224,224,192,192,224},
++    {248,248,248,248,248,254,255,255},
++    {1,1,1,1,0,0,0,0},
++    {3,3,3,1,3,15,15,31},
++    {0,0,1,3,3,1,1,1},
++    {1,1,1,1,3,15,31,15},
++    {192,224,224,248,252,254,255,255},
++    {1,1,3,15,15,15,15,15},
++    {15,31,31,127,127,127,127,127},
++    {3,3,3,1,3,3,1,0},
++    {192,192,224,248,252,254,255,255},
++    {15,3,1,1,1,1,1,1},
++    {0,0,0,3,3,11,31,31},
++    {248,248,248,248,252,254,255,255},
++    {0,0,0,128,128,192,224,224},
++    {127,127,127,127,31,31,15,3},
++    {255,128,128,0,0,0,0,0},
++    {224,128,0,0,0,0,0,0},
++    {255,255,255,255,255,255,255,1},
++    {255,255,255,127,3,3,1,0},
++    {15,0,0,0,0,0,0,0},
++    {255,255,127,127,31,31,15,0},
++    {255,255,255,255,224,192,192,224},
++    {255,131,3,1,0,0,0,0},
++    {15,3,1,1,3,3,1,0},
++    {248,248,252,248,224,192,192,192},
++    {1,0,0,0,0,0,0,0},
++    {127,15,15,15,15,15,15,15},
++    {0,0,0,0,0,255,255,255},
++    {0,0,0,0,0,15,15,31},
++    {224,224,224,224,224,224,224,192},
++    {255,127,127,127,31,15,15,3},
++    {255,15,15,15,0,0,0,0},
++    {127,127,255,255,127,127,127,127},
++    {0,0,1,3,0,0,0,0},
++    {192,224,224,248,252,252,248,224},
++    {255,127,127,127,31,15,15,0},
++    {0,0,0,0,0,14,15,31},
++    {192,224,224,224,0,0,0,0},
++    {127,3,3,1,0,0,0,0},
++    {192,192,224,224,224,224,224,192},
++    {0,0,0,15,31,63,127,127},
++    {15,15,15,15,15,127,127,0},
++    {0,0,0,0,0,248,252,252},
++    {15,15,15,127,127,255,255,127},
++    {0,0,0,0,0,3,3,0},
++    {192,192,192,192,192,192,192,224},
++    {192,192,232,248,248,255,255,255},
++    {0,0,0,3,3,15,15,31},
++    {1,3,15,15,3,3,1,0},
++    {127,3,1,1,1,3,1,0},
++    {15,15,31,15,3,3,1,0},
++    {127,127,127,127,31,15,15,1},
++    {127,127,127,127,96,224,192,0},
++    {255,31,15,15,1,1,1,3},
++    {255,255,255,255,252,248,248,192},
++    {15,15,31,127,127,127,127,15},
++    {248,248,255,255,248,248,248,248},
++    {248,252,248,248,248,248,248,248},
++    {0,0,0,3,3,99,127,127},
++    {15,11,3,1,3,3,1,0},
++    {15,15,15,15,15,15,15,0},
++    {1,1,3,15,15,63,127,127},
++    {255,3,1,1,1,1,1,1},
++    {127,31,15,15,0,0,0,0},
++    {3,3,3,15,15,15,15,15},
++    {127,31,31,15,3,3,1,0},
++    {15,3,1,1,1,1,1,3},
++    {192,192,192,192,192,232,248,248},
++    {192,224,192,192,192,248,248,248},
++    {248,248,248,248,248,255,255,252},
++    {255,127,127,127,3,1,1,1},
++    {15,12,28,24,0,0,0,0},
++    {248,248,248,255,255,254,254,255},
++    {0,0,0,224,224,246,255,255},
++    {31,3,3,1,1,3,3,3},
++    {127,127,127,127,127,127,63,31},
++    {3,3,3,1,3,3,3,1},
++    {0,0,0,0,0,192,224,192},
++    {224,192,192,0,0,0,0,0},
++    {255,255,254,254,255,255,255,255},
++    {0,0,0,224,224,248,248,252},
++    {0,0,0,3,3,247,255,255},
++    {0,0,8,120,124,254,255,255},
++    {0,0,0,0,0,248,248,252},
++    {0,0,8,28,8,0,0,0},
++    {255,255,255,255,255,255,247,224},
++    {255,255,255,255,227,227,193,0},
++    {128,128,192,255,255,255,255,255},
++    {3,3,3,1,1,1,1,1},
++    {255,124,120,120,0,0,0,0},
++    {96,64,0,0,0,0,0,0},
++    {248,224,192,192,224,224,192,0},
++    {1,1,1,1,3,15,14,0},
++    {255,255,255,254,255,255,254,248},
++    {255,248,248,248,248,248,248,248},
++    {127,127,127,127,3,3,1,0},
++    {248,192,192,128,0,0,0,0},
++    {255,255,255,255,255,255,254,0},
++    {15,3,3,1,0,0,0,0},
++    {255,255,127,127,15,15,15,0},
++    {255,255,255,255,255,255,255,63},
++    {248,0,0,0,0,0,0,0},
++    {31,3,3,1,0,0,0,0},
++    {1,1,1,1,3,3,1,0},
++    {255,255,255,255,248,248,232,224},
++    {255,255,255,255,7,3,1,0},
++    {240,240,240,254,255,255,255,255},
++    {240,240,240,247,255,255,255,255},
++    {240,240,246,255,255,255,255,255},
++    {240,240,240,244,255,255,255,255},
++    {240,255,255,255,255,255,255,255},
++    {240,240,252,252,255,255,255,255},
++    {240,244,244,240,255,255,255,255},
++    {255,255,254,240,255,255,255,255},
++    {247,241,240,240,255,255,255,255},
++    {254,254,254,254,255,255,255,255},
++    {243,247,255,255,255,255,255,255},
++    {240,240,251,255,255,255,255,255},
++    {240,240,255,255,255,255,255,255},
++    {240,240,241,255,255,255,255,255},
++    {248,252,255,255,255,255,255,255},
++    {241,255,255,255,255,255,255,255},
++    {240,240,244,244,255,255,255,255},
++    {247,246,242,240,255,255,255,255},
++    {252,248,248,248,255,255,255,255},
++    {240,247,255,255,255,255,255,255},
++    {240,248,252,252,255,255,255,255},
++    {240,241,243,243,255,255,255,255},
++    {240,252,254,255,255,255,255,255},
++    {254,254,246,247,255,255,255,255},
++    {240,254,254,255,255,255,255,255},
++    {248,255,255,255,255,255,255,255},
++    {240,252,248,248,255,255,255,255},
++    {243,243,247,247,255,255,255,255},
++    {240,248,248,240,255,255,255,255},
++    {241,241,241,240,255,255,255,255},
++    {255,255,255,241,255,255,255,255},
++    {254,254,248,248,255,255,255,255},
++    {255,247,247,243,255,255,255,255},
++    {240,248,248,252,255,255,255,255},
++    {255,255,247,247,255,255,255,255},
++    {254,254,252,248,255,255,255,255},
++    {247,247,247,247,255,255,255,255},
++    {254,252,248,240,255,255,255,255},
++    {247,247,247,255,255,255,255,255},
++    {247,240,240,240,255,255,255,255},
++    {255,255,248,240,255,255,255,255},
++    {240,240,243,247,255,255,255,255},
++    {255,252,248,240,255,255,255,255},
++    {255,255,255,240,255,255,255,255},
++    {255,255,255,243,255,255,255,255},
++    {243,243,241,240,255,255,255,255},
++    {255,255,252,240,255,255,255,255},
++    {255,255,247,240,255,255,255,255},
++    {252,248,248,240,255,255,255,255},
++    {255,255,247,243,255,255,255,255},
++    {243,247,247,247,255,255,255,255},
++    {254,252,252,248,255,255,255,255},
++    {252,252,240,240,255,255,255,255},
++    {240,241,240,240,255,255,255,255},
++    {240,240,244,252,255,255,255,255},
++    {246,240,240,240,255,255,255,255},
++    {240,241,255,255,255,255,255,255},
++    {248,248,252,254,255,255,255,255},
++    {243,243,243,247,255,255,255,255},
++    {248,252,252,240,255,255,255,255},
++    {243,255,255,255,255,255,255,255},
++    {240,248,252,254,255,255,255,255},
++    {240,240,241,247,255,255,255,255},
++    {240,241,243,247,255,255,255,255},
++    {240,240,248,255,255,255,255,255},
++    {254,254,255,255,255,255,255,255},
++    {247,247,247,240,255,255,255,255},
++    {255,255,252,252,255,255,255,255},
++    {241,243,243,247,255,255,255,255},
++    {252,252,254,254,255,255,255,255},
++    {247,243,241,241,255,255,255,255},
++    {255,254,240,240,255,255,255,255},
++    {254,254,254,255,255,255,255,255},
++    {247,243,243,241,255,255,255,255},
++    {254,255,255,254,255,255,255,255},
++    {247,247,243,243,255,255,255,255},
++    {252,254,255,255,255,255,255,255},
++    {254,252,248,248,255,255,255,255},
++    {243,241,241,240,255,255,255,255},
++    {248,248,248,254,255,255,255,255},
++    {254,252,240,240,255,255,255,255},
++    {255,243,241,240,255,255,255,255},
++    {240,252,255,255,255,255,255,255},
++    {247,247,243,241,255,255,255,255},
++    {252,252,248,248,255,255,255,255},
++    {247,247,247,243,255,255,255,255},
++    {255,255,247,241,255,255,255,255},
++    {247,247,255,255,255,255,255,255},
++    {241,241,241,243,255,255,255,255},
++    {248,252,254,255,255,255,255,255},
++    {240,248,254,255,255,255,255,255},
++    {255,255,255,244,255,255,255,255},
++    {252,252,252,254,255,255,255,255},
++    {252,254,254,254,255,255,255,255},
++    {255,241,241,241,255,255,255,255},
++    {255,254,254,254,255,255,255,255},
++    {252,252,252,252,255,255,255,255},
++    {243,241,241,243,255,255,255,255},
++    {252,252,252,248,255,255,255,255},
++    {241,241,240,240,255,255,255,255},
++    {240,240,240,246,255,255,255,255},
++    {243,243,241,241,255,255,255,255},
++    {242,246,246,248,255,255,255,255},
++    {254,254,242,240,255,255,255,255},
++    {248,252,252,252,255,255,255,255},
++    {255,254,252,248,255,255,255,255},
++    {247,255,255,241,255,255,255,255},
++    {240,251,240,240,255,255,255,255},
++    {240,255,248,240,255,255,255,255},
++    {255,255,254,248,255,255,255,255},
++    {255,247,242,240,255,255,255,255},
++    {0,0,0,0,0,0,128,240},
++    {0,0,0,0,6,254,255,255},
++    {0,0,0,192,252,255,255,255},
++    {0,0,0,31,127,255,255,255},
++    {0,0,0,0,0,1,7,207},
++    {0,0,0,0,0,0,0,7},
++    {240,240,240,240,240,240,224,192},
++    {15,15,15,3,1,1,0,0},
++    {0,0,16,128,128,128,192,240},
++    {255,248,240,225,231,71,15,127},
++    {255,255,255,255,255,254,252,252},
++    {255,143,0,0,0,255,255,255},
++    {255,255,249,0,0,7,255,255},
++    {1,3,1,0,0,0,1,7},
++    {224,192,192,192,192,192,192,192},
++    {255,255,255,255,241,241,241,127},
++    {255,255,143,135,135,195,227,128},
++    {7,15,15,15,15,1,1,0},
++    {224,32,0,0,0,0,0,0},
++    {127,126,62,62,126,126,30,14},
++    {128,128,128,128,128,192,224,224},
++    {255,255,255,255,255,127,15,15},
++    {127,127,63,63,63,28,4,0},
++    {0,0,16,0,0,0,0,0},
++    {6,6,3,0,0,0,0,0},
++    {224,224,192,128,0,0,0,0},
++    {15,7,7,3,0,0,0,0},
++    {0,0,0,0,0,0,0,0},
++  };
++};
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.frag b/game/graphics/opengl_renderer/shaders/hfrag.frag
+index e99509c2..83661856 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.frag
++++ b/game/graphics/opengl_renderer/shaders/hfrag.frag
+@@ -12,16 +12,25 @@ uniform vec4 fog_color;
+ 
+ uniform int gfx_hack_no_tex;
+ 
+-// ---------------------------------------------------------------- remaster : sable du desert
+-// Le sol du desert (hfrag) n'a que des carreaux de 32 x 32 pixels : a hauteur de Jak, un aplat jaune.
+-// On y ajoute, en coordonnees du monde (sans repetition visible) :
+-//  - des rides de vent eclairees par le soleil (quelques cm de haut, ~30 cm d'ecart), qui s'effacent au loin ;
+-//  - le grain du sable tout pres ;
+-//  - de larges variations de teinte (traces de vent, zones plus claires ou plus rousses) qui cassent la
+-//    repetition des carreaux jusqu'a l'horizon ;
+-//  - les ombres portees du soleil (roches, falaises) : sans elles, les montagnes semblaient posees sur le sable.
++// ---------------------------------------------------------------- remaster : sable du desert, facon Genshin Impact
++// Le sol du desert (hfrag) est une grille de hauteurs (sommets tous les 8 m) couverte de carreaux de 32 x 32 pixels,
++// eclairee par des couleurs precalculees presque uniformes : de loin, un aplat jaune pale.
++// Ce qui fait un desert « a la Genshin » est surtout la lumiere et la forme, pas la texture :
++//  - relief des dunes eclaire au pixel (pente tiree de la carte des hauteurs) avec une rampe douce facon dessin
++//    anime : flanc au soleil dore et lumineux, flanc a l'ombre orange-violet ;
++//  - grandes rides de vent (1,2 m) eclairees par le soleil, visibles a moyenne distance ; fines rides tout pres ;
++//    bandes de vent (7 m) et grandes traces claires / rousses visibles de loin ;
++//  - couleurs chaudes et saturees (teinte du jeu gardee en partie, luminosite du jeu gardee : heure du jour) ;
++//  - paillettes qui scintillent au soleil ;
++//  - sable HD peint (texture Codex) en fin detail ;
++//  - ombres portees du soleil (roches, falaises).
+ uniform vec3 weather_sun_dir;
++uniform vec3 weather_sun_color;
++uniform vec3 weather_sky;
++uniform float weather_sun_strength;
+ uniform int sand_detail;   // bit 0 : tout ; bits 1..3 : rides, grain, teintes (tests)
++uniform int sand_debug;    // test : couleur des sommets seule
++uniform float sand_time;   // s (animation de l'eau peinte sur le terrain)
+ 
+ // SUN_SHADOW_BEGIN (meme calcul que tfrag3.frag)
+ uniform int shadow_on;
+@@ -70,68 +79,209 @@ float sandNoiseWrap(vec2 p, float period) {
+   return mix(mix(sandHash(i), sandHash(vec2(i1.x, i.y)), u.x),
+              mix(sandHash(vec2(i.x, i1.y)), sandHash(i1), u.x), u.y) * 2. - 1.;
+ }
+-// hauteur des rides (m) : trains de rides legerement courbes, profil dissymetrique (pente douce au vent,
+-// front raide sous le vent), interrompus par endroits
+-float rippleHeight(vec2 q) {
+-  vec2 d = normalize(vec2(.83, .56));
+-  float warp = sandNoise(q * .21) * 2.2 + sandNoise(q * .9) * .45;
+-  float ph = dot(q, d) / .31 + warp;
+-  float f = fract(ph);
+-  float h = f < .78 ? f / .78 : (1. - f) / .22;
++float luma(vec3 c) { return dot(c, vec3(.2126, .7152, .0722)); }
++
++// ---------------------------------------------------------------- relief des dunes (carte des hauteurs)
++uniform sampler2D sand_height;   // hauteurs en unites du jeu, texel (x, z) = sommet (x, z) de la grille de 8 m
++uniform int sand_height_on;
++vec3 duneNormal(vec2 q) {
++  if (sand_height_on == 0) return vec3(0., 1., 0.);
++  const float t = 1. / 512.;
++  vec2 uv = (q / 8. + .5) * t;
++  // ecart d'un sommet de part et d'autre (16 m) : pente lissee, continue d'un triangle a l'autre
++  float hl = texture(sand_height, uv - vec2(t, 0.)).r, hr = texture(sand_height, uv + vec2(t, 0.)).r;
++  float hd = texture(sand_height, uv - vec2(0., t)).r, hu = texture(sand_height, uv + vec2(0., t)).r;
++  return normalize(vec3(-(hr - hl) / (4096. * 16.), 1., -(hu - hd) / (4096. * 16.)));
++}
++
++// ---------------------------------------------------------------- rides de vent
++const vec2 WIND = vec2(.83, .56);
++// hauteur des rides (m) pour une longueur d'onde donnee : trains de rides courbes, profil dissymetrique (pente douce
++// au vent, front raide sous le vent), interrompus par endroits
++float ripple(vec2 q, float lambda, float amp, float seed) {
++  vec2 d = normalize(WIND);
++  float warp = sandNoise(q * (.21 * .31 / lambda) + seed) * 2.2 + sandNoise(q * (.9 * .31 / lambda) + seed * 1.7) * .45;
++  float f = fract(dot(q, d) / lambda + warp);
++  float h = f < .75 ? f / .75 : (1. - f) / .25;
+   h = h * h * (3. - 2. * h);
+-  float patchy = smoothstep(-.35, .45, sandNoise(q * .07 + 3.1));   // zones sans rides
+-  return h * .016 * patchy;
++  float patchy = smoothstep(-.45, .35, sandNoise(q * (.022 / lambda) + 3.1 + seed));
++  return h * amp * patchy;
++}
++// pente (dh/dx, dh/dz) des rides, qui s'effacent quand le pixel couvre plus d'une demi-ride (pas de scintillement)
++vec2 rippleSlope(vec2 q, float footprint) {
++  vec2 s = vec2(0.);
++  // grandes rides : 1,2 m, visibles jusqu'a ~60 m
++  float v1 = 1. - smoothstep(.18, .5, footprint);
++  if (v1 > 0. && (sand_detail & 2) != 0) {
++    float e = .06, h0 = ripple(q, 1.2, .20, 0.);
++    s += v1 * vec2(ripple(q + vec2(e, 0.), 1.2, .20, 0.) - h0, ripple(q + vec2(0., e), 1.2, .20, 0.) - h0) / e;
++  }
++  // fines rides : 0,3 m, tout pres
++  float v2 = 1. - smoothstep(.03, .09, footprint);
++  if (v2 > 0. && (sand_detail & 2) != 0) {
++    float e = .02, h0 = ripple(q, .31, .03, 5.);
++    s += v2 * vec2(ripple(q + vec2(e, 0.), .31, .03, 5.) - h0, ripple(q + vec2(0., e), .31, .03, 5.) - h0) / e;
++  }
++  return s;
+ }
+ 
+-vec3 remasterSand(vec3 c) {
++// ---------------------------------------------------------------- sable HD peint (texture Codex) en fin detail
++uniform sampler2D sand_hd;
++uniform int sand_hd_on;
++vec3 sandHDRatio(vec2 q) {
++  if (sand_hd_on == 0) return vec3(1.);
++  mat2 rot = mat2(.8, -.6, .6, .8);
++  vec2 ga = q / 7.0, gb = (rot * q) / 19.0;
++  // coordonnees ramenees a un multiple entier de la repetition (precision a plusieurs km), derivees continues
++  vec3 t1 = textureGrad(sand_hd, mod(ga, 64.), dFdx(ga), dFdy(ga)).rgb;
++  vec3 t2 = textureGrad(sand_hd, mod(gb, 23.), dFdx(gb), dFdy(gb)).rgb;
++  vec3 avg = textureLod(sand_hd, vec2(.5), 12.).rgb;
++  vec3 r = mix(t1, t2, .4) / max(avg, vec3(.03));
++  float l = luma(r);
++  return mix(vec3(l), r, .5);
++}
++
++// ---------------------------------------------------------------- eclairage facon dessin anime
++// rampe douce entre ombre et lumiere (le « terminateur » des jeux en cel-shading peint)
++vec3 toonLight(vec3 n, vec3 L, vec3 sunTint, vec3 shadeTint) {
++  float ndl = dot(n, L);
++  float ramp = smoothstep(-.06, .20, ndl);
++  return mix(shadeTint, sunTint, ramp) * (.80 + .45 * clamp(ndl, 0., 1.));
++}
++
++vec3 genshinSand(vec3 c0) {
+   vec3 P = world_pos;
+   vec2 q = P.xz;
+-  vec3 L = normalize(weather_sun_dir);
++  vec3 V = normalize(eye_pos - P);
+   float footprint = max(length(dFdx(P)), length(dFdy(P)));   // metres par pixel
++  vec3 Lsun = normalize(weather_sun_dir);
++  float day = smoothstep(-.02, .22, Lsun.y) * clamp(weather_sun_strength, .25, 1.);
++  // lumiere rasante stylisee pour le modele : sous un soleil haut, les dunes gardent un flanc d'ombre lisible
++  vec2 hdir = normalize(Lsun.xz + vec2(1e-4));
++  float ly = clamp(Lsun.y, .14, .38);
++  vec3 L = vec3(hdir.x * sqrt(1. - ly * ly), ly, hdir.y * sqrt(1. - ly * ly));
++
++  // teinte : sable chaud et sature, luminosite du jeu (heure du jour, lieux assombris par les artistes)
++  float l0 = max(luma(c0), 1e-4);
++  vec3 warm = vec3(1.0, .80, .53);
++  warm /= luma(warm);
++  vec3 base = mix(c0, warm * l0 * 1.06, .62 * day);
++
++  // relief : dunes (carte des hauteurs) + rides
++  vec3 nT = duneNormal(q);
++  vec2 slope = rippleSlope(q, footprint);
++  vec3 n = normalize(nT + vec3(-slope.x, 0., -slope.y));
++  vec3 sunTint = vec3(1.10, 1.00, .84);
++  vec3 shadeTint = vec3(.52, .40, .47);          // ombre chaude, legerement violette (lumiere du ciel et du sable)
++  vec3 lit = toonLight(n, L, sunTint, shadeTint);
++  vec3 flat_ = toonLight(vec3(0., 1., 0.), L, sunTint, shadeTint);
++  vec3 relight = lit / max(luma(flat_), .05);
++  vec3 c = base * mix(vec3(1.), relight, day);
+ 
+-  // rides eclairees : pente locale par differences finies, rapport d'eclairement a celui du sol plat
+-  float ripples = (sand_detail & 2) != 0 ? 1. - smoothstep(.018, .07, footprint) : 0.;
+-  if (ripples > 0.) {
+-    float e = .03;
+-    float h0 = rippleHeight(q);
+-    float hx = rippleHeight(q + vec2(e, 0.)), hz = rippleHeight(q + vec2(0., e));
+-    // relief stylise (pentes x3) : les rides restent lisibles meme sous un soleil haut
+-    vec3 n = normalize(vec3(-3. * (hx - h0) / e, 1., -3. * (hz - h0) / e));
+-    vec3 Ls = normalize(vec3(L.x, min(L.y, .55), L.z));             // eclairage rasant des rides
+-    float lit = clamp(dot(n, Ls), 0., 1.5) / max(Ls.y, .08);
+-    float crest = h0 / .016;                                         // cretes plus claires, creux plus sombres
+-    c *= mix(1., clamp(mix(1., lit, .75), .6, 1.4) * (.93 + .14 * crest), ripples);
++  // reflet du ciel sur les flancs a l'ombre (un peu de bleu dans les creux, comme dans Genshin)
++  float away = clamp(-dot(n, L), 0., 1.);
++  c += base * weather_sky * .22 * away * day;
++
++  // bandes de vent (7 m) et grandes traces claires / rousses : visibles de loin
++  if ((sand_detail & 8) != 0) {
++    float band = ripple(q, 7.0, 1., 11.);
++    float bandVis = 1. - smoothstep(1.2, 3.5, footprint);
++    c *= 1. + (.18 * band - .09) * bandVis;
++    float broad = sandNoise(q * .012) * .6 + sandNoise(q * .045) * .4;
++    float streak = sandNoise(vec2(q.x * .03 + q.y * .02, q.y * .09 - q.x * .06));
++    c *= 1. + .07 * streak + .09 * broad;
++    c = mix(c, c * vec3(1.07, .95, .84), smoothstep(.15, .8, broad) * .45);   // sable plus roux par endroits
++    c = mix(c, c * vec3(1.03, 1.03, 1.08), smoothstep(.2, .9, -broad) * .35); // plus pale ailleurs
+   }
+-  // grain du sable, tout pres
++
++  // sable HD peint (texture Codex) : fin detail tout pres et a moyenne distance
++  c *= mix(vec3(1.), sandHDRatio(q), .55);
++
++  // grain tout pres
+   float grain = (sand_detail & 4) != 0 ? 1. - smoothstep(.004, .016, footprint) : 0.;
+   if (grain > 0.) {
+     vec2 w = mod(q, 64.);
+-    c *= 1. + .07 * grain * sandNoiseWrap(w * 38., 64. * 38.) + .04 * grain * sandNoiseWrap(w * 97., 64. * 97.);
++    c *= 1. + .5 * (.07 * grain * sandNoiseWrap(w * 38., 64. * 38.) + .04 * grain * sandNoiseWrap(w * 97., 64. * 97.));
+   }
+ 
+-  // grandes variations de teinte : traces de vent allongees, zones claires ou rousses
+-  if ((sand_detail & 8) == 0) return c;
+-  float streak = sandNoise(vec2(q.x * .035 + q.y * .02, q.y * .11 - q.x * .07));
+-  float broad = sandNoise(q * .012) * .6 + sandNoise(q * .05) * .4;
+-  c *= 1. + .05 * streak + .06 * broad;
+-  c = mix(c, c * vec3(1.06, .97, .88), smoothstep(.1, .8, broad) * .5);   // sable plus roux par endroits
++  // paillettes : petites facettes qui renvoient le soleil vers l'oeil (scintillent quand on bouge)
++  float sparkleVis = (1. - smoothstep(.02, .09, footprint)) * day;
++  if (sparkleVis > 0.) {
++    float cellSize = .045;
++    vec2 cell = floor(mod(q, 256.) / cellSize);
++    float h = sandHash(cell);
++    if (h > .90) {
++      vec3 rnd = vec3(sandHash(cell + 17.31) - .5, 0., sandHash(cell + 41.77) - .5);
++      vec3 facet = normalize(nT + rnd * 1.7);
++      vec3 H = normalize(Lsun + V);
++      float s = pow(max(dot(facet, H), 0.), 180.);
++      c += vec3(1., .93, .78) * s * 3.2 * sparkleVis;
++    }
++  }
+   return c;
+ }
+ 
++// ---------------------------------------------------------------- eau peinte sur le terrain (cascade du desert)
++// La grande cascade du desert n'est pas un objet : c'est la pente du terrain, peinte en bleu-vert par les artistes
++// (couleurs des sommets : bleu/rouge ~1,4, contre ~0,7 pour le sable). On y dessine de l'eau vive : filets blanc-
++// turquoise qui tombent vite le long de la pente, ecume au pied (riviere a 9 m) et sur les filets clairs.
++float paintedWater(vec3 vc) {
++  float r = max(vc.r, .01);
++  // cascade peinte : bleu/rouge ~1,4 (pied ~1,24) ; ombres bleutees au pied des rochers ~1,07 (a exclure)
++  return smoothstep(1.16, 1.30, vc.b / r) * smoothstep(1.08, 1.16, vc.g / r);
++}
++// filets d'eau : bruit etire le long de l'ecoulement (valeurs 0..1)
++float waterStreaks(float across, float along) {
++  float s1 = sandNoise(vec2(across * 1.1, along * .08)) * .5 + .5;
++  float s2 = sandNoise(vec2(across * 3.1 + 11., along * .20)) * .5 + .5;
++  float s3 = sandNoise(vec2(across * 7.5 + 5., along * .45)) * .5 + .5;
++  return s1 * .5 + s2 * .3 + s3 * .2;
++}
++vec3 terrainWater(vec3 vc) {
++  vec3 P = world_pos;
++  vec3 n = duneNormal(P.xz);
++  float steep = 1. - smoothstep(.40, .62, n.y);
++  // filets verticaux partout (direction fixe dans le plan : plus d'inversion sur les aretes du terrain, qui faisait
++  // des chevrons) ; sur les parties peu pentues, eau plus calme (filets attenues)
++  float fallS = waterStreaks(dot(P.xz, vec2(.62, .78)), P.y + sand_time * 7.5);
++  float streak = mix(.5 + (fallS - .5) * .35, fallS, smoothstep(.25, .75, steep));
++  float foamBottom = 1. - smoothstep(9., 26., P.y);
++  float foam = clamp(smoothstep(.60, .82, streak) * (.35 + .65 * steep) + foamBottom * (.65 + .35 * streak), 0., 1.);
++  vec3 water = mix(vec3(.22, .55, .62), vec3(.55, .84, .90), streak);
++  vec3 col = mix(water, vec3(.97, .99, 1.), foam);
++  float light = clamp(luma(vc * 2.) * 1.35, .25, 1.15);   // heure du jour (couleur precalculee du jeu)
++  return col * light;
++}
++
+ void main() {
+   if (gfx_hack_no_tex == 0) {
+     vec4 T0 = texture(tex_T0, tex_coord);
++    if ((sand_detail & 1) != 0) {
++      // l'ancien carreau (128 px pour 8 m, petites taches repetees) : moyenne locale seulement (couleur du lieu)
++      vec4 m = T0;
++      for (int k = 0; k < 6; k++) {
++        float a = 1.0472 * float(k) + .5;
++        m += texture(tex_T0, tex_coord + .09 * vec2(cos(a), sin(a)));
++        m += texture(tex_T0, tex_coord + .19 * vec2(cos(a + .52), sin(a + .52)));
++      }
++      T0 = m / 13.;
++    }
+     color = fragment_color * T0 * 2;
+-    if ((sand_detail & 1) != 0) color.rgb = remasterSand(color.rgb);
++    if ((sand_detail & 1) != 0) {
++      color.rgb = genshinSand(color.rgb);
++      float wet = paintedWater(fragment_color.rgb);
++      if (wet > 0.) color.rgb = mix(color.rgb, terrainWater(fragment_color.rgb), wet);
++    }
+     if (sand_detail == 0) color.rgb = vec3(1., 0., 1.);   // test : toutes les options du sable coupees -> magenta
+     if (shadow_on != 0) {
+       float baked = dot(fragment_color.rgb * 2., vec3(.2126, .7152, .0722));   // eclairage precalcule (1 = plein)
+       float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength * smoothstep(.35, .85, baked);
+-      color.rgb *= mix(vec3(1.), vec3(.70, .73, .81), shade);   // ombre eclairee par le ciel, un peu bleutee
++      color.rgb *= mix(vec3(1.), vec3(.62, .52, .60), shade);   // ombre chaude et violette, comme les flancs de dunes
+     }
+   } else {
+     color = fragment_color;
+   }
+ 
+    color.rgb = mix(color.rgb, fog_color.rgb, clamp(fogginess * fog_color.a, 0, 1));
++   if (sand_debug != 0) color = vec4(fragment_color.rgb, 1.);
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+index 60bc8f6a..23fdb29e 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_weather_fog.frag
+@@ -26,6 +26,7 @@ uniform vec2 wx_wind;               // m/s
+ uniform float wx_flash;             // eclair
+ uniform float wx_arena;             // 0..1 : brume de l'arene (fumee et chaleur de la lave)
+ uniform float wx_arena_level;       // m : niveau de la lave
++uniform float wx_desert;            // 0..1 : brume chaude du desert (perspective aerienne facon Genshin)
+ 
+ bool skyDepth(float d){const float s=1./16777215.;return d<=1.5*s||abs(d-400.*s)<=1.5*s;}
+ vec3 unproject(vec2 uv,float depth){
+@@ -80,7 +81,18 @@ void main(){
+     float layer=abs(a)<1e-5?base*dist:base*(1.-exp(-dist*a))/a;
+     tauArena=wx_arena*(.0022*min(dist,600.)+min(layer,1.5))*drift;
+   }
+-  float tau=tauFog+tauSand+tauArena;
++  // Desert : brume chaude et lumineuse, plus dense au ras du sable (densite qui decroit avec la hauteur), qui
++  // fond les lointains dans une lumiere doree : profondeur des dunes et des rochers au loin. Le ciel reste net.
++  float tauDesert=0.;
++  if(wx_desert>0.){
++    float k=1./140.;
++    float base=.00042*exp(-(wx_eye.y-22.)*k);
++    float a=rd.y*k;
++    float layer=abs(a)<1e-6?base*dist:base*(1.-exp(-dist*a))/a;
++    float skyCut=skyDepth(depth)?smoothstep(.30,.0,rd.y):1.;
++    tauDesert=wx_desert*min(layer,1.4)*skyCut;
++  }
++  float tau=tauFog+tauSand+tauArena+tauDesert;
+   if(tau<1e-4){color=vec4(0.);return;}
+   float f=1.-exp(-tau);
+   vec3 L=normalize(wx_sun);
+@@ -91,7 +103,10 @@ void main(){
+   float lowRay=exp(-max(rd.y,-.2)*2.5);
+   vec3 smokeCol=mix(vec3(.46,.40,.36),vec3(.95,.42,.14),.42*lowRay)*(.55+.45*length(wx_sun_color))
+                +wx_sun_color*vec3(1.,.85,.65)*pow(mu,6.)*.35;
+-  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena)/tau;
++  // brume du desert : blanc dore pres de l'horizon, un peu de bleu du ciel vers le haut, eclat du soleil a contre-jour
++  vec3 desertCol=mix(vec3(.96,.86,.70),vec3(.80,.86,.95),smoothstep(-.02,.20,rd.y))*(.55+.45*min(length(wx_sun_color),1.2))
++                +wx_sun_color*vec3(1.,.86,.62)*(pow(mu,5.)*.45+pow(mu,32.)*.35);
++  vec3 col=(fogCol*tauFog+sandCol*tauSand+smokeCol*tauArena+desertCol*tauDesert)/tau;
+   col+=vec3(.55,.6,.75)*wx_flash*.18;
+   color=vec4(col*f,f);
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/shrub.frag b/game/graphics/opengl_renderer/shaders/shrub.frag
+index bbe83852..032f81e8 100644
+--- a/game/graphics/opengl_renderer/shaders/shrub.frag
++++ b/game/graphics/opengl_renderer/shaders/shrub.frag
+@@ -126,11 +126,32 @@ vec3 shadePalaceMaterial(vec3 existing,vec3 albedo,vec3 p) {
+ }
+ // PALACE_MATERIAL_END
+ 
++// GENSHIN_LOOK_BEGIN (plantes : meme traitement des couleurs que le decor, tfrag3.frag ; pas de soleil stylise,
++// les plantes sont des cartes et des brins sans vraie face)
++uniform float genshin_look;
++vec3 genshinGrade(vec3 c) {
++  float k = genshin_look;
++  float y = dot(c, vec3(.2126, .7152, .0722));
++  float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
++  float sat = (mx - mn) / max(mx, 1e-3);
++  c = max(mix(vec3(y), c, 1. + .55 * k * (1. - sat)), vec3(0.));
++  c *= mix(vec3(1.), vec3(.94, .95, 1.07), k * (1. - smoothstep(.06, .42, y)));
++  c *= mix(vec3(1.), vec3(1.04, 1.01, .95), k * smoothstep(.45, 1., y));
++  return c * (1. + .07 * k);
++}
++// GENSHIN_LOOK_END
++
+ void main() {
+   if (gfx_hack_no_tex == 0) {
+     vec4 T0 = texture(tex_T0, tex_coord.xy);
+-    color = fragment_color * T0;
++    vec4 light = fragment_color;
++    if (genshin_look > 0.) {
++      float y = dot(max(light.rgb, vec3(0.)), vec3(.2126, .7152, .0722));
++      light.rgb = mix(light.rgb, vec3(y) * vec3(1.03, 1.0, .96), .65 * genshin_look);
++    }
++    color = light * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
++    if (genshin_look > 0.) color.rgb = genshinGrade(color.rgb);
+     if (palace_material==4) color.a *= mix(.48,1.0,smoothstep(.36,.49,T0.a));
+   } else {
+     color = fragment_color;
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index ec8d2d8c..f0181507 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -13,6 +13,7 @@ uniform float alpha_max;
+ uniform vec4 fog_color;
+ 
+ uniform int gfx_hack_no_tex;
++uniform float genshin_look;   // rendu du decor « facon Genshin » : 0 = d'origine, 1 = plein effet (voir GENSHIN_LOOK)
+ 
+ 
+ // Spargus arena prototype, morning lighting. World positions are GOAL units / 4096.
+@@ -820,6 +821,32 @@ vec3 weatherSurface(vec3 color,vec3 lit,vec3 P,vec3 N){
+ }
+ // WEATHER_WORLD_END
+ 
++// CASCADE_BEGIN
++// Grandes cascades (desert, temple) : nappe d'eau vive facon Genshin. Blanc-turquoise lumineux, filets qui tombent
++// vite (7,5 m/s), ecume blanche au pied (riviere a 9 m) et dans les filets les plus clairs ; un peu transparente
++// (on devine la roche), eclairee selon l'heure du jour (couleur precalculee du jeu).
++vec3 shadeWaterfall(vec3 P, vec3 n, vec4 legacy) {
++  vec2 screen = gl_FragCoord.xy / vec2(textureSize(tex_T25, 0));
++  vec3 behind = texture(tex_T25, screen).rgb;
++  vec3 t = normalize(vec3(n.z, 0., -n.x) + vec3(1e-4));
++  float across = dot(P, t);
++  float fall = P.y + fluid_time * 7.5;
++  float s1 = fluidNoise(vec2(across * 1.3, fall * .18));
++  float s2 = fluidNoise(vec2(across * 3.7 + 11., fall * .45));
++  float s3 = fluidNoise(vec2(across * 9.0 + 5., fall * 1.1));
++  float streak = s1 * .5 + s2 * .3 + s3 * .2;
++  float foamBottom = 1. - smoothstep(9., 32., P.y);
++  float foam = clamp(smoothstep(.55, .85, streak) + foamBottom * (.55 + .45 * s2), 0., 1.);
++  vec3 water = mix(vec3(.28, .60, .66), vec3(.62, .87, .92), streak);
++  vec3 col = mix(water, vec3(.96, .98, 1.), foam);
++  float light = clamp(dot(fragment_color.rgb, vec3(.2126, .7152, .0722)) * 1.7, .25, 1.15);
++  col *= light;
++  // bords de la nappe : la texture d'origine (voile tres transparent) dit seulement OU il y a de l'eau
++  float cover = smoothstep(.01, .10, legacy.a);
++  return mix(behind, col, mix(.80, .97, foam) * cover);
++}
++// CASCADE_END
++
+ // SUN_SHADOW_BEGIN
+ // Eclairage moderne : ombres portees du soleil (carte de profondeur du decor vue du soleil, ModernShadows.h).
+ uniform int shadow_on;
+@@ -857,7 +884,8 @@ vec3 applySunShadow(vec3 c, vec3 P, vec3 N) {
+   // l'ombre du soleil n'agit pleinement que sur les surfaces que le jeu eclaire au soleil (sinon double ombre)
+   float baked = dot(max(fragment_color.rgb, vec3(0.)), vec3(.2126, .7152, .0722));
+   float shade = (1. - sunVisibility(P, N)) * shadow_strength * smoothstep(.35, .85, baked);
+-  return c * mix(vec3(1.), vec3(.70, .73, .81), shade);     // ombre eclairee par le ciel : un peu bleutee
++  vec3 tint = mix(vec3(.70, .73, .81), vec3(.80, .78, .93), genshin_look);   // Genshin : ombre claire, lavande
++  return c * mix(vec3(1.), tint, shade);     // ombre eclairee par le ciel : un peu bleutee
+ }
+ // SUN_SHADOW_END
+ 
+@@ -880,6 +908,50 @@ vec4 arenaWorldTexture(vec3 p, vec3 n) {
+ }
+ // ARENA_WORLD_UV_END
+ 
++// GENSHIN_LOOK_BEGIN
++// Rendu du decor « facon Genshin Impact » (ville de Spargus, desert ; niveaux choisis dans PalaceMaterials) :
++//  - la lumiere precalculee du jeu garde sa force (heure du jour, ombres, interieurs, torches) mais perd l'essentiel
++//    de sa teinte orangee : la couleur vient des textures peintes (sinon orange x orange = jaune criard) ;
++//  - soleil stylise : rampe douce entre lumiere et ombre (normales du modele, ou de la face), faces au soleil
++//    chaudes et lumineuses, faces a l'ombre bleu-violet clair (ombres colorees, jamais noires) ;
++//  - couleurs plus vives (vibrance : surtout les couleurs ternes), hautes lumieres chaudes, legere exposition.
++vec3 genshinLight(vec3 light) {
++  float k = genshin_look;
++  float y = dot(max(light, vec3(0.)), vec3(.2126, .7152, .0722));
++  // rendu clair (« high-key ») : les zones moyennes et claires de l'eclairage d'origine sont rapprochees d'une franche
++  // lumiere de jour (les textures peintes se lisent au lieu d'etre ecrasees) ; tres sombre (interieurs, nuit) : garde
++  float lifted = mix(y, max(y, 1.02), .50 * k * smoothstep(.22, .85, y));
++  vec3 tinted = light * (lifted / max(y, 1e-3));
++  return mix(tinted, vec3(lifted) * vec3(1.03, 1.0, .96), .65 * k);
++}
++vec3 genshinLook(vec3 c, vec3 n, float relightScale) {
++  float k = genshin_look;
++  vec3 Ls = normalize(weather_sun_dir);
++  float day = smoothstep(-.02, .20, Ls.y);
++  // soleil un peu rasant pour le modele : les faces verticales restent lisibles meme a midi
++  vec2 hdir = normalize(Ls.xz + vec2(1e-4));
++  float ly = clamp(Ls.y, .22, .55), lh = sqrt(1. - ly * ly);
++  vec3 L = vec3(hdir.x * lh, ly, hdir.y * lh);
++  float ndl = dot(n, L);
++  float ramp = smoothstep(-.08, .22, ndl);
++  vec3 sunTint = vec3(1.08, 1.03, .96), shadeTint = vec3(.86, .85, 1.0);   // soleil blanc chaud, ombre lavande
++  float sky = clamp(n.y * .5 + .5, 0., 1.);
++  vec3 lit = mix(shadeTint, sunTint, ramp) * (.94 + .16 * clamp(ndl, 0., 1.)) * (.97 + .06 * sky);
++  float ref = dot(mix(shadeTint, sunTint, .55), vec3(.2126, .7152, .0722));
++  c *= mix(vec3(1.), lit / ref, .8 * k * day * relightScale);
++  // couleurs : vibrance, ombres violettes, lumieres chaudes, legere exposition
++  float y = dot(c, vec3(.2126, .7152, .0722));
++  float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
++  float sat = (mx - mn) / max(mx, 1e-3);
++  // vibrance (couleurs ternes surtout) ; les jaunes et oranges moins pousses (sinon sable « jaune citron »)
++  float yellow = smoothstep(.25, .6, (c.r + c.g) * .5 - c.b) * smoothstep(0., .25, c.g - c.b * .9);
++  c = max(mix(vec3(y), c, 1. + k * (.10 + .35 * (1. - sat)) * (1. - .75 * yellow)), vec3(0.));
++  c *= mix(vec3(1.), vec3(.94, .95, 1.07), k * (1. - smoothstep(.06, .42, y)));
++  c *= mix(vec3(1.), vec3(1.02, 1.0, .98), k * smoothstep(.45, 1., y));
++  return c * (1. + .07 * k);
++}
++// GENSHIN_LOOK_END
++
+ void main() {
+   vec3 arena_light = arenaRelight(fragment_color.rgb, arena_world);
+   vec3 surface_normal = normalize(cross(dFdx(arena_world),dFdy(arena_world)));
+@@ -891,18 +963,25 @@ void main() {
+                                    : texture(tex_T0, tex_coord.xy);
+     if (fluid_kind == 1) {
+       color = vec4(shadeModernLava(arena_world),1.0);
++    } else if (fluid_kind == 3) {
++      color = vec4(shadeWaterfall(arena_world, surface_normal, T0), 1.0);
+     } else if (fluid_kind == 2) {
+       fluidCoverHint = textureLod(tex_T0, tex_coord.xy, 3.5).a*fragment_color.a*2.0;   // couverture floue
+       color = vec4(shadeModernWater(arena_world,surface_normal,
+         T0*vec4(1.0,1.0,1.0,fragment_color.a*2.0)),1.0);
+     } else {
+-      color = vec4(arena_light, fragment_color.a) * T0;
++      color = vec4(genshin_look > 0. ? genshinLight(arena_light) : arena_light, fragment_color.a) * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
+     vec3 shadow_normal = dot(surface_normal, shadow_eye-arena_world) < 0. ? -surface_normal : surface_normal;
+     color.rgb = applySunShadow(color.rgb, arena_world, shadow_normal);   // ombres portees du soleil
+     if (palace_material==4) color.a *= mix(.48,1.0,smoothstep(.36,.49,T0.a));
+     color.rgb=beachWetSand(color.rgb,arena_world);   // plage de Spargus
+     color.rgb=weatherSurface(color.rgb,arena_light,arena_world,surface_normal);   // meteo
++    if (genshin_look > 0.) {
++      vec3 gn = dot(world_uv_normal, cam_trans.xyz / 4096. - arena_world) < 0. ? -world_uv_normal : world_uv_normal;
++      // matieres deja eclairees par leur relief (roches, palais) : soleil stylise plus discret
++      color.rgb = genshinLook(color.rgb, gn, palace_material != 0 ? .45 : 1.);
++    }
+     }
+   } else {
+     color = fragment_color/2;
+diff --git a/tools/palace_mesh_bridge.cpp b/tools/palace_mesh_bridge.cpp
+index 20a55cc3..69279c51 100644
+--- a/tools/palace_mesh_bridge.cpp
++++ b/tools/palace_mesh_bridge.cpp
+@@ -7,6 +7,7 @@
+ #include <set>
+ #include <cmath>
+ #include "common/custom_data/pack_helpers.h"
++#include "common/texture/texture_slots.h"
+ #include <type_traits>
+ #include <algorithm>
+ #include <array>
+@@ -905,7 +906,42 @@ int list_textures(const fs::path& directory,const fs::path& output) {
+   return 0;
+ }
+ 
++// Eaux et effets a texture animee (tree_tex_id < 0, ignores par l'export) : position de chaque dessin.
++int anim_bounds(const fs::path& input,const fs::path& output) {
++  auto level=read_native_level(input);
++  json result=json::array();
++  auto scan=[&](const char* type,int geom,int ti,auto& tree,auto& draws) {
++    tree.unpack();
++    for(size_t di=0;di<draws.size();di++) {
++      const auto& draw=draws[di];if(draw.tree_tex_id>=0)continue;
++      const int slot=-(draw.tree_tex_id+1);
++      const auto& names=jak3_animated_texture_slots();
++      float lo[3]={1e30f,1e30f,1e30f},hi[3]={-1e30f,-1e30f,-1e30f};size_t count=0;
++      size_t offset=draw.unpacked.idx_of_first_idx_in_full_buffer;
++      for(const auto& group:draw.vis_groups) {
++        for(size_t i=0;i<group.num_inds;i++) {
++          const u32 id=tree.unpacked.indices.at(offset+i);if(id==UINT32_MAX)continue;
++          const auto& v=tree.unpacked.vertices.at(id);const float p[3]={v.x/4096.f,v.y/4096.f,v.z/4096.f};
++          for(int k=0;k<3;k++){lo[k]=std::min(lo[k],p[k]);hi[k]=std::max(hi[k],p[k]);}++count;
++        }
++        offset+=group.num_inds;
++      }
++      result.push_back({{"type",type},{"geom",geom},{"tree",ti},{"draw",di},{"slot",slot},
++        {"material",slot<(int)names.size()?names[slot]:std::string("?")},{"indices",count},
++        {"min",{lo[0],lo[1],lo[2]}},{"max",{hi[0],hi[1],hi[2]}}});
++    }
++  };
++  for(int geom=0;geom<int(level.tfrag_trees.size());geom++)
++    for(size_t ti=0;ti<level.tfrag_trees[geom].size();ti++){auto& t=level.tfrag_trees[geom][ti];scan("tfrag",geom,int(ti),t,t.draws);}
++  for(int geom=0;geom<int(level.tie_trees.size());geom++)
++    for(size_t ti=0;ti<level.tie_trees[geom].size();ti++){auto& t=level.tie_trees[geom][ti];scan("tie",geom,int(ti),t,t.static_draws);}
++  file_util::write_text_file(output,result.dump(1));
++  fmt::print("Animated-texture draws: {}\n",result.size());
++  return 0;
++}
++
+ int main(int argc,char** argv) {
++  if(argc==4&&std::string(argv[1])=="--anim-bounds")return anim_bounds(argv[2],argv[3]);
+   if(argc==4&&std::string(argv[1])=="--list-textures")return list_textures(argv[2],argv[3]);
+   if(argc==5&&std::string(argv[1])=="--audit-bvh-coverage")
+     return audit_static_bvh_coverage(argv[2],argv[3],argv[4]);
+-- 
+2.54.0.windows.1
+

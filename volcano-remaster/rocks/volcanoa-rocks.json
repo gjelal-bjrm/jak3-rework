@@ -1,12 +1,12 @@
 {
- "native": "volcano-remaster/rocks/volcanox-rocks-native.json",
+ "native": "volcano-remaster/rocks/volcanoa-rocks-native.json",
  "materials": [
   "vola-lava-rock-01"
  ],
  "style": "lave",
  "centre": [
-  -93.6,
-  -429.0
+  -46.1,
+  -354.9
  ],
  "near": 0.0,
  "strata_top": 400.0,
@@ -16,9 +16,9 @@
  "far_spacing": 1.4,
  "thin_ratio": 0.07,
  "lava_scale": 1.8,
- "patch": "volcano-remaster/rocks/volcanox-rocks-patch.json",
- "report": "volcano-remaster/rocks/volcanox-rocks-report.json",
- "preview_prefix": "volcanox",
+ "patch": "volcano-remaster/rocks/volcanoa-rocks-patch.json",
+ "report": "volcano-remaster/rocks/volcanoa-rocks-report.json",
+ "preview_prefix": "volcanoa",
  "views": [
   [
    [

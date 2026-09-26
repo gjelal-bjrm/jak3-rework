@@ -185,3 +185,46 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   remise (le dessin de Codex reste).
 - Outil : les captures attendent maintenant 30 s le chargement complet du lieu (au volcan, la 1ʳᵉ vue était
   prise avant l'affichage).
+
+## 26/09 (soir) — tes retours en direct
+
+### 14. Désert — sable « façon Genshin » (ton retour : « catastrophique, on ne voit rien de loin »)
+- Mes premières retouches (rides fines, sable HD posé en léger détail) ne se voyaient que de près. Refait sur
+  un autre principe : ce qui fait un désert à la Genshin, c'est la **lumière et la forme**, pas la texture.
+- Relief des dunes éclairé au pixel (pente tirée de la carte des hauteurs du terrain) avec une rampe douce façon
+  dessin animé : flanc au soleil doré et lumineux, flanc à l'ombre orangé-violet ; **grandes rides de vent**
+  (1,2 m) visibles à moyenne distance et fines rides tout près ; bandes de vent et traces claires / rousses
+  visibles de loin ; sable chaud et saturé ; **paillettes** qui scintillent ; sable HD peint en détail.
+- **Brume chaude du désert** : les lointains se fondent dans une lumière dorée (profondeur).
+- Ton verdict : « c'est mieux, là on voit clairement une différence ». Planche : `qa/gs1-compare.png`.
+- Le vrai sable du désert n'était pas dans le kit Codex (le sol du désert est un atlas de petits carreaux) :
+  entrée prioritaire ajoutée en tête du kit (`des-sand-hd-v1`, voir `codex/PRIORITE-SABLE.md`). En attendant,
+  c'est le sable de la plage de Spargus qui sert de détail peint.
+
+### 15. Désert — l'eau (ton retour : mer, rivière et cascades pas refaites)
+- **Mer et rivière du désert** : la nouvelle eau (celle de Spargus, un peu plus turquoise) couvre maintenant
+  toute la carte d'eau du désert (mer autour, lac de l'oasis de la zone E, rivière qui traverse le désert) —
+  masque de côte généré depuis les tables d'origine (`models-v2/build_ocean_coast_mask_desert.py`, aperçu
+  `models-v2/ocean-coast-mask-desert.png`).
+- **Grande cascade** (zone D) : ce n'était pas un objet mais la pente du terrain peinte en vert sombre. Cette
+  peinture est maintenant rendue comme de l'eau vive : filets blanc-turquoise qui tombent vite, écume au pied.
+  Planches `qa/casc10-compare.png`. Scène de test « Désert : grande cascade et rivière » dans le lanceur.
+
+### 16. Ville de Spargus — ton retour : « très peu de différence au sol, aux maisons, aux textures »
+- Mesuré : dans la ville, le remaster était même **plus sombre** que l'original (0,87 à 1,0). Deux causes :
+  1. ma correction de teinte des textures (faite pour le sable du désert) avait ramené une partie de la ville
+     (sol, bas des murs, supports) au gris-vert d'origine alors que Codex l'avait faite en grès chaud ;
+  2. aucun éclairage moderne sur les murs et le sol de la ville, seulement l'ombre et l'occlusion (qui assombrissent).
+- Corrections : couleurs de Codex rétablies pour toute la ville (sans correction de teinte) ; **nouveau rendu du
+  décor « façon Genshin »** : la lumière précalculée du jeu garde sa force mais perd sa teinte orangée (plus de
+  « jaune criard »), soleil stylisé (faces au soleil chaudes et lumineuses, faces à l'ombre bleu-violet clair),
+  couleurs plus vives, plantes comprises. Suite de cette entrée après contrôle en jeu.
+- Codex : 202 nouvelles textures (Haven, port, fermes) contrôlées et intégrées ; 2 refusées (la photo de l'équipe
+  de Naughty Dog cachée dans une fenêtre du port, un halo devenu granuleux).
+- **Contrôlé en jeu** (4 cadrages, près et loin, `qa/cityD-cmp.png`) : ville nettement plus claire que l'original
+  (1,04 à 1,21), grès chaud au lieu du gris-bleu, ombres claires lavande, roches vives, brume de profondeur vue
+  de loin. Premier essai trop jaune (« sable jaune citron ») : jaunes et oranges moins poussés, soleil plus blanc.
+- Le même rendu s'applique aux roches du désert (plus chaudes, cohérentes avec le sable) : `qa/gs2-3way.png`.
+  Corrigé au passage : de fausses taches d'eau turquoise au pied des rochers (ombres bleutées prises pour la
+  cascade peinte) — `qa/water-threshold.png`.
+- Pour comparer toi-même : le rendu se coupe en test avec `pc-remaster-lighting 263` (256 = rendu Genshin coupé).
