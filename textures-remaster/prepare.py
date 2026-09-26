@@ -8,7 +8,11 @@ Pour chaque image de textures-remaster/codex/resultats/ (nouvelle ou modifiee) :
      touchee par les bords), aux proportions de la texture d'origine ;
   2. taille : plus grand cote 1024 (au-dela, le chargement des niveaux ralentit sans gain visible en jeu) ;
   3. raccords : si la texture d'origine se repete sans couture, les bords de la nouvelle sont corriges ;
-  4. alpha d'origine (textures a alpha uniforme seulement : les decoupes sont exclues du kit).
+  4. alpha d'origine (textures a alpha uniforme seulement : les decoupes sont exclues du kit) ;
+  5. teinte : Codex rechauffe et eclaircit presque tout. Quand la teinte moyenne s'ecarte franchement de
+     l'original (ecart a*b* > 20), elle y est ramenee a 80 % (luminosite moyenne a 50 %), sans toucher au
+     dessin. Raison : le jeu colore les textures par l'eclairage des sommets ; dans le desert, un sol gris-vert
+     devenu orange donnait orange x orange = jaune criard (verifie en jeu, qa/sand-diag.png).
 Textures refusees apres controle (hors sujet, couleurs trahies) : rejets.json (nom -> raison) ; le jeu garde
 l'original, et la liste sert a redemander ces textures a Codex.
 Sorties : out/<nom>.rgba (+ .png d'apercu) et textures.json (liste pour remaster-build/build.py).
@@ -21,11 +25,35 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(ROOT / 'arena-remaster/textures'))
-from prepare_textures import seam_ratio, fix_seam      # meme correction des raccords que l'arene
+from prepare_textures import seam_ratio, fix_seam, srgb_to_lab, lab_to_srgb   # memes outils que l'arene
 
 KIT = HERE / 'codex'
 OUT = HERE / 'out'
 MAX_SIDE = 1024
+VERSION = 3                      # 3 : teinte ramenee vers l'original (balance des blancs) si elle s'en ecarte franchement
+HUE_LIMIT, HUE_BACK, LIGHT_BACK = 20.0, .8, .5
+
+
+def keep_hue(pix, orig_rgb):
+    """Teinte et luminosite moyennes ramenees vers l'original, dessin intact. Renvoie (pixels, ecart a*b*).
+
+    Correction du type « balance des blancs » : chaque canal est multiplie (en lumiere lineaire) ; les zones sombres
+    restent sombres et aucune teinte opposee n'apparait (un decalage uniforme de a*b* bleuissait les stries
+    sombres, ex. tronc des palmiers)."""
+    a = srgb_to_lab(pix); b = srgb_to_lab(orig_rgb.astype(float))
+    d = b[..., 1:].reshape(-1, 2).mean(0) - a[..., 1:].reshape(-1, 2).mean(0)
+    gap = float(np.linalg.norm(d))
+    if gap <= HUE_LIMIT: return pix, gap
+    lin = lambda c: np.where(c <= .04045, c / 12.92, ((c + .055) / 1.055) ** 2.4)
+    srgb = lambda c: np.where(c <= .0031308, 12.92 * c, 1.055 * np.clip(c, 0, None) ** (1 / 2.4) - .055)
+    L = np.array([.2126, .7152, .0722])
+    x = lin(pix / 255.); o = lin(orig_rgb.astype(float) / 255.)
+    mx = x.reshape(-1, 3).mean(0); mo = o.reshape(-1, 3).mean(0)
+    balance = (mo / (mo @ L)) / (mx / (mx @ L))                       # rapport de teinte, luminosite egale
+    y = x * balance ** HUE_BACK
+    target = (mx @ L) ** (1 - LIGHT_BACK) * (mo @ L) ** LIGHT_BACK   # luminosite moyenne : a mi-chemin
+    y *= target / max((y.reshape(-1, 3).mean(0) @ L), 1e-6)
+    return np.clip(srgb(np.clip(y, 0, 1)) * 255, 0, 255), gap
 
 
 def main():
@@ -38,8 +66,8 @@ def main():
         if not e or png.stem in rejects: continue
         rgba = OUT / f'{png.stem}.rgba'
         entry = None
-        if rgba.exists() and rgba.stat().st_mtime >= png.stat().st_mtime:
-            meta = json.loads((OUT / f'{png.stem}.json').read_text())
+        meta = json.loads((OUT / f'{png.stem}.json').read_text()) if (OUT / f'{png.stem}.json').exists() else {}
+        if rgba.exists() and rgba.stat().st_mtime >= png.stat().st_mtime and meta.get('version') == VERSION:
             entry = meta
         else:
             ow, oh = e['source_size']; nx, ny = e['tiles']
@@ -53,18 +81,24 @@ def main():
             if h > MAX_SIDE: h = MAX_SIDE; w = max(4, int(round(h * ow / oh / 4)) * 4)
             pix = np.asarray(tile.resize((w, h), Image.LANCZOS), float)
             orig = np.asarray(Image.open(ROOT / e['source']).convert('RGBA'))
+            pix, gap = keep_hue(pix, orig[..., :3])
             for axis in (1, 0):
                 if seam_ratio(orig[..., :3], axis) < 2.0 and seam_ratio(pix, axis) > 1.6: pix = fix_seam(pix, axis)
             alpha = np.full((h, w), int(orig[..., 3].max()), np.uint8)
             out = np.dstack([np.clip(np.round(pix), 0, 255).astype(np.uint8), alpha])
-            rgba.write_bytes(out.tobytes())
-            Image.fromarray(out[..., :3]).save(OUT / f'{png.stem}.png')
-            entry = {'name': png.stem, 'rgba_file': str(rgba), 'width': w, 'height': h}
+            data = out.tobytes()
+            if not (rgba.exists() and rgba.read_bytes() == data):    # identique : on garde la date (pas de reconstruction)
+                rgba.write_bytes(data)
+                Image.fromarray(out[..., :3]).save(OUT / f'{png.stem}.png')
+                made += 1
+            entry = {'name': png.stem, 'rgba_file': str(rgba), 'width': w, 'height': h, 'version': VERSION,
+                     'hue_gap': round(gap, 1), 'hue_back': gap > HUE_LIMIT}
             (OUT / f'{png.stem}.json').write_text(json.dumps(entry))
-            made += 1
         listing.append(entry)
     (HERE / 'textures.json').write_text(json.dumps({'textures': listing}, indent=1))
-    print(f'{len(listing)} textures pretes ({made} nouvelles, {len(rejects)} refusees)')
+    back = sum(1 for x in listing if x.get('hue_back'))
+    print(f'{len(listing)} textures pretes ({made} nouvelles ou modifiees, {len(rejects)} refusees, '
+          f'{back} teintes ramenees vers celle de l original)')
 
 
 if __name__ == '__main__':

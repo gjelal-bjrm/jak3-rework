@@ -123,6 +123,8 @@ def main(args):
                 assert k not in seen, ('remplacements qui se chevauchent', level, p)
                 seen.add(k)
             patch['remove'] += part['remove']; patch['add'] += part['add']
+            for t in part.get('new_textures', []):             # textures neuves (ex. folioles des palmiers)
+                if all(x['name'] != t['name'] for x in patch.setdefault('new_textures', [])): patch['new_textures'].append(t)
             del part
         (HERE / 'patches').mkdir(exist_ok=True)
         patch_file = HERE / 'patches' / f'{level}.json'

@@ -114,3 +114,36 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
 - **Installé et vérifié en jeu** : grandes montagnes 63 828 → 3,0 millions de triangles ; rochers devant la porte
   (desertb) 99 224 → 1,6 million. **60 images/s**, pire image 32 ms (comme avant). Comparaison aux mêmes
   cadrages : `qa/desm-compare.png`.
+
+### 9. Désert — teinte des textures (sol jaune criard corrigé)
+- Constat en jeu, au pied de la porte : sol jaune vif à taches orange, rien à voir avec l'original. Diagnostic
+  (bascules une par une, `qa/sand-diag.png`, puis tir de rayons sur la géométrie) : ce n'est pas le sable du
+  désert mais deux sols texturés (`wascity-ground-01`, `des-beach-01`). Les textures d'origine sont gris-vert ;
+  le jeu les colore par l'éclairage des sommets (orangé dans le désert). Codex les avait faites orange :
+  orange × orange = jaune criard.
+- Mesure sur toutes les textures Codex : Codex réchauffe et éclaircit presque tout. Correction automatique
+  dans la préparation : quand la teinte moyenne s'écarte franchement de l'original, elle y est ramenée à 80 %
+  (dessin de Codex intact, pas de flou). 37 textures concernées (sols du désert, pierres bleues du palais, œufs,
+  ruines…). La ville (déjà validée) n'est presque pas touchée.
+- Vu en jeu ensuite : la 1ʳᵉ version de cette correction bleuissait les parties sombres (stries bleues sur les
+  troncs de palmiers). Remplacée par une correction « balance des blancs » (chaque couleur multipliée) : plus
+  aucune teinte opposée. Planche de contrôle des 37 textures : `qa/hue-back-v3.png`.
+- 3ᵉ série Codex (167 textures : temple, ruines, Haven, marcheur précurseur, volcan) contrôlée ; 26 refusées de
+  plus (cartes de reflets redessinées, halos devenus granuleux, lave ajoutée sur des roches du volcan qui n'en
+  ont pas…). Liste à jour : `textures-remaster/codex/TEXTURES-A-REFAIRE.md` (32 textures).
+
+### 10. Désert — toutes les zones, palmiers et herbe (végétation refaite en modèles)
+- **Roches des 8 zones du désert** sculptées (mêmes réglages que devant la porte) : de 58 000 à 103 000
+  triangles d'origine par zone → 0,65 à 1,66 million.
+- **Palmiers** (oasis) : dans le désert, un palmier est un assemblage (tronc + dizaines de palmes posées une à
+  une). Chaque palme d'origine = tige plate + deux cartes « plume » transparentes. Remplacée par une vraie palme :
+  tige ronde, rachis qui s'affine, 48 folioles séparées (pliées, arquées, retombantes) qui suivent exactement la
+  silhouette d'origine. Troncs : section ronde qui suit la courbe d'origine, bourrelets, relief, pied évasé.
+  Construits une fois par modèle, posés sur chaque exemplaire (les couronnes gardent leur disposition).
+  Aperçus : `desert-remaster/palms/preview/palms-cmp*.png`. Script : `desert-remaster/palms/author_palms.py`.
+- **Herbe sèche** : touffes de cartes croisées remplacées par de vrais brins (effilés, courbés, hauteurs variées),
+  couleur de l'herbe d'origine. Aperçu : `desert-remaster/plants/preview/grass-cmp.png`.
+- **Occlusion ambiante** : en jeu, elle noircissait les touffes d'herbe (brins fins et serrés). Vérifié en
+  coupant les effets un par un (`qa/grass-light.png`). Les plantes sont maintenant exclues de l'assombrissement
+  (le sol autour garde son ombre de contact).
+- Test par zone : `qa_zones.py <zone>` (scènes `desa`…`desh`, `oasis` ajoutées au lanceur) → `qa/zone-*.png`.

@@ -174,5 +174,15 @@
   "out/jak3/fr3/destrack.fr3",
   "out/jak3/fr3/intpalrf.fr3",
   "out/jak3/fr3/intpfall.fr3",
-  "out/jak3/fr3/forestb.fr3"
+  "out/jak3/fr3/forestb.fr3",
+  "game/graphics/opengl_renderer/shaders/hfrag.vert",
+  "game/graphics/opengl_renderer/shaders/hfrag.frag",
+  "out/jak3/fr3/combn.fr3",
+  "out/jak3/fr3/combx.fr3",
+  "out/jak3/fr3/ctyslumb.fr3",
+  "out/jak3/fr3/desbcst.fr3",
+  "out/jak3/fr3/deshover.fr3",
+  "out/jak3/fr3/gungame.fr3",
+  "out/jak3/fr3/minea.fr3",
+  "out/jak3/fr3/vinroom.fr3"
 ]

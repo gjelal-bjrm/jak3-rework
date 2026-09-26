@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -71,6 +71,14 @@ CITY_SCENES = {
                  'label': 'a la porte du desert de Spargus (garage des vehicules)'},
     'desert': {'continue': 'desert-start', 'arrival': (2266.4, 258.1), 'viewpoint': (2266.4, 33.0, 258.1),
                'label': 'dans le grand desert, devant la porte de Spargus'},
+    # une scene par zone du desert (points de reprise des buissons ardents) : controle de chaque zone
+    **{f'des{z}': {'continue': f'desert-bbush-des{z}', 'arrival': (x, zz), 'viewpoint': (x, y + 2.0, zz),
+                   'label': f'zone des{z} du desert (buisson ardent)'}
+       for z, x, y, zz in (('a', 1372.6, 94.7, 814.3), ('b', 2860.7, 29.7, 160.9), ('c', 862.9, 79.2, 1358.2),
+                           ('d', 3821.3, 34.9, 725.0), ('e', 648.2, 17.7, 2592.8), ('g', 3151.8, 40.5, 2513.4),
+                           ('h', 3118.8, 20.2, 3533.7))},
+    'oasis': {'continue': 'desert-nest-exit', 'arrival': (2210.0, 2218.2), 'viewpoint': (2210.0, 22.3, 2218.2),
+              'label': 'sortie du nid, centre du desert'},
 }
 route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 

@@ -1,0 +1,270 @@
+From 9c022cab3896a714b9516e858fc96ac8347835be Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Sat, 26 Sep 2026 06:03:58 +0200
+Subject: [PATCH] Sable du desert (hfrag) : ombres du soleil, rides et grain ;
+ carte des ombres avant le sable ; plantes exclues de l'occlusion ambiante
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernAO.h      |   4 +
+ .../opengl_renderer/OpenGLRenderer.cpp        |   5 +-
+ .../opengl_renderer/background/Hfrag.cpp      |  15 +++
+ .../opengl_renderer/background/Shrub.cpp      |  14 +++
+ .../opengl_renderer/shaders/hfrag.frag        | 110 ++++++++++++++++++
+ .../opengl_renderer/shaders/hfrag.vert        |   5 +
+ 6 files changed, 151 insertions(+), 2 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernAO.h b/game/graphics/opengl_renderer/ModernAO.h
+index 89357571..cbbe3813 100644
+--- a/game/graphics/opengl_renderer/ModernAO.h
++++ b/game/graphics/opengl_renderer/ModernAO.h
+@@ -62,7 +62,11 @@ class ModernAO {
+     glEnable(GL_BLEND); glBlendEquation(GL_FUNC_ADD); glBlendFuncSeparate(GL_ZERO, GL_SRC_COLOR, GL_ZERO, GL_ONE);
+     glActiveTexture(GL_TEXTURE28); glBindTexture(GL_TEXTURE_2D, m_ao[0]);
+     glUniform1i(glGetUniformLocation(id, "ao_mode"), 2);
++    // plantes (herbe, buissons : bit 0x80 du stencil, pose par Shrub) : pas d'assombrissement
++    glEnable(GL_STENCIL_TEST); glStencilMask(0); glStencilFunc(GL_NOTEQUAL, 0x80, 0x80);
++    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+     glDrawArrays(GL_TRIANGLES, 0, 3);
++    glStencilMask(0xFF); glDisable(GL_STENCIL_TEST);
+ 
+     glUseProgram(program); glBindVertexArray(vao);
+     glBindFramebuffer(GL_READ_FRAMEBUFFER, read_fb); glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw_fb);
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index 2e728c1b..c40f260a 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1449,8 +1449,9 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+     vif_interrupt_callback(bucket_id + 1);
+     m_category_times[(int)m_bucket_categories[bucket_id]] += bucket_prof.get_elapsed_time();
+ 
+-    // eclairage moderne : carte des ombres du soleil, juste avant le premier decor
+-    if (m_version == GameVersion::Jak3 && bucket_id + 1 == (int)jak3::BucketId::TEX_L0_TFRAG) {
++    // eclairage moderne : carte des ombres du soleil, juste avant le premier decor (le sable du desert, hfrag,
++    // est dessine avant tfrag : il recoit aussi les ombres des roches)
++    if (m_version == GameVersion::Jak3 && bucket_id + 1 == (int)jak3::BucketId::HFRAG) {
+       auto p = prof.make_scoped_child("modern-shadows");
+       m_modern_shadows.render(&m_render_state);
+     }
+diff --git a/game/graphics/opengl_renderer/background/Hfrag.cpp b/game/graphics/opengl_renderer/background/Hfrag.cpp
+index f7887c22..8092e290 100644
+--- a/game/graphics/opengl_renderer/background/Hfrag.cpp
++++ b/game/graphics/opengl_renderer/background/Hfrag.cpp
+@@ -2,6 +2,8 @@
+ 
+ #include "common/log/log.h"
+ 
++#include "game/graphics/opengl_renderer/ModernShadows.h"
++
+ #include "third-party/imgui/imgui.h"
+ 
+ Hfrag::Hfrag(const std::string& name, int my_id) : BucketRenderer(name, my_id) {
+@@ -403,6 +405,19 @@ void Hfrag::render_hfrag_level(Hfrag::HfragLevel* lev,
+ 
+   // set up shader
+   first_tfrag_draw_setup(pc_data.camera, render_state, ShaderId::HFRAG);
++  {
++    // sable du remaster : ombres des roches (carte du soleil) et relief fin eclaire par le soleil
++    const GLuint program = render_state->shaders[ShaderId::HFRAG].id();
++    shadow_bind(program);
++    std::array<float, 3> sun;
++    {
++      std::lock_guard<std::mutex> guard(WeatherLook::mutex);
++      sun = WeatherLook::sun_dir;
++    }
++    glUniform3fv(glGetUniformLocation(program, "weather_sun_dir"), 1, sun.data());
++    // tests : pc-remaster-lighting bit 3 = relief du sable coupe (bits 4..6 : rides, grain, teintes seuls)
++    glUniform1i(glGetUniformLocation(program, "sand_detail"), (~LightingState::flags.load() >> 3) & 15);
++  }
+   setup_opengl_from_draw_mode(lev->hfrag->draw_mode, GL_TEXTURE0, false);
+ 
+   glActiveTexture(GL_TEXTURE0);
+diff --git a/game/graphics/opengl_renderer/background/Shrub.cpp b/game/graphics/opengl_renderer/background/Shrub.cpp
+index 9efcebfd..039e002f 100644
+--- a/game/graphics/opengl_renderer/background/Shrub.cpp
++++ b/game/graphics/opengl_renderer/background/Shrub.cpp
+@@ -349,6 +349,16 @@ void Shrub::render_tree(int idx,
+ 
+   Timer draw_timer;
+ 
++  // remaster : les plantes (herbe, buissons) marquent leurs pixels (bit 0x80 du stencil) ; l'occlusion ambiante
++  // les epargne (sur des brins fins et serres, elle noircissait toute la touffe). Shadow2 efface le stencil.
++  if (render_state->version == GameVersion::Jak3) {
++    glEnable(GL_STENCIL_TEST);
++    glStencilFunc(GL_ALWAYS, 0x80, 0x80);
++    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
++    glStencilMask(0x80);
++    render_state->stencil_dirty = true;
++  }
++
+   for (size_t draw_idx = 0; draw_idx < tree.draws->size(); draw_idx++) {
+     const auto& draw = tree.draws->operator[](draw_idx);
+     if (!tree.proto_vis_mask.at(draw.proto_idx)) {
+@@ -418,6 +428,10 @@ void Shrub::render_tree(int idx,
+     }
+   }
+ 
++  if (render_state->version == GameVersion::Jak3) {
++    glStencilMask(0xFF);
++    glDisable(GL_STENCIL_TEST);
++  }
+   glBindVertexArray(0);
+   tree.perf.draw_time.add(draw_timer.getSeconds());
+   tree.perf.tree_time.add(tree_timer.getSeconds());
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.frag b/game/graphics/opengl_renderer/shaders/hfrag.frag
+index fc6bdbce..a7baa399 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.frag
++++ b/game/graphics/opengl_renderer/shaders/hfrag.frag
+@@ -5,16 +5,126 @@ out vec4 color;
+ in vec4 fragment_color;
+ in vec2 tex_coord;
+ in float fogginess;
++in vec3 world_pos;   // metres
++in vec3 eye_pos;     // metres
+ uniform sampler2D tex_T0;
+ uniform vec4 fog_color;
+ 
+ uniform int gfx_hack_no_tex;
+ 
++// ---------------------------------------------------------------- remaster : sable du desert
++// Le sol du desert (hfrag) n'a que des carreaux de 32 x 32 pixels : a hauteur de Jak, un aplat jaune.
++// On y ajoute, en coordonnees du monde (sans repetition visible) :
++//  - des rides de vent eclairees par le soleil (quelques cm de haut, ~30 cm d'ecart), qui s'effacent au loin ;
++//  - le grain du sable tout pres ;
++//  - de larges variations de teinte (traces de vent, zones plus claires ou plus rousses) qui cassent la
++//    repetition des carreaux jusqu'a l'horizon ;
++//  - les ombres portees du soleil (roches, falaises) : sans elles, les montagnes semblaient posees sur le sable.
++uniform vec3 weather_sun_dir;
++uniform int sand_detail;   // bit 0 : tout ; bits 1..3 : rides, grain, teintes (tests)
++
++// SUN_SHADOW_BEGIN (meme calcul que tfrag3.frag)
++uniform int shadow_on;
++uniform sampler2DShadow shadow_map;
++uniform mat4 shadow_matrix;
++uniform float shadow_strength;
++uniform float shadow_texel;
++const vec2 shadow_taps[12] = vec2[12](vec2(-.326,-.406), vec2(-.840,-.074), vec2(-.696,.457), vec2(-.203,.621),
++  vec2(.962,-.195), vec2(.473,-.480), vec2(.519,.767), vec2(.185,-.893), vec2(.507,.064), vec2(.896,.412),
++  vec2(-.322,-.933), vec2(-.792,-.598));
++float sunVisibility(vec3 P, vec3 N) {
++  vec3 L = normalize(weather_sun_dir);
++  vec3 Po = P + N * (.05 + 2. * shadow_texel) + L * shadow_texel;
++  vec4 sc = shadow_matrix * vec4(Po, 1.);
++  vec2 edge = abs(sc.xy * 2. - 1.);
++  if (max(edge.x, edge.y) > 1. || sc.z > 1.) return 1.;
++  float a = 6.2831853 * fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(.06711056, .00583715))));
++  mat2 rot = mat2(cos(a), sin(a), -sin(a), cos(a));
++  float radius = 2.2 / 4096.;
++  float lit = 0.;
++  for (int i = 0; i < 12; i++) lit += texture(shadow_map, vec3(sc.xy + rot * shadow_taps[i] * radius, sc.z - .00008));
++  lit /= 12.;
++  float fade = smoothstep(1., .82, max(edge.x, edge.y));
++  return mix(1., lit, fade);
++}
++// SUN_SHADOW_END
++
++// hachage entier des cellules (exact a toute distance de l'origine ; les versions en virgule flottante
++// degenerent a quelques km)
++float sandHash(vec2 p) {
++  uvec2 v = uvec2(ivec2(p));
++  uint h = v.x * 1664525u ^ (v.y * 1013904223u + 0x9e3779b9u);
++  h ^= h >> 16; h *= 0x7feb352du; h ^= h >> 15; h *= 0x846ca68bu; h ^= h >> 16;
++  return float(h & 0xffffffu) / 16777215.;
++}
++float sandNoise(vec2 p) {
++  vec2 i = floor(p), f = fract(p), u = f * f * (3. - 2. * f);
++  return mix(mix(sandHash(i), sandHash(i + vec2(1, 0)), u.x),
++             mix(sandHash(i + vec2(0, 1)), sandHash(i + vec2(1, 1)), u.x), u.y) * 2. - 1.;
++}
++// bruit periodique (grain : coordonnees ramenees a une periode de 64 m, sans perte de precision loin de l'origine)
++float sandNoiseWrap(vec2 p, float period) {
++  vec2 i = floor(p), f = fract(p), u = f * f * (3. - 2. * f);
++  vec2 i1 = mod(i + 1., period);
++  i = mod(i, period);
++  return mix(mix(sandHash(i), sandHash(vec2(i1.x, i.y)), u.x),
++             mix(sandHash(vec2(i.x, i1.y)), sandHash(i1), u.x), u.y) * 2. - 1.;
++}
++// hauteur des rides (m) : trains de rides legerement courbes, profil dissymetrique (pente douce au vent,
++// front raide sous le vent), interrompus par endroits
++float rippleHeight(vec2 q) {
++  vec2 d = normalize(vec2(.83, .56));
++  float warp = sandNoise(q * .21) * 2.2 + sandNoise(q * .9) * .45;
++  float ph = dot(q, d) / .31 + warp;
++  float f = fract(ph);
++  float h = f < .78 ? f / .78 : (1. - f) / .22;
++  h = h * h * (3. - 2. * h);
++  float patchy = smoothstep(-.35, .45, sandNoise(q * .07 + 3.1));   // zones sans rides
++  return h * .016 * patchy;
++}
++
++vec3 remasterSand(vec3 c) {
++  vec3 P = world_pos;
++  vec2 q = P.xz;
++  vec3 L = normalize(weather_sun_dir);
++  float footprint = max(length(dFdx(P)), length(dFdy(P)));   // metres par pixel
++
++  // rides eclairees : pente locale par differences finies, rapport d'eclairement a celui du sol plat
++  float ripples = (sand_detail & 2) != 0 ? 1. - smoothstep(.018, .07, footprint) : 0.;
++  if (ripples > 0.) {
++    float e = .03;
++    float h0 = rippleHeight(q);
++    float hx = rippleHeight(q + vec2(e, 0.)), hz = rippleHeight(q + vec2(0., e));
++    vec3 n = normalize(vec3(-(hx - h0) / e, 1., -(hz - h0) / e));
++    float flat_ = max(L.y, .08);
++    float lit = clamp(dot(n, L), 0., 1.5) / flat_;
++    c *= mix(1., clamp(mix(1., lit, .8), .55, 1.35), ripples);
++  }
++  // grain du sable, tout pres
++  float grain = (sand_detail & 4) != 0 ? 1. - smoothstep(.004, .016, footprint) : 0.;
++  if (grain > 0.) {
++    vec2 w = mod(q, 64.);
++    c *= 1. + .07 * grain * sandNoiseWrap(w * 38., 64. * 38.) + .04 * grain * sandNoiseWrap(w * 97., 64. * 97.);
++  }
++
++  // grandes variations de teinte : traces de vent allongees, zones claires ou rousses
++  if ((sand_detail & 8) == 0) return c;
++  float streak = sandNoise(vec2(q.x * .035 + q.y * .02, q.y * .11 - q.x * .07));
++  float broad = sandNoise(q * .012) * .6 + sandNoise(q * .05) * .4;
++  c *= 1. + .05 * streak + .06 * broad;
++  c = mix(c, c * vec3(1.06, .97, .88), smoothstep(.1, .8, broad) * .5);   // sable plus roux par endroits
++  return c;
++}
+ 
+ void main() {
+   if (gfx_hack_no_tex == 0) {
+     vec4 T0 = texture(tex_T0, tex_coord);
+     color = fragment_color * T0 * 2;
++    if ((sand_detail & 1) != 0) color.rgb = remasterSand(color.rgb);
++    if (shadow_on != 0) {
++      float shade = (1. - sunVisibility(world_pos, vec3(0., 1., 0.))) * shadow_strength;
++      color.rgb *= mix(vec3(1.), vec3(.60, .64, .74), shade);   // ombre eclairee par le ciel, un peu bleutee
++    }
+   } else {
+     color = fragment_color;
+   }
+diff --git a/game/graphics/opengl_renderer/shaders/hfrag.vert b/game/graphics/opengl_renderer/shaders/hfrag.vert
+index 676b3a51..c891914d 100644
+--- a/game/graphics/opengl_renderer/shaders/hfrag.vert
++++ b/game/graphics/opengl_renderer/shaders/hfrag.vert
+@@ -18,6 +18,8 @@ uniform float fog_hack_threshold;
+ out vec4 fragment_color;
+ out vec2 tex_coord;
+ out float fogginess;
++out vec3 world_pos;   // remaster : position du sol en metres (relief fin du sable, ombres)
++out vec3 eye_pos;     // remaster : camera en metres
+ 
+ void main() {
+   int vx = vi % 512;
+@@ -32,6 +34,9 @@ void main() {
+   transformed -= pc_camera[1] * (position_in - cam_trans.y);
+   transformed -= pc_camera[2] * (32768.f * vz - cam_trans.z);
+ 
++  world_pos = vec3(32768.f * vx, position_in, 32768.f * vz) / 4096.f;
++  eye_pos = cam_trans.xyz / 4096.f;
++
+   fogginess = 255 - clamp(-transformed.w + hvdf_offset.w, fog_min, fog_max);
+ 
+   // scissoring area adjust
+-- 
+2.54.0.windows.1
+

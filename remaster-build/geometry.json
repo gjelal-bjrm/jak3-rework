@@ -21,13 +21,66 @@
  "desertb": {
   "base": "desert-remaster/rocks/desertb-before-rocks.fr3",
   "patches": [
-   "desert-remaster/rocks/desertb-rocks-patch.json"
+   "desert-remaster/rocks/desertb-rocks-patch.json",
+   "desert-remaster/palms/desertb-palms-patch.json",
+   "desert-remaster/plants/desertb-grass-patch.json"
   ]
  },
  "desert": {
   "base": "desert-remaster/rocks/desert-before-rocks.fr3",
   "patches": [
    "desert-remaster/rocks/desert-rocks-patch.json"
+  ]
+ },
+ "deserta": {
+  "base": "desert-remaster/rocks/deserta-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/deserta-rocks-patch.json",
+   "desert-remaster/plants/deserta-grass-patch.json"
+  ]
+ },
+ "desertc": {
+  "base": "desert-remaster/rocks/desertc-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desertc-rocks-patch.json",
+   "desert-remaster/plants/desertc-grass-patch.json"
+  ]
+ },
+ "desertd": {
+  "base": "desert-remaster/rocks/desertd-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desertd-rocks-patch.json",
+   "desert-remaster/plants/desertd-grass-patch.json"
+  ]
+ },
+ "deserte": {
+  "base": "desert-remaster/rocks/deserte-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/deserte-rocks-patch.json",
+   "desert-remaster/palms/deserte-palms-patch.json",
+   "desert-remaster/plants/deserte-grass-patch.json"
+  ]
+ },
+ "deserth": {
+  "base": "desert-remaster/rocks/deserth-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/deserth-rocks-patch.json",
+   "desert-remaster/palms/deserth-palms-patch.json",
+   "desert-remaster/plants/deserth-grass-patch.json"
+  ]
+ },
+ "desertf": {
+  "base": "desert-remaster/rocks/desertf-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desertf-rocks-patch.json",
+   "desert-remaster/plants/desertf-grass-patch.json"
+  ]
+ },
+ "desertg": {
+  "base": "desert-remaster/rocks/desertg-before-rocks.fr3",
+  "patches": [
+   "desert-remaster/rocks/desertg-rocks-patch.json",
+   "desert-remaster/plants/desertg-grass-patch.json"
   ]
  }
 }
