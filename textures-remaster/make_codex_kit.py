@@ -12,7 +12,7 @@ Lecons de l'arene appliquees :
   - plus d'image etiree : une texture allongee (2:1, 4:1...) est REPETEE pour remplir un format accepte
     (1024x1024, 1536x1024, 1024x1536) puis recoupee a l'integration (le dessin garde ses proportions) ;
   - une meme texture presente dans plusieurs lieux n'est generee qu'une fois (installee partout ensuite).
-Exclus : personnages et PNJ (pages -pris), les 76 textures deja faites (arene), l'eau et les effets animes
+Exclus : personnages et PNJ (pages -pris, et le musee : personnages exposes en decor), les 76 textures deja faites (arene), l'eau et les effets animes
 (-water, -sprite, -warp : refaits par le rendu), cartes (-minimap), feuillages et decoupes transparentes
 (alpha variable : la silhouette doit rester exacte), aplats minuscules ou unis.
 """
