@@ -262,3 +262,37 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
   - aube, matinée et couchant (`qa/gs-hours.png`, `qa/casc14-dusk.png`) ;
   - cascade (`qa/casc15.png`) ;
   - 60 images/s.
+
+## 07/10 — textures Codex (tout le reste du jeu)
+
+### 18. Intégration des ~1 190 textures arrivées depuis le 26/09
+- Préparées (découpe de la répétition, raccords, teinte) : **1 790 textures Codex au total dans le jeu**.
+- **Contrôle de chacune** (planches original | nouveau, les plus suspectes d'abord, nouvel outil
+  `textures-remaster/review.py`). **107 nouveaux refus**, le jeu garde l'original :
+  - lumières, halos et faisceaux (dégradés doux) transformés en objets ou en peinture granuleuse ;
+  - surfaces unies couvertes d'un **camouflage** ou d'un motif inventé ;
+  - couleurs recolorées d'après le nom (dégradés violets du Hip Hog devenus bleu, rouge, or) ;
+  - décors lointains basse définition (gris, teintés par l'éclairage du jeu) peints en couleurs criardes ;
+  - textures entièrement transparentes dans le jeu (écrans, œufs, marches invisibles) ;
+  - traits lumineux sur fond noir (effet additif) devenus de la roche : le fond se serait affiché.
+- **Musée** : ses textures sont celles des personnages exposés (Blady, Flut Flut, le fermier…) : exclues, on ne
+  touche jamais aux personnages.
+- **Stade de Haven** : beau dessin de Codex, mais pierre et métal gris devenus beige-ocre : couleur d'origine
+  rendue à toute la famille (le dessin de Codex reste). Idem pour 3 textures des ruines et de la tour.
+- Liste des textures à redemander à Codex, avec la consigne à ajouter :
+  `textures-remaster/codex/TEXTURES-A-REFAIRE.md` (52 à refaire ; 89 à laisser telles quelles).
+- Niveaux reconstruits : **133 niveaux, aucun échec** (contrôle du nombre de textures remplacées par niveau).
+- **Vérifié à l'affichage** au port de Haven : 64 textures HD affichées, aucune manquante ; 60 images/s
+  (`qa/zone-port-compare.png`). Au nid des Metal Heads : 22 affichées, aucune manquante (`qa/zone-nest-compare.png`).
+
+### 19. Suite de l'histoire : nouveaux lieux dans le lanceur
+- Ordre des missions du jeu (liste des tâches du code) après le volcan : nid des Metal Heads (œufs), temple
+  (oracle, épreuves), défense de l'oasis, catacombes, mines, égouts, puis Haven.
+- Ajoutés au lanceur : nid (entrée et caverne du fond), salles de l'oracle du temple, catacombes, mines.
+- **Nid** : essai de sculpture des parois en strates (comme les falaises du désert) — refusé à l'aperçu :
+  les piliers organiques du nid devenaient des « pattes d'insecte » segmentées, sans gain lisible dans la
+  pénombre (`qa/nsta-rocks-preview.png`). Le nid garde ses formes ; il bénéficie des textures et de l'éclairage
+  moderne (plus clair et plus détaillé que l'original, voir la planche).
+- **Haven, essai du rendu « façon Genshin »** (celui de la ville de Spargus) au port : quais un peu plus clairs et
+  plus chauds, reste presque identique (`qa/haven-genshin-test.png`) : pas activé, l'effet est trop discret pour
+  valoir le changement d'ambiance. Option de test gardée (`pc-remaster-lighting 519`).

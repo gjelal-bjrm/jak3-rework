@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa', 'cascade'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa', 'cascade', 'nest', 'nestb', 'templeb', 'comb', 'mine'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -89,6 +89,17 @@ CITY_SCENES = {
                 'label': 'devant la grande cascade du desert (riviere)'},
     'oasis': {'continue': 'desert-nest-exit', 'arrival': (2210.0, 2218.2), 'viewpoint': (2210.0, 22.3, 2218.2),
               'label': 'sortie du nid, centre du desert'},
+    # suite de l'histoire (ordre des missions du jeu) : nid, temple, catacombes, mines
+    'nest': {'continue': 'nsta-start', 'arrival': (1914.9, 1904.1), 'viewpoint': (1914.9, -31.9, 1904.1),
+             'label': 'entree du nid des Metal Heads (sous le desert)'},
+    'nestb': {'continue': 'nstb-start', 'arrival': (1646.7, 639.9), 'viewpoint': (1646.7, -94.9, 639.9),
+              'label': 'fond du nid des Metal Heads (caverne)'},
+    'templeb': {'continue': 'templeb-start', 'arrival': (4157.1, 4646.8), 'viewpoint': (4157.1, 45.1, 4646.8),
+                'label': "temple precurseur, salles de l'oracle"},
+    'comb': {'continue': 'comba-start', 'arrival': (8.0, 6.7), 'viewpoint': (8.0, 1.3, 6.7),
+             'label': 'entree des catacombes precurseurs'},
+    'mine': {'continue': 'minea-start', 'arrival': (-89.9, -98.5), 'viewpoint': (-89.9, 85.0, -98.5),
+             'label': 'entree des mines'},
 }
 route_scene = 'palace' if args.scene in CITY_SCENES else args.scene
 

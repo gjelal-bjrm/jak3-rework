@@ -1,0 +1,33 @@
+From 06d1ffe8cc2278be7f48a29e4de7a1f1cd697a82 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 7 Oct 2026 01:04:22 +0200
+Subject: [PATCH] Rendu facon Genshin : option de test pour l'essayer dans
+ toute nouvelle region avant de l'ajouter a la liste (pc-remaster-lighting bit
+ 512) (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/background/PalaceMaterials.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 6c99cb88..b31cc47e 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -58,9 +58,11 @@ class PalaceMaterials {
+     const int kind=state->version==GameVersion::Jak3 && texture>=0 &&
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
+-    // tests : pc-remaster-lighting bit 8 (256) = rendu Genshin coupe (comparaisons avant/apres)
++    // tests : pc-remaster-lighting bit 8 (256) = rendu Genshin coupe (comparaisons avant/apres) ;
++    // bit 9 (512) = rendu Genshin partout (essai d'une nouvelle region avant de l'ajouter a la liste)
++    const int look_flags = LightingState::flags.load();
+     glUniform1f(glGetUniformLocation(program,"genshin_look"),
+-                (LightingState::flags.load() & 256) ? 0.f : m_genshin);
++                (look_flags & 256) ? 0.f : ((look_flags & 512) ? 1.f : m_genshin));
+     weather_bind_world(program);   // sol mouille, flaques, neige au sol
+     shadow_bind(program);          // ombres portees du soleil
+     const bool palm=kind && (m_names[texture]=="waspala-palmplant-leaf-02" || m_names[texture]=="waspala-shrub-plant" || m_names[texture]=="for-shrub-moss");
+-- 
+2.54.0.windows.1
+

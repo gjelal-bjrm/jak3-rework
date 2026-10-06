@@ -35,6 +35,11 @@ PLACES = [
     ('Temple précurseur (ravin d’entrée)', ['--scene', 'temple']),
     ('Volcan (entrée)', ['--scene', 'volcano']),
     ('Volcan (intérieur, végétation, lave)', ['--scene', 'volcanoa']),
+    ('Nid des Metal Heads (entrée)', ['--scene', 'nest']),
+    ('Nid des Metal Heads (caverne du fond)', ['--scene', 'nestb']),
+    ("Temple précurseur (salles de l'oracle)", ['--scene', 'templeb']),
+    ('Catacombes (entrée)', ['--scene', 'comb']),
+    ('Mines (entrée)', ['--scene', 'mine']),
 ]
 WEATHERS = [
     ('Au hasard (comme en jeu)', 'hasard'), ('Beau temps', 'beau-temps'), ('Voilé', 'voile'),
