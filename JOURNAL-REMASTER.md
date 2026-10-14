@@ -310,3 +310,11 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
 - Essai d'un rayonnement en extérieur : refusé (le sable clair du désert et l'armure bleue des gardes
   rayonnaient). Les **lampes des véhicules** (phares `light01` des voitures de Haven, voyants) brillent
   maintenant par elles-mêmes (sans ombre ni éclairage, centre presque blanc).
+- **Retour du 14/10 (soir)** : « trop calme, on perd l'ambiance », « couleur bleue dénaturée », « voiture
+  éblouissante ». Corrigé :
+  - rythme d'origine rendu (pulsation pleine, chenillard qui s'éteint), mais 2,5 pulsations/s au lieu de 12 ;
+  - la couleur des vitres bleues était assombrie par l'**occlusion ambiante** (mesuré : 114 au lieu de 152 en
+    bleu) : les sources de lumière ne sont plus assombries ; lampe ronde de Codex (granuleuse, bleu plus clair)
+    refusée ;
+  - vitres `comb-temp-glass` : lumière au fond d'un verre épais (elle glisse quand on bouge), reflet de bord ;
+  - halo des lampes et phares des véhicules adoucis (pas d'éblouissement). `qa/vitre-zoom3.png`, `qa/vitres4-cmp.png`.

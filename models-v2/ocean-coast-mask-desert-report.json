@@ -1,0 +1,37 @@
+{
+  "source": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\data\\goal_src\\jak3\\levels\\desert\\desert-ocean.gc",
+  "header": "C:\\Users\\Gjelal\\Documents\\OpenGoal\\prototypes\\spargus-arena-v0.1\\engine-src\\game\\graphics\\opengl_renderer\\ocean\\OceanCoastMaskDesert.h",
+  "header_sha256": "92ca94777ccfa0085d39994b40b41cbb8b30d5e1b691af7e7783674a80943d9e",
+  "origin_xz": [
+    -256.0,
+    -256.0
+  ],
+  "level": 9.0,
+  "observations": [
+    {
+      "name": "oasis de la zone E (eau)",
+      "xz": [
+        590.0,
+        2600.0
+      ],
+      "wet": false
+    },
+    {
+      "name": "sable devant la porte de Spargus (sec)",
+      "xz": [
+        2266.4,
+        258.1
+      ],
+      "wet": false
+    },
+    {
+      "name": "mer a l ouest de la zone D",
+      "xz": [
+        3890.0,
+        720.0
+      ],
+      "wet": false
+    }
+  ],
+  "water_cells": 1096002
+}

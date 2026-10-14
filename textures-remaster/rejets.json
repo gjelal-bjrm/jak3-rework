@@ -139,5 +139,6 @@
  "t-citypal-small-block-01": "bloc gris-vert devenu un camouflage pixelise : motif invente",
  "sewer-metal-new-01": "metal gris-vert uni devenu un panneau a circuits : motif invente",
  "t-strip-lo-palsup-panel-1": "panneau gris pale presque uni devenu un motif charge de petits signes : motif invente",
- "tcab-plat-edg-01-lores": "metal gris rivete devenu un camouflage : motif invente"
+ "tcab-plat-edg-01-lores": "metal gris rivete devenu un camouflage : motif invente",
+ "rail-light-green": "lampe ronde (degrade bleu nuit -> cyan) devenue granuleuse et d'un bleu plus clair : couleur d'origine denaturee, garder le degrade"
 }

@@ -1,0 +1,246 @@
+From f88e2ecdaa40da0bbceb34b1bb437973335d23ac Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 14 Oct 2026 14:12:30 +0200
+Subject: [PATCH] Catacombes : rythme d'origine des lumieres (2,5
+ pulsations/s), vitres bleues lumineuses (lumiere au fond du verre), lumieres
+ epargnees par l'occlusion, halo et phares adoucis (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernAO.h      |  6 ++++
+ .../background/PalaceMaterials.h              |  6 ++--
+ .../opengl_renderer/shaders/merc2.frag        |  2 +-
+ .../opengl_renderer/shaders/modern_ao.frag    |  8 ++++-
+ .../opengl_renderer/shaders/modern_glow.frag  |  4 +--
+ .../opengl_renderer/shaders/tfrag3.frag       | 33 +++++++++++++++++--
+ goal_src/jak3/levels/comb/comb-mood.gc        | 20 +++++------
+ 7 files changed, 60 insertions(+), 19 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernAO.h b/game/graphics/opengl_renderer/ModernAO.h
+index cbbe3813..5caa82a9 100644
+--- a/game/graphics/opengl_renderer/ModernAO.h
++++ b/game/graphics/opengl_renderer/ModernAO.h
+@@ -3,6 +3,7 @@
+ #include <memory>
+ #include "game/graphics/opengl_renderer/Shader.h"
+ #include "game/graphics/opengl_renderer/BucketRenderer.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ 
+ // Eclairage moderne du remaster. Les options sont reglees depuis GOAL (pc-remaster-lighting) :
+ // bit 0 = occlusion ambiante, bit 1 = ombres portees du soleil, bit 2 = feu du remaster. Actifs par defaut.
+@@ -62,6 +63,10 @@ class ModernAO {
+     glEnable(GL_BLEND); glBlendEquation(GL_FUNC_ADD); glBlendFuncSeparate(GL_ZERO, GL_SRC_COLOR, GL_ZERO, GL_ONE);
+     glActiveTexture(GL_TEXTURE28); glBindTexture(GL_TEXTURE_2D, m_ao[0]);
+     glUniform1i(glGetUniformLocation(id, "ao_mode"), 2);
++    // image de la scene : les sources de lumiere (vitres et lampes colorees) ne s'assombrissent pas
++    m_scene.bind(state, id);
++    glUniform1i(glGetUniformLocation(id, "ao_scene"), 25);
++    glActiveTexture(GL_TEXTURE28);
+     // plantes (herbe, buissons : bit 0x80 du stencil, pose par Shrub) : pas d'assombrissement
+     glEnable(GL_STENCIL_TEST); glStencilMask(0); glStencilFunc(GL_NOTEQUAL, 0x80, 0x80);
+     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+@@ -120,6 +125,7 @@ class ModernAO {
+     m_depth = m_depth_fbo = 0; m_w = m_h = 0;
+   }
+   std::unique_ptr<Shader> m_shader;
++  LiquidSnapshot m_scene;
+   GLuint m_vao = 0, m_depth = 0, m_depth_fbo = 0, m_ao[2] = {0, 0}, m_fbo[2] = {0, 0};
+   int m_w = 0, m_h = 0;
+ };
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 031d35b1..741a2c51 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -34,13 +34,15 @@ class PalaceMaterials {
+       m_all_names.clear();
+       for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
+     }
+-    if (level.level_name != "waspala" && !market && !arena && !desert) return;
++    const bool comb = level.level_name.rfind("comb", 0) == 0;   // catacombes : vitres lumineuses bleues
++    if (level.level_name != "waspala" && !market && !arena && !desert && !comb) return;
+     int count=0, high_res=0;
+     for (const auto& texture : level.textures) {
+       // Regional response only for explicit, high-resolution replacement
+       // materials. Alpha decals, windows, liquids and unchanged atlases keep
+       // the native path. The palace classification is unchanged.
+-      const int kind=desert ? (world_tile(texture.debug_name) ? 7 : 0) :
++      const int kind=comb ? (texture.debug_name == "comb-temp-glass" ? 10 : 0) :
++          desert ? (world_tile(texture.debug_name) ? 7 : 0) :
+           arena ? classify_arena(texture.debug_name) :
+           market ? (std::max(texture.w,texture.h)>=512 ?
+           classify_market(texture.debug_name) : 0) : classify(texture.debug_name);
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index 27da23c3..4c1e1841 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -460,7 +460,7 @@ void main() {
+   if (merc_emissive != 0 && gfx_hack_no_tex == 0) {
+     vec3 t = texture(tex_T0, vtx_st).rgb * 2.;
+     float y = dot(t, vec3(.2126, .7152, .0722));
+-    color.rgb = max(color.rgb, mix(t * 1.6, vec3(1.), .55 * smoothstep(.25, .8, y)));
++    color.rgb = max(color.rgb, mix(t * 1.15, vec3(1.), .18 * smoothstep(.35, .9, y)));   // sans eblouir
+   }
+    color.xyz = mix(color.xyz, fog_color.rgb, clamp(fog_color.a * fog, 0, 1));
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_ao.frag b/game/graphics/opengl_renderer/shaders/modern_ao.frag
+index 6889b39e..ffc4c32e 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_ao.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_ao.frag
+@@ -13,6 +13,8 @@ uniform vec4 ao_viewport;       // zone de dessin dans l'image (x, y, largeur, h
+ uniform int ao_mode;
+ uniform vec2 ao_dir;
+ uniform float ao_strength;
++uniform sampler2D ao_scene;     // image de la scene (application : sources de lumiere epargnees)
++uniform vec4 fluid_viewport;
+ 
+ bool skyDepth(float d) { const float s = 1. / 16777215.; return d <= 1.5 * s || abs(d - 400. * s) <= 1.5 * s; }
+ 
+@@ -95,6 +97,10 @@ void main() {
+     // et les lieux encaisses, deja sombres dans l'eclairage du jeu, devenaient noirs)
+     float ao = max(pow(c.r, 1.6), .6);
+     float fade = 1. - smoothstep(180., 400., c.g);          // tres loin : la brume prend le relais
+-    color = vec4(vec3(mix(1., ao, ao_strength * fade)), 1.);
++    // sources de lumiere (vitres bleues, voyants, lampes) : une lumiere ne s'assombrit pas dans les coins
++    vec3 sc = texture(ao_scene, gl_FragCoord.xy / vec2(textureSize(ao_scene, 0))).rgb;
++    float mx = max(sc.r, max(sc.g, sc.b)), mn = min(sc.r, min(sc.g, sc.b));
++    float light = smoothstep(.45, .70, (mx - mn) / max(mx, 1e-3)) * smoothstep(.30, .50, mx);
++    color = vec4(vec3(mix(1., ao, ao_strength * fade * (1. - light))), 1.);
+   }
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_glow.frag b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+index f03517db..32ffb4c9 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_glow.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+@@ -57,9 +57,9 @@ void main() {
+     vec3 glow = texture(tex_T27, uv).rgb;
+     float w = skyDepth(texture(tex_T26, uv).r) ? 0. : glowWeight(scene);   // le ciel ne blanchit pas
+     w *= 1. - smoothstep(.05, .25, scene.b - scene.r);   // les lumieres bleues gardent leur bleu fonce (pas de blanc)
+-    scene = mix(scene, mix(scene, vec3(1.), .55) * 1.08, w * .6 * glow_strength);   // coeur de la source
++    scene = mix(scene, mix(scene, vec3(1.), .55) * 1.08, w * .35 * glow_strength);   // coeur de la source (sans eblouir)
+     // les lumieres froides rayonnent un peu plus (bleu sature : peu lumineux a l'oeil sinon)
+     glow *= 1. + .3 * smoothstep(.03, .25, glow.b - glow.r);
+-    color = vec4(scene + glow * 1.6 * glow_strength, 1.);
++    color = vec4(scene + glow * 1.1 * glow_strength, 1.);
+   }
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 1f7cb442..de99dfc7 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -472,7 +472,7 @@ vec3 palaceSpecular(vec3 n,vec3 v,vec3 l,float roughness,vec3 f0) {
+   return distribution*geometry*fresnel/max(4.0*nv,.02);
+ }
+ vec3 shadePalaceMaterial(vec3 existing,vec3 albedo,vec3 p) {
+-  if (palace_material==0) return existing;
++  if (palace_material==0 || palace_material==10) return existing;
+   vec3 dx=dFdx(p),dy=dFdy(p),crossed=cross(dx,dy);
+   if (dot(crossed,crossed)<1e-16) return existing;
+   vec3 v=normalize(palace_eye-p),geometric=normalize(crossed);
+@@ -988,6 +988,32 @@ vec3 interiorLight(vec3 L) {
+   vec3 cool = hue * mix(vec3(1.), vec3(.80, .92, 1.25), k) + vec3(.035, .05, .085) * k;  // penombre fraiche
+   return mix(cool, warm, pool);
+ }
++// Vitre lumineuse des catacombes (comb-temp-glass) : une vitre epaisse, la lumiere bleue vient de l'interieur.
++// Couche lumineuse vue a travers le verre (decalee selon le regard : profondeur), surface de verre sombre avec
++// reflet sur les bords (Fresnel) et filets de reflet. La couleur et la pulsation d'origine sont gardees (la lumiere
++// precalculee qui pulse module la couche interieure).
++vec3 litGlass(vec3 light, vec2 uv, vec3 P) {
++  vec3 dp1 = dFdx(P), dp2 = dFdy(P); vec2 du1 = dFdx(uv), du2 = dFdy(uv);
++  vec3 n = normalize(cross(dp1, dp2));
++  vec3 V = normalize(cam_trans.xyz / 4096. - P);
++  if (dot(n, V) < 0.) n = -n;
++  // repere tangent (sans tangentes stockees) : derivees de la position et des UV
++  vec3 dp2perp = cross(dp2, n), dp1perp = cross(n, dp1);
++  vec3 T = dp2perp * du1.x + dp1perp * du2.x, B = dp2perp * du1.y + dp1perp * du2.y;
++  float invmax = inversesqrt(max(dot(T, T), dot(B, B)) + 1e-12);
++  vec2 view = vec2(dot(V, T * invmax), dot(V, B * invmax)) / max(dot(V, n), .25);
++  vec3 deep = texture(tex_T0, uv - view * .10).rgb, deeper = texture(tex_T0, uv - view * .22).rgb;
++  vec3 face = texture(tex_T0, uv).rgb;
++  // jamais moins lumineux que la vitre d'origine : la lumiere d'origine, plus une couche profonde qui glisse
++  // derriere le verre quand on bouge (on voit la lumiere a l'interieur)
++  vec3 orig = face * light * 2.;
++  vec3 inner = (deep * .55 + deeper * .45) * light * 2.;
++  vec3 lit = max(orig, mix(orig, inner, .6)) * 1.15 + inner * .25;
++  float fres = pow(1. - clamp(dot(n, V), 0., 1.), 4.);
++  // filets de reflet discrets sur la surface du verre, plus marques sur les bords (Fresnel)
++  float streak = smoothstep(.85, 1., sin(uv.x * 40. + uv.y * 6.) * .5 + .5) * (.25 + .75 * fres);
++  return lit + vec3(.35, .55, .95) * (fres * .18 + streak * .10);
++}
+ vec3 interiorGrade(vec3 c) {
+   float k = interior_look;
+   float y = dot(c, vec3(.2126, .7152, .0722));
+@@ -1016,7 +1042,7 @@ void main() {
+         T0*vec4(1.0,1.0,1.0,fragment_color.a*2.0)),1.0);
+     } else {
+       vec3 base_light = genshin_look > 0. ? genshinLight(arena_light) : arena_light;
+-      if (interior_look > 0.) base_light = interiorLight(base_light);
++      if (interior_look > 0. && palace_material != 10) base_light = interiorLight(base_light);
+       color = vec4(base_light, fragment_color.a) * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
+     vec3 shadow_normal = dot(surface_normal, shadow_eye-arena_world) < 0. ? -surface_normal : surface_normal;
+@@ -1029,7 +1055,8 @@ void main() {
+       // matieres deja eclairees par leur relief (roches, palais) : soleil stylise plus discret
+       color.rgb = genshinLook(color.rgb, gn, palace_material != 0 ? .45 : 1.);
+     }
+-    if (interior_look > 0.) color.rgb = interiorGrade(color.rgb);
++    if (interior_look > 0. && palace_material != 10) color.rgb = interiorGrade(color.rgb);
++    if (palace_material == 10) color.rgb = litGlass(arena_light, tex_coord.xy, arena_world);
+     }
+   } else {
+     color = fragment_color/2;
+diff --git a/goal_src/jak3/levels/comb/comb-mood.gc b/goal_src/jak3/levels/comb/comb-mood.gc
+index b8307409..00f362e5 100644
+--- a/goal_src/jak3/levels/comb/comb-mood.gc
++++ b/goal_src/jak3/levels/comb/comb-mood.gc
+@@ -60,38 +60,38 @@
+     (else
+       (-> arg0 state)
+       (let* ((s5-2 (-> *display* part-clock frame-counter))
+-             (f0-6 (* 109.22667 (the float (mod s5-2 300))))
+-             (f30-2 (+ 0.3 (* 0.7 (sin f0-6))))
++             (f0-6 (* 273.06667 (the float (mod s5-2 120))))
++             (f30-2 (sin f0-6))
+              (f0-8 (* 109.22667 (the float (mod s5-2 600))))
+-             (s5-3 (/ (mod s5-2 1500) 300))
++             (s5-3 (/ (mod s5-2 600) 120))
+              )
+-        ;; remaster : lumieres apaisees (respiration de 1 s au lieu de 12 eclairs par seconde)
++        ;; remaster : meme rythme que l'original (pulsation pleine, chenillard) mais 2,5 pulsations/s au lieu de 12
+         (set! (-> arg0 times 0 w) 1.0)
+-        (set! (-> arg0 times 1 w) (+ 0.55 (* 0.45 (sin f0-6))))
++        (set! (-> arg0 times 1 w) f30-2)
+         (set! (-> arg0 times 2 w) (+ 0.85 (* 0.15 (cos f0-8))))
+         (set! (-> arg0 times 3 w) (if (zero? s5-3)
+                                       f30-2
+-                                      0.3
++                                      0.0
+                                       )
+               )
+         (set! (-> arg0 times 4 w) (if (= s5-3 1)
+                                       f30-2
+-                                      0.3
++                                      0.0
+                                       )
+               )
+         (set! (-> arg0 times 5 w) (if (= s5-3 2)
+                                       f30-2
+-                                      0.3
++                                      0.0
+                                       )
+               )
+         (set! (-> arg0 times 6 w) (if (= s5-3 3)
+                                       f30-2
+-                                      0.3
++                                      0.0
+                                       )
+               )
+         (set! (-> arg0 times 7 w) (if (= s5-3 4)
+                                       f30-2
+-                                      0.3
++                                      0.0
+                                       )
+               )
+         )
+-- 
+2.54.0.windows.1
+

@@ -13,6 +13,8 @@ uniform vec4 ao_viewport;       // zone de dessin dans l'image (x, y, largeur, h
 uniform int ao_mode;
 uniform vec2 ao_dir;
 uniform float ao_strength;
+uniform sampler2D ao_scene;     // image de la scene (application : sources de lumiere epargnees)
+uniform vec4 fluid_viewport;
 
 bool skyDepth(float d) { const float s = 1. / 16777215.; return d <= 1.5 * s || abs(d - 400. * s) <= 1.5 * s; }
 
@@ -95,6 +97,10 @@ void main() {
     // et les lieux encaisses, deja sombres dans l'eclairage du jeu, devenaient noirs)
     float ao = max(pow(c.r, 1.6), .6);
     float fade = 1. - smoothstep(180., 400., c.g);          // tres loin : la brume prend le relais
-    color = vec4(vec3(mix(1., ao, ao_strength * fade)), 1.);
+    // sources de lumiere (vitres bleues, voyants, lampes) : une lumiere ne s'assombrit pas dans les coins
+    vec3 sc = texture(ao_scene, gl_FragCoord.xy / vec2(textureSize(ao_scene, 0))).rgb;
+    float mx = max(sc.r, max(sc.g, sc.b)), mn = min(sc.r, min(sc.g, sc.b));
+    float light = smoothstep(.45, .70, (mx - mn) / max(mx, 1e-3)) * smoothstep(.30, .50, mx);
+    color = vec4(vec3(mix(1., ao, ao_strength * fade * (1. - light))), 1.);
   }
 }

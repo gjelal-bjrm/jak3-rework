@@ -18,6 +18,7 @@ OLD = """      (let* ((s5-2 (-> *display* part-clock frame-counter))
              )
         (set! (-> arg0 times 0 w) 1.0)
         (set! (-> arg0 times 1 w) f30-2)"""
+# version 1 (trop calme : « on perd l'ambiance ») remplacee a la main par le rythme d'origine a 2,5 pulsations/s
 NEW = """      (let* ((s5-2 (-> *display* part-clock frame-counter))
              (f0-6 (* 109.22667 (the float (mod s5-2 300))))
              (f30-2 (+ 0.3 (* 0.7 (sin f0-6))))
