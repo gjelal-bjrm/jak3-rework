@@ -1,0 +1,306 @@
+From d94755d5454a611f9d182eb86a85dd336733a244 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 14 Oct 2026 11:24:20 +0200
+Subject: [PATCH] Lieux fermes : eclairage d'interieur stylise (lumiere chaude
+ des lampes, penombre fraiche) et rayonnement des sources de lumiere (halo,
+ coeur lumineux) (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernGlow.h    | 92 +++++++++++++++++++
+ .../opengl_renderer/OpenGLRenderer.cpp        |  1 +
+ .../graphics/opengl_renderer/OpenGLRenderer.h |  2 +
+ .../background/PalaceMaterials.h              |  7 ++
+ .../opengl_renderer/shaders/modern_glow.frag  | 41 +++++++++
+ .../opengl_renderer/shaders/modern_glow.vert  |  6 ++
+ .../opengl_renderer/shaders/tfrag3.frag       | 29 +++++-
+ 7 files changed, 177 insertions(+), 1 deletion(-)
+ create mode 100644 game/graphics/opengl_renderer/ModernGlow.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_glow.frag
+ create mode 100644 game/graphics/opengl_renderer/shaders/modern_glow.vert
+
+diff --git a/game/graphics/opengl_renderer/ModernGlow.h b/game/graphics/opengl_renderer/ModernGlow.h
+new file mode 100644
+index 00000000..f8ec5f7d
+--- /dev/null
++++ b/game/graphics/opengl_renderer/ModernGlow.h
+@@ -0,0 +1,92 @@
++#pragma once
++#include <algorithm>
++#include <memory>
++#include "game/graphics/opengl_renderer/ModernAO.h"
++#include "game/graphics/opengl_renderer/Shader.h"
++#include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
++#include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
++
++// Rayonnement des sources de lumiere dans les lieux fermes (catacombes, mines, nid, salles du temple, egouts) :
++// avant, on voyait une zone eclairee mais la lampe elle-meme ne brillait pas. Halo large en quart de resolution
++// (deux echelles de flou), coeur de la source eclairci. Avant l'interface (le texte ne rayonne pas).
++// Test : pc-remaster-lighting bit 10 (1024) coupe ce rayonnement (avec l'eclairage d'interieur).
++class ModernGlow {
++ public:
++  ~ModernGlow() { clear(); }
++  void render(SharedRenderState* state) {
++    if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
++    if (LightingState::flags.load() & 1024) return;
++    bool interior = false;
++    for (const char* prefix : {"comb", "mine", "nst", "sew", "templea", "templeb", "templec", "templed"})
++      interior = interior || ModernOcean::level_loaded(state, prefix);
++    if (!interior) return;
++    if (!m_shader) { m_shader = std::make_unique<Shader>("modern_glow", state->version); glGenVertexArrays(1, &m_vao); }
++    if (!m_shader->okay()) return;
++    GLint old_program, old_vao, old_read, old_draw, old_active, viewport[4];
++    glGetIntegerv(GL_CURRENT_PROGRAM, &old_program); glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &old_vao);
++    glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &old_read); glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &old_draw);
++    glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active); glGetIntegerv(GL_VIEWPORT, viewport);
++    const GLenum flags[] = {GL_DEPTH_TEST, GL_BLEND, GL_CULL_FACE, GL_SCISSOR_TEST, GL_STENCIL_TEST};
++    GLboolean enabled[5], color_mask[4], depth_write;
++    glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
++    for (int i = 0; i < 5; i++) { enabled[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
++    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE); glDepthMask(GL_FALSE);
++    GLint saved27; glActiveTexture(GL_TEXTURE27); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved27);
++    m_shader->activate();
++    const auto id = m_shader->id();
++    m_scene.bind(state, id);
++    glUniform1i(glGetUniformLocation(id, "tex_T25"), 25);
++    glUniform1i(glGetUniformLocation(id, "tex_T27"), 27);
++    glUniform1f(glGetUniformLocation(id, "glow_strength"), 1.f);
++    const int w = std::max(1, state->render_fb_w / 4), h = std::max(1, state->render_fb_h / 4);
++    if (w != m_width || h != m_height) {
++      clear_targets(); m_width = w; m_height = h;
++      glGenFramebuffers(2, m_fbo); glGenTextures(2, m_texture);
++      glActiveTexture(GL_TEXTURE27);
++      for (int i = 0; i < 2; i++) {
++        glBindTexture(GL_TEXTURE_2D, m_texture[i]);
++        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, w, h, 0, GL_RGBA, GL_FLOAT, nullptr);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
++        glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[i]);
++        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture[i], 0);
++      }
++    }
++    glBindVertexArray(m_vao);
++    glViewport(0, 0, w, h);
++    const auto pass = glGetUniformLocation(id, "glow_pass");
++    glActiveTexture(GL_TEXTURE27);
++    for (int p = 0; p < 5; p++) {   // 0 : extraction -> A ; 1 : A -> B ; 2 : B -> A ; 3 : A -> B ; 4 : B -> A
++      glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[p % 2 == 1 ? 1 : 0]);
++      glBindTexture(GL_TEXTURE_2D, p == 0 ? 0 : m_texture[p % 2 == 1 ? 0 : 1]);
++      glUniform1i(pass, p);
++      glDrawArrays(GL_TRIANGLES, 0, 3);
++    }
++    glBindFramebuffer(GL_FRAMEBUFFER, state->render_fb);
++    glViewport(0, 0, state->render_fb_w, state->render_fb_h);
++    glBindTexture(GL_TEXTURE_2D, m_texture[0]);
++    glUniform1i(pass, 5);
++    glDrawArrays(GL_TRIANGLES, 0, 3);
++
++    glBindTexture(GL_TEXTURE_2D, saved27);
++    glBindFramebuffer(GL_READ_FRAMEBUFFER, old_read); glBindFramebuffer(GL_DRAW_FRAMEBUFFER, old_draw);
++    glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
++    glBindVertexArray(old_vao); glUseProgram(old_program); glActiveTexture(old_active);
++    glColorMask(color_mask[0], color_mask[1], color_mask[2], color_mask[3]); glDepthMask(depth_write);
++    for (int i = 0; i < 5; i++) if (enabled[i]) glEnable(flags[i]);
++  }
++
++ private:
++  void clear_targets() {
++    if (m_fbo[0]) glDeleteFramebuffers(2, m_fbo);
++    if (m_texture[0]) glDeleteTextures(2, m_texture);
++    m_fbo[0] = m_fbo[1] = m_texture[0] = m_texture[1] = 0;
++  }
++  void clear() { clear_targets(); if (m_vao) glDeleteVertexArrays(1, &m_vao); }
++  std::unique_ptr<Shader> m_shader;
++  LiquidSnapshot m_scene;
++  GLuint m_vao = 0, m_fbo[2] = {}, m_texture[2] = {};
++  int m_width = 0, m_height = 0;
++};
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.cpp b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+index c40f260a..56ff5d85 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.cpp
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.cpp
+@@ -1487,6 +1487,7 @@ void OpenGLRenderer::dispatch_buckets_jak3(DmaFollower dma,
+       // feu du remaster : apres le ciel, la mer, les sprites (spectateurs) et la brume. La brume se calcule
+       // sur la profondeur du decor : devant le ciel elle serait opaque et effacerait la flamme.
+       if (m_modern_fire.enabled()) m_modern_fire.render(&m_render_state);
++      m_modern_glow.render(&m_render_state);   // rayonnement des lampes (lieux fermes), avant l'interface
+     }
+     if (bucket_id == (int)jak3::BucketId::TEX_HUD_HUD_ALPHA) {
+       auto p = prof.make_scoped_child("color-filter");
+diff --git a/game/graphics/opengl_renderer/OpenGLRenderer.h b/game/graphics/opengl_renderer/OpenGLRenderer.h
+index 41af3a79..1239bb96 100644
+--- a/game/graphics/opengl_renderer/OpenGLRenderer.h
++++ b/game/graphics/opengl_renderer/OpenGLRenderer.h
+@@ -15,6 +15,7 @@
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ #include "game/graphics/opengl_renderer/ModernSky.h"
+ #include "game/graphics/opengl_renderer/ModernWeather.h"
++#include "game/graphics/opengl_renderer/ModernGlow.h"
+ #include "game/graphics/opengl_renderer/ModernBeam.h"
+ #include "game/graphics/opengl_renderer/ModernAO.h"
+ #include "game/graphics/opengl_renderer/ModernShadows.h"
+@@ -129,6 +130,7 @@ class OpenGLRenderer {
+   WaterSpray m_water_spray;
+   ModernSky m_modern_sky;
+   ModernWeather m_modern_weather;
++  ModernGlow m_modern_glow;
+   ModernBeam m_modern_beam;
+   ModernAO m_modern_ao;
+   ModernShadows m_modern_shadows;
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index b31cc47e..031d35b1 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -26,6 +26,10 @@ class PalaceMaterials {
+     m_genshin = 0.f;
+     for (const char* prefix : {"wascity", "waswide", "wasdoors", "wasall", "desert", "wasintro"})
+       if (level.level_name.rfind(prefix, 0) == 0) m_genshin = 1.f;
++    // lieux fermes : eclairage d'interieur stylise (catacombes, mines, nid, salles du temple, egouts)
++    m_interior = 0.f;
++    for (const char* prefix : {"comb", "mine", "nst", "sew", "templea", "templeb", "templec", "templed"})
++      if (level.level_name.rfind(prefix, 0) == 0) m_interior = 1.f;
+     if (TextureAudit::enabled()) {           // controle : noms de toutes les textures, dans tous les niveaux
+       m_all_names.clear();
+       for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
+@@ -63,6 +67,8 @@ class PalaceMaterials {
+     const int look_flags = LightingState::flags.load();
+     glUniform1f(glGetUniformLocation(program,"genshin_look"),
+                 (look_flags & 256) ? 0.f : ((look_flags & 512) ? 1.f : m_genshin));
++    // bit 10 (1024) = eclairage d'interieur coupe (comparaisons avant/apres)
++    glUniform1f(glGetUniformLocation(program,"interior_look"), (look_flags & 1024) ? 0.f : m_interior);
+     weather_bind_world(program);   // sol mouille, flaques, neige au sol
+     shadow_bind(program);          // ombres portees du soleil
+     const bool palm=kind && (m_names[texture]=="waspala-palmplant-leaf-02" || m_names[texture]=="waspala-shrub-plant" || m_names[texture]=="for-shrub-moss");
+@@ -185,6 +191,7 @@ class PalaceMaterials {
+   int m_grass_region = 0;
+   std::vector<int> m_kinds;
+   float m_genshin = 0.f;
++  float m_interior = 0.f;
+   std::vector<std::string> m_all_names;
+   std::string m_level;
+   std::vector<std::string> m_names;
+diff --git a/game/graphics/opengl_renderer/shaders/modern_glow.frag b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+new file mode 100644
+index 00000000..59df3400
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+@@ -0,0 +1,41 @@
++#version 410 core
++// Rayonnement des sources de lumiere (lieux fermes) : les lampes, cristaux, bandes lumineuses et feux brillent
++// vraiment. Passe 0 : on garde ce qui est tres lumineux (en quart de resolution) ; passes 1 a 4 : flou large
++// (deux echelles) ; passe 5 : le halo deborde autour de la source et le coeur de la source s'eclaircit vers le blanc.
++in vec2 uv;
++out vec4 color;
++uniform sampler2D tex_T25;   // image de la scene (copie)
++uniform sampler2D tex_T27;   // tampon du halo
++uniform int glow_pass;
++uniform float glow_strength;
++
++float glowWeight(vec3 c) {
++  float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
++  float sat = (mx - mn) / max(mx, 1e-3);
++  // sources : tres lumineuses ; les couleurs franches (lampes jaunes, bandes bleues) comptent plus tot
++  return smoothstep(.62 - .22 * sat, .95 - .15 * sat, mx);
++}
++void main() {
++  if (glow_pass == 0) {
++    vec2 px = 1. / vec2(textureSize(tex_T25, 0));
++    vec3 sum = vec3(0.);
++    for (int y = -1; y <= 2; y++) for (int x = -1; x <= 2; x++) {
++      vec3 c = texture(tex_T25, uv + (vec2(x, y) - .5) * px).rgb;
++      sum += c * glowWeight(c);
++    }
++    color = vec4(sum / 16., 1.);
++  } else if (glow_pass <= 4) {
++    float step_ = glow_pass >= 3 ? 2.5 : 1.;
++    vec2 axis = (glow_pass == 1 || glow_pass == 3 ? vec2(1, 0) : vec2(0, 1)) / vec2(textureSize(tex_T27, 0)) * step_;
++    vec4 c = texture(tex_T27, uv) * .227027;
++    c += (texture(tex_T27, uv + axis * 1.384615) + texture(tex_T27, uv - axis * 1.384615)) * .316216;
++    c += (texture(tex_T27, uv + axis * 3.230769) + texture(tex_T27, uv - axis * 3.230769)) * .070270;
++    color = c;
++  } else {
++    vec3 scene = texture(tex_T25, uv).rgb;
++    vec3 glow = texture(tex_T27, uv).rgb;
++    float w = glowWeight(scene);
++    scene = mix(scene, mix(scene, vec3(1.), .55) * 1.08, w * .6 * glow_strength);   // coeur de la source
++    color = vec4(scene + glow * 1.6 * glow_strength, 1.);
++  }
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_glow.vert b/game/graphics/opengl_renderer/shaders/modern_glow.vert
+new file mode 100644
+index 00000000..9edfa400
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/modern_glow.vert
+@@ -0,0 +1,6 @@
++#version 410 core
++out vec2 uv;
++void main() {
++  uv=vec2((gl_VertexID<<1)&2,gl_VertexID&2);
++  gl_Position=vec4(uv*2.0-1.0,0.0,1.0);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index 11e9da44..1f7cb442 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -14,6 +14,7 @@ uniform vec4 fog_color;
+ 
+ uniform int gfx_hack_no_tex;
+ uniform float genshin_look;   // rendu du decor « facon Genshin » : 0 = d'origine, 1 = plein effet (voir GENSHIN_LOOK)
++uniform float interior_look;  // lieux fermes (catacombes, mines, nid, temple, egouts) : eclairage d'interieur stylise
+ 
+ 
+ // Spargus arena prototype, morning lighting. World positions are GOAL units / 4096.
+@@ -973,6 +974,29 @@ vec3 genshinLook(vec3 c, vec3 n, float relightScale) {
+ }
+ // GENSHIN_LOOK_END
+ 
++// ---------------------------------------------------------------- INTERIOR_LOOK
++// Interieurs facon Genshin : la lumiere precalculee du jeu (flaques des lampes, des feux, des cristaux) devient plus
++// franche et plus chaude ; la penombre n'est plus un brun sale mais une ombre fraiche, bleutee, un peu remontee
++// (on lit les formes dans le noir) ; couleurs plus vives. Le contraste lumiere chaude / ombre froide fait l'ambiance.
++vec3 interiorLight(vec3 L) {
++  float k = interior_look;
++  float y = dot(L, vec3(.2126, .7152, .0722));
++  float pool = smoothstep(.30, .95, y);
++  vec3 grey = vec3(y);
++  vec3 hue = mix(L, grey, .35 * k);                                       // teinte d'origine en partie gardee
++  vec3 warm = hue * mix(vec3(1.), vec3(1.20, 1.04, .82), k) * (1. + .35 * k * pool);   // flaques de lumiere
++  vec3 cool = hue * mix(vec3(1.), vec3(.80, .92, 1.25), k) + vec3(.035, .05, .085) * k;  // penombre fraiche
++  return mix(cool, warm, pool);
++}
++vec3 interiorGrade(vec3 c) {
++  float k = interior_look;
++  float y = dot(c, vec3(.2126, .7152, .0722));
++  float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
++  float sat = (mx - mn) / max(mx, 1e-3);
++  c = max(mix(vec3(y), c, 1. + k * (.15 + .35 * (1. - sat))), vec3(0.));   // vibrance
++  return c * (1. + .06 * k);
++}
++
+ void main() {
+   vec3 arena_light = arenaRelight(fragment_color.rgb, arena_world);
+   vec3 surface_normal = normalize(cross(dFdx(arena_world),dFdy(arena_world)));
+@@ -991,7 +1015,9 @@ void main() {
+       color = vec4(shadeModernWater(arena_world,surface_normal,
+         T0*vec4(1.0,1.0,1.0,fragment_color.a*2.0)),1.0);
+     } else {
+-      color = vec4(genshin_look > 0. ? genshinLight(arena_light) : arena_light, fragment_color.a) * T0;
++      vec3 base_light = genshin_look > 0. ? genshinLight(arena_light) : arena_light;
++      if (interior_look > 0.) base_light = interiorLight(base_light);
++      color = vec4(base_light, fragment_color.a) * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
+     vec3 shadow_normal = dot(surface_normal, shadow_eye-arena_world) < 0. ? -surface_normal : surface_normal;
+     color.rgb = applySunShadow(color.rgb, arena_world, shadow_normal);   // ombres portees du soleil
+@@ -1003,6 +1029,7 @@ void main() {
+       // matieres deja eclairees par leur relief (roches, palais) : soleil stylise plus discret
+       color.rgb = genshinLook(color.rgb, gn, palace_material != 0 ? .45 : 1.);
+     }
++    if (interior_look > 0.) color.rgb = interiorGrade(color.rgb);
+     }
+   } else {
+     color = fragment_color/2;
+-- 
+2.54.0.windows.1
+

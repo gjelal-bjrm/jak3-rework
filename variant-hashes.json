@@ -289,11 +289,13 @@
     "out/jak3/fr3/towerb.fr3": "787a1612bfbf777f2b287ad70b0b716ecc4c22965c9280ebac05950d0a2ff43e",
     "out/jak3/fr3/towerc.fr3": "dc5ba89f9056f354acfba3bf4775b17aa22849f6e4eb5cf901402bc6902b309e",
     "out/jak3/fr3/towercst.fr3": "e431d4c2efe7768014cb8350eb500812d586fa2e737c96e8dcfaf439d4ea4392",
-    "out/jak3/fr3/wasall.fr3": "3b282ebaa56ff70e0834a8fdff4b1385fff32abf24a0488eb9a7da142fe3c3bd"
+    "out/jak3/fr3/wasall.fr3": "3b282ebaa56ff70e0834a8fdff4b1385fff32abf24a0488eb9a7da142fe3c3bd",
+    "game/graphics/opengl_renderer/shaders/modern_glow.vert": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576",
+    "game/graphics/opengl_renderer/shaders/modern_glow.frag": "44aa3304c4fa7ab0b7bf9014ddf494f1973b692cb31715bc2a82c76ea75b61af"
   },
   "remaster": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "7e1b3747f803f508cbf4bd204efc4910a3a3a1268627ac6e2fddb02c23107a42",
-    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "8954bc434e733887426d71a7ad275daa1302d6dfc660f828d6feac7887892660",
+    "game/graphics/opengl_renderer/shaders/tfrag3.frag": "c456ec22e58c1e823a203bc208376af47628dcd4ba94d84d172095c6cb2b7f82",
     "game/graphics/opengl_renderer/shaders/tie_wind.vert": "d0014420a8c797d402b68c6c6a7d679b6ac5fc1b30efac638fa5fd5446b12772",
     "game/graphics/opengl_renderer/shaders/tie_wind.frag": "e090d25fd90f2e5ec1b957336a3c7b6e5c30e7987be3e9e3e7c2fd82fd7c0e46",
     "game/graphics/opengl_renderer/shaders/etie_base.vert": "19aa9c7b268b862c903ee06b49a10fe7efe30fc1cc37cfeadb318f946e45a612",
@@ -581,7 +583,9 @@
     "out/jak3/fr3/towerb.fr3": "3e931c59d98a6f4a689411260b81d7838d936ae4a389f4ca6ee0e11921488397",
     "out/jak3/fr3/towerc.fr3": "fe27461cf89603be87cc1faf4cd581ff8a2464eb23480d03dbec39809347819a",
     "out/jak3/fr3/towercst.fr3": "7504065c1fb71cffe10c73a0509078396fca14c3cff01389dac3207ce439713a",
-    "out/jak3/fr3/wasall.fr3": "4eb634d1900f736647ed2434727d64f502867f388c8b0dc7b5a834601c89eb56"
+    "out/jak3/fr3/wasall.fr3": "4eb634d1900f736647ed2434727d64f502867f388c8b0dc7b5a834601c89eb56",
+    "game/graphics/opengl_renderer/shaders/modern_glow.vert": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576",
+    "game/graphics/opengl_renderer/shaders/modern_glow.frag": "44aa3304c4fa7ab0b7bf9014ddf494f1973b692cb31715bc2a82c76ea75b61af"
   },
   "remaster-v1": {
     "game/graphics/opengl_renderer/shaders/tfrag3.vert": "c47e77781e3014e548fcb4d38bb344f4acc5c11c357d36beb4f64781ae1d2597",
@@ -873,6 +877,8 @@
     "out/jak3/fr3/towerb.fr3": "787a1612bfbf777f2b287ad70b0b716ecc4c22965c9280ebac05950d0a2ff43e",
     "out/jak3/fr3/towerc.fr3": "dc5ba89f9056f354acfba3bf4775b17aa22849f6e4eb5cf901402bc6902b309e",
     "out/jak3/fr3/towercst.fr3": "e431d4c2efe7768014cb8350eb500812d586fa2e737c96e8dcfaf439d4ea4392",
-    "out/jak3/fr3/wasall.fr3": "3b282ebaa56ff70e0834a8fdff4b1385fff32abf24a0488eb9a7da142fe3c3bd"
+    "out/jak3/fr3/wasall.fr3": "3b282ebaa56ff70e0834a8fdff4b1385fff32abf24a0488eb9a7da142fe3c3bd",
+    "game/graphics/opengl_renderer/shaders/modern_glow.vert": "85a2f798822e737c65e6edc20aa76828e7889139820b8d06cd199e5decda4576",
+    "game/graphics/opengl_renderer/shaders/modern_glow.frag": "44aa3304c4fa7ab0b7bf9014ddf494f1973b692cb31715bc2a82c76ea75b61af"
   }
 }

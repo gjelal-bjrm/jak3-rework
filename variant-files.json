@@ -288,5 +288,7 @@
   "out/jak3/fr3/towerb.fr3",
   "out/jak3/fr3/towerc.fr3",
   "out/jak3/fr3/towercst.fr3",
-  "out/jak3/fr3/wasall.fr3"
+  "out/jak3/fr3/wasall.fr3",
+  "game/graphics/opengl_renderer/shaders/modern_glow.vert",
+  "game/graphics/opengl_renderer/shaders/modern_glow.frag"
 ]
