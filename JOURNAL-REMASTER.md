@@ -296,3 +296,17 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
 - **Haven, essai du rendu « façon Genshin »** (celui de la ville de Spargus) au port : quais un peu plus clairs et
   plus chauds, reste presque identique (`qa/haven-genshin-test.png`) : pas activé, l'effet est trop discret pour
   valoir le changement d'ambiance. Option de test gardée (`pc-remaster-lighting 519`).
+
+## 14/10 — lumières (tes retours : « ce n'est pas le composant qui brille », « clignotements incessants »)
+
+### 20. Intérieurs : éclairage et rayonnement des lampes
+- Catacombes, mines, nid, salles du temple, égouts : lumière des lampes plus chaude et plus franche, pénombre
+  fraîche ; **les lampes rayonnent** (cœur lumineux, halo qui déborde), halo lissé dans le temps (plus de
+  vacillement). Les lumières bleues gardent leur bleu foncé d'origine (halo doux seulement, jamais de blanc).
+- **Clignotement des catacombes** : trouvé dans le code du jeu (`comb-mood.gc`) : les lumières pulsaient
+  **12 fois par seconde** et le chenillard bleu tournait en 0,4 s. Remplacé par une respiration lente (1 s,
+  jamais sous 55 %) et un chenillard de 5 s dont les segments éteints gardent 30 %. Variation mesurée sur les
+  lumières bleues : 5,9 → 2,8, et lente. Script : `models-v2/interiors/apply_calm_lights.py`.
+- Essai d'un rayonnement en extérieur : refusé (le sable clair du désert et l'armure bleue des gardes
+  rayonnaient). Les **lampes des véhicules** (phares `light01` des voitures de Haven, voyants) brillent
+  maintenant par elles-mêmes (sans ombre ni éclairage, centre presque blanc).

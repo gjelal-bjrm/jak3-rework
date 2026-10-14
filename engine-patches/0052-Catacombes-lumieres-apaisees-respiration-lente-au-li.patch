@@ -1,0 +1,292 @@
+From 99d59164c1dc9e4c5bf3e75ccabd675c141981f3 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 14 Oct 2026 12:25:29 +0200
+Subject: [PATCH] Catacombes : lumieres apaisees (respiration lente au lieu de
+ 12 eclairs/s), halo lisse dans le temps, bleus gardes fonces ; lampes des
+ vehicules emissives (AI-assisted)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ game/graphics/opengl_renderer/ModernGlow.h    | 44 ++++++++++++++-----
+ .../opengl_renderer/foreground/Merc2.cpp      |  9 ++++
+ .../opengl_renderer/shaders/merc2.frag        |  7 +++
+ .../opengl_renderer/shaders/modern_glow.frag  | 34 +++++++++++---
+ goal_src/jak3/levels/comb/comb-mood.gc        | 19 ++++----
+ 5 files changed, 87 insertions(+), 26 deletions(-)
+
+diff --git a/game/graphics/opengl_renderer/ModernGlow.h b/game/graphics/opengl_renderer/ModernGlow.h
+index f8ec5f7d..a2dc12c6 100644
+--- a/game/graphics/opengl_renderer/ModernGlow.h
++++ b/game/graphics/opengl_renderer/ModernGlow.h
+@@ -6,7 +6,8 @@
+ #include "game/graphics/opengl_renderer/background/LiquidSnapshot.h"
+ #include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
+ 
+-// Rayonnement des sources de lumiere dans les lieux fermes (catacombes, mines, nid, salles du temple, egouts) :
++// Rayonnement des sources de lumiere : lieux fermes (catacombes, mines, nid, salles du temple, egouts) et, dehors,
++// les lumieres colorees seules (feux des vehicules, lampes, ecrans) :
+ // avant, on voyait une zone eclairee mais la lampe elle-meme ne brillait pas. Halo large en quart de resolution
+ // (deux echelles de flou), coeur de la source eclairci. Avant l'interface (le texte ne rayonne pas).
+ // Test : pc-remaster-lighting bit 10 (1024) coupe ce rayonnement (avec l'eclairage d'interieur).
+@@ -15,11 +16,14 @@ class ModernGlow {
+   ~ModernGlow() { clear(); }
+   void render(SharedRenderState* state) {
+     if (state->version != GameVersion::Jak3 || !state->has_pc_data) return;
+-    if (LightingState::flags.load() & 1024) return;
++    if (LightingState::flags.load() & 1024) { m_history_valid = false; return; }
+     bool interior = false;
+     for (const char* prefix : {"comb", "mine", "nst", "sew", "templea", "templeb", "templec", "templed"})
+       interior = interior || ModernOcean::level_loaded(state, prefix);
+-    if (!interior) return;
++    // dehors : pas de rayonnement d'ecran (essai : le sable clair du desert rayonnait). Les lampes des vehicules
++    // brillent par elles-memes (merc_emissive, Merc2.cpp)
++    if (!interior) { m_history_valid = false; return; }
++    const bool outdoor = false;
+     if (!m_shader) { m_shader = std::make_unique<Shader>("modern_glow", state->version); glGenVertexArrays(1, &m_vao); }
+     if (!m_shader->okay()) return;
+     GLint old_program, old_vao, old_read, old_draw, old_active, viewport[4];
+@@ -31,19 +35,22 @@ class ModernGlow {
+     glGetBooleanv(GL_COLOR_WRITEMASK, color_mask); glGetBooleanv(GL_DEPTH_WRITEMASK, &depth_write);
+     for (int i = 0; i < 5; i++) { enabled[i] = glIsEnabled(flags[i]); glDisable(flags[i]); }
+     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE); glDepthMask(GL_FALSE);
+-    GLint saved27; glActiveTexture(GL_TEXTURE27); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved27);
++    GLint saved27, saved28; glActiveTexture(GL_TEXTURE27); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved27);
++    glActiveTexture(GL_TEXTURE28); glGetIntegerv(GL_TEXTURE_BINDING_2D, &saved28);
+     m_shader->activate();
+     const auto id = m_shader->id();
+     m_scene.bind(state, id);
+     glUniform1i(glGetUniformLocation(id, "tex_T25"), 25);
+     glUniform1i(glGetUniformLocation(id, "tex_T27"), 27);
+-    glUniform1f(glGetUniformLocation(id, "glow_strength"), 1.f);
++    glUniform1i(glGetUniformLocation(id, "tex_T26"), 26);
++    glUniform1f(glGetUniformLocation(id, "glow_strength"), outdoor ? .8f : 1.f);
++    glUniform1f(glGetUniformLocation(id, "glow_outdoor"), outdoor ? 1.f : 0.f);
+     const int w = std::max(1, state->render_fb_w / 4), h = std::max(1, state->render_fb_h / 4);
+     if (w != m_width || h != m_height) {
+       clear_targets(); m_width = w; m_height = h;
+-      glGenFramebuffers(2, m_fbo); glGenTextures(2, m_texture);
++      glGenFramebuffers(3, m_fbo); glGenTextures(3, m_texture); m_history_valid = false;
+       glActiveTexture(GL_TEXTURE27);
+-      for (int i = 0; i < 2; i++) {
++      for (int i = 0; i < 3; i++) {
+         glBindTexture(GL_TEXTURE_2D, m_texture[i]);
+         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, w, h, 0, GL_RGBA, GL_FLOAT, nullptr);
+         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+@@ -64,13 +71,25 @@ class ModernGlow {
+       glUniform1i(pass, p);
+       glDrawArrays(GL_TRIANGLES, 0, 3);
+     }
++    // lissage dans le temps (C) : les lampes qui clignotent (pulsations du jeu, petites sources qui tombent entre deux
++    // pixels du quart de resolution) ne font plus vaciller leur halo ; C = C + (A - C) * 0,2
++    glUniform1i(glGetUniformLocation(id, "tex_T28"), 28);
++    glActiveTexture(GL_TEXTURE28); glBindTexture(GL_TEXTURE_2D, m_texture[2]);
++    glActiveTexture(GL_TEXTURE27); glBindTexture(GL_TEXTURE_2D, m_texture[0]);
++    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo[1]);
++    glUniform1f(glGetUniformLocation(id, "glow_history"), m_history_valid ? .8f : 0.f);
++    glUniform1i(pass, 6);
++    glDrawArrays(GL_TRIANGLES, 0, 3);
++    std::swap(m_texture[1], m_texture[2]); std::swap(m_fbo[1], m_fbo[2]);   // B devient l'historique
++    m_history_valid = true;
+     glBindFramebuffer(GL_FRAMEBUFFER, state->render_fb);
+     glViewport(0, 0, state->render_fb_w, state->render_fb_h);
+-    glBindTexture(GL_TEXTURE_2D, m_texture[0]);
++    glBindTexture(GL_TEXTURE_2D, m_texture[2]);
+     glUniform1i(pass, 5);
+     glDrawArrays(GL_TRIANGLES, 0, 3);
+ 
+     glBindTexture(GL_TEXTURE_2D, saved27);
++    glActiveTexture(GL_TEXTURE28); glBindTexture(GL_TEXTURE_2D, saved28);
+     glBindFramebuffer(GL_READ_FRAMEBUFFER, old_read); glBindFramebuffer(GL_DRAW_FRAMEBUFFER, old_draw);
+     glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+     glBindVertexArray(old_vao); glUseProgram(old_program); glActiveTexture(old_active);
+@@ -80,13 +99,14 @@ class ModernGlow {
+ 
+  private:
+   void clear_targets() {
+-    if (m_fbo[0]) glDeleteFramebuffers(2, m_fbo);
+-    if (m_texture[0]) glDeleteTextures(2, m_texture);
+-    m_fbo[0] = m_fbo[1] = m_texture[0] = m_texture[1] = 0;
++    if (m_fbo[0]) glDeleteFramebuffers(3, m_fbo);
++    if (m_texture[0]) glDeleteTextures(3, m_texture);
++    for (int i = 0; i < 3; i++) m_fbo[i] = m_texture[i] = 0;
+   }
+   void clear() { clear_targets(); if (m_vao) glDeleteVertexArrays(1, &m_vao); }
+   std::unique_ptr<Shader> m_shader;
+   LiquidSnapshot m_scene;
+-  GLuint m_vao = 0, m_fbo[2] = {}, m_texture[2] = {};
++  GLuint m_vao = 0, m_fbo[3] = {}, m_texture[3] = {};
++  bool m_history_valid = false;
+   int m_width = 0, m_height = 0;
+ };
+diff --git a/game/graphics/opengl_renderer/foreground/Merc2.cpp b/game/graphics/opengl_renderer/foreground/Merc2.cpp
+index b0f617da..b99884e5 100644
+--- a/game/graphics/opengl_renderer/foreground/Merc2.cpp
++++ b/game/graphics/opengl_renderer/foreground/Merc2.cpp
+@@ -1296,8 +1296,17 @@ void Merc2::do_draws(const Draw* draw_array,
+     }
+     bool use_mipmaps_for_filtering = true;
+     if (draw.texture != last_tex) {
++      if (!set_fade && render_state->version == GameVersion::Jak3)
++        glUniform1i(glGetUniformLocation(render_state->shaders[ShaderId::MERC2].id(), "merc_emissive"), 0);
+       if (draw.texture < (int)lev->textures.size() && draw.texture >= 0) {
+         glBindTexture(GL_TEXTURE_2D, lev->textures.at(draw.texture));
++        // remaster : les lampes des vehicules et des machines brillent (la source elle-meme, pas une tache peinte)
++        if (!set_fade && render_state->version == GameVersion::Jak3 && lev->level &&
++            draw.texture < (int)lev->level->textures.size()) {
++          const auto& name = lev->level->textures[draw.texture].debug_name;
++          const bool lamp = name == "light01" || name == "citwide-crimson-light" || name == "rail-light-red";
++          glUniform1i(glGetUniformLocation(render_state->shaders[ShaderId::MERC2].id(), "merc_emissive"), lamp);
++        }
+       } else if ((draw.texture & 0xffffff00) == 0xefffff00) {
+         if (render_state->version == GameVersion::Jak3 ||
+             render_state->version == GameVersion::JakX) {
+diff --git a/game/graphics/opengl_renderer/shaders/merc2.frag b/game/graphics/opengl_renderer/shaders/merc2.frag
+index 19a853a3..27da23c3 100644
+--- a/game/graphics/opengl_renderer/shaders/merc2.frag
++++ b/game/graphics/opengl_renderer/shaders/merc2.frag
+@@ -29,6 +29,7 @@ uniform vec4 light_dir0_fade;
+ uniform vec4 light_dir1_fade_en;
+ 
+ uniform int decal_enable;
++uniform int merc_emissive;   // remaster : lampe des vehicules / machines (brille par elle-meme)
+ 
+ uniform int gfx_hack_no_tex;
+ 
+@@ -454,6 +455,12 @@ void main() {
+   if (shadow_on != 0) {
+     float shade = (1. - mercSunVisibility(merc_world)) * shadow_strength;
+     color.rgb *= mix(vec3(1.), vec3(.70, .73, .81), shade);
++  }
++  // remaster : lampe (phare, voyant) : elle brille par elle-meme, sans ombre ni eclairage ; centre presque blanc
++  if (merc_emissive != 0 && gfx_hack_no_tex == 0) {
++    vec3 t = texture(tex_T0, vtx_st).rgb * 2.;
++    float y = dot(t, vec3(.2126, .7152, .0722));
++    color.rgb = max(color.rgb, mix(t * 1.6, vec3(1.), .55 * smoothstep(.25, .8, y)));
+   }
+    color.xyz = mix(color.xyz, fog_color.rgb, clamp(fog_color.a * fog, 0, 1));
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/modern_glow.frag b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+index 59df3400..f03517db 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_glow.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+@@ -5,24 +5,43 @@
+ in vec2 uv;
+ out vec4 color;
+ uniform sampler2D tex_T25;   // image de la scene (copie)
++uniform sampler2D tex_T26;   // profondeur de la scene (le ciel ne rayonne pas)
+ uniform sampler2D tex_T27;   // tampon du halo
++uniform float glow_outdoor; // 1 : exterieur (seulement les lumieres colorees : feux des vehicules, lampes, ecrans)
++uniform sampler2D tex_T28;   // halo des images precedentes (lissage dans le temps)
++uniform float glow_history;
+ uniform int glow_pass;
+ uniform float glow_strength;
+ 
++bool skyDepth(float d) { const float s = 1. / 16777215.; return d <= 1.5 * s || abs(d - 400. * s) <= 1.5 * s; }
+ float glowWeight(vec3 c) {
+   float mx = max(c.r, max(c.g, c.b)), mn = min(c.r, min(c.g, c.b));
+   float sat = (mx - mn) / max(mx, 1e-3);
+-  // sources : tres lumineuses ; les couleurs franches (lampes jaunes, bandes bleues) comptent plus tot
+-  return smoothstep(.62 - .22 * sat, .95 - .15 * sat, mx);
++  // sources : tres lumineuses ; les couleurs franches (lampes jaunes) comptent plus tot
++  float w = smoothstep(.62 - .22 * sat, .95 - .15 * sat, mx);
++  // lumieres bleues / cyan (bandes, voyants, cristaux precurseurs) : moins lumineuses dans l'image mais ce sont des
++  // sources ; une surface bleue peinte est rarement aussi saturee
++  float cold = smoothstep(.22, .45, mx) * smoothstep(.50, .72, sat) * smoothstep(.05, .25, c.b - c.r);
++  // (les bleus vifs et clairs sont des armures, des peintures : pas des lampes ; on ne touche pas aux personnages)
++  cold *= 1. - smoothstep(.62, .80, mx);
++  w = max(w, .55 * cold);   // halo doux seulement : le bleu fonce lumineux d'origine est garde
++  // dehors : seulement les lumieres chaudes tres lumineuses (lampes, fenetres, phares, feux des vehicules) ; le
++  // sable, les murs clairs, le ciel, les armures bleues des gardes ne rayonnent pas
++  if (glow_outdoor > 0.) w = smoothstep(.80, .97, mx) * smoothstep(.35, .65, sat) * step(c.b, c.r);
++  return w;
+ }
+ void main() {
+   if (glow_pass == 0) {
+     vec2 px = 1. / vec2(textureSize(tex_T25, 0));
+     vec3 sum = vec3(0.);
+     for (int y = -1; y <= 2; y++) for (int x = -1; x <= 2; x++) {
+-      vec3 c = texture(tex_T25, uv + (vec2(x, y) - .5) * px).rgb;
+-      sum += c * glowWeight(c);
++      vec2 q = uv + (vec2(x, y) - .5) * px;
++      if (skyDepth(texture(tex_T26, q).r)) continue;
++      vec3 c = texture(tex_T25, q).rgb;
++      vec3 e = c * glowWeight(c);
++      sum += e;
+     }
++    // moyenne seule : le maximum faisait clignoter les bandes fines quand la camera bouge (retour du joueur)
+     color = vec4(sum / 16., 1.);
+   } else if (glow_pass <= 4) {
+     float step_ = glow_pass >= 3 ? 2.5 : 1.;
+@@ -31,11 +50,16 @@ void main() {
+     c += (texture(tex_T27, uv + axis * 1.384615) + texture(tex_T27, uv - axis * 1.384615)) * .316216;
+     c += (texture(tex_T27, uv + axis * 3.230769) + texture(tex_T27, uv - axis * 3.230769)) * .070270;
+     color = c;
++  } else if (glow_pass == 6) {
++    color = mix(texture(tex_T27, uv), texture(tex_T28, uv), glow_history);
+   } else {
+     vec3 scene = texture(tex_T25, uv).rgb;
+     vec3 glow = texture(tex_T27, uv).rgb;
+-    float w = glowWeight(scene);
++    float w = skyDepth(texture(tex_T26, uv).r) ? 0. : glowWeight(scene);   // le ciel ne blanchit pas
++    w *= 1. - smoothstep(.05, .25, scene.b - scene.r);   // les lumieres bleues gardent leur bleu fonce (pas de blanc)
+     scene = mix(scene, mix(scene, vec3(1.), .55) * 1.08, w * .6 * glow_strength);   // coeur de la source
++    // les lumieres froides rayonnent un peu plus (bleu sature : peu lumineux a l'oeil sinon)
++    glow *= 1. + .3 * smoothstep(.03, .25, glow.b - glow.r);
+     color = vec4(scene + glow * 1.6 * glow_strength, 1.);
+   }
+ }
+diff --git a/goal_src/jak3/levels/comb/comb-mood.gc b/goal_src/jak3/levels/comb/comb-mood.gc
+index 871f3671..b8307409 100644
+--- a/goal_src/jak3/levels/comb/comb-mood.gc
++++ b/goal_src/jak3/levels/comb/comb-mood.gc
+@@ -60,37 +60,38 @@
+     (else
+       (-> arg0 state)
+       (let* ((s5-2 (-> *display* part-clock frame-counter))
+-             (f0-6 (* 1310.72 (the float (mod s5-2 25))))
+-             (f30-2 (sin f0-6))
++             (f0-6 (* 109.22667 (the float (mod s5-2 300))))
++             (f30-2 (+ 0.3 (* 0.7 (sin f0-6))))
+              (f0-8 (* 109.22667 (the float (mod s5-2 600))))
+-             (s5-3 (/ (mod s5-2 125) 25))
++             (s5-3 (/ (mod s5-2 1500) 300))
+              )
++        ;; remaster : lumieres apaisees (respiration de 1 s au lieu de 12 eclairs par seconde)
+         (set! (-> arg0 times 0 w) 1.0)
+-        (set! (-> arg0 times 1 w) f30-2)
++        (set! (-> arg0 times 1 w) (+ 0.55 (* 0.45 (sin f0-6))))
+         (set! (-> arg0 times 2 w) (+ 0.85 (* 0.15 (cos f0-8))))
+         (set! (-> arg0 times 3 w) (if (zero? s5-3)
+                                       f30-2
+-                                      0.0
++                                      0.3
+                                       )
+               )
+         (set! (-> arg0 times 4 w) (if (= s5-3 1)
+                                       f30-2
+-                                      0.0
++                                      0.3
+                                       )
+               )
+         (set! (-> arg0 times 5 w) (if (= s5-3 2)
+                                       f30-2
+-                                      0.0
++                                      0.3
+                                       )
+               )
+         (set! (-> arg0 times 6 w) (if (= s5-3 3)
+                                       f30-2
+-                                      0.0
++                                      0.3
+                                       )
+               )
+         (set! (-> arg0 times 7 w) (if (= s5-3 4)
+                                       f30-2
+-                                      0.0
++                                      0.3
+                                       )
+               )
+         )
+-- 
+2.54.0.windows.1
+
