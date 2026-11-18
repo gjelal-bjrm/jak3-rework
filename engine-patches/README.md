@@ -17,6 +17,13 @@ git checkout -b remaster-spargus
 git am ../engine-patches/*.patch
 ```
 
+Avant de compiler, régénérer la table des lampes des lieux fermés (elle est tirée
+des niveaux du jeu, donc absente de ce dépôt) :
+
+```bash
+python materials-v2/lights/build_lights.py
+```
+
 Puis compiler avec `liquids-v3/build_engine.py` (MSVC 2019, voir le README
 principal).
 

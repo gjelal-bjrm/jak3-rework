@@ -24,7 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument('variant', choices=('original', 'remaster', 'remaster-v1'))
-parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa', 'cascade', 'nest', 'nestb', 'templeb', 'comb', 'mine'), default='arena')
+parser.add_argument('--scene', choices=('arena', 'palace', 'city', 'market', 'coast', 'port', 'intro', 'desert', 'wasdoors', 'desa', 'desb', 'desc', 'desd', 'dese', 'desg', 'desh', 'oasis', 'temple', 'templea', 'volcano', 'volcanoa', 'cascade', 'nest', 'nestb', 'templeb', 'comb', 'mine', 'combn'), default='arena')
 parser.add_argument('--face', metavar='X,Z', help='scenes de ville : point (m) vers lequel Jak se tourne apres placement')
 parser.add_argument('--burst', type=int, metavar='N', help='scenes de ville : N captures a 3 s d intervalle dans qa/ (test)')
 parser.add_argument('--stops', metavar='X,Y,Z/FX,FZ;...', help='scenes de ville : apres le premier placement, enchaine ces arrets (position puis point vise), avec une rafale --burst a chacun')
@@ -98,6 +98,8 @@ CITY_SCENES = {
                 'label': "temple precurseur, salles de l'oracle"},
     'comb': {'continue': 'comba-start', 'arrival': (8.0, 6.7), 'viewpoint': (8.0, 1.3, 6.7),
              'label': 'entree des catacombes precurseurs'},
+    'combn': {'continue': 'combn-start', 'arrival': (3569.2, 226.7), 'viewpoint': (3569.2, -37.4, 226.7),
+              'label': 'catacombes, salle de la statue (pouvoir de Light Jak)'},
     'mine': {'continue': 'minea-start', 'arrival': (-89.9, -98.5), 'viewpoint': (-89.9, 85.0, -98.5),
              'label': 'entree des mines'},
 }

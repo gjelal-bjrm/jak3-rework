@@ -292,5 +292,6 @@
   "game/graphics/opengl_renderer/shaders/modern_glow.vert",
   "game/graphics/opengl_renderer/shaders/modern_glow.frag",
   "out/jak3/iso/COMBA.DGO",
-  "out/jak3/iso/RAILA.DGO"
+  "out/jak3/iso/RAILA.DGO",
+  "game/graphics/opengl_renderer/shaders/materials_v2.glsl"
 ]

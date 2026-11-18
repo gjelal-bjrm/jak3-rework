@@ -146,3 +146,15 @@ lanceur-choix.json
 /remaster-build/patches/
 /remaster-build/textures-by-level.json
 /textures-remaster/revue-metriques.json
+
+# ---- Materiaux v2 : extractions du jeu (geometrie, lampes) et sorties regenerables par les scripts
+materials-v2/out/
+materials-v2/*/materials.json
+materials-v2/*/*native*.json
+materials-v2/*/*-objects.json
+materials-v2/*/textures.json
+materials-v2/lights/*-lamps.json
+remaster-build/build.lock
+remaster-build/stamps.json
+materials-v2/**/sel-*.json
+materials-v2/*/*-surfaces.json

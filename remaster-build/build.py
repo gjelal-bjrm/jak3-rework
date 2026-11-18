@@ -93,6 +93,9 @@ def main(args):
     geo = geometry()
     inventory = json.loads((HERE / 'textures-by-level.json').read_text())
     textures = {}
+    # matieres v2 (materials-v2/<famille>/materials.json) : la couleur recreee passe avant les textures Codex ; les
+    # cartes de relief / matiere de chaque texture presente et les jeux du monde de la famille sont ajoutes au niveau
+    families = [json.loads(p.read_text()) for p in sorted((ROOT / 'materials-v2').glob('*/materials.json'))]
     for path in TEXTURE_SETS:
         if path.exists():
             for t in json.loads(path.read_text())['textures']: textures.setdefault(t['name'], t)
@@ -105,16 +108,25 @@ def main(args):
     for level in levels:
         if wanted and level not in wanted: continue
         names = {n for n, w, h in inventory.get(level, [])}
-        tex = [textures[n] for n in sorted(names & set(textures))]
+        local = dict(textures)                       # couleurs : celles de la famille v2 du lieu d'abord
+        mine = [fam for fam in families if level.startswith(tuple(fam.get('levels', [''])))]
+        for fam in mine:
+            for t in fam['albedo']: local[t['name']] = t
+        tex = [local[n] for n in sorted(names & set(local))]
         spec = geo.get(level, {'patches': []})
-        if not tex and not spec['patches'] and level not in geo: continue
+        extra = []                                   # cartes v2 a ajouter a ce niveau
+        for fam in mine:
+            maps = [t for t in fam['maps'] if t['base'] in names]
+            if maps: extra += maps + fam['world']
+        if not tex and not spec['patches'] and level not in geo and not extra: continue
         base = base_of(level, geo)
         stamp = [stamp_of(base)] + [stamp_of(p) for p in spec['patches']] + \
-                [f"{t['name']}:{Path(t['rgba_file']).stat().st_mtime:.0f}" for t in tex]
+                [f"{t['name']}:{Path(t['rgba_file']).stat().st_mtime:.0f}" for t in tex + extra]
         key = hashlib.sha256('|'.join(stamp).encode()).hexdigest()
         if not force and stamps.get(level) == key and (DATA / f'{level}.fr3').exists():
             continue
         patch = {'description': f'Remaster : {level}', 'remove': [], 'add': [], 'textures': tex, 'textures_optional': True}
+        if extra: patch['new_textures'] = [{k: t[k] for k in ('name', 'page', 'width', 'height', 'rgba_file')} for t in extra]
         seen = set()
         for p in spec['patches']:
             part = json.loads(Path(p).read_text())

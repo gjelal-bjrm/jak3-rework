@@ -39,6 +39,7 @@ PLACES = [
     ('Nid des Metal Heads (caverne du fond)', ['--scene', 'nestb']),
     ("Temple précurseur (salles de l'oracle)", ['--scene', 'templeb']),
     ('Catacombes (entrée)', ['--scene', 'comb']),
+    ('Catacombes (salle de la statue)', ['--scene', 'combn']),
     ('Mines (entrée)', ['--scene', 'mine']),
 ]
 WEATHERS = [

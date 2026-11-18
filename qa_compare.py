@@ -26,7 +26,9 @@ def launch(variant, scene, hour):
         subprocess.Popen(cmd, stdout=f, stderr=subprocess.STDOUT, env=env, cwd=ROOT)
     for _ in range(600):
         time.sleep(2)
-        text = log.read_text(encoding='utf-8', errors='replace')
+        # un ancien lanceur encore ouvert peut ecrire « le jeu a quitte » dans ce journal (apres un trou de zeros) :
+        # on ne lit que ce que le nouveau lanceur a ecrit, sinon les vues partent avant l'arrivee dans le lieu
+        text = log.read_text(encoding='utf-8', errors='replace').split(chr(0), 1)[0]
         if any(k in text for k in ('vitesse', 'Traceback', 'quitte', 'Erreur')): break
     time.sleep(SETTLE)   # chargement complet du lieu (le volcan met plus longtemps que la ville)
     return log.read_text(encoding='utf-8', errors='replace')

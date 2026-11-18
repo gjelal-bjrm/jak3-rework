@@ -1,0 +1,694 @@
+From aa340d62882e47409960df91d8b67dab89487d49 Mon Sep 17 00:00:00 2001
+From: gjelalb96 <54110206+gjelalb96@users.noreply.github.com>
+Date: Wed, 18 Nov 2026 02:15:05 +0100
+Subject: [PATCH] Catacombes : materiaux v2 (couleur HD, relief, rugosite et
+ metal par texture, grain et patine dans l'espace du monde), lampes du decor
+ en vraies sources de lumiere, vitres lumineuses (AI-assisted)
+
+- shaders/materials_v2.glsl (inclus par tfrag3.frag et etie_base.frag) : matiere eclairee par les lampes
+  (tubes, GGX), reflets de la salle (panorama), lumiere precalculee du jeu gardee comme base ; lampes en verre
+  (lumiere derriere la vitre, parallaxe en vraie grandeur, couleur d'origine gardee).
+- Shader.cpp : directive #include pour les shaders.
+- InteriorLights.h : sources de lumiere tirees des lampes du decor (catacombes, rails), les 24 plus proches
+  par image, intensite suivant les palettes de l'heure du jeu (pulsations d'origine). La table des lampes
+  (InteriorLightsData.h) est tiree des niveaux du jeu : elle n'est pas versionnee, on la regenere avec
+  materials-v2/lights/build_lights.py avant de compiler.
+- PalaceMaterials.h : cartes compagnes <texture>.n / <texture>.m et jeux mv2-grain/macro/env par famille ;
+  option de test (pc-remaster-lighting 2048) pour couper les materiaux v2.
+- modern_glow.frag : le halo entoure les sources sans les recouvrir (bleus profonds gardes).
+- tfrag3.frag : ancien rendu des vitres retire.
+- tools/palace_mesh_bridge.cpp : export des palettes de couleur par sommet (with_palettes).
+
+Co-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>
+---
+ .gitignore                                    |   4 +-
+ .../graphics/opengl_renderer/InteriorLights.h |  97 +++++++++
+ game/graphics/opengl_renderer/Shader.cpp      |  16 ++
+ .../background/PalaceMaterials.h              |  79 +++++++-
+ .../opengl_renderer/background/TFragment.cpp  |   2 +-
+ .../opengl_renderer/background/Tie3.cpp       |   4 +-
+ .../opengl_renderer/shaders/etie_base.frag    |  13 +-
+ .../opengl_renderer/shaders/materials_v2.glsl | 187 ++++++++++++++++++
+ .../opengl_renderer/shaders/modern_glow.frag  |   5 +-
+ .../opengl_renderer/shaders/tfrag3.frag       |  38 +---
+ tools/palace_mesh_bridge.cpp                  |  11 +-
+ 11 files changed, 411 insertions(+), 45 deletions(-)
+ create mode 100644 game/graphics/opengl_renderer/InteriorLights.h
+ create mode 100644 game/graphics/opengl_renderer/shaders/materials_v2.glsl
+
+diff --git a/.gitignore b/.gitignore
+index 95afe75b..fd534656 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -87,4 +87,6 @@ __pycache__/
+ unifont-15.0.03.ttf
+ *.diff
+ goalc-report.html
+-_new-all-types.gc
+\ No newline at end of file
++_new-all-types.gc
++# Remaster : sources de lumiere tirees des niveaux du jeu, regenerees par materials-v2/lights/build_lights.py
++/game/graphics/opengl_renderer/InteriorLightsData.h
+diff --git a/game/graphics/opengl_renderer/InteriorLights.h b/game/graphics/opengl_renderer/InteriorLights.h
+new file mode 100644
+index 00000000..9c3e3446
+--- /dev/null
++++ b/game/graphics/opengl_renderer/InteriorLights.h
+@@ -0,0 +1,97 @@
++#pragma once
++#include <algorithm>
++#include <array>
++#include <cmath>
++#include <cstring>
++#include <string>
++#include <unordered_map>
++#include <vector>
++
++#include "game/graphics/opengl_renderer/BucketRenderer.h"
++#include "game/graphics/opengl_renderer/InteriorLightsData.h"
++#include "game/graphics/opengl_renderer/ocean/ModernOcean.h"
++
++// Materiaux v2 (lieux fermes) : les lampes du decor deviennent de vraies sources de lumiere pour le rendu des
++// matieres (reflets sur le metal, lumiere qui deborde sur ce qui entoure la lampe).
++//  - donnees : InteriorLightsData.h (genere par materials-v2/lights/build_lights.py a partir des faces lumineuses
++//    du niveau) : tubes, portee, puissance, couleur, intensite dans les 8 palettes de l'heure du jour ;
++//  - chaque image : les sources les plus proches de la camera, avec leur intensite du moment (les poids des
++//    palettes sont ceux du jeu : les sources pulsent et defilent comme les lampes d'origine) ;
++//  - envoyees une fois par image et par shader (bind).
++namespace InteriorLights {
++constexpr int kMaxLights = 24;
++constexpr float kRange = 70.f;        // au-dela (m), une source ne compte plus (fondu a partir de 50 m)
++
++// poids des 8 palettes de l'heure du jour (r, v, b), 1.0 = plein ; publies par Tie3 a chaque image
++inline float palette_weights[8][3] = {{1, 1, 1}};
++inline void set_palette_weights(const math::Vector<s32, 4> itimes[4]) {
++  for (int component = 0; component < 8; component++) {
++    const int quad_idx = component / 2, word_off = component % 2 * 2;
++    for (int channel = 0; channel < 3; channel++) {
++      const u32 word_val = itimes[quad_idx][word_off + channel / 2];
++      palette_weights[component][channel] = float((channel % 2 ? (word_val >> 16) : word_val) & 0xff) / 64.f;
++    }
++  }
++}
++
++struct Frame {
++  u64 frame = UINT64_MAX;
++  int count = 0;
++  float a[kMaxLights * 4], b[kMaxLights * 4], colour[kMaxLights * 3];
++  std::unordered_map<GLuint, u64> bound;   // shader -> derniere image envoyee
++};
++inline Frame g_frame;
++
++inline void update(const SharedRenderState* state) {
++  if (g_frame.frame == state->frame_idx) return;
++  g_frame.frame = state->frame_idx;
++  g_frame.count = 0;
++  const float eye[3] = {state->camera_pos[0] / 4096.f, state->camera_pos[1] / 4096.f, state->camera_pos[2] / 4096.f};
++  struct Candidate { float score; const InteriorLightData* light; float fade; };
++  std::vector<Candidate> candidates;
++  for (const auto& set : kInteriorLightSets) {       // tous les niveaux charges qui ont des lampes
++    if (!ModernOcean::level_loaded(state, set.level)) continue;
++    for (int i = 0; i < set.count; i++) {
++      const auto& l = set.lights[i];
++      float d2 = 0.f;
++      for (int k = 0; k < 3; k++) { const float d = (l.a[k] + l.b[k]) * .5f - eye[k]; d2 += d * d; }
++      const float d = std::sqrt(d2);
++      if (d > kRange) continue;
++      // les sources puissantes comptent de plus loin
++      candidates.push_back({d - 2.f * std::min(l.power, 8.f), &l, 1.f - std::clamp((d - 50.f) / (kRange - 50.f), 0.f, 1.f)});
++    }
++  }
++  const size_t n = std::min<size_t>(candidates.size(), kMaxLights);
++  std::partial_sort(candidates.begin(), candidates.begin() + n, candidates.end(),
++                    [](const Candidate& x, const Candidate& y) { return x.score < y.score; });
++  for (size_t i = 0; i < n; i++) {
++    const auto& l = *candidates[i].light;
++    // intensite du moment : comme la couleur des sommets de la lampe (somme des palettes x poids, x 2)
++    float level = 0.f;
++    for (int p = 0; p < 8; p++)
++      level += (palette_weights[p][0] + palette_weights[p][1] + palette_weights[p][2]) / 3.f * float(l.pal[p]) / 255.f;
++    level = std::min(level * 2.f, 2.f);
++    const float power = std::clamp(l.power, .25f, 5.f);
++    const float gain = level * power * candidates[i].fade;
++    std::memcpy(&g_frame.a[i * 4], l.a, 12); g_frame.a[i * 4 + 3] = l.radius;
++    std::memcpy(&g_frame.b[i * 4], l.b, 12); g_frame.b[i * 4 + 3] = l.size;
++    for (int k = 0; k < 3; k++) g_frame.colour[i * 3 + k] = l.colour[k] * gain;
++  }
++  g_frame.count = int(n);
++}
++
++// A appeler apres glUseProgram(program). Renvoie le nombre de sources actives.
++inline int bind(GLuint program, const SharedRenderState* state) {
++  update(state);
++  auto& last = g_frame.bound[program];
++  if (last == state->frame_idx + 1) return g_frame.count;
++  last = state->frame_idx + 1;
++  glUniform1i(glGetUniformLocation(program, "mv2_light_count"), g_frame.count);
++  if (g_frame.count) {
++    glUniform4fv(glGetUniformLocation(program, "mv2_light_a"), g_frame.count, g_frame.a);
++    glUniform4fv(glGetUniformLocation(program, "mv2_light_b"), g_frame.count, g_frame.b);
++    glUniform3fv(glGetUniformLocation(program, "mv2_light_colour"), g_frame.count, g_frame.colour);
++  }
++  return g_frame.count;
++}
++}  // namespace InteriorLights
+diff --git a/game/graphics/opengl_renderer/Shader.cpp b/game/graphics/opengl_renderer/Shader.cpp
+index e6dac6b4..4aaa33e7 100644
+--- a/game/graphics/opengl_renderer/Shader.cpp
++++ b/game/graphics/opengl_renderer/Shader.cpp
+@@ -1,5 +1,7 @@
+ #include "Shader.h"
+ 
++#include <regex>
++
+ #include "common/log/log.h"
+ #include "common/util/Assert.h"
+ #include "common/util/FileUtil.h"
+@@ -17,6 +19,20 @@ Shader::Shader(const std::string& shader_name, GameVersion version) : m_name(sha
+   auto frag_src =
+       file_util::read_text_file(file_util::get_file_path({shader_folder, shader_name + ".frag"}));
+ 
++  // remaster : code GLSL partage entre plusieurs shaders. Une ligne « #include "nom.glsl" » est remplacee par le
++  // contenu du fichier (dossier des shaders) ; pas d'inclusions imbriquees.
++  const auto expand_includes = [](std::string src) {
++    const std::regex include_line(R"re(#include "([A-Za-z0-9_\-]+\.glsl)")re");
++    std::smatch match;
++    while (std::regex_search(src, match, include_line)) {
++      const auto text = file_util::read_text_file(file_util::get_file_path({shader_folder, match[1].str()}));
++      src = match.prefix().str() + text + match.suffix().str();
++    }
++    return src;
++  };
++  vert_src = expand_includes(vert_src);
++  frag_src = expand_includes(frag_src);
++
+   vert_src = std::regex_replace(vert_src, std::regex("HEIGHT_SCALE"), height_scale);
+   vert_src = std::regex_replace(vert_src, std::regex("SCISSOR_HEIGHT"), scissor_height);
+   frag_src = std::regex_replace(frag_src, std::regex("SCISSOR_HEIGHT"), scissor_height);
+diff --git a/game/graphics/opengl_renderer/background/PalaceMaterials.h b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+index 741a2c51..57195847 100644
+--- a/game/graphics/opengl_renderer/background/PalaceMaterials.h
++++ b/game/graphics/opengl_renderer/background/PalaceMaterials.h
+@@ -7,6 +7,9 @@
+ #include "game/graphics/opengl_renderer/GrassContacts.h"
+ #include "game/graphics/opengl_renderer/WeatherWorld.h"
+ #include "game/graphics/opengl_renderer/ModernShadows.h"
++#include "game/graphics/opengl_renderer/InteriorLights.h"
++#include <cstdio>
++#include <set>
+ 
+ // Cache static scenery classifications at level load. Animated liquids,
+ // characters and other levels sharing the shader programs keep their own path.
+@@ -28,21 +31,47 @@ class PalaceMaterials {
+       if (level.level_name.rfind(prefix, 0) == 0) m_genshin = 1.f;
+     // lieux fermes : eclairage d'interieur stylise (catacombes, mines, nid, salles du temple, egouts)
+     m_interior = 0.f;
+-    for (const char* prefix : {"comb", "mine", "nst", "sew", "templea", "templeb", "templec", "templed"})
+-      if (level.level_name.rfind(prefix, 0) == 0) m_interior = 1.f;
++    for (const char* prefix : {"mine", "nst", "sew", "templea", "templeb", "templec", "templed"})
++      if (level.level_name.rfind(prefix, 0) == 0) m_interior = 1.f;   // (catacombes : materiaux v2 a la place)
++    // materiaux v2 : cartes de relief (« nom.n ») et de matiere (« nom.m ») ajoutees au niveau par
++    // materials-v2/ (remaster-build/build.py). La page de la carte de matiere porte la famille et la taille des
++    // jeux plaques selon le monde : « mv2:<famille>:<m par repetition du grain>:<m de la variation large> » ;
++    // grain fin et variation large de la famille : « mv2-grain-<famille> », « mv2-macro-<famille> ».
++    m_v2.assign(level.textures.size(), V2{});
++    m_has_v2 = false;
++    {
++      std::unordered_map<std::string, int> by_name;
++      for (size_t i = 0; i < level.textures.size(); i++) by_name.emplace(level.textures[i].debug_name, int(i));
++      const auto find = [&](const std::string& name) { auto it = by_name.find(name); return it == by_name.end() ? -1 : it->second; };
++      for (size_t i = 0; i < level.textures.size(); i++) {
++        const auto& name = level.textures[i].debug_name;
++        m_v2[i].normal = find(name + ".n"); m_v2[i].matter = find(name + ".m");
++        if (m_v2[i].normal < 0 || m_v2[i].matter < 0) continue;
++        const auto& page = level.textures[m_v2[i].matter].debug_tpage_name;
++        // « mv2lamp:... » : lampe (verre lumineux, mode 2)
++        char family[64] = {};
++        const bool lamp = page.rfind("mv2lamp:", 0) == 0;
++        if (!lamp && page.rfind("mv2:", 0) != 0) continue;
++        if (std::sscanf(page.c_str() + (lamp ? 8 : 4), "%63[^:]:%f:%f", family, &m_v2[i].grain_tile, &m_v2[i].macro_tile) != 3) continue;
++        m_v2[i].grain = find(std::string("mv2-grain-") + family); m_v2[i].macro = find(std::string("mv2-macro-") + family);
++        m_v2[i].env = find(std::string("mv2-env-") + family);
++        if (m_v2[i].grain < 0 || m_v2[i].macro < 0 || m_v2[i].env < 0) continue;
++        m_v2[i].mode = lamp ? 2 : 1; m_has_v2 = true;
++      }
++      if (m_has_v2) lg::info("Materiaux v2 [{}] : {} textures avec cartes de matiere", level.level_name,
++                             std::count_if(m_v2.begin(), m_v2.end(), [](const V2& v) { return v.mode != 0; }));
++    }
+     if (TextureAudit::enabled()) {           // controle : noms de toutes les textures, dans tous les niveaux
+       m_all_names.clear();
+       for (const auto& texture : level.textures) m_all_names.push_back(texture.debug_name);
+     }
+-    const bool comb = level.level_name.rfind("comb", 0) == 0;   // catacombes : vitres lumineuses bleues
+-    if (level.level_name != "waspala" && !market && !arena && !desert && !comb) return;
++    if (level.level_name != "waspala" && !market && !arena && !desert) return;
+     int count=0, high_res=0;
+     for (const auto& texture : level.textures) {
+       // Regional response only for explicit, high-resolution replacement
+       // materials. Alpha decals, windows, liquids and unchanged atlases keep
+       // the native path. The palace classification is unchanged.
+-      const int kind=comb ? (texture.debug_name == "comb-temp-glass" ? 10 : 0) :
+-          desert ? (world_tile(texture.debug_name) ? 7 : 0) :
++      const int kind=desert ? (world_tile(texture.debug_name) ? 7 : 0) :
+           arena ? classify_arena(texture.debug_name) :
+           market ? (std::max(texture.w,texture.h)>=512 ?
+           classify_market(texture.debug_name) : 0) : classify(texture.debug_name);
+@@ -58,9 +87,38 @@ class PalaceMaterials {
+       reported=true;
+     }
+   }
+-  void bind(GLuint program, int texture, const SharedRenderState* state) const {
++  bool has_v2() const { return m_has_v2 && !(LightingState::flags.load() & 2048); }
++  void bind(GLuint program, int texture, const SharedRenderState* state,
++            const std::vector<GLuint>* gl_textures = nullptr) const {
+     if (TextureAudit::enabled() && texture >= 0 && size_t(texture) < m_all_names.size())
+       TextureAudit::record(m_level, m_all_names[texture]);
++    // materiaux v2 (test : pc-remaster-lighting bit 11 (2048) = coupes)
++    {
++      const V2* v2 = has_v2() && gl_textures && texture >= 0 && size_t(texture) < m_v2.size() &&
++                     m_v2[texture].mode ? &m_v2[texture] : nullptr;
++      glUniform1i(glGetUniformLocation(program, "mv2_mode"), v2 ? v2->mode : 0);
++      if (v2) {
++        const int ids[5] = {v2->env, v2->normal, v2->matter, v2->macro, v2->grain};   // unites 5 a 9
++        for (int k = 0; k < 5; k++) {
++          const GLuint tex = gl_textures->at(ids[k]);
++          glActiveTexture(GL_TEXTURE5 + k); glBindTexture(GL_TEXTURE_2D, tex);
++          if (m_v2_ready.insert(tex).second) {
++            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
++            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
++          }
++        }
++        glActiveTexture(GL_TEXTURE0);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
++        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
++        glUniform4f(glGetUniformLocation(program, "mv2_world"), v2->grain_tile, v2->macro_tile, 1.f, 1.f);
++        glUniform3f(glGetUniformLocation(program, "mv2_eye"), state->camera_pos[0] / 4096.f,
++                    state->camera_pos[1] / 4096.f, state->camera_pos[2] / 4096.f);
++        glUniform1f(glGetUniformLocation(program, "mv2_time"), LiquidSnapshot::seconds());
++        InteriorLights::bind(program, state);
++      }
++    }
+     const int kind=state->version==GameVersion::Jak3 && texture>=0 &&
+         size_t(texture)<m_kinds.size() ? m_kinds[texture] : 0;
+     glUniform1i(glGetUniformLocation(program,"palace_material"),kind);
+@@ -192,6 +250,13 @@ class PalaceMaterials {
+   }
+   int m_grass_region = 0;
+   std::vector<int> m_kinds;
++  struct V2 {
++    int mode = 0, normal = -1, matter = -1, grain = -1, macro = -1, env = -1;
++    float grain_tile = 1.f, macro_tile = 8.f;
++  };
++  std::vector<V2> m_v2;
++  bool m_has_v2 = false;
++  mutable std::set<GLuint> m_v2_ready;
+   float m_genshin = 0.f;
+   float m_interior = 0.f;
+   std::vector<std::string> m_all_names;
+diff --git a/game/graphics/opengl_renderer/background/TFragment.cpp b/game/graphics/opengl_renderer/background/TFragment.cpp
+index 8916487c..47cee947 100644
+--- a/game/graphics/opengl_renderer/background/TFragment.cpp
++++ b/game/graphics/opengl_renderer/background/TFragment.cpp
+@@ -503,7 +503,7 @@ void TFragment::render_tree(int geom,
+       }
+     }
+     glUniform1i(glGetUniformLocation(liquid_shader, "fluid_kind"), liquid_kind);
+-    m_palace_materials.bind(liquid_shader,tex_idx,render_state);
++    m_palace_materials.bind(liquid_shader,tex_idx,render_state,m_textures);
+     if (liquid_kind) {
+       if (liquid_kind >= 2) m_liquid_snapshot.bind(render_state, liquid_shader);
+       if (liquid_kind == 1) {
+diff --git a/game/graphics/opengl_renderer/background/Tie3.cpp b/game/graphics/opengl_renderer/background/Tie3.cpp
+index 849f67c5..4ac2cf58 100644
+--- a/game/graphics/opengl_renderer/background/Tie3.cpp
++++ b/game/graphics/opengl_renderer/background/Tie3.cpp
+@@ -439,6 +439,7 @@ void Tie3::setup_tree(int idx,
+   }
+ 
+   interp_time_of_day(settings.camera.itimes, *tree.colors, m_color_result.data());
++  InteriorLights::set_palette_weights(settings.camera.itimes);   // les lampes v2 pulsent comme le jeu
+ 
+   glActiveTexture(GL_TEXTURE10);
+   glBindTexture(GL_TEXTURE_1D, tree.time_of_day_texture);
+@@ -610,7 +611,7 @@ void Tie3::draw_matching_draws_for_tree(int idx,
+     }
+     auto double_draw = setup_tfrag_shader(render_state, draw.mode, draw_shader);
+     const auto program = render_state->shaders[draw_shader].id();
+-    m_palace_materials.bind(program,draw.tree_tex_id,render_state);
++    m_palace_materials.bind(program,draw.tree_tex_id,render_state,m_textures);
+     glUniform1i(glGetUniformLocation(program, "fluid_kind"), water_kind);
+     if (modern_water) {
+       if (!m_logged_prototype_water) {
+@@ -673,6 +674,7 @@ void Tie3::draw_matching_draws_for_tree(int idx,
+ 
+   glBindVertexArray(0);
+ 
++  // (materiaux v2 : la passe de base ecrit alpha = 0, la carte de reflets plaquee ne s'ajoute pas sur eux)
+   if (use_envmap && m_draw_envmap_second_draw) {
+     envmap_second_pass_draw(tree, settings, render_state, prof,
+                             tfrag3::get_second_draw_category(category));
+diff --git a/game/graphics/opengl_renderer/shaders/etie_base.frag b/game/graphics/opengl_renderer/shaders/etie_base.frag
+index 7b4662d0..a52bec1e 100644
+--- a/game/graphics/opengl_renderer/shaders/etie_base.frag
++++ b/game/graphics/opengl_renderer/shaders/etie_base.frag
+@@ -158,13 +158,23 @@ vec3 shadePalaceMaterial(vec3 existing,vec3 albedo,vec3 p) {
+ }
+ // PALACE_MATERIAL_END
+ 
++#include "materials_v2.glsl"
++
+ void main() {
+   vec3 arena_light = arenaRelight(fragment_color.rgb, arena_world);
+   if (gfx_hack_no_tex == 0) {
+     //vec4 T0 = texture(tex_T0, tex_coord);
+     vec4 T0 = texture(tex_T0, tex_coord.xy);
+     color = vec4(arena_light, fragment_color.a) * T0;
++    if (mv2_mode != 0) {
++      // materiaux v2 : matiere eclairee par les lampes (mode 1) ou lampe de verre (mode 2)
++      vec3 face_normal = normalize(cross(dFdx(arena_world), dFdy(arena_world)));
++      vec3 ng = dot(palace_smooth_normal, palace_smooth_normal) > .01 ? normalize(palace_smooth_normal) : face_normal;
++      color.rgb = mv2_mode == 2 ? mv2Lamp(arena_light, tex_coord.xy, arena_world, ng)
++                                : mv2Surface(T0, arena_light, tex_coord.xy, arena_world, ng);
++    } else {
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
++    }
+     if (palace_material==4) color.a *= mix(.48,1.0,smoothstep(.36,.49,T0.a));
+   } else {
+     color = fragment_color/2;
+@@ -175,5 +185,6 @@ void main() {
+   }
+ 
+   color.rgb = mix(color.rgb, fog_color.rgb, clamp(fogginess * fog_color.a, 0, 1));
+-
++  // materiaux v2 : reflets calcules par matiere ; alpha 0 -> la passe de carte de reflets (x alpha) n'ajoute rien
++  if (mv2_mode != 0) color.a = 0.;
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/materials_v2.glsl b/game/graphics/opengl_renderer/shaders/materials_v2.glsl
+new file mode 100644
+index 00000000..a2dc981d
+--- /dev/null
++++ b/game/graphics/opengl_renderer/shaders/materials_v2.glsl
+@@ -0,0 +1,187 @@
++// ---------------------------------------------------------------- MATERIAUX V2 (lieux fermes)
++// De vraies matieres au lieu d'une image eclairee par les sommets :
++//  - chaque texture a ses cartes (materials-v2/) : relief (normale + hauteur), rugosite, metal, creux ; plus un grain
++//    fin et une variation large plaques selon le monde (meme densite partout, sans etirement) ;
++//  - les lampes du decor sont de vraies sources (InteriorLights.h) : reflets sur le metal qui suivent le regard,
++//    lumiere qui deborde autour de la lampe ; elles pulsent comme dans le jeu ;
++//  - reflets de la salle (panorama des lampes) : le metal reste du metal loin des lampes ;
++//  - la lumiere precalculee du jeu reste la base (ambiance, pulsations) : on calcule en lumiere lineaire par-dessus ;
++//  - mode 2 : lampe = verre epais, la lumiere est derriere le verre (parallaxe), reflets sur le verre.
++uniform int mv2_mode;            // 0 : rendu d'avant ; 1 : matiere ; 2 : lampe (verre lumineux)
++uniform sampler2D tex_T5;        // reflets de la salle : panorama equirectangulaire, racine(radiance / 4)
++uniform sampler2D tex_T6;        // relief : normale (rv), hauteur (b), part du grain du monde (a)
++                                 //   (lampe : normale du verre (rv), transparence du verre (b))
++uniform sampler2D tex_T7;        // matiere : rugosite (r), metal (v), lumiere emise (b), creux (a)
++uniform sampler2D tex_T8;        // variation large (monde) : teinte (rvb, .5 = neutre), rugosite (a, .5 = neutre)
++uniform sampler2D tex_T9;        // grain fin (monde) : normale (rv), creux (b), rugosite (a, .5 = neutre)
++uniform vec4 mv2_world;          // metres par repetition du grain fin, de la variation large ; force du grain, de la variation
++uniform vec3 mv2_eye;            // camera (m)
++uniform float mv2_time;
++uniform int mv2_light_count;
++uniform vec4 mv2_light_a[24];    // extremite A du tube (m), portee
++uniform vec4 mv2_light_b[24];    // extremite B, demi-epaisseur
++uniform vec3 mv2_light_colour[24];
++
++vec3 mv2Lin(vec3 c) { return pow(max(c, vec3(0.)), vec3(2.2)); }
++vec3 mv2Gam(vec3 c) { return pow(max(c, vec3(0.)), vec3(1. / 2.2)); }
++float mv2Luma(vec3 c) { return dot(c, vec3(.2126, .7152, .0722)); }
++
++// repere tangent sans tangentes stockees (derivees de la position et des UV) ; colonnes : dP/du, dP/dv, N
++mat3 mv2Frame(vec3 N, vec3 P, vec2 uv) {
++  vec3 dp1 = dFdx(P), dp2 = dFdy(P); vec2 du1 = dFdx(uv), du2 = dFdy(uv);
++  vec3 dp2perp = cross(dp2, N), dp1perp = cross(N, dp1);
++  vec3 T = dp2perp * du1.x + dp1perp * du2.x, B = dp2perp * du1.y + dp1perp * du2.y;
++  float invmax = inversesqrt(max(dot(T, T), dot(B, B)) + 1e-20);
++  return mat3(T * invmax, B * invmax, N);
++}
++
++// reflets de la salle dans la direction R, flous selon la rugosite
++vec3 mv2Env(vec3 R, float rough) {
++  vec2 e = vec2(atan(R.z, R.x) / 6.2831853 + .5, acos(clamp(R.y, -1., 1.)) / 3.14159265);
++  vec3 c = textureLod(tex_T5, e, .8 + rough * 5.5).rgb;
++  return c * c * 4.;
++}
++
++// lumiere des lampes sur une matiere : reflets (GGX, tubes de lumiere) + diffusion (non-metaux).
++// own : 1 pour une lampe (elle ne se reflete pas elle-meme)
++vec3 mv2Lights(vec3 P, vec3 N, vec3 V, vec3 albedo, float rough, float metal, float own) {
++  vec3 f0 = mix(vec3(.04), albedo, metal);
++  vec3 Rv = reflect(-V, N);
++  float nv = max(dot(N, V), .02);
++  float a = max(rough * rough, .03);
++  vec3 sum = vec3(0.);
++  for (int i = 0; i < mv2_light_count; i++) {
++    vec3 A = mv2_light_a[i].xyz - P, B = mv2_light_b[i].xyz - P;
++    float range = mv2_light_a[i].w, size = mv2_light_b[i].w;
++    vec3 AB = B - A; float ab2 = dot(AB, AB);
++    float tD = ab2 > 1e-5 ? clamp(-dot(A, AB) / ab2, 0., 1.) : 0.;
++    vec3 Ld = A + AB * tD;                       // point du tube le plus proche
++    float d2 = dot(Ld, Ld);
++    if (d2 > range * range) continue;
++    float d = sqrt(d2);
++    if (own > 0. && d < size * 1.5 + .7) continue;
++    float win = 1. - d2 / (range * range); win *= win;
++    float atten = win / (d2 + size * size + .5);
++    float nl = max(dot(N, Ld / d), 0.);
++    // reflet : point du tube le plus proche du rayon reflechi, puis sphere de la demi-epaisseur
++    float tS = tD;
++    if (ab2 > 1e-5) {
++      float rA = dot(Rv, A), rAB = dot(Rv, AB), den = ab2 - rAB * rAB;
++      if (den > 1e-5) tS = clamp((rA * rAB - dot(A, AB)) / den, 0., 1.);
++    }
++    vec3 Ls = A + AB * tS;
++    vec3 toRay = dot(Ls, Rv) * Rv - Ls;
++    Ls += toRay * clamp(size / max(length(toRay), 1e-4), 0., 1.);
++    float ds = max(length(Ls), 1e-3);
++    vec3 L = Ls / ds, H = normalize(L + V);
++    float nls = max(dot(N, L), 0.);
++    float nh = max(dot(N, H), 0.), vh = max(dot(V, H), 0.);
++    float aP = clamp(a + size / (2. * ds), 0., 1.);
++    float den = nh * nh * (a * a - 1.) + 1.;
++    float D = a * a / (3.14159 * den * den) * (a * a) / (aP * aP);      // source etendue : reflet plus large, energie gardee
++    float k = (rough + 1.) * (rough + 1.) * .125;
++    float G = (nv / (nv * (1. - k) + k)) * (nls / (nls * (1. - k) + k));
++    vec3 F = f0 + (max(vec3(1. - rough), f0) - f0) * pow(1. - vh, 5.);   // rugueux : pas de miroir en vue rasante
++    vec3 spec = D * G * F / (4. * nv + .05);
++    sum += (min(spec, vec3(1.4)) * smoothstep(0., .12, nls) + (1. - metal) * albedo * nl / 3.14159) * mv2_light_colour[i] * atten;
++  }
++  return sum * .55;
++}
++
++// normale du grain fin, plaque selon le monde sur les trois axes ; cav : creux ; rmod : rugosite (-.5 .. .5)
++vec3 mv2WorldGrain(vec3 P, vec3 N, float strength, out float cav, out float rmod) {
++  vec3 w = pow(abs(N), vec3(4.)); w /= (w.x + w.y + w.z);
++  float tile = mv2_world.x;
++  vec4 tx = texture(tex_T9, P.zy / tile), ty = texture(tex_T9, P.xz / tile), tz = texture(tex_T9, P.xy / tile);
++  vec2 nx = tx.rg * 2. - 1., ny = ty.rg * 2. - 1., nz = tz.rg * 2. - 1.;
++  vec3 bump = w.x * vec3(0., nx.y, nx.x) + w.y * vec3(ny.x, 0., ny.y) + w.z * vec3(nz.x, nz.y, 0.);
++  cav = dot(w, vec3(tx.b, ty.b, tz.b));
++  rmod = dot(w, vec3(tx.a, ty.a, tz.a)) - .5;
++  return normalize(N + bump * strength);
++}
++vec4 mv2WorldMacro(vec3 P, vec3 N) {
++  vec3 w = pow(abs(N), vec3(4.)); w /= (w.x + w.y + w.z);
++  float tile = mv2_world.y;
++  return w.x * texture(tex_T8, P.zy / tile) + w.y * texture(tex_T8, P.xz / tile) + w.z * texture(tex_T8, P.xy / tile);
++}
++
++// compression douce des hautes lumieres (pas de blanc brule) ; la teinte est gardee
++vec3 mv2Tone(vec3 c) {
++  float y = mv2Luma(c);
++  float t = y > .55 ? .55 + (y - .55) / (1. + (y - .55) / .45) : y;
++  return c * (t / max(y, 1e-4));
++}
++
++// matiere : base = couleur du jeu (texture x lumiere precalculee) ; Ng : normale lisse du modele ou de la face
++vec3 mv2Surface(vec4 T0, vec3 baked, vec2 uv, vec3 P, vec3 Ng) {
++  vec3 V = normalize(mv2_eye - P);
++  if (dot(Ng, V) < 0.) Ng = -Ng;
++  mat3 tbn = mv2Frame(Ng, P, uv);
++  vec4 relief = texture(tex_T6, uv), mat = texture(tex_T7, uv);
++  vec2 nxy = relief.rg * 2. - 1.;
++  vec3 N = normalize(tbn * vec3(nxy, sqrt(max(1. - dot(nxy, nxy), 0.05))));
++  float cav, rmod;
++  // vue rasante : le grain compte moins et la matiere repond plus mat aux lampes (sinon le sol scintille comme
++  // du metal mouille le long des bandes lumineuses)
++  float graze = 1. - max(dot(Ng, V), 0.); graze *= graze;
++  N = mv2WorldGrain(P, N, mv2_world.z * relief.a * (1. - .5 * graze), cav, rmod);
++  vec4 macro = mv2WorldMacro(P, Ng);
++  float k = mv2_world.w * relief.a;
++  vec3 albedo = T0.rgb * mix(vec3(1.), macro.rgb * 2., k);
++  float rough = clamp(mat.r + (macro.a - .5) * k + rmod * relief.a, .2, .95);
++  float metal = mat.g;
++  float ao = mat.a * mix(1., cav, .8 * relief.a);
++  vec3 albedoLin = mv2Lin(albedo);
++  float nv = max(dot(N, V), 0.);
++  // base : lumiere du jeu ; le relief y repond (lumiere dominante venue d'en haut), creux assombris
++  float bend = 1. + .55 * (N.y - Ng.y) + .35 * (dot(N, V) - dot(Ng, V));
++  vec3 bakedLin = mv2Lin(baked);
++  vec3 base = bakedLin * albedoLin * clamp(bend, .35, 1.9) * mix(.35, 1., ao) * (1. - .22 * metal);
++  // reflets de la salle : teintes par le metal, plus forts en vue rasante, a la mesure de la lumiere du lieu
++  vec3 f0 = mix(vec3(.04), albedoLin, metal);
++  vec3 fenv = f0 + (max(vec3(1. - rough), f0) - f0) * pow(1. - nv, 5.);
++  float place = clamp(mv2Luma(baked) / .5, .15, 1.6);
++  vec3 env = mv2Env(reflect(-V, N), rough) * fenv * place * mix(.4, 1., ao);
++  // lampes : la lumiere precalculee sert d'ombre (un endroit que le jeu laisse noir ne recoit pas de reflet)
++  float vis = smoothstep(.03, .30, mv2Luma(baked)) * mix(.5, 1., ao);
++  vec3 lights = mv2Lights(P, N, V, albedoLin, mix(rough, max(rough, .62), graze), metal, 0.) * vis;
++  vec3 c = base + env + lights + albedoLin * bakedLin * mat.b * 3.;
++  return mv2Gam(mv2Tone(c));
++}
++
++// lampe : verre epais, la lumiere est derriere. La couleur d'origine (bande lumineuse) est gardee ; elle est lue
++// decalee selon le regard (parallaxe en vraie grandeur), sous un verre a fines nervures qui reflete les autres lampes.
++vec3 mv2Lamp(vec3 baked, vec2 uv, vec3 P, vec3 Ng) {
++  vec3 V = normalize(mv2_eye - P);
++  if (dot(Ng, V) < 0.) Ng = -Ng;
++  // dP/du, dP/dv en metres (parallaxe juste quel que soit l'etirement de la texture)
++  vec3 dp1 = dFdx(P), dp2 = dFdy(P); vec2 du1 = dFdx(uv), du2 = dFdy(uv);
++  float det = du1.x * du2.y - du1.y * du2.x;
++  det = abs(det) > 1e-14 ? det : 1e-14;
++  vec3 dPdu = (dp1 * du2.y - dp2 * du1.y) / det, dPdv = (dp2 * du1.x - dp1 * du2.x) / det;
++  float mpu = max(length(dPdu), 1e-3), mpv = max(length(dPdv), 1e-3);
++  vec3 Tu = dPdu / mpu, Tv = dPdv / mpv;
++  float nv = max(dot(Ng, V), .25);
++  const float depth = .07;                                       // m : la lumiere est 7 cm derriere le verre
++  vec2 par = clamp(vec2(dot(V, Tu) / mpu, dot(V, Tv) / mpv) * depth / nv, vec2(-.10), vec2(.10));
++  vec4 surf = texture(tex_T6, uv), mat = texture(tex_T7, uv);
++  vec3 inner = mv2Lin(texture(tex_T0, uv - par).rgb);
++  // fines nervures du verre (4 cm, selon le monde) : visibles de pres seulement
++  vec3 at = abs(Tu);
++  float s = at.x > at.y && at.x > at.z ? P.x : (at.y > at.z ? P.y : P.z);
++  float fine = 1. - smoothstep(.004, .02, length(dp1) + length(dp2));
++  float rib = cos(s * 157.08);
++  inner *= 1. + .07 * rib * fine;
++  // niveau : celui du jeu (pulsations), plafonne : la lampe reste de sa couleur, sans virer au blanc
++  vec3 emission = inner * mv2Lin(min(baked, vec3(1.3))) * surf.b * 1.15;
++  // surface du verre : reflets des autres lampes et de la salle
++  vec2 nxy = surf.rg * 2. - 1.;
++  vec3 Nglass = normalize(Ng + Tu * (nxy.x - sin(s * 157.08) * .12 * fine) + Tv * nxy.y);
++  float fres = .04 + .96 * pow(1. - max(dot(Nglass, V), 0.), 5.);
++  vec3 glass = mv2Lights(P, Nglass, V, vec3(.04), mat.r, 0., 1.) + mv2Env(reflect(-V, Nglass), mat.r) * fres * .5;
++  // reflets discrets : ils signalent le verre sans delaver le bleu profond de la lampe
++  vec3 c = mv2Tone(emission + glass * .4);
++  float top = max(c.r, max(c.g, c.b));
++  if (top > 1.) c /= pow(top, .85);                              // sature : on garde la teinte au lieu de blanchir
++  return mv2Gam(c);
++}
+diff --git a/game/graphics/opengl_renderer/shaders/modern_glow.frag b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+index 32ffb4c9..ddc0a141 100644
+--- a/game/graphics/opengl_renderer/shaders/modern_glow.frag
++++ b/game/graphics/opengl_renderer/shaders/modern_glow.frag
+@@ -56,10 +56,9 @@ void main() {
+     vec3 scene = texture(tex_T25, uv).rgb;
+     vec3 glow = texture(tex_T27, uv).rgb;
+     float w = skyDepth(texture(tex_T26, uv).r) ? 0. : glowWeight(scene);   // le ciel ne blanchit pas
+-    w *= 1. - smoothstep(.05, .25, scene.b - scene.r);   // les lumieres bleues gardent leur bleu fonce (pas de blanc)
+-    scene = mix(scene, mix(scene, vec3(1.), .55) * 1.08, w * .35 * glow_strength);   // coeur de la source (sans eblouir)
+     // les lumieres froides rayonnent un peu plus (bleu sature : peu lumineux a l'oeil sinon)
+     glow *= 1. + .3 * smoothstep(.03, .25, glow.b - glow.r);
+-    color = vec4(scene + glow * 1.1 * glow_strength, 1.);
++    // le halo entoure la source sans la recouvrir (son dessin interieur reste lisible)
++    color = vec4(scene + glow * .75 * glow_strength * (1. - .85 * w), 1.);
+   }
+ }
+diff --git a/game/graphics/opengl_renderer/shaders/tfrag3.frag b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+index de99dfc7..95af357e 100644
+--- a/game/graphics/opengl_renderer/shaders/tfrag3.frag
++++ b/game/graphics/opengl_renderer/shaders/tfrag3.frag
+@@ -974,6 +974,8 @@ vec3 genshinLook(vec3 c, vec3 n, float relightScale) {
+ }
+ // GENSHIN_LOOK_END
+ 
++#include "materials_v2.glsl"
++
+ // ---------------------------------------------------------------- INTERIOR_LOOK
+ // Interieurs facon Genshin : la lumiere precalculee du jeu (flaques des lampes, des feux, des cristaux) devient plus
+ // franche et plus chaude ; la penombre n'est plus un brun sale mais une ombre fraiche, bleutee, un peu remontee
+@@ -988,32 +990,6 @@ vec3 interiorLight(vec3 L) {
+   vec3 cool = hue * mix(vec3(1.), vec3(.80, .92, 1.25), k) + vec3(.035, .05, .085) * k;  // penombre fraiche
+   return mix(cool, warm, pool);
+ }
+-// Vitre lumineuse des catacombes (comb-temp-glass) : une vitre epaisse, la lumiere bleue vient de l'interieur.
+-// Couche lumineuse vue a travers le verre (decalee selon le regard : profondeur), surface de verre sombre avec
+-// reflet sur les bords (Fresnel) et filets de reflet. La couleur et la pulsation d'origine sont gardees (la lumiere
+-// precalculee qui pulse module la couche interieure).
+-vec3 litGlass(vec3 light, vec2 uv, vec3 P) {
+-  vec3 dp1 = dFdx(P), dp2 = dFdy(P); vec2 du1 = dFdx(uv), du2 = dFdy(uv);
+-  vec3 n = normalize(cross(dp1, dp2));
+-  vec3 V = normalize(cam_trans.xyz / 4096. - P);
+-  if (dot(n, V) < 0.) n = -n;
+-  // repere tangent (sans tangentes stockees) : derivees de la position et des UV
+-  vec3 dp2perp = cross(dp2, n), dp1perp = cross(n, dp1);
+-  vec3 T = dp2perp * du1.x + dp1perp * du2.x, B = dp2perp * du1.y + dp1perp * du2.y;
+-  float invmax = inversesqrt(max(dot(T, T), dot(B, B)) + 1e-12);
+-  vec2 view = vec2(dot(V, T * invmax), dot(V, B * invmax)) / max(dot(V, n), .25);
+-  vec3 deep = texture(tex_T0, uv - view * .10).rgb, deeper = texture(tex_T0, uv - view * .22).rgb;
+-  vec3 face = texture(tex_T0, uv).rgb;
+-  // jamais moins lumineux que la vitre d'origine : la lumiere d'origine, plus une couche profonde qui glisse
+-  // derriere le verre quand on bouge (on voit la lumiere a l'interieur)
+-  vec3 orig = face * light * 2.;
+-  vec3 inner = (deep * .55 + deeper * .45) * light * 2.;
+-  vec3 lit = max(orig, mix(orig, inner, .6)) * 1.15 + inner * .25;
+-  float fres = pow(1. - clamp(dot(n, V), 0., 1.), 4.);
+-  // filets de reflet discrets sur la surface du verre, plus marques sur les bords (Fresnel)
+-  float streak = smoothstep(.85, 1., sin(uv.x * 40. + uv.y * 6.) * .5 + .5) * (.25 + .75 * fres);
+-  return lit + vec3(.35, .55, .95) * (fres * .18 + streak * .10);
+-}
+ vec3 interiorGrade(vec3 c) {
+   float k = interior_look;
+   float y = dot(c, vec3(.2126, .7152, .0722));
+@@ -1040,9 +1016,14 @@ void main() {
+       fluidCoverHint = textureLod(tex_T0, tex_coord.xy, 3.5).a*fragment_color.a*2.0;   // couverture floue
+       color = vec4(shadeModernWater(arena_world,surface_normal,
+         T0*vec4(1.0,1.0,1.0,fragment_color.a*2.0)),1.0);
++    } else if (mv2_mode != 0) {
++      // materiaux v2 : matiere eclairee par les lampes (mode 1) ou lampe de verre (mode 2)
++      color = vec4(mv2_mode == 2 ? mv2Lamp(arena_light, tex_coord.xy, arena_world, world_uv_normal)
++                                 : mv2Surface(T0, arena_light, tex_coord.xy, arena_world, world_uv_normal),
++                   fragment_color.a * T0.a);
+     } else {
+       vec3 base_light = genshin_look > 0. ? genshinLight(arena_light) : arena_light;
+-      if (interior_look > 0. && palace_material != 10) base_light = interiorLight(base_light);
++      if (interior_look > 0.) base_light = interiorLight(base_light);
+       color = vec4(base_light, fragment_color.a) * T0;
+     color.rgb = shadePalaceMaterial(color.rgb,T0.rgb,arena_world);
+     vec3 shadow_normal = dot(surface_normal, shadow_eye-arena_world) < 0. ? -surface_normal : surface_normal;
+@@ -1055,8 +1036,7 @@ void main() {
+       // matieres deja eclairees par leur relief (roches, palais) : soleil stylise plus discret
+       color.rgb = genshinLook(color.rgb, gn, palace_material != 0 ? .45 : 1.);
+     }
+-    if (interior_look > 0. && palace_material != 10) color.rgb = interiorGrade(color.rgb);
+-    if (palace_material == 10) color.rgb = litGlass(arena_light, tex_coord.xy, arena_world);
++    if (interior_look > 0.) color.rgb = interiorGrade(color.rgb);
+     }
+   } else {
+     color = fragment_color/2;
+diff --git a/tools/palace_mesh_bridge.cpp b/tools/palace_mesh_bridge.cpp
+index 69279c51..e1090658 100644
+--- a/tools/palace_mesh_bridge.cpp
++++ b/tools/palace_mesh_bridge.cpp
+@@ -1035,8 +1035,15 @@ int main(int argc,char** argv) {
+                  {"vertices",json::array()}};
+               for(u32 id:{a,b,current}) {
+                 const auto& v=tree.unpacked.vertices.at(id);
+-                face["vertices"].push_back({{"index",id},{"p",{v.x/4096.f,v.y/4096.f,v.z/4096.f}},
+-                  {"uv",{v.s,v.t}},{"color",v.color_index}});
++                json vertex={{"index",id},{"p",{v.x/4096.f,v.y/4096.f,v.z/4096.f}},
++                  {"uv",{v.s,v.t}},{"color",v.color_index}};
++                // option "with_palettes" : les 8 couleurs de l'heure du jour du sommet (lampes : pulsations du jeu)
++                if(selected && selection.manifest.value("with_palettes",false) && v.color_index<tree.colors.color_count) {
++                  json pal=json::array();
++                  for(int pi=0;pi<8;pi++)for(int c=0;c<3;c++)pal.push_back(tree.colors.read(v.color_index,pi,c));
++                  vertex["pal"]=pal;
++                }
++                face["vertices"].push_back(vertex);
+               }
+               output["faces"].push_back(face);
+             }
+-- 
+2.54.0.windows.1
+

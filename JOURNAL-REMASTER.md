@@ -318,3 +318,54 @@ complète désormais automatiquement les autres versions. Les deux modes démarr
     refusée ;
   - vitres `comb-temp-glass` : lumière au fond d'un verre épais (elle glisse quand on bouge), reflet de bord ;
   - halo des lampes et phares des véhicules adoucis (pas d'éblouissement). `qa/vitre-zoom3.png`, `qa/vitres4-cmp.png`.
+
+## 18/11 — catacombes : matériaux recréés (ton retour : « des nouvelles textures, des nouveaux matériaux »)
+
+### 21. Matériaux v2 des catacombes
+Ton retour : les réglages sur l'existant (teintes, halos) étaient « moins beaux qu'avant » ; il fallait recréer
+les matières. C'est une nouvelle méthode, appliquée à toute l'entrée des catacombes (`comba`), puis arrêt comme
+demandé (« arrête-toi dès que tu as fini ces catacombes v2 »).
+
+- **Ce qui est recréé, texture par texture (20 matières)** :
+  - la **couleur** en haute définition, redessinée en suivant le dessin de la texture d'origine (plaques,
+    persiennes, colliers des tuyaux, alvéoles du sol, grille) : rien n'est étiré ni déplacé ;
+  - le **relief** (« carte de normales » : une image qui dit à la lumière dans quel sens penche chaque point,
+    ce qui fait ressortir joints, rainures et rivets sans ajouter de polygones) ;
+  - la **matière** : rugosité (mat ou poli), métal ou non, creux assombris ;
+  - un **grain** et une **patine** posés dans l'espace du monde (ils ne se répètent pas d'une plaque à l'autre).
+- **Vraies sources de lumière** : les 206 lampes de la salle (bandes, arches, dômes, plafonniers, disques sous
+  les grilles) éclairent maintenant le métal autour d'elles et s'y reflètent. Elles pulsent avec le rythme du
+  jeu (celui réglé le 14/10 : forme d'origine, 2,5 pulsations/s). Le métal reflète aussi la salle (plafond chaud,
+  lueurs bleues), donc il ne paraît plus plat loin des lampes.
+- **Lampes** : ce sont des vitres, la lumière est 7 cm derrière le verre (elle glisse quand on bouge), fines
+  nervures visibles de près, reflets discrets sur le verre. Le dessin et la couleur d'origine sont gardés :
+  bleu mesuré sur les bandes 37/92/211 à l'origine, 40/85/210 maintenant ; lampe jaune segmentée à centre orangé.
+  Le halo d'écran entoure la lampe sans la recouvrir (c'était lui qui rendait les dômes bleus cyan).
+- **Auto-validation** (6 passes, planches `qa/m1…m4`, `qa/v2-compare.png`, `qa/catacombes-v2-avant-apres.png`) :
+  patine trop tachée, puis lampes ratées (barre blanche sur les dômes, jaune délavé), puis sol trop bleu
+  « mouillé », puis dômes cyan, puis vitre pâle sous la grille : corrigés un par un. 60 images/s (16,7 ms,
+  pire image 35 ms). Le lieu se charge en 1 à 2 s (fichier du lieu : 7 Mo à l'origine, 78 Mo maintenant).
+- **Où ça s'applique** : la famille de matières vaut pour les lieux dont le nom commence par `comb` ou `rail`
+  (pas le temple ni les ruines, qui partagent quelques textures). Les autres salles des catacombes utilisent
+  les mêmes textures `comb-*` et en profitent donc ; seule l'entrée a été regardée en détail.
+- **Limites, dites franchement** :
+  - Blender sert ici de moteur de calcul (son Python et ses outils d'image) : les matières sont fabriquées par
+    script, pas encore sculptées ni « cuites » (calcul de l'éclairage dans Blender) à partir de modèles ;
+  - les textures propres au tunnel des rails (`rail-*`) n'ont pas encore leurs matières v2 (elles gardent
+    celles de Codex) ; leurs lampes sont déjà de vraies sources de lumière ;
+  - le reste du jeu n'est pas touché par cette méthode.
+- **Pour comparer en jeu** : `(pc-remaster-lighting 2055)` coupe les matériaux v2, `(pc-remaster-lighting 7)`
+  les remet.
+- **Salle de la statue** (`combn`, vérifiée aussi) : à hauteur de Jak, le sol scintillait en bleu pâle le long
+  des bandes lumineuses, comme du métal mouillé (`qa/v2n-zoom.png`). Corrigé : en vue rasante, une matière
+  rugueuse ne devient plus un miroir et le grain compte moins (`qa/v2n2-grid.png`). Revérifié ensuite sur toutes
+  les vues de l'entrée (`qa/v2f-compare.png`).
+- **Lanceur** : un lieu de test ajouté, « Catacombes (salle de la statue) ». Le « tunnel des rails » n'a pas pu
+  être ajouté : son point de départ ne répond pas (c'est une séquence en véhicule), écran noir dans l'original
+  comme dans le remaster.
+- Fichiers : `materials-v2/author_comb.py` (fabrique les matières), `materials-v2/mv2lib.py` (outils),
+  `materials-v2/lights/build_lights.py` (sources de lumière à partir des lampes du décor),
+  `remaster-build/build.py` (pose les matières dans les lieux), moteur : `shaders/materials_v2.glsl`,
+  `InteriorLights.h`, `background/PalaceMaterials.h`. Nettoyage : l'ancien rendu des vitres (14/10) est retiré.
+- Outil de contrôle : `qa_compare.py` partait parfois avant l'arrivée dans le lieu (première vue sur l'océan de
+  Spargus) quand un ancien lanceur écrivait encore dans le journal de lancement : corrigé.
